@@ -11,7 +11,7 @@ import { greedyFloor, solveFromStart, solveRun } from '../src/core/solver';
 
 const hero = { atk: 10, def: 10 };
 const mk = (traits: MonsterDef['traits'], over: Partial<MonsterDef> = {}): MonsterDef =>
-    ({ id: 'moss', name: 'x', hp: 30, atk: 15, def: 2, traits, ...over });
+    ({ id: 'moss', name: 'x', hp: 30, atk: 15, def: 2, traits, gold: 0, ...over });
 
 test('设计文档里的例子：攻10防10打井苔损失15', () => {
     assert.equal(simulateCombat(hero, MONSTERS.moss).damage, 15);
@@ -52,11 +52,34 @@ test('预览掉血 = 实际掉血，怪物格子变空地，主角不动', () =>
     assert.equal(run.cells[1].kind, 'floor');
 });
 
-test('不会主动发起致死的战斗', () => {
+test('打不过的怪也可以硬上：打完就死，这一局结束', () => {
     const run = new Run([tiny(['@f>'])]);
     run.hero.hp = 10;
+    assert.equal(run.move(1, 0).ok, true);
+    assert.equal(run.status, 'dead');
+    assert.equal(run.hero.hp, 0);
     assert.equal(run.move(1, 0).ok, false);
-    assert.equal(run.hero.hp, 10);
+    // 打不动（攻击不够破防）的怪也可以上
+    const r2 = new Run([tiny(['@c>'])]);
+    assert.equal(r2.move(1, 0).ok, true);
+    assert.equal(r2.status, 'dead');
+    // 死了以后还能重开本层
+    r2.restartFloor();
+    assert.equal(r2.status, 'playing');
+    assert.equal(r2.hero.hp, 200);
+});
+
+test('打败怪物按强度掉金币；金币袋照样能捡', () => {
+    const run = new Run([tiny(['@me$>'])]);
+    run.move(1, 0);
+    assert.equal(run.hero.gold, MONSTERS.moss.gold);
+    run.move(1, 0); run.move(1, 0);
+    assert.equal(run.hero.gold, MONSTERS.moss.gold + MONSTERS.eel.gold);
+    run.move(1, 0); run.move(1, 0);
+    assert.equal(run.hero.gold, MONSTERS.moss.gold + MONSTERS.eel.gold + 20);
+    // 越强的怪掉得越多
+    const g = (id: keyof typeof MONSTERS) => MONSTERS[id].gold;
+    assert.ok(g('moss') < g('eel') && g('eel') < g('frog') && g('frog') < g('wraith') && g('wraith') < g('guardian'));
 });
 
 test('骨门要钥匙，血门扣血', () => {
@@ -96,7 +119,7 @@ test('清层不再有额外奖励；剩余血瓶换金币、卖钥匙', () => {
     const s = run.exitSummary();
     assert.equal(s.leftoverPotions, 1);
     run.finishFloor(true);
-    assert.equal(run.hero.gold, 5 + 15);
+    assert.equal(run.hero.gold, MONSTERS.moss.gold + 5 + 15);
     assert.equal(run.status, 'finished');
 });
 

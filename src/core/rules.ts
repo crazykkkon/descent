@@ -3,17 +3,24 @@ import { CharacterDef, Hero, MONSTERS } from './config';
 import { simulateCombat } from './combat';
 import { Cell, FloorDef } from './floor';
 
-export type Outcome = { ok: true; hero: Hero } | { ok: false; reason: string };
+/** fatal：这一仗打完主角死了（生命为 0） */
+export type Outcome = { ok: true; hero: Hero; fatal?: boolean; reason?: string } | { ok: false; reason: string };
 
-export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterDef): Outcome {
+/**
+ * @param allowFatal 是否允许打会死的仗。游戏里允许（玩家可以硬上，打完就死）；
+ *                   求解器和乱打的玩家模拟不允许（它们只找活路）。
+ */
+export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterDef, allowFatal = false): Outcome {
     switch (cell.kind) {
         case 'monster': {
             const m = MONSTERS[cell.id];
             const r = simulateCombat(hero, m);
-            if (!r.canAttack) return { ok: false, reason: `打不动${m.name}：攻击要高于它的防御 ${m.def}` };
-            if (!r.canWin) return { ok: false, reason: `打不死${m.name}：它回血比你打得快` };
-            if (r.damage >= hero.hp) return { ok: false, reason: `打${m.name}要损失 ${r.damage} 生命，你会死` };
-            return { ok: true, hero: { ...hero, hp: hero.hp - r.damage } };
+            let reason = '';
+            if (!r.canAttack) reason = `打不动${m.name}：攻击要高于它的防御 ${m.def}`;
+            else if (!r.canWin) reason = `打不死${m.name}：它回血比你打得快`;
+            else if (r.damage >= hero.hp) reason = `打${m.name}要损失 ${r.damage} 生命，你会死`;
+            if (reason) return allowFatal ? { ok: true, hero: { ...hero, hp: 0 }, fatal: true, reason } : { ok: false, reason };
+            return { ok: true, hero: { ...hero, hp: hero.hp - r.damage, gold: hero.gold + m.gold } };
         }
         case 'item': {
             const h = { ...hero };

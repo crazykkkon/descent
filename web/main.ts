@@ -186,16 +186,23 @@ function floatText(i: number, text: string, color: string) {
 }
 
 // ---------- 战斗预览 ----------
-interface Preview { lose: number; left: number; text: string; ok: boolean }
+/** ok=false 表示这一仗打完会死（打不动、打不死、血不够），但玩家仍然可以硬上 */
+interface Preview { lose: number; left: number; text: string; ok: boolean; gold: number }
 
 function preview(i: number): Preview | null {
     const c = run.cells[i];
     if (c.kind !== 'monster') return null;
-    const r = simulateCombat(run.hero, MONSTERS[c.id]);
-    if (!r.canAttack) return { lose: 0, left: run.hero.hp, text: '打不动', ok: false };
-    if (!r.canWin) return { lose: 0, left: run.hero.hp, text: '打不死', ok: false };
+    const m = MONSTERS[c.id];
+    const r = simulateCombat(run.hero, m);
+    if (!r.canAttack) return { lose: 0, left: 0, text: '打不动', ok: false, gold: m.gold };
+    if (!r.canWin) return { lose: 0, left: 0, text: '打不死', ok: false, gold: m.gold };
     const left = run.hero.hp - r.damage;
-    return { lose: r.damage, left, text: left <= 0 ? '会死' : `剩 ${left}`, ok: left > 0 };
+    return { lose: r.damage, left, text: left <= 0 ? '会死' : `剩 ${left}`, ok: left > 0, gold: m.gold };
+}
+
+function isFatal(i: number): boolean {
+    const p = preview(i);
+    return !!p && !p.ok;
 }
 
 let tipCell = -1;
@@ -205,8 +212,8 @@ function placeTip() {
     const el = board.children[tipCell] as HTMLElement | undefined;
     if (!p || !el) { tip.style.display = 'none'; return; }
     tip.innerHTML = p.ok
-        ? `<b>-${p.lose}</b> → <span class="after">${p.text}</span>`
-        : `<span class="after dead">${p.text}</span>`;
+        ? `<b>-${p.lose}</b> → <span class="after">${p.text}</span> <span class="goldTip">+${p.gold}金</span>`
+        : `<span class="after dead">${p.text === '会死' ? '会死' : `${p.text}·硬打会死`}</span>`;
     const r = el.getBoundingClientRect();
     const w = wrap.getBoundingClientRect();
     // 气泡放在不挡东西的一侧：优先上方，上方有东西（或在最上排）就放下方，都有就放侧面
@@ -251,13 +258,14 @@ function showInfo(i: number) {
     const info = run.info(i);
     title.textContent = info.title;
     const p = preview(i);
-    let html = info.lines.filter(l => !l.startsWith('战斗预计') && !l.startsWith('⚠')).map(l => `<div>${l}</div>`).join('');
+    let html = info.lines.filter(l => !l.startsWith('战斗预计') && !l.startsWith('⚠') && !l.startsWith('打败后掉落')).map(l => `<div>${l}</div>`).join('');
     if (p) {
         html += p.ok
-            ? `<div class="preview"><span class="k">预计损失</span><span class="k">打完剩余</span><span class="v lose">-${p.lose}</span><span class="v left">${p.left}</span></div>`
-            : `<div class="preview"><span class="k">结果</span><span class="k">当前生命</span><span class="v dead">${p.text}</span><span class="v">${run.hero.hp}</span></div>`;
-        if (p.text === '打不动') html += '<div class="warn">攻击要高于它的防御才能破防</div>';
-        if (p.text === '会死') html += '<div class="warn">这一仗打完你会死，先去变强或者绕开它</div>';
+            ? `<div class="preview"><span class="k">预计损失</span><span class="k">打完剩余</span><span class="v lose">-${p.lose}</span><span class="v left">${p.left}</span><span class="k gold">掉落 ${p.gold} 金币</span></div>`
+            : `<div class="preview"><span class="k">结果</span><span class="k">当前生命</span><span class="v dead">${p.text}</span><span class="v">${run.hero.hp}</span><span class="k gold">掉落 ${p.gold} 金币</span></div>`;
+        if (p.text === '打不动') html += '<div class="warn">攻击要高于它的防御才能破防。硬打的话你会死。</div>';
+        if (p.text === '打不死') html += '<div class="warn">它回血比你打得快。硬打的话你会死。</div>';
+        if (p.text === '会死') html += '<div class="warn">这一仗打完你会死。可以硬上，但这一局就结束了。</div>';
         tipCell = i;
     }
     if (run.cells[i].kind === 'exit') html += intelHtml();
@@ -265,9 +273,10 @@ function showInfo(i: number) {
     // 手机：选中后出现确认按钮
     const c = run.cells[i];
     if (!HOVER && i === selected && ACTION[c.kind]) {
-        confirm.textContent = ACTION[c.kind];
+        const fatal = !!p && !p.ok;
+        confirm.textContent = fatal ? '硬打（会死）' : ACTION[c.kind];
+        confirm.className = fatal ? 'danger' : 'primary';
         confirm.style.display = 'block';
-        (confirm as HTMLButtonElement).disabled = !!p && !p.ok;
     }
     placeTip();
 }
@@ -375,9 +384,10 @@ function popText(at: number, before: Hero) {
 }
 
 /** 沿路线一格一格走；最后一格是怪物、门或道具时，走到旁边再交互。走过就不能撤回。 */
-async function walk(path: number[], confirmedExit = false) {
+async function walk(path: number[], confirmedExit = false, confirmedFatal = false) {
     if (busy || !path.length) return;
     let askExit = false;
+    let askFatal = -1;
     busy = true;
     document.body.dataset.walking = '1';
     selected = -1;
@@ -397,13 +407,24 @@ async function walk(path: number[], confirmedExit = false) {
                 await sleep(STEP_MS);
                 continue;
             }
+            // 打会死的仗：走到旁边先确认
+            if (c.kind === 'monster' && isFatal(cell) && !confirmedFatal) { askFatal = cell; break; }
             // 交互：先撞一下，再结算
             const r0 = run.step(cell);
             if (!r0.ok) { setMsg(r0.msg, true); break; }
             bump(cell);
             await sleep(STEP_MS / 2);
-            setMsg(r0.msg);
+            setMsg(r0.msg, run.status === 'dead');
+            if (run.status === 'dead') {
+                heroEl.classList.add('dead');
+                floatText(cell, '倒下', '#ff4d6a');
+                renderHud();
+                placeHero(true);
+                await sleep(STEP_MS * 3);
+                break;
+            }
             popText(cell, before);
+            if (run.hero.gold > before.gold && c.kind === 'monster') setTimeout(() => floatText(cell, `+${run.hero.gold - before.gold}金`, '#f0c94a'), 250);
             renderBoard();
             renderHud();
             placeHero(true);
@@ -416,8 +437,35 @@ async function walk(path: number[], confirmedExit = false) {
         render();
         saveRun();
         if (run.status === 'floorDone') setTimeout(showExit, 150);
+        if (run.status === 'dead') setTimeout(showDeath, 150);
         if (askExit) confirmStairs();
+        if (askFatal >= 0) confirmFatal(askFatal);
     }
+}
+
+function confirmFatal(cell: number) {
+    const c = run.cells[cell];
+    if (c.kind !== 'monster') return;
+    const m = MONSTERS[c.id];
+    const p = preview(cell)!;
+    const why = p.text === '打不动' ? `你的攻击 ${run.hero.atk} 破不了它的防御 ${m.def}`
+        : p.text === '打不死' ? '它回血比你打得快'
+        : `这一仗要损失 ${p.lose} 生命，你只有 ${run.hero.hp}`;
+    modal(`<h2>硬打${m.name}？</h2><p>${why}。打下去你会死，这一局就结束了。</p>`, [
+        { label: '算了', primary: true, on: () => setMsg('没有出手。') },
+        { label: '硬打', danger: true, on: () => void walk([cell], false, true) },
+    ]);
+}
+
+function showDeath() {
+    modal(`<h2>你倒下了</h2>
+        <p>你倒在了${run.floor.name}。</p>
+        <div class="row"><span>攻击 / 防御</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
+        <div class="row"><span>金币</span><b>${run.hero.gold}</b></div>
+        <p class="small">可以从本层开头重来（地图不变），也可以新开一局换地图。</p>`, [
+        { label: '重开本层', on: restart },
+        { label: '新开一局', primary: true, on: () => newRun() },
+    ]);
 }
 
 function confirmStairs() {
@@ -476,6 +524,7 @@ window.addEventListener('keydown', e => {
 
 function restart() {
     run.restartFloor();
+    heroEl.classList.remove('dead');
     startFloor();
     render();
     saveRun();
@@ -499,7 +548,9 @@ function begin(c: FloorChoice[], save?: RunSave) {
     startFloor();
     render();
     saveRun();
+    heroEl.classList.toggle('dead', run.status === 'dead');
     if (run.status === 'floorDone') showExit();
+    if (run.status === 'dead') showDeath();
 }
 
 function newRun() {

@@ -5,7 +5,8 @@ import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
 
-export type Status = 'playing' | 'floorDone' | 'finished';
+/** dead：主角死了，这一局结束 */
+export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
 
 export interface Snapshot {
     hero: Hero;
@@ -118,9 +119,10 @@ export class Run {
                 const lines = [`生命 ${m.hp}　攻击 ${m.atk}　防御 ${m.def}`];
                 for (const t of m.traits) lines.push(`【${TRAIT_NAMES[t]}】${TRAIT_DESC[t]}`);
                 if (m.elite) lines.push('精英：必须打败它才能使用出口');
-                if (!r.canAttack) lines.push('⚠ 你打不动它');
-                else if (!r.canWin) lines.push('⚠ 你打不死它');
+                if (!r.canAttack) lines.push('⚠ 你打不动它，硬打会死');
+                else if (!r.canWin) lines.push('⚠ 你打不死它，硬打会死');
                 else lines.push(`战斗预计损失 ${r.damage} 生命${r.damage >= this.hero.hp ? '（会死）' : ''}`);
+                lines.push(`打败后掉落 ${m.gold} 金币`);
                 return { title: m.name, lines, combat: r };
             }
             case 'item': {
@@ -186,15 +188,22 @@ export class Run {
             return { ok: true, msg: '' };
         }
 
-        const r = interact(c, this.hero, this.floor, this.ch);
+        const r = interact(c, this.hero, this.floor, this.ch, true);
         if (!r.ok) return { ok: false, msg: r.reason };
+        if (r.fatal) {
+            // 硬上打不过的怪：打完就死
+            this.hero = r.hero;
+            this.steps++;
+            this.status = 'dead';
+            return { ok: true, msg: `你倒下了。${r.reason}` };
+        }
         const lost = this.hero.hp - r.hero.hp;
         this.hero = r.hero;
         this.steps++;
         let msg: string;
         if (c.kind === 'monster') {
             this.kills++;
-            msg = `击败${MONSTERS[c.id].name}，损失 ${lost} 生命`;
+            msg = `击败${MONSTERS[c.id].name}，损失 ${lost} 生命，获得 ${MONSTERS[c.id].gold} 金币`;
         } else {
             this.pos = i;
             msg = c.kind === 'item' ? `获得${ITEM_NAMES[c.id]}` : (c.door === 'bone' ? '打开骨门' : `穿过血门，损失 ${lost} 生命`);

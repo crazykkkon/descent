@@ -28,19 +28,21 @@ export interface MonsterDef {
     atk: number;
     def: number;
     traits: Trait[];
+    /** 打败后掉落的金币，按强度给 */
+    gold: number;
     /** 精英：所在层必须打败它才能使用出口 */
     elite?: boolean;
 }
 
 export const MONSTERS: Record<MonsterId, MonsterDef> = {
-    moss: { id: 'moss', name: '井苔', hp: 30, atk: 15, def: 2, traits: [] },
-    eel: { id: 'eel', name: '盲鳗', hp: 45, atk: 20, def: 5, traits: [] },
-    frog: { id: 'frog', name: '骨蛙', hp: 60, atk: 22, def: 8, traits: [] },
-    beetle: { id: 'beetle', name: '锈甲虫', hp: 40, atk: 18, def: 14, traits: [] },
-    bat: { id: 'bat', name: '回声蝠', hp: 35, atk: 25, def: 6, traits: ['firstStrike'] },
-    wraith: { id: 'wraith', name: '溺魂', hp: 80, atk: 28, def: 10, traits: ['lifesteal'] },
-    crab: { id: 'crab', name: '裂岩蟹', hp: 70, atk: 30, def: 12, traits: ['thorns'] },
-    guardian: { id: 'guardian', name: '石鳞守卫', hp: 300, atk: 40, def: 18, traits: ['double'], elite: true },
+    moss: { id: 'moss', name: '井苔', hp: 30, atk: 15, def: 2, traits: [], gold: 3 },
+    eel: { id: 'eel', name: '盲鳗', hp: 45, atk: 20, def: 5, traits: [], gold: 6 },
+    frog: { id: 'frog', name: '骨蛙', hp: 60, atk: 22, def: 8, traits: [], gold: 10 },
+    beetle: { id: 'beetle', name: '锈甲虫', hp: 40, atk: 18, def: 14, traits: [], gold: 9 },
+    bat: { id: 'bat', name: '回声蝠', hp: 35, atk: 25, def: 6, traits: ['firstStrike'], gold: 9 },
+    wraith: { id: 'wraith', name: '溺魂', hp: 80, atk: 28, def: 10, traits: ['lifesteal'], gold: 16 },
+    crab: { id: 'crab', name: '裂岩蟹', hp: 70, atk: 30, def: 12, traits: ['thorns'], gold: 16 },
+    guardian: { id: 'guardian', name: '石鳞守卫', hp: 300, atk: 40, def: 18, traits: ['double'], elite: true, gold: 50 },
 };
 
 export type ItemId = 'smallPotion' | 'bigPotion' | 'redGem' | 'blueGem' | 'key' | 'gold';
