@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>坠井者 · 试玩版</title>
+<style>
+  :root {
+    --bg: #0a1014; --panel: #121c22; --line: #24343d; --text: #d7e3e8; --dim: #7d939c;
+    --hp: #e0566b; --atk: #e8925a; --def: #5aa6e8; --key: #d9c27a; --gold: #f0c94a; --accent: #5fd0b5;
+    --font: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "WenQuanYi Zen Hei", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #05080a; color: var(--text); font-family: var(--font); overflow: hidden; user-select: none; -webkit-user-select: none; }
+  body { display: flex; align-items: center; justify-content: center; }
+
+  /* 16:9 横屏画布，按屏幕等比缩放；--u = 画布高度的 1% */
+  #stage { position: relative; width: min(100vw, calc(100vh * 16 / 9)); aspect-ratio: 16 / 9; background: var(--bg);
+           display: grid; grid-template-columns: 1fr calc(var(--u) * 42); grid-template-rows: calc(var(--u) * 11) 1fr;
+           gap: calc(var(--u) * 2); padding: calc(var(--u) * 2.5); }
+
+  /* 顶部状态栏 */
+  #hud { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: calc(var(--u) * 3); background: var(--panel); border: 1px solid var(--line); border-radius: calc(var(--u) * 1.5); padding: 0 calc(var(--u) * 3); }
+  #hud .title { display: flex; flex-direction: column; margin-right: auto; min-width: 0; }
+  #hud .name { font-size: calc(var(--u) * 3.8); font-weight: bold; color: var(--accent); white-space: nowrap; }
+  #hud .sub { font-size: calc(var(--u) * 2.3); color: var(--dim); white-space: nowrap; }
+  .stat { display: flex; align-items: center; gap: calc(var(--u) * 1); }
+  .stat .ico { width: calc(var(--u) * 4.6); height: calc(var(--u) * 4.6); border-radius: calc(var(--u) * 0.8); display: grid; place-items: center; font-size: calc(var(--u) * 2.6); font-weight: bold; color: #0a1014; }
+  .stat .val { font-size: calc(var(--u) * 4); font-weight: bold; font-variant-numeric: tabular-nums; min-width: calc(var(--u) * 5); }
+  .stat .val.bump { animation: bump .35s; }
+  @keyframes bump { 0% { transform: scale(1.35); } 100% { transform: scale(1); } }
+  .stat.steps .val { font-size: calc(var(--u) * 3); color: var(--dim); }
+
+  /* 地图 */
+  #boardWrap { grid-column: 1; grid-row: 2; position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; }
+  #board { display: grid; gap: calc(var(--u) * 0.5); background: #071014; padding: calc(var(--u) * 0.8); border-radius: calc(var(--u) * 1.5); border: 1px solid var(--line); }
+  .cell { position: relative; border-radius: calc(var(--u) * 0.8); display: grid; place-items: center; cursor: pointer; font-weight: bold; overflow: hidden; }
+  .cell:hover { outline: 2px solid #ffffff50; }
+  .cell.sel { outline: 3px solid var(--accent); z-index: 1; }
+  .cell.floor { background: #1a272e; }
+  .cell.wall { background: #0c1418; cursor: default; background-image: repeating-linear-gradient(45deg, #0f191e 0 6px, #0b1316 6px 12px); }
+  .cell.wall:hover { outline: none; }
+  .cell .glyph { font-size: calc(var(--cell) * 0.36); line-height: 1; }
+  .cell .sub { position: absolute; bottom: 5%; left: 0; right: 0; text-align: center; font-size: calc(var(--cell) * 0.2); font-weight: bold; }
+  .cell.monster { background: #3a1e26; color: #ffd6dc; }
+  .cell.monster.elite { background: #5a2330; }
+  .cell.monster .glyph, .cell.door .glyph { margin-top: -18%; font-size: calc(var(--cell) * 0.3); }
+  .cell.monster .sub.ok { color: #ffd479; }
+  .cell.monster .sub.bad { color: #ff4d6a; }
+  .cell.item { background: #1d2b24; }
+  .cell.door { background: #3b2f1c; color: #f2d79b; }
+  .cell.door.blood { background: #4a1820; color: #ff9aa8; }
+  .cell.exit { background: #133a33; color: #8ff0d6; }
+  .cell.exit.locked { background: #23302d; color: #5d7a73; }
+  .cell.hero { background: #26414a; }
+  .heroToken { width: 72%; height: 72%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6d5, #f0c94a 55%, #a37a1d); box-shadow: 0 0 calc(var(--u) * 2) #f0c94a80; display: grid; place-items: center; color: #3b2a00; font-size: calc(var(--cell) * 0.32); }
+  .gem { width: 50%; height: 50%; transform: rotate(45deg); border-radius: 18%; }
+  .gem.red { background: linear-gradient(135deg, #ffb08a, #e2553a); box-shadow: 0 0 calc(var(--u) * 1.5) #e2553a90; }
+  .gem.blue { background: linear-gradient(135deg, #a8dcff, #2f7fd6); box-shadow: 0 0 calc(var(--u) * 1.5) #2f7fd690; }
+  .potion { width: 44%; height: 54%; border-radius: 40% 40% 45% 45%; background: linear-gradient(#ff8a9b, #c8304a); position: relative; }
+  .potion.big { width: 58%; height: 68%; }
+  .potion::before { content: ''; position: absolute; top: -18%; left: 32%; width: 36%; height: 22%; background: #9fb3ba; border-radius: 2px; }
+
+  /* 战斗预览气泡（贴在怪物格子上方） */
+  #tip { position: absolute; pointer-events: none; z-index: 6; display: none; transform: translate(-50%, -100%); background: #0d1519f0; border: 1px solid #3c5560; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 0.8) calc(var(--u) * 1.6); font-size: calc(var(--u) * 2.8); white-space: nowrap; box-shadow: 0 4px 14px #000a; }
+  #tip b { color: #ff7a8c; }
+  #tip .after { color: var(--accent); font-weight: bold; }
+  #tip .after.dead { color: #ff4d6a; }
+  .float { position: absolute; pointer-events: none; font-weight: bold; font-size: calc(var(--u) * 3.6); animation: floatUp .9s forwards; z-index: 5; text-shadow: 0 2px 4px #000; transform: translateX(-50%); }
+  @keyframes floatUp { from { opacity: 1; } to { opacity: 0; margin-top: calc(var(--u) * -7); } }
+
+  /* 右栏 */
+  #side { grid-column: 2; grid-row: 1 / 3; background: var(--panel); border: 1px solid var(--line); border-radius: calc(var(--u) * 1.5); padding: calc(var(--u) * 3); display: flex; flex-direction: column; gap: calc(var(--u) * 1.6); min-height: 0; }
+  #infoTitle { font-size: calc(var(--u) * 4); font-weight: bold; }
+  #infoLines { font-size: calc(var(--u) * 2.7); line-height: 1.6; }
+  #infoLines .warn { color: var(--hp); font-weight: bold; }
+  .preview { background: #0d1519; border: 1px solid var(--line); border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.6); display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 0.6) calc(var(--u) * 2); }
+  .preview .k { font-size: calc(var(--u) * 2.3); color: var(--dim); }
+  .preview .v { font-size: calc(var(--u) * 4.4); font-weight: bold; font-variant-numeric: tabular-nums; }
+  .preview .v.lose { color: #ff7a8c; }
+  .preview .v.left { color: var(--accent); }
+  .preview .v.dead { color: #ff4d6a; }
+  #confirm { display: none; }
+  #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
+  #msg.err { color: var(--hp); }
+  #danger { display: none; font-size: calc(var(--u) * 2.5); color: #ffb0b8; background: #3a1820; border: 1px solid #7a2a38; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.2); }
+  .sep { height: 1px; background: var(--line); flex: none; }
+  .grow { flex: 1; }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 1.2); }
+  button { font-family: var(--font); font-size: calc(var(--u) * 2.8); padding: calc(var(--u) * 1.5) calc(var(--u) * 1); border-radius: calc(var(--u) * 1); border: 1px solid var(--line); background: #1c2a31; color: var(--text); cursor: pointer; }
+  button:hover:not(:disabled) { background: #26414a; }
+  button:disabled { opacity: .4; cursor: default; }
+  button.primary { background: #1f5a4d; border-color: #2f8a74; }
+  button.danger { background: #5a1f2a; border-color: #8a2f40; }
+  button.wide { grid-column: 1 / -1; }
+  .keys { font-size: calc(var(--u) * 2.1); color: var(--dim); line-height: 1.5; }
+
+  /* 弹窗 */
+  #modal { position: absolute; inset: 0; background: #000a; display: none; align-items: center; justify-content: center; z-index: 10; }
+  #modal .box { background: var(--panel); border: 1px solid var(--line); border-radius: calc(var(--u) * 2); padding: calc(var(--u) * 4) calc(var(--u) * 5); width: calc(var(--u) * 84); display: flex; flex-direction: column; gap: calc(var(--u) * 2); }
+  #modal h2 { margin: 0; font-size: calc(var(--u) * 5); color: var(--accent); }
+  #modal .row { display: flex; justify-content: space-between; font-size: calc(var(--u) * 3.2); }
+  #modal .row b { color: var(--gold); }
+  #modal p { margin: 0; font-size: calc(var(--u) * 2.9); line-height: 1.6; }
+  #modal .small { font-size: calc(var(--u) * 2.5); color: var(--dim); }
+
+  /* 竖屏提示 */
+  #rotate { position: fixed; inset: 0; background: #05080a; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 16px; font-size: 20px; z-index: 100; text-align: center; padding: 24px; }
+  #rotate .phone { width: 60px; height: 100px; border: 4px solid var(--accent); border-radius: 12px; animation: rot 2s infinite; }
+  @keyframes rot { 0%, 30% { transform: rotate(0); } 60%, 100% { transform: rotate(-90deg); } }
+  @media (orientation: portrait) and (max-width: 900px) { #rotate { display: flex; } }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="hud"></div>
+  <div id="boardWrap"><div id="board"></div><div id="tip"></div></div>
+  <div id="side">
+    <div id="infoTitle"></div>
+    <div id="infoLines"></div>
+    <button id="confirm" class="primary">出手</button>
+    <div id="danger">⚠ 现在已经走不到出口了，建议撤回或重开本层。</div>
+    <div class="sep"></div>
+    <div id="msg"></div>
+    <div class="grow"></div>
+    <div class="btns">
+      <button id="undo">撤回</button>
+      <button id="restart">重开本层</button>
+      <button id="newRun" class="wide">新开一局（换地图）</button>
+    </div>
+    <div class="keys" id="keysHint"></div>
+  </div>
+  <div id="modal"><div class="box" id="modalBox"></div></div>
+</div>
+<div id="rotate"><div class="phone"></div><div>请把手机横过来玩</div></div>
+<script>
+"use strict";
+(() => {
+  // src/core/config.ts
+  var TRAIT_NAMES = {
+    firstStrike: "\u5148\u653B",
+    lifesteal: "\u5438\u8840",
+    thorns: "\u53CD\u4F24",
+    double: "\u4E8C\u8FDE\u51FB"
+  };
+  var TRAIT_DESC = {
+    firstStrike: "\u6218\u6597\u5F00\u59CB\u65F6\u5B83\u5148\u6253\u4E00\u6B21",
+    lifesteal: "\u6BCF\u6B21\u547D\u4E2D\uFF0C\u56DE\u590D\u9020\u6210\u4F24\u5BB3\u7684\u4E00\u534A",
+    thorns: "\u4F60\u6BCF\u6B21\u653B\u51FB\uFF0C\u81EA\u5DF1\u53D7\u5230 3 \u70B9\u4F24\u5BB3",
+    double: "\u6BCF\u56DE\u5408\u653B\u51FB\u4E24\u6B21"
+  };
+  var THORNS_DAMAGE = 3;
+  var MONSTERS = {
+    moss: { id: "moss", name: "\u4E95\u82D4", hp: 30, atk: 15, def: 2, traits: [] },
+    eel: { id: "eel", name: "\u76F2\u9CD7", hp: 45, atk: 20, def: 5, traits: [] },
+    frog: { id: "frog", name: "\u9AA8\u86D9", hp: 60, atk: 22, def: 8, traits: [] },
+    beetle: { id: "beetle", name: "\u9508\u7532\u866B", hp: 40, atk: 18, def: 14, traits: [] },
+    bat: { id: "bat", name: "\u56DE\u58F0\u8760", hp: 35, atk: 25, def: 6, traits: ["firstStrike"] },
+    wraith: { id: "wraith", name: "\u6EBA\u9B42", hp: 80, atk: 28, def: 10, traits: ["lifesteal"] },
+    crab: { id: "crab", name: "\u88C2\u5CA9\u87F9", hp: 70, atk: 30, def: 12, traits: ["thorns"] },
+    guardian: { id: "guardian", name: "\u77F3\u9CDE\u5B88\u536B", hp: 300, atk: 40, def: 18, traits: ["double"], elite: true }
+  };
+  var ITEM_NAMES = {
+    smallPotion: "\u5C0F\u8840\u74F6",
+    bigPotion: "\u5927\u8840\u74F6",
+    redGem: "\u8D64\u6676",
+    blueGem: "\u9752\u6676",
+    key: "\u9AA8\u94A5",
+    gold: "\u91D1\u5E01\u888B"
+  };
+  var CHARACTERS = {
+    digger: {
+      id: "digger",
+      name: "\u6398\u4E95\u4EBA",
+      base: { hp: 200, atk: 10, def: 10, keys: 0, gold: 0 },
+      gemBonus: 1
+    }
+  };
+  var EXIT = {
+    leftoverPotionGold: 5,
+    keySellGold: 15
+  };
+
+  // src/core/combat.ts
+  var MAX_ROUNDS = 1e3;
+  function simulateCombat(hero, m) {
+    const heroHit = Math.max(hero.atk - m.def, 0);
+    if (heroHit === 0) return { canAttack: false, canWin: false, damage: 0, hits: 0 };
+    const monsterHit = Math.max(m.atk - hero.def, 0);
+    const hitsPerRound = m.traits.includes("double") ? 2 : 1;
+    const lifesteal = m.traits.includes("lifesteal");
+    const thorns = m.traits.includes("thorns");
+    let mhp = m.hp;
+    let damage = 0;
+    let hits = 0;
+    const monsterAttack = () => {
+      damage += monsterHit;
+      if (lifesteal) mhp = Math.min(m.hp, mhp + Math.floor(monsterHit / 2));
+    };
+    if (m.traits.includes("firstStrike")) monsterAttack();
+    for (let round = 0; round < MAX_ROUNDS; round++) {
+      mhp -= heroHit;
+      hits++;
+      if (thorns) damage += THORNS_DAMAGE;
+      if (mhp <= 0) return { canAttack: true, canWin: true, damage, hits };
+      for (let i = 0; i < hitsPerRound; i++) monsterAttack();
+    }
+    return { canAttack: true, canWin: false, damage, hits };
+  }
+
+  // src/core/floor.ts
+  var LEGEND = {
+    "#": { kind: "wall" },
+    ".": { kind: "floor" },
+    "@": { kind: "floor" },
+    ">": { kind: "exit" },
+    D: { kind: "door", door: "bone" },
+    B: { kind: "door", door: "blood" },
+    k: { kind: "item", id: "key" },
+    h: { kind: "item", id: "smallPotion" },
+    H: { kind: "item", id: "bigPotion" },
+    r: { kind: "item", id: "redGem" },
+    b: { kind: "item", id: "blueGem" },
+    $: { kind: "item", id: "gold" },
+    m: { kind: "monster", id: "moss" },
+    e: { kind: "monster", id: "eel" },
+    f: { kind: "monster", id: "frog" },
+    c: { kind: "monster", id: "beetle" },
+    v: { kind: "monster", id: "bat" },
+    g: { kind: "monster", id: "wraith" },
+    x: { kind: "monster", id: "crab" },
+    G: { kind: "monster", id: "guardian" }
+  };
+  function parseFloor(def) {
+    const h = def.map.length;
+    const w = def.map[0].length;
+    const cells = [];
+    let start = -1;
+    let exits = 0;
+    def.map.forEach((row, y) => {
+      if (row.length !== w) throw new Error(`${def.name}: \u7B2C ${y + 1} \u884C\u957F\u5EA6\u4E0D\u5BF9`);
+      for (let x = 0; x < w; x++) {
+        const ch = row[x];
+        const cell = LEGEND[ch];
+        if (!cell) throw new Error(`${def.name}: \u672A\u77E5\u5B57\u7B26 "${ch}"`);
+        if (ch === "@") start = y * w + x;
+        if (cell.kind === "exit") exits++;
+        cells.push({ ...cell });
+      }
+    });
+    if (start < 0) throw new Error(`${def.name}: \u6CA1\u6709\u5165\u53E3 @`);
+    if (exits !== 1) throw new Error(`${def.name}: \u51FA\u53E3\u5FC5\u987B\u6B63\u597D 1 \u4E2A`);
+    return { w, h, cells, start };
+  }
+  function neighbors(i, w, h) {
+    const x = i % w;
+    const y = (i - x) / w;
+    const out = [];
+    if (y > 0) out.push(i - w);
+    if (y < h - 1) out.push(i + w);
+    if (x > 0) out.push(i - 1);
+    if (x < w - 1) out.push(i + 1);
+    return out;
+  }
+
+  // src/core/rules.ts
+  function interact(cell, hero, floor, ch) {
+    switch (cell.kind) {
+      case "monster": {
+        const m = MONSTERS[cell.id];
+        const r = simulateCombat(hero, m);
+        if (!r.canAttack) return { ok: false, reason: `\u6253\u4E0D\u52A8${m.name}\uFF1A\u653B\u51FB\u8981\u9AD8\u4E8E\u5B83\u7684\u9632\u5FA1 ${m.def}` };
+        if (!r.canWin) return { ok: false, reason: `\u6253\u4E0D\u6B7B${m.name}\uFF1A\u5B83\u56DE\u8840\u6BD4\u4F60\u6253\u5F97\u5FEB` };
+        if (r.damage >= hero.hp) return { ok: false, reason: `\u6253${m.name}\u8981\u635F\u5931 ${r.damage} \u751F\u547D\uFF0C\u4F60\u4F1A\u6B7B` };
+        return { ok: true, hero: { ...hero, hp: hero.hp - r.damage } };
+      }
+      case "item": {
+        const h = { ...hero };
+        const gem = floor.gem + ch.gemBonus;
+        switch (cell.id) {
+          case "smallPotion":
+            h.hp += floor.smallPotion;
+            break;
+          case "bigPotion":
+            h.hp += floor.bigPotion;
+            break;
+          case "redGem":
+            h.atk += gem;
+            break;
+          case "blueGem":
+            h.def += gem;
+            break;
+          case "key":
+            h.keys += 1;
+            break;
+          case "gold":
+            h.gold += floor.gold;
+            break;
+        }
+        return { ok: true, hero: h };
+      }
+      case "door":
+        if (cell.door === "bone") {
+          if (hero.keys <= 0) return { ok: false, reason: "\u6CA1\u6709\u9AA8\u94A5\uFF0C\u6253\u4E0D\u5F00\u9AA8\u95E8" };
+          return { ok: true, hero: { ...hero, keys: hero.keys - 1 } };
+        }
+        if (hero.hp <= floor.bloodCost) return { ok: false, reason: `\u7A7F\u8FC7\u8840\u95E8\u8981\u6263 ${floor.bloodCost} \u751F\u547D\uFF0C\u4F60\u4F1A\u6B7B` };
+        return { ok: true, hero: { ...hero, hp: hero.hp - floor.bloodCost } };
+      default:
+        return { ok: false, reason: "" };
+    }
+  }
+  function isEntity(cell) {
+    return cell.kind === "monster" || cell.kind === "item" || cell.kind === "door";
+  }
+  function isElite(cell) {
+    return cell.kind === "monster" && !!MONSTERS[cell.id].elite;
+  }
+
+  // src/core/game.ts
+  var Run = class _Run {
+    constructor(floors, characterId = "digger") {
+      this.floors = floors;
+      this.floorIndex = 0;
+      this.w = 0;
+      this.h = 0;
+      this.cells = [];
+      this.pos = 0;
+      this.steps = 0;
+      this.kills = 0;
+      this.totalSteps = 0;
+      this.status = "playing";
+      this.history = [];
+      this.ch = CHARACTERS[characterId];
+      this.hero = { ...this.ch.base };
+      this.loadFloor(0);
+    }
+    get floor() {
+      return this.floors[this.floorIndex];
+    }
+    loadFloor(i) {
+      this.floorIndex = i;
+      const p = parseFloor(this.floors[i]);
+      this.w = p.w;
+      this.h = p.h;
+      this.cells = p.cells;
+      this.pos = p.start;
+      this.steps = 0;
+      this.kills = 0;
+      this.status = "playing";
+      this.history = [];
+      this.floorStart = this.snapshot();
+    }
+    snapshot() {
+      return { hero: { ...this.hero }, cells: this.cells.map((c) => ({ ...c })), pos: this.pos, steps: this.steps, kills: this.kills };
+    }
+    restore(s) {
+      this.hero = { ...s.hero };
+      this.cells = s.cells.map((c) => ({ ...c }));
+      this.pos = s.pos;
+      this.steps = s.steps;
+      this.kills = s.kills;
+      this.status = "playing";
+    }
+    /** 本层入场时的属性 */
+    get floorStartHero() {
+      return { ...this.floorStart.hero };
+    }
+    canUndo() {
+      return this.history.length > 0 && this.status === "playing";
+    }
+    undo() {
+      if (!this.canUndo()) return false;
+      this.restore(this.history.pop());
+      return true;
+    }
+    restartFloor() {
+      this.restore(this.floorStart);
+      this.history = [];
+    }
+    monstersLeft() {
+      return this.cells.filter((c) => c.kind === "monster").length;
+    }
+    eliteAlive() {
+      return this.cells.some(isElite);
+    }
+    /** 点击格子时显示的信息（包括战斗预览） */
+    info(i) {
+      const c = this.cells[i];
+      switch (c.kind) {
+        case "monster": {
+          const m = MONSTERS[c.id];
+          const r = simulateCombat(this.hero, m);
+          const lines = [`\u751F\u547D ${m.hp}\u3000\u653B\u51FB ${m.atk}\u3000\u9632\u5FA1 ${m.def}`];
+          for (const t of m.traits) lines.push(`\u3010${TRAIT_NAMES[t]}\u3011${TRAIT_DESC[t]}`);
+          if (m.elite) lines.push("\u7CBE\u82F1\uFF1A\u5FC5\u987B\u6253\u8D25\u5B83\u624D\u80FD\u4F7F\u7528\u51FA\u53E3");
+          if (!r.canAttack) lines.push("\u26A0 \u4F60\u6253\u4E0D\u52A8\u5B83");
+          else if (!r.canWin) lines.push("\u26A0 \u4F60\u6253\u4E0D\u6B7B\u5B83");
+          else lines.push(`\u6218\u6597\u9884\u8BA1\u635F\u5931 ${r.damage} \u751F\u547D${r.damage >= this.hero.hp ? "\uFF08\u4F1A\u6B7B\uFF09" : ""}`);
+          return { title: m.name, lines, combat: r };
+        }
+        case "item": {
+          const f = this.floor;
+          const gem = f.gem + this.ch.gemBonus;
+          const eff = {
+            smallPotion: `\u751F\u547D +${f.smallPotion}`,
+            bigPotion: `\u751F\u547D +${f.bigPotion}`,
+            redGem: `\u653B\u51FB +${gem}`,
+            blueGem: `\u9632\u5FA1 +${gem}`,
+            key: "\u9AA8\u94A5 +1",
+            gold: `\u91D1\u5E01 +${f.gold}`
+          };
+          return { title: ITEM_NAMES[c.id], lines: [eff[c.id]] };
+        }
+        case "door":
+          return c.door === "bone" ? { title: "\u9AA8\u95E8", lines: ["\u6D88\u8017 1 \u628A\u9AA8\u94A5\u6253\u5F00"] } : { title: "\u8840\u95E8", lines: [`\u4E0D\u9700\u8981\u94A5\u5319\uFF0C\u901A\u8FC7\u65F6\u6263 ${this.floor.bloodCost} \u751F\u547D`] };
+        case "exit":
+          return { title: "\u51FA\u53E3", lines: this.eliteAlive() ? ["\u7CBE\u82F1\u5B88\u536B\u8FD8\u6D3B\u7740\uFF0C\u51FA\u53E3\u88AB\u5C01\u4F4F\u4E86"] : ["\u8D70\u5230\u8FD9\u91CC\u8FDB\u5165\u4E0B\u4E00\u5C42"] };
+        case "wall":
+          return { title: "\u4E95\u58C1", lines: [] };
+        default:
+          return { title: "\u7A7A\u5730", lines: [] };
+      }
+    }
+    /** 走空地到目标格子（目标是怪物/道具/门/出口时，最后一步与它交互）。整次点击算一次撤回。 */
+    tapCell(target) {
+      if (this.status !== "playing") return { ok: false, msg: "" };
+      if (target === this.pos) return { ok: false, msg: "" };
+      const path = this.findPath(target);
+      if (!path) return { ok: false, msg: "\u8D70\u4E0D\u8FC7\u53BB" };
+      const before = this.snapshot();
+      const histLen = this.history.length;
+      let last = { ok: true, msg: "" };
+      for (const cell of path) {
+        last = this.stepInto(cell, false);
+        if (!last.ok) break;
+      }
+      this.history.length = histLen;
+      const moved = this.pos !== before.pos || this.steps !== before.steps;
+      if (moved) this.history.push(before);
+      return last;
+    }
+    /** 方向键移动一步 */
+    move(dx, dy) {
+      const x = this.pos % this.w + dx;
+      const y = Math.floor(this.pos / this.w) + dy;
+      if (x < 0 || y < 0 || x >= this.w || y >= this.h) return { ok: false, msg: "" };
+      return this.stepInto(y * this.w + x, true);
+    }
+    stepInto(i, recordUndo) {
+      if (this.status !== "playing") return { ok: false, msg: "" };
+      if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: "" };
+      const c = this.cells[i];
+      if (c.kind === "wall") return { ok: false, msg: "" };
+      if (c.kind === "exit" && this.eliteAlive()) return { ok: false, msg: "\u7CBE\u82F1\u5B88\u536B\u8FD8\u6D3B\u7740\uFF0C\u51FA\u53E3\u88AB\u5C01\u4F4F\u4E86" };
+      if (c.kind === "floor" || c.kind === "exit") {
+        if (recordUndo) this.history.push(this.snapshot());
+        this.pos = i;
+        this.steps++;
+        if (c.kind === "exit") this.status = "floorDone";
+        return { ok: true, msg: "" };
+      }
+      const r = interact(c, this.hero, this.floor, this.ch);
+      if (!r.ok) return { ok: false, msg: r.reason };
+      if (recordUndo) this.history.push(this.snapshot());
+      const lost = this.hero.hp - r.hero.hp;
+      this.hero = r.hero;
+      this.steps++;
+      let msg;
+      if (c.kind === "monster") {
+        this.kills++;
+        msg = `\u51FB\u8D25${MONSTERS[c.id].name}\uFF0C\u635F\u5931 ${lost} \u751F\u547D`;
+      } else {
+        this.pos = i;
+        msg = c.kind === "item" ? `\u83B7\u5F97${ITEM_NAMES[c.id]}` : c.door === "bone" ? "\u6253\u5F00\u9AA8\u95E8" : `\u7A7F\u8FC7\u8840\u95E8\uFF0C\u635F\u5931 ${lost} \u751F\u547D`;
+      }
+      this.cells[i] = { kind: "floor" };
+      return { ok: true, msg };
+    }
+    /** 只经过空地的最短路线；返回从下一格到目标的格子列表 */
+    findPath(target) {
+      const prev = /* @__PURE__ */ new Map([[this.pos, -1]]);
+      const queue = [this.pos];
+      while (queue.length) {
+        const cur = queue.shift();
+        for (const n of neighbors(cur, this.w, this.h)) {
+          if (prev.has(n)) continue;
+          if (n === target) {
+            const path = [n];
+            let p = cur;
+            while (p !== this.pos) {
+              path.unshift(p);
+              p = prev.get(p);
+            }
+            return path;
+          }
+          if (this.cells[n].kind !== "floor") continue;
+          prev.set(n, cur);
+          queue.push(n);
+        }
+      }
+      return null;
+    }
+    exitSummary() {
+      const leftoverPotions = this.cells.filter((c) => c.kind === "item" && (c.id === "smallPotion" || c.id === "bigPotion")).length;
+      return {
+        leftoverPotions,
+        potionGold: leftoverPotions * EXIT.leftoverPotionGold,
+        keys: this.hero.keys,
+        keyGold: this.hero.keys * EXIT.keySellGold
+      };
+    }
+    /** 出口结算后进入下一层；只能往下，不能回到上一层 */
+    finishFloor(sellKeys) {
+      if (this.status !== "floorDone") return;
+      const s = this.exitSummary();
+      this.hero.gold += s.potionGold;
+      if (sellKeys) {
+        this.hero.gold += s.keyGold;
+        this.hero.keys = 0;
+      }
+      this.totalSteps += this.steps;
+      if (this.floorIndex + 1 >= this.floors.length) this.status = "finished";
+      else this.loadFloor(this.floorIndex + 1);
+    }
+    /** 存档：只存状态，不存关卡定义（关卡由外部按选图结果重建） */
+    save() {
+      return {
+        characterId: this.ch.id,
+        floorIndex: this.floorIndex,
+        current: this.snapshot(),
+        floorStart: this.floorStart,
+        totalSteps: this.totalSteps,
+        status: this.status
+      };
+    }
+    static load(floors, s) {
+      const run2 = new _Run(floors, s.characterId);
+      run2.loadFloor(s.floorIndex);
+      run2.floorStart = s.floorStart;
+      run2.restore(s.current);
+      run2.totalSteps = s.totalSteps;
+      run2.status = s.status;
+      return run2;
+    }
+    /** 设计文档第八章的计分公式（步数项在开启坍塌前不计） */
+    score() {
+      return (this.floorIndex + (this.status === "finished" ? 1 : 0)) * 1e3 + this.hero.hp;
+    }
+  };
+
+  // src/core/levels.ts
+  var base = { gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
+  var DEMO_POOLS = [
+    // ---------------- 第 1 层：9×7 教学层 ----------------
+    {
+      params: {
+        ...base,
+        name: "\u7B2C 1 \u5C42 \xB7 \u4E95\u53E3",
+        hint: "\u602A\u7269\u683C\u5B50\u4E0A\u7684\u6570\u5B57\u662F\u6253\u5B83\u8981\u6389\u7684\u8840\u3002\u4E0D\u7528\u6E05\u602A\uFF0C\u8D70\u5230\u51FA\u53E3\u5C31\u884C\uFF1B\u5956\u52B1\u90FD\u5728\u602A\u7269\u8EAB\u540E\uFF0C\u503C\u4E0D\u503C\u5F97\u6253\uFF0C\u81EA\u5DF1\u7B97\u3002",
+        bloodCost: 40
+      },
+      layouts: [
+        {
+          name: "\u4E24\u6761\u8DEF",
+          variants: [
+            {
+              note: "\u82B1 15 \u8840\u6253\u4E95\u82D4\u62FF\u8D64\u6676\uFF0C\u80FD\u8BA9\u540E\u9762\u7684\u76F2\u9CD7\u5C11\u6389 30 \u8840",
+              map: [
+                "..m.r#...",
+                ".#####.#.",
+                "@...e...>",
+                ".###.###.",
+                ".#b.m#h..",
+                ".#####.#.",
+                "....v...."
+              ]
+            },
+            {
+              note: "\u4E0A\u8DEF\u8759\u8760\u5B88\u7740\u9752\u6676\uFF0C\u4E0B\u8DEF\u4E24\u53EA\u76F2\u9CD7\uFF0C\u8D70\u54EA\u6761\uFF1F",
+              map: [
+                "..m.b#.h.",
+                ".#####.#.",
+                "@...e...>",
+                ".###.###.",
+                ".#r.v#...",
+                ".#####.#.",
+                "....e..m."
+              ]
+            }
+          ]
+        },
+        {
+          name: "\u56DE\u5ECA",
+          variants: [
+            {
+              note: "\u5916\u5708\u662F\u73AF\u9053\uFF0C\u4E2D\u95F4\u7684\u5C0F\u5C4B\u91CC\u6709\u5B9D\u77F3\uFF0C\u4ECE\u4E0A\u9762\u8FDB\u8FD8\u662F\u4ECE\u4E0B\u9762\u8FDB\uFF1F",
+              map: [
+                "@...e....",
+                ".###.###.",
+                ".#r...b#.",
+                ".##...##.",
+                "..m.#.v..",
+                ".#######e",
+                "...m.h.e>"
+              ]
+            },
+            {
+              note: "\u5C0F\u5C4B\u91CC\u53EA\u6709\u4E00\u9897\u8D64\u6676\uFF0C\u4F46\u8840\u74F6\u5728\u73AF\u9053\u53E6\u4E00\u5934",
+              map: [
+                "@...m....",
+                ".###.###.",
+                ".#b.$..#.",
+                ".##...##.",
+                "..e.#.v..",
+                ".#######m",
+                "...v.r.e>"
+              ]
+            }
+          ]
+        },
+        {
+          name: "\u4FA7\u5BA4",
+          variants: [
+            {
+              note: "\u4E00\u6761\u4E3B\u8DEF\uFF0C\u4E24\u8FB9\u7684\u5C0F\u623F\u95F4\u5404\u6709\u5956\u52B1\uFF0C\u5B88\u536B\u6709\u5F3A\u6709\u5F31",
+              map: [
+                "#r#h..#b#",
+                "#m###e#v#",
+                "#.#...#.#",
+                "@.....e.>",
+                "#.#.#.###",
+                "#e#D#m..#",
+                "#k#h#..h#"
+              ]
+            },
+            {
+              note: "\u94A5\u5319\u548C\u9AA8\u95E8\uFF1A\u95E8\u540E\u7684\u5927\u8840\u74F6\u8981\u4E0D\u8981\u73B0\u5728\u62FF\uFF1F",
+              map: [
+                "#b#...#r#",
+                "#e###m#m#",
+                "#.#...#.#",
+                "@.....e.>",
+                "#.#.#.###",
+                "#m#D#v..#",
+                "#k#h#..h#"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- 第 2 层：11×7 ----------------
+    {
+      params: {
+        ...base,
+        name: "\u7B2C 2 \u5C42 \xB7 \u82D4\u58C1",
+        hint: "\u9508\u7532\u866B\u9632\u5FA1\u5F88\u9AD8\uFF0C\u653B\u51FB\u4E0D\u591F\u5C31\u6253\u4E0D\u52A8\u3002\u5148\u60F3\u60F3\u5B9D\u77F3\u5728\u54EA\u3002",
+        bloodCost: 60
+      },
+      layouts: [
+        {
+          name: "\u5C94\u8DEF",
+          variants: [
+            {
+              note: "\u4E0A\u8DEF\u7684\u76F2\u9CD7\u5B88\u7740\u9AA8\u94A5\uFF1B\u4E24\u9897\u8D64\u6676\u4E00\u9897\u5728\u53F3\u4E0B\u89D2\uFF0C\u4E00\u9897\u5728\u4E95\u82D4\u8EAB\u540E",
+              map: [
+                "@..e.#m..r.",
+                ".###.#.###.",
+                ".#e.k....#>",
+                ".#.###D#.#.",
+                "...#b..#...",
+                "##e#.###.#.",
+                "h..f.....rv"
+              ]
+            },
+            {
+              note: "\u9AA8\u94A5\u5728\u76F2\u9CD7\u8EAB\u540E\uFF0C\u9AA8\u95E8\u540E\u9762\u662F\u9752\u6676\uFF1B\u4E0B\u8DEF\u7684\u76F2\u9CD7\u5B88\u7740\u8840\u74F6",
+              map: [
+                "@..e.#D..b.",
+                ".###.#.###.",
+                ".#m.e....#>",
+                ".#.###k#.#.",
+                "...#r..#...",
+                "##f#.###.#.",
+                "h..e.....rv"
+              ]
+            }
+          ]
+        },
+        {
+          name: "\u73AF\u9053",
+          variants: [
+            {
+              note: "\u53EA\u60F3\u8D76\u8DEF\u4F1A\u88AB\u9AA8\u86D9\u5835\u6B7B\uFF1A\u5148\u62FF\u4E24\u9897\u8D64\u6676\u518D\u6253\u5B83",
+              map: [
+                "@...f...D..",
+                ".###.#.###.",
+                ".#h..f..r#.",
+                ".#.###.##..",
+                ".#..r..m#.>",
+                ".##.###.#b.",
+                "..m.v...f.k"
+              ]
+            },
+            {
+              note: "\u4E2D\u95F4\u7684\u9AA8\u95E8\u53EF\u4EE5\u4E0D\u5F00\uFF0C\u4E24\u53EA\u76F2\u9CD7\u5404\u5B88\u4E00\u9897\u5B9D\u77F3",
+              map: [
+                "@...e...f..",
+                ".###.#.###.",
+                ".#r..D..e#.",
+                ".#.###.##..",
+                ".#..b..f#.>",
+                ".##.###.#h.",
+                "..e.e...r.k"
+              ]
+            }
+          ]
+        },
+        {
+          name: "\u4FA7\u5BA4",
+          variants: [
+            {
+              note: "\u51FA\u53E3\u88AB\u9AA8\u95E8\u5C01\u4F4F\uFF0C\u9AA8\u94A5\u5728\u56DE\u58F0\u8760\u8EAB\u540E\u7684\u4FA7\u5BA4\u91CC",
+              map: [
+                "#e#.e.#b#.r",
+                "#e#.#.#f#.#",
+                "#.#.#.#.#.#",
+                "@....m...D>",
+                "#.#.#.#.#.#",
+                "#v#.c.#m#h#",
+                "#k#.#.#r#.#"
+              ]
+            },
+            {
+              note: "\u4FA7\u5BA4\u91CC\u7684\u5B9D\u77F3\u90FD\u6709\u4E95\u82D4\u5B88\u7740\uFF0C\u4E3B\u8DEF\u5C3D\u5934\u7684\u9AA8\u86D9\u975E\u6253\u4E0D\u53EF",
+              map: [
+                "#b#.c.#r#.h",
+                "#m#.#.#m#.#",
+                "#.#.#.#.#.#",
+                "@........f>",
+                "#.#.#.#.#.#",
+                "#f#.v.#c#m#",
+                "#r#.#.#$#$#"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- 第 3 层：11×7 ----------------
+    {
+      params: {
+        ...base,
+        name: "\u7B2C 3 \u5C42 \xB7 \u56DE\u58F0",
+        hint: "\u56DE\u58F0\u8760\u4F1A\u5148\u6253\u4F60\u4E00\u4E0B\uFF1B\u6EBA\u9B42\u4F1A\u5438\u8840\uFF0C\u653B\u51FB\u4E0D\u591F\u6839\u672C\u6253\u4E0D\u6B7B\u3002\u6253\u4E0D\u8FC7\u7684\u602A\uFF0C\u4E5F\u8BB8\u53EF\u4EE5\u7ED5\u5F00\uFF1F",
+        bloodCost: 80
+      },
+      layouts: [
+        {
+          name: "\u5C94\u8DEF",
+          variants: [
+            {
+              note: "\u56DE\u58F0\u8760\u5B88\u7740\u9AA8\u95E8\uFF0C\u95E8\u540E\u7684\u9AA8\u94A5\u8FD8\u80FD\u518D\u5F00\u4E00\u6247\u95E8",
+              map: [
+                "@..f.#B..h.",
+                ".###.#.###.",
+                ".#v.D....#>",
+                ".#.###k#.#.",
+                "...#r..#...",
+                "##v#.###.#.",
+                "h..f.....bb"
+              ]
+            },
+            {
+              note: "\u88C2\u5CA9\u87F9\u5B88\u7740\u4E2D\u8DEF\uFF0C\u8D70\u8840\u95E8\u7ED5\u5F00\u5B83\u66F4\u5212\u7B97",
+              map: [
+                "@..v.#e..h.",
+                ".###.#.###.",
+                ".#D.x....#>",
+                ".#.###r#.#.",
+                "...#k..#...",
+                "##B#.###.#.",
+                "h..v.....bb"
+              ]
+            }
+          ]
+        },
+        {
+          name: "\u73AF\u9053",
+          variants: [
+            {
+              note: "\u7528\u9AA8\u94A5\u5F00\u95E8\u53EF\u4EE5\u5C11\u6253\u4E00\u573A\uFF1B\u9508\u7532\u866B\u8981\u653B\u51FB\u591F\u4E86\u624D\u6253\u5F97\u52A8",
+              map: [
+                "@...D...g..",
+                ".###.#.###.",
+                ".#k..h..h#.",
+                ".#.###.##..",
+                ".#..r..f#.>",
+                ".##.###.#b.",
+                "..v.c...B.b"
+              ]
+            },
+            {
+              note: "\u9AA8\u86D9\u5B88\u7740\u4E0A\u9762\u7684\u73AF\u9053\uFF0C\u5148\u62FF\u8D64\u6676\u518D\u53BB\u6253\u9508\u7532\u866B",
+              map: [
+                "@...f...x..",
+                ".###.#.###.",
+                ".#b..h..h#.",
+                ".#.###.##..",
+                ".#..r..c#.>",
+                ".##.###.#k.",
+                "..f.D...B.b"
+              ]
+            }
+          ]
+        },
+        {
+          name: "\u4FA7\u5BA4",
+          variants: [
+            {
+              note: "\u4E3B\u8DEF\u4E0A\u7684\u9AA8\u86D9\u975E\u6253\u4E0D\u53EF\uFF1B\u4FA7\u5BA4\u91CC\u7684\u9508\u7532\u866B\u5B88\u7740\u9AA8\u94A5",
+              map: [
+                "#k#.f.#e#.b",
+                "#c#.#.#r#.#",
+                "#.#.#.#.#.#",
+                "@....f...B>",
+                "#.#.#.#.#.#",
+                "#f#.v.#h#b#",
+                "#h#.#.#.#.#"
+              ]
+            },
+            {
+              note: "\u4E3B\u8DEF\u7684\u8840\u95E8\u53EF\u4EE5\u7ED5\u5F00\u9AA8\u86D9\uFF1B\u4E24\u53EA\u76F2\u9CD7\u5B88\u7740\u51FA\u53E3\u548C\u8840\u74F6",
+              map: [
+                "#h#.v.#b#.v",
+                "#x#.#.#b#.#",
+                "#.#.#.#.#.#",
+                "@....B...e>",
+                "#.#.#.#.#.#",
+                "#v#...#e#k#",
+                "#r#.#.#h#.#"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+  function buildFloor(pool, choice) {
+    const layout = pool.layouts[choice.layout];
+    const v = layout.variants[choice.variant];
+    return { ...pool.params, name: `${pool.params.name}`, hint: pool.params.hint, map: v.map };
+  }
+  function rng(seed) {
+    let a = seed >>> 0;
+    return () => {
+      a = a + 1831565813 >>> 0;
+      let t = a;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function pickChoices(seed, pools = DEMO_POOLS, avoid) {
+    const rand = rng(seed);
+    const picked = [];
+    return pools.map((pool, i) => {
+      const all = [];
+      pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => all.push({ layout: li, variant: vi })));
+      const prev = avoid == null ? void 0 : avoid[i];
+      let options = prev ? all.filter((c) => c.layout !== prev.layout || c.variant !== prev.variant) : all;
+      const before = picked[i - 1];
+      if (before) {
+        const prevName = pools[i - 1].layouts[before.layout].name;
+        const differ = options.filter((c) => pool.layouts[c.layout].name !== prevName);
+        if (differ.length) options = differ;
+      }
+      const choice = options[Math.floor(rand() * options.length)];
+      picked.push(choice);
+      return choice;
+    });
+  }
+  function buildFloors(choices2, pools = DEMO_POOLS) {
+    return choices2.map((c, i) => buildFloor(pools[i], c));
+  }
+
+  // src/core/solver.ts
+  var MAX_ENTITIES = 30;
+  function solveFloor(state, hero, floor, ch) {
+    const { w, h, cells, pos } = state;
+    const entities = [];
+    cells.forEach((c, i) => {
+      if (isEntity(c)) entities.push(i);
+    });
+    if (entities.length > MAX_ENTITIES) throw new Error(`\u53EF\u4EA4\u4E92\u683C\u5B50\u592A\u591A\uFF08${entities.length}\uFF09\uFF0C\u6C42\u89E3\u5668\u4E0A\u9650 ${MAX_ENTITIES}`);
+    const bit = /* @__PURE__ */ new Map();
+    entities.forEach((cell, k) => bit.set(cell, k));
+    const exit = cells.findIndex((c) => c.kind === "exit");
+    const eliteMask = entities.reduce((m, cell, k) => isElite(cells[cell]) ? m | 1 << k : m, 0);
+    const statsOf = (mask) => {
+      let hh = { ...hero, hp: Number.MAX_SAFE_INTEGER };
+      let doors = 0;
+      for (let k = 0; k < entities.length; k++) {
+        if (!(mask & 1 << k)) continue;
+        const c = cells[entities[k]];
+        if (c.kind === "item") {
+          const r = interact(c, hh, floor, ch);
+          if (r.ok) hh = r.hero;
+        } else if (c.kind === "door" && c.door === "bone") doors++;
+      }
+      return { ...hh, hp: hero.hp, keys: hh.keys - doors };
+    };
+    const frontier = (mask) => {
+      const seen = new Uint8Array(cells.length);
+      const stack = [pos];
+      seen[pos] = 1;
+      const next = [];
+      let atExit = false;
+      while (stack.length) {
+        const cur = stack.pop();
+        for (const n of neighbors(cur, w, h)) {
+          if (seen[n]) continue;
+          seen[n] = 1;
+          const c = cells[n];
+          if (c.kind === "wall") continue;
+          if (c.kind === "exit") {
+            atExit = true;
+            continue;
+          }
+          if (c.kind === "floor") {
+            stack.push(n);
+            continue;
+          }
+          const k = bit.get(n);
+          if (mask & 1 << k) stack.push(n);
+          else next.push(k);
+        }
+      }
+      return { next, atExit };
+    };
+    const close = (mask, stats) => {
+      const picked = [];
+      for (; ; ) {
+        const items = frontier(mask).next.filter((k) => cells[entities[k]].kind === "item");
+        if (!items.length) return { mask, stats, picked };
+        for (const k of items) {
+          const r = interact(cells[entities[k]], stats, floor, ch);
+          if (r.ok) stats = r.hero;
+          mask |= 1 << k;
+          picked.push(entities[k]);
+        }
+      }
+    };
+    const nodes = /* @__PURE__ */ new Map();
+    const start = close(0, { ...hero });
+    nodes.set(start.mask, { hp: start.stats.hp, parent: -1, via: start.picked });
+    const buckets = Array.from({ length: entities.length + 1 }, () => /* @__PURE__ */ new Set());
+    buckets[popcount(start.mask)].add(start.mask);
+    const exits = [];
+    for (let p = 0; p <= entities.length; p++) {
+      for (const mask of buckets[p]) {
+        const node = nodes.get(mask);
+        const stats = { ...statsOf(mask), hp: node.hp };
+        const { next, atExit } = frontier(mask);
+        if (atExit && (mask & eliteMask) === eliteMask) exits.push({ mask, hero: stats });
+        for (const k of next) {
+          const r = interact(cells[entities[k]], stats, floor, ch);
+          if (!r.ok) continue;
+          const c = close(mask | 1 << k, r.hero);
+          const old = nodes.get(c.mask);
+          if (!old || old.hp < c.stats.hp) nodes.set(c.mask, { hp: c.stats.hp, parent: mask, via: [entities[k], ...c.picked] });
+          buckets[popcount(c.mask)].add(c.mask);
+        }
+      }
+    }
+    const planOf = (mask) => {
+      const plan = [];
+      let m = mask;
+      for (; ; ) {
+        const n = nodes.get(m);
+        plan.unshift(...n.via);
+        if (n.parent < 0) break;
+        m = n.parent;
+      }
+      return plan;
+    };
+    const pareto = paretoFilter(exits.map((e) => e.hero)).map((hh) => {
+      const e = exits.find((x) => x.hero === hh);
+      return { hero: hh, plan: planOf(e.mask) };
+    });
+    const best = pareto.length ? pareto.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
+    return { solvable: exits.length > 0, best, pareto, statesVisited: nodes.size };
+  }
+  function paretoFilter(list) {
+    const dominated = (a, b) => b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
+    const uniq = [];
+    for (const x of list) {
+      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys)) uniq.push(x);
+    }
+    return uniq.filter((a) => !uniq.some((b) => dominated(a, b)));
+  }
+  function solveFromStart(floor, hero, ch = CHARACTERS.digger) {
+    const p = parseFloor(floor);
+    return solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, floor, ch);
+  }
+  function popcount(n) {
+    let c = 0;
+    while (n) {
+      n &= n - 1;
+      c++;
+    }
+    return c;
+  }
+
+  // web/main.ts
+  var $ = (id) => document.getElementById(id);
+  var stage = $("stage");
+  var board = $("board");
+  var wrap = $("boardWrap");
+  var tip = $("tip");
+  var HOVER = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var SAVE_KEY = "descent.demo.save.v1";
+  var LAST_KEY = "descent.demo.lastChoices.v1";
+  var choices = [];
+  var run;
+  var selected = -1;
+  var hovered = -1;
+  var lastHero = null;
+  var floorBest = null;
+  function store(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch {
+    }
+  }
+  function loadKey(key) {
+    try {
+      const s = localStorage.getItem(key);
+      return s ? JSON.parse(s) : null;
+    } catch {
+      return null;
+    }
+  }
+  function clearSave() {
+    try {
+      localStorage.removeItem(SAVE_KEY);
+    } catch {
+    }
+  }
+  function saveRun() {
+    if (run.status === "finished") {
+      clearSave();
+      return;
+    }
+    store(SAVE_KEY, { choices, run: run.save() });
+  }
+  function fit() {
+    const h = stage.getBoundingClientRect().height;
+    stage.style.setProperty("--u", `${h / 100}px`);
+    if (!run) return;
+    const r = wrap.getBoundingClientRect();
+    const u = h / 100;
+    const gap = u * 0.5;
+    const pad = u * 0.8 * 2 + 2;
+    const cell = Math.floor(Math.min((r.width - pad - gap * (run.w - 1)) / run.w, (r.height - pad - gap * (run.h - 1)) / run.h));
+    board.style.gridTemplateColumns = `repeat(${run.w}, ${cell}px)`;
+    board.style.gridTemplateRows = `repeat(${run.h}, ${cell}px)`;
+    board.style.setProperty("--cell", `${cell}px`);
+  }
+  window.addEventListener("resize", () => {
+    fit();
+    placeTip();
+  });
+  function stat(color, ico, val, bump, cls = "") {
+    return `<div class="stat ${cls}"><div class="ico" style="background:${color}">${ico}</div><span class="val${bump ? " bump" : ""}">${val}</span></div>`;
+  }
+  function renderHud() {
+    const h = run.hero;
+    const b = (k) => !!lastHero && h[k] !== lastHero[k];
+    const [num, name] = run.floor.name.split(" \xB7 ");
+    const layout = DEMO_POOLS[run.floorIndex].layouts[choices[run.floorIndex].layout].name;
+    $("hud").innerHTML = `
+        <div class="title"><span class="name">${name != null ? name : num}</span><span class="sub">${num} / \u5171 ${run.floors.length} \u5C42 \xB7 ${layout}</span></div>
+        ${stat("var(--hp)", "\u8840", h.hp, b("hp"))}
+        ${stat("var(--atk)", "\u653B", h.atk, b("atk"))}
+        ${stat("var(--def)", "\u9632", h.def, b("def"))}
+        ${stat("var(--key)", "\u94A5", h.keys, b("keys"))}
+        ${stat("var(--gold)", "\u91D1", h.gold, b("gold"))}
+        ${stat("#3a4a52", "\u6B65", run.steps, false, "steps")}`;
+    lastHero = { ...h };
+  }
+  var SHORT = { moss: "\u82D4", eel: "\u9CD7", frog: "\u86D9", beetle: "\u7532", bat: "\u8760", wraith: "\u9B42", crab: "\u87F9", guardian: "\u5B88" };
+  function cellHtml(i) {
+    const c = run.cells[i];
+    if (i === run.pos) return { cls: "hero", html: '<div class="heroToken">\u6211</div>' };
+    switch (c.kind) {
+      case "wall":
+        return { cls: "wall", html: "" };
+      case "floor":
+        return { cls: "floor", html: "" };
+      case "exit":
+        return { cls: `exit${run.eliteAlive() ? " locked" : ""}`, html: '<span class="glyph">\u25BC</span><span class="sub">\u51FA\u53E3</span>' };
+      case "door":
+        return c.door === "bone" ? { cls: "door", html: '<span class="glyph">\u95E8</span><span class="sub">\u9AA8\u94A5</span>' } : { cls: "door blood", html: `<span class="glyph">\u8840\u95E8</span><span class="sub">-${run.floor.bloodCost}</span>` };
+      case "item":
+        switch (c.id) {
+          case "redGem":
+            return { cls: "item", html: '<div class="gem red"></div>' };
+          case "blueGem":
+            return { cls: "item", html: '<div class="gem blue"></div>' };
+          case "smallPotion":
+            return { cls: "item", html: '<div class="potion"></div>' };
+          case "bigPotion":
+            return { cls: "item", html: '<div class="potion big"></div>' };
+          case "key":
+            return { cls: "item", html: '<span class="glyph" style="color:var(--key)">\u94A5</span>' };
+          case "gold":
+            return { cls: "item", html: '<span class="glyph" style="color:var(--gold)">\u91D1</span>' };
+        }
+        break;
+      case "monster": {
+        const m = MONSTERS[c.id];
+        const r = simulateCombat(run.hero, m);
+        const dead = !r.canWin || r.damage >= run.hero.hp;
+        const sub = !r.canAttack ? "\u6253\u4E0D\u52A8" : !r.canWin ? "\u6253\u4E0D\u6B7B" : `-${r.damage}`;
+        return { cls: `monster${m.elite ? " elite" : ""}`, html: `<span class="glyph">${SHORT[c.id]}</span><span class="sub ${dead ? "bad" : "ok"}">${sub}</span>` };
+      }
+    }
+    return { cls: "floor", html: "" };
+  }
+  function renderBoard() {
+    if (board.children.length !== run.cells.length) {
+      board.innerHTML = "";
+      run.cells.forEach((_, i) => {
+        const d = document.createElement("div");
+        d.addEventListener("click", () => onTap(i));
+        if (HOVER) d.addEventListener("mouseenter", () => {
+          const k = run.cells[i].kind;
+          hovered = k === "wall" || k === "floor" ? -1 : i;
+          showInfo(hovered >= 0 ? hovered : selected);
+        });
+        board.appendChild(d);
+      });
+      fit();
+    }
+    run.cells.forEach((_, i) => {
+      const el = board.children[i];
+      const { cls, html } = cellHtml(i);
+      el.className = `cell ${cls}${i === selected ? " sel" : ""}`;
+      el.innerHTML = html;
+    });
+  }
+  if (HOVER) board.addEventListener("mouseleave", () => {
+    hovered = -1;
+    showInfo(selected);
+  });
+  function floatText(i, text, color) {
+    const el = board.children[i];
+    if (!el || !text) return;
+    const r = el.getBoundingClientRect();
+    const s = stage.getBoundingClientRect();
+    const f = document.createElement("div");
+    f.className = "float";
+    f.style.color = color;
+    f.style.left = `${r.left - s.left + r.width / 2}px`;
+    f.style.top = `${r.top - s.top + r.height * 0.25}px`;
+    f.textContent = text;
+    stage.appendChild(f);
+    setTimeout(() => f.remove(), 900);
+  }
+  function preview(i) {
+    const c = run.cells[i];
+    if (c.kind !== "monster") return null;
+    const r = simulateCombat(run.hero, MONSTERS[c.id]);
+    if (!r.canAttack) return { lose: 0, left: run.hero.hp, text: "\u6253\u4E0D\u52A8", ok: false };
+    if (!r.canWin) return { lose: 0, left: run.hero.hp, text: "\u6253\u4E0D\u6B7B", ok: false };
+    const left = run.hero.hp - r.damage;
+    return { lose: r.damage, left, text: left <= 0 ? "\u4F1A\u6B7B" : `\u5269 ${left}`, ok: left > 0 };
+  }
+  var tipCell = -1;
+  function placeTip() {
+    if (tipCell < 0) {
+      tip.style.display = "none";
+      return;
+    }
+    const p = preview(tipCell);
+    const el = board.children[tipCell];
+    if (!p || !el) {
+      tip.style.display = "none";
+      return;
+    }
+    tip.innerHTML = p.ok ? `<b>-${p.lose}</b> \u2192 <span class="after">${p.text}</span>` : `<span class="after dead">${p.text}</span>`;
+    const r = el.getBoundingClientRect();
+    const w = wrap.getBoundingClientRect();
+    const x = tipCell % run.w;
+    const y = Math.floor(tipCell / run.w);
+    const busy = (cx2, cy2) => {
+      if (cx2 < 0 || cy2 < 0 || cx2 >= run.w || cy2 >= run.h) return true;
+      const k = run.cells[cy2 * run.w + cx2].kind;
+      return k !== "wall" && k !== "floor";
+    };
+    const cx = r.left - w.left + r.width / 2;
+    const cy = r.top - w.top + r.height / 2;
+    if (y > 0 && !busy(x, y - 1)) {
+      tip.style.left = `${cx}px`;
+      tip.style.top = `${r.top - w.top - 4}px`;
+      tip.style.transform = "translate(-50%, -100%)";
+    } else if (y < run.h - 1 && !busy(x, y + 1)) {
+      tip.style.left = `${cx}px`;
+      tip.style.top = `${r.bottom - w.top + 4}px`;
+      tip.style.transform = "translate(-50%, 0)";
+    } else if (x < run.w / 2) {
+      tip.style.left = `${r.right - w.left + 4}px`;
+      tip.style.top = `${cy}px`;
+      tip.style.transform = "translate(0, -50%)";
+    } else {
+      tip.style.left = `${r.left - w.left - 4}px`;
+      tip.style.top = `${cy}px`;
+      tip.style.transform = "translate(-100%, -50%)";
+    }
+    tip.style.display = "block";
+  }
+  var ACTION = { monster: "\u51FA\u624B", door: "\u5F00\u95E8", item: "\u62FF\u53D6", exit: "\u4E0B\u697C" };
+  function showInfo(i) {
+    const title = $("infoTitle");
+    const lines = $("infoLines");
+    const confirm = $("confirm");
+    tipCell = -1;
+    confirm.style.display = "none";
+    if (i < 0 || i === run.pos) {
+      title.textContent = run.floor.name;
+      lines.innerHTML = HOVER ? "\u9F20\u6807\u79FB\u5230\u683C\u5B50\u4E0A\u67E5\u770B\u8BE6\u60C5\uFF0C\u70B9\u51FB\u6267\u884C\u3002<br>\u70B9\u7A7A\u5730\u76F4\u63A5\u8D70\u8FC7\u53BB\u3002" : "\u8F7B\u70B9\u683C\u5B50\u67E5\u770B\u8BE6\u60C5\uFF0C\u518D\u70B9\u4E00\u6B21\u6216\u6309\u4E0B\u65B9\u6309\u94AE\u6267\u884C\u3002<br>\u70B9\u7A7A\u5730\u76F4\u63A5\u8D70\u8FC7\u53BB\u3002";
+      placeTip();
+      return;
+    }
+    const info = run.info(i);
+    title.textContent = info.title;
+    const p = preview(i);
+    let html = info.lines.filter((l) => !l.startsWith("\u6218\u6597\u9884\u8BA1") && !l.startsWith("\u26A0")).map((l) => `<div>${l}</div>`).join("");
+    if (p) {
+      html += p.ok ? `<div class="preview"><span class="k">\u9884\u8BA1\u635F\u5931</span><span class="k">\u6253\u5B8C\u5269\u4F59</span><span class="v lose">-${p.lose}</span><span class="v left">${p.left}</span></div>` : `<div class="preview"><span class="k">\u7ED3\u679C</span><span class="k">\u5F53\u524D\u751F\u547D</span><span class="v dead">${p.text}</span><span class="v">${run.hero.hp}</span></div>`;
+      if (p.text === "\u6253\u4E0D\u52A8") html += '<div class="warn">\u653B\u51FB\u8981\u9AD8\u4E8E\u5B83\u7684\u9632\u5FA1\u624D\u80FD\u7834\u9632</div>';
+      if (p.text === "\u4F1A\u6B7B") html += '<div class="warn">\u8FD9\u4E00\u4ED7\u6253\u5B8C\u4F60\u4F1A\u6B7B\uFF0C\u5148\u53BB\u53D8\u5F3A\u6216\u8005\u7ED5\u5F00\u5B83</div>';
+      tipCell = i;
+    }
+    lines.innerHTML = html;
+    const c = run.cells[i];
+    if (!HOVER && i === selected && ACTION[c.kind]) {
+      confirm.textContent = ACTION[c.kind];
+      confirm.style.display = "block";
+      confirm.disabled = !!p && !p.ok;
+    }
+    placeTip();
+  }
+  function setMsg(text, err = false) {
+    const m = $("msg");
+    m.textContent = text;
+    m.className = err ? "err" : "";
+  }
+  function checkDanger() {
+    let stuck = false;
+    if (run.status === "playing") {
+      stuck = !solveFloor({ w: run.w, h: run.h, cells: run.cells, pos: run.pos }, run.hero, run.floor, run.ch).solvable;
+    }
+    $("danger").style.display = stuck ? "block" : "none";
+  }
+  function render() {
+    renderHud();
+    renderBoard();
+    $("undo").disabled = !run.canUndo();
+    checkDanger();
+    showInfo(HOVER && hovered >= 0 ? hovered : selected);
+  }
+  function modal(html, buttons) {
+    const box = $("modalBox");
+    box.innerHTML = html + '<div class="btns" id="mbtns"></div>';
+    const w = $("mbtns");
+    for (const b of buttons) {
+      const el = document.createElement("button");
+      el.textContent = b.label;
+      if (b.primary) el.className = "primary";
+      if (b.danger) el.className = "danger";
+      if (buttons.length === 1) el.classList.add("wide");
+      el.onclick = () => {
+        $("modal").style.display = "none";
+        b.on();
+      };
+      w.appendChild(el);
+    }
+    $("modal").style.display = "flex";
+  }
+  var modalOpen = () => $("modal").style.display === "flex";
+  function showExit() {
+    const s = run.exitSummary();
+    const startHp = run.floorStartHero.hp;
+    const diffHp = run.hero.hp - startHp;
+    const rows = [
+      `<div class="row"><span>\u672C\u5C42\u751F\u547D\u53D8\u5316</span><b>${diffHp >= 0 ? "+" : ""}${diffHp}</b></div>`,
+      `<div class="row"><span>\u5730\u56FE\u4E0A\u5269\u4E0B\u7684\u8840\u74F6 \xD7${s.leftoverPotions}</span><b>+${s.potionGold} \u91D1\u5E01</b></div>`
+    ];
+    if (floorBest !== null) {
+      const d = floorBest - run.hero.hp;
+      rows.push(`<p class="small">\u672C\u5C42\u6700\u4F18\u89E3\u51FA\u53E3\u65F6\u751F\u547D ${floorBest}${d <= 0 ? "\uFF0C\u4F60\u627E\u5230\u4E86\u6700\u4F18\u89E3\uFF01" : `\uFF0C\u4F60\u6BD4\u6700\u4F18\u89E3\u5C11 ${d}\u3002`}</p>`);
+    }
+    const next = (sell) => {
+      run.finishFloor(sell);
+      saveRun();
+      if (run.status === "finished") showEnd();
+      else {
+        startFloor();
+        render();
+      }
+    };
+    const btns = s.keys > 0 ? [
+      { label: `\u5356\u6389 ${s.keys} \u628A\u9AA8\u94A5\uFF08+${s.keyGold}\uFF09`, on: () => next(true) },
+      { label: "\u7559\u7740\u9AA8\u94A5\uFF0C\u4E0B\u697C", primary: true, on: () => next(false) }
+    ] : [{ label: "\u4E0B\u697C", primary: true, on: () => next(false) }];
+    modal(`<h2>${run.floor.name} \u5B8C\u6210</h2>${rows.join("")}`, btns);
+  }
+  function showEnd() {
+    clearSave();
+    render();
+    modal(
+      `<h2>\u8BD5\u73A9\u7ED3\u675F</h2>
+        <p>\u4F60\u8D70\u5B8C\u4E86\u8BD5\u73A9\u7248\u7684 ${run.floors.length} \u5C42\u3002\u6BCF\u6B21\u65B0\u5F00\u4E00\u5C40\uFF0C\u6BCF\u5C42\u90FD\u4F1A\u6362\u4E00\u5F20\u5730\u56FE\u3002</p>
+        <div class="row"><span>\u5269\u4F59\u751F\u547D</span><b>${run.hero.hp}</b></div>
+        <div class="row"><span>\u653B\u51FB / \u9632\u5FA1</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
+        <div class="row"><span>\u91D1\u5E01</span><b>${run.hero.gold}</b></div>
+        <div class="row"><span>\u603B\u6B65\u6570</span><b>${run.totalSteps}</b></div>
+        <div class="row"><span>\u5206\u6570</span><b>${run.score()}</b></div>`,
+      [{ label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }]
+    );
+  }
+  function afterAct(r, at, before) {
+    if (r.msg) setMsg(r.msg, !r.ok);
+    if (r.ok) {
+      const lost = before.hp - run.hero.hp;
+      if (lost > 0) floatText(at, `-${lost}`, "#ff6b81");
+      else if (run.hero.hp > before.hp) floatText(at, `+${run.hero.hp - before.hp}`, "#7dffb0");
+      else if (run.hero.atk > before.atk) floatText(at, `\u653B+${run.hero.atk - before.atk}`, "#ffb07a");
+      else if (run.hero.def > before.def) floatText(at, `\u9632+${run.hero.def - before.def}`, "#8ac8ff");
+    }
+    selected = -1;
+    render();
+    saveRun();
+    if (run.status === "floorDone") setTimeout(showExit, 200);
+  }
+  function act(i) {
+    const before = { ...run.hero };
+    const r = run.tapCell(i);
+    if (!r.ok && !r.msg) r.msg = "\u8D70\u4E0D\u8FC7\u53BB";
+    afterAct(r, i, before);
+  }
+  function onTap(i) {
+    if (run.status !== "playing" || modalOpen()) return;
+    const c = run.cells[i];
+    if (c.kind === "wall" || i === run.pos) {
+      selected = -1;
+      renderBoard();
+      showInfo(-1);
+      return;
+    }
+    if (c.kind === "floor" || HOVER || selected === i) {
+      act(i);
+      return;
+    }
+    selected = i;
+    renderBoard();
+    showInfo(i);
+  }
+  $("confirm").onclick = () => {
+    if (selected >= 0) act(selected);
+  };
+  var DIRS = {
+    ArrowUp: [0, -1],
+    ArrowDown: [0, 1],
+    ArrowLeft: [-1, 0],
+    ArrowRight: [1, 0],
+    w: [0, -1],
+    s: [0, 1],
+    a: [-1, 0],
+    d: [1, 0]
+  };
+  window.addEventListener("keydown", (e) => {
+    var _a2;
+    if (modalOpen()) {
+      if (e.key === "Enter" || e.key === " ") (_a2 = document.querySelector("#mbtns button.primary")) == null ? void 0 : _a2.click();
+      return;
+    }
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    const d = DIRS[key];
+    if (d) {
+      e.preventDefault();
+      const x = run.pos % run.w + d[0];
+      const y = Math.floor(run.pos / run.w) + d[1];
+      const before = { ...run.hero };
+      const r = run.move(d[0], d[1]);
+      hovered = -1;
+      afterAct(r, y * run.w + x, before);
+    } else if (key === "z" || key === "Backspace") undo();
+    else if (key === "r") restart();
+    else if (key === "Escape") {
+      selected = -1;
+      renderBoard();
+      showInfo(-1);
+    }
+  });
+  function undo() {
+    if (run.undo()) {
+      setMsg("\u5DF2\u64A4\u56DE\u4E00\u6B65");
+      selected = -1;
+      render();
+      saveRun();
+    }
+  }
+  function restart() {
+    run.restartFloor();
+    startFloor();
+    render();
+    saveRun();
+    setMsg("\u5DF2\u91CD\u5F00\u672C\u5C42\uFF08\u5730\u56FE\u4E0D\u53D8\uFF09");
+  }
+  function startFloor() {
+    var _a2, _b, _c;
+    selected = -1;
+    hovered = -1;
+    board.innerHTML = "";
+    floorBest = (_b = (_a2 = solveFromStart(run.floor, run.floorStartHero, run.ch).best) == null ? void 0 : _a2.hero.hp) != null ? _b : null;
+    setMsg((_c = run.floor.hint) != null ? _c : "");
+  }
+  function begin(c, save) {
+    choices = c;
+    const floors = buildFloors(choices);
+    run = save ? Run.load(floors, save) : new Run(floors);
+    lastHero = null;
+    startFloor();
+    render();
+    saveRun();
+    if (run.status === "floorDone") showExit();
+  }
+  function newRun() {
+    var _a2;
+    const last = (_a2 = loadKey(LAST_KEY)) != null ? _a2 : void 0;
+    const seed = Math.floor(Math.random() * 2 ** 31);
+    const c = pickChoices(seed, DEMO_POOLS, last);
+    store(LAST_KEY, c);
+    begin(c);
+  }
+  $("undo").onclick = undo;
+  $("restart").onclick = restart;
+  $("newRun").onclick = () => modal("<h2>\u65B0\u5F00\u4E00\u5C40\uFF1F</h2><p>\u8FD9\u4E00\u5C40\u7684\u8FDB\u5EA6\u4F1A\u4E22\u5931\u3002\u65B0\u7684\u4E00\u5C40\u6BCF\u5C42\u90FD\u4F1A\u6362\u4E00\u5F20\u5730\u56FE\u3002</p>", [
+    { label: "\u53D6\u6D88", on: () => {
+    } },
+    { label: "\u65B0\u5F00\u4E00\u5C40", danger: true, on: newRun }
+  ]);
+  $("keysHint").textContent = HOVER ? "\u65B9\u5411\u952E / WASD \u79FB\u52A8 \xB7 Z \u64A4\u56DE \xB7 R \u91CD\u5F00\u672C\u5C42" : "\u8F7B\u70B9\u67E5\u770B\uFF0C\u518D\u70B9\u4E00\u6B21\u51FA\u624B";
+  fit();
+  var saved = loadKey(SAVE_KEY);
+  var _a;
+  if (((_a = saved == null ? void 0 : saved.choices) == null ? void 0 : _a.length) === DEMO_POOLS.length && saved.run) {
+    begin(saved.choices, saved.run);
+    modal(`<h2>\u5760\u4E95\u8005 \xB7 \u8BD5\u73A9\u7248</h2><p>\u4F60\u6709\u4E00\u5C40\u8FD8\u6CA1\u6253\u5B8C\uFF08${run.floor.name}\uFF09\u3002</p>`, [
+      { label: "\u65B0\u5F00\u4E00\u5C40", on: newRun },
+      { label: "\u7EE7\u7EED", primary: true, on: () => {
+      } }
+    ]);
+  } else {
+    newRun();
+    modal(
+      `<h2>\u5760\u4E95\u8005 \xB7 \u8BD5\u73A9\u7248</h2>
+        <p>\u4F60\u6389\u8FDB\u4E86\u4E00\u53E3\u6CA1\u6709\u5E95\u7684\u4E95\u3002\u6BCF\u5C42\u8D70\u5230\u51FA\u53E3\u5C31\u80FD\u5F80\u4E0B\u8D70\uFF0C\u4E00\u5171 3 \u5C42\u3002</p>
+        <p>\u602A\u7269\u683C\u5B50\u4E0A\u7684\u6570\u5B57\u662F\u6253\u5B83\u8981\u6389\u7684\u8840\u3002\u5956\u52B1\u90FD\u5728\u602A\u7269\u8EAB\u540E\uFF0C\u503C\u4E0D\u503C\u5F97\u6253\uFF0C\u81EA\u5DF1\u7B97\u3002</p>
+        <p class="small">${HOVER ? "\u9F20\u6807\u60AC\u505C\u67E5\u770B\u6218\u6597\u9884\u89C8\uFF0C\u70B9\u51FB\u51FA\u624B\u3002" : "\u8F7B\u70B9\u67E5\u770B\u6218\u6597\u9884\u89C8\uFF0C\u518D\u70B9\u4E00\u6B21\u51FA\u624B\u3002"}\u6BCF\u6B21\u65B0\u5F00\u4E00\u5C40\u90FD\u4F1A\u6362\u5730\u56FE\u3002</p>`,
+      [{ label: "\u5F00\u59CB", primary: true, on: () => {
+      } }]
+    );
+  }
+})();
+
+</script>
+</body>
+</html>
