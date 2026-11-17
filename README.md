@@ -2,6 +2,7 @@
 
 数值解谜 + 肉鸽游戏，横屏 16:9。先做 Steam 版（买断制），之后再做微信 / 抖音横屏小游戏。
 
+- 在线试玩：https://crazykkkon.github.io/descent/ （每次推送到 main 自动更新）
 - 设计方案：[docs/game-design.md](docs/game-design.md)（Word 版：`docs/坠井者-游戏设计方案.docx`）
 
 ## 当前进度：Steam 3 层试玩版（进行中）
