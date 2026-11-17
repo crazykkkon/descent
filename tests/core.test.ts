@@ -4,7 +4,8 @@ import { CHARACTERS, MONSTERS, MonsterDef } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
-import { M1_FLOORS } from '../src/core/levels';
+import { DEMO_POOLS, allChoices, buildFloor, buildFloors, pickChoices } from '../src/core/levels';
+import { parseFloor } from '../src/core/floor';
 import { solveFromStart, solveRun } from '../src/core/solver';
 
 const hero = { atk: 10, def: 10 };
@@ -77,7 +78,6 @@ test('走到出口进入结算，不需要清怪；只能往下走', () => {
     const run = new Run([tiny(['@>', 'm.']), tiny(['@>'])]);
     run.move(1, 0);
     assert.equal(run.status, 'floorDone');
-    assert.equal(run.exitSummary().cleared, false);
     run.finishFloor(false);
     assert.equal(run.floorIndex, 1);
     assert.equal(run.canUndo(), false);
@@ -90,14 +90,13 @@ test('精英活着时出口被封住', () => {
     assert.equal(run.status, 'playing');
 });
 
-test('清层奖励、剩余血瓶、卖钥匙', () => {
+test('清层不再有额外奖励；剩余血瓶换金币、卖钥匙', () => {
     const run = new Run([tiny(['@mk>', '..h.'])]);
     run.move(1, 0); run.move(1, 0); run.move(1, 0); run.move(1, 0);
     const s = run.exitSummary();
-    assert.equal(s.cleared, true);
     assert.equal(s.leftoverPotions, 1);
     run.finishFloor(true);
-    assert.equal(run.hero.gold, 30 + 5 + 15);
+    assert.equal(run.hero.gold, 5 + 15);
     assert.equal(run.status, 'finished');
 });
 
@@ -127,25 +126,83 @@ test('求解器：只能靠宝石过的小谜题', () => {
     assert.ok(r.best!.plan.filter(i => i >= 3).length >= 2);
 });
 
-test('M1 三层都能通关，且最优解明显好于乱走', () => {
-    const run = solveRun(M1_FLOORS);
-    assert.ok(run.perFloor.every(hp => hp > 0), `每层结束生命 ${run.perFloor}`);
-    for (const f of M1_FLOORS) assert.ok(solveFromStart(f, CHARACTERS.digger.base).statesVisited < 100000);
+test('试玩版地图尺寸：第 1 层 9×7，第 2、3 层 11×7', () => {
+    DEMO_POOLS.forEach((pool, fi) => pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
+        const p = parseFloor(buildFloor(pool, { layout: li, variant: vi }));
+        assert.deepEqual([p.w, p.h], fi === 0 ? [9, 7] : [11, 7], `${pool.params.name} ${l.name}${vi + 1}`);
+    })));
+});
+
+test('每层 3 种布局 × 2 套配置；同一布局的两套墙壁、入口、出口完全一样', () => {
+    for (const pool of DEMO_POOLS) {
+        assert.equal(pool.layouts.length, 3);
+        for (const l of pool.layouts) {
+            assert.equal(l.variants.length, 2);
+            const shape = (m: string[]) => m.map(r => r.replace(/[^#@>]/g, '.')).join('|');
+            assert.equal(shape(l.variants[0].map), shape(l.variants[1].map), `${pool.params.name} ${l.name}`);
+            assert.notEqual(l.variants[0].map.join(), l.variants[1].map.join());
+        }
+    }
+});
+
+test('开局不打怪就拿不到宝石和血瓶（奖励都在怪物身后）', () => {
+    DEMO_POOLS.forEach(pool => pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
+        const f = buildFloor(pool, { layout: li, variant: vi });
+        const run = new Run([f]);
+        const reach = new Set([run.pos]);
+        const st = [run.pos];
+        while (st.length) {
+            const cur = st.pop()!;
+            for (let n = 0; n < run.cells.length; n++) {
+                const adj = Math.abs(n % run.w - cur % run.w) + Math.abs(Math.floor(n / run.w) - Math.floor(cur / run.w)) === 1;
+                if (!adj || reach.has(n)) continue;
+                const c = run.cells[n];
+                if (c.kind === 'item') assert.ok(c.id === 'gold' || c.id === 'key', `${pool.params.name} ${l.name}${vi + 1} 白拿 ${c.id}`);
+                if (c.kind === 'floor' || c.kind === 'item') { reach.add(n); st.push(n); }
+            }
+        }
+    })));
+});
+
+test('所有选图组合都能通关', () => {
+    for (const c of allChoices()) assert.ok(solveRun(buildFloors(c)).bestHp > 0, JSON.stringify(c));
+});
+
+test('同一个种子选到同一组地图；新开一局每层都换图；第 2、3 层不连用同一种布局', () => {
+    assert.deepEqual(pickChoices(42), pickChoices(42));
+    for (let seed = 1; seed < 200; seed++) {
+        const a = pickChoices(seed);
+        const b = pickChoices(seed + 1000, DEMO_POOLS, a);
+        b.forEach((c, i) => assert.ok(c.layout !== a[i].layout || c.variant !== a[i].variant));
+        assert.notEqual(DEMO_POOLS[1].layouts[a[1].layout].name, DEMO_POOLS[2].layouts[a[2].layout].name);
+    }
+});
+
+test('存档读档：继续游戏时地图和进度不变', () => {
+    const choices = pickChoices(7);
+    const floors = buildFloors(choices);
+    const run = new Run(floors);
+    const r = solveFromStart(floors[0], run.hero);
+    run.tapCell(r.best!.plan[0]);
+    const saved = JSON.parse(JSON.stringify(run.save()));
+    const back = Run.load(floors, saved);
+    assert.deepEqual(back.cells, run.cells);
+    assert.deepEqual(back.hero, run.hero);
+    assert.equal(back.pos, run.pos);
+    back.restartFloor();
+    assert.deepEqual(back.hero, CHARACTERS.digger.base);
 });
 
 test('按求解器的路线实际玩，结果和求解器一致', () => {
-    const run = new Run(M1_FLOORS);
-    let expectHero = CHARACTERS.digger.base;
-    for (let i = 0; i < M1_FLOORS.length; i++) {
-        const r = solveFromStart(M1_FLOORS[i], { ...run.hero });
+    const floors = buildFloors(pickChoices(3));
+    const run = new Run(floors);
+    for (let i = 0; i < floors.length; i++) {
+        const r = solveFromStart(floors[i], { ...run.hero });
         for (const cell of r.best!.plan) assert.ok(run.tapCell(cell).ok, `第 ${i + 1} 层格子 ${cell}`);
-        const exit = run.cells.findIndex(c => c.kind === 'exit');
-        run.tapCell(exit);
+        run.tapCell(run.cells.findIndex(c => c.kind === 'exit'));
         assert.equal(run.status, 'floorDone');
         assert.equal(run.hero.hp, r.best!.hero.hp);
-        expectHero = r.best!.hero;
         run.finishFloor(false);
     }
     assert.equal(run.status, 'finished');
-    assert.ok(expectHero.hp > 0);
 });

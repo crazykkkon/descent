@@ -6,7 +6,7 @@ import { interact, isElite } from './rules';
 
 export type Status = 'playing' | 'floorDone' | 'finished';
 
-interface Snapshot {
+export interface Snapshot {
     hero: Hero;
     cells: Cell[];
     pos: number;
@@ -15,12 +15,19 @@ interface Snapshot {
 }
 
 export interface ExitSummary {
-    cleared: boolean;
-    clearBonus: number;
     leftoverPotions: number;
     potionGold: number;
     keys: number;
     keyGold: number;
+}
+
+export interface RunSave {
+    characterId: string;
+    floorIndex: number;
+    current: Snapshot;
+    floorStart: Snapshot;
+    totalSteps: number;
+    status: Status;
 }
 
 export interface ActResult {
@@ -228,11 +235,8 @@ export class Run {
     }
 
     exitSummary(): ExitSummary {
-        const cleared = this.monstersLeft() === 0;
         const leftoverPotions = this.cells.filter(c => c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion')).length;
         return {
-            cleared,
-            clearBonus: cleared ? EXIT.clearBonusGold : 0,
             leftoverPotions,
             potionGold: leftoverPotions * EXIT.leftoverPotionGold,
             keys: this.hero.keys,
@@ -244,7 +248,7 @@ export class Run {
     finishFloor(sellKeys: boolean) {
         if (this.status !== 'floorDone') return;
         const s = this.exitSummary();
-        this.hero.gold += s.clearBonus + s.potionGold;
+        this.hero.gold += s.potionGold;
         if (sellKeys) {
             this.hero.gold += s.keyGold;
             this.hero.keys = 0;
@@ -252,6 +256,28 @@ export class Run {
         this.totalSteps += this.steps;
         if (this.floorIndex + 1 >= this.floors.length) this.status = 'finished';
         else this.loadFloor(this.floorIndex + 1);
+    }
+
+    /** 存档：只存状态，不存关卡定义（关卡由外部按选图结果重建） */
+    save(): RunSave {
+        return {
+            characterId: this.ch.id,
+            floorIndex: this.floorIndex,
+            current: this.snapshot(),
+            floorStart: this.floorStart,
+            totalSteps: this.totalSteps,
+            status: this.status,
+        };
+    }
+
+    static load(floors: FloorDef[], s: RunSave): Run {
+        const run = new Run(floors, s.characterId);
+        run.loadFloor(s.floorIndex);
+        run.floorStart = s.floorStart;
+        run.restore(s.current);
+        run.totalSteps = s.totalSteps;
+        run.status = s.status;
+        return run;
     }
 
     /** 设计文档第八章的计分公式（步数项在开启坍塌前不计） */

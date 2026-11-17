@@ -79,9 +79,8 @@ export const CHARACTERS: Record<string, CharacterDef> = {
     },
 };
 
-/** 出口交易与清层奖励（设计文档 4.6 / 5.3） */
+/** 出口交易（设计文档 5.3）。清层不再额外给奖励：奖励直接放在怪物身后，让玩家自己判断值不值得打。 */
 export const EXIT = {
     leftoverPotionGold: 5,
     keySellGold: 15,
-    clearBonusGold: 30,
 };

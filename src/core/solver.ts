@@ -34,7 +34,7 @@ export interface SolveResult {
 
 const MAX_ENTITIES = 30;
 
-interface Node { hp: number; parent: number; via: number }
+interface Node { hp: number; parent: number; via: number[] }
 
 export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: CharacterDef): SolveResult {
     const { w, h, cells, pos } = state;
@@ -48,16 +48,16 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
 
     // 已处理集合下的属性（生命除外）
     const statsOf = (mask: number): Hero => {
-        let hh: Hero = { ...hero };
+        // 先算道具，再扣骨门用掉的钥匙，和处理顺序无关
+        let hh: Hero = { ...hero, hp: Number.MAX_SAFE_INTEGER };
+        let doors = 0;
         for (let k = 0; k < entities.length; k++) {
             if (!(mask & (1 << k))) continue;
             const c = cells[entities[k]];
-            if (c.kind === 'monster') continue;
-            if (c.kind === 'door' && c.door === 'blood') continue;
-            const r = interact(c, { ...hh, hp: Number.MAX_SAFE_INTEGER }, floor, ch);
-            if (r.ok) hh = { ...r.hero, hp: hh.hp };
+            if (c.kind === 'item') { const r = interact(c, hh, floor, ch); if (r.ok) hh = r.hero; }
+            else if (c.kind === 'door' && c.door === 'bone') doors++;
         }
-        return hh;
+        return { ...hh, hp: hero.hp, keys: hh.keys - doors };
     };
 
     // 从起点出发，经过空地和已处理格子能到的区域；返回区域边上的未处理格子，以及出口是否相邻
@@ -84,14 +84,31 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
         return { next, atExit };
     };
 
+    // 捡道具永远不亏（只加不减），所以能走到的道具立刻全部捡掉，大幅减少状态数
+    const close = (mask: number, stats: Hero): { mask: number; stats: Hero; picked: number[] } => {
+        const picked: number[] = [];
+        for (;;) {
+            const items = frontier(mask).next.filter(k => cells[entities[k]].kind === 'item');
+            if (!items.length) return { mask, stats, picked };
+            for (const k of items) {
+                const r = interact(cells[entities[k]], stats, floor, ch);
+                if (r.ok) stats = r.hero;
+                mask |= 1 << k;
+                picked.push(entities[k]);
+            }
+        }
+    };
+
     const nodes = new Map<number, Node>();
-    nodes.set(0, { hp: hero.hp, parent: -1, via: -1 });
-    let layer = [0];
+    const start = close(0, { ...hero });
+    nodes.set(start.mask, { hp: start.stats.hp, parent: -1, via: start.picked });
+    // 已处理集合只会变大，所以按"已处理格子数"从少到多处理，保证一个状态被处理时它的所有来路都已经算过
+    const buckets: Set<number>[] = Array.from({ length: entities.length + 1 }, () => new Set<number>());
+    buckets[popcount(start.mask)].add(start.mask);
     const exits: { mask: number; hero: Hero }[] = [];
 
-    while (layer.length) {
-        const nextLayer = new Map<number, true>();
-        for (const mask of layer) {
+    for (let p = 0; p <= entities.length; p++) {
+        for (const mask of buckets[p]) {
             const node = nodes.get(mask)!;
             const stats = { ...statsOf(mask), hp: node.hp };
             const { next, atExit } = frontier(mask);
@@ -99,19 +116,18 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
             for (const k of next) {
                 const r = interact(cells[entities[k]], stats, floor, ch);
                 if (!r.ok) continue;
-                const nm = mask | (1 << k);
-                const old = nodes.get(nm);
-                if (!old || old.hp < r.hero.hp) nodes.set(nm, { hp: r.hero.hp, parent: mask, via: entities[k] });
-                nextLayer.set(nm, true);
+                const c = close(mask | (1 << k), r.hero);
+                const old = nodes.get(c.mask);
+                if (!old || old.hp < c.stats.hp) nodes.set(c.mask, { hp: c.stats.hp, parent: mask, via: [entities[k], ...c.picked] });
+                buckets[popcount(c.mask)].add(c.mask);
             }
         }
-        layer = [...nextLayer.keys()];
     }
 
     const planOf = (mask: number): number[] => {
         const plan: number[] = [];
         let m = mask;
-        while (m !== 0) { const n = nodes.get(m)!; plan.unshift(n.via); m = n.parent; }
+        for (;;) { const n = nodes.get(m)!; plan.unshift(...n.via); if (n.parent < 0) break; m = n.parent; }
         return plan;
     };
 
@@ -155,10 +171,11 @@ export function solveRun(floors: FloorDef[], ch: CharacterDef = CHARACTERS.digge
 }
 
 /**
- * 一个"不怎么算"的玩家：先捡所有道具和开门，然后每次打掉血最少的怪，
- * 直到能走到出口就离开。用来和最优解比较，差距越大说明这层越有解谜空间。
+ * 两种"不怎么算"的玩家，用来和最优解比较，差距越大说明这层越有解谜空间：
+ * - rush（赶路）：捡所有能捡的，每次打掉血最少的怪，能走到出口就离开
+ * - clear（清图）：同样每次打最便宜的，但要把打得过的怪全打完才走
  */
-export function greedyFloor(floor: FloorDef, hero: Hero, ch: CharacterDef = CHARACTERS.digger): Hero | null {
+export function greedyFloor(floor: FloorDef, hero: Hero, ch: CharacterDef = CHARACTERS.digger, mode: 'rush' | 'clear' = 'rush'): Hero | null {
     const p = parseFloor(floor);
     const cells = p.cells.map(c => ({ ...c })) as Cell[];
     let hh = { ...hero };
@@ -173,14 +190,16 @@ export function greedyFloor(floor: FloorDef, hero: Hero, ch: CharacterDef = CHAR
             if (r.ok) { hh = r.hero; cells[free[0]] = { kind: 'floor' }; continue; }
         }
         const eliteAlive = cells.some(isElite);
-        if (reach.atExit && !eliteAlive) return hh;
+        const canLeave = reach.atExit && !eliteAlive;
+        if (canLeave && mode === 'rush') return hh;
         let bestI = -1;
         let bestHero: Hero | null = null;
         for (const i of reach.next) {
+            if (mode === 'clear' && canLeave && cells[i].kind !== 'monster') continue;
             const r = interact(cells[i], hh, floor, ch);
             if (r.ok && (!bestHero || r.hero.hp > bestHero.hp)) { bestI = i; bestHero = r.hero; }
         }
-        if (!bestHero) return null;
+        if (!bestHero) return canLeave ? hh : null;
         hh = bestHero;
         cells[bestI] = { kind: 'floor' };
     }
@@ -205,4 +224,10 @@ function reachable(cells: Cell[], w: number, h: number, pos: number): { next: nu
         }
     }
     return { next, atExit };
+}
+
+function popcount(n: number): number {
+    let c = 0;
+    while (n) { n &= n - 1; c++; }
+    return c;
 }
