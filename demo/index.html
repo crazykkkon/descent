@@ -82,6 +82,9 @@
   .preview .v.left { color: var(--accent); }
   .preview .v.dead { color: #ff4d6a; }
   #confirm { display: none; }
+  .intel { background: #1a1608; border: 1px solid #6b5a22; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.5); line-height: 1.6; color: #e8dcb0; }
+  .intel b { display: block; color: #ffd479; font-size: calc(var(--u) * 2.9); margin-bottom: calc(var(--u) * 0.4); }
+  .intelHead { font-size: calc(var(--u) * 2.2); color: #b8a46a; }
   #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
   #msg.err { color: var(--hp); }
   #danger { display: none; font-size: calc(var(--u) * 2.5); color: #ffb0b8; background: #3a1820; border: 1px solid #7a2a38; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.2); }
@@ -317,6 +320,209 @@
     return cell.kind === "monster" && !!MONSTERS[cell.id].elite;
   }
 
+  // src/core/solver.ts
+  var MAX_ENTITIES = 30;
+  function solveFloor(state, hero, floor, ch) {
+    const { w, h, cells, pos } = state;
+    const entities = [];
+    cells.forEach((c, i) => {
+      if (isEntity(c)) entities.push(i);
+    });
+    if (entities.length > MAX_ENTITIES) throw new Error(`\u53EF\u4EA4\u4E92\u683C\u5B50\u592A\u591A\uFF08${entities.length}\uFF09\uFF0C\u6C42\u89E3\u5668\u4E0A\u9650 ${MAX_ENTITIES}`);
+    const bit = /* @__PURE__ */ new Map();
+    entities.forEach((cell, k) => bit.set(cell, k));
+    const exit = cells.findIndex((c) => c.kind === "exit");
+    const eliteMask = entities.reduce((m, cell, k) => isElite(cells[cell]) ? m | 1 << k : m, 0);
+    const statsOf = (mask) => {
+      let hh = { ...hero, hp: Number.MAX_SAFE_INTEGER };
+      let doors = 0;
+      for (let k = 0; k < entities.length; k++) {
+        if (!(mask & 1 << k)) continue;
+        const c = cells[entities[k]];
+        if (c.kind === "item") {
+          const r = interact(c, hh, floor, ch);
+          if (r.ok) hh = r.hero;
+        } else if (c.kind === "door" && c.door === "bone") doors++;
+      }
+      return { ...hh, hp: hero.hp, keys: hh.keys - doors };
+    };
+    const frontier = (mask) => {
+      const seen = new Uint8Array(cells.length);
+      const stack = [pos];
+      seen[pos] = 1;
+      const next = [];
+      let atExit = false;
+      while (stack.length) {
+        const cur = stack.pop();
+        for (const n of neighbors(cur, w, h)) {
+          if (seen[n]) continue;
+          seen[n] = 1;
+          const c = cells[n];
+          if (c.kind === "wall") continue;
+          if (c.kind === "exit") {
+            atExit = true;
+            continue;
+          }
+          if (c.kind === "floor") {
+            stack.push(n);
+            continue;
+          }
+          const k = bit.get(n);
+          if (mask & 1 << k) stack.push(n);
+          else next.push(k);
+        }
+      }
+      return { next, atExit };
+    };
+    const close = (mask, stats) => {
+      const picked = [];
+      for (; ; ) {
+        const items = frontier(mask).next.filter((k) => cells[entities[k]].kind === "item");
+        if (!items.length) return { mask, stats, picked };
+        for (const k of items) {
+          const r = interact(cells[entities[k]], stats, floor, ch);
+          if (r.ok) stats = r.hero;
+          mask |= 1 << k;
+          picked.push(entities[k]);
+        }
+      }
+    };
+    const nodes = /* @__PURE__ */ new Map();
+    const start = close(0, { ...hero });
+    nodes.set(start.mask, { hp: start.stats.hp, parent: -1, via: start.picked });
+    const buckets = Array.from({ length: entities.length + 1 }, () => /* @__PURE__ */ new Set());
+    buckets[popcount(start.mask)].add(start.mask);
+    const exits = [];
+    for (let p = 0; p <= entities.length; p++) {
+      for (const mask of buckets[p]) {
+        const node = nodes.get(mask);
+        const stats = { ...statsOf(mask), hp: node.hp };
+        const { next, atExit } = frontier(mask);
+        if (atExit && (mask & eliteMask) === eliteMask) exits.push({ mask, hero: stats });
+        for (const k of next) {
+          const r = interact(cells[entities[k]], stats, floor, ch);
+          if (!r.ok) continue;
+          const c = close(mask | 1 << k, r.hero);
+          const old = nodes.get(c.mask);
+          if (!old || old.hp < c.stats.hp) nodes.set(c.mask, { hp: c.stats.hp, parent: mask, via: [entities[k], ...c.picked] });
+          buckets[popcount(c.mask)].add(c.mask);
+        }
+      }
+    }
+    const planOf = (mask) => {
+      const plan = [];
+      let m = mask;
+      for (; ; ) {
+        const n = nodes.get(m);
+        plan.unshift(...n.via);
+        if (n.parent < 0) break;
+        m = n.parent;
+      }
+      return plan;
+    };
+    const pareto = paretoFilter(exits.map((e) => e.hero)).map((hh) => {
+      const e = exits.find((x) => x.hero === hh);
+      return { hero: hh, plan: planOf(e.mask) };
+    });
+    const best = pareto.length ? pareto.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
+    const itemMask = entities.reduce((m, cell, k) => cells[cell].kind === "item" ? m | 1 << k : m, 0);
+    const all = exits.filter((e) => (e.mask & itemMask) === itemMask);
+    const allBest = all.length ? all.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
+    const bestAll = allBest ? { hero: allBest.hero, plan: planOf(allBest.mask) } : void 0;
+    return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
+  }
+  function paretoFilter(list) {
+    const dominated = (a, b) => b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
+    const uniq = [];
+    for (const x of list) {
+      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys)) uniq.push(x);
+    }
+    return uniq.filter((a) => !uniq.some((b) => dominated(a, b)));
+  }
+  function solveFromStart(floor, hero, ch = CHARACTERS.digger) {
+    const p = parseFloor(floor);
+    return solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, floor, ch);
+  }
+  function popcount(n) {
+    let c = 0;
+    while (n) {
+      n &= n - 1;
+      c++;
+    }
+    return c;
+  }
+
+  // src/core/intel.ts
+  function blocks(cells, w, h, start, wall) {
+    const seen = new Uint8Array(cells.length);
+    const stack = [start];
+    seen[start] = 1;
+    while (stack.length) {
+      const cur = stack.pop();
+      for (const n of neighbors(cur, w, h)) {
+        if (seen[n] || n === wall) continue;
+        seen[n] = 1;
+        const c = cells[n];
+        if (c.kind === "exit") return false;
+        if (c.kind !== "wall") stack.push(n);
+      }
+    }
+    return true;
+  }
+  var HIGH_DEF = 14;
+  var TRAIT_RANK = (m) => {
+    if (m.def >= HIGH_DEF) return 5;
+    if (m.traits.includes("lifesteal")) return 4;
+    if (m.traits.includes("firstStrike")) return 3;
+    if (m.traits.includes("thorns")) return 2;
+    if (m.traits.includes("double")) return 1;
+    return 0;
+  };
+  function damageText(hero, m) {
+    const r = simulateCombat(hero, m);
+    if (!r.canAttack) return "\u6253\u4E0D\u52A8";
+    if (!r.canWin) return "\u6253\u4E0D\u6B7B";
+    return `-${r.damage}`;
+  }
+  function stairIntel(next, hero, ch, current) {
+    var _a2, _b;
+    const p = parseFloor(next);
+    const monsters = p.cells.map((c, i) => c.kind === "monster" ? { i, m: MONSTERS[c.id] } : null).filter((x) => !!x);
+    if (!monsters.length) return null;
+    const hard = (m) => {
+      const r = simulateCombat(hero, m);
+      return !r.canAttack || !r.canWin ? Infinity : r.damage;
+    };
+    const must = monsters.filter((x) => blocks(p.cells, p.w, p.h, p.start, x.i));
+    const route = (_b = (_a2 = solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, next, ch).best) == null ? void 0 : _a2.plan) != null ? _b : [];
+    const onRoute = monsters.filter((x) => route.includes(x.i) && !must.includes(x));
+    const pool = must.length || onRoute.length ? [...must, ...onRoute] : monsters;
+    const pick = [...pool].sort((a, b) => TRAIT_RANK(b.m) - TRAIT_RANK(a.m) || hard(b.m) - hard(a.m))[0].m;
+    const mustFight = must.some((x) => x.m === pick);
+    const where = mustFight ? "\u6321\u5728\u5FC5\u7ECF\u4E4B\u8DEF\u4E0A" : "\u5B88\u5728\u4E3B\u8981\u8DEF\u7EBF\u4E0A";
+    let headline;
+    if (pick.def >= HIGH_DEF) headline = `\u4E0B\u4E00\u5C42\u6709\u9AD8\u9632\u5B88\u536B\uFF1A${pick.name}${where}`;
+    else if (pick.traits.includes("lifesteal")) headline = `\u4E0B\u4E00\u5C42\u6709\u4F1A\u5438\u8840\u7684${pick.name}${where}`;
+    else if (pick.traits.includes("firstStrike")) headline = `\u4E0B\u4E00\u5C42\u6709\u5148\u624B\u653B\u51FB\u7684${pick.name}${where}`;
+    else if (pick.traits.includes("thorns")) headline = `\u4E0B\u4E00\u5C42\u6709\u4F1A\u53CD\u4F24\u7684${pick.name}${where}`;
+    else headline = `\u4E0B\u4E00\u5C42\u7684${pick.name}${where}`;
+    const lines = [`${pick.name}\uFF1A\u751F\u547D ${pick.hp}\u3000\u653B\u51FB ${pick.atk}\u3000\u9632\u5FA1 ${pick.def}`];
+    if (pick.def >= HIGH_DEF) lines.push(`\u653B\u51FB\u8981\u9AD8\u4E8E ${pick.def} \u624D\u6253\u5F97\u52A8\u5B83`);
+    if (pick.traits.includes("lifesteal")) lines.push("\u5B83\u4F1A\u5438\u8840\uFF0C\u653B\u51FB\u4E0D\u591F\u9AD8\u5C31\u6253\u4E0D\u6B7B");
+    if (pick.traits.includes("firstStrike")) lines.push("\u5B83\u4F1A\u5148\u6253\u4F60\u4E00\u4E0B\uFF0C\u9632\u5FA1\u8D8A\u9AD8\u8D8A\u597D\u6253");
+    if (pick.traits.includes("thorns")) lines.push("\u4F60\u6BCF\u6253\u5B83\u4E00\u4E0B\u81EA\u5DF1\u4E5F\u6389 3 \u8840\uFF0C\u653B\u51FB\u8D8A\u9AD8\u3001\u6253\u7684\u6B21\u6570\u8D8A\u5C11");
+    lines.push(`\u6309\u4F60\u73B0\u5728\u7684\u5C5E\u6027\uFF08\u653B ${hero.atk} / \u9632 ${hero.def}\uFF09\u6253\u5B83\uFF1A${damageText(hero, pick)}`);
+    if (current) {
+      const gem = current.floor.gem + ch.gemBonus;
+      const reds = current.cells.filter((c) => c.kind === "item" && c.id === "redGem").length;
+      const blues = current.cells.filter((c) => c.kind === "item" && c.id === "blueGem").length;
+      if (reds) lines.push(`\u672C\u5C42\u8FD8\u6709 ${reds} \u9897\u8D64\u6676\u6CA1\u62FF\uFF0C\u62FF\u4E86\u4EE5\u540E\uFF08\u653B ${hero.atk + gem * reds}\uFF09\u6253\u5B83\uFF1A${damageText({ ...hero, atk: hero.atk + gem * reds }, pick)}`);
+      if (blues) lines.push(`\u672C\u5C42\u8FD8\u6709 ${blues} \u9897\u9752\u6676\u6CA1\u62FF\uFF0C\u62FF\u4E86\u4EE5\u540E\uFF08\u9632 ${hero.def + gem * blues}\uFF09\u6253\u5B83\uFF1A${damageText({ ...hero, def: hero.def + gem * blues }, pick)}`);
+      if (reds && blues) lines.push(`\u4E24\u79CD\u90FD\u62FF\uFF08\u653B ${hero.atk + gem * reds} / \u9632 ${hero.def + gem * blues}\uFF09\uFF1A${damageText({ ...hero, atk: hero.atk + gem * reds, def: hero.def + gem * blues }, pick)}`);
+    }
+    return { headline, lines, monster: pick.id, mustFight };
+  }
+
   // src/core/game.ts
   var Run = class _Run {
     constructor(floors, characterId = "digger") {
@@ -363,6 +569,12 @@
     /** 本层入场时的属性 */
     get floorStartHero() {
       return { ...this.floorStart.hero };
+    }
+    /** 楼梯口情报：下一层的一条情报（最后一层没有） */
+    nextFloorIntel() {
+      const next = this.floors[this.floorIndex + 1];
+      if (!next) return null;
+      return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
     }
     /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
     restartFloor() {
@@ -869,138 +1081,6 @@
     return choices2.map((c, i) => buildFloor(pools[i], c));
   }
 
-  // src/core/solver.ts
-  var MAX_ENTITIES = 30;
-  function solveFloor(state, hero, floor, ch) {
-    const { w, h, cells, pos } = state;
-    const entities = [];
-    cells.forEach((c, i) => {
-      if (isEntity(c)) entities.push(i);
-    });
-    if (entities.length > MAX_ENTITIES) throw new Error(`\u53EF\u4EA4\u4E92\u683C\u5B50\u592A\u591A\uFF08${entities.length}\uFF09\uFF0C\u6C42\u89E3\u5668\u4E0A\u9650 ${MAX_ENTITIES}`);
-    const bit = /* @__PURE__ */ new Map();
-    entities.forEach((cell, k) => bit.set(cell, k));
-    const exit = cells.findIndex((c) => c.kind === "exit");
-    const eliteMask = entities.reduce((m, cell, k) => isElite(cells[cell]) ? m | 1 << k : m, 0);
-    const statsOf = (mask) => {
-      let hh = { ...hero, hp: Number.MAX_SAFE_INTEGER };
-      let doors = 0;
-      for (let k = 0; k < entities.length; k++) {
-        if (!(mask & 1 << k)) continue;
-        const c = cells[entities[k]];
-        if (c.kind === "item") {
-          const r = interact(c, hh, floor, ch);
-          if (r.ok) hh = r.hero;
-        } else if (c.kind === "door" && c.door === "bone") doors++;
-      }
-      return { ...hh, hp: hero.hp, keys: hh.keys - doors };
-    };
-    const frontier = (mask) => {
-      const seen = new Uint8Array(cells.length);
-      const stack = [pos];
-      seen[pos] = 1;
-      const next = [];
-      let atExit = false;
-      while (stack.length) {
-        const cur = stack.pop();
-        for (const n of neighbors(cur, w, h)) {
-          if (seen[n]) continue;
-          seen[n] = 1;
-          const c = cells[n];
-          if (c.kind === "wall") continue;
-          if (c.kind === "exit") {
-            atExit = true;
-            continue;
-          }
-          if (c.kind === "floor") {
-            stack.push(n);
-            continue;
-          }
-          const k = bit.get(n);
-          if (mask & 1 << k) stack.push(n);
-          else next.push(k);
-        }
-      }
-      return { next, atExit };
-    };
-    const close = (mask, stats) => {
-      const picked = [];
-      for (; ; ) {
-        const items = frontier(mask).next.filter((k) => cells[entities[k]].kind === "item");
-        if (!items.length) return { mask, stats, picked };
-        for (const k of items) {
-          const r = interact(cells[entities[k]], stats, floor, ch);
-          if (r.ok) stats = r.hero;
-          mask |= 1 << k;
-          picked.push(entities[k]);
-        }
-      }
-    };
-    const nodes = /* @__PURE__ */ new Map();
-    const start = close(0, { ...hero });
-    nodes.set(start.mask, { hp: start.stats.hp, parent: -1, via: start.picked });
-    const buckets = Array.from({ length: entities.length + 1 }, () => /* @__PURE__ */ new Set());
-    buckets[popcount(start.mask)].add(start.mask);
-    const exits = [];
-    for (let p = 0; p <= entities.length; p++) {
-      for (const mask of buckets[p]) {
-        const node = nodes.get(mask);
-        const stats = { ...statsOf(mask), hp: node.hp };
-        const { next, atExit } = frontier(mask);
-        if (atExit && (mask & eliteMask) === eliteMask) exits.push({ mask, hero: stats });
-        for (const k of next) {
-          const r = interact(cells[entities[k]], stats, floor, ch);
-          if (!r.ok) continue;
-          const c = close(mask | 1 << k, r.hero);
-          const old = nodes.get(c.mask);
-          if (!old || old.hp < c.stats.hp) nodes.set(c.mask, { hp: c.stats.hp, parent: mask, via: [entities[k], ...c.picked] });
-          buckets[popcount(c.mask)].add(c.mask);
-        }
-      }
-    }
-    const planOf = (mask) => {
-      const plan = [];
-      let m = mask;
-      for (; ; ) {
-        const n = nodes.get(m);
-        plan.unshift(...n.via);
-        if (n.parent < 0) break;
-        m = n.parent;
-      }
-      return plan;
-    };
-    const pareto = paretoFilter(exits.map((e) => e.hero)).map((hh) => {
-      const e = exits.find((x) => x.hero === hh);
-      return { hero: hh, plan: planOf(e.mask) };
-    });
-    const best = pareto.length ? pareto.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
-    const itemMask = entities.reduce((m, cell, k) => cells[cell].kind === "item" ? m | 1 << k : m, 0);
-    const all = exits.filter((e) => (e.mask & itemMask) === itemMask);
-    const allBest = all.length ? all.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
-    const bestAll = allBest ? { hero: allBest.hero, plan: planOf(allBest.mask) } : void 0;
-    return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
-  }
-  function paretoFilter(list) {
-    const dominated = (a, b) => b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
-    const uniq = [];
-    for (const x of list) {
-      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys)) uniq.push(x);
-    }
-    return uniq.filter((a) => !uniq.some((b) => dominated(a, b)));
-  }
-  function solveFromStart(floor, hero, ch = CHARACTERS.digger) {
-    const p = parseFloor(floor);
-    return solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, floor, ch);
-  }
-  function popcount(n) {
-    let c = 0;
-    while (n) {
-      n &= n - 1;
-      c++;
-    }
-    return c;
-  }
-
   // web/main.ts
   var $ = (id) => document.getElementById(id);
   var stage = $("stage");
@@ -1252,6 +1332,7 @@
       if (p.text === "\u4F1A\u6B7B") html += '<div class="warn">\u8FD9\u4E00\u4ED7\u6253\u5B8C\u4F60\u4F1A\u6B7B\uFF0C\u5148\u53BB\u53D8\u5F3A\u6216\u8005\u7ED5\u5F00\u5B83</div>';
       tipCell = i;
     }
+    if (run.cells[i].kind === "exit") html += intelHtml();
     lines.innerHTML = html;
     const c = run.cells[i];
     if (!HOVER && i === selected && ACTION[c.kind]) {
@@ -1260,6 +1341,11 @@
       confirm.disabled = !!p && !p.ok;
     }
     placeTip();
+  }
+  function intelHtml() {
+    const it = run.nextFloorIntel();
+    if (!it) return '<div class="intel"><b>\u8FD9\u662F\u8BD5\u73A9\u7248\u7684\u6700\u540E\u4E00\u5C42</b></div>';
+    return `<div class="intel"><div class="intelHead">\u{1F4DC} \u4E0B\u4E00\u5C42\u60C5\u62A5</div><b>${it.headline}</b>${it.lines.map((l) => `<div>${l}</div>`).join("")}</div>`;
   }
   function setMsg(text, err = false) {
     const m = $("msg");
@@ -1350,8 +1436,9 @@
     else if (run.hero.def > before.def) floatText(at, `\u9632+${run.hero.def - before.def}`, "#8ac8ff");
     else if (run.hero.keys > before.keys) floatText(at, "\u9AA8\u94A5+1", "#e8d38a");
   }
-  async function walk(path) {
+  async function walk(path, confirmedExit = false) {
     if (busy || !path.length) return;
+    let askExit = false;
     busy = true;
     document.body.dataset.walking = "1";
     selected = -1;
@@ -1361,6 +1448,10 @@
       for (const cell of path) {
         const c = run.cells[cell];
         const before = { ...run.hero };
+        if (c.kind === "exit" && !confirmedExit && run.nextFloorIntel() && !run.eliteAlive()) {
+          askExit = true;
+          break;
+        }
         if (c.kind === "floor" || c.kind === "exit") {
           const r = run.step(cell);
           if (!r.ok) {
@@ -1393,7 +1484,16 @@
       render();
       saveRun();
       if (run.status === "floorDone") setTimeout(showExit, 150);
+      if (askExit) confirmStairs();
     }
+  }
+  function confirmStairs() {
+    const exit = run.cells.findIndex((c) => c.kind === "exit");
+    modal(`<h2>\u697C\u68AF\u53E3</h2><p>\u4E0B\u697C\u4E4B\u540E\u5C31\u56DE\u4E0D\u6765\u4E86\u3002\u4E0B\u697C\u524D\uFF0C\u4F60\u542C\u5230\u4E95\u5E95\u4F20\u6765\u7684\u56DE\u58F0\uFF1A</p>${intelHtml()}
+        <p class="small">\u8FD8\u60F3\u56DE\u5934\u62FF\u70B9\u4EC0\u4E48\u7684\u8BDD\uFF0C\u9009"\u518D\u60F3\u60F3"\u3002</p>`, [
+      { label: "\u518D\u60F3\u60F3", on: () => setMsg("\u7559\u5728\u672C\u5C42\u3002\u60F3\u597D\u4E86\u518D\u8D70\u5230\u697C\u68AF\u53E3\u3002") },
+      { label: "\u4E0B\u697C", primary: true, on: () => void walk([exit], true) }
+    ]);
   }
   function act(i) {
     if (busy) return;

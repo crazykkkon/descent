@@ -260,6 +260,7 @@ function showInfo(i: number) {
         if (p.text === '会死') html += '<div class="warn">这一仗打完你会死，先去变强或者绕开它</div>';
         tipCell = i;
     }
+    if (run.cells[i].kind === 'exit') html += intelHtml();
     lines.innerHTML = html;
     // 手机：选中后出现确认按钮
     const c = run.cells[i];
@@ -269,6 +270,13 @@ function showInfo(i: number) {
         (confirm as HTMLButtonElement).disabled = !!p && !p.ok;
     }
     placeTip();
+}
+
+/** 楼梯口情报（下一层的一条情报） */
+function intelHtml(): string {
+    const it = run.nextFloorIntel();
+    if (!it) return '<div class="intel"><b>这是试玩版的最后一层</b></div>';
+    return `<div class="intel"><div class="intelHead">📜 下一层情报</div><b>${it.headline}</b>${it.lines.map(l => `<div>${l}</div>`).join('')}</div>`;
 }
 
 function setMsg(text: string, err = false) {
@@ -367,8 +375,9 @@ function popText(at: number, before: Hero) {
 }
 
 /** 沿路线一格一格走；最后一格是怪物、门或道具时，走到旁边再交互。走过就不能撤回。 */
-async function walk(path: number[]) {
+async function walk(path: number[], confirmedExit = false) {
     if (busy || !path.length) return;
+    let askExit = false;
     busy = true;
     document.body.dataset.walking = '1';
     selected = -1;
@@ -378,6 +387,8 @@ async function walk(path: number[]) {
         for (const cell of path) {
             const c = run.cells[cell];
             const before = { ...run.hero };
+            // 下楼前先停在楼梯口，看一眼下一层的情报再决定
+            if (c.kind === 'exit' && !confirmedExit && run.nextFloorIntel() && !run.eliteAlive()) { askExit = true; break; }
             if (c.kind === 'floor' || c.kind === 'exit') {
                 const r = run.step(cell);
                 if (!r.ok) { setMsg(r.msg || '走不过去', true); break; }
@@ -405,7 +416,17 @@ async function walk(path: number[]) {
         render();
         saveRun();
         if (run.status === 'floorDone') setTimeout(showExit, 150);
+        if (askExit) confirmStairs();
     }
+}
+
+function confirmStairs() {
+    const exit = run.cells.findIndex(c => c.kind === 'exit');
+    modal(`<h2>楼梯口</h2><p>下楼之后就回不来了。下楼前，你听到井底传来的回声：</p>${intelHtml()}
+        <p class="small">还想回头拿点什么的话，选"再想想"。</p>`, [
+        { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
+        { label: '下楼', primary: true, on: () => void walk([exit], true) },
+    ]);
 }
 
 function act(i: number) {

@@ -3,6 +3,7 @@ import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, TRAIT_DESC,
 import { CombatResult, simulateCombat } from './combat';
 import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
+import { Intel, stairIntel } from './intel';
 
 export type Status = 'playing' | 'floorDone' | 'finished';
 
@@ -91,6 +92,13 @@ export class Run {
 
     /** 本层入场时的属性 */
     get floorStartHero(): Hero { return { ...this.floorStart.hero }; }
+
+    /** 楼梯口情报：下一层的一条情报（最后一层没有） */
+    nextFloorIntel(): Intel | null {
+        const next = this.floors[this.floorIndex + 1];
+        if (!next) return null;
+        return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
+    }
 
     /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
     restartFloor() {

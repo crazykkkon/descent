@@ -6,6 +6,7 @@ import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, allChoices, buildFloor, buildFloors, pickChoices } from '../src/core/levels';
 import { parseFloor } from '../src/core/floor';
+import { stairIntel } from '../src/core/intel';
 import { greedyFloor, solveFromStart, solveRun } from '../src/core/solver';
 
 const hero = { atk: 10, def: 10 };
@@ -180,6 +181,33 @@ test('前两层难度低：每张图都能不死地拿到所有加成，见怪�
             }
         }));
     }
+});
+
+test('楼梯口情报：必经的高防守卫，给出现在和拿宝石后的掉血对比', () => {
+    const next = tiny(['@.c.>']);
+    const cur = new Run([tiny(['@rr>']), next]);
+    const it = cur.nextFloorIntel()!;
+    assert.match(it.headline, /高防守卫/);
+    assert.match(it.headline, /必经/);
+    assert.equal(it.mustFight, true);
+    assert.ok(it.lines.some(l => l.includes('打不动')), it.lines.join('|'));
+    assert.ok(it.lines.some(l => /赤晶没拿.*-\d+/.test(l)), it.lines.join('|'));
+});
+
+test('楼梯口情报：不拿可以绕开的怪吓唬人', () => {
+    // 回声蝠在死胡同里，井苔挡路
+    const it = stairIntel(tiny(['@m>', 'v##']), CHARACTERS.digger.base, CHARACTERS.digger)!;
+    assert.equal(it.monster, 'moss');
+});
+
+test('最后一层没有楼梯口情报；试玩版每层都能生成情报', () => {
+    const floors = buildFloors(pickChoices(5));
+    const run = new Run(floors);
+    assert.ok(run.nextFloorIntel());
+    assert.equal(Run.load(floors, { ...run.save(), floorIndex: 2, current: run.save().current, floorStart: run.save().floorStart }).nextFloorIntel(), null);
+    for (const fi of [1, 2]) DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
+        assert.ok(stairIntel(buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi }), CHARACTERS.digger.base, CHARACTERS.digger));
+    }));
 });
 
 test('所有选图组合都能通关', () => {
