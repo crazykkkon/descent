@@ -53,7 +53,6 @@ export class Run {
     kills = 0;
     totalSteps = 0;
     status: Status = 'playing';
-    private history: Snapshot[] = [];
     private floorStart!: Snapshot;
 
     constructor(readonly floors: FloorDef[], characterId = 'digger') {
@@ -74,7 +73,6 @@ export class Run {
         this.steps = 0;
         this.kills = 0;
         this.status = 'playing';
-        this.history = [];
         this.floorStart = this.snapshot();
     }
 
@@ -94,17 +92,9 @@ export class Run {
     /** 本层入场时的属性 */
     get floorStartHero(): Hero { return { ...this.floorStart.hero }; }
 
-    canUndo(): boolean { return this.history.length > 0 && this.status === 'playing'; }
-
-    undo(): boolean {
-        if (!this.canUndo()) return false;
-        this.restore(this.history.pop()!);
-        return true;
-    }
-
+    /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
     restartFloor() {
         this.restore(this.floorStart);
-        this.history = [];
     }
 
     monstersLeft(): number { return this.cells.filter(c => c.kind === 'monster').length; }
@@ -151,23 +141,17 @@ export class Run {
         }
     }
 
-    /** 走空地到目标格子（目标是怪物/道具/门/出口时，最后一步与它交互）。整次点击算一次撤回。 */
+    /** 走空地到目标格子（目标是怪物/道具/门/出口时，最后一步与它交互）。一次走完，界面做动画时改用 findPath + step。 */
     tapCell(target: number): ActResult {
         if (this.status !== 'playing') return { ok: false, msg: '' };
         if (target === this.pos) return { ok: false, msg: '' };
         const path = this.findPath(target);
         if (!path) return { ok: false, msg: '走不过去' };
-        const before = this.snapshot();
-        const histLen = this.history.length;
         let last: ActResult = { ok: true, msg: '' };
         for (const cell of path) {
-            last = this.stepInto(cell, false);
+            last = this.step(cell);
             if (!last.ok) break;
         }
-        // 一次点击只留一个撤回点
-        this.history.length = histLen;
-        const moved = this.pos !== before.pos || this.steps !== before.steps;
-        if (moved) this.history.push(before);
         return last;
     }
 
@@ -176,10 +160,11 @@ export class Run {
         const x = this.pos % this.w + dx;
         const y = Math.floor(this.pos / this.w) + dy;
         if (x < 0 || y < 0 || x >= this.w || y >= this.h) return { ok: false, msg: '' };
-        return this.stepInto(y * this.w + x, true);
+        return this.step(y * this.w + x);
     }
 
-    private stepInto(i: number, recordUndo: boolean): ActResult {
+    /** 往相邻格子走一步（或和它交互） */
+    step(i: number): ActResult {
         if (this.status !== 'playing') return { ok: false, msg: '' };
         if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: '' };
         const c = this.cells[i];
@@ -187,7 +172,6 @@ export class Run {
         if (c.kind === 'exit' && this.eliteAlive()) return { ok: false, msg: '精英守卫还活着，出口被封住了' };
 
         if (c.kind === 'floor' || c.kind === 'exit') {
-            if (recordUndo) this.history.push(this.snapshot());
             this.pos = i;
             this.steps++;
             if (c.kind === 'exit') this.status = 'floorDone';
@@ -196,7 +180,6 @@ export class Run {
 
         const r = interact(c, this.hero, this.floor, this.ch);
         if (!r.ok) return { ok: false, msg: r.reason };
-        if (recordUndo) this.history.push(this.snapshot());
         const lost = this.hero.hp - r.hero.hp;
         this.hero = r.hero;
         this.steps++;

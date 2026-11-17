@@ -6,7 +6,7 @@ import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, allChoices, buildFloor, buildFloors, pickChoices } from '../src/core/levels';
 import { parseFloor } from '../src/core/floor';
-import { solveFromStart, solveRun } from '../src/core/solver';
+import { greedyFloor, solveFromStart, solveRun } from '../src/core/solver';
 
 const hero = { atk: 10, def: 10 };
 const mk = (traits: MonsterDef['traits'], over: Partial<MonsterDef> = {}): MonsterDef =>
@@ -80,7 +80,6 @@ test('走到出口进入结算，不需要清怪；只能往下走', () => {
     assert.equal(run.status, 'floorDone');
     run.finishFloor(false);
     assert.equal(run.floorIndex, 1);
-    assert.equal(run.canUndo(), false);
 });
 
 test('精英活着时出口被封住', () => {
@@ -100,15 +99,14 @@ test('清层不再有额外奖励；剩余血瓶换金币、卖钥匙', () => {
     assert.equal(run.status, 'finished');
 });
 
-test('点击寻路 + 一次点击只算一次撤回', () => {
+test('点击寻路：走到怪物旁边再打；没有撤回', () => {
     const run = new Run([tiny(['@..m', '...>'])]);
+    assert.deepEqual(run.findPath(3), [1, 2, 3]);
     run.tapCell(3);
     assert.equal(run.pos, 2);
     assert.equal(run.cells[3].kind, 'floor');
-    run.undo();
-    assert.equal(run.pos, 0);
-    assert.equal(run.cells[3].kind, 'monster');
-    assert.equal(run.canUndo(), false);
+    assert.equal(run.steps, 3);
+    assert.equal((run as unknown as Record<string, unknown>).undo, undefined);
 });
 
 test('重开本层回到入场状态', () => {
@@ -162,6 +160,26 @@ test('开局不打怪就拿不到宝石和血瓶（奖励都在怪物身后）',
             }
         }
     })));
+});
+
+test('前两层难度低：每张图都能不死地拿到所有加成，见怪就打的玩家也不会死', () => {
+    const base = CHARACTERS.digger.base;
+    const f1Out: { hp: number; atk: number; def: number; keys: number; gold: number }[] = [];
+    for (const [fi, entries] of [[0, [base]], [1, null]] as const) {
+        const pool = DEMO_POOLS[fi];
+        const ins = entries ?? f1Out;
+        pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
+            const f = buildFloor(pool, { layout: li, variant: vi });
+            for (const e of ins) {
+                const r = solveFromStart(f, e);
+                const name = `${pool.params.name} ${l.name}${vi + 1} 入场 ${e.hp}`;
+                assert.ok(r.bestAll, `${name}：拿不全所有道具`);
+                assert.ok(r.bestAll!.hero.hp >= Math.min(150, e.hp * 0.75), `${name}：拿全后只剩 ${r.bestAll!.hero.hp}`);
+                assert.ok(greedyFloor(f, e, undefined, 'clear'), `${name}：见怪就打会死`);
+                if (fi === 0) f1Out.push(r.bestAll!.hero);
+            }
+        }));
+    }
 });
 
 test('所有选图组合都能通关', () => {

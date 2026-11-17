@@ -27,6 +27,8 @@ export interface SolveResult {
     solvable: boolean;
     /** 剩余生命最多的打法 */
     best?: ExitOption;
+    /** 拿到本层所有道具（宝石、血瓶、钥匙、金币）后再走出口、剩余生命最多的打法；做不到时为空 */
+    bestAll?: ExitOption;
     /** 所有"不被其他结果完全压制"的出口结果（用于多层连续求解） */
     pareto: ExitOption[];
     statesVisited: number;
@@ -136,7 +138,11 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
         return { hero: hh, plan: planOf(e.mask) };
     });
     const best = pareto.length ? pareto.reduce((a, b) => (b.hero.hp > a.hero.hp ? b : a)) : undefined;
-    return { solvable: exits.length > 0, best, pareto, statesVisited: nodes.size };
+    const itemMask = entities.reduce((m, cell, k) => (cells[cell].kind === 'item' ? m | (1 << k) : m), 0);
+    const all = exits.filter(e => (e.mask & itemMask) === itemMask);
+    const allBest = all.length ? all.reduce((a, b) => (b.hero.hp > a.hero.hp ? b : a)) : undefined;
+    const bestAll = allBest ? { hero: allBest.hero, plan: planOf(allBest.mask) } : undefined;
+    return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
 }
 
 /** 去掉被完全压制的结果（生命、攻击、防御、钥匙都不比别人高） */

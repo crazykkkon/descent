@@ -52,7 +52,8 @@
   .cell.door.blood { background: #4a1820; color: #ff9aa8; }
   .cell.exit { background: #133a33; color: #8ff0d6; }
   .cell.exit.locked { background: #23302d; color: #5d7a73; }
-  .cell.hero { background: #26414a; }
+  #board { position: relative; }
+  #hero { position: absolute; left: 0; top: 0; display: grid; place-items: center; pointer-events: none; z-index: 3; will-change: transform; }
   .heroToken { width: 72%; height: 72%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6d5, #f0c94a 55%, #a37a1d); box-shadow: 0 0 calc(var(--u) * 2) #f0c94a80; display: grid; place-items: center; color: #3b2a00; font-size: calc(var(--cell) * 0.32); }
   .gem { width: 50%; height: 50%; transform: rotate(45deg); border-radius: 18%; }
   .gem.red { background: linear-gradient(135deg, #ffb08a, #e2553a); box-shadow: 0 0 calc(var(--u) * 1.5) #e2553a90; }
@@ -119,13 +120,12 @@
     <div id="infoTitle"></div>
     <div id="infoLines"></div>
     <button id="confirm" class="primary">出手</button>
-    <div id="danger">⚠ 现在已经走不到出口了，建议撤回或重开本层。</div>
+    <div id="danger">⚠ 现在已经走不到出口了，只能重开本层。</div>
     <div class="sep"></div>
     <div id="msg"></div>
     <div class="grow"></div>
     <div class="btns">
-      <button id="undo">撤回</button>
-      <button id="restart">重开本层</button>
+      <button id="restart" class="wide">重开本层（地图不变）</button>
       <button id="newRun" class="wide">新开一局（换地图）</button>
     </div>
     <div class="keys" id="keysHint"></div>
@@ -330,7 +330,6 @@
       this.kills = 0;
       this.totalSteps = 0;
       this.status = "playing";
-      this.history = [];
       this.ch = CHARACTERS[characterId];
       this.hero = { ...this.ch.base };
       this.loadFloor(0);
@@ -348,7 +347,6 @@
       this.steps = 0;
       this.kills = 0;
       this.status = "playing";
-      this.history = [];
       this.floorStart = this.snapshot();
     }
     snapshot() {
@@ -366,17 +364,9 @@
     get floorStartHero() {
       return { ...this.floorStart.hero };
     }
-    canUndo() {
-      return this.history.length > 0 && this.status === "playing";
-    }
-    undo() {
-      if (!this.canUndo()) return false;
-      this.restore(this.history.pop());
-      return true;
-    }
+    /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
     restartFloor() {
       this.restore(this.floorStart);
-      this.history = [];
     }
     monstersLeft() {
       return this.cells.filter((c) => c.kind === "monster").length;
@@ -422,22 +412,17 @@
           return { title: "\u7A7A\u5730", lines: [] };
       }
     }
-    /** 走空地到目标格子（目标是怪物/道具/门/出口时，最后一步与它交互）。整次点击算一次撤回。 */
+    /** 走空地到目标格子（目标是怪物/道具/门/出口时，最后一步与它交互）。一次走完，界面做动画时改用 findPath + step。 */
     tapCell(target) {
       if (this.status !== "playing") return { ok: false, msg: "" };
       if (target === this.pos) return { ok: false, msg: "" };
       const path = this.findPath(target);
       if (!path) return { ok: false, msg: "\u8D70\u4E0D\u8FC7\u53BB" };
-      const before = this.snapshot();
-      const histLen = this.history.length;
       let last = { ok: true, msg: "" };
       for (const cell of path) {
-        last = this.stepInto(cell, false);
+        last = this.step(cell);
         if (!last.ok) break;
       }
-      this.history.length = histLen;
-      const moved = this.pos !== before.pos || this.steps !== before.steps;
-      if (moved) this.history.push(before);
       return last;
     }
     /** 方向键移动一步 */
@@ -445,16 +430,16 @@
       const x = this.pos % this.w + dx;
       const y = Math.floor(this.pos / this.w) + dy;
       if (x < 0 || y < 0 || x >= this.w || y >= this.h) return { ok: false, msg: "" };
-      return this.stepInto(y * this.w + x, true);
+      return this.step(y * this.w + x);
     }
-    stepInto(i, recordUndo) {
+    /** 往相邻格子走一步（或和它交互） */
+    step(i) {
       if (this.status !== "playing") return { ok: false, msg: "" };
       if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: "" };
       const c = this.cells[i];
       if (c.kind === "wall") return { ok: false, msg: "" };
       if (c.kind === "exit" && this.eliteAlive()) return { ok: false, msg: "\u7CBE\u82F1\u5B88\u536B\u8FD8\u6D3B\u7740\uFF0C\u51FA\u53E3\u88AB\u5C01\u4F4F\u4E86" };
       if (c.kind === "floor" || c.kind === "exit") {
-        if (recordUndo) this.history.push(this.snapshot());
         this.pos = i;
         this.steps++;
         if (c.kind === "exit") this.status = "floorDone";
@@ -462,7 +447,6 @@
       }
       const r = interact(c, this.hero, this.floor, this.ch);
       if (!r.ok) return { ok: false, msg: r.reason };
-      if (recordUndo) this.history.push(this.snapshot());
       const lost = this.hero.hp - r.hero.hp;
       this.hero = r.hero;
       this.steps++;
@@ -573,19 +557,19 @@
                 ".###.###.",
                 ".#b.m#h..",
                 ".#####.#.",
-                "....v...."
+                "....m...."
               ]
             },
             {
-              note: "\u4E0A\u8DEF\u8759\u8760\u5B88\u7740\u9752\u6676\uFF0C\u4E0B\u8DEF\u4E24\u53EA\u76F2\u9CD7\uFF0C\u8D70\u54EA\u6761\uFF1F",
+              note: "\u4E0A\u8DEF\u4E95\u82D4\u5B88\u7740\u9752\u6676\uFF0C\u4E2D\u8DEF\u76F2\u9CD7\u6321\u7740\u51FA\u53E3\uFF0C\u4E0B\u8DEF\u7ED5\u8FDC\u4F46\u53EA\u6709\u4E95\u82D4",
               map: [
                 "..m.b#.h.",
                 ".#####.#.",
                 "@...e...>",
                 ".###.###.",
-                ".#r.v#...",
+                ".#r.m#...",
                 ".#####.#.",
-                "....e..m."
+                "....m..m."
               ]
             }
           ]
@@ -600,7 +584,7 @@
                 ".###.###.",
                 ".#r...b#.",
                 ".##...##.",
-                "..m.#.v..",
+                "..m.#.m..",
                 ".#######e",
                 "...m.h.e>"
               ]
@@ -612,9 +596,9 @@
                 ".###.###.",
                 ".#b.$..#.",
                 ".##...##.",
-                "..e.#.v..",
+                "..e.#.m..",
                 ".#######m",
-                "...v.r.e>"
+                "...m.r.e>"
               ]
             }
           ]
@@ -626,7 +610,7 @@
               note: "\u4E00\u6761\u4E3B\u8DEF\uFF0C\u4E24\u8FB9\u7684\u5C0F\u623F\u95F4\u5404\u6709\u5956\u52B1\uFF0C\u5B88\u536B\u6709\u5F3A\u6709\u5F31",
               map: [
                 "#r#h..#b#",
-                "#m###e#v#",
+                "#m###e#e#",
                 "#.#...#.#",
                 "@.....e.>",
                 "#.#.#.###",
@@ -642,7 +626,7 @@
                 "#.#...#.#",
                 "@.....e.>",
                 "#.#.#.###",
-                "#m#D#v..#",
+                "#m#D#m..#",
                 "#k#h#..h#"
               ]
             }
@@ -696,11 +680,11 @@
               map: [
                 "@...f...D..",
                 ".###.#.###.",
-                ".#h..f..r#.",
+                ".#h..e..r#.",
                 ".#.###.##..",
                 ".#..r..m#.>",
                 ".##.###.#b.",
-                "..m.v...f.k"
+                "..m.e...f.k"
               ]
             },
             {
@@ -721,14 +705,14 @@
           name: "\u4FA7\u5BA4",
           variants: [
             {
-              note: "\u51FA\u53E3\u88AB\u9AA8\u95E8\u5C01\u4F4F\uFF0C\u9AA8\u94A5\u5728\u56DE\u58F0\u8760\u8EAB\u540E\u7684\u4FA7\u5BA4\u91CC",
+              note: "\u51FA\u53E3\u88AB\u9AA8\u95E8\u5C01\u4F4F\uFF0C\u9AA8\u94A5\u5728\u76F2\u9CD7\u8EAB\u540E\u7684\u4FA7\u5BA4\u91CC",
               map: [
-                "#e#.e.#b#.r",
+                "#h#.m.#b#.r",
                 "#e#.#.#f#.#",
                 "#.#.#.#.#.#",
                 "@....m...D>",
                 "#.#.#.#.#.#",
-                "#v#.c.#m#h#",
+                "#e#.c.#m#h#",
                 "#k#.#.#r#.#"
               ]
             },
@@ -740,7 +724,7 @@
                 "#.#.#.#.#.#",
                 "@........f>",
                 "#.#.#.#.#.#",
-                "#f#.v.#c#m#",
+                "#e#.v.#c#m#",
                 "#r#.#.#$#$#"
               ]
             }
@@ -990,7 +974,11 @@
       return { hero: hh, plan: planOf(e.mask) };
     });
     const best = pareto.length ? pareto.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
-    return { solvable: exits.length > 0, best, pareto, statesVisited: nodes.size };
+    const itemMask = entities.reduce((m, cell, k) => cells[cell].kind === "item" ? m | 1 << k : m, 0);
+    const all = exits.filter((e) => (e.mask & itemMask) === itemMask);
+    const allBest = all.length ? all.reduce((a, b) => b.hero.hp > a.hero.hp ? b : a) : void 0;
+    const bestAll = allBest ? { hero: allBest.hero, plan: planOf(allBest.mask) } : void 0;
+    return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
   }
   function paretoFilter(list) {
     const dominated = (a, b) => b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
@@ -1067,13 +1055,14 @@
     board.style.gridTemplateColumns = `repeat(${run.w}, ${cell}px)`;
     board.style.gridTemplateRows = `repeat(${run.h}, ${cell}px)`;
     board.style.setProperty("--cell", `${cell}px`);
+    requestAnimationFrame(() => placeHero(false));
   }
   window.addEventListener("resize", () => {
     fit();
     placeTip();
   });
-  function stat(color, ico, val, bump, cls = "") {
-    return `<div class="stat ${cls}"><div class="ico" style="background:${color}">${ico}</div><span class="val${bump ? " bump" : ""}">${val}</span></div>`;
+  function stat(color, ico, val, bump2, cls = "") {
+    return `<div class="stat ${cls}"><div class="ico" style="background:${color}">${ico}</div><span class="val${bump2 ? " bump" : ""}">${val}</span></div>`;
   }
   function renderHud() {
     const h = run.hero;
@@ -1093,7 +1082,6 @@
   var SHORT = { moss: "\u82D4", eel: "\u9CD7", frog: "\u86D9", beetle: "\u7532", bat: "\u8760", wraith: "\u9B42", crab: "\u87F9", guardian: "\u5B88" };
   function cellHtml(i) {
     const c = run.cells[i];
-    if (i === run.pos) return { cls: "hero", html: '<div class="heroToken">\u6211</div>' };
     switch (c.kind) {
       case "wall":
         return { cls: "wall", html: "" };
@@ -1129,6 +1117,25 @@
     }
     return { cls: "floor", html: "" };
   }
+  var heroEl = document.createElement("div");
+  heroEl.id = "hero";
+  heroEl.innerHTML = '<div class="heroToken">\u6211</div>';
+  function placeHero(animate) {
+    const el = board.children[run.pos];
+    if (!el) return;
+    heroEl.style.transition = animate ? `transform ${STEP_MS}ms linear` : "none";
+    heroEl.style.width = `${el.offsetWidth}px`;
+    heroEl.style.height = `${el.offsetHeight}px`;
+    heroEl.style.transform = `translate(${el.offsetLeft}px, ${el.offsetTop}px)`;
+  }
+  function bump(target) {
+    const from = board.children[run.pos];
+    const to = board.children[target];
+    const dx = (to.offsetLeft - from.offsetLeft) * 0.35;
+    const dy = (to.offsetTop - from.offsetTop) * 0.35;
+    heroEl.style.transition = `transform ${STEP_MS / 2}ms ease-out`;
+    heroEl.style.transform = `translate(${from.offsetLeft + dx}px, ${from.offsetTop + dy}px)`;
+  }
   function renderBoard() {
     if (board.children.length !== run.cells.length) {
       board.innerHTML = "";
@@ -1142,6 +1149,7 @@
         });
         board.appendChild(d);
       });
+      board.appendChild(heroEl);
       fit();
     }
     run.cells.forEach((_, i) => {
@@ -1195,18 +1203,18 @@
     const w = wrap.getBoundingClientRect();
     const x = tipCell % run.w;
     const y = Math.floor(tipCell / run.w);
-    const busy = (cx2, cy2) => {
+    const busy2 = (cx2, cy2) => {
       if (cx2 < 0 || cy2 < 0 || cx2 >= run.w || cy2 >= run.h) return true;
       const k = run.cells[cy2 * run.w + cx2].kind;
       return k !== "wall" && k !== "floor";
     };
     const cx = r.left - w.left + r.width / 2;
     const cy = r.top - w.top + r.height / 2;
-    if (y > 0 && !busy(x, y - 1)) {
+    if (y > 0 && !busy2(x, y - 1)) {
       tip.style.left = `${cx}px`;
       tip.style.top = `${r.top - w.top - 4}px`;
       tip.style.transform = "translate(-50%, -100%)";
-    } else if (y < run.h - 1 && !busy(x, y + 1)) {
+    } else if (y < run.h - 1 && !busy2(x, y + 1)) {
       tip.style.left = `${cx}px`;
       tip.style.top = `${r.bottom - w.top + 4}px`;
       tip.style.transform = "translate(-50%, 0)";
@@ -1268,7 +1276,6 @@
   function render() {
     renderHud();
     renderBoard();
-    $("undo").disabled = !run.canUndo();
     checkDanger();
     showInfo(HOVER && hovered >= 0 ? hovered : selected);
   }
@@ -1332,28 +1339,73 @@
       [{ label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }]
     );
   }
-  function afterAct(r, at, before) {
-    if (r.msg) setMsg(r.msg, !r.ok);
-    if (r.ok) {
-      const lost = before.hp - run.hero.hp;
-      if (lost > 0) floatText(at, `-${lost}`, "#ff6b81");
-      else if (run.hero.hp > before.hp) floatText(at, `+${run.hero.hp - before.hp}`, "#7dffb0");
-      else if (run.hero.atk > before.atk) floatText(at, `\u653B+${run.hero.atk - before.atk}`, "#ffb07a");
-      else if (run.hero.def > before.def) floatText(at, `\u9632+${run.hero.def - before.def}`, "#8ac8ff");
-    }
+  var STEP_MS = 130;
+  var sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  var busy = false;
+  function popText(at, before) {
+    const lost = before.hp - run.hero.hp;
+    if (lost > 0) floatText(at, `-${lost}`, "#ff6b81");
+    else if (run.hero.hp > before.hp) floatText(at, `+${run.hero.hp - before.hp}`, "#7dffb0");
+    else if (run.hero.atk > before.atk) floatText(at, `\u653B+${run.hero.atk - before.atk}`, "#ffb07a");
+    else if (run.hero.def > before.def) floatText(at, `\u9632+${run.hero.def - before.def}`, "#8ac8ff");
+    else if (run.hero.keys > before.keys) floatText(at, "\u9AA8\u94A5+1", "#e8d38a");
+  }
+  async function walk(path) {
+    if (busy || !path.length) return;
+    busy = true;
+    document.body.dataset.walking = "1";
     selected = -1;
-    render();
-    saveRun();
-    if (run.status === "floorDone") setTimeout(showExit, 200);
+    tipCell = -1;
+    placeTip();
+    try {
+      for (const cell of path) {
+        const c = run.cells[cell];
+        const before = { ...run.hero };
+        if (c.kind === "floor" || c.kind === "exit") {
+          const r = run.step(cell);
+          if (!r.ok) {
+            setMsg(r.msg || "\u8D70\u4E0D\u8FC7\u53BB", true);
+            break;
+          }
+          placeHero(true);
+          renderHud();
+          await sleep(STEP_MS);
+          continue;
+        }
+        const r0 = run.step(cell);
+        if (!r0.ok) {
+          setMsg(r0.msg, true);
+          break;
+        }
+        bump(cell);
+        await sleep(STEP_MS / 2);
+        setMsg(r0.msg);
+        popText(cell, before);
+        renderBoard();
+        renderHud();
+        placeHero(true);
+        await sleep(STEP_MS);
+      }
+    } finally {
+      busy = false;
+      document.body.dataset.walking = "";
+      hovered = -1;
+      render();
+      saveRun();
+      if (run.status === "floorDone") setTimeout(showExit, 150);
+    }
   }
   function act(i) {
-    const before = { ...run.hero };
-    const r = run.tapCell(i);
-    if (!r.ok && !r.msg) r.msg = "\u8D70\u4E0D\u8FC7\u53BB";
-    afterAct(r, i, before);
+    if (busy) return;
+    const path = run.findPath(i);
+    if (!path) {
+      setMsg("\u8D70\u4E0D\u8FC7\u53BB", true);
+      return;
+    }
+    void walk(path);
   }
   function onTap(i) {
-    if (run.status !== "playing" || modalOpen()) return;
+    if (busy || run.status !== "playing" || modalOpen()) return;
     const c = run.cells[i];
     if (c.kind === "wall" || i === run.pos) {
       selected = -1;
@@ -1392,28 +1444,20 @@
     const d = DIRS[key];
     if (d) {
       e.preventDefault();
+      if (busy || run.status !== "playing") return;
       const x = run.pos % run.w + d[0];
       const y = Math.floor(run.pos / run.w) + d[1];
-      const before = { ...run.hero };
-      const r = run.move(d[0], d[1]);
-      hovered = -1;
-      afterAct(r, y * run.w + x, before);
-    } else if (key === "z" || key === "Backspace") undo();
-    else if (key === "r") restart();
+      if (x < 0 || y < 0 || x >= run.w || y >= run.h) return;
+      const t = y * run.w + x;
+      if (run.cells[t].kind === "wall") return;
+      void walk([t]);
+    } else if (key === "r" && !busy) restart();
     else if (key === "Escape") {
       selected = -1;
       renderBoard();
       showInfo(-1);
     }
   });
-  function undo() {
-    if (run.undo()) {
-      setMsg("\u5DF2\u64A4\u56DE\u4E00\u6B65");
-      selected = -1;
-      render();
-      saveRun();
-    }
-  }
   function restart() {
     run.restartFloor();
     startFloor();
@@ -1447,14 +1491,15 @@
     store(LAST_KEY, c);
     begin(c);
   }
-  $("undo").onclick = undo;
-  $("restart").onclick = restart;
+  $("restart").onclick = () => {
+    if (!busy) restart();
+  };
   $("newRun").onclick = () => modal("<h2>\u65B0\u5F00\u4E00\u5C40\uFF1F</h2><p>\u8FD9\u4E00\u5C40\u7684\u8FDB\u5EA6\u4F1A\u4E22\u5931\u3002\u65B0\u7684\u4E00\u5C40\u6BCF\u5C42\u90FD\u4F1A\u6362\u4E00\u5F20\u5730\u56FE\u3002</p>", [
     { label: "\u53D6\u6D88", on: () => {
     } },
     { label: "\u65B0\u5F00\u4E00\u5C40", danger: true, on: newRun }
   ]);
-  $("keysHint").textContent = HOVER ? "\u65B9\u5411\u952E / WASD \u79FB\u52A8 \xB7 Z \u64A4\u56DE \xB7 R \u91CD\u5F00\u672C\u5C42" : "\u8F7B\u70B9\u67E5\u770B\uFF0C\u518D\u70B9\u4E00\u6B21\u51FA\u624B";
+  $("keysHint").textContent = HOVER ? "\u65B9\u5411\u952E / WASD \u79FB\u52A8 \xB7 R \u91CD\u5F00\u672C\u5C42 \xB7 \u8D70\u8FC7\u4E0D\u80FD\u64A4\u56DE" : "\u8F7B\u70B9\u67E5\u770B\uFF0C\u518D\u70B9\u4E00\u6B21\u51FA\u624B \xB7 \u8D70\u8FC7\u4E0D\u80FD\u64A4\u56DE";
   fit();
   var saved = loadKey(SAVE_KEY);
   var _a;

@@ -5,6 +5,7 @@
  * 操作：
  *   电脑（有鼠标）：鼠标悬停看战斗预览，点击直接出手 / 移动；方向键或 WASD 也能走
  *   手机（触屏）：轻点查看，再点一次或按"出手"确认
+ *   没有撤回：走过、打过就不能退回；卡住时可以重开本层（地图不变）
  */
 import { Hero, MONSTERS } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
@@ -60,6 +61,7 @@ function fit() {
     board.style.gridTemplateColumns = `repeat(${run.w}, ${cell}px)`;
     board.style.gridTemplateRows = `repeat(${run.h}, ${cell}px)`;
     board.style.setProperty('--cell', `${cell}px`);
+    requestAnimationFrame(() => placeHero(false));
 }
 window.addEventListener('resize', () => { fit(); placeTip(); });
 
@@ -89,7 +91,6 @@ const SHORT: Record<string, string> = { moss: '苔', eel: '鳗', frog: '蛙', be
 
 function cellHtml(i: number): { cls: string; html: string } {
     const c = run.cells[i];
-    if (i === run.pos) return { cls: 'hero', html: '<div class="heroToken">我</div>' };
     switch (c.kind) {
         case 'wall': return { cls: 'wall', html: '' };
         case 'floor': return { cls: 'floor', html: '' };
@@ -119,6 +120,30 @@ function cellHtml(i: number): { cls: string; html: string } {
     return { cls: 'floor', html: '' };
 }
 
+/** 主角棋子：独立于格子，移动时用 CSS 过渡一格一格走 */
+const heroEl = document.createElement('div');
+heroEl.id = 'hero';
+heroEl.innerHTML = '<div class="heroToken">我</div>';
+
+function placeHero(animate: boolean) {
+    const el = board.children[run.pos] as HTMLElement | undefined;
+    if (!el) return;
+    heroEl.style.transition = animate ? `transform ${STEP_MS}ms linear` : 'none';
+    heroEl.style.width = `${el.offsetWidth}px`;
+    heroEl.style.height = `${el.offsetHeight}px`;
+    heroEl.style.transform = `translate(${el.offsetLeft}px, ${el.offsetTop}px)`;
+}
+
+/** 打怪、开门、捡东西时朝目标"撞"一下 */
+function bump(target: number) {
+    const from = board.children[run.pos] as HTMLElement;
+    const to = board.children[target] as HTMLElement;
+    const dx = (to.offsetLeft - from.offsetLeft) * 0.35;
+    const dy = (to.offsetTop - from.offsetTop) * 0.35;
+    heroEl.style.transition = `transform ${STEP_MS / 2}ms ease-out`;
+    heroEl.style.transform = `translate(${from.offsetLeft + dx}px, ${from.offsetTop + dy}px)`;
+}
+
 function renderBoard() {
     if (board.children.length !== run.cells.length) {
         board.innerHTML = '';
@@ -132,6 +157,7 @@ function renderBoard() {
             });
             board.appendChild(d);
         });
+        board.appendChild(heroEl);
         fit();
     }
     run.cells.forEach((_, i) => {
@@ -262,7 +288,6 @@ function checkDanger() {
 function render() {
     renderHud();
     renderBoard();
-    ($('undo') as HTMLButtonElement).disabled = !run.canUndo();
     checkDanger();
     showInfo(HOVER && hovered >= 0 ? hovered : selected);
 }
@@ -327,30 +352,71 @@ function showEnd() {
 }
 
 // ---------- 输入 ----------
-function afterAct(r: { ok: boolean; msg: string }, at: number, before: Hero) {
-    if (r.msg) setMsg(r.msg, !r.ok);
-    if (r.ok) {
-        const lost = before.hp - run.hero.hp;
-        if (lost > 0) floatText(at, `-${lost}`, '#ff6b81');
-        else if (run.hero.hp > before.hp) floatText(at, `+${run.hero.hp - before.hp}`, '#7dffb0');
-        else if (run.hero.atk > before.atk) floatText(at, `攻+${run.hero.atk - before.atk}`, '#ffb07a');
-        else if (run.hero.def > before.def) floatText(at, `防+${run.hero.def - before.def}`, '#8ac8ff');
-    }
+const STEP_MS = 130;
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+/** 正在走路时不接受新的操作 */
+let busy = false;
+
+function popText(at: number, before: Hero) {
+    const lost = before.hp - run.hero.hp;
+    if (lost > 0) floatText(at, `-${lost}`, '#ff6b81');
+    else if (run.hero.hp > before.hp) floatText(at, `+${run.hero.hp - before.hp}`, '#7dffb0');
+    else if (run.hero.atk > before.atk) floatText(at, `攻+${run.hero.atk - before.atk}`, '#ffb07a');
+    else if (run.hero.def > before.def) floatText(at, `防+${run.hero.def - before.def}`, '#8ac8ff');
+    else if (run.hero.keys > before.keys) floatText(at, '骨钥+1', '#e8d38a');
+}
+
+/** 沿路线一格一格走；最后一格是怪物、门或道具时，走到旁边再交互。走过就不能撤回。 */
+async function walk(path: number[]) {
+    if (busy || !path.length) return;
+    busy = true;
+    document.body.dataset.walking = '1';
     selected = -1;
-    render();
-    saveRun();
-    if (run.status === 'floorDone') setTimeout(showExit, 200);
+    tipCell = -1;
+    placeTip();
+    try {
+        for (const cell of path) {
+            const c = run.cells[cell];
+            const before = { ...run.hero };
+            if (c.kind === 'floor' || c.kind === 'exit') {
+                const r = run.step(cell);
+                if (!r.ok) { setMsg(r.msg || '走不过去', true); break; }
+                placeHero(true);
+                renderHud();
+                await sleep(STEP_MS);
+                continue;
+            }
+            // 交互：先撞一下，再结算
+            const r0 = run.step(cell);
+            if (!r0.ok) { setMsg(r0.msg, true); break; }
+            bump(cell);
+            await sleep(STEP_MS / 2);
+            setMsg(r0.msg);
+            popText(cell, before);
+            renderBoard();
+            renderHud();
+            placeHero(true);
+            await sleep(STEP_MS);
+        }
+    } finally {
+        busy = false;
+        document.body.dataset.walking = '';
+        hovered = -1;
+        render();
+        saveRun();
+        if (run.status === 'floorDone') setTimeout(showExit, 150);
+    }
 }
 
 function act(i: number) {
-    const before = { ...run.hero };
-    const r = run.tapCell(i);
-    if (!r.ok && !r.msg) r.msg = '走不过去';
-    afterAct(r, i, before);
+    if (busy) return;
+    const path = run.findPath(i);
+    if (!path) { setMsg('走不过去', true); return; }
+    void walk(path);
 }
 
 function onTap(i: number) {
-    if (run.status !== 'playing' || modalOpen()) return;
+    if (busy || run.status !== 'playing' || modalOpen()) return;
     const c = run.cells[i];
     if (c.kind === 'wall' || i === run.pos) { selected = -1; renderBoard(); showInfo(-1); return; }
     if (c.kind === 'floor' || HOVER || selected === i) { act(i); return; }
@@ -376,20 +442,16 @@ window.addEventListener('keydown', e => {
     const d = DIRS[key];
     if (d) {
         e.preventDefault();
+        if (busy || run.status !== 'playing') return;
         const x = run.pos % run.w + d[0];
         const y = Math.floor(run.pos / run.w) + d[1];
-        const before = { ...run.hero };
-        const r = run.move(d[0], d[1]);
-        hovered = -1;
-        afterAct(r, y * run.w + x, before);
-    } else if (key === 'z' || key === 'Backspace') undo();
-    else if (key === 'r') restart();
+        if (x < 0 || y < 0 || x >= run.w || y >= run.h) return;
+        const t = y * run.w + x;
+        if (run.cells[t].kind === 'wall') return;
+        void walk([t]);
+    } else if (key === 'r' && !busy) restart();
     else if (key === 'Escape') { selected = -1; renderBoard(); showInfo(-1); }
 });
-
-function undo() {
-    if (run.undo()) { setMsg('已撤回一步'); selected = -1; render(); saveRun(); }
-}
 
 function restart() {
     run.restartFloor();
@@ -427,15 +489,14 @@ function newRun() {
     begin(c);
 }
 
-$('undo').onclick = undo;
-$('restart').onclick = restart;
+$('restart').onclick = () => { if (!busy) restart(); };
 $('newRun').onclick = () => modal('<h2>新开一局？</h2><p>这一局的进度会丢失。新的一局每层都会换一张地图。</p>', [
     { label: '取消', on: () => {} },
     { label: '新开一局', danger: true, on: newRun },
 ]);
 $('keysHint').textContent = HOVER
-    ? '方向键 / WASD 移动 · Z 撤回 · R 重开本层'
-    : '轻点查看，再点一次出手';
+    ? '方向键 / WASD 移动 · R 重开本层 · 走过不能撤回'
+    : '轻点查看，再点一次出手 · 走过不能撤回';
 
 fit();
 const saved = loadKey<SaveFile>(SAVE_KEY);
