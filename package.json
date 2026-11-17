@@ -1,0 +1,19 @@
+{
+  "name": "descent",
+  "private": true,
+  "description": "坠井者：数值解谜 + 肉鸽小游戏（核心逻辑、测试、求解器、浏览器预览）",
+  "scripts": {
+    "test": "node --import tsx --test tests/*.test.ts",
+    "solve": "tsx tools/solve.ts",
+    "preview:build": "esbuild web/main.ts --bundle --outfile=web/dist/main.js --format=iife --target=es2019",
+    "preview": "npm run preview:build && npx --yes http-server web -p 8080 -c-1",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "@types/node": "^22.0.0"
+  }
+}
