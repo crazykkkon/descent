@@ -9,7 +9,7 @@
  */
 import { Hero, MONSTERS } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
-import { Run, RunSave, StairCheck } from '../src/core/game';
+import { Run, RunSave } from '../src/core/game';
 import { DEMO_POOLS, FloorChoice, buildFloors, pickChoices } from '../src/core/levels';
 import { solveFloor, solveFromStart } from '../src/core/solver';
 
@@ -268,7 +268,7 @@ function showInfo(i: number) {
         if (p.text === '会死') html += '<div class="warn">这一仗打完你会死。可以硬上，但这一局就结束了。</div>';
         tipCell = i;
     }
-    if (run.cells[i].kind === 'exit') html += stairWarnHtml() + intelHtml();
+    if (run.cells[i].kind === 'exit') html += intelHtml();
     lines.innerHTML = html;
     // 手机：选中后出现确认按钮
     const c = run.cells[i];
@@ -279,33 +279,6 @@ function showInfo(i: number) {
         confirm.style.display = 'block';
     }
     placeTip();
-}
-
-let stairCache: { key: string; v: StairCheck | null } | null = null;
-function stairCheck(): StairCheck | null {
-    const key = `${run.floorIndex}:${run.steps}:${run.hero.hp}:${run.hero.atk}:${run.hero.def}:${run.hero.keys}`;
-    if (!stairCache || stairCache.key !== key) stairCache = { key, v: run.stairCheck() };
-    return stairCache.v;
-}
-
-/** 下一层没有活路时的警告，以及还能怎么补救 */
-function stairWarnHtml(): string {
-    const c = stairCheck();
-    if (!c || c.nextOk) return '';
-    const h = run.hero;
-    let fix: string;
-    if (c.rescue) {
-        const r = c.rescue;
-        const what = r.items.length ? `先去拿 ${[...new Set(r.items)].join('、')}` : '换一条走法';
-        const fight = r.fights.length ? `（路上要过：${r.fights.join('、')}）` : '';
-        fix = `<b class="ok">回头还来得及：</b>${what}${fight}，带着 生命 ${r.hero.hp} / 攻 ${r.hero.atk} / 防 ${r.hero.def} 下楼，下一层就有活路。`;
-    } else if (c.restartHelps) {
-        fix = '<b class="ok">本层已经补救不了，但重开本层还来得及：</b>回到进入本层时的状态，换一种走法，带着更好的状态下楼。';
-    } else {
-        fix = '<b>重开本层也来不及了：</b>进入本层时的状态就已经过不去下一层。只能新开一局。';
-    }
-    return `<div class="stairWarn"><div class="stairWarnHead">⚠ 以你现在的状态（生命 ${h.hp} / 攻 ${h.atk} / 防 ${h.def}），下一层没有活路</div>
-        <div>下楼以后，"重开本层"只能回到下一层的开头，还是这个状态，救不回来。</div><div>${fix}</div></div>`;
 }
 
 /** 楼梯口情报（下一层的一条情报） */
@@ -512,21 +485,13 @@ function showDeath() {
 }
 
 function confirmStairs() {
+    // 不提示下一层会不会死：顺其自然，下一层的结果要玩家自己去面对
     const exit = run.cells.findIndex(c => c.kind === 'exit');
-    const c = stairCheck();
-    const doomed = !!c && !c.nextOk;
-    const buttons: Btn[] = doomed
-        ? [
-            ...(c!.rescue || !c!.restartHelps ? [] : [{ label: '重开本层', on: restart }]),
-            { label: c!.rescue ? '回头补救' : '再想想', primary: true, on: () => setMsg(c!.rescue ? '回头去拿上面提到的东西，再来楼梯口。' : '留在本层。') },
-            { label: '仍然下楼', danger: true, on: () => void walk([exit], true) },
-        ]
-        : [
-            { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
-            { label: '下楼', primary: true, on: () => void walk([exit], true) },
-        ];
-    modal(`<h2>楼梯口</h2>${doomed ? stairWarnHtml() : '<p>下楼之后就回不来了。'}${doomed ? '' : '下楼前，你听到井底传来的回声：</p>'}${intelHtml()}
-        ${doomed ? '' : '<p class="small">还想回头拿点什么的话，选"再想想"。</p>'}`, buttons);
+    modal(`<h2>楼梯口</h2><p>下楼之后就回不来了。下楼前，你听到井底传来的回声：</p>${intelHtml()}
+        <p class="small">还想回头拿点什么的话，选"再想想"。</p>`, [
+        { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
+        { label: '下楼', primary: true, on: () => void walk([exit], true) },
+    ]);
 }
 
 function act(i: number) {

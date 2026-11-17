@@ -234,31 +234,6 @@ test('最后一层没有楼梯口情报；试玩版每层都能生成情报', ()
     }));
 });
 
-test('楼梯口检查：下一层没有活路时说清楚还能不能补救', () => {
-    const next = tiny(['@e>']); // 盲鳗：攻10防10 要掉 80
-    // 1. 回头拿大血瓶就有救
-    const a = new Run([tiny(['@.>', 'H..']), next]);
-    a.hero.hp = 30;
-    const ca = a.stairCheck()!;
-    assert.equal(ca.nextOk, false);
-    assert.deepEqual(ca.rescue!.items, ['大血瓶']);
-    // 2. 本层没东西可拿了，但进入本层时血是够的：重开本层有救
-    const b = new Run([tiny(['@.>']), next]);
-    b.hero.hp = 30;
-    const cb = b.stairCheck()!;
-    assert.equal(cb.rescue, undefined);
-    assert.equal(cb.restartHelps, true);
-    // 3. 进入本层时就不够：重开也救不回来
-    const c = new Run([tiny(['@.>']), next]);
-    c.hero.hp = 30;
-    (c as unknown as { floorStart: { hero: { hp: number } } }).floorStart.hero.hp = 30;
-    const cc = c.stairCheck()!;
-    assert.equal(cc.restartHelps, false);
-    // 有活路时什么都不提示；最后一层没有检查
-    assert.equal(new Run([tiny(['@.>']), next]).stairCheck()!.nextOk, true);
-    assert.equal(new Run([tiny(['@.>'])]).stairCheck(), null);
-});
-
 test('层内检查：走不到出口时，说清楚重开本层能不能救回来', () => {
     const run = new Run([tiny(['@e>'])]);
     run.hero.hp = 30;

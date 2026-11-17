@@ -87,9 +87,6 @@
   #hero.dead .heroToken { filter: grayscale(1) brightness(.6); transform: rotate(90deg); transition: transform .4s, filter .4s; }
   .intel { background: #1a1608; border: 1px solid #6b5a22; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.5); line-height: 1.6; color: #e8dcb0; }
   .intel b { display: block; color: #ffd479; font-size: calc(var(--u) * 2.9); margin-bottom: calc(var(--u) * 0.4); }
-  .stairWarn { background: #3a1820; border: 1px solid #a03a4c; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.5); line-height: 1.6; color: #ffd0d6; margin-bottom: calc(var(--u) * 1); }
-  .stairWarnHead { color: #ff6b81; font-weight: bold; font-size: calc(var(--u) * 2.8); }
-  .stairWarn b.ok { color: var(--accent); }
   .intelHead { font-size: calc(var(--u) * 2.2); color: #b8a46a; }
   #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
   #msg.err { color: var(--hp); }
@@ -490,7 +487,7 @@
     const r = simulateCombat(hero, m);
     if (!r.canAttack) return "\u6253\u4E0D\u52A8";
     if (!r.canWin) return "\u6253\u4E0D\u6B7B";
-    return r.damage >= hero.hp ? `-${r.damage}\uFF08\u4F60\u53EA\u6709 ${hero.hp} \u8840\uFF0C\u4F1A\u6B7B\uFF09` : `-${r.damage}`;
+    return `-${r.damage}`;
   }
   function stairIntel(next, hero, ch, current) {
     var _a2, _b;
@@ -583,36 +580,6 @@
       const next = this.floors[this.floorIndex + 1];
       if (!next) return null;
       return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
-    }
-    /**
-     * 楼梯口检查。下楼以后重开只能回到下一层的开头，所以"带着这点血下楼必死"要在这里说清楚。
-     * 最后一层没有下一层，返回 null。
-     */
-    stairCheck() {
-      const next = this.floors[this.floorIndex + 1];
-      if (!next) return null;
-      const nextSolvable = (h) => solveFromStart(next, h, this.ch).solvable;
-      if (nextSolvable(this.hero)) return { nextOk: true, restartHelps: false };
-      const here = solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch);
-      let best = null;
-      for (const o of here.pareto) {
-        const r = solveFromStart(next, o.hero, this.ch);
-        if (r.best && (!best || r.best.hero.hp > best.nextHp)) best = { plan: o.plan, hero: o.hero, nextHp: r.best.hero.hp };
-      }
-      if (best) {
-        const items = [];
-        const fights = [];
-        for (const i of best.plan) {
-          const c = this.cells[i];
-          if (c.kind === "item") items.push(ITEM_NAMES[c.id]);
-          if (c.kind === "monster") fights.push(MONSTERS[c.id].name);
-          if (c.kind === "door") fights.push(c.door === "bone" ? "\u9AA8\u95E8" : "\u8840\u95E8");
-        }
-        return { nextOk: false, rescue: { items, fights, hero: best.hero }, restartHelps: true };
-      }
-      const fromStart = solveFromStart(this.floor, this.floorStartHero, this.ch);
-      const restartHelps = fromStart.pareto.some((o) => nextSolvable(o.hero));
-      return { nextOk: false, restartHelps };
     }
     /** 本层还能不能走到出口；走不到的话，重开本层能不能救回来（进入本层时的属性够不够） */
     floorCheck() {
@@ -1462,7 +1429,7 @@
       if (p.text === "\u4F1A\u6B7B") html += '<div class="warn">\u8FD9\u4E00\u4ED7\u6253\u5B8C\u4F60\u4F1A\u6B7B\u3002\u53EF\u4EE5\u786C\u4E0A\uFF0C\u4F46\u8FD9\u4E00\u5C40\u5C31\u7ED3\u675F\u4E86\u3002</div>';
       tipCell = i;
     }
-    if (run.cells[i].kind === "exit") html += stairWarnHtml() + intelHtml();
+    if (run.cells[i].kind === "exit") html += intelHtml();
     lines.innerHTML = html;
     const c = run.cells[i];
     if (!HOVER && i === selected && ACTION[c.kind]) {
@@ -1472,30 +1439,6 @@
       confirm.style.display = "block";
     }
     placeTip();
-  }
-  var stairCache = null;
-  function stairCheck() {
-    const key = `${run.floorIndex}:${run.steps}:${run.hero.hp}:${run.hero.atk}:${run.hero.def}:${run.hero.keys}`;
-    if (!stairCache || stairCache.key !== key) stairCache = { key, v: run.stairCheck() };
-    return stairCache.v;
-  }
-  function stairWarnHtml() {
-    const c = stairCheck();
-    if (!c || c.nextOk) return "";
-    const h = run.hero;
-    let fix;
-    if (c.rescue) {
-      const r = c.rescue;
-      const what = r.items.length ? `\u5148\u53BB\u62FF ${[...new Set(r.items)].join("\u3001")}` : "\u6362\u4E00\u6761\u8D70\u6CD5";
-      const fight = r.fights.length ? `\uFF08\u8DEF\u4E0A\u8981\u8FC7\uFF1A${r.fights.join("\u3001")}\uFF09` : "";
-      fix = `<b class="ok">\u56DE\u5934\u8FD8\u6765\u5F97\u53CA\uFF1A</b>${what}${fight}\uFF0C\u5E26\u7740 \u751F\u547D ${r.hero.hp} / \u653B ${r.hero.atk} / \u9632 ${r.hero.def} \u4E0B\u697C\uFF0C\u4E0B\u4E00\u5C42\u5C31\u6709\u6D3B\u8DEF\u3002`;
-    } else if (c.restartHelps) {
-      fix = '<b class="ok">\u672C\u5C42\u5DF2\u7ECF\u8865\u6551\u4E0D\u4E86\uFF0C\u4F46\u91CD\u5F00\u672C\u5C42\u8FD8\u6765\u5F97\u53CA\uFF1A</b>\u56DE\u5230\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\uFF0C\u6362\u4E00\u79CD\u8D70\u6CD5\uFF0C\u5E26\u7740\u66F4\u597D\u7684\u72B6\u6001\u4E0B\u697C\u3002';
-    } else {
-      fix = "<b>\u91CD\u5F00\u672C\u5C42\u4E5F\u6765\u4E0D\u53CA\u4E86\uFF1A</b>\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\u5C31\u5DF2\u7ECF\u8FC7\u4E0D\u53BB\u4E0B\u4E00\u5C42\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\u3002";
-    }
-    return `<div class="stairWarn"><div class="stairWarnHead">\u26A0 \u4EE5\u4F60\u73B0\u5728\u7684\u72B6\u6001\uFF08\u751F\u547D ${h.hp} / \u653B ${h.atk} / \u9632 ${h.def}\uFF09\uFF0C\u4E0B\u4E00\u5C42\u6CA1\u6709\u6D3B\u8DEF</div>
-        <div>\u4E0B\u697C\u4EE5\u540E\uFF0C"\u91CD\u5F00\u672C\u5C42"\u53EA\u80FD\u56DE\u5230\u4E0B\u4E00\u5C42\u7684\u5F00\u5934\uFF0C\u8FD8\u662F\u8FD9\u4E2A\u72B6\u6001\uFF0C\u6551\u4E0D\u56DE\u6765\u3002</div><div>${fix}</div></div>`;
   }
   function intelHtml() {
     const it = run.nextFloorIntel();
@@ -1698,19 +1641,12 @@
     );
   }
   function confirmStairs() {
-    const exit = run.cells.findIndex((c2) => c2.kind === "exit");
-    const c = stairCheck();
-    const doomed = !!c && !c.nextOk;
-    const buttons = doomed ? [
-      ...c.rescue || !c.restartHelps ? [] : [{ label: "\u91CD\u5F00\u672C\u5C42", on: restart }],
-      { label: c.rescue ? "\u56DE\u5934\u8865\u6551" : "\u518D\u60F3\u60F3", primary: true, on: () => setMsg(c.rescue ? "\u56DE\u5934\u53BB\u62FF\u4E0A\u9762\u63D0\u5230\u7684\u4E1C\u897F\uFF0C\u518D\u6765\u697C\u68AF\u53E3\u3002" : "\u7559\u5728\u672C\u5C42\u3002") },
-      { label: "\u4ECD\u7136\u4E0B\u697C", danger: true, on: () => void walk([exit], true) }
-    ] : [
+    const exit = run.cells.findIndex((c) => c.kind === "exit");
+    modal(`<h2>\u697C\u68AF\u53E3</h2><p>\u4E0B\u697C\u4E4B\u540E\u5C31\u56DE\u4E0D\u6765\u4E86\u3002\u4E0B\u697C\u524D\uFF0C\u4F60\u542C\u5230\u4E95\u5E95\u4F20\u6765\u7684\u56DE\u58F0\uFF1A</p>${intelHtml()}
+        <p class="small">\u8FD8\u60F3\u56DE\u5934\u62FF\u70B9\u4EC0\u4E48\u7684\u8BDD\uFF0C\u9009"\u518D\u60F3\u60F3"\u3002</p>`, [
       { label: "\u518D\u60F3\u60F3", on: () => setMsg("\u7559\u5728\u672C\u5C42\u3002\u60F3\u597D\u4E86\u518D\u8D70\u5230\u697C\u68AF\u53E3\u3002") },
       { label: "\u4E0B\u697C", primary: true, on: () => void walk([exit], true) }
-    ];
-    modal(`<h2>\u697C\u68AF\u53E3</h2>${doomed ? stairWarnHtml() : "<p>\u4E0B\u697C\u4E4B\u540E\u5C31\u56DE\u4E0D\u6765\u4E86\u3002"}${doomed ? "" : "\u4E0B\u697C\u524D\uFF0C\u4F60\u542C\u5230\u4E95\u5E95\u4F20\u6765\u7684\u56DE\u58F0\uFF1A</p>"}${intelHtml()}
-        ${doomed ? "" : '<p class="small">\u8FD8\u60F3\u56DE\u5934\u62FF\u70B9\u4EC0\u4E48\u7684\u8BDD\uFF0C\u9009"\u518D\u60F3\u60F3"\u3002</p>'}`, buttons);
+    ]);
   }
   function act(i) {
     if (busy) return;
