@@ -233,6 +233,35 @@ export const DEMO_POOLS: FloorPool[] = [
                     },
                 ],
             },
+            {
+                name: '近路',
+                variants: [
+                    {
+                        note: '骨钥在井苔身后，开骨门走上面的近路就能绕开骨蛙；眼前的赤晶要打盲鳗才拿得到，走近路就用不上它',
+                        map: [
+                            '.m.D......h',
+                            '.#k#######.',
+                            '.#########.',
+                            '@...e...f.>',
+                            '##e####m###',
+                            '##r##..bh##',
+                            '###########',
+                        ],
+                    },
+                    {
+                        note: '主路尽头是锈甲虫，要先拿赤晶才打得动；走上面的近路（盲鳗守着骨钥）可以连赤晶带锈甲虫一起绕开',
+                        map: [
+                            '.m.D......h',
+                            '.#h#######.',
+                            '.#########.',
+                            '@...m...c.>',
+                            '##m####e###',
+                            '##r##..kb##',
+                            '###########',
+                        ],
+                    },
+                ],
+            },
         ],
     },
     // ---------------- 第 3 层：11×7 ----------------
@@ -331,6 +360,35 @@ export const DEMO_POOLS: FloorPool[] = [
                     },
                 ],
             },
+            {
+                name: '近路',
+                variants: [
+                    {
+                        note: '主路的溺魂攻击不够打不死；回声蝠守着骨钥，开门走近路',
+                        map: [
+                            '.v.D......h',
+                            '.#k#######.',
+                            '.#########.',
+                            '@...e...g.>',
+                            '##f####x###',
+                            '##r##..bh##',
+                            '###########',
+                        ],
+                    },
+                    {
+                        note: '近路尽头是血门，主路是裂岩蟹：骨钥加血门，还是硬打裂岩蟹？',
+                        map: [
+                            '.e.D.....hB',
+                            '.#k#######.',
+                            '.#########.',
+                            '@...v...x.>',
+                            '##c####e###',
+                            '##r##..hb##',
+                            '###########',
+                        ],
+                    },
+                ],
+            },
         ],
     },
 ];
@@ -353,24 +411,41 @@ export function rng(seed: number): () => number {
     };
 }
 
+/** 两层的布局是不是同一批（第 2、3 层共用同一批墙壁布局） */
+function sameFamily(a: FloorPool, b: FloorPool): boolean {
+    const names = (p: FloorPool) => p.layouts.map(l => l.name).sort().join('|');
+    return names(a) === names(b);
+}
+
 /**
- * 给每层选布局和配置。avoid 是上一局的选择：新开一局时每层都换成不同的地图
- * （每层有 6 种，排除上一局那一种后在剩下 5 种里选）。
+ * 给每层选布局和配置。avoid 是上一局的选择。新开一局时按下面的顺序尽量换思路（某条做不到就跳过）：
+ * 1. 每层都不出现上一局那一张图；
+ * 2. 每层的布局都不和上一局"同一批布局"的层用过的重复
+ *    （第 1 层避开上一局第 1 层的布局；第 2、3 层避开上一局第 2、3 层用过的两种布局）；
+ * 3. 本局连续两层不用同一种布局。
  */
 export function pickChoices(seed: number, pools: FloorPool[] = DEMO_POOLS, avoid?: FloorChoice[]): FloorChoice[] {
     const rand = rng(seed);
     const picked: FloorChoice[] = [];
+    const prefer = (options: FloorChoice[], keep: (c: FloorChoice) => boolean) => {
+        const f = options.filter(keep);
+        return f.length ? f : options;
+    };
     return pools.map((pool, i) => {
-        const all: FloorChoice[] = [];
-        pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => all.push({ layout: li, variant: vi })));
+        let options: FloorChoice[] = [];
+        pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => options.push({ layout: li, variant: vi })));
+        const name = (c: FloorChoice) => pool.layouts[c.layout].name;
         const prev = avoid?.[i];
-        let options = prev ? all.filter(c => c.layout !== prev.layout || c.variant !== prev.variant) : all;
-        // 第 2、3 层共用同一批墙壁布局：连续两层不出现同一种布局
+        if (prev) options = prefer(options, c => c.layout !== prev.layout || c.variant !== prev.variant);
+        if (avoid) {
+            const used = new Set<string>();
+            avoid.forEach((c, j) => { if (pools[j] && sameFamily(pools[j], pool)) used.add(pools[j].layouts[c.layout].name); });
+            options = prefer(options, c => !used.has(name(c)));
+        }
         const before = picked[i - 1];
-        if (before) {
+        if (before && sameFamily(pools[i - 1], pool)) {
             const prevName = pools[i - 1].layouts[before.layout].name;
-            const differ = options.filter(c => pool.layouts[c.layout].name !== prevName);
-            if (differ.length) options = differ;
+            options = prefer(options, c => name(c) !== prevName);
         }
         const choice = options[Math.floor(rand() * options.length)];
         picked.push(choice);

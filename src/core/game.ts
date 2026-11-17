@@ -4,6 +4,7 @@ import { CombatResult, simulateCombat } from './combat';
 import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
+import { solveFloor, solveFromStart } from './solver';
 
 /** dead：主角死了，这一局结束 */
 export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
@@ -35,6 +36,22 @@ export interface RunSave {
 export interface ActResult {
     ok: boolean;
     msg: string;
+}
+
+/** 楼梯口检查：带着现在的状态下楼，下一层还有没有活路；没有的话还能怎么补救 */
+export interface StairCheck {
+    /** 下一层有活路 */
+    nextOk: boolean;
+    /** 在本层回头还能补救：要拿的道具、要打的怪、补救后的属性 */
+    rescue?: { items: string[]; fights: string[]; hero: Hero };
+    /** 回头补救不了，但重开本层（回到进入本层时的状态）能补救 */
+    restartHelps: boolean;
+}
+
+/** 本层还能不能走到出口；不能的话，重开本层能不能救回来 */
+export interface FloorCheck {
+    canReachExit: boolean;
+    restartHelps: boolean;
 }
 
 export interface CellInfo {
@@ -99,6 +116,49 @@ export class Run {
         const next = this.floors[this.floorIndex + 1];
         if (!next) return null;
         return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
+    }
+
+    /**
+     * 楼梯口检查。下楼以后重开只能回到下一层的开头，所以"带着这点血下楼必死"要在这里说清楚。
+     * 最后一层没有下一层，返回 null。
+     */
+    stairCheck(): StairCheck | null {
+        const next = this.floors[this.floorIndex + 1];
+        if (!next) return null;
+        const nextSolvable = (h: Hero) => solveFromStart(next, h, this.ch).solvable;
+        if (nextSolvable(this.hero)) return { nextOk: true, restartHelps: false };
+
+        // 在本层回头：所有能走到出口的打法里，找一个能让下一层有活路的
+        const here = solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch);
+        let best: { plan: number[]; hero: Hero; nextHp: number } | null = null;
+        for (const o of here.pareto) {
+            const r = solveFromStart(next, o.hero, this.ch);
+            if (r.best && (!best || r.best.hero.hp > best.nextHp)) best = { plan: o.plan, hero: o.hero, nextHp: r.best.hero.hp };
+        }
+        if (best) {
+            const items: string[] = [];
+            const fights: string[] = [];
+            for (const i of best.plan) {
+                const c = this.cells[i];
+                if (c.kind === 'item') items.push(ITEM_NAMES[c.id]);
+                if (c.kind === 'monster') fights.push(MONSTERS[c.id].name);
+                if (c.kind === 'door') fights.push(c.door === 'bone' ? '骨门' : '血门');
+            }
+            return { nextOk: false, rescue: { items, fights, hero: best.hero }, restartHelps: true };
+        }
+
+        // 重开本层（回到进入本层时的状态）还来不来得及
+        const fromStart = solveFromStart(this.floor, this.floorStartHero, this.ch);
+        const restartHelps = fromStart.pareto.some(o => nextSolvable(o.hero));
+        return { nextOk: false, restartHelps };
+    }
+
+    /** 本层还能不能走到出口；走不到的话，重开本层能不能救回来（进入本层时的属性够不够） */
+    floorCheck(): FloorCheck {
+        const canReachExit = this.status === 'playing'
+            && solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch).solvable;
+        const restartHelps = solveFromStart(this.floor, this.floorStartHero, this.ch).solvable;
+        return { canReachExit, restartHelps };
     }
 
     /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */

@@ -55,7 +55,7 @@ function damageText(hero: Hero, m: MonsterDef): string {
     const r = simulateCombat(hero, m);
     if (!r.canAttack) return '打不动';
     if (!r.canWin) return '打不死';
-    return `-${r.damage}`;
+    return r.damage >= hero.hp ? `-${r.damage}（你只有 ${hero.hp} 血，会死）` : `-${r.damage}`;
 }
 
 /**

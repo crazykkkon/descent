@@ -87,6 +87,9 @@
   #hero.dead .heroToken { filter: grayscale(1) brightness(.6); transform: rotate(90deg); transition: transform .4s, filter .4s; }
   .intel { background: #1a1608; border: 1px solid #6b5a22; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.5); line-height: 1.6; color: #e8dcb0; }
   .intel b { display: block; color: #ffd479; font-size: calc(var(--u) * 2.9); margin-bottom: calc(var(--u) * 0.4); }
+  .stairWarn { background: #3a1820; border: 1px solid #a03a4c; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.5); line-height: 1.6; color: #ffd0d6; margin-bottom: calc(var(--u) * 1); }
+  .stairWarnHead { color: #ff6b81; font-weight: bold; font-size: calc(var(--u) * 2.8); }
+  .stairWarn b.ok { color: var(--accent); }
   .intelHead { font-size: calc(var(--u) * 2.2); color: #b8a46a; }
   #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
   #msg.err { color: var(--hp); }
@@ -487,7 +490,7 @@
     const r = simulateCombat(hero, m);
     if (!r.canAttack) return "\u6253\u4E0D\u52A8";
     if (!r.canWin) return "\u6253\u4E0D\u6B7B";
-    return `-${r.damage}`;
+    return r.damage >= hero.hp ? `-${r.damage}\uFF08\u4F60\u53EA\u6709 ${hero.hp} \u8840\uFF0C\u4F1A\u6B7B\uFF09` : `-${r.damage}`;
   }
   function stairIntel(next, hero, ch, current) {
     var _a2, _b;
@@ -580,6 +583,42 @@
       const next = this.floors[this.floorIndex + 1];
       if (!next) return null;
       return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
+    }
+    /**
+     * 楼梯口检查。下楼以后重开只能回到下一层的开头，所以"带着这点血下楼必死"要在这里说清楚。
+     * 最后一层没有下一层，返回 null。
+     */
+    stairCheck() {
+      const next = this.floors[this.floorIndex + 1];
+      if (!next) return null;
+      const nextSolvable = (h) => solveFromStart(next, h, this.ch).solvable;
+      if (nextSolvable(this.hero)) return { nextOk: true, restartHelps: false };
+      const here = solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch);
+      let best = null;
+      for (const o of here.pareto) {
+        const r = solveFromStart(next, o.hero, this.ch);
+        if (r.best && (!best || r.best.hero.hp > best.nextHp)) best = { plan: o.plan, hero: o.hero, nextHp: r.best.hero.hp };
+      }
+      if (best) {
+        const items = [];
+        const fights = [];
+        for (const i of best.plan) {
+          const c = this.cells[i];
+          if (c.kind === "item") items.push(ITEM_NAMES[c.id]);
+          if (c.kind === "monster") fights.push(MONSTERS[c.id].name);
+          if (c.kind === "door") fights.push(c.door === "bone" ? "\u9AA8\u95E8" : "\u8840\u95E8");
+        }
+        return { nextOk: false, rescue: { items, fights, hero: best.hero }, restartHelps: true };
+      }
+      const fromStart = solveFromStart(this.floor, this.floorStartHero, this.ch);
+      const restartHelps = fromStart.pareto.some((o) => nextSolvable(o.hero));
+      return { nextOk: false, restartHelps };
+    }
+    /** 本层还能不能走到出口；走不到的话，重开本层能不能救回来（进入本层时的属性够不够） */
+    floorCheck() {
+      const canReachExit = this.status === "playing" && solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch).solvable;
+      const restartHelps = solveFromStart(this.floor, this.floorStartHero, this.ch).solvable;
+      return { canReachExit, restartHelps };
     }
     /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
     restartFloor() {
@@ -953,6 +992,35 @@
               ]
             }
           ]
+        },
+        {
+          name: "\u8FD1\u8DEF",
+          variants: [
+            {
+              note: "\u9AA8\u94A5\u5728\u4E95\u82D4\u8EAB\u540E\uFF0C\u5F00\u9AA8\u95E8\u8D70\u4E0A\u9762\u7684\u8FD1\u8DEF\u5C31\u80FD\u7ED5\u5F00\u9AA8\u86D9\uFF1B\u773C\u524D\u7684\u8D64\u6676\u8981\u6253\u76F2\u9CD7\u624D\u62FF\u5F97\u5230\uFF0C\u8D70\u8FD1\u8DEF\u5C31\u7528\u4E0D\u4E0A\u5B83",
+              map: [
+                ".m.D......h",
+                ".#k#######.",
+                ".#########.",
+                "@...e...f.>",
+                "##e####m###",
+                "##r##..bh##",
+                "###########"
+              ]
+            },
+            {
+              note: "\u4E3B\u8DEF\u5C3D\u5934\u662F\u9508\u7532\u866B\uFF0C\u8981\u5148\u62FF\u8D64\u6676\u624D\u6253\u5F97\u52A8\uFF1B\u8D70\u4E0A\u9762\u7684\u8FD1\u8DEF\uFF08\u76F2\u9CD7\u5B88\u7740\u9AA8\u94A5\uFF09\u53EF\u4EE5\u8FDE\u8D64\u6676\u5E26\u9508\u7532\u866B\u4E00\u8D77\u7ED5\u5F00",
+              map: [
+                ".m.D......h",
+                ".#h#######.",
+                ".#########.",
+                "@...m...c.>",
+                "##m####e###",
+                "##r##..kb##",
+                "###########"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1051,6 +1119,35 @@
               ]
             }
           ]
+        },
+        {
+          name: "\u8FD1\u8DEF",
+          variants: [
+            {
+              note: "\u4E3B\u8DEF\u7684\u6EBA\u9B42\u653B\u51FB\u4E0D\u591F\u6253\u4E0D\u6B7B\uFF1B\u56DE\u58F0\u8760\u5B88\u7740\u9AA8\u94A5\uFF0C\u5F00\u95E8\u8D70\u8FD1\u8DEF",
+              map: [
+                ".v.D......h",
+                ".#k#######.",
+                ".#########.",
+                "@...e...g.>",
+                "##f####x###",
+                "##r##..bh##",
+                "###########"
+              ]
+            },
+            {
+              note: "\u8FD1\u8DEF\u5C3D\u5934\u662F\u8840\u95E8\uFF0C\u4E3B\u8DEF\u662F\u88C2\u5CA9\u87F9\uFF1A\u9AA8\u94A5\u52A0\u8840\u95E8\uFF0C\u8FD8\u662F\u786C\u6253\u88C2\u5CA9\u87F9\uFF1F",
+              map: [
+                ".e.D.....hB",
+                ".#k#######.",
+                ".#########.",
+                "@...v...x.>",
+                "##c####e###",
+                "##r##..hb##",
+                "###########"
+              ]
+            }
+          ]
         }
       ]
     }
@@ -1070,19 +1167,34 @@
       return ((t ^ t >>> 14) >>> 0) / 4294967296;
     };
   }
+  function sameFamily(a, b) {
+    const names = (p) => p.layouts.map((l) => l.name).sort().join("|");
+    return names(a) === names(b);
+  }
   function pickChoices(seed, pools = DEMO_POOLS, avoid) {
     const rand = rng(seed);
     const picked = [];
+    const prefer = (options, keep) => {
+      const f = options.filter(keep);
+      return f.length ? f : options;
+    };
     return pools.map((pool, i) => {
-      const all = [];
-      pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => all.push({ layout: li, variant: vi })));
+      let options = [];
+      pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => options.push({ layout: li, variant: vi })));
+      const name = (c) => pool.layouts[c.layout].name;
       const prev = avoid == null ? void 0 : avoid[i];
-      let options = prev ? all.filter((c) => c.layout !== prev.layout || c.variant !== prev.variant) : all;
+      if (prev) options = prefer(options, (c) => c.layout !== prev.layout || c.variant !== prev.variant);
+      if (avoid) {
+        const used = /* @__PURE__ */ new Set();
+        avoid.forEach((c, j) => {
+          if (pools[j] && sameFamily(pools[j], pool)) used.add(pools[j].layouts[c.layout].name);
+        });
+        options = prefer(options, (c) => !used.has(name(c)));
+      }
       const before = picked[i - 1];
-      if (before) {
+      if (before && sameFamily(pools[i - 1], pool)) {
         const prevName = pools[i - 1].layouts[before.layout].name;
-        const differ = options.filter((c) => pool.layouts[c.layout].name !== prevName);
-        if (differ.length) options = differ;
+        options = prefer(options, (c) => name(c) !== prevName);
       }
       const choice = options[Math.floor(rand() * options.length)];
       picked.push(choice);
@@ -1350,7 +1462,7 @@
       if (p.text === "\u4F1A\u6B7B") html += '<div class="warn">\u8FD9\u4E00\u4ED7\u6253\u5B8C\u4F60\u4F1A\u6B7B\u3002\u53EF\u4EE5\u786C\u4E0A\uFF0C\u4F46\u8FD9\u4E00\u5C40\u5C31\u7ED3\u675F\u4E86\u3002</div>';
       tipCell = i;
     }
-    if (run.cells[i].kind === "exit") html += intelHtml();
+    if (run.cells[i].kind === "exit") html += stairWarnHtml() + intelHtml();
     lines.innerHTML = html;
     const c = run.cells[i];
     if (!HOVER && i === selected && ACTION[c.kind]) {
@@ -1360,6 +1472,30 @@
       confirm.style.display = "block";
     }
     placeTip();
+  }
+  var stairCache = null;
+  function stairCheck() {
+    const key = `${run.floorIndex}:${run.steps}:${run.hero.hp}:${run.hero.atk}:${run.hero.def}:${run.hero.keys}`;
+    if (!stairCache || stairCache.key !== key) stairCache = { key, v: run.stairCheck() };
+    return stairCache.v;
+  }
+  function stairWarnHtml() {
+    const c = stairCheck();
+    if (!c || c.nextOk) return "";
+    const h = run.hero;
+    let fix;
+    if (c.rescue) {
+      const r = c.rescue;
+      const what = r.items.length ? `\u5148\u53BB\u62FF ${[...new Set(r.items)].join("\u3001")}` : "\u6362\u4E00\u6761\u8D70\u6CD5";
+      const fight = r.fights.length ? `\uFF08\u8DEF\u4E0A\u8981\u8FC7\uFF1A${r.fights.join("\u3001")}\uFF09` : "";
+      fix = `<b class="ok">\u56DE\u5934\u8FD8\u6765\u5F97\u53CA\uFF1A</b>${what}${fight}\uFF0C\u5E26\u7740 \u751F\u547D ${r.hero.hp} / \u653B ${r.hero.atk} / \u9632 ${r.hero.def} \u4E0B\u697C\uFF0C\u4E0B\u4E00\u5C42\u5C31\u6709\u6D3B\u8DEF\u3002`;
+    } else if (c.restartHelps) {
+      fix = '<b class="ok">\u672C\u5C42\u5DF2\u7ECF\u8865\u6551\u4E0D\u4E86\uFF0C\u4F46\u91CD\u5F00\u672C\u5C42\u8FD8\u6765\u5F97\u53CA\uFF1A</b>\u56DE\u5230\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\uFF0C\u6362\u4E00\u79CD\u8D70\u6CD5\uFF0C\u5E26\u7740\u66F4\u597D\u7684\u72B6\u6001\u4E0B\u697C\u3002';
+    } else {
+      fix = "<b>\u91CD\u5F00\u672C\u5C42\u4E5F\u6765\u4E0D\u53CA\u4E86\uFF1A</b>\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\u5C31\u5DF2\u7ECF\u8FC7\u4E0D\u53BB\u4E0B\u4E00\u5C42\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\u3002";
+    }
+    return `<div class="stairWarn"><div class="stairWarnHead">\u26A0 \u4EE5\u4F60\u73B0\u5728\u7684\u72B6\u6001\uFF08\u751F\u547D ${h.hp} / \u653B ${h.atk} / \u9632 ${h.def}\uFF09\uFF0C\u4E0B\u4E00\u5C42\u6CA1\u6709\u6D3B\u8DEF</div>
+        <div>\u4E0B\u697C\u4EE5\u540E\uFF0C"\u91CD\u5F00\u672C\u5C42"\u53EA\u80FD\u56DE\u5230\u4E0B\u4E00\u5C42\u7684\u5F00\u5934\uFF0C\u8FD8\u662F\u8FD9\u4E2A\u72B6\u6001\uFF0C\u6551\u4E0D\u56DE\u6765\u3002</div><div>${fix}</div></div>`;
   }
   function intelHtml() {
     const it = run.nextFloorIntel();
@@ -1372,11 +1508,18 @@
     m.className = err ? "err" : "";
   }
   function checkDanger() {
-    let stuck = false;
-    if (run.status === "playing") {
-      stuck = !solveFloor({ w: run.w, h: run.h, cells: run.cells, pos: run.pos }, run.hero, run.floor, run.ch).solvable;
+    const el = $("danger");
+    if (run.status !== "playing") {
+      el.style.display = "none";
+      return;
     }
-    $("danger").style.display = stuck ? "block" : "none";
+    const c = run.floorCheck();
+    if (c.canReachExit) {
+      el.style.display = "none";
+      return;
+    }
+    el.innerHTML = c.restartHelps ? "\u26A0 \u73B0\u5728\u5DF2\u7ECF\u8D70\u4E0D\u5230\u51FA\u53E3\u4E86\u3002<b>\u91CD\u5F00\u672C\u5C42\u53EF\u4EE5\u6551\u56DE\u6765</b>\uFF1A\u56DE\u5230\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\uFF0C\u6362\u4E00\u79CD\u8D70\u6CD5\u3002" : "\u26A0 \u73B0\u5728\u5DF2\u7ECF\u8D70\u4E0D\u5230\u51FA\u53E3\u4E86\uFF0C\u800C\u4E14<b>\u91CD\u5F00\u672C\u5C42\u4E5F\u6551\u4E0D\u56DE\u6765</b>\uFF1A\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\u5C31\u8FC7\u4E0D\u53BB\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\u3002";
+    el.style.display = "block";
   }
   function render() {
     renderHud();
@@ -1411,9 +1554,19 @@
       `<div class="row"><span>\u672C\u5C42\u751F\u547D\u53D8\u5316</span><b>${diffHp >= 0 ? "+" : ""}${diffHp}</b></div>`,
       `<div class="row"><span>\u5730\u56FE\u4E0A\u5269\u4E0B\u7684\u8840\u74F6 \xD7${s.leftoverPotions}</span><b>+${s.potionGold} \u91D1\u5E01</b></div>`
     ];
-    if (floorBest !== null) {
-      const d = floorBest - run.hero.hp;
-      rows.push(`<p class="small">\u672C\u5C42\u6700\u4F18\u89E3\u51FA\u53E3\u65F6\u751F\u547D ${floorBest}${d <= 0 ? "\uFF0C\u4F60\u627E\u5230\u4E86\u6700\u4F18\u89E3\uFF01" : `\uFF0C\u4F60\u6BD4\u6700\u4F18\u89E3\u5C11 ${d}\u3002`}</p>`);
+    const st = run.floorStartHero;
+    const gains = [
+      ["\u653B\u51FB", run.hero.atk - st.atk],
+      ["\u9632\u5FA1", run.hero.def - st.def],
+      ["\u9AA8\u94A5", run.hero.keys - st.keys]
+    ].filter(([, d]) => d !== 0).map(([k, d]) => `${k} ${d > 0 ? "+" : ""}${d}`);
+    rows.push(`<div class="row"><span>\u672C\u5C42\u6362\u5230\u7684\u5C5E\u6027</span><b>${gains.length ? gains.join("\uFF0C") : "\u6CA1\u6709"}</b></div>`);
+    if (floorBest) {
+      const b = floorBest;
+      const same = b.atk === run.hero.atk && b.def === run.hero.def;
+      const route = same ? "" : `\uFF08\u90A3\u6761\u8D70\u6CD5\u79BB\u5F00\u65F6 \u653B ${b.atk} / \u9632 ${b.def}\uFF09`;
+      const mine = `\u4F60\u4EE5 ${run.hero.hp} \u8840\u79BB\u5F00\uFF0C\u653B ${run.hero.atk} / \u9632 ${run.hero.def}`;
+      rows.push(`<p class="small">\u672C\u5C42\u80FD\u5E26\u51FA\u7684\u6700\u9AD8\u751F\u547D\u662F ${b.hp}${route}\u3002${mine}${gains.length && run.hero.hp < b.hp ? `\uFF1A\u4F60\u7528 ${b.hp - run.hero.hp} \u8840\u6362\u5230\u4E86 ${gains.join("\u3001")}` : ""}\u3002</p>`);
     }
     const next = (sell) => {
       run.finishFloor(sell);
@@ -1534,22 +1687,30 @@
     ]);
   }
   function showDeath() {
-    modal(`<h2>\u4F60\u5012\u4E0B\u4E86</h2>
+    const canRestart = run.floorCheck().restartHelps;
+    modal(
+      `<h2>\u4F60\u5012\u4E0B\u4E86</h2>
         <p>\u4F60\u5012\u5728\u4E86${run.floor.name}\u3002</p>
         <div class="row"><span>\u653B\u51FB / \u9632\u5FA1</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
         <div class="row"><span>\u91D1\u5E01</span><b>${run.hero.gold}</b></div>
-        <p class="small">\u53EF\u4EE5\u4ECE\u672C\u5C42\u5F00\u5934\u91CD\u6765\uFF08\u5730\u56FE\u4E0D\u53D8\uFF09\uFF0C\u4E5F\u53EF\u4EE5\u65B0\u5F00\u4E00\u5C40\u6362\u5730\u56FE\u3002</p>`, [
-      { label: "\u91CD\u5F00\u672C\u5C42", on: restart },
-      { label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }
-    ]);
+        <p class="small">${canRestart ? "\u91CD\u5F00\u672C\u5C42\u53EF\u4EE5\u4ECE\u672C\u5C42\u5F00\u5934\u91CD\u6765\uFF08\u5730\u56FE\u4E0D\u53D8\uFF09\uFF0C\u6362\u4E00\u79CD\u8D70\u6CD5\u8FD8\u8FC7\u5F97\u53BB\uFF1B\u4E5F\u53EF\u4EE5\u65B0\u5F00\u4E00\u5C40\u6362\u5730\u56FE\u3002" : "\u91CD\u5F00\u672C\u5C42\u4E5F\u8FC7\u4E0D\u53BB\u4E86\uFF1A\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\u5C31\u4E0D\u591F\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\u3002"}</p>`,
+      canRestart ? [{ label: "\u91CD\u5F00\u672C\u5C42", on: restart }, { label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }] : [{ label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }]
+    );
   }
   function confirmStairs() {
-    const exit = run.cells.findIndex((c) => c.kind === "exit");
-    modal(`<h2>\u697C\u68AF\u53E3</h2><p>\u4E0B\u697C\u4E4B\u540E\u5C31\u56DE\u4E0D\u6765\u4E86\u3002\u4E0B\u697C\u524D\uFF0C\u4F60\u542C\u5230\u4E95\u5E95\u4F20\u6765\u7684\u56DE\u58F0\uFF1A</p>${intelHtml()}
-        <p class="small">\u8FD8\u60F3\u56DE\u5934\u62FF\u70B9\u4EC0\u4E48\u7684\u8BDD\uFF0C\u9009"\u518D\u60F3\u60F3"\u3002</p>`, [
+    const exit = run.cells.findIndex((c2) => c2.kind === "exit");
+    const c = stairCheck();
+    const doomed = !!c && !c.nextOk;
+    const buttons = doomed ? [
+      ...c.rescue || !c.restartHelps ? [] : [{ label: "\u91CD\u5F00\u672C\u5C42", on: restart }],
+      { label: c.rescue ? "\u56DE\u5934\u8865\u6551" : "\u518D\u60F3\u60F3", primary: true, on: () => setMsg(c.rescue ? "\u56DE\u5934\u53BB\u62FF\u4E0A\u9762\u63D0\u5230\u7684\u4E1C\u897F\uFF0C\u518D\u6765\u697C\u68AF\u53E3\u3002" : "\u7559\u5728\u672C\u5C42\u3002") },
+      { label: "\u4ECD\u7136\u4E0B\u697C", danger: true, on: () => void walk([exit], true) }
+    ] : [
       { label: "\u518D\u60F3\u60F3", on: () => setMsg("\u7559\u5728\u672C\u5C42\u3002\u60F3\u597D\u4E86\u518D\u8D70\u5230\u697C\u68AF\u53E3\u3002") },
       { label: "\u4E0B\u697C", primary: true, on: () => void walk([exit], true) }
-    ]);
+    ];
+    modal(`<h2>\u697C\u68AF\u53E3</h2>${doomed ? stairWarnHtml() : "<p>\u4E0B\u697C\u4E4B\u540E\u5C31\u56DE\u4E0D\u6765\u4E86\u3002"}${doomed ? "" : "\u4E0B\u697C\u524D\uFF0C\u4F60\u542C\u5230\u4E95\u5E95\u4F20\u6765\u7684\u56DE\u58F0\uFF1A</p>"}${intelHtml()}
+        ${doomed ? "" : '<p class="small">\u8FD8\u60F3\u56DE\u5934\u62FF\u70B9\u4EC0\u4E48\u7684\u8BDD\uFF0C\u9009"\u518D\u60F3\u60F3"\u3002</p>'}`, buttons);
   }
   function act(i) {
     if (busy) return;
@@ -1627,7 +1788,7 @@
     selected = -1;
     hovered = -1;
     board.innerHTML = "";
-    floorBest = (_b = (_a2 = solveFromStart(run.floor, run.floorStartHero, run.ch).best) == null ? void 0 : _a2.hero.hp) != null ? _b : null;
+    floorBest = (_b = (_a2 = solveFromStart(run.floor, run.floorStartHero, run.ch).best) == null ? void 0 : _a2.hero) != null ? _b : null;
     setMsg((_c = run.floor.hint) != null ? _c : "");
   }
   function begin(c, save) {

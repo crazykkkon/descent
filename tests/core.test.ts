@@ -155,9 +155,10 @@ test('试玩版地图尺寸：第 1 层 9×7，第 2、3 层 11×7', () => {
     })));
 });
 
-test('每层 3 种布局 × 2 套配置；同一布局的两套墙壁、入口、出口完全一样', () => {
+test('第 1 层 3 种布局、第 2、3 层 4 种布局（含近路），每种 2 套配置；同一布局的两套墙壁、入口、出口完全一样', () => {
+    assert.deepEqual(DEMO_POOLS.map(p => p.layouts.length), [3, 4, 4]);
+    assert.ok(DEMO_POOLS[1].layouts.some(l => l.name === '近路') && DEMO_POOLS[2].layouts.some(l => l.name === '近路'));
     for (const pool of DEMO_POOLS) {
-        assert.equal(pool.layouts.length, 3);
         for (const l of pool.layouts) {
             assert.equal(l.variants.length, 2);
             const shape = (m: string[]) => m.map(r => r.replace(/[^#@>]/g, '.')).join('|');
@@ -233,17 +234,69 @@ test('最后一层没有楼梯口情报；试玩版每层都能生成情报', ()
     }));
 });
 
+test('楼梯口检查：下一层没有活路时说清楚还能不能补救', () => {
+    const next = tiny(['@e>']); // 盲鳗：攻10防10 要掉 80
+    // 1. 回头拿大血瓶就有救
+    const a = new Run([tiny(['@.>', 'H..']), next]);
+    a.hero.hp = 30;
+    const ca = a.stairCheck()!;
+    assert.equal(ca.nextOk, false);
+    assert.deepEqual(ca.rescue!.items, ['大血瓶']);
+    // 2. 本层没东西可拿了，但进入本层时血是够的：重开本层有救
+    const b = new Run([tiny(['@.>']), next]);
+    b.hero.hp = 30;
+    const cb = b.stairCheck()!;
+    assert.equal(cb.rescue, undefined);
+    assert.equal(cb.restartHelps, true);
+    // 3. 进入本层时就不够：重开也救不回来
+    const c = new Run([tiny(['@.>']), next]);
+    c.hero.hp = 30;
+    (c as unknown as { floorStart: { hero: { hp: number } } }).floorStart.hero.hp = 30;
+    const cc = c.stairCheck()!;
+    assert.equal(cc.restartHelps, false);
+    // 有活路时什么都不提示；最后一层没有检查
+    assert.equal(new Run([tiny(['@.>']), next]).stairCheck()!.nextOk, true);
+    assert.equal(new Run([tiny(['@.>'])]).stairCheck(), null);
+});
+
+test('层内检查：走不到出口时，说清楚重开本层能不能救回来', () => {
+    const run = new Run([tiny(['@e>'])]);
+    run.hero.hp = 30;
+    assert.deepEqual(run.floorCheck(), { canReachExit: false, restartHelps: true });
+    (run as unknown as { floorStart: { hero: { hp: number } } }).floorStart.hero.hp = 30;
+    assert.deepEqual(run.floorCheck(), { canReachExit: false, restartHelps: false });
+});
+
 test('所有选图组合都能通关', () => {
     for (const c of allChoices()) assert.ok(solveRun(buildFloors(c)).bestHp > 0, JSON.stringify(c));
 });
 
-test('同一个种子选到同一组地图；新开一局每层都换图；第 2、3 层不连用同一种布局', () => {
+test('同一个种子选到同一组地图；新开一局换思路：每层换图，布局避开上一局用过的；第 2、3 层不连用同一种布局', () => {
     assert.deepEqual(pickChoices(42), pickChoices(42));
-    for (let seed = 1; seed < 200; seed++) {
+    const L = (i: number, c: { layout: number }) => DEMO_POOLS[i].layouts[c.layout].name;
+    for (let seed = 1; seed < 300; seed++) {
         const a = pickChoices(seed);
         const b = pickChoices(seed + 1000, DEMO_POOLS, a);
         b.forEach((c, i) => assert.ok(c.layout !== a[i].layout || c.variant !== a[i].variant));
-        assert.notEqual(DEMO_POOLS[1].layouts[a[1].layout].name, DEMO_POOLS[2].layouts[a[2].layout].name);
+        assert.notEqual(L(0, b[0]), L(0, a[0]), '第 1 层换布局');
+        const usedBefore = new Set([L(1, a[1]), L(2, a[2])]);
+        assert.ok(!usedBefore.has(L(1, b[1])) && !usedBefore.has(L(2, b[2])), `第 2、3 层避开上一局的 ${[...usedBefore]}`);
+        assert.notEqual(L(1, b[1]), L(2, b[2]));
+    }
+});
+
+test('近路布局：最优走法用骨钥开近路，绕开主路的大怪', () => {
+    for (const fi of [1, 2]) {
+        const li = DEMO_POOLS[fi].layouts.findIndex(l => l.name === '近路');
+        for (const vi of [0, 1]) {
+            const f = buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi });
+            const p = parseFloor(f);
+            const entry = fi === 1 ? { ...CHARACTERS.digger.base, hp: 180, atk: 13, def: 13 } : { ...CHARACTERS.digger.base, hp: 150, atk: 16, def: 13 };
+            const plan = solveFromStart(f, entry).best!.plan;
+            assert.ok(plan.some(i => p.cells[i].kind === 'door' && (p.cells[i] as { door: string }).door === 'bone'), `第 ${fi + 1} 层近路${vi + 1} 没走近路`);
+            const guard = p.cells.findIndex((c, i) => c.kind === 'monster' && Math.floor(i / p.w) === 3 && i % p.w === 8);
+            assert.ok(!plan.includes(guard), `第 ${fi + 1} 层近路${vi + 1} 还是打了主路大怪`);
+        }
     }
 });
 

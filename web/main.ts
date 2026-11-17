@@ -9,7 +9,7 @@
  */
 import { Hero, MONSTERS } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
-import { Run, RunSave } from '../src/core/game';
+import { Run, RunSave, StairCheck } from '../src/core/game';
 import { DEMO_POOLS, FloorChoice, buildFloors, pickChoices } from '../src/core/levels';
 import { solveFloor, solveFromStart } from '../src/core/solver';
 
@@ -31,7 +31,7 @@ let selected = -1;
 let hovered = -1;
 let lastHero: Hero | null = null;
 /** 本层入场时的最优解，结算时对比 */
-let floorBest: number | null = null;
+let floorBest: Hero | null = null;
 
 // ---------- 存档（浏览器本地；Steam 版换成本地文件） ----------
 function store(key: string, value: unknown) {
@@ -268,7 +268,7 @@ function showInfo(i: number) {
         if (p.text === '会死') html += '<div class="warn">这一仗打完你会死。可以硬上，但这一局就结束了。</div>';
         tipCell = i;
     }
-    if (run.cells[i].kind === 'exit') html += intelHtml();
+    if (run.cells[i].kind === 'exit') html += stairWarnHtml() + intelHtml();
     lines.innerHTML = html;
     // 手机：选中后出现确认按钮
     const c = run.cells[i];
@@ -279,6 +279,33 @@ function showInfo(i: number) {
         confirm.style.display = 'block';
     }
     placeTip();
+}
+
+let stairCache: { key: string; v: StairCheck | null } | null = null;
+function stairCheck(): StairCheck | null {
+    const key = `${run.floorIndex}:${run.steps}:${run.hero.hp}:${run.hero.atk}:${run.hero.def}:${run.hero.keys}`;
+    if (!stairCache || stairCache.key !== key) stairCache = { key, v: run.stairCheck() };
+    return stairCache.v;
+}
+
+/** 下一层没有活路时的警告，以及还能怎么补救 */
+function stairWarnHtml(): string {
+    const c = stairCheck();
+    if (!c || c.nextOk) return '';
+    const h = run.hero;
+    let fix: string;
+    if (c.rescue) {
+        const r = c.rescue;
+        const what = r.items.length ? `先去拿 ${[...new Set(r.items)].join('、')}` : '换一条走法';
+        const fight = r.fights.length ? `（路上要过：${r.fights.join('、')}）` : '';
+        fix = `<b class="ok">回头还来得及：</b>${what}${fight}，带着 生命 ${r.hero.hp} / 攻 ${r.hero.atk} / 防 ${r.hero.def} 下楼，下一层就有活路。`;
+    } else if (c.restartHelps) {
+        fix = '<b class="ok">本层已经补救不了，但重开本层还来得及：</b>回到进入本层时的状态，换一种走法，带着更好的状态下楼。';
+    } else {
+        fix = '<b>重开本层也来不及了：</b>进入本层时的状态就已经过不去下一层。只能新开一局。';
+    }
+    return `<div class="stairWarn"><div class="stairWarnHead">⚠ 以你现在的状态（生命 ${h.hp} / 攻 ${h.atk} / 防 ${h.def}），下一层没有活路</div>
+        <div>下楼以后，"重开本层"只能回到下一层的开头，还是这个状态，救不回来。</div><div>${fix}</div></div>`;
 }
 
 /** 楼梯口情报（下一层的一条情报） */
@@ -295,11 +322,14 @@ function setMsg(text: string, err = false) {
 }
 
 function checkDanger() {
-    let stuck = false;
-    if (run.status === 'playing') {
-        stuck = !solveFloor({ w: run.w, h: run.h, cells: run.cells, pos: run.pos }, run.hero, run.floor, run.ch).solvable;
-    }
-    $('danger').style.display = stuck ? 'block' : 'none';
+    const el = $('danger');
+    if (run.status !== 'playing') { el.style.display = 'none'; return; }
+    const c = run.floorCheck();
+    if (c.canReachExit) { el.style.display = 'none'; return; }
+    el.innerHTML = c.restartHelps
+        ? '⚠ 现在已经走不到出口了。<b>重开本层可以救回来</b>：回到进入本层时的状态，换一种走法。'
+        : '⚠ 现在已经走不到出口了，而且<b>重开本层也救不回来</b>：进入本层时的状态就过不去。只能新开一局。';
+    el.style.display = 'block';
 }
 
 function render() {
@@ -336,9 +366,19 @@ function showExit() {
         `<div class="row"><span>本层生命变化</span><b>${diffHp >= 0 ? '+' : ''}${diffHp}</b></div>`,
         `<div class="row"><span>地图上剩下的血瓶 ×${s.leftoverPotions}</span><b>+${s.potionGold} 金币</b></div>`,
     ];
-    if (floorBest !== null) {
-        const d = floorBest - run.hero.hp;
-        rows.push(`<p class="small">本层最优解出口时生命 ${floorBest}${d <= 0 ? '，你找到了最优解！' : `，你比最优解少 ${d}。`}</p>`);
+    // 这一层换到了什么
+    const st = run.floorStartHero;
+    const gains = [
+        ['攻击', run.hero.atk - st.atk], ['防御', run.hero.def - st.def], ['骨钥', run.hero.keys - st.keys],
+    ].filter(([, d]) => d !== 0).map(([k, d]) => `${k} ${(d as number) > 0 ? '+' : ''}${d}`);
+    rows.push(`<div class="row"><span>本层换到的属性</span><b>${gains.length ? gains.join('，') : '没有'}</b></div>`);
+    if (floorBest) {
+        // 不说"最优解"：生命最多的走法不一定最好，宝石在后面几层还会继续起作用
+        const b = floorBest;
+        const same = b.atk === run.hero.atk && b.def === run.hero.def;
+        const route = same ? '' : `（那条走法离开时 攻 ${b.atk} / 防 ${b.def}）`;
+        const mine = `你以 ${run.hero.hp} 血离开，攻 ${run.hero.atk} / 防 ${run.hero.def}`;
+        rows.push(`<p class="small">本层能带出的最高生命是 ${b.hp}${route}。${mine}${gains.length && run.hero.hp < b.hp ? `：你用 ${b.hp - run.hero.hp} 血换到了 ${gains.join('、')}` : ''}。</p>`);
     }
     const next = (sell: boolean) => {
         run.finishFloor(sell);
@@ -458,23 +498,35 @@ function confirmFatal(cell: number) {
 }
 
 function showDeath() {
+    const canRestart = run.floorCheck().restartHelps;
     modal(`<h2>你倒下了</h2>
         <p>你倒在了${run.floor.name}。</p>
         <div class="row"><span>攻击 / 防御</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
         <div class="row"><span>金币</span><b>${run.hero.gold}</b></div>
-        <p class="small">可以从本层开头重来（地图不变），也可以新开一局换地图。</p>`, [
-        { label: '重开本层', on: restart },
-        { label: '新开一局', primary: true, on: () => newRun() },
-    ]);
+        <p class="small">${canRestart
+            ? '重开本层可以从本层开头重来（地图不变），换一种走法还过得去；也可以新开一局换地图。'
+            : '重开本层也过不去了：进入本层时的状态就不够。只能新开一局。'}</p>`,
+        canRestart
+            ? [{ label: '重开本层', on: restart }, { label: '新开一局', primary: true, on: () => newRun() }]
+            : [{ label: '新开一局', primary: true, on: () => newRun() }]);
 }
 
 function confirmStairs() {
     const exit = run.cells.findIndex(c => c.kind === 'exit');
-    modal(`<h2>楼梯口</h2><p>下楼之后就回不来了。下楼前，你听到井底传来的回声：</p>${intelHtml()}
-        <p class="small">还想回头拿点什么的话，选"再想想"。</p>`, [
-        { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
-        { label: '下楼', primary: true, on: () => void walk([exit], true) },
-    ]);
+    const c = stairCheck();
+    const doomed = !!c && !c.nextOk;
+    const buttons: Btn[] = doomed
+        ? [
+            ...(c!.rescue || !c!.restartHelps ? [] : [{ label: '重开本层', on: restart }]),
+            { label: c!.rescue ? '回头补救' : '再想想', primary: true, on: () => setMsg(c!.rescue ? '回头去拿上面提到的东西，再来楼梯口。' : '留在本层。') },
+            { label: '仍然下楼', danger: true, on: () => void walk([exit], true) },
+        ]
+        : [
+            { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
+            { label: '下楼', primary: true, on: () => void walk([exit], true) },
+        ];
+    modal(`<h2>楼梯口</h2>${doomed ? stairWarnHtml() : '<p>下楼之后就回不来了。'}${doomed ? '' : '下楼前，你听到井底传来的回声：</p>'}${intelHtml()}
+        ${doomed ? '' : '<p class="small">还想回头拿点什么的话，选"再想想"。</p>'}`, buttons);
 }
 
 function act(i: number) {
@@ -536,7 +588,7 @@ function startFloor() {
     selected = -1;
     hovered = -1;
     board.innerHTML = '';
-    floorBest = solveFromStart(run.floor, run.floorStartHero, run.ch).best?.hero.hp ?? null;
+    floorBest = solveFromStart(run.floor, run.floorStartHero, run.ch).best?.hero ?? null;
     setMsg(run.floor.hint ?? '');
 }
 
