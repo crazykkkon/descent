@@ -126,12 +126,11 @@
     <div id="infoTitle"></div>
     <div id="infoLines"></div>
     <button id="confirm" class="primary">出手</button>
-    <div id="danger">⚠ 现在已经走不到出口了，只能重开本层。</div>
+    <div id="danger"></div>
     <div class="sep"></div>
     <div id="msg"></div>
     <div class="grow"></div>
     <div class="btns">
-      <button id="restart" class="wide">重开本层（地图不变）</button>
       <button id="newRun" class="wide">新开一局（换地图）</button>
     </div>
     <div class="keys" id="keysHint"></div>
@@ -581,15 +580,10 @@
       if (!next) return null;
       return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
     }
-    /** 本层还能不能走到出口；走不到的话，重开本层能不能救回来（进入本层时的属性够不够） */
+    /** 本层还能不能活着走到出口 */
     floorCheck() {
       const canReachExit = this.status === "playing" && solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch).solvable;
-      const restartHelps = solveFromStart(this.floor, this.floorStartHero, this.ch).solvable;
-      return { canReachExit, restartHelps };
-    }
-    /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
-    restartFloor() {
-      this.restore(this.floorStart);
+      return { canReachExit };
     }
     monstersLeft() {
       return this.cells.filter((c) => c.kind === "monster").length;
@@ -1461,7 +1455,7 @@
       el.style.display = "none";
       return;
     }
-    el.innerHTML = c.restartHelps ? "\u26A0 \u73B0\u5728\u5DF2\u7ECF\u8D70\u4E0D\u5230\u51FA\u53E3\u4E86\u3002<b>\u91CD\u5F00\u672C\u5C42\u53EF\u4EE5\u6551\u56DE\u6765</b>\uFF1A\u56DE\u5230\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\uFF0C\u6362\u4E00\u79CD\u8D70\u6CD5\u3002" : "\u26A0 \u73B0\u5728\u5DF2\u7ECF\u8D70\u4E0D\u5230\u51FA\u53E3\u4E86\uFF0C\u800C\u4E14<b>\u91CD\u5F00\u672C\u5C42\u4E5F\u6551\u4E0D\u56DE\u6765</b>\uFF1A\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\u5C31\u8FC7\u4E0D\u53BB\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\u3002";
+    el.innerHTML = "\u26A0 \u73B0\u5728\u5DF2\u7ECF\u6D3B\u7740\u8D70\u4E0D\u5230\u51FA\u53E3\u4E86\uFF0C<b>\u8FD9\u4E00\u5C40\u8D70\u4E0D\u4E0B\u53BB\u4E86</b>\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\uFF08\u4ECE\u7B2C 1 \u5C42\u91CD\u6765\uFF0C\u5730\u56FE\u4F1A\u6362\uFF09\u3002";
     el.style.display = "block";
   }
   function render() {
@@ -1630,14 +1624,14 @@
     ]);
   }
   function showDeath() {
-    const canRestart = run.floorCheck().restartHelps;
+    clearSave();
     modal(
       `<h2>\u4F60\u5012\u4E0B\u4E86</h2>
         <p>\u4F60\u5012\u5728\u4E86${run.floor.name}\u3002</p>
         <div class="row"><span>\u653B\u51FB / \u9632\u5FA1</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
         <div class="row"><span>\u91D1\u5E01</span><b>${run.hero.gold}</b></div>
-        <p class="small">${canRestart ? "\u91CD\u5F00\u672C\u5C42\u53EF\u4EE5\u4ECE\u672C\u5C42\u5F00\u5934\u91CD\u6765\uFF08\u5730\u56FE\u4E0D\u53D8\uFF09\uFF0C\u6362\u4E00\u79CD\u8D70\u6CD5\u8FD8\u8FC7\u5F97\u53BB\uFF1B\u4E5F\u53EF\u4EE5\u65B0\u5F00\u4E00\u5C40\u6362\u5730\u56FE\u3002" : "\u91CD\u5F00\u672C\u5C42\u4E5F\u8FC7\u4E0D\u53BB\u4E86\uFF1A\u8FDB\u5165\u672C\u5C42\u65F6\u7684\u72B6\u6001\u5C31\u4E0D\u591F\u3002\u53EA\u80FD\u65B0\u5F00\u4E00\u5C40\u3002"}</p>`,
-      canRestart ? [{ label: "\u91CD\u5F00\u672C\u5C42", on: restart }, { label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }] : [{ label: "\u65B0\u5F00\u4E00\u5C40", primary: true, on: () => newRun() }]
+        <p class="small">\u8FD9\u4E00\u5C40\u7ED3\u675F\u4E86\u3002\u91CD\u65B0\u5F00\u59CB\u8981\u4ECE\u7B2C 1 \u5C42\u8D70\u8D77\uFF0C\u5730\u56FE\u4F1A\u6362\u6210\u65B0\u7684\u3002</p>`,
+      [{ label: "\u4ECE\u7B2C 1 \u5C42\u91CD\u65B0\u5F00\u59CB", primary: true, on: () => newRun() }]
     );
   }
   function confirmStairs() {
@@ -1704,21 +1698,12 @@
       const t = y * run.w + x;
       if (run.cells[t].kind === "wall") return;
       void walk([t]);
-    } else if (key === "r" && !busy) restart();
-    else if (key === "Escape") {
+    } else if (key === "Escape") {
       selected = -1;
       renderBoard();
       showInfo(-1);
     }
   });
-  function restart() {
-    run.restartFloor();
-    heroEl.classList.remove("dead");
-    startFloor();
-    render();
-    saveRun();
-    setMsg("\u5DF2\u91CD\u5F00\u672C\u5C42\uFF08\u5730\u56FE\u4E0D\u53D8\uFF09");
-  }
   function startFloor() {
     var _a2, _b, _c;
     selected = -1;
@@ -1747,15 +1732,12 @@
     store(LAST_KEY, c);
     begin(c);
   }
-  $("restart").onclick = () => {
-    if (!busy) restart();
-  };
   $("newRun").onclick = () => modal("<h2>\u65B0\u5F00\u4E00\u5C40\uFF1F</h2><p>\u8FD9\u4E00\u5C40\u7684\u8FDB\u5EA6\u4F1A\u4E22\u5931\u3002\u65B0\u7684\u4E00\u5C40\u6BCF\u5C42\u90FD\u4F1A\u6362\u4E00\u5F20\u5730\u56FE\u3002</p>", [
     { label: "\u53D6\u6D88", on: () => {
     } },
     { label: "\u65B0\u5F00\u4E00\u5C40", danger: true, on: newRun }
   ]);
-  $("keysHint").textContent = HOVER ? "\u65B9\u5411\u952E / WASD \u79FB\u52A8 \xB7 R \u91CD\u5F00\u672C\u5C42 \xB7 \u8D70\u8FC7\u4E0D\u80FD\u64A4\u56DE" : "\u8F7B\u70B9\u67E5\u770B\uFF0C\u518D\u70B9\u4E00\u6B21\u51FA\u624B \xB7 \u8D70\u8FC7\u4E0D\u80FD\u64A4\u56DE";
+  $("keysHint").textContent = HOVER ? "\u65B9\u5411\u952E / WASD \u79FB\u52A8 \xB7 \u8D70\u8FC7\u4E0D\u80FD\u64A4\u56DE \xB7 \u6B7B\u4E86\u4ECE\u7B2C 1 \u5C42\u91CD\u6765" : "\u8F7B\u70B9\u67E5\u770B\uFF0C\u518D\u70B9\u4E00\u6B21\u51FA\u624B \xB7 \u8D70\u8FC7\u4E0D\u80FD\u64A4\u56DE";
   fit();
   var saved = loadKey(SAVE_KEY);
   var _a;

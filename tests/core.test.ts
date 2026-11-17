@@ -63,10 +63,8 @@ test('打不过的怪也可以硬上：打完就死，这一局结束', () => {
     const r2 = new Run([tiny(['@c>'])]);
     assert.equal(r2.move(1, 0).ok, true);
     assert.equal(r2.status, 'dead');
-    // 死了以后还能重开本层
-    r2.restartFloor();
-    assert.equal(r2.status, 'playing');
-    assert.equal(r2.hero.hp, 200);
+    // 没有重开本层：死了就只能整局重来
+    assert.equal((r2 as unknown as Record<string, unknown>).restartFloor, undefined);
 });
 
 test('打败怪物按强度掉金币；金币袋照样能捡', () => {
@@ -131,14 +129,6 @@ test('点击寻路：走到怪物旁边再打；没有撤回', () => {
     assert.equal(run.cells[3].kind, 'floor');
     assert.equal(run.steps, 3);
     assert.equal((run as unknown as Record<string, unknown>).undo, undefined);
-});
-
-test('重开本层回到入场状态', () => {
-    const run = new Run([tiny(['@rm>'])]);
-    run.move(1, 0); run.move(1, 0);
-    run.restartFloor();
-    assert.equal(run.hero.atk, 10);
-    assert.equal(run.pos, 0);
 });
 
 test('求解器：只能靠宝石过的小谜题', () => {
@@ -234,12 +224,11 @@ test('最后一层没有楼梯口情报；试玩版每层都能生成情报', ()
     }));
 });
 
-test('层内检查：走不到出口时，说清楚重开本层能不能救回来', () => {
+test('层内检查：已经活着走不到出口时能发现', () => {
     const run = new Run([tiny(['@e>'])]);
+    assert.deepEqual(run.floorCheck(), { canReachExit: true });
     run.hero.hp = 30;
-    assert.deepEqual(run.floorCheck(), { canReachExit: false, restartHelps: true });
-    (run as unknown as { floorStart: { hero: { hp: number } } }).floorStart.hero.hp = 30;
-    assert.deepEqual(run.floorCheck(), { canReachExit: false, restartHelps: false });
+    assert.deepEqual(run.floorCheck(), { canReachExit: false });
 });
 
 test('所有选图组合都能通关', () => {
@@ -286,8 +275,7 @@ test('存档读档：继续游戏时地图和进度不变', () => {
     assert.deepEqual(back.cells, run.cells);
     assert.deepEqual(back.hero, run.hero);
     assert.equal(back.pos, run.pos);
-    back.restartFloor();
-    assert.deepEqual(back.hero, CHARACTERS.digger.base);
+    assert.deepEqual(back.floorStartHero, CHARACTERS.digger.base);
 });
 
 test('按求解器的路线实际玩，结果和求解器一致', () => {

@@ -1,10 +1,10 @@
-/** 一局游戏的状态和操作：移动、交互、撤回、重开本层、出口结算。 */
+/** 一局游戏的状态和操作：移动、交互、出口结算。没有撤回、没有重开本层：死了就整局重来。 */
 import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, TRAIT_DESC, TRAIT_NAMES } from './config';
 import { CombatResult, simulateCombat } from './combat';
 import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
-import { solveFloor, solveFromStart } from './solver';
+import { solveFloor } from './solver';
 
 /** dead：主角死了，这一局结束 */
 export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
@@ -38,10 +38,9 @@ export interface ActResult {
     msg: string;
 }
 
-/** 本层还能不能走到出口；不能的话，重开本层能不能救回来 */
+/** 本层还能不能走到出口 */
 export interface FloorCheck {
     canReachExit: boolean;
-    restartHelps: boolean;
 }
 
 export interface CellInfo {
@@ -108,17 +107,11 @@ export class Run {
         return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
     }
 
-    /** 本层还能不能走到出口；走不到的话，重开本层能不能救回来（进入本层时的属性够不够） */
+    /** 本层还能不能活着走到出口 */
     floorCheck(): FloorCheck {
         const canReachExit = this.status === 'playing'
             && solveFloor({ w: this.w, h: this.h, cells: this.cells, pos: this.pos }, this.hero, this.floor, this.ch).solvable;
-        const restartHelps = solveFromStart(this.floor, this.floorStartHero, this.ch).solvable;
-        return { canReachExit, restartHelps };
-    }
-
-    /** 重开本层：回到入场状态，地图不变。（没有撤回：走过、打过就不能退回） */
-    restartFloor() {
-        this.restore(this.floorStart);
+        return { canReachExit };
     }
 
     monstersLeft(): number { return this.cells.filter(c => c.kind === 'monster').length; }

@@ -5,7 +5,7 @@
  * 操作：
  *   电脑（有鼠标）：鼠标悬停看战斗预览，点击直接出手 / 移动；方向键或 WASD 也能走
  *   手机（触屏）：轻点查看，再点一次或按"出手"确认
- *   没有撤回：走过、打过就不能退回；卡住时可以重开本层（地图不变）
+ *   没有撤回、没有重开本层：走过、打过就不能退回；死了就从第 1 层重新开始，地图随机换
  */
 import { Hero, MONSTERS } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
@@ -299,9 +299,7 @@ function checkDanger() {
     if (run.status !== 'playing') { el.style.display = 'none'; return; }
     const c = run.floorCheck();
     if (c.canReachExit) { el.style.display = 'none'; return; }
-    el.innerHTML = c.restartHelps
-        ? '⚠ 现在已经走不到出口了。<b>重开本层可以救回来</b>：回到进入本层时的状态，换一种走法。'
-        : '⚠ 现在已经走不到出口了，而且<b>重开本层也救不回来</b>：进入本层时的状态就过不去。只能新开一局。';
+    el.innerHTML = '⚠ 现在已经活着走不到出口了，<b>这一局走不下去了</b>。只能新开一局（从第 1 层重来，地图会换）。';
     el.style.display = 'block';
 }
 
@@ -471,17 +469,14 @@ function confirmFatal(cell: number) {
 }
 
 function showDeath() {
-    const canRestart = run.floorCheck().restartHelps;
+    // 死了就整局重来：存档清掉，刷新页面也回不到这一局
+    clearSave();
     modal(`<h2>你倒下了</h2>
         <p>你倒在了${run.floor.name}。</p>
         <div class="row"><span>攻击 / 防御</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
         <div class="row"><span>金币</span><b>${run.hero.gold}</b></div>
-        <p class="small">${canRestart
-            ? '重开本层可以从本层开头重来（地图不变），换一种走法还过得去；也可以新开一局换地图。'
-            : '重开本层也过不去了：进入本层时的状态就不够。只能新开一局。'}</p>`,
-        canRestart
-            ? [{ label: '重开本层', on: restart }, { label: '新开一局', primary: true, on: () => newRun() }]
-            : [{ label: '新开一局', primary: true, on: () => newRun() }]);
+        <p class="small">这一局结束了。重新开始要从第 1 层走起，地图会换成新的。</p>`,
+        [{ label: '从第 1 层重新开始', primary: true, on: () => newRun() }]);
 }
 
 function confirmStairs() {
@@ -535,18 +530,10 @@ window.addEventListener('keydown', e => {
         const t = y * run.w + x;
         if (run.cells[t].kind === 'wall') return;
         void walk([t]);
-    } else if (key === 'r' && !busy) restart();
+    }
     else if (key === 'Escape') { selected = -1; renderBoard(); showInfo(-1); }
 });
 
-function restart() {
-    run.restartFloor();
-    heroEl.classList.remove('dead');
-    startFloor();
-    render();
-    saveRun();
-    setMsg('已重开本层（地图不变）');
-}
 
 // ---------- 开局 / 继续 ----------
 function startFloor() {
@@ -578,13 +565,12 @@ function newRun() {
     begin(c);
 }
 
-$('restart').onclick = () => { if (!busy) restart(); };
 $('newRun').onclick = () => modal('<h2>新开一局？</h2><p>这一局的进度会丢失。新的一局每层都会换一张地图。</p>', [
     { label: '取消', on: () => {} },
     { label: '新开一局', danger: true, on: newRun },
 ]);
 $('keysHint').textContent = HOVER
-    ? '方向键 / WASD 移动 · R 重开本层 · 走过不能撤回'
+    ? '方向键 / WASD 移动 · 走过不能撤回 · 死了从第 1 层重来'
     : '轻点查看，再点一次出手 · 走过不能撤回';
 
 fit();
