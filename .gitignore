@@ -1,2 +1,4 @@
 node_modules/
 web/dist/
+love/dist/
+love/.cache/

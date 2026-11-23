@@ -1,0 +1,50 @@
+# LÖVE 版：每次推送到 main，先用原型导出的标准算例对账，再打 Windows / Mac 安装包，
+# 发布到固定的下载页：https://github.com/crazykkkon/descent/releases/tag/love-latest
+name: LÖVE 试玩包
+
+on:
+  push:
+    branches: [main]
+    paths: ['love/**', 'src/core/**', 'tools/export-vectors.ts', '.github/workflows/love.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: love-release
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 标准算例是不是最新的
+        run: |
+          npx tsx tools/export-vectors.ts
+          git diff --exit-code love/tests/vectors.lua || (echo "::error::love/tests/vectors.lua 和原型不一致，请运行 npx tsx tools/export-vectors.ts 后提交" && exit 1)
+      - name: Lua 对账
+        run: |
+          sudo apt-get install -y -qq luajit
+          cd love && luajit tests/run.lua
+      - name: 打包
+        run: python3 love/build.py
+      - name: 发布到下载页
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete love-latest --yes --cleanup-tag || true
+          gh release create love-latest love/dist/* \
+            --prerelease \
+            --title "坠井者 LÖVE 白盒（最新）" \
+            --notes "每次推送自动更新。提交：${GITHUB_SHA::7}
+
+          - Windows：下载 坠井者-windows.zip，解压后双击 坠井者.exe
+          - Mac：下载 坠井者-mac.zip，解压后右键 坠井者.app → 打开（未签名）
+          - 已装 LÖVE 11.5 的电脑：直接打开 descent.love"

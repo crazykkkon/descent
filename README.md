@@ -1,5 +1,8 @@
 # 坠井者
 
+> **Steam 版用 LÖVE + Lua 制作（`love/` 目录）**，TypeScript 原型（`src/core/`）作为规则参照和算例来源。
+> LÖVE 安装包下载：https://github.com/crazykkkon/descent/releases/tag/love-latest
+
 数值解谜 + 肉鸽游戏，横屏 16:9。先做 Steam 版（买断制），之后再做微信 / 抖音横屏小游戏。
 
 - 在线试玩：https://crazykkkon.github.io/descent/ （每次推送到 main 自动更新）
@@ -39,6 +42,9 @@ npm run solve       # 每张图的最优解 vs"赶路""清图"两种乱打，以
 npx tsx tools/fill.ts f2-ring 2500 1   # 内容搜索：在手画墙壁的内容格里找合适的怪物和奖励摆法
 npx tsx tools/contract.ts             # 契约验算：每张契约图上拒签 / 守约 / 毁约三条路的结果
 npm run typecheck
+npm run vectors       # 从原型导出标准算例到 love/tests/vectors.lua
+npm run love:test     # LÖVE 版用标准算例对账（需要 luajit）
+npm run love:build    # 打 Windows / Mac 安装包和 .love（输出到 love/dist/）
 npm run build:demo  # 打包成单文件 demo/index.html，可放到任何静态网页托管，也能直接发给别人
 ```
 

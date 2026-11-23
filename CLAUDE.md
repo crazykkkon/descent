@@ -19,10 +19,13 @@
 ## 当前技术路线
 - Steam Demo：**LÖVE（Love2D）+ Lua**（交接稿 a9ca98b 已确认）。
 - `src/core/` 的 TypeScript 原型是规则的参照实现：Lua 版要用同一组输入逐条对账（战损、押金、退还、毁约、存档）。
-- 求解器 / 设计工具是否继续用 TypeScript、Lua 代码放在哪，仍是讨论项（见 `docs/game-design.md` 23.2）。
+- 求解器和设计工具继续用 TypeScript（制作人倾向）；Lua 代码在 `love/` 目录（制作人倾向）。
+- 只做 Steam，按电脑分辨率；不做小程序（制作人倾向）。试玩发 Windows / Mac 安装包（制作人倾向）。
+- 改了 `src/core/` 的规则：先改原型 → `npm test` → `npm run vectors` 重新导出算例 → 改 `love/src/core/` → `npm run love:test` 必须 0 条不一致。
 
 ## 仓库要点
 - 设计方案：`docs/game-design.md`（Word 版同目录）；`crazykkkon/xiaochengxu` 的 `docs/descent/` 里有一份同步副本。
 - 核心规则是纯 TypeScript（`src/core/`），游戏和求解器共用同一份规则；改规则后跑 `npm test`。
 - 关卡检查：`npm run solve`；契约验算：`npx tsx tools/contract.ts`；内容搜索：`tools/fill.ts`。
-- 推送到 `main` 会自动发布在线试玩：https://crazykkkon.github.io/descent/
+- 推送到 `main` 会自动发布：网页原型 https://crazykkkon.github.io/descent/ ；LÖVE 安装包 https://github.com/crazykkkon/descent/releases/tag/love-latest
+- LÖVE 版本地运行：`cd love && love .`；无界面自检：`DESCENT_AUTOTEST=1 xvfb-run -a love .`（截图在 ~/.local/share/love/descent/）
