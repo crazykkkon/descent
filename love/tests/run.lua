@@ -9,6 +9,8 @@ local serialize = require('core.serialize')
 local slot = require('core.slot')
 local intel = require('core.intel')
 local floorMod = require('core.floor')
+local levels = require('core.levels')
+local mainline = require('data.mainline')
 local V = dofile('tests/vectors.lua')
 
 local pass, fail = 0, 0
@@ -33,8 +35,9 @@ end
 local function heroEq(h, e)
     return h.hp == e.hp and h.atk == e.atk and h.def == e.def and h.keys == e.keys and h.gold == e.gold
 end
-for _, sc in ipairs(V.scenarios) do
+local function runScenario(sc)
     local f = sc.floor
+    f.stall, f.eliteReward = sc.stall, sc.eliteReward or f.eliteReward
     f.contract = sc.contract
     local entryFloor = { name = 'entry', map = { '@>' }, bloodCost = f.bloodCost, gem = f.gem, smallPotion = f.smallPotion, bigPotion = f.bigPotion, gold = f.gold }
     local run = Run.new({ entryFloor, f }, 'digger', 1)
@@ -64,6 +67,8 @@ for _, sc in ipairs(V.scenarios) do
     check(heroEq(run.hero, sc.final) and run.status == sc.final.status,
         string.format('%s：结算后 期望 生命%d 金%d %s，实际 生命%d 金%d %s', sc.name, sc.final.hp, sc.final.gold, sc.final.status, run.hero.hp, run.hero.gold, run.status))
 end
+
+for _, sc in ipairs(V.scenarios) do runScenario(sc) end
 
 -- 2b. 新怪：按周围格子算出的攻防
 for _, mv in ipairs(V.monsterViews) do
@@ -141,5 +146,29 @@ for _, it in ipairs(V.intels) do
         '情报 ' .. it.floor.name .. '：期望 ' .. it.headline .. ' / ' .. table.concat(it.lines, '|') .. '，实际 ' .. (r and (r.headline .. ' / ' .. table.concat(r.lines, '|')) or 'nil'))
 end
 
-print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d、致死 %d、转轮 %d、井中轮 %d、三选一 %d、情报 %d）', pass, fail, #V.combat, #V.scenarios, #V.deaths, #V.rolls, #V.slotSessions, #V.weaponChoices, #V.intels))
+-- 7. 补给摊
+for n, st in ipairs(V.stalls) do
+    local f = st.floor
+    f.stall = st.stall
+    local run = Run.new({ f }, 'digger', 1)
+    run.hero.gold = st.gold
+    check(run:stallBuy(3, 1).ok == st.pre, '补给摊 ' .. n .. '：没走到旁边就能买')
+    run:step(2)
+    for k, x in ipairs(st.steps) do
+        local r = run:stallBuy(3, x.k + 1)
+        check(r.ok == x.ok and r.msg == x.msg and heroEq(run.hero, x.hero), string.format('补给摊 %d 第 %d 次：期望 %s，实际 %s', n, k, x.msg, r.msg))
+        run = Run.load(run.floors, serialize.load(serialize.dump(run:save())))
+    end
+end
+
+-- 8. 主线选图和逐层路线
+for _, p in ipairs(V.picks) do
+    local got = levels.pickChoices(p.seed, mainline.pools, p.avoid)
+    local ok = #got == #p.choices
+    for i, c in ipairs(p.choices) do ok = ok and got[i].layout == c.layout and got[i].variant == c.variant end
+    check(ok, '主线选图 种子' .. p.seed)
+end
+for _, sc in ipairs(V.mainScenarios) do runScenario(sc) end
+
+print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d、致死 %d、转轮 %d、井中轮 %d、三选一 %d、情报 %d、补给摊 %d、主线 %d 层）', pass, fail, #V.combat, #V.scenarios, #V.deaths, #V.rolls, #V.slotSessions, #V.weaponChoices, #V.intels, #V.stalls, #V.mainScenarios))
 os.exit(fail == 0 and 0 or 1)

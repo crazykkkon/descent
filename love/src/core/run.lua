@@ -32,6 +32,7 @@ function Run.new(floors, characterId, seed)
     self.seed = slot.u32(seed or 1)
     self.slots = {}           -- 井中轮状态，键是 '层:格子'
     self.pendingWeapons = nil -- 精英倒下后等着三选一的武器
+    self.stallBought = {}     -- 补给摊上买过的货，键是 '层:第几样'（原型的层号从 0 开始）
     self.totalSteps = 0
     self.contract = nil -- { def, floorIndex, broken }
     self:loadFloor(1)
@@ -188,6 +189,36 @@ function Run:slotCollect(i)
     return lines
 end
 
+-- ---------- 补给摊 ----------
+
+function Run.stallText(o)
+    if o.id == 'atk' then return '攻击 +' .. o.amount
+    elseif o.id == 'def' then return '防御 +' .. o.amount
+    elseif o.id == 'hp' then return '生命 +' .. o.amount end
+    return '骨钥 ×' .. o.amount
+end
+
+function Run:stallSold(k)
+    return self.stallBought[(self.floorIndex - 1) .. ':' .. (k - 1)] == true
+end
+
+-- 在第 i 格的补给摊买第 k 样货（k 从 1 开始）
+function Run:stallBuy(i, k)
+    local c = self.cells[i]
+    local o = self:floor().stall and self:floor().stall[k]
+    if self.status ~= 'playing' or not c or c.kind ~= 'stall' or not o then return { ok = false, msg = '' } end
+    if not contains(floorMod.neighbors(self.pos, self.w, self.h), i) then return { ok = false, msg = '站在补给摊旁边才能买东西' } end
+    if self:stallSold(k) then return { ok = false, msg = '这样已经买过了' } end
+    if self.hero.gold < o.price then return { ok = false, msg = '金币不够（要 ' .. o.price .. '）' } end
+    self.hero.gold = self.hero.gold - o.price
+    if o.id == 'atk' then self.hero.atk = self.hero.atk + o.amount
+    elseif o.id == 'def' then self.hero.def = self.hero.def + o.amount
+    elseif o.id == 'hp' then self.hero.hp = self.hero.hp + o.amount
+    else self.hero.keys = self.hero.keys + o.amount end
+    self.stallBought[(self.floorIndex - 1) .. ':' .. (k - 1)] = true
+    return { ok = true, msg = '买下' .. Run.stallText(o) .. '，花了 ' .. o.price .. ' 金币' }
+end
+
 -- ---------- 移动和交互 ----------
 
 -- 往相邻格子走一步（或和它交互）。返回 { ok, msg }
@@ -197,6 +228,7 @@ function Run:step(i)
     local c = self.cells[i]
     if c.kind == 'wall' then return { ok = false, msg = '' } end
     if c.kind == 'slot' then return { ok = false, msg = '站在井中轮旁边才能用它' } end
+    if c.kind == 'stall' then return { ok = false, msg = '站在补给摊旁边才能买东西' } end
     if c.kind == 'exit' and self:eliteAlive() then return { ok = false, msg = '精英守卫还活着，出口被封住了' } end
 
     if c.kind == 'floor' or c.kind == 'exit' then
@@ -380,6 +412,7 @@ function Run:save()
         rentPaid = self.rentPaid,
         slots = self.slots,
         pendingWeapons = self.pendingWeapons,
+        stallBought = self.stallBought,
     }
 end
 
@@ -394,6 +427,7 @@ function Run.load(floors, s)
     run.rentPaid = s.rentPaid or false
     run.slots = s.slots or {}
     run.pendingWeapons = s.pendingWeapons
+    run.stallBought = s.stallBought or {}
     return run
 end
 

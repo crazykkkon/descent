@@ -15,6 +15,9 @@ import { keepVersion } from '../src/core/contract';
 import { solveFromStart } from '../src/core/solver';
 import { SLOTS, SlotId, newSlotState, roll } from '../src/core/slot';
 import { choosePick, stairIntel } from '../src/core/intel';
+import { MAINLINE, buildMainline, pickMainline } from '../src/core/mainline';
+import { solveChain } from '../src/core/solver';
+import { pickChoices, FloorChoice } from '../src/core/levels';
 
 // ---------- 把 JS 值写成 Lua 表 ----------
 function lua(v: unknown, indent = ''): string {
@@ -50,7 +53,7 @@ for (const id of Object.keys(MONSTERS) as MonsterId[]) {
 type Step = { cell: number; ok: boolean; hp: number; atk: number; def: number; keys: number; gold: number; pos: number; status: string; contractActive: boolean };
 
 function floorParams(f: FloorDef) {
-    return { name: f.name, map: f.map, bloodCost: f.bloodCost, gem: f.gem, smallPotion: f.smallPotion, bigPotion: f.bigPotion, gold: f.gold, rent: f.rent };
+    return { name: f.name, map: f.map, bloodCost: f.bloodCost, gem: f.gem, smallPotion: f.smallPotion, bigPotion: f.bigPotion, gold: f.gold, rent: f.rent, eliteReward: f.eliteReward };
 }
 
 function scenario(name: string, f: FloorDef, entry: Hero, mode: 'refuse' | 'keep' | 'break' | 'any') {
@@ -222,10 +225,66 @@ for (const fi of [1, 2, 4]) {
     }));
 }
 
+// ---------- 7. 补给摊 ----------
+const stallFloor: FloorDef = { name: 't', map: ['@.M>'], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20, stall: [{ id: 'atk', amount: 2, price: 40 }, { id: 'hp', amount: 80, price: 25 }, { id: 'key', amount: 1, price: 30 }] };
+const stalls: unknown[] = [];
+for (const [gold, buys] of [[100, [0, 0, 1, 2]], [50, [2, 1, 0]], [200, [1, 2, 0, 1]]] as [number, number[]][]) {
+    const run = new Run([stallFloor]);
+    run.hero.gold = gold;
+    const pre = run.stallBuy(2, 0).ok; // 还没走到旁边
+    run.move(1, 0);
+    const steps = buys.map(k => { const r = run.stallBuy(2, k); return { k, ok: r.ok, msg: r.msg, hero: { ...run.hero } }; });
+    stalls.push({ floor: floorParams(stallFloor), stall: stallFloor.stall, gold, pre, steps });
+}
+
+// ---------- 8. 主线：选图 + 每层按求解器路线走一遍 ----------
+const picks: unknown[] = [];
+let prevChoice: FloorChoice[] | undefined;
+for (const seed of [1, 2, 3, 99, 12345, 4000000000]) {
+    const c = pickMainline(seed, prevChoice);
+    picks.push({ seed, avoid: prevChoice, choices: c });
+    prevChoice = c;
+}
+const mainScenarios: unknown[] = [];
+{
+    const floors = buildMainline(pickMainline(1));
+    const chain = solveChain(floors);
+    floors.forEach((f, i) => {
+        if (i === 0) return; // 第 1 层已经在上面的楼层算例里
+        const entry = chain[i - 1].best!;
+        const sc = scenario(`主线第${i + 1}层`, f, entry, f.contract ? 'keep' : 'any');
+        if (!sc) throw new Error(`主线第 ${i + 1} 层走不通`);
+        mainScenarios.push({ ...sc, floorIndex: i + 1, stall: f.stall, eliteReward: f.eliteReward });
+    });
+}
+
+// ---------- 主线关卡数据（Lua 版直接读这一份，不另外手写） ----------
+{
+    const ref = solveChain(buildMainline(pickMainline(1)));
+    const pools = MAINLINE.map((pool, fi) => ({
+        params: pool.params,
+        layouts: pool.layouts.map(l => ({
+            name: l.name,
+            variants: l.variants.map(v => {
+                const f = { ...buildFloor(pool, { layout: 0, variant: 0 }), map: v.map, contract: v.contract, intel: v.intel };
+                // 楼梯口情报说哪只怪：用"按求解器最优走到上一层出口"的属性选（Lua 版没有求解器）
+                const hero = fi === 0 ? CHARACTERS.digger.base : ref[fi - 1].best!;
+                const pick = v.intel || !parseFloor(f).cells.some(c => c.kind === 'monster') ? undefined : choosePick(f, hero, CHARACTERS.digger);
+                return { map: v.map, contract: v.contract, intel: v.intel, intelPick: pick && { cell: pick.cell + 1, mustFight: pick.mustFight } };
+            }),
+        })),
+    }));
+    writeFileSync('love/src/data/mainline.lua', `-- 由 tools/export-vectors.ts 从 src/core/mainline.ts 自动生成，不要手改。
+-- 20 层主线白盒：每层的参数、布局和配置。intelPick 的格子下标已经换成 Lua 的 1 开始。
+-- 层位、地图、数值、井租、补给摊价格都是讨论项（见 src/core/mainline.ts 开头的说明）。
+return ${lua({ pools })}
+`);
+}
+
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, deaths, rolls, slotSessions, weaponChoices, intels })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, stalls, picks, mainScenarios, deaths, rolls, slotSessions, weaponChoices, intels })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
-console.log(`战斗 ${combat.length}；新怪属性 ${monsterViews.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);
+console.log(`战斗 ${combat.length}；新怪属性 ${monsterViews.length}；补给摊 ${stalls.length}；主线选图 ${picks.length}；主线楼层 ${mainScenarios.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);

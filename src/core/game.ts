@@ -2,7 +2,7 @@
 import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, MonsterDef, monsterInContext, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
 import { SLOTS, SlotState, Sym, bloodPrice, leechBite, newSlotState, payout, roll, spinPrice } from './slot';
 import { CombatResult, simulateCombat } from './combat';
-import { adjacentMonsters, Cell, FloorDef, neighbors, parseFloor } from './floor';
+import { adjacentMonsters, Cell, FloorDef, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
 import { solveFloor } from './solver';
@@ -28,6 +28,11 @@ export interface ExitSummary {
     keyGold: number;
 }
 
+/** 补给摊货品的说明，例如"攻击 +3" */
+export function stallText(o: StallOffer): string {
+    return { atk: `攻击 +${o.amount}`, def: `防御 +${o.amount}`, hp: `生命 +${o.amount}`, key: `骨钥 ×${o.amount}` }[o.id];
+}
+
 export interface RunSave {
     characterId: string;
     floorIndex: number;
@@ -40,6 +45,7 @@ export interface RunSave {
     slots?: Record<string, SlotState>;
     rentPaid?: boolean;
     pendingWeapons?: WeaponId[] | null;
+    stallBought?: string[];
 }
 
 /** 交井租的方式 */
@@ -95,6 +101,8 @@ export class Run {
     rentPaid = false;
     /** 打败精英后等待三选一的武器 */
     pendingWeapons: WeaponId[] | null = null;
+    /** 补给摊上已经买过的货，键是 '层:第几样' */
+    stallBought: string[] = [];
     private floorStart!: Snapshot;
 
     constructor(readonly floors: FloorDef[], characterId = 'digger', seed = 1) {
@@ -247,6 +255,29 @@ export class Run {
         return lines;
     }
 
+    // ---------- 补给摊 ----------
+
+    stallSold(k: number): boolean {
+        return this.stallBought.includes(`${this.floorIndex}:${k}`);
+    }
+
+    /** 在第 i 格的补给摊买第 k 样货 */
+    stallBuy(i: number, k: number): ActResult {
+        const c = this.cells[i];
+        const o = this.floor.stall?.[k];
+        if (this.status !== 'playing' || c?.kind !== 'stall' || !o) return { ok: false, msg: '' };
+        if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: '站在补给摊旁边才能买东西' };
+        if (this.stallSold(k)) return { ok: false, msg: '这样已经买过了' };
+        if (this.hero.gold < o.price) return { ok: false, msg: `金币不够（要 ${o.price}）` };
+        this.hero.gold -= o.price;
+        if (o.id === 'atk') this.hero.atk += o.amount;
+        else if (o.id === 'def') this.hero.def += o.amount;
+        else if (o.id === 'hp') this.hero.hp += o.amount;
+        else this.hero.keys += o.amount;
+        this.stallBought.push(`${this.floorIndex}:${k}`);
+        return { ok: true, msg: `买下${stallText(o)}，花了 ${o.price} 金币` };
+    }
+
     // ---------- 井租 ----------
 
     /** 本层出口要交的井租（交过了就是 0） */
@@ -326,6 +357,8 @@ export class Run {
                 return { title: '出口', lines: this.eliteAlive() ? ['精英守卫还活着，出口被封住了'] : ['走到这里进入下一层'] };
             case 'wall':
                 return { title: '井壁', lines: [] };
+            case 'stall':
+                return { title: '补给摊', lines: (this.floor.stall ?? []).map((o, k) => `${stallText(o)}：${o.price} 金${this.stallSold(k) ? '（已买）' : ''}`) };
             case 'slot': {
                 const d = SLOTS[c.id];
                 return { title: `井中轮·${d.name}`, lines: [d.desc, '站到旁边点它，就能花金币或生命转一次'] };
@@ -364,6 +397,7 @@ export class Run {
         const c = this.cells[i];
         if (c.kind === 'wall') return { ok: false, msg: '' };
         if (c.kind === 'slot') return { ok: false, msg: '站在井中轮旁边才能用它' };
+        if (c.kind === 'stall') return { ok: false, msg: '站在补给摊旁边才能买东西' };
         if (c.kind === 'exit' && this.eliteAlive()) return { ok: false, msg: '精英守卫还活着，出口被封住了' };
 
         if (c.kind === 'floor' || c.kind === 'exit') {
@@ -488,6 +522,7 @@ export class Run {
             slots: this.slots,
             rentPaid: this.rentPaid,
             pendingWeapons: this.pendingWeapons,
+            stallBought: this.stallBought,
         };
     }
 
@@ -502,6 +537,7 @@ export class Run {
         run.slots = s.slots ?? {};
         run.rentPaid = s.rentPaid ?? false;
         run.pendingWeapons = s.pendingWeapons ?? null;
+        run.stallBought = s.stallBought ?? [];
         return run;
     }
 

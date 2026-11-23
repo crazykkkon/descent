@@ -9,6 +9,7 @@
 --   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
 --   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
 --   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）
+--   E  井底之眼（Boss 占位）   M  补给摊（站在旁边买，货品写在楼层的 stall 里）
 --   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
 
 local M = {}
@@ -38,6 +39,8 @@ local LEGEND = {
     u = { kind = 'monster', id = 'slug' },
     p = { kind = 'monster', id = 'priest' },
     K = { kind = 'monster', id = 'gatekeeper' },
+    E = { kind = 'monster', id = 'eye' },
+    M = { kind = 'stall' },
     S = { kind = 'slot', id = 'risky' },
     T = { kind = 'slot', id = 'steady' },
 }

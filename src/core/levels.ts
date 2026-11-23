@@ -3,7 +3,7 @@
  * 新开一局时按随机种子给每层选一种；同一布局的两套配置墙壁完全一样，只有内容不同。
  * 地图字符说明见 floor.ts。
  */
-import { FloorDef } from './floor';
+import { FloorDef, StallOffer } from './floor';
 import { ContractDef } from './contract';
 
 export interface FloorParams {
@@ -18,6 +18,8 @@ export interface FloorParams {
     rent?: number;
     /** 打败本层精英后三选一拿武器 */
     eliteReward?: boolean;
+    /** 补给摊的货 */
+    stall?: StallOffer[];
 }
 
 export interface VariantDef {
@@ -187,7 +189,7 @@ const F2_INTEL = '下一层有两瓶血瓶。';
  * 布局名会显示在游戏里，所以用中性的名字；每张图想让哪种选择最划算写在 note 里：
  * 侧厅 → 守约最划算；长廊 → 签了以后主动毁约最划算（和拒签接近）；双道 → 拒签最划算。
  */
-const F2_CONTRACT: FloorPool = {
+export const F2_CONTRACT: FloorPool = {
     params: {
         ...base,
         name: '第 2 层 · 苔壁',
@@ -251,7 +253,7 @@ const F2_CONTRACT: FloorPool = {
 
 
 /** 试玩版第 4 层：赌坊。两台井中轮，怪物少、金币袋多（正式版里赌坊是第 5～8 层楼梯可选的层类型） */
-const F4_GAMBLE: FloorPool = {
+export const F4_GAMBLE: FloorPool = {
     params: {
         ...base,
         name: '第 4 层 · 赌坊',
@@ -279,7 +281,7 @@ const F4_GAMBLE: FloorPool = {
 };
 
 /** 试玩版第 5 层：鳞厅（精英）。石鳞守卫守住出口，前面三条小道是备战区；打败守卫后三选一拿武器 */
-const F5_ELITE: FloorPool = {
+export const F5_ELITE: FloorPool = {
     params: {
         ...base,
         name: '第 5 层 · 鳞厅',

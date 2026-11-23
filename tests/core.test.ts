@@ -589,3 +589,32 @@ test('求解器：庇护和群居按"还活着的邻居"算，先拆祭司的路
     const viaPriest = simulateCombat(h, MONSTERS.priest).damage + simulateCombat(h, MONSTERS.gatekeeper).damage;
     assert.equal(r.best!.hero.hp, h.hp - Math.min(direct, viaPriest));
 });
+
+test('20 层主线：第 1、2 层所有选图组合都能一路求解到井底（不算补给摊、井中轮、武器）', async () => {
+    const { MAINLINE, buildMainline } = await import('../src/core/mainline');
+    const { solveChain } = await import('../src/core/solver');
+    assert.equal(MAINLINE.length, 20);
+    let worst = Infinity;
+    for (const combo of allChoices(MAINLINE)) {
+        const chain = solveChain(buildMainline(combo));
+        assert.equal(chain.length, 20);
+        const last = chain[19].best;
+        assert.ok(last && last.hp > 0, `组合 ${JSON.stringify(combo.slice(0, 2))} 走不到井底`);
+        worst = Math.min(worst, last!.hp);
+    }
+    assert.ok(worst >= 100, `最差的组合到井底只剩 ${worst} 生命`);
+});
+
+test('补给摊：站在旁边买，每样只能买一次，存档读档后还记得', () => {
+    const f = tiny(['@M>'], { stall: [{ id: 'atk', amount: 2, price: 40 }, { id: 'hp', amount: 80, price: 25 }] });
+    const run = new Run([f], 'digger', 1);
+    run.hero.gold = 50;
+    assert.equal(run.step(1).ok, false, '摊位不能走过去');
+    assert.equal(run.stallBuy(1, 0).ok, true);
+    assert.equal(run.hero.atk, 12);
+    assert.equal(run.hero.gold, 10);
+    assert.equal(run.stallBuy(1, 0).ok, false, '每样只能买一次');
+    assert.equal(run.stallBuy(1, 1).ok, false, '金币不够');
+    const back = Run.load([f], JSON.parse(JSON.stringify(run.save())));
+    assert.equal(back.stallSold(0), true);
+});

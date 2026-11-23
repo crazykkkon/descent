@@ -14965,6 +14965,1252 @@ return {
       canWin = true,
       damage = 140,
       hits = 8
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 7697,
+      hits = 180
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 6265,
+      hits = 180
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 6265,
+      hits = 180
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 2040,
+      hits = 52
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 2848,
+      hits = 90
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 1408,
+      hits = 45
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 2816,
+      hits = 90
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 1408,
+      hits = 45
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 2848,
+      hits = 90
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 2272,
+      hits = 72
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 2848,
+      hits = 90
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 999,
+      hits = 28
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2848,
+      hits = 90
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 754,
+      hits = 30
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 572,
+      hits = 23
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 728,
+      hits = 30
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 572,
+      hits = 23
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 754,
+      hits = 30
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 702,
+      hits = 28
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 754,
+      hits = 30
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 527,
+      hits = 18
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 754,
+      hits = 30
     }
   },
   scenarios = {
@@ -32366,6 +33612,10492 @@ return {
       def = 14
     }
   },
+  stalls = {
+    {
+      floor = {
+        name = "t",
+        map = { "@.M>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      stall = {
+        {
+          id = "atk",
+          amount = 2,
+          price = 40
+        },
+        {
+          id = "hp",
+          amount = 80,
+          price = 25
+        },
+        {
+          id = "key",
+          amount = 1,
+          price = 30
+        }
+      },
+      gold = 100,
+      pre = false,
+      steps = {
+        {
+          k = 0,
+          ok = true,
+          msg = "买下攻击 +2，花了 40 金币",
+          hero = {
+            hp = 200,
+            atk = 12,
+            def = 10,
+            keys = 0,
+            gold = 60
+          }
+        },
+        {
+          k = 0,
+          ok = false,
+          msg = "这样已经买过了",
+          hero = {
+            hp = 200,
+            atk = 12,
+            def = 10,
+            keys = 0,
+            gold = 60
+          }
+        },
+        {
+          k = 1,
+          ok = true,
+          msg = "买下生命 +80，花了 25 金币",
+          hero = {
+            hp = 280,
+            atk = 12,
+            def = 10,
+            keys = 0,
+            gold = 35
+          }
+        },
+        {
+          k = 2,
+          ok = true,
+          msg = "买下骨钥 ×1，花了 30 金币",
+          hero = {
+            hp = 280,
+            atk = 12,
+            def = 10,
+            keys = 1,
+            gold = 5
+          }
+        }
+      }
+    },
+    {
+      floor = {
+        name = "t",
+        map = { "@.M>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      stall = {
+        {
+          id = "atk",
+          amount = 2,
+          price = 40
+        },
+        {
+          id = "hp",
+          amount = 80,
+          price = 25
+        },
+        {
+          id = "key",
+          amount = 1,
+          price = 30
+        }
+      },
+      gold = 50,
+      pre = false,
+      steps = {
+        {
+          k = 2,
+          ok = true,
+          msg = "买下骨钥 ×1，花了 30 金币",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 1,
+            gold = 20
+          }
+        },
+        {
+          k = 1,
+          ok = false,
+          msg = "金币不够（要 25）",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 1,
+            gold = 20
+          }
+        },
+        {
+          k = 0,
+          ok = false,
+          msg = "金币不够（要 40）",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 1,
+            gold = 20
+          }
+        }
+      }
+    },
+    {
+      floor = {
+        name = "t",
+        map = { "@.M>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      stall = {
+        {
+          id = "atk",
+          amount = 2,
+          price = 40
+        },
+        {
+          id = "hp",
+          amount = 80,
+          price = 25
+        },
+        {
+          id = "key",
+          amount = 1,
+          price = 30
+        }
+      },
+      gold = 200,
+      pre = false,
+      steps = {
+        {
+          k = 1,
+          ok = true,
+          msg = "买下生命 +80，花了 25 金币",
+          hero = {
+            hp = 280,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 175
+          }
+        },
+        {
+          k = 2,
+          ok = true,
+          msg = "买下骨钥 ×1，花了 30 金币",
+          hero = {
+            hp = 280,
+            atk = 10,
+            def = 10,
+            keys = 1,
+            gold = 145
+          }
+        },
+        {
+          k = 0,
+          ok = true,
+          msg = "买下攻击 +2，花了 40 金币",
+          hero = {
+            hp = 280,
+            atk = 12,
+            def = 10,
+            keys = 1,
+            gold = 105
+          }
+        },
+        {
+          k = 1,
+          ok = false,
+          msg = "这样已经买过了",
+          hero = {
+            hp = 280,
+            atk = 12,
+            def = 10,
+            keys = 1,
+            gold = 105
+          }
+        }
+      }
+    }
+  },
+  picks = {
+    {
+      seed = 1,
+      choices = {
+        {
+          layout = 1,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      }
+    },
+    {
+      seed = 2,
+      avoid = {
+        {
+          layout = 1,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      },
+      choices = {
+        {
+          layout = 2,
+          variant = 0
+        },
+        {
+          layout = 1,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      }
+    },
+    {
+      seed = 3,
+      avoid = {
+        {
+          layout = 2,
+          variant = 0
+        },
+        {
+          layout = 1,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      },
+      choices = {
+        {
+          layout = 1,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      }
+    },
+    {
+      seed = 99,
+      avoid = {
+        {
+          layout = 1,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      },
+      choices = {
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 2,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      }
+    },
+    {
+      seed = 12345,
+      avoid = {
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 2,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      },
+      choices = {
+        {
+          layout = 2,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      }
+    },
+    {
+      seed = 4000000000,
+      avoid = {
+        {
+          layout = 2,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 1
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      },
+      choices = {
+        {
+          layout = 1,
+          variant = 0
+        },
+        {
+          layout = 2,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        },
+        {
+          layout = 0,
+          variant = 0
+        }
+      }
+    }
+  },
+  mainScenarios = {
+    {
+      name = "主线第2层",
+      mode = "keep",
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      sign = true,
+      entry = {
+        hp = 179,
+        atk = 10,
+        def = 13,
+        keys = 0,
+        gold = 26
+      },
+      start = {
+        hp = 129,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 26
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 1,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 2,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 3,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 4,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 15,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 26,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 129,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 26,
+          pos = 37,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 125,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 37,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 125,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 48,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 125,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 49,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 125,
+          atk = 13,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 50,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 51,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 50,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 49,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 48,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 37,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 26,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 15,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 4,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 125,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 29,
+          pos = 5,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 62,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 39,
+          pos = 5,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 62,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 39,
+          pos = 6,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 62,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 39,
+          pos = 7,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 62,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 39,
+          pos = 8,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 62,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 39,
+          pos = 9,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 62,
+          atk = 16,
+          def = 13,
+          keys = 0,
+          gold = 39,
+          pos = 10,
+          status = "floorDone",
+          contractActive = true
+        }
+      },
+      exit = {
+        kept = true,
+        leftoverPotions = 2,
+        potionGold = 10
+      },
+      final = {
+        hp = 122,
+        atk = 16,
+        def = 13,
+        keys = 0,
+        gold = 59,
+        status = "finished"
+      },
+      floorIndex = 2
+    },
+    {
+      name = "主线第3层",
+      mode = "any",
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..f.#B..h.", ".M##.#.###.", ".#v.D....#>", ".#.###k#.#.", "...#r..#...", "##v#.###.#.", "h..f.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 136,
+        atk = 19,
+        def = 13,
+        keys = 0,
+        gold = 52
+      },
+      start = {
+        hp = 136,
+        atk = 19,
+        def = 13,
+        keys = 0,
+        gold = 52
+      },
+      steps = {
+        {
+          cell = 11,
+          ok = true,
+          hp = 136,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 52,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 136,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 52,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 136,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 52,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 136,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 52,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 136,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 52,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 136,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 52,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 57,
+          ok = true,
+          hp = 100,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 57,
+          ok = true,
+          hp = 100,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 57,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 100,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 67,
+          ok = true,
+          hp = 100,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 67,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 66,
+          ok = true,
+          hp = 150,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 66,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 67,
+          ok = true,
+          hp = 150,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 67,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 150,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 61,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 69,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 71,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 71,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 72,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 72,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 73,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 73,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 13,
+          keys = 0,
+          gold = 71,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 75,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 16,
+          keys = 0,
+          gold = 71,
+          pos = 75,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 76,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 53,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 53,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 0,
+          gold = 71,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 39,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 39,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 105,
+          atk = 19,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 59,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 59,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 71,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 71,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 72,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 72,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 73,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 73,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 53,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 53,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 32,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 1,
+        potionGold = 5
+      },
+      final = {
+        hp = 105,
+        atk = 22,
+        def = 19,
+        keys = 1,
+        gold = 76,
+        status = "finished"
+      },
+      floorIndex = 3,
+      stall = {
+        {
+          id = "hp",
+          amount = 80,
+          price = 25
+        },
+        {
+          id = "atk",
+          amount = 2,
+          price = 40
+        },
+        {
+          id = "def",
+          amount = 2,
+          price = 40
+        }
+      }
+    },
+    {
+      name = "主线第4层",
+      mode = "any",
+      floor = {
+        name = "第 4 层 · 鳞厅",
+        map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        eliteReward = true
+      },
+      sign = false,
+      entry = {
+        hp = 105,
+        atk = 22,
+        def = 19,
+        keys = 1,
+        gold = 71
+      },
+      start = {
+        hp = 105,
+        atk = 22,
+        def = 19,
+        keys = 1,
+        gold = 71
+      },
+      steps = {
+        {
+          cell = 9,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 71,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 105,
+          atk = 22,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 20,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 105,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 105,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 20,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 105,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 105,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 105,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 36,
+          ok = true,
+          hp = 105,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 74,
+          pos = 36,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 80,
+          pos = 36,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 80,
+          pos = 37,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 38,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 80,
+          pos = 38,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 39,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 100,
+          pos = 39,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 40,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 100,
+          pos = 40,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 100,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 42,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 100,
+          pos = 42,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 109,
+          pos = 42,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 109,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 109,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 109,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 109,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 109,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 129,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 103,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 129,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 135,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 135,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 19,
+          keys = 1,
+          gold = 135,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 42,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 42,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 40,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 40,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 39,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 39,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 38,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 38,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 37,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 36,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 36,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 20,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 135,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 23,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 101,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 42,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 42,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 40,
+          ok = true,
+          hp = 151,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 145,
+          pos = 40,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 40,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 58,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 58,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 87,
+        atk = 25,
+        def = 22,
+        keys = 1,
+        gold = 195,
+        status = "finished"
+      },
+      floorIndex = 4,
+      eliteReward = true
+    },
+    {
+      name = "主线第5层",
+      mode = "any",
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      sign = false,
+      entry = {
+        hp = 87,
+        atk = 25,
+        def = 22,
+        keys = 1,
+        gold = 195
+      },
+      start = {
+        hp = 87,
+        atk = 25,
+        def = 22,
+        keys = 1,
+        gold = 195
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 15,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 195,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 75,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 75,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 75,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 127,
+        atk = 25,
+        def = 22,
+        keys = 1,
+        gold = 211,
+        status = "finished"
+      },
+      floorIndex = 5
+    },
+    {
+      name = "主线第6层",
+      mode = "any",
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      sign = false,
+      entry = {
+        hp = 127,
+        atk = 25,
+        def = 22,
+        keys = 1,
+        gold = 211
+      },
+      start = {
+        hp = 127,
+        atk = 25,
+        def = 22,
+        keys = 1,
+        gold = 211
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 211,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 211,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 211,
+          pos = 15,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 211,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 211,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 217,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 217,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 217,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 217,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 226,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 57,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 226,
+          pos = 57,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 226,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 69,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 71,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 71,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 72,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 72,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 73,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 73,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 167,
+        atk = 25,
+        def = 22,
+        keys = 2,
+        gold = 236,
+        status = "finished"
+      },
+      floorIndex = 6
+    },
+    {
+      name = "主线第7层",
+      mode = "any",
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      sign = false,
+      entry = {
+        hp = 167,
+        atk = 25,
+        def = 22,
+        keys = 2,
+        gold = 236
+      },
+      start = {
+        hp = 167,
+        atk = 25,
+        def = 22,
+        keys = 2,
+        gold = 236
+      },
+      steps = {
+        {
+          cell = 11,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 167,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 236,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 258,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 258,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 258,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 258,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 258,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 53,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 59,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 59,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 69,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 67,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 67,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 66,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 66,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 55,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 55,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 53,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 53,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 2,
+        potionGold = 10
+      },
+      final = {
+        hp = 177,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 281,
+        status = "finished"
+      },
+      floorIndex = 7
+    },
+    {
+      name = "主线第8层",
+      mode = "any",
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      sign = false,
+      entry = {
+        hp = 177,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 271
+      },
+      start = {
+        hp = 177,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 271
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 271,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 277,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 277,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 277,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 15,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 177,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 32,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 217,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 302,
+        status = "finished"
+      },
+      floorIndex = 8
+    },
+    {
+      name = "主线第9层",
+      mode = "any",
+      floor = {
+        name = "第 9 层 · 收租口",
+        map = { "@..f..$..g.", ".#####.###.", ".B.......#.", ".#.#####.#.", ".#..$..c.#.", ".#######.#.", "...w.w...$>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25,
+        rent = 120
+      },
+      sign = false,
+      entry = {
+        hp = 217,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 302
+      },
+      start = {
+        hp = 217,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 302
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 302,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 312,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 312,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 312,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 312,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 337,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 75,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 75,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 362,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 387,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 387,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 387,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 63,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 63,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 74,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 75,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 75,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 396,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      rentMethod = "gold",
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 217,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 276,
+        status = "finished"
+      },
+      floorIndex = 9
+    },
+    {
+      name = "主线第10层",
+      mode = "any",
+      floor = {
+        name = "第 10 层 · 断绞盘",
+        map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+        bloodCost = 100,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 120,
+        gold = 30,
+        eliteReward = true
+      },
+      sign = false,
+      entry = {
+        hp = 217,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 276
+      },
+      start = {
+        hp = 217,
+        atk = 28,
+        def = 22,
+        keys = 2,
+        gold = 276
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 276,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 276,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 276,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 276,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 276,
+          pos = 15,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 276,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 62,
+          ok = true,
+          hp = 217,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 282,
+          pos = 62,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 61,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 62,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 245,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 62,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 62,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 61,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 61,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 72,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 72,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 295,
+        atk = 28,
+        def = 25,
+        keys = 2,
+        gold = 341,
+        status = "finished"
+      },
+      floorIndex = 10,
+      eliteReward = true
+    },
+    {
+      name = "主线第11层",
+      mode = "any",
+      floor = {
+        name = "第 11 层 · 旧泵室",
+        map = { "@...$.....>", ".##S#M##.#.", ".....e..h..", "###########", "###########", "###########", "###########" },
+        bloodCost = 100,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 120,
+        gold = 30
+      },
+      sign = false,
+      entry = {
+        hp = 295,
+        atk = 28,
+        def = 25,
+        keys = 2,
+        gold = 341
+      },
+      start = {
+        hp = 295,
+        atk = 28,
+        def = 25,
+        keys = 2,
+        gold = 341
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 371,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 10,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 345,
+        atk = 28,
+        def = 25,
+        keys = 2,
+        gold = 377,
+        status = "finished"
+      },
+      floorIndex = 11,
+      stall = {
+        {
+          id = "hp",
+          amount = 150,
+          price = 40
+        },
+        {
+          id = "atk",
+          amount = 3,
+          price = 70
+        },
+        {
+          id = "def",
+          amount = 3,
+          price = 70
+        }
+      }
+    },
+    {
+      name = "主线第12层",
+      mode = "any",
+      floor = {
+        name = "第 12 层 · 双井道",
+        map = { "@.w..#..x.h", ".#w#.#.###.", ".#r#...g...", ".#.#####.#.", ".v...k...#.", ".#####D###.", "h....u....>" },
+        bloodCost = 100,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 120,
+        gold = 30
+      },
+      sign = false,
+      entry = {
+        hp = 345,
+        atk = 28,
+        def = 25,
+        keys = 2,
+        gold = 377
+      },
+      start = {
+        hp = 345,
+        atk = 28,
+        def = 25,
+        keys = 2,
+        gold = 377
+      },
+      steps = {
+        {
+          cell = 11,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 55,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 55,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 66,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 66,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 55,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 55,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 386,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 386,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 386,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 386,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 386,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 395,
+          atk = 28,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 395,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 445,
+          atk = 31,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 445,
+        atk = 31,
+        def = 25,
+        keys = 3,
+        gold = 386,
+        status = "finished"
+      },
+      floorIndex = 12
+    },
+    {
+      name = "主线第13层",
+      mode = "keep",
+      floor = {
+        name = "第 13 层 · 蓄水窖",
+        map = { "@.H.u.h...>", ".####.####.", ".x..g..w.w.", ".#########.", ".b..m..$...", "###########", "###########" },
+        bloodCost = 100,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 120,
+        gold = 30
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 0,
+        refund = 150,
+        gold = 30
+      },
+      sign = true,
+      entry = {
+        hp = 445,
+        atk = 31,
+        def = 25,
+        keys = 3,
+        gold = 386
+      },
+      start = {
+        hp = 325,
+        atk = 36,
+        def = 25,
+        keys = 3,
+        gold = 386
+      },
+      steps = {
+        {
+          cell = 11,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 11,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 22,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 33,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 25,
+          keys = 3,
+          gold = 386,
+          pos = 44,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 45,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 386,
+          pos = 45,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 386,
+          pos = 46,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 386,
+          pos = 47,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 389,
+          pos = 47,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 389,
+          pos = 48,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 389,
+          pos = 49,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 389,
+          pos = 50,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 51,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 52,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 53,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 53,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 54,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 43,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 32,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 21,
+          status = "playing",
+          contractActive = true
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 325,
+          atk = 36,
+          def = 28,
+          keys = 3,
+          gold = 419,
+          pos = 10,
+          status = "floorDone",
+          contractActive = true
+        }
+      },
+      exit = {
+        kept = true,
+        leftoverPotions = 2,
+        potionGold = 10
+      },
+      final = {
+        hp = 475,
+        atk = 36,
+        def = 28,
+        keys = 3,
+        gold = 459,
+        status = "finished"
+      },
+      floorIndex = 13
+    },
+    {
+      name = "主线第14层",
+      mode = "any",
+      floor = {
+        name = "第 14 层 · 锈栅",
+        map = { "@..k.#.p.$.", ".###.#.u##.", ".#$.D......", ".#.#####.#.", ".w.w...g.#.", ".#####.###.", ".....h...x>" },
+        bloodCost = 100,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 120,
+        gold = 30
+      },
+      sign = false,
+      entry = {
+        hp = 597,
+        atk = 31,
+        def = 28,
+        keys = 3,
+        gold = 451
+      },
+      start = {
+        hp = 597,
+        atk = 31,
+        def = 28,
+        keys = 3,
+        gold = 451
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 3,
+          gold = 451,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 3,
+          gold = 451,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 55,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 55,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 66,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 66,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 67,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 67,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 69,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 597,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 71,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 71,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 72,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 72,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 61,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 61,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 451,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 467,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 647,
+        atk = 31,
+        def = 28,
+        keys = 4,
+        gold = 497,
+        status = "finished"
+      },
+      floorIndex = 14
+    },
+    {
+      name = "主线第15层",
+      mode = "any",
+      floor = {
+        name = "第 15 层 · 裂石廊",
+        map = { "@...r...w.>", ".#########.", "...h...u...", "###########", "###########", "###########", "###########" },
+        bloodCost = 120,
+        gem = 2,
+        smallPotion = 60,
+        bigPotion = 150,
+        gold = 40
+      },
+      sign = false,
+      entry = {
+        hp = 647,
+        atk = 31,
+        def = 28,
+        keys = 4,
+        gold = 497
+      },
+      start = {
+        hp = 647,
+        atk = 31,
+        def = 28,
+        keys = 4,
+        gold = 497
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 647,
+          atk = 31,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 647,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 647,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 647,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 647,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 497,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 23,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 23,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 10,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 701,
+        atk = 34,
+        def = 28,
+        keys = 4,
+        gold = 505,
+        status = "finished"
+      },
+      floorIndex = 15
+    },
+    {
+      name = "主线第16层",
+      mode = "any",
+      floor = {
+        name = "第 16 层 · 回声库",
+        map = { "@..g..$.$..", ".#########.", ".k.D..x..h.", ".#########.", "..u..b..w.w", "##########.", "##########>" },
+        bloodCost = 120,
+        gem = 2,
+        smallPotion = 60,
+        bigPotion = 150,
+        gold = 40
+      },
+      sign = false,
+      entry = {
+        hp = 701,
+        atk = 34,
+        def = 28,
+        keys = 4,
+        gold = 505
+      },
+      start = {
+        hp = 701,
+        atk = 34,
+        def = 28,
+        keys = 4,
+        gold = 505
+      },
+      steps = {
+        {
+          cell = 11,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 505,
+          pos = 23,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 505,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 505,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 505,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 505,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 505,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 521,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 521,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 521,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 521,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 561,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 561,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 701,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 761,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 761,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 761,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 601,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 755,
+        atk = 34,
+        def = 28,
+        keys = 5,
+        gold = 609,
+        status = "finished"
+      },
+      floorIndex = 16
+    },
+    {
+      name = "主线第17层",
+      mode = "any",
+      floor = {
+        name = "第 17 层 · 抵押厅",
+        map = { "@..x...u..$", ".#####.###.", ".h..p.g...$", ".#.#####.#.", ".w...r...#.", ".#.#####.#.", ".....$...u>" },
+        bloodCost = 120,
+        gem = 2,
+        smallPotion = 60,
+        bigPotion = 150,
+        gold = 40,
+        rent = 250
+      },
+      sign = false,
+      entry = {
+        hp = 755,
+        atk = 34,
+        def = 28,
+        keys = 5,
+        gold = 609
+      },
+      start = {
+        hp = 755,
+        atk = 34,
+        def = 28,
+        keys = 5,
+        gold = 609
+      },
+      steps = {
+        {
+          cell = 11,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 33,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 44,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 44,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 55,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 55,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 66,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 66,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 67,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 67,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 69,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 609,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 71,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 71,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 70,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 70,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 69,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 68,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 57,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 57,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 755,
+          atk = 34,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 649,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 689,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 689,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 755,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 23,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 35,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 35,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 46,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 47,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 47,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 51,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 52,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 41,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 41,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 729,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 43,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 43,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 54,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 54,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 65,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 65,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 76,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
+          pos = 76,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      rentMethod = "gold",
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 815,
+        atk = 37,
+        def = 28,
+        keys = 5,
+        gold = 495,
+        status = "finished"
+      },
+      floorIndex = 17
+    },
+    {
+      name = "主线第18层",
+      mode = "any",
+      floor = {
+        name = "第 18 层 · 井底营火",
+        map = { "@...h...H..", ".###M###...", "..........>", "###########", "###########", "###########", "###########" },
+        bloodCost = 120,
+        gem = 2,
+        smallPotion = 60,
+        bigPotion = 150,
+        gold = 40
+      },
+      sign = false,
+      entry = {
+        hp = 815,
+        atk = 37,
+        def = 28,
+        keys = 5,
+        gold = 495
+      },
+      start = {
+        hp = 815,
+        atk = 37,
+        def = 28,
+        keys = 5,
+        gold = 495
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 875,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 875,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 875,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 875,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 32,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 1025,
+        atk = 37,
+        def = 28,
+        keys = 5,
+        gold = 495,
+        status = "finished"
+      },
+      floorIndex = 18,
+      stall = {
+        {
+          id = "hp",
+          amount = 200,
+          price = 50
+        },
+        {
+          id = "atk",
+          amount = 4,
+          price = 100
+        },
+        {
+          id = "def",
+          amount = 4,
+          price = 100
+        }
+      }
+    },
+    {
+      name = "主线第19层",
+      mode = "any",
+      floor = {
+        name = "第 19 层 · 守门",
+        map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+        bloodCost = 120,
+        gem = 2,
+        smallPotion = 60,
+        bigPotion = 150,
+        gold = 40,
+        eliteReward = true
+      },
+      sign = false,
+      entry = {
+        hp = 1025,
+        atk = 37,
+        def = 28,
+        keys = 5,
+        gold = 495
+      },
+      start = {
+        hp = 1025,
+        atk = 37,
+        def = 28,
+        keys = 5,
+        gold = 495
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1025,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1025,
+          atk = 40,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 1025,
+          atk = 40,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 1025,
+          atk = 40,
+          def = 28,
+          keys = 5,
+          gold = 495,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 1025,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 1025,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 1025,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 1085,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 1085,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 1085,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 1085,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 495,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 1051,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 509,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 1051,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 509,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 1051,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 509,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 1051,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 509,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 517,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 517,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 39,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 517,
+          pos = 39,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 38,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 517,
+          pos = 38,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 517,
+          pos = 37,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 48,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 533,
+          pos = 37,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 38,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 533,
+          pos = 38,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 39,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 533,
+          pos = 39,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 549,
+          pos = 39,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 50,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 549,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 814,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 629,
+          pos = 50,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 814,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 629,
+          pos = 49,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 60,
+          ok = true,
+          hp = 814,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 629,
+          pos = 60,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 71,
+          ok = true,
+          hp = 814,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 629,
+          pos = 71,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 814,
+        atk = 40,
+        def = 31,
+        keys = 5,
+        gold = 629,
+        status = "finished"
+      },
+      floorIndex = 19,
+      eliteReward = true
+    },
+    {
+      name = "主线第20层",
+      mode = "any",
+      floor = {
+        name = "第 20 层 · 井底之眼",
+        map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+        bloodCost = 120,
+        gem = 2,
+        smallPotion = 60,
+        bigPotion = 150,
+        gold = 40
+      },
+      sign = false,
+      entry = {
+        hp = 877,
+        atk = 40,
+        def = 34,
+        keys = 5,
+        gold = 661
+      },
+      start = {
+        hp = 877,
+        atk = 40,
+        def = 34,
+        keys = 5,
+        gold = 661
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 877,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 877,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 877,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 937,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 937,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 34,
+          keys = 5,
+          gold = 661,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 37,
+          keys = 5,
+          gold = 661,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 37,
+          keys = 5,
+          gold = 661,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 37,
+          keys = 5,
+          gold = 661,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 997,
+          atk = 40,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 29,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 30,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 30,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 31,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 31,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 32,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 21,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 21,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 10,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 8,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 0,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 22,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 677,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 22,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 23,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 23,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 24,
+          ok = true,
+          hp = 997,
+          atk = 43,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 24,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 25,
+          ok = true,
+          hp = 997,
+          atk = 46,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 25,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 26,
+          ok = true,
+          hp = 997,
+          atk = 46,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 422,
+          atk = 46,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 26,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 27,
+          ok = true,
+          hp = 422,
+          atk = 46,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 38,
+          ok = true,
+          hp = 422,
+          atk = 46,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 38,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 49,
+          ok = true,
+          hp = 422,
+          atk = 46,
+          def = 37,
+          keys = 5,
+          gold = 693,
+          pos = 49,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 422,
+        atk = 46,
+        def = 37,
+        keys = 5,
+        gold = 693,
+        status = "finished"
+      },
+      floorIndex = 20
+    }
+  },
   deaths = {
     {
       monster = "frog",
@@ -35783,7 +47515,8 @@ return {
         gem = 2,
         smallPotion = 50,
         bigPotion = 150,
-        gold = 20
+        gold = 20,
+        eliteReward = true
       },
       intelPick = {
         cell = 49,
@@ -35817,7 +47550,8 @@ return {
         gem = 2,
         smallPotion = 50,
         bigPotion = 150,
-        gold = 20
+        gold = 20,
+        eliteReward = true
       },
       intelPick = {
         cell = 49,
@@ -35851,7 +47585,8 @@ return {
         gem = 2,
         smallPotion = 50,
         bigPotion = 150,
-        gold = 20
+        gold = 20,
+        eliteReward = true
       },
       intelPick = {
         cell = 49,
@@ -35886,7 +47621,8 @@ return {
         gem = 2,
         smallPotion = 50,
         bigPotion = 150,
-        gold = 20
+        gold = 20,
+        eliteReward = true
       },
       intelPick = {
         cell = 49,
@@ -35920,7 +47656,8 @@ return {
         gem = 2,
         smallPotion = 50,
         bigPotion = 150,
-        gold = 20
+        gold = 20,
+        eliteReward = true
       },
       intelPick = {
         cell = 49,
@@ -35954,7 +47691,8 @@ return {
         gem = 2,
         smallPotion = 50,
         bigPotion = 150,
-        gold = 20
+        gold = 20,
+        eliteReward = true
       },
       intelPick = {
         cell = 49,

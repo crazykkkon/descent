@@ -78,7 +78,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
                 if (seen[n]) continue;
                 seen[n] = 1;
                 const c = cells[n];
-                if (c.kind === 'wall' || c.kind === 'slot') continue;
+                if (c.kind === 'wall' || c.kind === 'slot' || c.kind === 'stall') continue;
                 if (c.kind === 'exit') { atExit = true; continue; }
                 if (c.kind === 'floor') { stack.push(n); continue; }
                 const k = bit.get(n)!;
@@ -248,7 +248,7 @@ function reachable(cells: Cell[], w: number, h: number, pos: number): { next: nu
             if (seen[n]) continue;
             seen[n] = 1;
             const c = cells[n];
-            if (c.kind === 'wall' || c.kind === 'slot') continue;
+            if (c.kind === 'wall' || c.kind === 'slot' || c.kind === 'stall') continue;
             if (c.kind === 'exit') atExit = true;
             else if (c.kind === 'floor') stack.push(n);
             else next.push(n);
@@ -261,4 +261,46 @@ function popcount(n: number): number {
     let c = 0;
     while (n) { n &= n - 1; c++; }
     return c;
+}
+
+export interface ChainFloor {
+    name: string;
+    /** 走完这一层（交完井租）以后还活着的不被压制的结果个数 */
+    outcomes: number;
+    best: Hero | null;
+}
+
+/**
+ * 20 层主线的连续求解：和 solveRun 一样每层带着所有不被压制的结果往下走，另外
+ * - 交井租：金币够就交金币，也算"用攻击 / 防御抵"两种分支；
+ * - 不算补给摊、井中轮和武器（它们只会让结果更好，所以这里得到的是保守的下限）；
+ * - 每层最多带 cap 个结果（按生命从高到低），避免 20 层下来结果数爆炸。
+ */
+export function solveChain(floors: FloorDef[], ch: CharacterDef = CHARACTERS.digger, cap = 40): ChainFloor[] {
+    let heroes: Hero[] = [{ ...ch.base }];
+    const out: ChainFloor[] = [];
+    for (const f of floors) {
+        let outs: Hero[] = [];
+        for (const hh of heroes) {
+            outs.push(...solveFromStart(f, hh, ch).pareto.map(o => o.hero));
+            const c = f.contract;
+            if (c && hh.hp > c.deposit) {
+                const signed = { ...hh, hp: hh.hp - c.deposit, atk: hh.atk + c.atk, def: hh.def + c.def };
+                outs.push(...solveFromStart(f, signed, ch).pareto.map(o => o.hero));
+                outs.push(...solveFromStart(keepVersion(f), signed, ch).pareto.map(o => ({ ...o.hero, hp: o.hero.hp + c.refund, gold: o.hero.gold + c.gold })));
+            }
+        }
+        if (f.rent) {
+            const rent = f.rent;
+            outs = outs.flatMap(hh => [
+                ...(hh.gold >= rent ? [{ ...hh, gold: hh.gold - rent }] : []),
+                { ...hh, atk: hh.atk - 3 },
+                { ...hh, def: hh.def - 3 },
+            ]);
+        }
+        heroes = paretoFilter(outs).sort((a, b) => b.hp - a.hp).slice(0, cap);
+        out.push({ name: f.name, outcomes: heroes.length, best: heroes[0] ?? null });
+        if (!heroes.length) break;
+    }
+    return out;
 }

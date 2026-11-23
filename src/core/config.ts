@@ -31,7 +31,7 @@ export const CORRODE_DEF = 1;
 /** 庇护：相邻其他怪物加的防御（不叠加：原案里守门人两边各一只祭司时防御 30） */
 export const SHELTER_DEF = 6;
 
-export type MonsterId = 'moss' | 'eel' | 'frog' | 'beetle' | 'bat' | 'wraith' | 'crab' | 'guardian' | 'rat' | 'slug' | 'priest' | 'gatekeeper';
+export type MonsterId = 'moss' | 'eel' | 'frog' | 'beetle' | 'bat' | 'wraith' | 'crab' | 'guardian' | 'rat' | 'slug' | 'priest' | 'gatekeeper' | 'eye';
 
 export interface MonsterDef {
     id: MonsterId;
@@ -60,6 +60,8 @@ export const MONSTERS: Record<MonsterId, MonsterDef> = {
     slug: { id: 'slug', name: '盐蚀蛞蝓', hp: 90, atk: 38, def: 18, traits: ['corrode'], gold: 14 },
     priest: { id: 'priest', name: '骸骨祭司', hp: 100, atk: 30, def: 22, traits: ['shelter'], gold: 16 },
     gatekeeper: { id: 'gatekeeper', name: '守门人', hp: 160, atk: 44, def: 24, traits: ['double'], elite: true, gold: 80 },
+    // 第 20 层 Boss 的占位：回合制站位战（召唤、落石、危区）还没做，先用一场确定的战斗代替
+    eye: { id: 'eye', name: '井底之眼', hp: 360, atk: 60, def: 32, traits: [], elite: true, gold: 0 },
 };
 
 /**

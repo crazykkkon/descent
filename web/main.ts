@@ -99,6 +99,7 @@ function cellHtml(i: number): { cls: string; html: string } {
     const c = run.cells[i];
     switch (c.kind) {
         case 'wall': return { cls: 'wall', html: '' };
+        case 'stall': return { cls: 'slot', html: '<span class="glyph">摊</span><span class="sub">补给</span>' };
         case 'slot': return { cls: `slot ${c.id}`, html: `<span class="glyph">轮</span><span class="sub">${SLOTS[c.id].name}</span>` };
         case 'floor': return { cls: 'floor', html: '' };
         case 'exit': return { cls: `exit${run.eliteAlive() ? ' locked' : ''}`, html: '<span class="glyph">▼</span><span class="sub">出口</span>' };

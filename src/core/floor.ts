@@ -11,7 +11,16 @@ export type Cell =
     | { kind: 'item'; id: ItemId }
     | { kind: 'door'; door: 'bone' | 'blood' }
     /** 井中轮（老虎机）：不能走过去，站在旁边使用 */
-    | { kind: 'slot'; id: SlotId };
+    | { kind: 'slot'; id: SlotId }
+    /** 补给摊：不能走过去，站在旁边买（货品和价格写在楼层的 stall 里） */
+    | { kind: 'stall' };
+
+/** 补给摊上的一样货：每样只能买一次（货品和价格都是讨论项） */
+export interface StallOffer {
+    id: 'atk' | 'def' | 'hp' | 'key';
+    amount: number;
+    price: number;
+}
 
 export interface FloorDef {
     name: string;
@@ -35,6 +44,8 @@ export interface FloorDef {
     rent?: number;
     /** 打败本层精英后三选一拿武器 */
     eliteReward?: boolean;
+    /** 本层补给摊的货（地图上的 M） */
+    stall?: StallOffer[];
 }
 
 /**
@@ -43,7 +54,8 @@ export interface FloorDef {
  *   D  骨门      B  血门
  *   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
  *   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
- *   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）
+ *   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）  E  井底之眼（Boss 占位）
+ *   M  补给摊（站在旁边买，货品写在楼层的 stall 里）
  *   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
  */
 const LEGEND: Record<string, Cell> = {
@@ -71,8 +83,10 @@ const LEGEND: Record<string, Cell> = {
     u: { kind: 'monster', id: 'slug' },
     p: { kind: 'monster', id: 'priest' },
     K: { kind: 'monster', id: 'gatekeeper' },
+    E: { kind: 'monster', id: 'eye' },
     S: { kind: 'slot', id: 'risky' },
     T: { kind: 'slot', id: 'steady' },
+    M: { kind: 'stall' },
 };
 
 export interface ParsedFloor {

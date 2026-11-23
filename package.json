@@ -12,7 +12,8 @@
     "build:demo": "npm run preview:build && node tools/build-demo.mjs",
     "vectors": "tsx tools/export-vectors.ts",
     "love:test": "cd love && luajit tests/run.lua",
-    "love:build": "python3 love/build.py"
+    "love:build": "python3 love/build.py",
+    "mainline": "tsx tools/mainline.ts"
   },
   "devDependencies": {
     "esbuild": "^0.28.0",
