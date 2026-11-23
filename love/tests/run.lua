@@ -65,6 +65,13 @@ for _, sc in ipairs(V.scenarios) do
         string.format('%s：结算后 期望 生命%d 金%d %s，实际 生命%d 金%d %s', sc.name, sc.final.hp, sc.final.gold, sc.final.status, run.hero.hp, run.hero.gold, run.status))
 end
 
+-- 2b. 新怪：按周围格子算出的攻防
+for _, mv in ipairs(V.monsterViews) do
+    local run = Run.new({ { name = 't', map = mv.map, bloodCost = 40, gem = 2, smallPotion = 50, bigPotion = 150, gold = 20 } }, 'digger', 1)
+    local m = run:monsterAt(mv.cell + 1)
+    check(m.atk == mv.atk and m.def == mv.def, string.format('新怪 %s 格子%d：期望 攻%d防%d，实际 攻%d防%d', table.concat(mv.map, '/'), mv.cell, mv.atk, mv.def, m.atk, m.def))
+end
+
 -- 3. 硬打致死
 for _, d in ipairs(V.deaths) do
     local run = Run.new({ { name = 't', map = d.map, bloodCost = 40, gem = 2, smallPotion = 50, bigPotion = 150, gold = 20 } }, 'digger', 1)

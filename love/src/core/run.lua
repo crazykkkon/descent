@@ -206,7 +206,7 @@ function Run:step(i)
         return { ok = true, msg = '' }
     end
 
-    local r = rules.interact(c, self.hero, self:floor(), self.ch, true)
+    local r = rules.interact(c, self.hero, self:floor(), self.ch, true, c.kind == 'monster' and self:monsterAt(i) or nil)
     if not r.ok then return { ok = false, msg = r.reason } end
     -- 喝下血瓶的那一刻就毁约
     local breaks = rules.isPotion(c) and self:contractActive()
@@ -281,10 +281,17 @@ end
 
 -- ---------- 战斗预览和格子信息 ----------
 
+-- 第 i 格怪物这一刻的真实属性（算上相邻的井鼠、骸骨祭司）
+function Run:monsterAt(i)
+    local c = self.cells[i]
+    assert(c.kind == 'monster', '不是怪物')
+    return config.monsterInContext(config.MONSTERS[c.id], floorMod.adjacentMonsters(self.cells, self.w, self.h, i))
+end
+
 function Run:preview(i)
     local c = self.cells[i]
     if c.kind ~= 'monster' then return nil end
-    return combat.simulate(self.hero, config.MONSTERS[c.id])
+    return combat.simulate(self.hero, self:monsterAt(i))
 end
 
 -- ---------- 出口 ----------

@@ -544,3 +544,48 @@ test('求解器：跨层比较时算上金币（血少但钱多的结果不会�
     const healthy = { hp: 120, atk: 10, def: 10, keys: 0, gold: 0 };
     assert.equal(paretoFilter([rich, healthy]).length, 2);
 });
+
+// ---------- 新怪：群居、腐蚀、庇护 ----------
+
+test('腐蚀：怪物每打中一下，主角这一仗的防御 −1', () => {
+    // 攻 10 防 10 打 生命 30 攻 15 防 2 的腐蚀怪：每下 8，要 4 下；怪物还手 3 次：5、6、7
+    assert.equal(simulateCombat(hero, mk(['corrode'])).damage, 5 + 6 + 7);
+    assert.equal(simulateCombat(hero, mk([])).damage, 15);
+});
+
+test('群居：每有一只相邻的井鼠，攻击 +5；先打边上的，中间那只就便宜', () => {
+    const f = tiny(['@www>']);
+    const run = new Run([f], 'digger', 1);
+    assert.equal(run.monsterAt(1).atk, 34 + 5);
+    assert.equal(run.monsterAt(2).atk, 34 + 10);
+    assert.equal(run.monsterAt(3).atk, 34 + 5);
+});
+
+test('庇护：相邻的其他怪物防御 +6，几只祭司围着也只加一次；打掉祭司就降回去', () => {
+    const f = tiny(['@pKp>', '#####']);
+    const run = new Run([f], 'digger', 1);
+    assert.equal(run.monsterAt(2).def, 24 + 6, '守门人两边各一只祭司：防御 30（原案）');
+    assert.equal(run.monsterAt(1).def, 22, '祭司身边没有别的祭司');
+    run.hero = { hp: 9999, atk: 60, def: 60, keys: 0, gold: 0 };
+    run.move(1, 0);
+    assert.equal(run.monsterAt(2).def, 30, '另一边的祭司还在');
+    const r = tiny(['@pp>']);
+    const run2 = new Run([r], 'digger', 1);
+    assert.equal(run2.monsterAt(1).def, 28, '两只祭司互相庇护');
+});
+
+test('求解器：庇护和群居按"还活着的邻居"算，先拆祭司的路线更省血', () => {
+    // 祭司在支路上，守门人挡路：先绕去打祭司，再打守门人
+    const f = tiny(['@.K>', '.p###', '.....'].map(s => s.padEnd(5, '#')));
+    const h = { hp: 2000, atk: 50, def: 30, keys: 0, gold: 0 };
+    const r = solveFromStart(f, h);
+    assert.ok(r.best);
+    const plan = r.best!.plan;
+    const priest = 6;
+    const gate = 2;
+    assert.ok(plan.indexOf(priest) >= 0 && plan.indexOf(priest) < plan.indexOf(gate), '先拆祭司');
+    // 和"直接打守门人"的生命对比
+    const direct = simulateCombat(h, { ...MONSTERS.gatekeeper, def: 30 }).damage;
+    const viaPriest = simulateCombat(h, MONSTERS.priest).damage + simulateCombat(h, MONSTERS.gatekeeper).damage;
+    assert.equal(r.best!.hero.hp, h.hp - Math.min(direct, viaPriest));
+});

@@ -93,7 +93,7 @@ function renderHud() {
 }
 
 // ---------- 地图 ----------
-const SHORT: Record<string, string> = { moss: '苔', eel: '鳗', frog: '蛙', beetle: '甲', bat: '蝠', wraith: '魂', crab: '蟹', guardian: '守' };
+const SHORT: Record<string, string> = { moss: '苔', eel: '鳗', frog: '蛙', beetle: '甲', bat: '蝠', wraith: '魂', crab: '蟹', guardian: '守', rat: '鼠', slug: '蝓', priest: '祭', gatekeeper: '门' };
 
 function cellHtml(i: number): { cls: string; html: string } {
     const c = run.cells[i];
@@ -117,7 +117,7 @@ function cellHtml(i: number): { cls: string; html: string } {
             }
             break;
         case 'monster': {
-            const m = MONSTERS[c.id];
+            const m = run.monsterAt(i);
             const r = simulateCombat(run.hero, m);
             const dead = !r.canWin || r.damage >= run.hero.hp;
             const sub = !r.canAttack ? '打不动' : !r.canWin ? '打不死' : `-${r.damage}`;
@@ -199,7 +199,7 @@ interface Preview { lose: number; left: number; text: string; ok: boolean; gold:
 function preview(i: number): Preview | null {
     const c = run.cells[i];
     if (c.kind !== 'monster') return null;
-    const m = MONSTERS[c.id];
+    const m = run.monsterAt(i);
     const r = simulateCombat(run.hero, m);
     if (!r.canAttack) return { lose: 0, left: 0, text: '打不动', ok: false, gold: m.gold };
     if (!r.canWin) return { lose: 0, left: 0, text: '打不死', ok: false, gold: m.gold };

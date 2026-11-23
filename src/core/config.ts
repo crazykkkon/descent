@@ -1,12 +1,15 @@
 /** 静态配置：怪物、道具、角色。数值来自设计文档 4.2 / 4.4 / 4.8，后续用求解器调整。 */
 
-export type Trait = 'firstStrike' | 'lifesteal' | 'thorns' | 'double';
+export type Trait = 'firstStrike' | 'lifesteal' | 'thorns' | 'double' | 'swarm' | 'corrode' | 'shelter';
 
 export const TRAIT_NAMES: Record<Trait, string> = {
     firstStrike: '先攻',
     lifesteal: '吸血',
     thorns: '反伤',
     double: '二连击',
+    swarm: '群居',
+    corrode: '腐蚀',
+    shelter: '庇护',
 };
 
 export const TRAIT_DESC: Record<Trait, string> = {
@@ -14,12 +17,21 @@ export const TRAIT_DESC: Record<Trait, string> = {
     lifesteal: '每次命中，回复造成伤害的一半',
     thorns: '你每次攻击，自己受到 3 点伤害',
     double: '每回合攻击两次',
+    swarm: '每有一只相邻的同类，攻击 +5',
+    corrode: '每次命中，你在这场战斗里的防御 −1',
+    shelter: '相邻的其他怪物防御 +6（几只祭司围着也只加一次）',
 };
 
 /** 反伤每次的伤害 */
 export const THORNS_DAMAGE = 3;
+/** 群居：每只相邻同类加的攻击 */
+export const SWARM_ATK = 5;
+/** 腐蚀：怪物每次命中让主角这场战斗的防御减多少 */
+export const CORRODE_DEF = 1;
+/** 庇护：相邻其他怪物加的防御（不叠加：原案里守门人两边各一只祭司时防御 30） */
+export const SHELTER_DEF = 6;
 
-export type MonsterId = 'moss' | 'eel' | 'frog' | 'beetle' | 'bat' | 'wraith' | 'crab' | 'guardian';
+export type MonsterId = 'moss' | 'eel' | 'frog' | 'beetle' | 'bat' | 'wraith' | 'crab' | 'guardian' | 'rat' | 'slug' | 'priest' | 'gatekeeper';
 
 export interface MonsterDef {
     id: MonsterId;
@@ -43,7 +55,24 @@ export const MONSTERS: Record<MonsterId, MonsterDef> = {
     wraith: { id: 'wraith', name: '溺魂', hp: 80, atk: 28, def: 10, traits: ['lifesteal'], gold: 16 },
     crab: { id: 'crab', name: '裂岩蟹', hp: 70, atk: 30, def: 12, traits: ['thorns'], gold: 16 },
     guardian: { id: 'guardian', name: '石鳞守卫', hp: 90, atk: 26, def: 14, traits: ['double'], elite: true, gold: 50 },
+    // 下面四只的数值来自原设计方案第 4 章（层位和最终数值是讨论项，二十层平衡时再调）
+    rat: { id: 'rat', name: '井鼠', hp: 40, atk: 34, def: 14, traits: ['swarm'], gold: 8 },
+    slug: { id: 'slug', name: '盐蚀蛞蝓', hp: 90, atk: 38, def: 18, traits: ['corrode'], gold: 14 },
+    priest: { id: 'priest', name: '骸骨祭司', hp: 100, atk: 30, def: 22, traits: ['shelter'], gold: 16 },
+    gatekeeper: { id: 'gatekeeper', name: '守门人', hp: 160, atk: 44, def: 24, traits: ['double'], elite: true, gold: 80 },
 };
+
+/**
+ * 按周围格子算出怪物这一刻的真实属性（群居、庇护）。
+ * @param adjacent 相邻格子上还活着的怪物
+ */
+export function monsterInContext(m: MonsterDef, adjacent: MonsterId[]): MonsterDef {
+    let atk = m.atk;
+    let def = m.def;
+    if (m.traits.includes('swarm')) atk += SWARM_ATK * adjacent.filter(id => id === m.id).length;
+    if (adjacent.some(id => MONSTERS[id].traits.includes('shelter'))) def += SHELTER_DEF;
+    return atk === m.atk && def === m.def ? m : { ...m, atk, def };
+}
 
 export type ItemId = 'smallPotion' | 'bigPotion' | 'redGem' | 'blueGem' | 'key' | 'gold';
 

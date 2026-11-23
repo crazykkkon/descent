@@ -23,7 +23,9 @@ function M.simulate(hero, m)
     if w and w.antiLifesteal and lifesteal then heroHit = heroHit * 2 end
     if heroHit == 0 then return { canAttack = false, canWin = false, damage = 0, hits = 0 } end
 
-    local monsterHit = math.max(m.atk - def, 0)
+    local corrode = m.traits.corrode == true
+    -- 腐蚀：怪物每打一下，主角这场战斗的防御 −1
+    local curDef = def
     local hitsPerRound = m.traits.double and 2 or 1
     local thorns = m.traits.thorns == true
 
@@ -32,8 +34,10 @@ function M.simulate(hero, m)
     local hits = 0
 
     local function monsterAttack()
+        local monsterHit = math.max(m.atk - curDef, 0)
         damage = damage + monsterHit
         if lifesteal then mhp = math.min(m.hp, mhp + math.floor(monsterHit / 2)) end
+        if corrode then curDef = curDef - config.CORRODE_DEF end
     end
 
     -- 鱼叉：开打前先刺一下

@@ -108,7 +108,7 @@ end
 local function preview(i)
     local c = run.cells[i]
     if c.kind ~= 'monster' then return nil end
-    local m = config.MONSTERS[c.id]
+    local m = run:monsterAt(i)
     local r = combat.simulate(run.hero, m)
     if not r.canAttack then return { fatal = true, text = '打不动', lose = 0, left = 0, gold = m.gold } end
     if not r.canWin then return { fatal = true, text = '打不死', lose = 0, left = 0, gold = m.gold } end
@@ -432,7 +432,7 @@ local function drawUI()
     if i and run.cells[i].kind ~= 'wall' and run.cells[i].kind ~= 'floor' and not modal then
         local c = run.cells[i]
         if c.kind == 'monster' then
-            local m = config.MONSTERS[c.id]
+            local m = run:monsterAt(i)
             local p = preview(i)
             text(m.name, px, py, 11, C.text)
             text('生命 ' .. m.hp .. '　攻击 ' .. m.atk .. '　防御 ' .. m.def, px, py + 18, 7.5, C.text)

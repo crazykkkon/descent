@@ -994,6 +994,273 @@ return {
       hits = 2
     },
     {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
       monster = "eel",
       atk = 10,
       def = 10,
@@ -1971,6 +2238,273 @@ return {
       canWin = true,
       damage = 0,
       hits = 3
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
     },
     {
       monster = "frog",
@@ -2952,6 +3486,273 @@ return {
       hits = 4
     },
     {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
       monster = "beetle",
       atk = 10,
       def = 10,
@@ -3929,6 +4730,273 @@ return {
       canWin = true,
       damage = 0,
       hits = 4
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
     },
     {
       monster = "bat",
@@ -4910,6 +5978,273 @@ return {
       hits = 2
     },
     {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
       monster = "wraith",
       atk = 10,
       def = 10,
@@ -5887,6 +7222,273 @@ return {
       canWin = true,
       damage = 36,
       hits = 7
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 5
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 5
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 5
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 5
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
     },
     {
       monster = "crab",
@@ -6868,6 +8470,273 @@ return {
       hits = 6
     },
     {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 22,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 29,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 11,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 23,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 7,
+      hits = 2
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
       monster = "guardian",
       atk = 10,
       def = 10,
@@ -7845,6 +9714,5257 @@ return {
       canWin = true,
       damage = 64,
       hits = 9
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 8,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 8,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 8,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 203,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 312,
+      hits = 14
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 312,
+      hits = 14
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 116,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 182,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 273,
+      hits = 14
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 273,
+      hits = 14
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 104,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      canAttack = true,
+      canWin = true,
+      damage = 399,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 126,
+      hits = 7
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 378,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 126,
+      hits = 7
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 399,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 273,
+      hits = 14
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 399,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 78,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 399,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      canAttack = true,
+      canWin = true,
+      damage = 342,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 108,
+      hits = 7
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 324,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 108,
+      hits = 7
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 342,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 234,
+      hits = 14
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 342,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 69,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 342,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      canAttack = true,
+      canWin = true,
+      damage = 126,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 72,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 108,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 72,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 126,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 108,
+      hits = 7
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 126,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 126,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      canAttack = true,
+      canWin = true,
+      damage = 105,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 105,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 7
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 105,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 40,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 105,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 40,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 34,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 17,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 11,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 5,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 6853,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 957,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 6586,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 891,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 2046,
+      hits = 45
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 2046,
+      hits = 45
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 426,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 1914,
+      hits = 45
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 1914,
+      hits = 45
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 390,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      canAttack = true,
+      canWin = true,
+      damage = 5874,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 510,
+      hits = 18
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 5764,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 510,
+      hits = 18
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 5874,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 1914,
+      hits = 45
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 5874,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 244,
+      hits = 9
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 5874,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      canAttack = true,
+      canWin = true,
+      damage = 5607,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 459,
+      hits = 18
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 5500,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 459,
+      hits = 18
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 5607,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 1782,
+      hits = 45
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 5607,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 220,
+      hits = 9
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 5607,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      canAttack = true,
+      canWin = true,
+      damage = 649,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 12
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 609,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 12
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 649,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 459,
+      hits = 18
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 649,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 159,
+      hits = 7
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 649,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      canAttack = true,
+      canWin = true,
+      damage = 583,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 231,
+      hits = 12
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 546,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 231,
+      hits = 12
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 583,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 408,
+      hits = 18
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 583,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 141,
+      hits = 7
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 583,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      canAttack = true,
+      canWin = true,
+      damage = 258,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 156,
+      hits = 9
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 231,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 156,
+      hits = 9
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 258,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 231,
+      hits = 12
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 258,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 115,
+      hits = 6
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 258,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 8
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 75,
+      hits = 6
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 93,
+      hits = 8
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 75,
+      hits = 6
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 8
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 93,
+      hits = 7
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 8
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 78,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 8
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 33,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 19,
+      hits = 3
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 726,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 627,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 1386,
+      hits = 100
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 1386,
+      hits = 100
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 304,
+      hits = 17
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 1089,
+      hits = 100
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 1089,
+      hits = 100
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 256,
+      hits = 17
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 25
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 25
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 1089,
+      hits = 100
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 176,
+      hits = 12
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 192,
+      hits = 25
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 192,
+      hits = 25
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 792,
+      hits = 100
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 143,
+      hits = 12
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 15
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 256,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 15
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 192,
+      hits = 25
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 104,
+      hits = 9
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 40,
+      hits = 9
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 55,
+      hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 40,
+      hits = 9
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 55,
+      hits = 12
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 50,
+      hits = 6
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 8
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 8
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 8
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 7
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 8
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 28,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 8
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 3,
+      hits = 4
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 11448,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 10494,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 2574,
+      hits = 40
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "hammer",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 2340,
+      hits = 40
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 3950,
+      hits = 80
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 3950,
+      hits = 80
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 1320,
+      hits = 23
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 3476,
+      hits = 80
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 3476,
+      hits = 80
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 1188,
+      hits = 23
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      canAttack = true,
+      canWin = true,
+      damage = 6996,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 1364,
+      hits = 32
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 6952,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 1364,
+      hits = 32
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 6996,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 3476,
+      hits = 80
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 6996,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 810,
+      hits = 16
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 6996,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      canAttack = true,
+      canWin = true,
+      damage = 988,
+      hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 570,
+      hits = 16
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 950,
+      hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 570,
+      hits = 16
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 988,
+      hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 836,
+      hits = 23
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 988,
+      hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 480,
+      hits = 11
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 988,
+      hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      canAttack = true,
+      canWin = true,
+      damage = 416,
+      hits = 14
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 288,
+      hits = 10
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 384,
+      hits = 14
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 288,
+      hits = 10
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 416,
+      hits = 14
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 384,
+      hits = 13
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 416,
+      hits = 14
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 294,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 416,
+      hits = 14
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      canAttack = true,
+      canWin = true,
+      damage = 140,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 120,
+      hits = 7
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 120,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 120,
+      hits = 7
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 140,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 140,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 140,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 150,
+      hits = 6
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 140,
+      hits = 8
     }
   },
   scenarios = {
@@ -23608,6 +30728,1642 @@ return {
         gold = 20,
         status = "finished"
       }
+    },
+    {
+      name = "新怪1·入场1",
+      mode = "any",
+      floor = {
+        name = "新怪1",
+        map = { "@.www..", ".#####.", "...u..>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      start = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 0,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1491,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 8,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1491,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 8,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1482,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1482,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 1478,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 1478,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 1478,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 1478,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 13,
+          ok = true,
+          hp = 1478,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 13,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 1478,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 1478,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 24,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪1·入场2",
+      mode = "any",
+      floor = {
+        name = "新怪1",
+        map = { "@.www..", ".#####.", "...u..>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      start = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 2500,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 0,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2487,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2487,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 2474,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 2474,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 2466,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 2466,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 2466,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 2466,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 13,
+          ok = true,
+          hp = 2466,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 13,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 2466,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 2466,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 24,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪2·入场1",
+      mode = "any",
+      floor = {
+        name = "新怪2",
+        map = { "@..p...", ".#.K.#.", ".#.p.#>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      start = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 0,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 0,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 16,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 32,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 32,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 13,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 13,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 1248,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 112,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 1248,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 112,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪2·入场2",
+      mode = "any",
+      floor = {
+        name = "新怪2",
+        map = { "@..p...", ".#.K.#.", ".#.p.#>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      start = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 2500,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 0,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2500,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 0,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 2476,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 2476,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 16,
+          ok = true,
+          hp = 2476,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 2452,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 32,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 2452,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 32,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 10,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 5,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 5,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 6,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 6,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 13,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 13,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 2020,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 112,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 2020,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 112,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪3·入场1",
+      mode = "any",
+      floor = {
+        name = "新怪3",
+        map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      start = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 0,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 8,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 8,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 16,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 40,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 40,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 1244,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 120,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 1244,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 120,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 1244,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 120,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 1244,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 120,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪3·入场2",
+      mode = "any",
+      floor = {
+        name = "新怪3",
+        map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      start = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 2500,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 0,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2484,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2484,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 9,
+          ok = true,
+          hp = 2484,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 9,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 16,
+          ok = true,
+          hp = 2484,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 2484,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 2460,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 2460,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 2028,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 104,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 2028,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 104,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 2028,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 104,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 2028,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 104,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪4·入场1",
+      mode = "any",
+      floor = {
+        name = "新怪4",
+        map = { "@ppp...", "..w#...", ".www..>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      start = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 0
+      },
+      steps = {
+        {
+          cell = 1,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 0,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 1,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 32,
+          pos = 1,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 32,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 2,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 11,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 11,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 48,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 1500,
+        atk = 40,
+        def = 30,
+        keys = 0,
+        gold = 48,
+        status = "finished"
+      }
+    },
+    {
+      name = "新怪4·入场2",
+      mode = "any",
+      floor = {
+        name = "新怪4",
+        map = { "@ppp...", "..w#...", ".www..>" },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      sign = false,
+      entry = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      start = {
+        hp = 2500,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      steps = {
+        {
+          cell = 7,
+          ok = true,
+          hp = 2500,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 0,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 14,
+          ok = true,
+          hp = 2500,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 0,
+          pos = 14,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 2487,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 14,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 15,
+          ok = true,
+          hp = 2487,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 8,
+          pos = 15,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 16,
+          ok = true,
+          hp = 2469,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 15,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 16,
+          ok = true,
+          hp = 2469,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 2461,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 16,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 17,
+          ok = true,
+          hp = 2461,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 17,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 2461,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 18,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 19,
+          ok = true,
+          hp = 2461,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 19,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 20,
+          ok = true,
+          hp = 2461,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 24,
+          pos = 20,
+          status = "floorDone",
+          contractActive = false
+        }
+      },
+      exit = {
+        leftoverPotions = 0,
+        potionGold = 0
+      },
+      final = {
+        hp = 2461,
+        atk = 33,
+        def = 26,
+        keys = 0,
+        gold = 24,
+        status = "finished"
+      }
+    }
+  },
+  monsterViews = {
+    {
+      map = { "@.www..", ".#####.", "...u..>" },
+      cell = 2,
+      atk = 39,
+      def = 14
+    },
+    {
+      map = { "@.www..", ".#####.", "...u..>" },
+      cell = 3,
+      atk = 44,
+      def = 14
+    },
+    {
+      map = { "@.www..", ".#####.", "...u..>" },
+      cell = 4,
+      atk = 39,
+      def = 14
+    },
+    {
+      map = { "@.www..", ".#####.", "...u..>" },
+      cell = 17,
+      atk = 38,
+      def = 18
+    },
+    {
+      map = { "@..p...", ".#.K.#.", ".#.p.#>" },
+      cell = 3,
+      atk = 30,
+      def = 22
+    },
+    {
+      map = { "@..p...", ".#.K.#.", ".#.p.#>" },
+      cell = 10,
+      atk = 44,
+      def = 30
+    },
+    {
+      map = { "@..p...", ".#.K.#.", ".#.p.#>" },
+      cell = 17,
+      atk = 30,
+      def = 22
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 2,
+      atk = 34,
+      def = 20
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 3,
+      atk = 30,
+      def = 22
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 4,
+      atk = 34,
+      def = 20
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 10,
+      atk = 34,
+      def = 20
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 14,
+      atk = 38,
+      def = 18
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 18,
+      atk = 30,
+      def = 22
+    },
+    {
+      map = { "@.wpw..", ".#.w.#.", "u...pK>" },
+      cell = 19,
+      atk = 44,
+      def = 30
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 1,
+      atk = 30,
+      def = 28
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 2,
+      atk = 30,
+      def = 28
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 3,
+      atk = 30,
+      def = 28
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 9,
+      atk = 39,
+      def = 20
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 15,
+      atk = 39,
+      def = 14
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 16,
+      atk = 49,
+      def = 14
+    },
+    {
+      map = { "@ppp...", "..w#...", ".www..>" },
+      cell = 17,
+      atk = 39,
+      def = 14
     }
   },
   deaths = {

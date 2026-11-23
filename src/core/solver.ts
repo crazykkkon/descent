@@ -5,8 +5,8 @@
  * 只有生命会因为处理顺序不同而不同。所以状态 = 已处理格子的集合（位掩码），
  * 每个状态只保留生命最高的那条路线。主角在已打通区域里可以随便走（M1 不计步数）。
  */
-import { CharacterDef, CHARACTERS, Hero, MONSTERS } from './config';
-import { Cell, FloorDef, neighbors, parseFloor } from './floor';
+import { CharacterDef, CHARACTERS, Hero, MONSTERS, monsterInContext } from './config';
+import { adjacentMonsters, Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite, isEntity } from './rules';
 import { keepVersion } from './contract';
 
@@ -121,7 +121,12 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
             const { next, atExit } = frontier(mask);
             if (atExit && (mask & eliteMask) === eliteMask) exits.push({ mask, hero: stats });
             for (const k of next) {
-                const r = interact(cells[entities[k]], stats, floor, ch);
+                const cell = cells[entities[k]];
+                // 群居、庇护：只算还活着的邻居
+                const mon = cell.kind === 'monster'
+                    ? monsterInContext(MONSTERS[cell.id], adjacentMonsters(cells, w, h, entities[k], j => !(mask & (1 << bit.get(j)!))))
+                    : undefined;
+                const r = interact(cell, stats, floor, ch, false, mon);
                 if (!r.ok) continue;
                 const c = close(mask | (1 << k), r.hero);
                 const old = nodes.get(c.mask);
@@ -220,7 +225,9 @@ export function greedyFloor(floor: FloorDef, hero: Hero, ch: CharacterDef = CHAR
         let bestHero: Hero | null = null;
         for (const i of reach.next) {
             if (mode === 'clear' && canLeave && cells[i].kind !== 'monster') continue;
-            const r = interact(cells[i], hh, floor, ch);
+            const c = cells[i];
+            const mon = c.kind === 'monster' ? monsterInContext(MONSTERS[c.id], adjacentMonsters(cells, p.w, p.h, i)) : undefined;
+            const r = interact(c, hh, floor, ch, false, mon);
             if (r.ok && (!bestHero || r.hero.hp > bestHero.hp)) { bestI = i; bestHero = r.hero; }
         }
         if (!bestHero) return canLeave ? hh : null;

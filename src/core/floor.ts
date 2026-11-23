@@ -43,6 +43,7 @@ export interface FloorDef {
  *   D  骨门      B  血门
  *   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
  *   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
+ *   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）
  *   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
  */
 const LEGEND: Record<string, Cell> = {
@@ -66,6 +67,10 @@ const LEGEND: Record<string, Cell> = {
     g: { kind: 'monster', id: 'wraith' },
     x: { kind: 'monster', id: 'crab' },
     G: { kind: 'monster', id: 'guardian' },
+    w: { kind: 'monster', id: 'rat' },
+    u: { kind: 'monster', id: 'slug' },
+    p: { kind: 'monster', id: 'priest' },
+    K: { kind: 'monster', id: 'gatekeeper' },
     S: { kind: 'slot', id: 'risky' },
     T: { kind: 'slot', id: 'steady' },
 };
@@ -97,6 +102,16 @@ export function parseFloor(def: FloorDef): ParsedFloor {
     if (start < 0) throw new Error(`${def.name}: 没有入口 @`);
     if (exits !== 1) throw new Error(`${def.name}: 出口必须正好 1 个`);
     return { w, h, cells, start };
+}
+
+/** 第 i 格相邻格子上的怪物；alive 用来排除已经打掉的（求解器里格子数组不变） */
+export function adjacentMonsters(cells: Cell[], w: number, h: number, i: number, alive: (j: number) => boolean = () => true): MonsterId[] {
+    const out: MonsterId[] = [];
+    for (const n of neighbors(i, w, h)) {
+        const c = cells[n];
+        if (c.kind === 'monster' && alive(n)) out.push(c.id);
+    }
+    return out;
 }
 
 export function neighbors(i: number, w: number, h: number): number[] {

@@ -34,7 +34,7 @@ function lua(v: unknown, indent = ''): string {
 }
 
 // ---------- 1. 战斗算例 ----------
-const STATS: [number, number][] = [[10, 10], [13, 10], [10, 13], [13, 13], [16, 13], [16, 16], [19, 16], [19, 19], [22, 19], [22, 22], [25, 22]];
+const STATS: [number, number][] = [[10, 10], [13, 10], [10, 13], [13, 13], [16, 13], [16, 16], [19, 16], [19, 19], [22, 19], [22, 22], [25, 22], [30, 25], [36, 28], [44, 34]];
 const weapons: (WeaponId | null)[] = [null, ...(Object.keys(WEAPONS) as WeaponId[])];
 const combat: unknown[] = [];
 for (const id of Object.keys(MONSTERS) as MonsterId[]) {
@@ -115,6 +115,28 @@ for (const fi of [0, 2]) {
         if (sc) scenarios.push(sc);
     }));
 }
+
+// 新怪（群居、腐蚀、庇护、守门人）：伤害要按周围还活着的怪算
+const AURA_MAPS: string[][] = [
+    ['@.www..', '.#####.', '...u..>'],
+    ['@..p...', '.#.K.#.', '.#.p.#>'],
+    ['@.wpw..', '.#.w.#.', 'u...pK>'],
+    ['@ppp...', '..w#...', '.www..>'],
+];
+const auraEntries: Hero[] = [{ hp: 1500, atk: 40, def: 30, keys: 0, gold: 0 }, { hp: 2500, atk: 33, def: 26, keys: 0, gold: 0, weapon: 'hammer' }];
+const monsterViews: unknown[] = [];
+AURA_MAPS.forEach((map, mi) => {
+    const f: FloorDef = { name: `新怪${mi + 1}`, map, bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
+    auraEntries.forEach((e, ei) => {
+        const sc = scenario(`新怪${mi + 1}·入场${ei + 1}`, f, e, 'any');
+        if (!sc) throw new Error(`新怪${mi + 1}·入场${ei + 1}：走不通`);
+        scenarios.push(sc);
+    });
+    const run = new Run([f]);
+    run.cells.forEach((c, i) => {
+        if (c.kind === 'monster') { const m = run.monsterAt(i); monsterViews.push({ map, cell: i, atk: m.atk, def: m.def }); }
+    });
+});
 
 // ---------- 3. 硬打致死 ----------
 const deaths = (['frog', 'beetle', 'wraith'] as MonsterId[]).map(id => {
@@ -202,8 +224,8 @@ for (const fi of [1, 2, 4]) {
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, deaths, rolls, slotSessions, weaponChoices, intels })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, deaths, rolls, slotSessions, weaponChoices, intels })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
-console.log(`战斗 ${combat.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);
+console.log(`战斗 ${combat.length}；新怪属性 ${monsterViews.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);

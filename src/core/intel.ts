@@ -6,9 +6,9 @@
  * 2. 候选里优先挑有特点的（高防 > 吸血 > 先攻 > 反伤 > 二连击），再挑最难打的。
  * 同时给出"按现在的属性打它"和"拿了本层剩下的宝石后打它"的掉血对比。
  */
-import { CharacterDef, Hero, MONSTERS, MonsterDef, MonsterId } from './config';
+import { CharacterDef, Hero, MONSTERS, MonsterDef, MonsterId, monsterInContext } from './config';
 import { simulateCombat } from './combat';
-import { Cell, FloorDef, neighbors, parseFloor } from './floor';
+import { adjacentMonsters, Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { solveFloor } from './solver';
 
 export interface Intel {
@@ -43,6 +43,7 @@ function blocks(cells: Cell[], w: number, h: number, start: number, wall: number
 const HIGH_DEF = 14;
 
 const TRAIT_RANK = (m: MonsterDef): number => {
+    if (m.traits.includes('shelter')) return 6;
     if (m.def >= HIGH_DEF) return 5;
     if (m.traits.includes('lifesteal')) return 4;
     if (m.traits.includes('firstStrike')) return 3;
@@ -63,7 +64,7 @@ function damageText(hero: Hero, m: MonsterDef): string {
 export function choosePick(next: FloorDef, hero: Hero, ch: CharacterDef): { cell: number; mustFight: boolean } {
     const p = parseFloor(next);
     const monsters = p.cells
-        .map((c, i) => (c.kind === 'monster' ? { i, m: MONSTERS[c.id] } : null))
+        .map((c, i) => (c.kind === 'monster' ? { i, m: monsterInContext(MONSTERS[c.id], adjacentMonsters(p.cells, p.w, p.h, i)) } : null))
         .filter((x): x is { i: number; m: MonsterDef } => !!x);
     const hard = (m: MonsterDef) => {
         const r = simulateCombat(hero, m);
@@ -85,7 +86,7 @@ export function choosePick(next: FloorDef, hero: Hero, ch: CharacterDef): { cell
 export function stairIntel(next: FloorDef, hero: Hero, ch: CharacterDef, current?: { floor: FloorDef; cells: Cell[] }): Intel | null {
     const p = parseFloor(next);
     const monsters = p.cells
-        .map((c, i) => (c.kind === 'monster' ? { i, m: MONSTERS[c.id] } : null))
+        .map((c, i) => (c.kind === 'monster' ? { i, m: monsterInContext(MONSTERS[c.id], adjacentMonsters(p.cells, p.w, p.h, i)) } : null))
         .filter((x): x is { i: number; m: MonsterDef } => !!x);
     if (!monsters.length) return null;
 
@@ -99,27 +100,33 @@ export function stairIntel(next: FloorDef, hero: Hero, ch: CharacterDef, current
         // 关卡数据里已经选好了（设计时用 choosePick 算出来）
         const c = p.cells[next.intelPick.cell];
         if (c.kind !== 'monster') throw new Error(`${next.name}：intelPick 指向的格子不是怪物`);
-        pick = MONSTERS[c.id];
+        pick = monsterInContext(MONSTERS[c.id], adjacentMonsters(p.cells, p.w, p.h, next.intelPick.cell));
         mustFight = next.intelPick.mustFight;
     } else {
         const chosen = choosePick(next, hero, ch);
-        pick = MONSTERS[(p.cells[chosen.cell] as { id: MonsterId }).id];
+        pick = monsters.find(x => x.i === chosen.cell)!.m;
         mustFight = chosen.mustFight;
     }
 
     const where = mustFight ? '挡在必经之路上' : '守在主要路线上';
     let headline: string;
-    if (pick.def >= HIGH_DEF) headline = `下一层有高防守卫：${pick.name}${where}`;
+    if (pick.traits.includes('shelter')) headline = `下一层有会庇护同伴的${pick.name}${where}`;
+    else if (pick.def >= HIGH_DEF) headline = `下一层有高防守卫：${pick.name}${where}`;
     else if (pick.traits.includes('lifesteal')) headline = `下一层有会吸血的${pick.name}${where}`;
     else if (pick.traits.includes('firstStrike')) headline = `下一层有先手攻击的${pick.name}${where}`;
     else if (pick.traits.includes('thorns')) headline = `下一层有会反伤的${pick.name}${where}`;
     else headline = `下一层的${pick.name}${where}`;
 
+    const base = MONSTERS[pick.id];
     const lines = [`${pick.name}：生命 ${pick.hp}　攻击 ${pick.atk}　防御 ${pick.def}`];
+    if (pick.atk !== base.atk) lines.push(`它和同类挤在一起，攻击从 ${base.atk} 涨到 ${pick.atk}；先打掉身边的同类会便宜`);
+    if (pick.def !== base.def) lines.push(`它被骸骨祭司庇护，防御从 ${base.def} 涨到 ${pick.def}；先打掉祭司就降回去`);
+    if (pick.traits.includes('shelter')) lines.push('它让相邻的其他怪物防御 +6');
     if (pick.def >= HIGH_DEF) lines.push(`攻击要高于 ${pick.def} 才打得动它`);
     if (pick.traits.includes('lifesteal')) lines.push('它会吸血，攻击不够高就打不死');
     if (pick.traits.includes('firstStrike')) lines.push('它会先打你一下，防御越高越好打');
     if (pick.traits.includes('thorns')) lines.push('你每打它一下自己也掉 3 血，攻击越高、打的次数越少');
+    if (pick.traits.includes('corrode')) lines.push('它每打中你一下，你这一仗的防御 −1，越拖越疼');
     lines.push(`按你现在的属性（攻 ${hero.atk} / 防 ${hero.def}）打它：${damageText(hero, pick)}`);
 
     // 本层还没拿的宝石：拿了以后再打它要掉多少

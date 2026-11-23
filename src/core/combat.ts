@@ -1,5 +1,5 @@
 /** 战斗公式：完全固定、没有随机。预览和实际结算用同一个函数，保证"预览掉血 = 实际掉血"。 */
-import { MonsterDef, THORNS_DAMAGE, WEAPONS, WeaponId } from './config';
+import { CORRODE_DEF, MonsterDef, THORNS_DAMAGE, WEAPONS, WeaponId } from './config';
 
 export interface CombatStats {
     atk: number;
@@ -34,7 +34,9 @@ export function simulateCombat(hero: CombatStats, m: MonsterDef): CombatResult {
     if (w?.antiLifesteal && lifestealMon) heroHit *= 2;
     if (heroHit === 0) return { canAttack: false, canWin: false, damage: 0, hits: 0 };
 
-    const monsterHit = Math.max(m.atk - def, 0);
+    const corrode = m.traits.includes('corrode');
+    // 腐蚀：怪物每打一下，主角这场战斗的防御 −1（只在这一仗里有效）
+    let curDef = def;
     const hitsPerRound = m.traits.includes('double') ? 2 : 1;
     const lifesteal = lifestealMon;
     const thorns = m.traits.includes('thorns');
@@ -44,8 +46,10 @@ export function simulateCombat(hero: CombatStats, m: MonsterDef): CombatResult {
     let hits = 0;
 
     const monsterAttack = () => {
+        const monsterHit = Math.max(m.atk - curDef, 0);
         damage += monsterHit;
         if (lifesteal) mhp = Math.min(m.hp, mhp + Math.floor(monsterHit / 2));
+        if (corrode) curDef -= CORRODE_DEF;
     };
 
     // 鱼叉：开打前先刺一下

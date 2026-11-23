@@ -4,15 +4,22 @@
 local M = {}
 
 M.THORNS_DAMAGE = 3
+M.SWARM_ATK = 5     -- 群居：每只相邻同类加的攻击
+M.CORRODE_DEF = 1   -- 腐蚀：怪物每次命中让主角这场战斗的防御减多少
+M.SHELTER_DEF = 6   -- 庇护：相邻其他怪物加的防御（不叠加）
 
 M.TRAIT_NAMES = {
     firstStrike = '先攻', lifesteal = '吸血', thorns = '反伤', double = '二连击',
+    swarm = '群居', corrode = '腐蚀', shelter = '庇护',
 }
 M.TRAIT_DESC = {
     firstStrike = '战斗开始时它先打一次',
     lifesteal = '每次命中，回复造成伤害的一半',
     thorns = '你每次攻击，自己受到 3 点伤害',
     double = '每回合攻击两次',
+    swarm = '每有一只相邻的同类，攻击 +5',
+    corrode = '每次命中，你在这场战斗里的防御 −1',
+    shelter = '相邻的其他怪物防御 +6（几只祭司围着也只加一次）',
 }
 
 -- traits 用集合表示：traits.double == true
@@ -31,7 +38,28 @@ M.MONSTERS = {
     wraith   = { id = 'wraith',   name = '溺魂',   hp = 80,  atk = 28, def = 10, gold = 16, traits = T('lifesteal') },
     crab     = { id = 'crab',     name = '裂岩蟹', hp = 70,  atk = 30, def = 12, gold = 16, traits = T('thorns') },
     guardian = { id = 'guardian', name = '石鳞守卫', hp = 90, atk = 26, def = 14, gold = 50, traits = T('double'), elite = true },
+    -- 下面四只的数值来自原设计方案第 4 章（层位和最终数值是讨论项）
+    rat        = { id = 'rat',        name = '井鼠',     hp = 40,  atk = 34, def = 14, gold = 8,  traits = T('swarm') },
+    slug       = { id = 'slug',       name = '盐蚀蛞蝓', hp = 90,  atk = 38, def = 18, gold = 14, traits = T('corrode') },
+    priest     = { id = 'priest',     name = '骸骨祭司', hp = 100, atk = 30, def = 22, gold = 16, traits = T('shelter') },
+    gatekeeper = { id = 'gatekeeper', name = '守门人',   hp = 160, atk = 44, def = 24, gold = 80, traits = T('double'), elite = true },
 }
+
+-- 按周围格子算出怪物这一刻的真实属性（群居、庇护）。adjacent：相邻格子上还活着的怪物 id 列表
+function M.monsterInContext(m, adjacent)
+    local atk, def = m.atk, m.def
+    local sheltered = false
+    for _, id in ipairs(adjacent) do
+        if m.traits.swarm and id == m.id then atk = atk + M.SWARM_ATK end
+        if M.MONSTERS[id].traits.shelter then sheltered = true end
+    end
+    if sheltered then def = def + M.SHELTER_DEF end
+    if atk == m.atk and def == m.def then return m end
+    local t = {}
+    for k, v in pairs(m) do t[k] = v end
+    t.atk, t.def = atk, def
+    return t
+end
 
 M.WEAPONS = {
     boneKnife  = { id = 'boneKnife',  name = '骨刀',     desc = '攻击 +4', atk = 4, def = 0, sell = 25 },

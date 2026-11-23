@@ -8,6 +8,7 @@
 --   D  骨门      B  血门
 --   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
 --   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
+--   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）
 --   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
 
 local M = {}
@@ -33,6 +34,10 @@ local LEGEND = {
     g = { kind = 'monster', id = 'wraith' },
     x = { kind = 'monster', id = 'crab' },
     G = { kind = 'monster', id = 'guardian' },
+    w = { kind = 'monster', id = 'rat' },
+    u = { kind = 'monster', id = 'slug' },
+    p = { kind = 'monster', id = 'priest' },
+    K = { kind = 'monster', id = 'gatekeeper' },
     S = { kind = 'slot', id = 'risky' },
     T = { kind = 'slot', id = 'steady' },
 }
@@ -76,6 +81,16 @@ function M.neighbors(i, w, h)
     if y < h - 1 then out[#out + 1] = i + w end
     if x > 0 then out[#out + 1] = i - 1 end
     if x < w - 1 then out[#out + 1] = i + 1 end
+    return out
+end
+
+-- 第 i 格相邻格子上的怪物 id；alive(j) 可以排除已经打掉的
+function M.adjacentMonsters(cells, w, h, i, alive)
+    local out = {}
+    for _, n in ipairs(M.neighbors(i, w, h)) do
+        local c = cells[n]
+        if c.kind == 'monster' and (not alive or alive(n)) then out[#out + 1] = c.id end
+    end
     return out
 end
 

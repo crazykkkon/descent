@@ -1,8 +1,8 @@
 /** 一局游戏的状态和操作：移动、交互、出口结算。没有撤回、没有重开本层：死了就整局重来。 */
-import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
+import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, MonsterDef, monsterInContext, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
 import { SLOTS, SlotState, Sym, bloodPrice, leechBite, newSlotState, payout, roll, spinPrice } from './slot';
 import { CombatResult, simulateCombat } from './combat';
-import { Cell, FloorDef, neighbors, parseFloor } from './floor';
+import { adjacentMonsters, Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
 import { solveFloor } from './solver';
@@ -276,6 +276,13 @@ export class Run {
         return { canReachExit };
     }
 
+    /** 第 i 格怪物这一刻的真实属性（算上相邻的井鼠、骸骨祭司） */
+    monsterAt(i: number): MonsterDef {
+        const c = this.cells[i];
+        if (c.kind !== 'monster') throw new Error('不是怪物');
+        return monsterInContext(MONSTERS[c.id], adjacentMonsters(this.cells, this.w, this.h, i));
+    }
+
     monstersLeft(): number { return this.cells.filter(c => c.kind === 'monster').length; }
     eliteAlive(): boolean { return this.cells.some(isElite); }
 
@@ -284,9 +291,12 @@ export class Run {
         const c = this.cells[i];
         switch (c.kind) {
             case 'monster': {
-                const m = MONSTERS[c.id];
+                const m = this.monsterAt(i);
+                const base = MONSTERS[c.id];
                 const r = simulateCombat(this.hero, m);
                 const lines = [`生命 ${m.hp}　攻击 ${m.atk}　防御 ${m.def}`];
+                if (m.atk !== base.atk) lines.push(`（群居：身边有同类，攻击从 ${base.atk} 涨到 ${m.atk}）`);
+                if (m.def !== base.def) lines.push(`（被骸骨祭司庇护，防御从 ${base.def} 涨到 ${m.def}）`);
                 for (const t of m.traits) lines.push(`【${TRAIT_NAMES[t]}】${TRAIT_DESC[t]}`);
                 if (m.elite) lines.push('精英：必须打败它才能使用出口');
                 if (!r.canAttack) lines.push('⚠ 你打不动它，硬打会死');
@@ -363,7 +373,7 @@ export class Run {
             return { ok: true, msg: '' };
         }
 
-        const r = interact(c, this.hero, this.floor, this.ch, true);
+        const r = interact(c, this.hero, this.floor, this.ch, true, c.kind === 'monster' ? this.monsterAt(i) : undefined);
         if (!r.ok) return { ok: false, msg: r.reason };
         // 喝下血瓶的那一刻就毁约
         const breaks = c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion') && this.contractActive();
