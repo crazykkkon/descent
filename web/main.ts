@@ -12,6 +12,7 @@ import { simulateCombat } from '../src/core/combat';
 import { Run, RunSave } from '../src/core/game';
 import { DEMO_POOLS, FloorChoice, buildFloors, pickChoices } from '../src/core/levels';
 import { solveFloor, solveFromStart } from '../src/core/solver';
+import { contractText, keepVersion } from '../src/core/contract';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const stage = $('stage');
@@ -32,6 +33,8 @@ let hovered = -1;
 let lastHero: Hero | null = null;
 /** 本层入场时的最优解，结算时对比 */
 let floorBest: Hero | null = null;
+/** 契约层：守约 / 不管契约 两种走法能带出的最高生命 */
+let floorContract: { keep: number | null; any: number | null } | null = null;
 
 // ---------- 存档（浏览器本地；Steam 版换成本地文件） ----------
 function store(key: string, value: unknown) {
@@ -268,7 +271,11 @@ function showInfo(i: number) {
         if (p.text === '会死') html += '<div class="warn">这一仗打完你会死。可以硬上，但这一局就结束了。</div>';
         tipCell = i;
     }
-    if (run.cells[i].kind === 'exit') html += intelHtml();
+    if (run.cells[i].kind === 'exit') html += intelHtml() + contractCardHtml();
+    const ci = run.cells[i];
+    if (ci.kind === 'item' && (ci.id === 'smallPotion' || ci.id === 'bigPotion') && run.contractActive()) {
+        html += `<div class="warn">喝下会毁约：押下的 ${run.contract!.def.deposit} 生命不退</div>`;
+    }
     lines.innerHTML = html;
     // 手机：选中后出现确认按钮
     const c = run.cells[i];
@@ -294,6 +301,17 @@ function setMsg(text: string, err = false) {
     m.className = err ? 'err' : '';
 }
 
+function renderContract() {
+    const el = $('contractBox');
+    const ct = run.contract;
+    if (!ct || ct.floorIndex !== run.floorIndex) { el.style.display = 'none'; return; }
+    el.className = ct.broken ? 'broken' : '';
+    el.innerHTML = ct.broken
+        ? `🪝 契约已毁：押下的 ${ct.def.deposit} 生命归井了，血瓶随便喝。`
+        : `🪝 契约生效中：本层一瓶血瓶都不喝，走到出口退还 ${ct.def.refund} 生命${ct.def.gold ? ` + ${ct.def.gold} 金币` : ''}。`;
+    el.style.display = 'block';
+}
+
 function checkDanger() {
     const el = $('danger');
     if (run.status !== 'playing') { el.style.display = 'none'; return; }
@@ -306,6 +324,7 @@ function checkDanger() {
 function render() {
     renderHud();
     renderBoard();
+    renderContract();
     checkDanger();
     showInfo(HOVER && hovered >= 0 ? hovered : selected);
 }
@@ -333,17 +352,29 @@ function showExit() {
     const s = run.exitSummary();
     const startHp = run.floorStartHero.hp;
     const diffHp = run.hero.hp - startHp;
-    const rows = [
-        `<div class="row"><span>本层生命变化</span><b>${diffHp >= 0 ? '+' : ''}${diffHp}</b></div>`,
+    const rows: string[] = [];
+    if (s.contract) {
+        rows.push(s.contract.kept
+            ? `<div class="row contractOk"><span>🪝 契约守住了</span><b>+${s.contract.def.refund} 生命${s.contract.def.gold ? `，+${s.contract.def.gold} 金币` : ''}</b></div>`
+            : `<div class="row contractBad"><span>🪝 契约已毁</span><b>押下的 ${s.contract.def.deposit} 生命归井</b></div>`);
+    }
+    rows.push(
+        `<div class="row"><span>本层生命变化（不含契约退还）</span><b>${diffHp >= 0 ? '+' : ''}${diffHp}</b></div>`,
         `<div class="row"><span>地图上剩下的血瓶 ×${s.leftoverPotions}</span><b>+${s.potionGold} 金币</b></div>`,
-    ];
+    );
     // 这一层换到了什么
     const st = run.floorStartHero;
     const gains = [
         ['攻击', run.hero.atk - st.atk], ['防御', run.hero.def - st.def], ['骨钥', run.hero.keys - st.keys],
     ].filter(([, d]) => d !== 0).map(([k, d]) => `${k} ${(d as number) > 0 ? '+' : ''}${d}`);
     rows.push(`<div class="row"><span>本层换到的属性</span><b>${gains.length ? gains.join('，') : '没有'}</b></div>`);
-    if (floorBest) {
+    if (floorContract) {
+        // 契约层：分别给出守约和不守约能带出的最高生命，让玩家看清自己这一步的账
+        const k = floorContract.keep;
+        const b = floorContract.any;
+        const mine = s.contract?.kept ? run.hero.hp + s.contract.def.refund : run.hero.hp;
+        rows.push(`<p class="small">这一层，守约的走法最多能带出 ${k ?? '—'} 生命（含退还）；不管契约的走法最多 ${b ?? '—'}。你带出 ${mine}。</p>`);
+    } else if (floorBest) {
         // 不说"最优解"：生命最多的走法不一定最好，宝石在后面几层还会继续起作用
         const b = floorBest;
         const same = b.atk === run.hero.atk && b.def === run.hero.def;
@@ -352,7 +383,9 @@ function showExit() {
         rows.push(`<p class="small">本层能带出的最高生命是 ${b.hp}${route}。${mine}${gains.length && run.hero.hp < b.hp ? `：你用 ${b.hp - run.hero.hp} 血换到了 ${gains.join('、')}` : ''}。</p>`);
     }
     const next = (sell: boolean) => {
-        run.finishFloor(sell);
+        recordContract(`带着 ${s.contract?.kept ? run.hero.hp + s.contract.def.refund : run.hero.hp} 血离开`);
+        run.finishFloor(sell, pendingSign);
+        pendingSign = false;
         saveRun();
         if (run.status === 'finished') showEnd();
         else { startFloor(); render(); }
@@ -366,6 +399,28 @@ function showExit() {
     modal(`<h2>${run.floor.name} 完成</h2>${rows.join('')}`, btns);
 }
 
+// ---------- 契约记录（跨局保存，方便试玩反馈） ----------
+const HISTORY_KEY = 'descent.demo.contracts.v1';
+interface ContractRecord { map: string; choice: '拒签' | '守约' | '毁约'; result: string }
+
+/** 在契约层结束（走出去或者倒下）时记一笔 */
+function recordContract(result: string) {
+    if (!run.floor.contract) return;
+    const ct = run.contract && run.contract.floorIndex === run.floorIndex ? run.contract : null;
+    const choice: ContractRecord['choice'] = !ct ? '拒签' : ct.broken ? '毁约' : '守约';
+    const map = DEMO_POOLS[run.floorIndex].layouts[choices[run.floorIndex].layout].name;
+    const list = loadKey<ContractRecord[]>(HISTORY_KEY) ?? [];
+    list.push({ map, choice, result });
+    store(HISTORY_KEY, list.slice(-10));
+}
+
+function historyHtml(): string {
+    const list = loadKey<ContractRecord[]>(HISTORY_KEY) ?? [];
+    if (!list.length) return '';
+    const rows = list.slice(-6).map((r, i, a) => `<div class="row"><span>${list.length - a.length + i + 1}. 第 2 层「${r.map}」</span><b>${r.choice} · ${r.result}</b></div>`).join('');
+    return `<p class="small">你的契约记录（最近几局，截图发给我们就是最好的反馈）：</p>${rows}`;
+}
+
 function showEnd() {
     clearSave();
     render();
@@ -375,7 +430,7 @@ function showEnd() {
         <div class="row"><span>攻击 / 防御</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
         <div class="row"><span>金币</span><b>${run.hero.gold}</b></div>
         <div class="row"><span>总步数</span><b>${run.totalSteps}</b></div>
-        <div class="row"><span>分数</span><b>${run.score()}</b></div>`,
+        <div class="row"><span>分数</span><b>${run.score()}</b></div>${historyHtml()}`,
         [{ label: '新开一局', primary: true, on: () => newRun() }]);
 }
 
@@ -395,10 +450,11 @@ function popText(at: number, before: Hero) {
 }
 
 /** 沿路线一格一格走；最后一格是怪物、门或道具时，走到旁边再交互。走过就不能撤回。 */
-async function walk(path: number[], confirmedExit = false, confirmedFatal = false) {
+async function walk(path: number[], confirmedExit = false, confirmedFatal = false, confirmedBreak = false) {
     if (busy || !path.length) return;
     let askExit = false;
     let askFatal = -1;
+    let askBreak = -1;
     busy = true;
     document.body.dataset.walking = '1';
     selected = -1;
@@ -420,6 +476,8 @@ async function walk(path: number[], confirmedExit = false, confirmedFatal = fals
             }
             // 打会死的仗：走到旁边先确认
             if (c.kind === 'monster' && isFatal(cell) && !confirmedFatal) { askFatal = cell; break; }
+            // 签了"不喝血瓶"的契约：喝之前先确认
+            if (c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion') && run.contractActive() && !confirmedBreak) { askBreak = cell; break; }
             // 交互：先撞一下，再结算
             const r0 = run.step(cell);
             if (!r0.ok) { setMsg(r0.msg, true); break; }
@@ -451,6 +509,7 @@ async function walk(path: number[], confirmedExit = false, confirmedFatal = fals
         if (run.status === 'dead') setTimeout(showDeath, 150);
         if (askExit) confirmStairs();
         if (askFatal >= 0) confirmFatal(askFatal);
+        if (askBreak >= 0) confirmBreak(askBreak);
     }
 }
 
@@ -471,21 +530,57 @@ function confirmFatal(cell: number) {
 function showDeath() {
     // 死了就整局重来：存档清掉，刷新页面也回不到这一局
     clearSave();
+    recordContract(`倒在这一层`);
     modal(`<h2>你倒下了</h2>
         <p>你倒在了${run.floor.name}。</p>
         <div class="row"><span>攻击 / 防御</span><b>${run.hero.atk} / ${run.hero.def}</b></div>
         <div class="row"><span>金币</span><b>${run.hero.gold}</b></div>
-        <p class="small">这一局结束了。重新开始要从第 1 层走起，地图会换成新的。</p>`,
+        <p class="small">这一局结束了。重新开始要从第 1 层走起，地图会换成新的。</p>${historyHtml()}`,
         [{ label: '从第 1 层重新开始', primary: true, on: () => newRun() }]);
+}
+
+/** 下楼时要不要签楼梯口的契约（在出口结算后生效） */
+let pendingSign = false;
+
+function contractCardHtml(): string {
+    const c = run.offeredContract();
+    if (!c) return '';
+    const t = contractText(c);
+    const afford = run.hero.hp > c.deposit;
+    return `<div class="contract"><div class="contractHead">🪝 楼梯边垂下一枚铁钩，钩上挂着一纸契约</div>
+        <div class="contractRow"><span>押</span><b>${c.deposit} 生命</b>（现在就扣，你有 ${run.hero.hp}）</div>
+        <div class="contractRow"><span>得</span><b>${t.get}</b></div>
+        <div class="contractRow"><span>约</span><b>${t.cond}</b></div>
+        <div class="contractRow"><span>还</span><b>${t.reward}</b></div>
+        <div class="small">下一层可以随时喝血瓶，喝下那一刻就算毁约：押下的生命归井，拿到的属性归你。${afford ? '' : '<br><b class="warnText">你的生命不够押。</b>'}</div></div>`;
 }
 
 function confirmStairs() {
     // 不提示下一层会不会死：顺其自然，下一层的结果要玩家自己去面对
     const exit = run.cells.findIndex(c => c.kind === 'exit');
-    modal(`<h2>楼梯口</h2><p>下楼之后就回不来了。下楼前，你听到井底传来的回声：</p>${intelHtml()}
-        <p class="small">还想回头拿点什么的话，选"再想想"。</p>`, [
-        { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
-        { label: '下楼', primary: true, on: () => void walk([exit], true) },
+    const c = run.offeredContract();
+    const down = (sign: boolean) => { pendingSign = sign; void walk([exit], true); };
+    const buttons: Btn[] = c
+        ? [
+            { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
+            { label: '不签，下楼', on: () => down(false) },
+            ...(run.hero.hp > c.deposit ? [{ label: `签约（押 ${c.deposit} 血），下楼`, primary: true, on: () => down(true) }] : []),
+        ]
+        : [
+            { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
+            { label: '下楼', primary: true, on: () => down(false) },
+        ];
+    modal(`<h2>楼梯口</h2><p>下楼之后就回不来了。下楼前，你听到井底传来的回声：</p>${intelHtml()}${contractCardHtml()}
+        ${c ? '' : '<p class="small">还想回头拿点什么的话，选"再想想"。</p>'}`, buttons);
+}
+
+function confirmBreak(cell: number) {
+    const ct = run.contract!;
+    modal(`<h2>喝下这瓶血瓶？</h2><p>你和井签了契约：本层一瓶血瓶都不喝。</p>
+        <p>喝下去就毁约：<b class="warnText">押下的 ${ct.def.deposit} 生命不退</b>，攻击 +${ct.def.atk} 照样留着。</p>
+        <p class="small">守约走到出口，能拿回 ${ct.def.refund} 生命${ct.def.gold ? ` 和 ${ct.def.gold} 金币` : ''}。</p>`, [
+        { label: '不喝，守约', primary: true, on: () => setMsg('没有喝。') },
+        { label: '喝（毁约）', danger: true, on: () => void walk([cell], false, false, true) },
     ]);
 }
 
@@ -541,6 +636,11 @@ function startFloor() {
     hovered = -1;
     board.innerHTML = '';
     floorBest = solveFromStart(run.floor, run.floorStartHero, run.ch).best?.hero ?? null;
+    floorContract = null;
+    if (run.contract && run.contract.floorIndex === run.floorIndex) {
+        const keep = solveFromStart(keepVersion(run.floor), run.floorStartHero, run.ch).best;
+        floorContract = { keep: keep ? keep.hero.hp + run.contract.def.refund : null, any: floorBest?.hp ?? null };
+    }
     setMsg(run.floor.hint ?? '');
 }
 

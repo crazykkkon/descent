@@ -87,6 +87,15 @@
   #hero.dead .heroToken { filter: grayscale(1) brightness(.6); transform: rotate(90deg); transition: transform .4s, filter .4s; }
   .intel { background: #1a1608; border: 1px solid #6b5a22; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.5); line-height: 1.6; color: #e8dcb0; }
   .intel b { display: block; color: #ffd479; font-size: calc(var(--u) * 2.9); margin-bottom: calc(var(--u) * 0.4); }
+  .contract { background: #10161c; border: 1px solid #4b6b7a; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.4) calc(var(--u) * 1.8); font-size: calc(var(--u) * 2.6); line-height: 1.7; margin-top: calc(var(--u) * 1); }
+  .contractHead { color: #9fd3e6; font-weight: bold; margin-bottom: calc(var(--u) * 0.5); }
+  .contractRow span { display: inline-block; width: calc(var(--u) * 3.6); color: #6f8c99; }
+  .contractRow b { color: #e6f3f8; }
+  .warnText { color: #ff6b81; }
+  #contractBox { display: none; font-size: calc(var(--u) * 2.5); line-height: 1.5; color: #cfeaf3; background: #12232b; border: 1px solid #3e6878; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1.2); }
+  #contractBox.broken { color: #ffc2cb; background: #2a161b; border-color: #7a2a38; }
+  #modal .row.contractOk b { color: var(--accent); }
+  #modal .row.contractBad b { color: #ff6b81; }
   .intelHead { font-size: calc(var(--u) * 2.2); color: #b8a46a; }
   #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
   #msg.err { color: var(--hp); }
@@ -126,6 +135,7 @@
     <div id="infoTitle"></div>
     <div id="infoLines"></div>
     <button id="confirm" class="primary">出手</button>
+    <div id="contractBox"></div>
     <div id="danger"></div>
     <div class="sep"></div>
     <div id="msg"></div>

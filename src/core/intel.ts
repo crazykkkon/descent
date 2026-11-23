@@ -16,7 +16,7 @@ export interface Intel {
     headline: string;
     /** 详细说明和掉血对比 */
     lines: string[];
-    monster: MonsterId;
+    monster?: MonsterId;
     /** 是否是不打就过不去的必经守卫 */
     mustFight: boolean;
 }

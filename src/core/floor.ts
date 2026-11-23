@@ -1,5 +1,6 @@
 /** 楼层：用文字地图配置，解析成格子数组。 */
 import { ItemId, MonsterId } from './config';
+import type { ContractDef } from './contract';
 
 export type Cell =
     | { kind: 'wall' }
@@ -21,6 +22,10 @@ export interface FloorDef {
     smallPotion: number;
     bigPotion: number;
     gold: number;
+    /** 进入这一层之前，上一层楼梯口挂出的契约 */
+    contract?: ContractDef;
+    /** 上一层楼梯口显示的情报（手写，必须是真话）；不写就自动从地图里挑 */
+    intel?: string;
 }
 
 /**

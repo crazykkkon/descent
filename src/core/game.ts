@@ -5,6 +5,7 @@ import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
 import { solveFloor } from './solver';
+import { ActiveContract, ContractDef, ContractResult } from './contract';
 
 /** dead：主角死了，这一局结束 */
 export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
@@ -18,6 +19,8 @@ export interface Snapshot {
 }
 
 export interface ExitSummary {
+    /** 本层有契约时的结算结果 */
+    contract?: ContractResult;
     leftoverPotions: number;
     potionGold: number;
     keys: number;
@@ -31,6 +34,7 @@ export interface RunSave {
     floorStart: Snapshot;
     totalSteps: number;
     status: Status;
+    contract?: ActiveContract | null;
 }
 
 export interface ActResult {
@@ -61,6 +65,8 @@ export class Run {
     kills = 0;
     totalSteps = 0;
     status: Status = 'playing';
+    /** 正在生效的契约 */
+    contract: ActiveContract | null = null;
     private floorStart!: Snapshot;
 
     constructor(readonly floors: FloorDef[], characterId = 'digger') {
@@ -104,7 +110,18 @@ export class Run {
     nextFloorIntel(): Intel | null {
         const next = this.floors[this.floorIndex + 1];
         if (!next) return null;
+        if (next.intel) return { headline: next.intel, lines: [], mustFight: false };
         return stairIntel(next, this.hero, this.ch, { floor: this.floor, cells: this.cells });
+    }
+
+    /** 楼梯口挂出的契约（作用在下一层）；签不起（血不够押）也照样显示，由界面提示 */
+    offeredContract(): ContractDef | null {
+        return this.floors[this.floorIndex + 1]?.contract ?? null;
+    }
+
+    /** 本层的契约是否还在守约中 */
+    contractActive(): boolean {
+        return !!this.contract && this.contract.floorIndex === this.floorIndex && !this.contract.broken;
     }
 
     /** 本层还能不能活着走到出口 */
@@ -198,6 +215,9 @@ export class Run {
 
         const r = interact(c, this.hero, this.floor, this.ch, true);
         if (!r.ok) return { ok: false, msg: r.reason };
+        // 喝下血瓶的那一刻就毁约
+        const breaks = c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion') && this.contractActive();
+        if (breaks) this.contract!.broken = true;
         if (r.fatal) {
             // 硬上打不过的怪：打完就死
             this.hero = r.hero;
@@ -215,6 +235,7 @@ export class Run {
         } else {
             this.pos = i;
             msg = c.kind === 'item' ? `获得${ITEM_NAMES[c.id]}` : (c.door === 'bone' ? '打开骨门' : `穿过血门，损失 ${lost} 生命`);
+            if (breaks) msg += `。契约已毁：押下的 ${this.contract!.def.deposit} 生命归井了`;
         }
         this.cells[i] = { kind: 'floor' };
         return { ok: true, msg };
@@ -244,7 +265,10 @@ export class Run {
 
     exitSummary(): ExitSummary {
         const leftoverPotions = this.cells.filter(c => c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion')).length;
+        const ct = this.contract && this.contract.floorIndex === this.floorIndex
+            ? { def: this.contract.def, kept: !this.contract.broken } : undefined;
         return {
+            contract: ct,
             leftoverPotions,
             potionGold: leftoverPotions * EXIT.leftoverPotionGold,
             keys: this.hero.keys,
@@ -253,10 +277,29 @@ export class Run {
     }
 
     /** 出口结算后进入下一层；只能往下，不能回到上一层 */
-    finishFloor(sellKeys: boolean) {
+    /**
+     * @param sign 是否签下楼梯口挂出的契约（押金立刻扣、属性立刻生效，作用在下一层）
+     */
+    finishFloor(sellKeys: boolean, sign = false) {
         if (this.status !== 'floorDone') return;
         const s = this.exitSummary();
         this.hero.gold += s.potionGold;
+        // 本层契约结算：守约退还押金和利息
+        if (s.contract) {
+            if (s.contract.kept) {
+                this.hero.hp += s.contract.def.refund;
+                this.hero.gold += s.contract.def.gold;
+            }
+            this.contract = null;
+        }
+        // 签下一层的契约
+        const offer = this.offeredContract();
+        if (sign && offer && this.hero.hp > offer.deposit) {
+            this.hero.hp -= offer.deposit;
+            this.hero.atk += offer.atk;
+            this.hero.def += offer.def;
+            this.contract = { def: offer, floorIndex: this.floorIndex + 1, broken: false };
+        }
         if (sellKeys) {
             this.hero.gold += s.keyGold;
             this.hero.keys = 0;
@@ -275,6 +318,7 @@ export class Run {
             floorStart: this.floorStart,
             totalSteps: this.totalSteps,
             status: this.status,
+            contract: this.contract,
         };
     }
 
@@ -285,6 +329,7 @@ export class Run {
         run.restore(s.current);
         run.totalSteps = s.totalSteps;
         run.status = s.status;
+        run.contract = s.contract ?? null;
         return run;
     }
 
