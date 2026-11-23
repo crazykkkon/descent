@@ -16,6 +16,11 @@
 - 交接稿、设计方案（`docs/game-design.md`）和现有代码之间有冲突时，不要自己选边，列出冲突让制作人决定。
 - 制作人在对话里表达过倾向、但交接稿没标"已确认"的事，记成"讨论项（制作人倾向：……）"。
 
+## 当前技术路线
+- Steam Demo：**LÖVE（Love2D）+ Lua**（交接稿 a9ca98b 已确认）。
+- `src/core/` 的 TypeScript 原型是规则的参照实现：Lua 版要用同一组输入逐条对账（战损、押金、退还、毁约、存档）。
+- 求解器 / 设计工具是否继续用 TypeScript、Lua 代码放在哪，仍是讨论项（见 `docs/game-design.md` 23.2）。
+
 ## 仓库要点
 - 设计方案：`docs/game-design.md`（Word 版同目录）；`crazykkkon/xiaochengxu` 的 `docs/descent/` 里有一份同步副本。
 - 核心规则是纯 TypeScript（`src/core/`），游戏和求解器共用同一份规则；改规则后跑 `npm test`。
