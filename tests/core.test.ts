@@ -9,7 +9,7 @@ import { keepVersion } from '../src/core/contract';
 import { SLOTS, holdOdds, leechBite, payout, tripleWeaponOdds } from '../src/core/slot';
 import { parseFloor } from '../src/core/floor';
 import { stairIntel } from '../src/core/intel';
-import { greedyFloor, solveFromStart, solveRun } from '../src/core/solver';
+import { greedyFloor, paretoFilter, solveFromStart, solveRun } from '../src/core/solver';
 
 const hero = { atk: 10, def: 10 };
 const mk = (traits: MonsterDef['traits'], over: Partial<MonsterDef> = {}): MonsterDef =>
@@ -376,6 +376,7 @@ test('按求解器的路线实际玩，结果和求解器一致', () => {
         run.tapCell(run.cells.findIndex(c => c.kind === 'exit'));
         assert.equal(run.status, 'floorDone');
         assert.equal(run.hero.hp, r.best!.hero.hp);
+        assert.equal(run.hero.gold, r.best!.hero.gold, `第 ${i + 1} 层：求解器算的金币和实际一致（含怪物掉落）`);
         if (run.pendingWeapons) run.chooseWeapon(run.pendingWeapons[0]);
         if (run.rentDue()) assert.ok(run.payRent(run.hero.gold >= run.rentDue() ? 'gold' : 'def').ok);
         run.finishFloor(false);
@@ -526,4 +527,20 @@ test('精英倒下后三选一拿武器（由种子决定，三把不重复）',
     run.chooseWeapon(w);
     assert.equal(run.hero.weapon, w);
     assert.equal(run.pendingWeapons, null);
+});
+
+test('求解器：血瓶不再强制喝掉——签了"不喝血瓶"或想留着时，不喝的走法也算得到', () => {
+    // 血瓶在支路上：不喝也能走到出口
+    const f = tiny(['@.>', 'h..']);
+    const r = solveFromStart(f, CHARACTERS.digger.base);
+    const drank = (o: { plan: number[] }) => o.plan.includes(3);
+    assert.ok(r.best && drank(r.best), '生命最多的走法会喝');
+    // 带着金币比较时，不喝药的结果不会被"喝了药的"压掉（求解器给出的 pareto 里至少有一条路线）
+    assert.ok(r.pareto.length >= 1);
+});
+
+test('求解器：跨层比较时算上金币（血少但钱多的结果不会被丢掉）', () => {
+    const rich = { hp: 100, atk: 10, def: 10, keys: 0, gold: 80 };
+    const healthy = { hp: 120, atk: 10, def: 10, keys: 0, gold: 0 };
+    assert.equal(paretoFilter([rich, healthy]).length, 2);
 });

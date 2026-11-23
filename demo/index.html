@@ -554,6 +554,7 @@
     const statsOf = (mask) => {
       let hh = { ...hero, hp: Number.MAX_SAFE_INTEGER };
       let doors = 0;
+      let monsterGold = 0;
       for (let k = 0; k < entities.length; k++) {
         if (!(mask & 1 << k)) continue;
         const c = cells[entities[k]];
@@ -561,8 +562,9 @@
           const r = interact(c, hh, floor, ch);
           if (r.ok) hh = r.hero;
         } else if (c.kind === "door" && c.door === "bone") doors++;
+        else if (c.kind === "monster") monsterGold += MONSTERS[c.id].gold;
       }
-      return { ...hh, hp: hero.hp, keys: hh.keys - doors };
+      return { ...hh, hp: hero.hp, keys: hh.keys - doors, gold: hh.gold + monsterGold };
     };
     const frontier = (mask) => {
       const seen = new Uint8Array(cells.length);
@@ -592,10 +594,11 @@
       }
       return { next, atExit };
     };
+    const autoPick = (c) => c.kind === "item" && c.id !== "smallPotion" && c.id !== "bigPotion";
     const close = (mask, stats) => {
       const picked = [];
       for (; ; ) {
-        const items = frontier(mask).next.filter((k) => cells[entities[k]].kind === "item");
+        const items = frontier(mask).next.filter((k) => autoPick(cells[entities[k]]));
         if (!items.length) return { mask, stats, picked };
         for (const k of items) {
           const r = interact(cells[entities[k]], stats, floor, ch);
@@ -650,10 +653,10 @@
     return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
   }
   function paretoFilter(list) {
-    const dominated = (a, b) => a.weapon === b.weapon && b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
+    const dominated = (a, b) => a.weapon === b.weapon && b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && b.gold >= a.gold && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys || b.gold > a.gold);
     const uniq = [];
     for (const x of list) {
-      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys && u.weapon === x.weapon)) uniq.push(x);
+      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys && u.gold === x.gold && u.weapon === x.weapon)) uniq.push(x);
     }
     return uniq.filter((a) => !uniq.some((b) => dominated(a, b)));
   }

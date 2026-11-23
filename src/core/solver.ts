@@ -5,7 +5,7 @@
  * 只有生命会因为处理顺序不同而不同。所以状态 = 已处理格子的集合（位掩码），
  * 每个状态只保留生命最高的那条路线。主角在已打通区域里可以随便走（M1 不计步数）。
  */
-import { CharacterDef, CHARACTERS, Hero } from './config';
+import { CharacterDef, CHARACTERS, Hero, MONSTERS } from './config';
 import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite, isEntity } from './rules';
 import { keepVersion } from './contract';
@@ -49,18 +49,20 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
     const exit = cells.findIndex(c => c.kind === 'exit');
     const eliteMask = entities.reduce((m, cell, k) => (isElite(cells[cell]) ? m | (1 << k) : m), 0);
 
-    // 已处理集合下的属性（生命除外）
+    // 已处理集合下的属性（生命除外）：攻防、钥匙、金币都只由"处理了哪些格子"决定
     const statsOf = (mask: number): Hero => {
         // 先算道具，再扣骨门用掉的钥匙，和处理顺序无关
         let hh: Hero = { ...hero, hp: Number.MAX_SAFE_INTEGER };
         let doors = 0;
+        let monsterGold = 0;
         for (let k = 0; k < entities.length; k++) {
             if (!(mask & (1 << k))) continue;
             const c = cells[entities[k]];
             if (c.kind === 'item') { const r = interact(c, hh, floor, ch); if (r.ok) hh = r.hero; }
             else if (c.kind === 'door' && c.door === 'bone') doors++;
+            else if (c.kind === 'monster') monsterGold += MONSTERS[c.id].gold;
         }
-        return { ...hh, hp: hero.hp, keys: hh.keys - doors };
+        return { ...hh, hp: hero.hp, keys: hh.keys - doors, gold: hh.gold + monsterGold };
     };
 
     // 从起点出发，经过空地和已处理格子能到的区域；返回区域边上的未处理格子，以及出口是否相邻
@@ -87,11 +89,13 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
         return { next, atExit };
     };
 
-    // 捡道具永远不亏（只加不减），所以能走到的道具立刻全部捡掉，大幅减少状态数
+    // 宝石、钥匙、金币袋捡了永远不亏（只加不减），能走到就立刻捡掉，大幅减少状态数。
+    // 血瓶不自动喝：签了"不喝血瓶"的契约、或者想留着在出口卖钱时，不喝可能更好，所以当成一个选择。
+    const autoPick = (c: Cell) => c.kind === 'item' && c.id !== 'smallPotion' && c.id !== 'bigPotion';
     const close = (mask: number, stats: Hero): { mask: number; stats: Hero; picked: number[] } => {
         const picked: number[] = [];
         for (;;) {
-            const items = frontier(mask).next.filter(k => cells[entities[k]].kind === 'item');
+            const items = frontier(mask).next.filter(k => autoPick(cells[entities[k]]));
             if (!items.length) return { mask, stats, picked };
             for (const k of items) {
                 const r = interact(cells[entities[k]], stats, floor, ch);
@@ -113,7 +117,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
     for (let p = 0; p <= entities.length; p++) {
         for (const mask of buckets[p]) {
             const node = nodes.get(mask)!;
-            const stats = { ...statsOf(mask), hp: node.hp };
+            const stats: Hero = { ...statsOf(mask), hp: node.hp };
             const { next, atExit } = frontier(mask);
             if (atExit && (mask & eliteMask) === eliteMask) exits.push({ mask, hero: stats });
             for (const k of next) {
@@ -146,15 +150,18 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
     return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
 }
 
-/** 去掉被完全压制的结果（生命、攻击、防御、钥匙都不比别人高） */
+/**
+ * 去掉被完全压制的结果（生命、攻击、防御、钥匙、金币都不比别人高）。
+ * 金币也要比：有井租和商店以后，"血少但钱多"可能是唯一的活路。
+ */
 export function paretoFilter(list: Hero[]): Hero[] {
     // 武器不同的结果互不压制（没法简单比较哪把更好）
     const dominated = (a: Hero, b: Hero) => a.weapon === b.weapon &&
-        b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys &&
-        (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
+        b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && b.gold >= a.gold &&
+        (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys || b.gold > a.gold);
     const uniq: Hero[] = [];
     for (const x of list) {
-        if (!uniq.some(u => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys && u.weapon === x.weapon)) uniq.push(x);
+        if (!uniq.some(u => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys && u.gold === x.gold && u.weapon === x.weapon)) uniq.push(x);
     }
     return uniq.filter(a => !uniq.some(b => dominated(a, b)));
 }
