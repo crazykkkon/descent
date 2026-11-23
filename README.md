@@ -8,7 +8,14 @@
 - 在线试玩：https://crazykkkon.github.io/descent/ （每次推送到 main 自动更新）
 - 设计方案：[docs/game-design.md](docs/game-design.md)（Word 版：`docs/坠井者-游戏设计方案.docx`）
 
-## 当前进度：Steam 5 层试玩版（井的契约 + 井中轮 + 武器，进行中）
+## 当前进度：单英雄 20 层 Steam Demo 白盒（LÖVE 版）
+
+- LÖVE 版可以从第 1 层玩到第 20 层：楼梯口情报 / 契约 / 井租、出口结算、精英三选一武器、井中轮、补给摊、通关结算
+- 20 层关卡数据在 `src/core/mainline.ts`（只写一份），导出到 `love/src/data/mainline.lua`；`npm run mainline` 看每层的求解结果
+- 新怪：井鼠（群居）、盐蚀蛞蝓（腐蚀）、骸骨祭司（庇护）、守门人；第 15 层落石和第 20 层 Boss 站位战还是占位
+- 详细安排和讨论项见设计方案第二十三章
+
+## 网页原型：Steam 5 层试玩版（井的契约 + 井中轮 + 武器）
 
 - **5 层**：井口 → 苔壁（契约）→ 回声（出口交 30 金井租）→ 赌坊（两台井中轮）→ 鳞厅（精英石鳞守卫，打败后三选一拿武器）
 - **井中轮**：三个转轮的图案全部印在机器上，金币或血注；每次转完选"收下"或"锁轴半价重转"，锁轴时直接显示概率；井蛭当场咬人；结果由本局种子决定
@@ -44,6 +51,7 @@ npx tsx tools/contract.ts             # 契约验算：每张契约图上拒签 
 npm run typecheck
 npm run vectors       # 从原型导出标准算例到 love/tests/vectors.lua
 npm run love:test     # LÖVE 版用标准算例对账（需要 luajit）
+npm run mainline      # 20 层主线：每层最优、只看眼前、赶路三种走法对比
 npm run love:build    # 打 Windows / Mac 安装包和 .love（输出到 love/dist/）
 npm run build:demo  # 打包成单文件 demo/index.html，可放到任何静态网页托管，也能直接发给别人
 ```
@@ -62,6 +70,7 @@ src/core/     纯 TypeScript 核心逻辑（不依赖任何引擎，Steam 版和
   contract.ts 井的契约
   slot.ts     井中轮（老虎机）
   levels.ts   试玩版关卡：每层 3 布局 × 2 配置，选图和换图规则
+  mainline.ts 20 层主线白盒（Lua 版的关卡数据从这里导出）
 web/          横屏网页试玩界面
 tests/        单元测试
 tools/        关卡检查工具（solve.ts）、内容搜索工具（fill.ts）
@@ -77,6 +86,8 @@ docs/         设计文档
 D  骨门      B  血门
 k  骨钥      h  小血瓶    H  大血瓶    r  赤晶    b  青晶    $  金币袋
 m  井苔      e  盲鳗      f  骨蛙      c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
+w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人    E  井底之眼（占位）
+S  井中轮·骨轮  T  井中轮·苔轮  M  补给摊
 ```
 
 改完运行 `npm run solve`，看最优解剩多少血、和乱打的差多少、有没有开局白拿的奖励，再运行 `npm test` 确认所有组合都能通关。

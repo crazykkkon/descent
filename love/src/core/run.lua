@@ -256,7 +256,7 @@ function Run:step(i)
     if c.kind == 'monster' then
         self.kills = self.kills + 1
         local m = config.MONSTERS[c.id]
-        msg = '击败' .. m.name .. '，损失 ' .. lost .. ' 生命，获得 ' .. m.gold .. ' 金币'
+        msg = '击败' .. m.name .. '，' .. (lost >= 0 and ('损失 ' .. lost) or ('回复 ' .. -lost)) .. ' 生命，获得 ' .. m.gold .. ' 金币'
         -- 精英倒下：三选一拿武器
         if m.elite and self:floor().eliteReward then self.pendingWeapons = self:rollWeaponChoices() end
     else

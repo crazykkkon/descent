@@ -425,7 +425,7 @@ export class Run {
         let msg: string;
         if (c.kind === 'monster') {
             this.kills++;
-            msg = `击败${MONSTERS[c.id].name}，损失 ${lost} 生命，获得 ${MONSTERS[c.id].gold} 金币`;
+            msg = `击败${MONSTERS[c.id].name}，${lost >= 0 ? `损失 ${lost}` : `回复 ${-lost}`} 生命，获得 ${MONSTERS[c.id].gold} 金币`;
             // 精英倒下：三选一拿武器
             if (MONSTERS[c.id].elite && this.floor.eliteReward) this.pendingWeapons = this.rollWeaponChoices();
         } else {
