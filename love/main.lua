@@ -518,10 +518,9 @@ local function isTwinPath()
     return run.floorIndex == 2 and run:floor().layout == '双道'
 end
 
-local function drawTile(i, painted)
+local function drawTile(i)
     local c = run.cells[i]
     local x, y = tileXY(i)
-    if painted and twinPath.drawCell(run, i, x, y) then return end
     local g = love.graphics
     if c.kind == 'wall' then
         setColor(C.wall); g.rectangle('fill', x, y, TILE, TILE)
@@ -557,12 +556,14 @@ local function drawPixel()
     setColor(C.panel)
     love.graphics.rectangle('fill', 8, 6, LW - 16, 30)
     love.graphics.rectangle('fill', PANEL_X - 4, MAP_Y - 4, PANEL_W + 8, LH - MAP_Y - 4)
-    setColor(C.line)
-    love.graphics.rectangle('line', MAP_X - 2.5, MAP_Y - 2.5, run.w * TILE + 5, run.h * TILE + 5)
     local painted = isTwinPath()
-    for i = 1, #run.cells do drawTile(i, painted) end
+    setColor(C.line)
+    love.graphics.rectangle('line', MAP_X - 2.5, MAP_Y - 2.5, run.w * TILE + 5, run.h * TILE + 5 + (painted and 24 or 0))
+    if not painted then
+        for i = 1, #run.cells do drawTile(i) end
+    end
     -- 悬停框
-    if hovered and run.cells[hovered].kind ~= 'wall' and not modal then
+    if not painted and hovered and run.cells[hovered].kind ~= 'wall' and not modal then
         local x, y = tileXY(hovered)
         setColor({ 1, 1, 1 }, 0.5); love.graphics.rectangle('line', x + 0.5, y + 0.5, TILE - 1, TILE - 1)
     end
@@ -573,15 +574,16 @@ local function drawPixel()
         hx = fx + (hx - fx) * heroAnim.t
         hy = fy + (hy - fy) * heroAnim.t
     end
-    if painted then
-        twinPath.drawHero(hx, hy, run.status == 'dead')
-    else
+    if not painted then
         setColor(run.status == 'dead' and { 0.4, 0.4, 0.4 } or C.hero)
         love.graphics.circle('fill', hx + 16, hy + 16, 11)
     end
     love.graphics.setCanvas()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(canvas, OX, OY, 0, S, S)
+    if painted then
+        twinPath.drawScene(run, MAP_X, MAP_Y, hx, hy, not modal and hovered, S, OX, OY)
+    end
 end
 
 -- ---------- 绘制：UI 层 ----------
@@ -637,6 +639,9 @@ local function drawUI()
     local i = hovered
     if i and run.cells[i].kind ~= 'wall' and run.cells[i].kind ~= 'floor' and not modal then
         local c = run.cells[i]
+        if isTwinPath() and twinPath.hasSprite(c.id) then
+            twinPath.drawPortrait(c.id, OX + (px + PANEL_W / 2) * S, OY + (py + 206) * S, S)
+        end
         if c.kind == 'monster' then
             local m = run:monsterAt(i)
             local p = preview(i)
