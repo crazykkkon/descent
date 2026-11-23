@@ -14,6 +14,7 @@ local serialize = require('core.serialize')
 local intelMod = require('core.intel')
 local slotMod = require('core.slot')
 local levels = require('core.levels')
+local twinPath = require('view.twin_path')
 local mainline = require('data.mainline')
 local floorMod = require('core.floor')
 
@@ -478,6 +479,7 @@ end
 -- ---------- LÖVE 回调 ----------
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
+    twinPath.load()
     canvas = love.graphics.newCanvas(LW, LH)
     relayout()
     local data = love.filesystem.getInfo(SAVE_FILE) and serialize.load(love.filesystem.read(SAVE_FILE))
@@ -512,9 +514,14 @@ function love.update(dt)
 end
 
 -- ---------- 绘制：像素层 ----------
-local function drawTile(i)
+local function isTwinPath()
+    return run.floorIndex == 2 and run:floor().layout == '双道'
+end
+
+local function drawTile(i, painted)
     local c = run.cells[i]
     local x, y = tileXY(i)
+    if painted and twinPath.drawCell(run, i, x, y) then return end
     local g = love.graphics
     if c.kind == 'wall' then
         setColor(C.wall); g.rectangle('fill', x, y, TILE, TILE)
@@ -552,7 +559,8 @@ local function drawPixel()
     love.graphics.rectangle('fill', PANEL_X - 4, MAP_Y - 4, PANEL_W + 8, LH - MAP_Y - 4)
     setColor(C.line)
     love.graphics.rectangle('line', MAP_X - 2.5, MAP_Y - 2.5, run.w * TILE + 5, run.h * TILE + 5)
-    for i = 1, #run.cells do drawTile(i) end
+    local painted = isTwinPath()
+    for i = 1, #run.cells do drawTile(i, painted) end
     -- 悬停框
     if hovered and run.cells[hovered].kind ~= 'wall' and not modal then
         local x, y = tileXY(hovered)
@@ -565,8 +573,12 @@ local function drawPixel()
         hx = fx + (hx - fx) * heroAnim.t
         hy = fy + (hy - fy) * heroAnim.t
     end
-    setColor(run.status == 'dead' and { 0.4, 0.4, 0.4 } or C.hero)
-    love.graphics.circle('fill', hx + 16, hy + 16, 11)
+    if painted then
+        twinPath.drawHero(hx, hy, run.status == 'dead')
+    else
+        setColor(run.status == 'dead' and { 0.4, 0.4, 0.4 } or C.hero)
+        love.graphics.circle('fill', hx + 16, hy + 16, 11)
+    end
     love.graphics.setCanvas()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(canvas, OX, OY, 0, S, S)
@@ -597,7 +609,9 @@ local function drawUI()
         local x, y = tileXY(i)
         if c.kind == 'monster' then
             local p = preview(i)
-            text(SHORT[c.id], x, y + 3, 10, { 1, 0.84, 0.86 }, 'center', TILE)
+            if not isTwinPath() or not twinPath.hasSprite(c.id) then
+                text(SHORT[c.id], x, y + 3, 10, { 1, 0.84, 0.86 }, 'center', TILE)
+            end
             text(p.fatal and (p.text == '会死' and ('-' .. p.lose) or p.text) or ('-' .. p.lose), x, y + 19, 6.5, p.fatal and C.warn or C.ok, 'center', TILE)
         elseif c.kind == 'door' then
             text(c.door == 'bone' and '门' or '血门', x, y + 5, 9, { 0.95, 0.84, 0.6 }, 'center', TILE)
