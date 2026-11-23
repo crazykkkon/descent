@@ -14,6 +14,10 @@ export interface FloorParams {
     smallPotion: number;
     bigPotion: number;
     gold: number;
+    /** 离开这一层要交的井租 */
+    rent?: number;
+    /** 打败本层精英后三选一拿武器 */
+    eliteReward?: boolean;
 }
 
 export interface VariantDef {
@@ -245,6 +249,77 @@ const F2_CONTRACT: FloorPool = {
     ],
 };
 
+
+/** 试玩版第 4 层：赌坊。两台井中轮，怪物少、金币袋多（正式版里赌坊是第 5～8 层楼梯可选的层类型） */
+const F4_GAMBLE: FloorPool = {
+    params: {
+        ...base,
+        name: '第 4 层 · 赌坊',
+        hint: '井壁上嵌着两台井中轮。站到旁边点它，花金币或者生命转一次。下一层就是精英。',
+        bloodCost: 60,
+    },
+    layouts: [
+        {
+            name: '赌坊',
+            variants: [{
+                note: '骨轮（武器多、井蛭多）和苔轮（血瓶金币多）一左一右，从入口走过去不用打怪；四袋金币里有两袋要打怪才拿得到',
+                intel: '下一层是赌坊：两台井中轮，一台武器多，一台血瓶多。',
+                map: [
+                    '@...v...$',
+                    '.##S#T##.',
+                    '......$eh',
+                    '####.####',
+                    '.$..e..r.',
+                    '.#######.',
+                    '....>....',
+                ],
+            }],
+        },
+    ],
+};
+
+/** 试玩版第 5 层：鳞厅（精英）。石鳞守卫守住出口，前面三条小道是备战区；打败守卫后三选一拿武器 */
+const F5_ELITE: FloorPool = {
+    params: {
+        ...base,
+        name: '第 5 层 · 鳞厅',
+        hint: '石鳞守卫封住了出口，它每回合打你两下。先把前面三条小道里的宝石拿到手，再去打它。',
+        bloodCost: 60,
+        eliteReward: true,
+    },
+    layouts: [
+        {
+            name: '三道',
+            variants: [
+                {
+                    note: '一颗赤晶、一颗青晶、一瓶血瓶，分别藏在三条小道里；锈甲虫后面只有一袋金币，攻击不够就别去',
+                    map: [
+                        '@.m.r.e.h',
+                        '.#######.',
+                        '.v.b.f.$.',
+                        '.#######.',
+                        '.c.$...e.',
+                        '####G####',
+                        '####>####',
+                    ],
+                },
+                {
+                    note: '宝石换到了中道，上道是青晶和金币；回声蝠先手，防御低的人要先拿青晶',
+                    map: [
+                        '@.v.b.e.$',
+                        '.#######.',
+                        '.m.r.f.h.',
+                        '.#######.',
+                        '.e.$...c.',
+                        '####G####',
+                        '####>####',
+                    ],
+                },
+            ],
+        },
+    ],
+};
+
 export const DEMO_POOLS: FloorPool[] = [
     // ---------------- 第 1 层：9×7 教学层 ----------------
     {
@@ -350,6 +425,7 @@ export const DEMO_POOLS: FloorPool[] = [
         params: {
             ...base,
             name: '第 3 层 · 回声',
+            rent: 30,
             hint: '回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。打不过的怪，也许可以绕开？',
             bloodCost: 80,
         },
@@ -472,6 +548,8 @@ export const DEMO_POOLS: FloorPool[] = [
             },
         ],
     },
+    F4_GAMBLE,
+    F5_ELITE,
 ];
 
 export function buildFloor(pool: FloorPool, choice: FloorChoice): FloorDef {

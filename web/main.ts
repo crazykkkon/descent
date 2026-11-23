@@ -7,12 +7,14 @@
  *   手机（触屏）：轻点查看，再点一次或按"出手"确认
  *   没有撤回、没有重开本层：走过、打过就不能退回；死了就从第 1 层重新开始，地图随机换
  */
-import { Hero, MONSTERS } from '../src/core/config';
-import { simulateCombat } from '../src/core/combat';
+import { Hero, MONSTERS, WEAPONS, WeaponId } from '../src/core/config';
+import { effectiveStats, simulateCombat } from '../src/core/combat';
 import { Run, RunSave } from '../src/core/game';
 import { DEMO_POOLS, FloorChoice, buildFloors, pickChoices } from '../src/core/levels';
 import { solveFloor, solveFromStart } from '../src/core/solver';
-import { contractText, keepVersion } from '../src/core/contract';
+import { contractText, depositFor, keepVersion } from '../src/core/contract';
+import { SLOTS, Sym, holdHint, machineOdds, payout } from '../src/core/slot';
+import { RENT_STAT_COST } from '../src/core/game';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const stage = $('stage');
@@ -81,8 +83,9 @@ function renderHud() {
     $('hud').innerHTML = `
         <div class="title"><span class="name">${name ?? num}</span><span class="sub">${num} / 共 ${run.floors.length} 层 · ${layout}</span></div>
         ${stat('var(--hp)', '血', h.hp, b('hp'))}
-        ${stat('var(--atk)', '攻', h.atk, b('atk'))}
-        ${stat('var(--def)', '防', h.def, b('def'))}
+        ${stat('var(--atk)', '攻', effectiveStats(h).atk, b('atk') || b('weapon'))}
+        ${stat('var(--def)', '防', effectiveStats(h).def, b('def') || b('weapon'))}
+        <div class="weaponChip${b('weapon') ? ' bump' : ''}" title="${h.weapon ? WEAPONS[h.weapon].desc : '还没有武器'}">⚔ ${h.weapon ? WEAPONS[h.weapon].name : '无武器'}</div>
         ${stat('var(--key)', '钥', h.keys, b('keys'))}
         ${stat('var(--gold)', '金', h.gold, b('gold'))}
         ${stat('#3a4a52', '步', run.steps, false, 'steps')}`;
@@ -96,6 +99,7 @@ function cellHtml(i: number): { cls: string; html: string } {
     const c = run.cells[i];
     switch (c.kind) {
         case 'wall': return { cls: 'wall', html: '' };
+        case 'slot': return { cls: `slot ${c.id}`, html: `<span class="glyph">轮</span><span class="sub">${SLOTS[c.id].name}</span>` };
         case 'floor': return { cls: 'floor', html: '' };
         case 'exit': return { cls: `exit${run.eliteAlive() ? ' locked' : ''}`, html: '<span class="glyph">▼</span><span class="sub">出口</span>' };
         case 'door':
@@ -242,7 +246,7 @@ function placeTip() {
 }
 
 // ---------- 右栏 ----------
-const ACTION: Record<string, string> = { monster: '出手', door: '开门', item: '拿取', exit: '下楼' };
+const ACTION: Record<string, string> = { monster: '出手', door: '开门', item: '拿取', exit: '下楼', slot: '去转一把' };
 
 function showInfo(i: number) {
     const title = $('infoTitle');
@@ -333,6 +337,7 @@ function render() {
 type Btn = { label: string; primary?: boolean; danger?: boolean; on: () => void };
 function modal(html: string, buttons: Btn[]) {
     const box = $('modalBox');
+    box.classList.remove('slotBox');
     box.innerHTML = html + '<div class="btns" id="mbtns"></div>';
     const w = $('mbtns');
     for (const b of buttons) {
@@ -383,6 +388,7 @@ function showExit() {
         rows.push(`<p class="small">本层能带出的最高生命是 ${b.hp}${route}。${mine}${gains.length && run.hero.hp < b.hp ? `：你用 ${b.hp - run.hero.hp} 血换到了 ${gains.join('、')}` : ''}。</p>`);
     }
     const next = (sell: boolean) => {
+        if (run.rentDue()) { showRent(() => next(sell)); return; }
         recordContract(`带着 ${s.contract?.kept ? run.hero.hp + s.contract.def.refund : run.hero.hp} 血离开`);
         run.finishFloor(sell, pendingSign);
         pendingSign = false;
@@ -510,6 +516,9 @@ async function walk(path: number[], confirmedExit = false, confirmedFatal = fals
         if (askExit) confirmStairs();
         if (askFatal >= 0) confirmFatal(askFatal);
         if (askBreak >= 0) confirmBreak(askBreak);
+        if (run.pendingWeapons && run.status === 'playing') showWeaponChoice();
+        else if (pendingSlot >= 0 && run.status === 'playing') { const i = pendingSlot; pendingSlot = -1; openSlot(i); }
+        pendingSlot = -1;
     }
 }
 
@@ -546,13 +555,147 @@ function contractCardHtml(): string {
     const c = run.offeredContract();
     if (!c) return '';
     const t = contractText(c);
-    const afford = run.hero.hp > c.deposit;
+    const dep = depositFor(c, run.hero);
+    const afford = run.hero.hp > dep;
     return `<div class="contract"><div class="contractHead">🪝 楼梯边垂下一枚铁钩，钩上挂着一纸契约</div>
-        <div class="contractRow"><span>押</span><b>${c.deposit} 生命</b>（现在就扣，你有 ${run.hero.hp}）</div>
+        <div class="contractRow"><span>押</span><b>${dep} 生命</b>（现在就扣，你有 ${run.hero.hp}）${dep < c.deposit ? '　井神的钩：少押 ' + (c.deposit - dep) : ''}</div>
         <div class="contractRow"><span>得</span><b>${t.get}</b></div>
         <div class="contractRow"><span>约</span><b>${t.cond}</b></div>
         <div class="contractRow"><span>还</span><b>${t.reward}</b></div>
         <div class="small">下一层可以随时喝血瓶，喝下那一刻就算毁约：押下的生命归井，拿到的属性归你。${afford ? '' : '<br><b class="warnText">你的生命不够押。</b>'}</div></div>`;
+}
+
+// ---------- 井中轮 ----------
+const SYM_SHORT: Record<Sym, string> = { blade: '刀', hammer: '锤', harpoon: '叉', potion: '瓶', coin: '金', leech: '蛭' };
+const symChip = (s: Sym, cls = '') => `<span class="sym s-${s} ${cls}">${SYM_SHORT[s]}</span>`;
+let slotHeld: boolean[] = [false, false, false];
+
+function openSlot(i: number) {
+    slotHeld = [false, false, false];
+    renderSlot(i);
+}
+
+function renderSlot(i: number, spinning = false, lastBite = 0, fresh: boolean[] = [true, true, true]) {
+    const c = run.cells[i];
+    if (c.kind !== 'slot') return;
+    const def = SLOTS[c.id];
+    const st = run.slotState(i);
+    const odds = machineOdds(def);
+    const pct = (x: number) => `${Math.round(x * 1000) / 10}%`;
+    const full = run.slotPrice(i, false);
+    const hold = run.slotPrice(i, true);
+    const pending = st.pending;
+    const heldN = slotHeld.filter(Boolean).length;
+    const strips = def.reels.map((reel, k) => `<div class="strip"><div class="stripHead">第 ${k + 1} 轮</div>${reel.map(x => symChip(x, 'mini')).join('')}</div>`).join('');
+    const result = pending
+        ? pending.map((x, k) => `<button class="reel${slotHeld[k] ? ' held' : ''}${x === 'leech' && fresh[k] && lastBite ? ' bit' : ''}" data-k="${k}">${symChip(x, 'big')}<span class="lock">${slotHeld[k] ? '🔒 锁住' : '点击锁住'}</span></button>`).join('')
+        : '<div class="small">还没转。</div>';
+    const p = pending ? payout(pending) : null;
+    const holdLine = pending && heldN > 0 && heldN < 3
+        ? `<div class="holdHint">🔒 ${holdHint(def, pending, slotHeld)}<br><span class="small">锁轴重转会放弃这次的奖励；新转出来的井蛭照样咬人。</span></div>` : '';
+    const html = `<h2>井中轮 · ${def.name}</h2>
+        <div class="slotGrid">
+          <div class="slotLeft">
+            <p class="small">${def.desc}。每个转轮上的图案都印在机器上：新转一次，三连武器的概率 <b>${pct(odds.weapon)}</b>，至少转出一个井蛭的概率 <b>${pct(odds.anyLeech)}</b>。</p>
+            <div class="strips">${strips}</div>
+            <div class="small rules">三连武器 → 得到这把武器<br>两个相同武器 → 一颗赤晶<br>两个以上血瓶 → 每个 +40 生命<br>两个以上金币 → 每个 +15 金<br>每个新转出的井蛭 → −15 生命（三个 −60）</div>
+          </div>
+          <div class="slotRight">
+            <div class="reels${spinning ? ' spinning' : ''}">${result}</div>
+            ${p && !spinning ? `<div class="payout">收下可得：${p.lines.join('；')}</div>` : ''}
+            ${lastBite && !spinning ? `<div class="warnText">井蛭咬掉了 ${lastBite} 生命</div>` : ''}
+            ${holdLine}
+            <div class="small">你现在：生命 ${run.hero.hp}　金币 ${run.hero.gold}</div>
+            <div class="btns" id="slotBtns"></div>
+          </div>
+        </div>`;
+    $('modalBox').classList.add('slotBox');
+    $('modalBox').innerHTML = html;
+    $('modal').style.display = 'flex';
+    const btns = $('slotBtns');
+    const add = (label: string, cls: string, on: () => void, disabled = false) => {
+        const b = document.createElement('button');
+        b.textContent = label;
+        b.className = cls;
+        b.disabled = disabled || spinning;
+        b.onclick = on;
+        btns.appendChild(b);
+    };
+    const spin = (pay: 'gold' | 'blood', withHold: boolean) => {
+        const r = run.slotSpin(i, pay, withHold ? slotHeld : undefined);
+        if (!r.ok) { setMsg(r.msg, true); renderSlot(i); return; }
+        if (!withHold) slotHeld = [false, false, false];
+        renderHud();
+        saveRun();
+        // 转轮动画：先乱转一会儿，再停在结果上
+        const reelsEl = () => document.querySelector('#modalBox .reels') as HTMLElement | null;
+        renderSlot(i, true);
+        const syms: Sym[] = ['blade', 'hammer', 'harpoon', 'potion', 'coin', 'leech'];
+        let t = 0;
+        const timer = setInterval(() => {
+            const el = reelsEl();
+            if (!el) return;
+            el.querySelectorAll('.reel').forEach((b, k) => {
+                if (r.fresh![k]) (b.querySelector('.sym') as HTMLElement).outerHTML = symChip(syms[(t + k * 2) % syms.length], 'big');
+            });
+            t++;
+        }, 70);
+        setTimeout(() => {
+            clearInterval(timer);
+            if (run.status === 'dead') { $('modal').style.display = 'none'; render(); showDeath(); return; }
+            renderSlot(i, false, r.bite ?? 0, r.fresh);
+        }, 650);
+    };
+    if (pending) {
+        add('收下', 'primary', () => { const lines = run.slotCollect(i); setMsg(lines.join('；')); renderHud(); saveRun(); slotHeld = [false, false, false]; renderSlot(i); });
+        const canHold = heldN > 0 && heldN < 3;
+        add(`锁轴重转（${hold.gold} 金）`, '', () => spin('gold', true), !canHold || run.hero.gold < hold.gold);
+        add(`锁轴重转（血注 ${hold.blood} 血）`, 'danger', () => spin('blood', true), !canHold || run.hero.hp <= hold.blood);
+    }
+    add(`${pending ? '收下，再转一次' : '转一次'}（${full.gold} 金）`, pending ? '' : 'primary', () => spin('gold', false), run.hero.gold < full.gold);
+    add(`血注（${full.blood} 血）`, 'danger', () => spin('blood', false), run.hero.hp <= full.blood);
+    add(pending ? '收下，离开' : '离开', 'wide', () => {
+        if (run.slotState(i).pending) setMsg(run.slotCollect(i).join('；'));
+        $('modal').style.display = 'none';
+        render();
+        saveRun();
+    });
+    document.querySelectorAll('#modalBox .reel').forEach(b => (b as HTMLElement).onclick = () => {
+        const k = Number((b as HTMLElement).dataset.k);
+        slotHeld[k] = !slotHeld[k];
+        renderSlot(i, false, 0, fresh);
+    });
+}
+
+// ---------- 井租 ----------
+function showRent(then: () => void) {
+    const due = run.rentDue();
+    const pay = (m: 'gold' | 'atk' | 'def') => {
+        const r = run.payRent(m);
+        if (!r.ok) { setMsg(r.msg, true); showRent(then); return; }
+        setMsg(r.msg);
+        renderHud();
+        then();
+    };
+    const btns: Btn[] = [
+        { label: `用 ${RENT_STAT_COST} 点攻击抵`, on: () => pay('atk') },
+        { label: `用 ${RENT_STAT_COST} 点防御抵`, on: () => pay('def') },
+    ];
+    if (run.hero.gold >= due) btns.push({ label: `交 ${due} 金币`, primary: true, on: () => pay('gold') });
+    modal(`<h2>井租</h2><p>楼梯口坐着收租的井神：要下楼，先交 <b>${due}</b> 金币的井租。</p>
+        <p>你有 ${run.hero.gold} 金币。${run.hero.gold >= due ? '' : '<b class="warnText">金币不够，只能用属性抵。</b>'}</p>
+        <p class="small">交不上可以用 ${RENT_STAT_COST} 点攻击或防御抵（永久减少）。</p>`, btns);
+}
+
+// ---------- 武器三选一 ----------
+function showWeaponChoice() {
+    const list = run.pendingWeapons;
+    if (!list) return;
+    const cur = run.hero.weapon;
+    const cards = list.map((w: WeaponId) => `<div class="row"><span>⚔ ${WEAPONS[w].name}</span><b>${WEAPONS[w].desc}</b></div>`).join('');
+    modal(`<h2>守卫倒下了</h2><p>它的鳞甲下压着三件东西，你只能拿走一件：</p>${cards}
+        <p class="small">${cur ? `你现在拿着${WEAPONS[cur].name}，换掉会当场卖 ${WEAPONS[cur].sell} 金币。` : '你还没有武器。'}</p>`,
+        list.map((w: WeaponId) => ({ label: WEAPONS[w].name, primary: false, on: () => { setMsg(run.chooseWeapon(w)); render(); saveRun(); } })));
 }
 
 function confirmStairs() {
@@ -564,7 +707,7 @@ function confirmStairs() {
         ? [
             { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
             { label: '不签，下楼', on: () => down(false) },
-            ...(run.hero.hp > c.deposit ? [{ label: `签约（押 ${c.deposit} 血），下楼`, primary: true, on: () => down(true) }] : []),
+            ...(run.hero.hp > depositFor(c, run.hero) ? [{ label: `签约（押 ${depositFor(c, run.hero)} 血），下楼`, primary: true, on: () => down(true) }] : []),
         ]
         : [
             { label: '再想想', on: () => setMsg('留在本层。想好了再走到楼梯口。') },
@@ -584,8 +727,20 @@ function confirmBreak(cell: number) {
     ]);
 }
 
+/** 走到旁边以后要打开的井中轮 */
+let pendingSlot = -1;
+
 function act(i: number) {
     if (busy) return;
+    if (run.cells[i].kind === 'slot') {
+        const near = Math.abs(i % run.w - run.pos % run.w) + Math.abs(Math.floor(i / run.w) - Math.floor(run.pos / run.w)) === 1;
+        if (near) { openSlot(i); return; }
+        const path = run.findPath(i);
+        if (!path) { setMsg('走不到它旁边：先清出一条路（打掉挡路的怪、捡掉路上的东西）', true); return; }
+        pendingSlot = i;
+        void walk(path.slice(0, -1));
+        return;
+    }
     const path = run.findPath(i);
     if (!path) { setMsg('走不过去', true); return; }
     void walk(path);
@@ -624,6 +779,7 @@ window.addEventListener('keydown', e => {
         if (x < 0 || y < 0 || x >= run.w || y >= run.h) return;
         const t = y * run.w + x;
         if (run.cells[t].kind === 'wall') return;
+        if (run.cells[t].kind === 'slot') { openSlot(t); return; }
         void walk([t]);
     }
     else if (key === 'Escape') { selected = -1; renderBoard(); showInfo(-1); }
@@ -647,7 +803,7 @@ function startFloor() {
 function begin(c: FloorChoice[], save?: RunSave) {
     choices = c;
     const floors = buildFloors(choices);
-    run = save ? Run.load(floors, save) : new Run(floors);
+    run = save ? Run.load(floors, save) : new Run(floors, 'digger', Math.floor(Math.random() * 2 ** 31));
     lastHero = null;
     startFloor();
     render();
@@ -655,6 +811,7 @@ function begin(c: FloorChoice[], save?: RunSave) {
     heroEl.classList.toggle('dead', run.status === 'dead');
     if (run.status === 'floorDone') showExit();
     if (run.status === 'dead') showDeath();
+    if (run.pendingWeapons && run.status === 'playing') showWeaponChoice();
 }
 
 function newRun() {

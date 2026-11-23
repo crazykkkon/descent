@@ -6,6 +6,7 @@ import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, F2_CLASSIC, allChoices, buildFloor, buildFloors, pickChoices } from '../src/core/levels';
 import { keepVersion } from '../src/core/contract';
+import { SLOTS, holdOdds, leechBite, payout, tripleWeaponOdds } from '../src/core/slot';
 import { parseFloor } from '../src/core/floor';
 import { stairIntel } from '../src/core/intel';
 import { greedyFloor, solveFromStart, solveRun } from '../src/core/solver';
@@ -139,15 +140,17 @@ test('求解器：只能靠宝石过的小谜题', () => {
     assert.ok(r.best!.plan.filter(i => i >= 3).length >= 2);
 });
 
-test('试玩版地图尺寸：第 1 层 9×7，第 2、3 层 11×7', () => {
+test('试玩版地图尺寸：第 1、4、5 层 9×7，第 2、3 层 11×7', () => {
     DEMO_POOLS.forEach((pool, fi) => pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
         const p = parseFloor(buildFloor(pool, { layout: li, variant: vi }));
-        assert.deepEqual([p.w, p.h], fi === 0 ? [9, 7] : [11, 7], `${pool.params.name} ${l.name}${vi + 1}`);
+        assert.deepEqual([p.w, p.h], fi === 1 || fi === 2 ? [11, 7] : [9, 7], `${pool.params.name} ${l.name}${vi + 1}`);
     })));
 });
 
 test('关卡结构：第 1 层 3 布局 × 2 套；第 2 层 3 张契约图；第 3 层 4 布局 × 2 套；同一布局两套墙壁一样', () => {
-    assert.deepEqual(DEMO_POOLS.map(p => p.layouts.length), [3, 3, 4]);
+    assert.deepEqual(DEMO_POOLS.map(p => p.layouts.length), [3, 3, 4, 1, 1]);
+    assert.equal(DEMO_POOLS[2].params.rent, 30, '第 3 层出口交井租');
+    assert.ok(DEMO_POOLS[4].params.eliteReward, '第 5 层精英掉武器');
     for (const pool of DEMO_POOLS) {
         for (const l of pool.layouts) {
             if (l.variants.length < 2) continue;
@@ -298,8 +301,8 @@ test('最后一层没有楼梯口情报；试玩版每层都能生成情报', ()
     const floors = buildFloors(pickChoices(5));
     const run = new Run(floors);
     assert.ok(run.nextFloorIntel());
-    assert.equal(Run.load(floors, { ...run.save(), floorIndex: 2, current: run.save().current, floorStart: run.save().floorStart }).nextFloorIntel(), null);
-    for (const fi of [1, 2]) DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
+    assert.equal(Run.load(floors, { ...run.save(), floorIndex: floors.length - 1, current: run.save().current, floorStart: run.save().floorStart }).nextFloorIntel(), null);
+    for (const fi of [1, 2, 3, 4]) DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
         assert.ok(stairIntel(buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi }), CHARACTERS.digger.base, CHARACTERS.digger));
     }));
 });
@@ -322,8 +325,10 @@ test('同一个种子选到同一组地图；新开一局换思路：每层换�
         const a = pickChoices(seed);
         const b = pickChoices(seed + 1000, DEMO_POOLS, a);
         b.forEach((c, i) => {
-            assert.ok(c.layout !== a[i].layout || c.variant !== a[i].variant);
-            assert.notEqual(L(i, c), L(i, a[i]), `第 ${i + 1} 层换布局`);
+            const pool = DEMO_POOLS[i];
+            const total = pool.layouts.reduce((n, l) => n + l.variants.length, 0);
+            if (total > 1) assert.ok(c.layout !== a[i].layout || c.variant !== a[i].variant, `第 ${i + 1} 层换图`);
+            if (pool.layouts.length > 1) assert.notEqual(L(i, c), L(i, a[i]), `第 ${i + 1} 层换布局`);
         });
     }
 });
@@ -371,7 +376,154 @@ test('按求解器的路线实际玩，结果和求解器一致', () => {
         run.tapCell(run.cells.findIndex(c => c.kind === 'exit'));
         assert.equal(run.status, 'floorDone');
         assert.equal(run.hero.hp, r.best!.hero.hp);
+        if (run.pendingWeapons) run.chooseWeapon(run.pendingWeapons[0]);
+        if (run.rentDue()) assert.ok(run.payRent(run.hero.gold >= run.rentDue() ? 'gold' : 'def').ok);
         run.finishFloor(false);
     }
     assert.equal(run.status, 'finished');
+});
+
+// ---------- 武器 ----------
+
+test('武器：效果算进战斗预览，和实际结算一致', () => {
+    const base = { atk: 19, def: 16 };
+    const plain = simulateCombat(base, MONSTERS.guardian).damage;
+    assert.ok(simulateCombat({ ...base, weapon: 'boneKnife' }, MONSTERS.guardian).damage < plain, '骨刀攻击 +4');
+    assert.ok(simulateCombat({ ...base, weapon: 'hammer' }, MONSTERS.guardian).damage < plain, '破壳锤无视 4 点防御');
+    assert.equal(simulateCombat({ atk: 13, def: 13 }, MONSTERS.beetle).canAttack, false);
+    assert.equal(simulateCombat({ atk: 13, def: 13, weapon: 'hammer' }, MONSTERS.beetle).canAttack, true, '破壳锤能打动锈甲虫');
+    assert.ok(simulateCombat({ ...base, weapon: 'harpoon' }, MONSTERS.moss).hits >= 2);
+    assert.ok(simulateCombat({ atk: 13, def: 13, weapon: 'bellStaff' }, MONSTERS.bat).damage < simulateCombat({ atk: 14, def: 13 }, MONSTERS.bat).damage, '铃杖让先攻失效');
+    assert.equal(simulateCombat({ atk: 16, def: 16 }, MONSTERS.wraith).canWin, false);
+    assert.equal(simulateCombat({ atk: 16, def: 16, weapon: 'saltDagger' }, MONSTERS.wraith).canWin, true, '盐晶匕首克溺魂');
+    // 苔衣短剑：击杀回血
+    const run = new Run([tiny(['@m>'])]);
+    run.hero.weapon = 'mossBlade';
+    const before = run.hero.hp;
+    const dmg = run.info(1).combat!.damage;
+    run.move(1, 0);
+    assert.equal(run.hero.hp, before - dmg + 8);
+    // 换武器：旧的当场卖掉
+    const msg = run.equip('boneKnife');
+    assert.match(msg, /卖了/);
+    assert.equal(run.hero.weapon, 'boneKnife');
+});
+
+test('井神的钩：签契约少押 20 血', () => {
+    const c = { condition: 'noPotion' as const, deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 };
+    const run = new Run([tiny(['@>']), { ...tiny(['@>']), contract: c }]);
+    run.hero.weapon = 'wellHook';
+    run.move(1, 0);
+    run.finishFloor(false, true);
+    assert.equal(run.hero.hp, 200 - 30);
+    assert.equal(run.contract!.def.deposit, 30, '毁约时归井的也是 30');
+});
+
+// ---------- 井中轮 ----------
+
+const slotFloor = (seed = 7) => new Run([tiny(['@.>', '.S.'])], 'digger', seed);
+
+test('井中轮：要站在旁边；价格每转一次涨一半；金币不够不能转', () => {
+    const run = slotFloor();
+    const slot = 4;
+    assert.equal(run.slotSpin(slot, 'gold').ok, false, '不在旁边');
+    run.move(0, 1); // 站到机器左边
+    run.hero.gold = 1000;
+    const prices: number[] = [];
+    for (let k = 0; k < 4; k++) { prices.push(run.slotPrice(slot, false).gold); run.slotSpin(slot, 'gold'); run.slotCollect(slot); if (run.status !== 'playing') break; }
+    assert.deepEqual(prices.slice(0, 3), [20, 30, 45]);
+    run.hero.gold = 0;
+    assert.equal(run.slotSpin(slot, 'gold').ok, false);
+});
+
+test('井中轮：结果由种子决定，退出再进来不变；不同种子结果不同', () => {
+    const spinAll = (seed: number) => {
+        const run = slotFloor(seed);
+        run.move(0, 1);
+        run.hero.gold = 10000; run.hero.hp = 100000;
+        const out: string[] = [];
+        for (let k = 0; k < 6; k++) { out.push(run.slotSpin(4, 'gold').result!.join(',')); run.slotCollect(4); }
+        return out;
+    };
+    assert.deepEqual(spinAll(7), spinAll(7));
+    assert.notDeepEqual(spinAll(7), spinAll(8));
+    // 存档读档后接着转，和不存档一样
+    const a = slotFloor(9); a.move(0, 1); a.hero.gold = 1000; a.hero.hp = 100000;
+    a.slotSpin(4, 'gold'); a.slotCollect(4);
+    const b = Run.load(a.floors, JSON.parse(JSON.stringify(a.save())));
+    assert.deepEqual(a.slotSpin(4, 'gold').result, b.slotSpin(4, 'gold').result);
+});
+
+test('井中轮：锁轴重转半价、锁住的转轮不变；收下才领奖；血注用生命付', () => {
+    const run = slotFloor(3);
+    run.move(0, 1);
+    run.hero.gold = 1000; run.hero.hp = 100000;
+    const first = run.slotSpin(4, 'gold').result!;
+    const half = run.slotPrice(4, true).gold;
+    assert.ok(half <= run.slotPrice(4, false).gold / 2 + 5);
+    const gold = run.hero.gold;
+    const again = run.slotSpin(4, 'gold', [true, false, false]);
+    assert.equal(again.result![0], first[0], '锁住的第一轴不变');
+    assert.equal(run.hero.gold, gold - half);
+    assert.equal(again.fresh![0], false);
+    const hp = run.hero.hp;
+    run.slotCollect(4);
+    assert.equal(run.slotState(4).pending, null);
+    // 血注
+    const blood = run.slotPrice(4, false).blood;
+    const hp2 = run.hero.hp;
+    const r = run.slotSpin(4, 'blood');
+    assert.equal(run.hero.hp, hp2 - blood - (r.bite ?? 0));
+    assert.ok(hp > 0);
+});
+
+test('井中轮：奖励表', () => {
+    assert.equal(payout(['blade', 'blade', 'blade']).weapon, 'boneKnife');
+    assert.equal(payout(['hammer', 'hammer', 'coin']).gems, 1);
+    assert.equal(payout(['potion', 'potion', 'leech']).hp, 80);
+    assert.equal(payout(['coin', 'coin', 'coin']).gold, 45);
+    assert.equal(leechBite(['leech', 'leech', 'leech'], [true, true, true]), 60);
+    assert.equal(leechBite(['leech', 'coin', 'leech'], [false, true, true]), 15, '锁住的旧井蛭不再咬');
+    assert.ok(Math.abs(tripleWeaponOdds(SLOTS.risky) - (2 * 1 * 1 + 1 * 2 * 1 + 1 * 1 * 2) / 512) < 1e-9);
+    assert.equal(holdOdds(SLOTS.risky, ['blade', 'blade', 'coin'], [true, true, false]), 1 / 8);
+});
+
+test('井中轮被井蛭咬死：这一局结束', () => {
+    const run = slotFloor(11);
+    run.move(0, 1);
+    run.hero.gold = 100000; run.hero.hp = 16;
+    for (let k = 0; k < 40 && run.status === 'playing'; k++) { run.slotSpin(4, 'gold'); run.slotCollect(4); }
+    assert.equal(run.status, 'dead');
+});
+
+// ---------- 井租、精英 ----------
+
+test('井租：不交不能下楼；可以用金币、攻击或防御交', () => {
+    const mk = () => new Run([{ ...tiny(['@>']), rent: 30 }, tiny(['@>'])]);
+    const a = mk();
+    a.move(1, 0);
+    a.finishFloor(false);
+    assert.equal(a.floorIndex, 0, '没交井租不能下楼');
+    assert.equal(a.payRent('gold').ok, false, '金币不够');
+    assert.ok(a.payRent('atk').ok);
+    assert.equal(a.hero.atk, 7);
+    a.finishFloor(false);
+    assert.equal(a.floorIndex, 1);
+    const b = mk();
+    b.hero.gold = 50;
+    b.move(1, 0);
+    assert.ok(b.payRent('gold').ok);
+    assert.equal(b.hero.gold, 20);
+});
+
+test('精英倒下后三选一拿武器（由种子决定，三把不重复）', () => {
+    const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 5);
+    run.hero.atk = 40; run.hero.def = 40;
+    run.move(1, 0);
+    assert.equal(run.pendingWeapons!.length, 3);
+    assert.equal(new Set(run.pendingWeapons).size, 3);
+    const w = run.pendingWeapons![1];
+    run.chooseWeapon(w);
+    assert.equal(run.hero.weapon, w);
+    assert.equal(run.pendingWeapons, null);
 });

@@ -10,6 +10,7 @@
  * 价格是设计者手调的，求解器只负责验算（tools/contract.ts 列出拒签 / 守约 / 毁约三条路的结果）。
  */
 import { FloorDef } from './floor';
+import { Hero, WEAPONS } from './config';
 
 export interface ContractDef {
     condition: 'noPotion';
@@ -45,6 +46,12 @@ export function contractText(c: ContractDef): { pay: string; get: string; cond: 
         cond: '下一层一瓶血瓶都不喝，走到出口',
         reward: `退还 ${c.refund} 生命${c.gold ? `，再给 ${c.gold} 金币` : ''}`,
     };
+}
+
+/** 实际要押的生命（井神的钩可以少押） */
+export function depositFor(c: ContractDef, hero: Hero): number {
+    const d = hero.weapon ? WEAPONS[hero.weapon].contractDiscount ?? 0 : 0;
+    return Math.max(0, c.deposit - d);
 }
 
 /** 守约时这一层的样子：血瓶不能碰，相当于墙（求解器用来验算守约的走法） */

@@ -1,6 +1,7 @@
 /** 楼层：用文字地图配置，解析成格子数组。 */
 import { ItemId, MonsterId } from './config';
 import type { ContractDef } from './contract';
+import type { SlotId } from './slot';
 
 export type Cell =
     | { kind: 'wall' }
@@ -8,7 +9,9 @@ export type Cell =
     | { kind: 'exit' }
     | { kind: 'monster'; id: MonsterId }
     | { kind: 'item'; id: ItemId }
-    | { kind: 'door'; door: 'bone' | 'blood' };
+    | { kind: 'door'; door: 'bone' | 'blood' }
+    /** 井中轮（老虎机）：不能走过去，站在旁边使用 */
+    | { kind: 'slot'; id: SlotId };
 
 export interface FloorDef {
     name: string;
@@ -26,6 +29,10 @@ export interface FloorDef {
     contract?: ContractDef;
     /** 上一层楼梯口显示的情报（手写，必须是真话）；不写就自动从地图里挑 */
     intel?: string;
+    /** 离开这一层时要交的井租（金币） */
+    rent?: number;
+    /** 打败本层精英后三选一拿武器 */
+    eliteReward?: boolean;
 }
 
 /**
@@ -34,6 +41,7 @@ export interface FloorDef {
  *   D  骨门      B  血门
  *   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
  *   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
+ *   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
  */
 const LEGEND: Record<string, Cell> = {
     '#': { kind: 'wall' },
@@ -56,6 +64,8 @@ const LEGEND: Record<string, Cell> = {
     g: { kind: 'monster', id: 'wraith' },
     x: { kind: 'monster', id: 'crab' },
     G: { kind: 'monster', id: 'guardian' },
+    S: { kind: 'slot', id: 'risky' },
+    T: { kind: 'slot', id: 'steady' },
 };
 
 export interface ParsedFloor {

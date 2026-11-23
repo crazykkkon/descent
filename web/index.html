@@ -96,6 +96,37 @@
   #contractBox.broken { color: #ffc2cb; background: #2a161b; border-color: #7a2a38; }
   #modal .row.contractOk b { color: var(--accent); }
   #modal .row.contractBad b { color: #ff6b81; }
+  .weaponChip { font-size: calc(var(--u) * 2.6); color: #ffd9b0; background: #2a1d12; border: 1px solid #6b4a22; border-radius: calc(var(--u) * 0.8); padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2); white-space: nowrap; }
+  .weaponChip.bump { animation: bump .35s; }
+  .cell.slot { background: #2b2140; color: #e6d4ff; cursor: pointer; box-shadow: inset 0 0 0 2px #6d4fa8; }
+  .cell.slot.risky { background: #3a1f33; box-shadow: inset 0 0 0 2px #a84f8a; }
+  .cell.slot .glyph { margin-top: -18%; font-size: calc(var(--cell) * 0.3); }
+  .strips { display: flex; gap: calc(var(--u) * 1.5); justify-content: center; }
+  .strip { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 0.4); background: #0d1519; border: 1px solid var(--line); border-radius: calc(var(--u) * 0.8); padding: calc(var(--u) * 0.8); }
+  .stripHead { font-size: calc(var(--u) * 2); color: var(--dim); }
+  .strip { flex-direction: row; flex-wrap: wrap; width: calc(var(--u) * 21); justify-content: center; }
+  .stripHead { width: 100%; text-align: center; }
+  .sym { display: inline-grid; place-items: center; border-radius: calc(var(--u) * 0.6); font-weight: bold; color: #0a1014; }
+  .sym.mini { width: calc(var(--u) * 4); height: calc(var(--u) * 4); font-size: calc(var(--u) * 2.2); }
+  .sym.big { width: calc(var(--u) * 8); height: calc(var(--u) * 8); font-size: calc(var(--u) * 4.2); }
+  .sym.s-blade { background: #e8925a; } .sym.s-hammer { background: #e0b25a; } .sym.s-harpoon { background: #5ac8e0; }
+  .sym.s-potion { background: #e0566b; } .sym.s-coin { background: #f0c94a; } .sym.s-leech { background: #6b4a8a; color: #f2e6ff; }
+  .reels { display: flex; gap: calc(var(--u) * 2); justify-content: center; min-height: calc(var(--u) * 14); align-items: center; }
+  .reel { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 0.6); background: #10161c; border: 2px solid var(--line); padding: calc(var(--u) * 1); }
+  .reel.held { border-color: var(--accent); background: #12302a; }
+  .reel.bit { border-color: #a03a4c; }
+  .reel .lock { font-size: calc(var(--u) * 2); color: var(--dim); }
+  .reels.spinning .sym { filter: blur(1px); }
+  .payout { font-size: calc(var(--u) * 2.8); color: var(--accent); text-align: center; }
+  #modal .box { max-height: 96%; overflow-y: auto; }
+  #modal .box.slotBox { width: calc(var(--u) * 150); padding: calc(var(--u) * 3) calc(var(--u) * 4); }
+  .slotGrid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 3); align-items: start; }
+  .slotLeft, .slotRight { display: flex; flex-direction: column; gap: calc(var(--u) * 1.5); }
+  .slotLeft .strips { flex-direction: column; align-items: stretch; }
+  .slotLeft .strip { width: auto; flex-wrap: nowrap; justify-content: flex-start; gap: calc(var(--u) * 0.5); }
+  .slotLeft .stripHead { width: calc(var(--u) * 8); text-align: left; }
+  .rules { line-height: 1.7; }
+  .holdHint { font-size: calc(var(--u) * 2.6); color: #cfeaf3; background: #12232b; border: 1px solid #3e6878; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1); }
   .intelHead { font-size: calc(var(--u) * 2.2); color: #b8a46a; }
   #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
   #msg.err { color: var(--hp); }

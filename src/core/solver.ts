@@ -76,7 +76,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
                 if (seen[n]) continue;
                 seen[n] = 1;
                 const c = cells[n];
-                if (c.kind === 'wall') continue;
+                if (c.kind === 'wall' || c.kind === 'slot') continue;
                 if (c.kind === 'exit') { atExit = true; continue; }
                 if (c.kind === 'floor') { stack.push(n); continue; }
                 const k = bit.get(n)!;
@@ -148,12 +148,13 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
 
 /** 去掉被完全压制的结果（生命、攻击、防御、钥匙都不比别人高） */
 export function paretoFilter(list: Hero[]): Hero[] {
-    const dominated = (a: Hero, b: Hero) =>
+    // 武器不同的结果互不压制（没法简单比较哪把更好）
+    const dominated = (a: Hero, b: Hero) => a.weapon === b.weapon &&
         b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys &&
         (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
     const uniq: Hero[] = [];
     for (const x of list) {
-        if (!uniq.some(u => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys)) uniq.push(x);
+        if (!uniq.some(u => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys && u.weapon === x.weapon)) uniq.push(x);
     }
     return uniq.filter(a => !uniq.some(b => dominated(a, b)));
 }
@@ -233,7 +234,7 @@ function reachable(cells: Cell[], w: number, h: number, pos: number): { next: nu
             if (seen[n]) continue;
             seen[n] = 1;
             const c = cells[n];
-            if (c.kind === 'wall') continue;
+            if (c.kind === 'wall' || c.kind === 'slot') continue;
             if (c.kind === 'exit') atExit = true;
             else if (c.kind === 'floor') stack.push(n);
             else next.push(n);

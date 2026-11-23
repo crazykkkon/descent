@@ -96,6 +96,37 @@
   #contractBox.broken { color: #ffc2cb; background: #2a161b; border-color: #7a2a38; }
   #modal .row.contractOk b { color: var(--accent); }
   #modal .row.contractBad b { color: #ff6b81; }
+  .weaponChip { font-size: calc(var(--u) * 2.6); color: #ffd9b0; background: #2a1d12; border: 1px solid #6b4a22; border-radius: calc(var(--u) * 0.8); padding: calc(var(--u) * 0.6) calc(var(--u) * 1.2); white-space: nowrap; }
+  .weaponChip.bump { animation: bump .35s; }
+  .cell.slot { background: #2b2140; color: #e6d4ff; cursor: pointer; box-shadow: inset 0 0 0 2px #6d4fa8; }
+  .cell.slot.risky { background: #3a1f33; box-shadow: inset 0 0 0 2px #a84f8a; }
+  .cell.slot .glyph { margin-top: -18%; font-size: calc(var(--cell) * 0.3); }
+  .strips { display: flex; gap: calc(var(--u) * 1.5); justify-content: center; }
+  .strip { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 0.4); background: #0d1519; border: 1px solid var(--line); border-radius: calc(var(--u) * 0.8); padding: calc(var(--u) * 0.8); }
+  .stripHead { font-size: calc(var(--u) * 2); color: var(--dim); }
+  .strip { flex-direction: row; flex-wrap: wrap; width: calc(var(--u) * 21); justify-content: center; }
+  .stripHead { width: 100%; text-align: center; }
+  .sym { display: inline-grid; place-items: center; border-radius: calc(var(--u) * 0.6); font-weight: bold; color: #0a1014; }
+  .sym.mini { width: calc(var(--u) * 4); height: calc(var(--u) * 4); font-size: calc(var(--u) * 2.2); }
+  .sym.big { width: calc(var(--u) * 8); height: calc(var(--u) * 8); font-size: calc(var(--u) * 4.2); }
+  .sym.s-blade { background: #e8925a; } .sym.s-hammer { background: #e0b25a; } .sym.s-harpoon { background: #5ac8e0; }
+  .sym.s-potion { background: #e0566b; } .sym.s-coin { background: #f0c94a; } .sym.s-leech { background: #6b4a8a; color: #f2e6ff; }
+  .reels { display: flex; gap: calc(var(--u) * 2); justify-content: center; min-height: calc(var(--u) * 14); align-items: center; }
+  .reel { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 0.6); background: #10161c; border: 2px solid var(--line); padding: calc(var(--u) * 1); }
+  .reel.held { border-color: var(--accent); background: #12302a; }
+  .reel.bit { border-color: #a03a4c; }
+  .reel .lock { font-size: calc(var(--u) * 2); color: var(--dim); }
+  .reels.spinning .sym { filter: blur(1px); }
+  .payout { font-size: calc(var(--u) * 2.8); color: var(--accent); text-align: center; }
+  #modal .box { max-height: 96%; overflow-y: auto; }
+  #modal .box.slotBox { width: calc(var(--u) * 150); padding: calc(var(--u) * 3) calc(var(--u) * 4); }
+  .slotGrid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 3); align-items: start; }
+  .slotLeft, .slotRight { display: flex; flex-direction: column; gap: calc(var(--u) * 1.5); }
+  .slotLeft .strips { flex-direction: column; align-items: stretch; }
+  .slotLeft .strip { width: auto; flex-wrap: nowrap; justify-content: flex-start; gap: calc(var(--u) * 0.5); }
+  .slotLeft .stripHead { width: calc(var(--u) * 8); text-align: left; }
+  .rules { line-height: 1.7; }
+  .holdHint { font-size: calc(var(--u) * 2.6); color: #cfeaf3; background: #12232b; border: 1px solid #3e6878; border-radius: calc(var(--u) * 1); padding: calc(var(--u) * 1); }
   .intelHead { font-size: calc(var(--u) * 2.2); color: #b8a46a; }
   #msg { font-size: calc(var(--u) * 2.6); min-height: calc(var(--u) * 7); line-height: 1.5; }
   #msg.err { color: var(--hp); }
@@ -173,7 +204,7 @@
     bat: { id: "bat", name: "\u56DE\u58F0\u8760", hp: 35, atk: 25, def: 6, traits: ["firstStrike"], gold: 9 },
     wraith: { id: "wraith", name: "\u6EBA\u9B42", hp: 80, atk: 28, def: 10, traits: ["lifesteal"], gold: 16 },
     crab: { id: "crab", name: "\u88C2\u5CA9\u87F9", hp: 70, atk: 30, def: 12, traits: ["thorns"], gold: 16 },
-    guardian: { id: "guardian", name: "\u77F3\u9CDE\u5B88\u536B", hp: 300, atk: 40, def: 18, traits: ["double"], elite: true, gold: 50 }
+    guardian: { id: "guardian", name: "\u77F3\u9CDE\u5B88\u536B", hp: 90, atk: 26, def: 14, traits: ["double"], elite: true, gold: 50 }
   };
   var ITEM_NAMES = {
     smallPotion: "\u5C0F\u8840\u74F6",
@@ -182,6 +213,16 @@
     blueGem: "\u9752\u6676",
     key: "\u9AA8\u94A5",
     gold: "\u91D1\u5E01\u888B"
+  };
+  var WEAPONS = {
+    boneKnife: { id: "boneKnife", name: "\u9AA8\u5200", desc: "\u653B\u51FB +4", atk: 4, def: 0, sell: 25 },
+    harpoon: { id: "harpoon", name: "\u9C7C\u53C9", desc: "\u6BCF\u573A\u6218\u6597\u5F00\u59CB\u5148\u523A\u4E00\u4E0B\uFF08\u591A\u4E00\u6B21\u653B\u51FB\uFF09", atk: 0, def: 0, firstHit: true, sell: 25 },
+    hammer: { id: "hammer", name: "\u7834\u58F3\u9524", desc: "\u653B\u51FB\u65E0\u89C6\u602A\u7269 4 \u70B9\u9632\u5FA1", atk: 0, def: 0, pierce: 4, sell: 30 },
+    mossBlade: { id: "mossBlade", name: "\u82D4\u8863\u77ED\u5251", desc: "\u6BCF\u6B21\u51FB\u6740\u56DE\u590D 8 \u751F\u547D", atk: 0, def: 0, killHeal: 8, sell: 25 },
+    bellStaff: { id: "bellStaff", name: "\u56DE\u58F0\u94C3\u6756", desc: '\u653B\u51FB +1\uFF1B\u654C\u4EBA\u7684"\u5148\u653B"\u5931\u6548', atk: 1, def: 0, noFirstStrike: true, sell: 25 },
+    saltDagger: { id: "saltDagger", name: "\u76D0\u6676\u5315\u9996", desc: "\u5BF9\u4F1A\u5438\u8840\u7684\u602A\u4F24\u5BB3\u7FFB\u500D", atk: 0, def: 0, antiLifesteal: true, sell: 25 },
+    rustSword: { id: "rustSword", name: "\u9508\u8680\u5927\u5251", desc: "\u653B\u51FB +9\uFF0C\u9632\u5FA1 \u22125\uFF08\u8BC5\u5492\uFF09", atk: 9, def: -5, sell: 35 },
+    wellHook: { id: "wellHook", name: "\u4E95\u795E\u7684\u94A9", desc: "\u6BCF\u6B21\u7B7E\u5951\u7EA6\uFF0C\u62BC\u91D1 \u221220", atk: 0, def: 0, contractDiscount: 20, sell: 40 }
   };
   var CHARACTERS = {
     digger: {
@@ -197,13 +238,23 @@
   };
 
   // src/core/combat.ts
+  function effectiveStats(hero) {
+    var _a2, _b;
+    const w = hero.weapon ? WEAPONS[hero.weapon] : void 0;
+    return { atk: hero.atk + ((_a2 = w == null ? void 0 : w.atk) != null ? _a2 : 0), def: hero.def + ((_b = w == null ? void 0 : w.def) != null ? _b : 0) };
+  }
   var MAX_ROUNDS = 1e3;
   function simulateCombat(hero, m) {
-    const heroHit = Math.max(hero.atk - m.def, 0);
+    var _a2;
+    const w = hero.weapon ? WEAPONS[hero.weapon] : void 0;
+    const { atk, def } = effectiveStats(hero);
+    const lifestealMon = m.traits.includes("lifesteal");
+    let heroHit = Math.max(atk - Math.max(m.def - ((_a2 = w == null ? void 0 : w.pierce) != null ? _a2 : 0), 0), 0);
+    if ((w == null ? void 0 : w.antiLifesteal) && lifestealMon) heroHit *= 2;
     if (heroHit === 0) return { canAttack: false, canWin: false, damage: 0, hits: 0 };
-    const monsterHit = Math.max(m.atk - hero.def, 0);
+    const monsterHit = Math.max(m.atk - def, 0);
     const hitsPerRound = m.traits.includes("double") ? 2 : 1;
-    const lifesteal = m.traits.includes("lifesteal");
+    const lifesteal = lifestealMon;
     const thorns = m.traits.includes("thorns");
     let mhp = m.hp;
     let damage = 0;
@@ -212,7 +263,13 @@
       damage += monsterHit;
       if (lifesteal) mhp = Math.min(m.hp, mhp + Math.floor(monsterHit / 2));
     };
-    if (m.traits.includes("firstStrike")) monsterAttack();
+    if (w == null ? void 0 : w.firstHit) {
+      mhp -= heroHit;
+      hits++;
+      if (thorns) damage += THORNS_DAMAGE;
+      if (mhp <= 0) return { canAttack: true, canWin: true, damage, hits };
+    }
+    if (m.traits.includes("firstStrike") && !(w == null ? void 0 : w.noFirstStrike)) monsterAttack();
     for (let round = 0; round < MAX_ROUNDS; round++) {
       mhp -= heroHit;
       hits++;
@@ -221,6 +278,130 @@
       for (let i = 0; i < hitsPerRound; i++) monsterAttack();
     }
     return { canAttack: true, canWin: false, damage, hits };
+  }
+
+  // src/core/slot.ts
+  var SYM_NAMES = {
+    blade: "\u9AA8\u5200",
+    hammer: "\u7834\u58F3\u9524",
+    harpoon: "\u9C7C\u53C9",
+    potion: "\u8840\u74F6",
+    coin: "\u91D1\u5E01",
+    leech: "\u4E95\u86ED"
+  };
+  var SYM_WEAPON = { blade: "boneKnife", hammer: "hammer", harpoon: "harpoon" };
+  var R = (s) => s.split(" ").map((x) => ({ \u5200: "blade", \u9524: "hammer", \u53C9: "harpoon", \u74F6: "potion", \u91D1: "coin", \u86ED: "leech" })[x]);
+  var SLOTS = {
+    risky: {
+      id: "risky",
+      name: "\u9AA8\u8F6E",
+      desc: "\u6B66\u5668\u591A\uFF0C\u4E95\u86ED\u4E5F\u591A",
+      reels: [
+        R("\u5200 \u5200 \u9524 \u53C9 \u86ED \u86ED \u91D1 \u74F6"),
+        R("\u5200 \u9524 \u9524 \u53C9 \u86ED \u86ED \u91D1 \u74F6"),
+        R("\u5200 \u9524 \u53C9 \u53C9 \u86ED \u86ED \u91D1 \u74F6")
+      ]
+    },
+    steady: {
+      id: "steady",
+      name: "\u82D4\u8F6E",
+      desc: "\u8840\u74F6\u548C\u91D1\u5E01\u591A\uFF0C\u6B66\u5668\u5F88\u5C11\uFF08\u4E09\u8FDE\u9AA8\u5200\u6781\u96BE\uFF0C\u4F46\u4E24\u628A\u9AA8\u5200\u80FD\u6362\u8D64\u6676\uFF09",
+      reels: [
+        R("\u74F6 \u74F6 \u74F6 \u91D1 \u91D1 \u5200 \u86ED \u91D1"),
+        R("\u74F6 \u74F6 \u91D1 \u91D1 \u91D1 \u5200 \u86ED \u74F6"),
+        R("\u74F6 \u74F6 \u91D1 \u91D1 \u74F6 \u5200 \u86ED \u91D1")
+      ]
+    }
+  };
+  var LEECH_BITE = 15;
+  var LEECH_TRIPLE = 60;
+  var POTION_HP = 40;
+  var COIN_GOLD = 15;
+  function spinPrice(spins) {
+    return Math.round(20 * Math.pow(1.5, spins) / 5) * 5;
+  }
+  function bloodPrice(gold) {
+    return Math.ceil(gold * 1.5);
+  }
+  function newSlotState() {
+    return { spins: 0, draws: 0, pending: null };
+  }
+  function payout(r) {
+    const p = { gems: 0, hp: 0, gold: 0, lines: [] };
+    const count = (s) => r.filter((x) => x === s).length;
+    for (const s of ["blade", "hammer", "harpoon"]) {
+      if (count(s) === 3) {
+        p.weapon = SYM_WEAPON[s];
+        p.lines.push(`\u4E09\u8FDE${SYM_NAMES[s]}\uFF1A\u5F97\u5230\u6B66\u5668\u300C${SYM_NAMES[s]}\u300D`);
+      } else if (count(s) === 2) {
+        p.gems++;
+        p.lines.push(`\u4E24\u4E2A${SYM_NAMES[s]}\uFF1A\u5F97\u5230\u4E00\u9897\u8D64\u6676`);
+      }
+    }
+    if (count("potion") >= 2) {
+      p.hp += count("potion") * POTION_HP;
+      p.lines.push(`${count("potion")} \u4E2A\u8840\u74F6\uFF1A+${count("potion") * POTION_HP} \u751F\u547D`);
+    }
+    if (count("coin") >= 2) {
+      p.gold += count("coin") * COIN_GOLD;
+      p.lines.push(`${count("coin")} \u4E2A\u91D1\u5E01\uFF1A+${count("coin") * COIN_GOLD} \u91D1\u5E01`);
+    }
+    if (!p.lines.length) p.lines.push("\u4EC0\u4E48\u90FD\u6CA1\u6709");
+    return p;
+  }
+  function leechBite(r, fresh) {
+    const n = r.filter((s, i) => s === "leech" && fresh[i]).length;
+    if (r.every((s) => s === "leech") && fresh.every(Boolean)) return LEECH_TRIPLE;
+    return n * LEECH_BITE;
+  }
+  function draw(seed, key, n) {
+    let a = (seed ^ Math.imul(key + 1, 2654435761) ^ Math.imul(n + 1, 2246822507)) >>> 0;
+    a = Math.imul(a ^ a >>> 16, 2146121005) >>> 0;
+    a = Math.imul(a ^ a >>> 15, 2221713035) >>> 0;
+    return ((a ^ a >>> 16) >>> 0) / 4294967296;
+  }
+  function roll(def, st, seed, key, held = [false, false, false]) {
+    const result = [];
+    const fresh = [];
+    for (let i = 0; i < 3; i++) {
+      if (held[i] && st.pending) {
+        result.push(st.pending[i]);
+        fresh.push(false);
+        continue;
+      }
+      const reel = def.reels[i];
+      result.push(reel[Math.floor(draw(seed, key, st.draws++) * reel.length)]);
+      fresh.push(true);
+    }
+    return { result, fresh };
+  }
+  function tripleWeaponOdds(def) {
+    let p = 0;
+    for (const s of ["blade", "hammer", "harpoon"]) {
+      p += def.reels.reduce((acc, reel) => acc * reel.filter((x) => x === s).length / reel.length, 1);
+    }
+    return p;
+  }
+  function holdHint(def, pending, held) {
+    const heldSyms = pending.filter((_, i) => held[i]);
+    if (!heldSyms.length) return "";
+    const pctS = (x) => `${Math.round(x * 1e3) / 10}%`;
+    const target = heldSyms[0];
+    if (heldSyms.some((s) => s !== target)) return "\u9501\u4F4F\u7684\u56FE\u6848\u4E0D\u4E00\u6837\uFF0C\u91CD\u8F6C\u51D1\u4E0D\u6210\u4E09\u8FDE\uFF1B\u53EA\u80FD\u6307\u671B\u53E6\u4E00\u4E2A\u8F6C\u8F6E\u51FA\u597D\u4E1C\u897F\u3002";
+    if (target === "leech") return "\u9501\u4F4F\u4E95\u86ED\u4E0D\u4F1A\u8BA9\u5B83\u518D\u54AC\u4F60\uFF0C\u4F46\u5B83\u4E5F\u4E0D\u4F1A\u53D8\u6210\u522B\u7684\u3002";
+    const free = def.reels.filter((_, i) => !held[i]);
+    const each = free.map((reel) => reel.filter((x) => x === target).length / reel.length);
+    const all = each.reduce((a, b) => a * b, 1);
+    const atLeastOne = 1 - each.reduce((a, b) => a * (1 - b), 1);
+    const name = SYM_NAMES[target];
+    if (SYM_WEAPON[target]) {
+      return heldSyms.length === 2 ? `\u91CD\u8F6C\u5269\u4E0B\u90A3\u4E2A\u8F6C\u8F6E\uFF0C\u51D1\u6210\u4E09\u8FDE${name}\uFF08\u5F97\u5230\u6B66\u5668\uFF09\u7684\u6982\u7387 ${pctS(all)}\uFF1B\u6CA1\u4E2D\u4E5F\u8FD8\u4FDD\u6709\u4E24\u4E2A${name}\uFF08\u4E00\u9897\u8D64\u6676\uFF09\u3002` : `\u91CD\u8F6C\u53E6\u5916\u4E24\u4E2A\u8F6C\u8F6E\uFF1A\u51D1\u6210\u4E09\u8FDE${name}\u7684\u6982\u7387 ${pctS(all)}\uFF0C\u81F3\u5C11\u518D\u51FA\u4E00\u4E2A${name}\uFF08\u4E24\u4E2A\u80FD\u6362\u8D64\u6676\uFF09\u7684\u6982\u7387 ${pctS(atLeastOne)}\u3002`;
+    }
+    return heldSyms.length === 2 ? `\u5DF2\u7ECF\u6709\u4E24\u4E2A${name}\u4E86\uFF0C\u91CD\u8F6C\u5269\u4E0B\u90A3\u4E2A\u8F6C\u8F6E\uFF0C\u518D\u51FA\u4E00\u4E2A${name}\u7684\u6982\u7387 ${pctS(all)}\u3002` : `\u91CD\u8F6C\u53E6\u5916\u4E24\u4E2A\u8F6C\u8F6E\uFF0C\u81F3\u5C11\u518D\u51FA\u4E00\u4E2A${name}\uFF08\u51D1\u591F\u4E24\u4E2A\u624D\u6709\u5956\u52B1\uFF09\u7684\u6982\u7387 ${pctS(atLeastOne)}\u3002`;
+  }
+  function machineOdds(def) {
+    const noLeech = def.reels.reduce((acc, reel) => acc * reel.filter((x) => x !== "leech").length / reel.length, 1);
+    return { weapon: tripleWeaponOdds(def), anyLeech: 1 - noLeech };
   }
 
   // src/core/floor.ts
@@ -244,7 +425,9 @@
     v: { kind: "monster", id: "bat" },
     g: { kind: "monster", id: "wraith" },
     x: { kind: "monster", id: "crab" },
-    G: { kind: "monster", id: "guardian" }
+    G: { kind: "monster", id: "guardian" },
+    S: { kind: "slot", id: "risky" },
+    T: { kind: "slot", id: "steady" }
   };
   function parseFloor(def) {
     const h = def.map.length;
@@ -280,6 +463,7 @@
 
   // src/core/rules.ts
   function interact(cell, hero, floor, ch, allowFatal = false) {
+    var _a2;
     switch (cell.kind) {
       case "monster": {
         const m = MONSTERS[cell.id];
@@ -289,7 +473,8 @@
         else if (!r.canWin) reason = `\u6253\u4E0D\u6B7B${m.name}\uFF1A\u5B83\u56DE\u8840\u6BD4\u4F60\u6253\u5F97\u5FEB`;
         else if (r.damage >= hero.hp) reason = `\u6253${m.name}\u8981\u635F\u5931 ${r.damage} \u751F\u547D\uFF0C\u4F60\u4F1A\u6B7B`;
         if (reason) return allowFatal ? { ok: true, hero: { ...hero, hp: 0 }, fatal: true, reason } : { ok: false, reason };
-        return { ok: true, hero: { ...hero, hp: hero.hp - r.damage, gold: hero.gold + m.gold } };
+        const heal = hero.weapon ? (_a2 = WEAPONS[hero.weapon].killHeal) != null ? _a2 : 0 : 0;
+        return { ok: true, hero: { ...hero, hp: hero.hp - r.damage + heal, gold: hero.gold + m.gold } };
       }
       case "item": {
         const h = { ...hero };
@@ -344,6 +529,11 @@
       reward: `\u9000\u8FD8 ${c.refund} \u751F\u547D${c.gold ? `\uFF0C\u518D\u7ED9 ${c.gold} \u91D1\u5E01` : ""}`
     };
   }
+  function depositFor(c, hero) {
+    var _a2;
+    const d = hero.weapon ? (_a2 = WEAPONS[hero.weapon].contractDiscount) != null ? _a2 : 0 : 0;
+    return Math.max(0, c.deposit - d);
+  }
   function keepVersion(floor) {
     return { ...floor, map: floor.map.map((r) => r.replace(/[hH]/g, "#")) };
   }
@@ -386,7 +576,7 @@
           if (seen[n]) continue;
           seen[n] = 1;
           const c = cells[n];
-          if (c.kind === "wall") continue;
+          if (c.kind === "wall" || c.kind === "slot") continue;
           if (c.kind === "exit") {
             atExit = true;
             continue;
@@ -460,10 +650,10 @@
     return { solvable: exits.length > 0, best, bestAll, pareto, statesVisited: nodes.size };
   }
   function paretoFilter(list) {
-    const dominated = (a, b) => b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
+    const dominated = (a, b) => a.weapon === b.weapon && b.hp >= a.hp && b.atk >= a.atk && b.def >= a.def && b.keys >= a.keys && (b.hp > a.hp || b.atk > a.atk || b.def > a.def || b.keys > a.keys);
     const uniq = [];
     for (const x of list) {
-      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys)) uniq.push(x);
+      if (!uniq.some((u) => u.hp === x.hp && u.atk === x.atk && u.def === x.def && u.keys === x.keys && u.weapon === x.weapon)) uniq.push(x);
     }
     return uniq.filter((a) => !uniq.some((b) => dominated(a, b)));
   }
@@ -492,7 +682,7 @@
         seen[n] = 1;
         const c = cells[n];
         if (c.kind === "exit") return false;
-        if (c.kind !== "wall") stack.push(n);
+        if (c.kind !== "wall" && c.kind !== "slot") stack.push(n);
       }
     }
     return true;
@@ -552,8 +742,9 @@
   }
 
   // src/core/game.ts
+  var RENT_STAT_COST = 3;
   var Run = class _Run {
-    constructor(floors, characterId = "digger") {
+    constructor(floors, characterId = "digger", seed = 1) {
       this.floors = floors;
       this.floorIndex = 0;
       this.w = 0;
@@ -566,6 +757,13 @@
       this.status = "playing";
       /** 正在生效的契约 */
       this.contract = null;
+      /** 每台井中轮的状态，键是"层:格子" */
+      this.slots = {};
+      /** 本层井租交了没有 */
+      this.rentPaid = false;
+      /** 打败精英后等待三选一的武器 */
+      this.pendingWeapons = null;
+      this.seed = seed >>> 0;
       this.ch = CHARACTERS[characterId];
       this.hero = { ...this.ch.base };
       this.loadFloor(0);
@@ -583,6 +781,7 @@
       this.steps = 0;
       this.kills = 0;
       this.status = "playing";
+      this.rentPaid = false;
       this.floorStart = this.snapshot();
     }
     snapshot() {
@@ -615,6 +814,111 @@
     /** 本层的契约是否还在守约中 */
     contractActive() {
       return !!this.contract && this.contract.floorIndex === this.floorIndex && !this.contract.broken;
+    }
+    // ---------- 武器 ----------
+    /** 换上新武器；旧武器当场卖掉换金币 */
+    equip(id) {
+      const old = this.hero.weapon;
+      this.hero.weapon = id;
+      if (old && old !== id) {
+        this.hero.gold += WEAPONS[old].sell;
+        return `\u6362\u4E0A${WEAPONS[id].name}\uFF0C\u65E7\u7684${WEAPONS[old].name}\u5356\u4E86 ${WEAPONS[old].sell} \u91D1\u5E01`;
+      }
+      return `\u62FF\u5230${WEAPONS[id].name}`;
+    }
+    rollWeaponChoices() {
+      const pool = Object.keys(WEAPONS).filter((w) => w !== this.hero.weapon);
+      const out = [];
+      let n = 0;
+      while (out.length < 3 && out.length < pool.length) {
+        const r = (Math.imul(this.seed ^ this.floorIndex * 7919 + ++n * 104729, 2654435761) >>> 0) % pool.length;
+        if (!out.includes(pool[r])) out.push(pool[r]);
+      }
+      return out;
+    }
+    chooseWeapon(id) {
+      var _a2;
+      if (!((_a2 = this.pendingWeapons) == null ? void 0 : _a2.includes(id))) return "";
+      this.pendingWeapons = null;
+      return this.equip(id);
+    }
+    // ---------- 井中轮 ----------
+    slotState(i) {
+      var _a2, _b;
+      const key = `${this.floorIndex}:${i}`;
+      return (_b = (_a2 = this.slots)[key]) != null ? _b : _a2[key] = newSlotState();
+    }
+    /** 下一次转的价格；hold 为 true 时是锁轴重转（半价） */
+    slotPrice(i, hold) {
+      const base2 = spinPrice(this.slotState(i).spins);
+      const gold = hold ? Math.ceil(base2 / 2 / 5) * 5 : base2;
+      return { gold, blood: bloodPrice(gold) };
+    }
+    /**
+     * 转一次井中轮。held 不为空时是锁轴重转：放弃当前结果，锁住的转轮不变，其余重转。
+     * 不锁轴时如果机器上还有没收下的结果，先自动收下。
+     */
+    slotSpin(i, pay, held) {
+      const c = this.cells[i];
+      if (this.status !== "playing" || c.kind !== "slot") return { ok: false, msg: "" };
+      if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: "\u7AD9\u5728\u4E95\u4E2D\u8F6E\u65C1\u8FB9\u624D\u80FD\u7528\u5B83" };
+      const st = this.slotState(i);
+      const hold = !!held && held.some(Boolean);
+      if (hold && (!st.pending || held.every(Boolean))) return { ok: false, msg: "\u8981\u9501\u4F4F\u4E00\u4E24\u4E2A\u8F6C\u8F6E\uFF0C\u7559\u81F3\u5C11\u4E00\u4E2A\u91CD\u8F6C" };
+      if (!hold && st.pending) this.slotCollect(i);
+      const price = this.slotPrice(i, hold);
+      if (pay === "gold") {
+        if (this.hero.gold < price.gold) return { ok: false, msg: `\u91D1\u5E01\u4E0D\u591F\uFF08\u8981 ${price.gold}\uFF09` };
+        this.hero.gold -= price.gold;
+      } else {
+        if (this.hero.hp <= price.blood) return { ok: false, msg: `\u751F\u547D\u4E0D\u591F\u62BC\uFF08\u8981 ${price.blood}\uFF09` };
+        this.hero.hp -= price.blood;
+      }
+      const def = SLOTS[c.id];
+      const { result, fresh } = roll(def, st, this.seed, this.floorIndex * 1e3 + i, hold ? held : void 0);
+      st.spins++;
+      st.pending = result;
+      const bite = leechBite(result, fresh);
+      this.hero.hp -= bite;
+      if (this.hero.hp <= 0) {
+        this.hero.hp = 0;
+        this.status = "dead";
+        return { ok: true, msg: "\u4F60\u5012\u4E0B\u4E86\u3002\u4E95\u86ED\u5438\u5E72\u4E86\u4F60\u6700\u540E\u4E00\u70B9\u8840", result, fresh, bite };
+      }
+      return { ok: true, msg: bite ? `\u4E95\u86ED\u54AC\u6389\u4E86 ${bite} \u751F\u547D` : "", result, fresh, bite };
+    }
+    /** 收下机器上当前的结果 */
+    slotCollect(i) {
+      const c = this.cells[i];
+      const st = this.slotState(i);
+      if (c.kind !== "slot" || !st.pending) return [];
+      const p = payout(st.pending);
+      st.pending = null;
+      const lines = [...p.lines];
+      if (p.gems) this.hero.atk += p.gems * (this.floor.gem + this.ch.gemBonus);
+      this.hero.hp += p.hp;
+      this.hero.gold += p.gold;
+      if (p.weapon) lines.push(this.equip(p.weapon));
+      return lines;
+    }
+    // ---------- 井租 ----------
+    /** 本层出口要交的井租（交过了就是 0） */
+    rentDue() {
+      return this.floor.rent && !this.rentPaid ? this.floor.rent : 0;
+    }
+    payRent(method) {
+      const due = this.rentDue();
+      if (!due) return { ok: true, msg: "" };
+      if (method === "gold") {
+        if (this.hero.gold < due) return { ok: false, msg: `\u91D1\u5E01\u4E0D\u591F\uFF08\u8981 ${due}\uFF0C\u4F60\u6709 ${this.hero.gold}\uFF09` };
+        this.hero.gold -= due;
+      } else if (method === "atk") {
+        this.hero.atk -= RENT_STAT_COST;
+      } else {
+        this.hero.def -= RENT_STAT_COST;
+      }
+      this.rentPaid = true;
+      return { ok: true, msg: method === "gold" ? `\u4EA4\u4E86 ${due} \u91D1\u5E01\u4E95\u79DF` : `\u7528 ${RENT_STAT_COST} \u70B9${method === "atk" ? "\u653B\u51FB" : "\u9632\u5FA1"}\u62B5\u4E86\u4E95\u79DF` };
     }
     /** 本层还能不能活着走到出口 */
     floorCheck() {
@@ -662,6 +966,10 @@
           return { title: "\u51FA\u53E3", lines: this.eliteAlive() ? ["\u7CBE\u82F1\u5B88\u536B\u8FD8\u6D3B\u7740\uFF0C\u51FA\u53E3\u88AB\u5C01\u4F4F\u4E86"] : ["\u8D70\u5230\u8FD9\u91CC\u8FDB\u5165\u4E0B\u4E00\u5C42"] };
         case "wall":
           return { title: "\u4E95\u58C1", lines: [] };
+        case "slot": {
+          const d = SLOTS[c.id];
+          return { title: `\u4E95\u4E2D\u8F6E\xB7${d.name}`, lines: [d.desc, "\u7AD9\u5230\u65C1\u8FB9\u70B9\u5B83\uFF0C\u5C31\u80FD\u82B1\u91D1\u5E01\u6216\u751F\u547D\u8F6C\u4E00\u6B21"] };
+        }
         default:
           return { title: "\u7A7A\u5730", lines: [] };
       }
@@ -692,6 +1000,7 @@
       if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: "" };
       const c = this.cells[i];
       if (c.kind === "wall") return { ok: false, msg: "" };
+      if (c.kind === "slot") return { ok: false, msg: "\u7AD9\u5728\u4E95\u4E2D\u8F6E\u65C1\u8FB9\u624D\u80FD\u7528\u5B83" };
       if (c.kind === "exit" && this.eliteAlive()) return { ok: false, msg: "\u7CBE\u82F1\u5B88\u536B\u8FD8\u6D3B\u7740\uFF0C\u51FA\u53E3\u88AB\u5C01\u4F4F\u4E86" };
       if (c.kind === "floor" || c.kind === "exit") {
         this.pos = i;
@@ -716,6 +1025,7 @@
       if (c.kind === "monster") {
         this.kills++;
         msg = `\u51FB\u8D25${MONSTERS[c.id].name}\uFF0C\u635F\u5931 ${lost} \u751F\u547D\uFF0C\u83B7\u5F97 ${MONSTERS[c.id].gold} \u91D1\u5E01`;
+        if (MONSTERS[c.id].elite && this.floor.eliteReward) this.pendingWeapons = this.rollWeaponChoices();
       } else {
         this.pos = i;
         msg = c.kind === "item" ? `\u83B7\u5F97${ITEM_NAMES[c.id]}` : c.door === "bone" ? "\u6253\u5F00\u9AA8\u95E8" : `\u7A7F\u8FC7\u8840\u95E8\uFF0C\u635F\u5931 ${lost} \u751F\u547D`;
@@ -765,6 +1075,7 @@
      */
     finishFloor(sellKeys, sign = false) {
       if (this.status !== "floorDone") return;
+      if (this.rentDue()) return;
       const s = this.exitSummary();
       this.hero.gold += s.potionGold;
       if (s.contract) {
@@ -775,11 +1086,12 @@
         this.contract = null;
       }
       const offer = this.offeredContract();
-      if (sign && offer && this.hero.hp > offer.deposit) {
-        this.hero.hp -= offer.deposit;
+      if (sign && offer && this.hero.hp > depositFor(offer, this.hero)) {
+        const deposit = depositFor(offer, this.hero);
+        this.hero.hp -= deposit;
         this.hero.atk += offer.atk;
         this.hero.def += offer.def;
-        this.contract = { def: offer, floorIndex: this.floorIndex + 1, broken: false };
+        this.contract = { def: { ...offer, deposit }, floorIndex: this.floorIndex + 1, broken: false };
       }
       if (sellKeys) {
         this.hero.gold += s.keyGold;
@@ -798,18 +1110,25 @@
         floorStart: this.floorStart,
         totalSteps: this.totalSteps,
         status: this.status,
-        contract: this.contract
+        contract: this.contract,
+        seed: this.seed,
+        slots: this.slots,
+        rentPaid: this.rentPaid,
+        pendingWeapons: this.pendingWeapons
       };
     }
     static load(floors, s) {
-      var _a2;
-      const run2 = new _Run(floors, s.characterId);
+      var _a2, _b, _c, _d, _e;
+      const run2 = new _Run(floors, s.characterId, (_a2 = s.seed) != null ? _a2 : 1);
       run2.loadFloor(s.floorIndex);
       run2.floorStart = s.floorStart;
       run2.restore(s.current);
       run2.totalSteps = s.totalSteps;
       run2.status = s.status;
-      run2.contract = (_a2 = s.contract) != null ? _a2 : null;
+      run2.contract = (_b = s.contract) != null ? _b : null;
+      run2.slots = (_c = s.slots) != null ? _c : {};
+      run2.rentPaid = (_d = s.rentPaid) != null ? _d : false;
+      run2.pendingWeapons = (_e = s.pendingWeapons) != null ? _e : null;
       return run2;
     }
     /** 设计文档第八章的计分公式（步数项在开启坍塌前不计） */
@@ -1009,6 +1328,72 @@
       }
     ]
   };
+  var F4_GAMBLE = {
+    params: {
+      ...base,
+      name: "\u7B2C 4 \u5C42 \xB7 \u8D4C\u574A",
+      hint: "\u4E95\u58C1\u4E0A\u5D4C\u7740\u4E24\u53F0\u4E95\u4E2D\u8F6E\u3002\u7AD9\u5230\u65C1\u8FB9\u70B9\u5B83\uFF0C\u82B1\u91D1\u5E01\u6216\u8005\u751F\u547D\u8F6C\u4E00\u6B21\u3002\u4E0B\u4E00\u5C42\u5C31\u662F\u7CBE\u82F1\u3002",
+      bloodCost: 60
+    },
+    layouts: [
+      {
+        name: "\u8D4C\u574A",
+        variants: [{
+          note: "\u9AA8\u8F6E\uFF08\u6B66\u5668\u591A\u3001\u4E95\u86ED\u591A\uFF09\u548C\u82D4\u8F6E\uFF08\u8840\u74F6\u91D1\u5E01\u591A\uFF09\u4E00\u5DE6\u4E00\u53F3\uFF0C\u4ECE\u5165\u53E3\u8D70\u8FC7\u53BB\u4E0D\u7528\u6253\u602A\uFF1B\u56DB\u888B\u91D1\u5E01\u91CC\u6709\u4E24\u888B\u8981\u6253\u602A\u624D\u62FF\u5F97\u5230",
+          intel: "\u4E0B\u4E00\u5C42\u662F\u8D4C\u574A\uFF1A\u4E24\u53F0\u4E95\u4E2D\u8F6E\uFF0C\u4E00\u53F0\u6B66\u5668\u591A\uFF0C\u4E00\u53F0\u8840\u74F6\u591A\u3002",
+          map: [
+            "@...v...$",
+            ".##S#T##.",
+            "......$eh",
+            "####.####",
+            ".$..e..r.",
+            ".#######.",
+            "....>...."
+          ]
+        }]
+      }
+    ]
+  };
+  var F5_ELITE = {
+    params: {
+      ...base,
+      name: "\u7B2C 5 \u5C42 \xB7 \u9CDE\u5385",
+      hint: "\u77F3\u9CDE\u5B88\u536B\u5C01\u4F4F\u4E86\u51FA\u53E3\uFF0C\u5B83\u6BCF\u56DE\u5408\u6253\u4F60\u4E24\u4E0B\u3002\u5148\u628A\u524D\u9762\u4E09\u6761\u5C0F\u9053\u91CC\u7684\u5B9D\u77F3\u62FF\u5230\u624B\uFF0C\u518D\u53BB\u6253\u5B83\u3002",
+      bloodCost: 60,
+      eliteReward: true
+    },
+    layouts: [
+      {
+        name: "\u4E09\u9053",
+        variants: [
+          {
+            note: "\u4E00\u9897\u8D64\u6676\u3001\u4E00\u9897\u9752\u6676\u3001\u4E00\u74F6\u8840\u74F6\uFF0C\u5206\u522B\u85CF\u5728\u4E09\u6761\u5C0F\u9053\u91CC\uFF1B\u9508\u7532\u866B\u540E\u9762\u53EA\u6709\u4E00\u888B\u91D1\u5E01\uFF0C\u653B\u51FB\u4E0D\u591F\u5C31\u522B\u53BB",
+            map: [
+              "@.m.r.e.h",
+              ".#######.",
+              ".v.b.f.$.",
+              ".#######.",
+              ".c.$...e.",
+              "####G####",
+              "####>####"
+            ]
+          },
+          {
+            note: "\u5B9D\u77F3\u6362\u5230\u4E86\u4E2D\u9053\uFF0C\u4E0A\u9053\u662F\u9752\u6676\u548C\u91D1\u5E01\uFF1B\u56DE\u58F0\u8760\u5148\u624B\uFF0C\u9632\u5FA1\u4F4E\u7684\u4EBA\u8981\u5148\u62FF\u9752\u6676",
+            map: [
+              "@.v.b.e.$",
+              ".#######.",
+              ".m.r.f.h.",
+              ".#######.",
+              ".e.$...c.",
+              "####G####",
+              "####>####"
+            ]
+          }
+        ]
+      }
+    ]
+  };
   var DEMO_POOLS = [
     // ---------------- 第 1 层：9×7 教学层 ----------------
     {
@@ -1114,6 +1499,7 @@
       params: {
         ...base,
         name: "\u7B2C 3 \u5C42 \xB7 \u56DE\u58F0",
+        rent: 30,
         hint: "\u56DE\u58F0\u8760\u4F1A\u5148\u6253\u4F60\u4E00\u4E0B\uFF1B\u6EBA\u9B42\u4F1A\u5438\u8840\uFF0C\u653B\u51FB\u4E0D\u591F\u6839\u672C\u6253\u4E0D\u6B7B\u3002\u6253\u4E0D\u8FC7\u7684\u602A\uFF0C\u4E5F\u8BB8\u53EF\u4EE5\u7ED5\u5F00\uFF1F",
         bloodCost: 80
       },
@@ -1235,7 +1621,9 @@
           ]
         }
       ]
-    }
+    },
+    F4_GAMBLE,
+    F5_ELITE
   ];
   function buildFloor(pool, choice) {
     const layout = pool.layouts[choice.layout];
@@ -1362,8 +1750,9 @@
     $("hud").innerHTML = `
         <div class="title"><span class="name">${name != null ? name : num}</span><span class="sub">${num} / \u5171 ${run.floors.length} \u5C42 \xB7 ${layout}</span></div>
         ${stat("var(--hp)", "\u8840", h.hp, b("hp"))}
-        ${stat("var(--atk)", "\u653B", h.atk, b("atk"))}
-        ${stat("var(--def)", "\u9632", h.def, b("def"))}
+        ${stat("var(--atk)", "\u653B", effectiveStats(h).atk, b("atk") || b("weapon"))}
+        ${stat("var(--def)", "\u9632", effectiveStats(h).def, b("def") || b("weapon"))}
+        <div class="weaponChip${b("weapon") ? " bump" : ""}" title="${h.weapon ? WEAPONS[h.weapon].desc : "\u8FD8\u6CA1\u6709\u6B66\u5668"}">\u2694 ${h.weapon ? WEAPONS[h.weapon].name : "\u65E0\u6B66\u5668"}</div>
         ${stat("var(--key)", "\u94A5", h.keys, b("keys"))}
         ${stat("var(--gold)", "\u91D1", h.gold, b("gold"))}
         ${stat("#3a4a52", "\u6B65", run.steps, false, "steps")}`;
@@ -1375,6 +1764,8 @@
     switch (c.kind) {
       case "wall":
         return { cls: "wall", html: "" };
+      case "slot":
+        return { cls: `slot ${c.id}`, html: `<span class="glyph">\u8F6E</span><span class="sub">${SLOTS[c.id].name}</span>` };
       case "floor":
         return { cls: "floor", html: "" };
       case "exit":
@@ -1524,7 +1915,7 @@
     }
     tip.style.display = "block";
   }
-  var ACTION = { monster: "\u51FA\u624B", door: "\u5F00\u95E8", item: "\u62FF\u53D6", exit: "\u4E0B\u697C" };
+  var ACTION = { monster: "\u51FA\u624B", door: "\u5F00\u95E8", item: "\u62FF\u53D6", exit: "\u4E0B\u697C", slot: "\u53BB\u8F6C\u4E00\u628A" };
   function showInfo(i) {
     const title = $("infoTitle");
     const lines = $("infoLines");
@@ -1607,6 +1998,7 @@
   }
   function modal(html, buttons) {
     const box = $("modalBox");
+    box.classList.remove("slotBox");
     box.innerHTML = html + '<div class="btns" id="mbtns"></div>';
     const w = $("mbtns");
     for (const b of buttons) {
@@ -1658,6 +2050,10 @@
     }
     const next = (sell) => {
       var _a3;
+      if (run.rentDue()) {
+        showRent(() => next(sell));
+        return;
+      }
       recordContract(`\u5E26\u7740 ${((_a3 = s.contract) == null ? void 0 : _a3.kept) ? run.hero.hp + s.contract.def.refund : run.hero.hp} \u8840\u79BB\u5F00`);
       run.finishFloor(sell, pendingSign);
       pendingSign = false;
@@ -1788,6 +2184,13 @@
       if (askExit) confirmStairs();
       if (askFatal >= 0) confirmFatal(askFatal);
       if (askBreak >= 0) confirmBreak(askBreak);
+      if (run.pendingWeapons && run.status === "playing") showWeaponChoice();
+      else if (pendingSlot >= 0 && run.status === "playing") {
+        const i = pendingSlot;
+        pendingSlot = -1;
+        openSlot(i);
+      }
+      pendingSlot = -1;
     }
   }
   function confirmFatal(cell) {
@@ -1818,13 +2221,162 @@
     const c = run.offeredContract();
     if (!c) return "";
     const t = contractText(c);
-    const afford = run.hero.hp > c.deposit;
+    const dep = depositFor(c, run.hero);
+    const afford = run.hero.hp > dep;
     return `<div class="contract"><div class="contractHead">\u{1FA9D} \u697C\u68AF\u8FB9\u5782\u4E0B\u4E00\u679A\u94C1\u94A9\uFF0C\u94A9\u4E0A\u6302\u7740\u4E00\u7EB8\u5951\u7EA6</div>
-        <div class="contractRow"><span>\u62BC</span><b>${c.deposit} \u751F\u547D</b>\uFF08\u73B0\u5728\u5C31\u6263\uFF0C\u4F60\u6709 ${run.hero.hp}\uFF09</div>
+        <div class="contractRow"><span>\u62BC</span><b>${dep} \u751F\u547D</b>\uFF08\u73B0\u5728\u5C31\u6263\uFF0C\u4F60\u6709 ${run.hero.hp}\uFF09${dep < c.deposit ? "\u3000\u4E95\u795E\u7684\u94A9\uFF1A\u5C11\u62BC " + (c.deposit - dep) : ""}</div>
         <div class="contractRow"><span>\u5F97</span><b>${t.get}</b></div>
         <div class="contractRow"><span>\u7EA6</span><b>${t.cond}</b></div>
         <div class="contractRow"><span>\u8FD8</span><b>${t.reward}</b></div>
         <div class="small">\u4E0B\u4E00\u5C42\u53EF\u4EE5\u968F\u65F6\u559D\u8840\u74F6\uFF0C\u559D\u4E0B\u90A3\u4E00\u523B\u5C31\u7B97\u6BC1\u7EA6\uFF1A\u62BC\u4E0B\u7684\u751F\u547D\u5F52\u4E95\uFF0C\u62FF\u5230\u7684\u5C5E\u6027\u5F52\u4F60\u3002${afford ? "" : '<br><b class="warnText">\u4F60\u7684\u751F\u547D\u4E0D\u591F\u62BC\u3002</b>'}</div></div>`;
+  }
+  var SYM_SHORT = { blade: "\u5200", hammer: "\u9524", harpoon: "\u53C9", potion: "\u74F6", coin: "\u91D1", leech: "\u86ED" };
+  var symChip = (s, cls = "") => `<span class="sym s-${s} ${cls}">${SYM_SHORT[s]}</span>`;
+  var slotHeld = [false, false, false];
+  function openSlot(i) {
+    slotHeld = [false, false, false];
+    renderSlot(i);
+  }
+  function renderSlot(i, spinning = false, lastBite = 0, fresh = [true, true, true]) {
+    const c = run.cells[i];
+    if (c.kind !== "slot") return;
+    const def = SLOTS[c.id];
+    const st = run.slotState(i);
+    const odds = machineOdds(def);
+    const pct = (x) => `${Math.round(x * 1e3) / 10}%`;
+    const full = run.slotPrice(i, false);
+    const hold = run.slotPrice(i, true);
+    const pending = st.pending;
+    const heldN = slotHeld.filter(Boolean).length;
+    const strips = def.reels.map((reel, k) => `<div class="strip"><div class="stripHead">\u7B2C ${k + 1} \u8F6E</div>${reel.map((x) => symChip(x, "mini")).join("")}</div>`).join("");
+    const result = pending ? pending.map((x, k) => `<button class="reel${slotHeld[k] ? " held" : ""}${x === "leech" && fresh[k] && lastBite ? " bit" : ""}" data-k="${k}">${symChip(x, "big")}<span class="lock">${slotHeld[k] ? "\u{1F512} \u9501\u4F4F" : "\u70B9\u51FB\u9501\u4F4F"}</span></button>`).join("") : '<div class="small">\u8FD8\u6CA1\u8F6C\u3002</div>';
+    const p = pending ? payout(pending) : null;
+    const holdLine = pending && heldN > 0 && heldN < 3 ? `<div class="holdHint">\u{1F512} ${holdHint(def, pending, slotHeld)}<br><span class="small">\u9501\u8F74\u91CD\u8F6C\u4F1A\u653E\u5F03\u8FD9\u6B21\u7684\u5956\u52B1\uFF1B\u65B0\u8F6C\u51FA\u6765\u7684\u4E95\u86ED\u7167\u6837\u54AC\u4EBA\u3002</span></div>` : "";
+    const html = `<h2>\u4E95\u4E2D\u8F6E \xB7 ${def.name}</h2>
+        <div class="slotGrid">
+          <div class="slotLeft">
+            <p class="small">${def.desc}\u3002\u6BCF\u4E2A\u8F6C\u8F6E\u4E0A\u7684\u56FE\u6848\u90FD\u5370\u5728\u673A\u5668\u4E0A\uFF1A\u65B0\u8F6C\u4E00\u6B21\uFF0C\u4E09\u8FDE\u6B66\u5668\u7684\u6982\u7387 <b>${pct(odds.weapon)}</b>\uFF0C\u81F3\u5C11\u8F6C\u51FA\u4E00\u4E2A\u4E95\u86ED\u7684\u6982\u7387 <b>${pct(odds.anyLeech)}</b>\u3002</p>
+            <div class="strips">${strips}</div>
+            <div class="small rules">\u4E09\u8FDE\u6B66\u5668 \u2192 \u5F97\u5230\u8FD9\u628A\u6B66\u5668<br>\u4E24\u4E2A\u76F8\u540C\u6B66\u5668 \u2192 \u4E00\u9897\u8D64\u6676<br>\u4E24\u4E2A\u4EE5\u4E0A\u8840\u74F6 \u2192 \u6BCF\u4E2A +40 \u751F\u547D<br>\u4E24\u4E2A\u4EE5\u4E0A\u91D1\u5E01 \u2192 \u6BCF\u4E2A +15 \u91D1<br>\u6BCF\u4E2A\u65B0\u8F6C\u51FA\u7684\u4E95\u86ED \u2192 \u221215 \u751F\u547D\uFF08\u4E09\u4E2A \u221260\uFF09</div>
+          </div>
+          <div class="slotRight">
+            <div class="reels${spinning ? " spinning" : ""}">${result}</div>
+            ${p && !spinning ? `<div class="payout">\u6536\u4E0B\u53EF\u5F97\uFF1A${p.lines.join("\uFF1B")}</div>` : ""}
+            ${lastBite && !spinning ? `<div class="warnText">\u4E95\u86ED\u54AC\u6389\u4E86 ${lastBite} \u751F\u547D</div>` : ""}
+            ${holdLine}
+            <div class="small">\u4F60\u73B0\u5728\uFF1A\u751F\u547D ${run.hero.hp}\u3000\u91D1\u5E01 ${run.hero.gold}</div>
+            <div class="btns" id="slotBtns"></div>
+          </div>
+        </div>`;
+    $("modalBox").classList.add("slotBox");
+    $("modalBox").innerHTML = html;
+    $("modal").style.display = "flex";
+    const btns = $("slotBtns");
+    const add = (label, cls, on, disabled = false) => {
+      const b = document.createElement("button");
+      b.textContent = label;
+      b.className = cls;
+      b.disabled = disabled || spinning;
+      b.onclick = on;
+      btns.appendChild(b);
+    };
+    const spin = (pay, withHold) => {
+      const r = run.slotSpin(i, pay, withHold ? slotHeld : void 0);
+      if (!r.ok) {
+        setMsg(r.msg, true);
+        renderSlot(i);
+        return;
+      }
+      if (!withHold) slotHeld = [false, false, false];
+      renderHud();
+      saveRun();
+      const reelsEl = () => document.querySelector("#modalBox .reels");
+      renderSlot(i, true);
+      const syms = ["blade", "hammer", "harpoon", "potion", "coin", "leech"];
+      let t = 0;
+      const timer = setInterval(() => {
+        const el = reelsEl();
+        if (!el) return;
+        el.querySelectorAll(".reel").forEach((b, k) => {
+          if (r.fresh[k]) b.querySelector(".sym").outerHTML = symChip(syms[(t + k * 2) % syms.length], "big");
+        });
+        t++;
+      }, 70);
+      setTimeout(() => {
+        var _a2;
+        clearInterval(timer);
+        if (run.status === "dead") {
+          $("modal").style.display = "none";
+          render();
+          showDeath();
+          return;
+        }
+        renderSlot(i, false, (_a2 = r.bite) != null ? _a2 : 0, r.fresh);
+      }, 650);
+    };
+    if (pending) {
+      add("\u6536\u4E0B", "primary", () => {
+        const lines = run.slotCollect(i);
+        setMsg(lines.join("\uFF1B"));
+        renderHud();
+        saveRun();
+        slotHeld = [false, false, false];
+        renderSlot(i);
+      });
+      const canHold = heldN > 0 && heldN < 3;
+      add(`\u9501\u8F74\u91CD\u8F6C\uFF08${hold.gold} \u91D1\uFF09`, "", () => spin("gold", true), !canHold || run.hero.gold < hold.gold);
+      add(`\u9501\u8F74\u91CD\u8F6C\uFF08\u8840\u6CE8 ${hold.blood} \u8840\uFF09`, "danger", () => spin("blood", true), !canHold || run.hero.hp <= hold.blood);
+    }
+    add(`${pending ? "\u6536\u4E0B\uFF0C\u518D\u8F6C\u4E00\u6B21" : "\u8F6C\u4E00\u6B21"}\uFF08${full.gold} \u91D1\uFF09`, pending ? "" : "primary", () => spin("gold", false), run.hero.gold < full.gold);
+    add(`\u8840\u6CE8\uFF08${full.blood} \u8840\uFF09`, "danger", () => spin("blood", false), run.hero.hp <= full.blood);
+    add(pending ? "\u6536\u4E0B\uFF0C\u79BB\u5F00" : "\u79BB\u5F00", "wide", () => {
+      if (run.slotState(i).pending) setMsg(run.slotCollect(i).join("\uFF1B"));
+      $("modal").style.display = "none";
+      render();
+      saveRun();
+    });
+    document.querySelectorAll("#modalBox .reel").forEach((b) => b.onclick = () => {
+      const k = Number(b.dataset.k);
+      slotHeld[k] = !slotHeld[k];
+      renderSlot(i, false, 0, fresh);
+    });
+  }
+  function showRent(then) {
+    const due = run.rentDue();
+    const pay = (m) => {
+      const r = run.payRent(m);
+      if (!r.ok) {
+        setMsg(r.msg, true);
+        showRent(then);
+        return;
+      }
+      setMsg(r.msg);
+      renderHud();
+      then();
+    };
+    const btns = [
+      { label: `\u7528 ${RENT_STAT_COST} \u70B9\u653B\u51FB\u62B5`, on: () => pay("atk") },
+      { label: `\u7528 ${RENT_STAT_COST} \u70B9\u9632\u5FA1\u62B5`, on: () => pay("def") }
+    ];
+    if (run.hero.gold >= due) btns.push({ label: `\u4EA4 ${due} \u91D1\u5E01`, primary: true, on: () => pay("gold") });
+    modal(`<h2>\u4E95\u79DF</h2><p>\u697C\u68AF\u53E3\u5750\u7740\u6536\u79DF\u7684\u4E95\u795E\uFF1A\u8981\u4E0B\u697C\uFF0C\u5148\u4EA4 <b>${due}</b> \u91D1\u5E01\u7684\u4E95\u79DF\u3002</p>
+        <p>\u4F60\u6709 ${run.hero.gold} \u91D1\u5E01\u3002${run.hero.gold >= due ? "" : '<b class="warnText">\u91D1\u5E01\u4E0D\u591F\uFF0C\u53EA\u80FD\u7528\u5C5E\u6027\u62B5\u3002</b>'}</p>
+        <p class="small">\u4EA4\u4E0D\u4E0A\u53EF\u4EE5\u7528 ${RENT_STAT_COST} \u70B9\u653B\u51FB\u6216\u9632\u5FA1\u62B5\uFF08\u6C38\u4E45\u51CF\u5C11\uFF09\u3002</p>`, btns);
+  }
+  function showWeaponChoice() {
+    const list = run.pendingWeapons;
+    if (!list) return;
+    const cur = run.hero.weapon;
+    const cards = list.map((w) => `<div class="row"><span>\u2694 ${WEAPONS[w].name}</span><b>${WEAPONS[w].desc}</b></div>`).join("");
+    modal(
+      `<h2>\u5B88\u536B\u5012\u4E0B\u4E86</h2><p>\u5B83\u7684\u9CDE\u7532\u4E0B\u538B\u7740\u4E09\u4EF6\u4E1C\u897F\uFF0C\u4F60\u53EA\u80FD\u62FF\u8D70\u4E00\u4EF6\uFF1A</p>${cards}
+        <p class="small">${cur ? `\u4F60\u73B0\u5728\u62FF\u7740${WEAPONS[cur].name}\uFF0C\u6362\u6389\u4F1A\u5F53\u573A\u5356 ${WEAPONS[cur].sell} \u91D1\u5E01\u3002` : "\u4F60\u8FD8\u6CA1\u6709\u6B66\u5668\u3002"}</p>`,
+      list.map((w) => ({ label: WEAPONS[w].name, primary: false, on: () => {
+        setMsg(run.chooseWeapon(w));
+        render();
+        saveRun();
+      } }))
+    );
   }
   function confirmStairs() {
     const exit = run.cells.findIndex((c2) => c2.kind === "exit");
@@ -1836,7 +2388,7 @@
     const buttons = c ? [
       { label: "\u518D\u60F3\u60F3", on: () => setMsg("\u7559\u5728\u672C\u5C42\u3002\u60F3\u597D\u4E86\u518D\u8D70\u5230\u697C\u68AF\u53E3\u3002") },
       { label: "\u4E0D\u7B7E\uFF0C\u4E0B\u697C", on: () => down(false) },
-      ...run.hero.hp > c.deposit ? [{ label: `\u7B7E\u7EA6\uFF08\u62BC ${c.deposit} \u8840\uFF09\uFF0C\u4E0B\u697C`, primary: true, on: () => down(true) }] : []
+      ...run.hero.hp > depositFor(c, run.hero) ? [{ label: `\u7B7E\u7EA6\uFF08\u62BC ${depositFor(c, run.hero)} \u8840\uFF09\uFF0C\u4E0B\u697C`, primary: true, on: () => down(true) }] : []
     ] : [
       { label: "\u518D\u60F3\u60F3", on: () => setMsg("\u7559\u5728\u672C\u5C42\u3002\u60F3\u597D\u4E86\u518D\u8D70\u5230\u697C\u68AF\u53E3\u3002") },
       { label: "\u4E0B\u697C", primary: true, on: () => down(false) }
@@ -1853,8 +2405,24 @@
       { label: "\u559D\uFF08\u6BC1\u7EA6\uFF09", danger: true, on: () => void walk([cell], false, false, true) }
     ]);
   }
+  var pendingSlot = -1;
   function act(i) {
     if (busy) return;
+    if (run.cells[i].kind === "slot") {
+      const near = Math.abs(i % run.w - run.pos % run.w) + Math.abs(Math.floor(i / run.w) - Math.floor(run.pos / run.w)) === 1;
+      if (near) {
+        openSlot(i);
+        return;
+      }
+      const path2 = run.findPath(i);
+      if (!path2) {
+        setMsg("\u8D70\u4E0D\u5230\u5B83\u65C1\u8FB9\uFF1A\u5148\u6E05\u51FA\u4E00\u6761\u8DEF\uFF08\u6253\u6389\u6321\u8DEF\u7684\u602A\u3001\u6361\u6389\u8DEF\u4E0A\u7684\u4E1C\u897F\uFF09", true);
+        return;
+      }
+      pendingSlot = i;
+      void walk(path2.slice(0, -1));
+      return;
+    }
     const path = run.findPath(i);
     if (!path) {
       setMsg("\u8D70\u4E0D\u8FC7\u53BB", true);
@@ -1908,6 +2476,10 @@
       if (x < 0 || y < 0 || x >= run.w || y >= run.h) return;
       const t = y * run.w + x;
       if (run.cells[t].kind === "wall") return;
+      if (run.cells[t].kind === "slot") {
+        openSlot(t);
+        return;
+      }
       void walk([t]);
     } else if (key === "Escape") {
       selected = -1;
@@ -1931,7 +2503,7 @@
   function begin(c, save) {
     choices = c;
     const floors = buildFloors(choices);
-    run = save ? Run.load(floors, save) : new Run(floors);
+    run = save ? Run.load(floors, save) : new Run(floors, "digger", Math.floor(Math.random() * 2 ** 31));
     lastHero = null;
     startFloor();
     render();
@@ -1939,6 +2511,7 @@
     heroEl.classList.toggle("dead", run.status === "dead");
     if (run.status === "floorDone") showExit();
     if (run.status === "dead") showDeath();
+    if (run.pendingWeapons && run.status === "playing") showWeaponChoice();
   }
   function newRun() {
     var _a2;

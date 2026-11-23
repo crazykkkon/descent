@@ -33,7 +33,7 @@ function blocks(cells: Cell[], w: number, h: number, start: number, wall: number
             seen[n] = 1;
             const c = cells[n];
             if (c.kind === 'exit') return false;
-            if (c.kind !== 'wall') stack.push(n);
+            if (c.kind !== 'wall' && c.kind !== 'slot') stack.push(n);
         }
     }
     return true;

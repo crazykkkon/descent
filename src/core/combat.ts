@@ -1,9 +1,16 @@
 /** 战斗公式：完全固定、没有随机。预览和实际结算用同一个函数，保证"预览掉血 = 实际掉血"。 */
-import { MonsterDef, THORNS_DAMAGE } from './config';
+import { MonsterDef, THORNS_DAMAGE, WEAPONS, WeaponId } from './config';
 
 export interface CombatStats {
     atk: number;
     def: number;
+    weapon?: WeaponId;
+}
+
+/** 算上武器以后的攻防（界面显示用） */
+export function effectiveStats(hero: CombatStats): { atk: number; def: number } {
+    const w = hero.weapon ? WEAPONS[hero.weapon] : undefined;
+    return { atk: hero.atk + (w?.atk ?? 0), def: hero.def + (w?.def ?? 0) };
 }
 
 export interface CombatResult {
@@ -20,12 +27,16 @@ export interface CombatResult {
 const MAX_ROUNDS = 1000;
 
 export function simulateCombat(hero: CombatStats, m: MonsterDef): CombatResult {
-    const heroHit = Math.max(hero.atk - m.def, 0);
+    const w = hero.weapon ? WEAPONS[hero.weapon] : undefined;
+    const { atk, def } = effectiveStats(hero);
+    const lifestealMon = m.traits.includes('lifesteal');
+    let heroHit = Math.max(atk - Math.max(m.def - (w?.pierce ?? 0), 0), 0);
+    if (w?.antiLifesteal && lifestealMon) heroHit *= 2;
     if (heroHit === 0) return { canAttack: false, canWin: false, damage: 0, hits: 0 };
 
-    const monsterHit = Math.max(m.atk - hero.def, 0);
+    const monsterHit = Math.max(m.atk - def, 0);
     const hitsPerRound = m.traits.includes('double') ? 2 : 1;
-    const lifesteal = m.traits.includes('lifesteal');
+    const lifesteal = lifestealMon;
     const thorns = m.traits.includes('thorns');
 
     let mhp = m.hp;
@@ -37,7 +48,14 @@ export function simulateCombat(hero: CombatStats, m: MonsterDef): CombatResult {
         if (lifesteal) mhp = Math.min(m.hp, mhp + Math.floor(monsterHit / 2));
     };
 
-    if (m.traits.includes('firstStrike')) monsterAttack();
+    // 鱼叉：开打前先刺一下
+    if (w?.firstHit) {
+        mhp -= heroHit;
+        hits++;
+        if (thorns) damage += THORNS_DAMAGE;
+        if (mhp <= 0) return { canAttack: true, canWin: true, damage, hits };
+    }
+    if (m.traits.includes('firstStrike') && !w?.noFirstStrike) monsterAttack();
 
     for (let round = 0; round < MAX_ROUNDS; round++) {
         mhp -= heroHit;

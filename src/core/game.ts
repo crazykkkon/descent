@@ -1,11 +1,12 @@
 /** 一局游戏的状态和操作：移动、交互、出口结算。没有撤回、没有重开本层：死了就整局重来。 */
-import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, TRAIT_DESC, TRAIT_NAMES } from './config';
+import { CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MONSTERS, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
+import { SLOTS, SlotState, Sym, bloodPrice, leechBite, newSlotState, payout, roll, spinPrice } from './slot';
 import { CombatResult, simulateCombat } from './combat';
 import { Cell, FloorDef, neighbors, parseFloor } from './floor';
 import { interact, isElite } from './rules';
 import { Intel, stairIntel } from './intel';
 import { solveFloor } from './solver';
-import { ActiveContract, ContractDef, ContractResult } from './contract';
+import { ActiveContract, ContractDef, ContractResult, depositFor } from './contract';
 
 /** dead：主角死了，这一局结束 */
 export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
@@ -35,6 +36,25 @@ export interface RunSave {
     totalSteps: number;
     status: Status;
     contract?: ActiveContract | null;
+    seed?: number;
+    slots?: Record<string, SlotState>;
+    rentPaid?: boolean;
+    pendingWeapons?: WeaponId[] | null;
+}
+
+/** 交井租的方式 */
+export type RentMethod = 'gold' | 'atk' | 'def';
+/** 交不上井租时，用攻击或防御抵的点数 */
+export const RENT_STAT_COST = 3;
+
+export interface SpinResult {
+    ok: boolean;
+    msg: string;
+    result?: Sym[];
+    /** 哪些转轮是新转出来的（锁住的不算） */
+    fresh?: boolean[];
+    /** 这一次井蛭咬掉的生命 */
+    bite?: number;
 }
 
 export interface ActResult {
@@ -67,9 +87,18 @@ export class Run {
     status: Status = 'playing';
     /** 正在生效的契约 */
     contract: ActiveContract | null = null;
+    /** 本局随机种子：井中轮的结果、精英掉的武器都由它决定，退出再进来不会变 */
+    seed: number;
+    /** 每台井中轮的状态，键是"层:格子" */
+    slots: Record<string, SlotState> = {};
+    /** 本层井租交了没有 */
+    rentPaid = false;
+    /** 打败精英后等待三选一的武器 */
+    pendingWeapons: WeaponId[] | null = null;
     private floorStart!: Snapshot;
 
-    constructor(readonly floors: FloorDef[], characterId = 'digger') {
+    constructor(readonly floors: FloorDef[], characterId = 'digger', seed = 1) {
+        this.seed = seed >>> 0;
         this.ch = CHARACTERS[characterId];
         this.hero = { ...this.ch.base };
         this.loadFloor(0);
@@ -87,6 +116,7 @@ export class Run {
         this.steps = 0;
         this.kills = 0;
         this.status = 'playing';
+        this.rentPaid = false;
         this.floorStart = this.snapshot();
     }
 
@@ -122,6 +152,121 @@ export class Run {
     /** 本层的契约是否还在守约中 */
     contractActive(): boolean {
         return !!this.contract && this.contract.floorIndex === this.floorIndex && !this.contract.broken;
+    }
+
+    // ---------- 武器 ----------
+
+    /** 换上新武器；旧武器当场卖掉换金币 */
+    equip(id: WeaponId): string {
+        const old = this.hero.weapon;
+        this.hero.weapon = id;
+        if (old && old !== id) {
+            this.hero.gold += WEAPONS[old].sell;
+            return `换上${WEAPONS[id].name}，旧的${WEAPONS[old].name}卖了 ${WEAPONS[old].sell} 金币`;
+        }
+        return `拿到${WEAPONS[id].name}`;
+    }
+
+    private rollWeaponChoices(): WeaponId[] {
+        const pool = (Object.keys(WEAPONS) as WeaponId[]).filter(w => w !== this.hero.weapon);
+        const out: WeaponId[] = [];
+        let n = 0;
+        while (out.length < 3 && out.length < pool.length) {
+            const r = ((Math.imul(this.seed ^ (this.floorIndex * 7919 + ++n * 104729), 2654435761) >>> 0) % pool.length);
+            if (!out.includes(pool[r])) out.push(pool[r]);
+        }
+        return out;
+    }
+
+    chooseWeapon(id: WeaponId): string {
+        if (!this.pendingWeapons?.includes(id)) return '';
+        this.pendingWeapons = null;
+        return this.equip(id);
+    }
+
+    // ---------- 井中轮 ----------
+
+    slotState(i: number): SlotState {
+        const key = `${this.floorIndex}:${i}`;
+        return (this.slots[key] ??= newSlotState());
+    }
+
+    /** 下一次转的价格；hold 为 true 时是锁轴重转（半价） */
+    slotPrice(i: number, hold: boolean): { gold: number; blood: number } {
+        const base = spinPrice(this.slotState(i).spins);
+        const gold = hold ? Math.ceil(base / 2 / 5) * 5 : base;
+        return { gold, blood: bloodPrice(gold) };
+    }
+
+    /**
+     * 转一次井中轮。held 不为空时是锁轴重转：放弃当前结果，锁住的转轮不变，其余重转。
+     * 不锁轴时如果机器上还有没收下的结果，先自动收下。
+     */
+    slotSpin(i: number, pay: 'gold' | 'blood', held?: boolean[]): SpinResult {
+        const c = this.cells[i];
+        if (this.status !== 'playing' || c.kind !== 'slot') return { ok: false, msg: '' };
+        if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: '站在井中轮旁边才能用它' };
+        const st = this.slotState(i);
+        const hold = !!held && held.some(Boolean);
+        if (hold && (!st.pending || held!.every(Boolean))) return { ok: false, msg: '要锁住一两个转轮，留至少一个重转' };
+        if (!hold && st.pending) this.slotCollect(i);
+        const price = this.slotPrice(i, hold);
+        if (pay === 'gold') {
+            if (this.hero.gold < price.gold) return { ok: false, msg: `金币不够（要 ${price.gold}）` };
+            this.hero.gold -= price.gold;
+        } else {
+            if (this.hero.hp <= price.blood) return { ok: false, msg: `生命不够押（要 ${price.blood}）` };
+            this.hero.hp -= price.blood;
+        }
+        const def = SLOTS[c.id];
+        const { result, fresh } = roll(def, st, this.seed, this.floorIndex * 1000 + i, hold ? held : undefined);
+        st.spins++;
+        st.pending = result;
+        const bite = leechBite(result, fresh);
+        this.hero.hp -= bite;
+        if (this.hero.hp <= 0) {
+            this.hero.hp = 0;
+            this.status = 'dead';
+            return { ok: true, msg: '你倒下了。井蛭吸干了你最后一点血', result, fresh, bite };
+        }
+        return { ok: true, msg: bite ? `井蛭咬掉了 ${bite} 生命` : '', result, fresh, bite };
+    }
+
+    /** 收下机器上当前的结果 */
+    slotCollect(i: number): string[] {
+        const c = this.cells[i];
+        const st = this.slotState(i);
+        if (c.kind !== 'slot' || !st.pending) return [];
+        const p = payout(st.pending);
+        st.pending = null;
+        const lines = [...p.lines];
+        if (p.gems) this.hero.atk += p.gems * (this.floor.gem + this.ch.gemBonus);
+        this.hero.hp += p.hp;
+        this.hero.gold += p.gold;
+        if (p.weapon) lines.push(this.equip(p.weapon));
+        return lines;
+    }
+
+    // ---------- 井租 ----------
+
+    /** 本层出口要交的井租（交过了就是 0） */
+    rentDue(): number {
+        return this.floor.rent && !this.rentPaid ? this.floor.rent : 0;
+    }
+
+    payRent(method: RentMethod): ActResult {
+        const due = this.rentDue();
+        if (!due) return { ok: true, msg: '' };
+        if (method === 'gold') {
+            if (this.hero.gold < due) return { ok: false, msg: `金币不够（要 ${due}，你有 ${this.hero.gold}）` };
+            this.hero.gold -= due;
+        } else if (method === 'atk') {
+            this.hero.atk -= RENT_STAT_COST;
+        } else {
+            this.hero.def -= RENT_STAT_COST;
+        }
+        this.rentPaid = true;
+        return { ok: true, msg: method === 'gold' ? `交了 ${due} 金币井租` : `用 ${RENT_STAT_COST} 点${method === 'atk' ? '攻击' : '防御'}抵了井租` };
     }
 
     /** 本层还能不能活着走到出口 */
@@ -171,6 +316,10 @@ export class Run {
                 return { title: '出口', lines: this.eliteAlive() ? ['精英守卫还活着，出口被封住了'] : ['走到这里进入下一层'] };
             case 'wall':
                 return { title: '井壁', lines: [] };
+            case 'slot': {
+                const d = SLOTS[c.id];
+                return { title: `井中轮·${d.name}`, lines: [d.desc, '站到旁边点它，就能花金币或生命转一次'] };
+            }
             default:
                 return { title: '空地', lines: [] };
         }
@@ -204,6 +353,7 @@ export class Run {
         if (!neighbors(this.pos, this.w, this.h).includes(i)) return { ok: false, msg: '' };
         const c = this.cells[i];
         if (c.kind === 'wall') return { ok: false, msg: '' };
+        if (c.kind === 'slot') return { ok: false, msg: '站在井中轮旁边才能用它' };
         if (c.kind === 'exit' && this.eliteAlive()) return { ok: false, msg: '精英守卫还活着，出口被封住了' };
 
         if (c.kind === 'floor' || c.kind === 'exit') {
@@ -232,6 +382,8 @@ export class Run {
         if (c.kind === 'monster') {
             this.kills++;
             msg = `击败${MONSTERS[c.id].name}，损失 ${lost} 生命，获得 ${MONSTERS[c.id].gold} 金币`;
+            // 精英倒下：三选一拿武器
+            if (MONSTERS[c.id].elite && this.floor.eliteReward) this.pendingWeapons = this.rollWeaponChoices();
         } else {
             this.pos = i;
             msg = c.kind === 'item' ? `获得${ITEM_NAMES[c.id]}` : (c.door === 'bone' ? '打开骨门' : `穿过血门，损失 ${lost} 生命`);
@@ -282,6 +434,7 @@ export class Run {
      */
     finishFloor(sellKeys: boolean, sign = false) {
         if (this.status !== 'floorDone') return;
+        if (this.rentDue()) return; // 先交井租才能下楼
         const s = this.exitSummary();
         this.hero.gold += s.potionGold;
         // 本层契约结算：守约退还押金和利息
@@ -294,11 +447,13 @@ export class Run {
         }
         // 签下一层的契约
         const offer = this.offeredContract();
-        if (sign && offer && this.hero.hp > offer.deposit) {
-            this.hero.hp -= offer.deposit;
+        if (sign && offer && this.hero.hp > depositFor(offer, this.hero)) {
+            const deposit = depositFor(offer, this.hero);
+            this.hero.hp -= deposit;
             this.hero.atk += offer.atk;
             this.hero.def += offer.def;
-            this.contract = { def: offer, floorIndex: this.floorIndex + 1, broken: false };
+            // 记下实际押了多少（毁约时归井的就是这么多）
+            this.contract = { def: { ...offer, deposit }, floorIndex: this.floorIndex + 1, broken: false };
         }
         if (sellKeys) {
             this.hero.gold += s.keyGold;
@@ -319,17 +474,24 @@ export class Run {
             totalSteps: this.totalSteps,
             status: this.status,
             contract: this.contract,
+            seed: this.seed,
+            slots: this.slots,
+            rentPaid: this.rentPaid,
+            pendingWeapons: this.pendingWeapons,
         };
     }
 
     static load(floors: FloorDef[], s: RunSave): Run {
-        const run = new Run(floors, s.characterId);
+        const run = new Run(floors, s.characterId, s.seed ?? 1);
         run.loadFloor(s.floorIndex);
         run.floorStart = s.floorStart;
         run.restore(s.current);
         run.totalSteps = s.totalSteps;
         run.status = s.status;
         run.contract = s.contract ?? null;
+        run.slots = s.slots ?? {};
+        run.rentPaid = s.rentPaid ?? false;
+        run.pendingWeapons = s.pendingWeapons ?? null;
         return run;
     }
 

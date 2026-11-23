@@ -1,5 +1,5 @@
 /** 和格子交互的规则。游戏和求解器共用这一份，保证两边结果一致。 */
-import { CharacterDef, Hero, MONSTERS } from './config';
+import { CharacterDef, Hero, MONSTERS, WEAPONS } from './config';
 import { simulateCombat } from './combat';
 import { Cell, FloorDef } from './floor';
 
@@ -20,7 +20,8 @@ export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterD
             else if (!r.canWin) reason = `打不死${m.name}：它回血比你打得快`;
             else if (r.damage >= hero.hp) reason = `打${m.name}要损失 ${r.damage} 生命，你会死`;
             if (reason) return allowFatal ? { ok: true, hero: { ...hero, hp: 0 }, fatal: true, reason } : { ok: false, reason };
-            return { ok: true, hero: { ...hero, hp: hero.hp - r.damage, gold: hero.gold + m.gold } };
+            const heal = hero.weapon ? WEAPONS[hero.weapon].killHeal ?? 0 : 0;
+            return { ok: true, hero: { ...hero, hp: hero.hp - r.damage + heal, gold: hero.gold + m.gold } };
         }
         case 'item': {
             const h = { ...hero };
