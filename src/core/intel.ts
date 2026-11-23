@@ -59,6 +59,24 @@ function damageText(hero: Hero, m: MonsterDef): string {
     return `-${r.damage}`;
 }
 
+/** 用求解器给一层选出情报要说的那只怪（设计时用；结果可以写进关卡数据的 intelPick） */
+export function choosePick(next: FloorDef, hero: Hero, ch: CharacterDef): { cell: number; mustFight: boolean } {
+    const p = parseFloor(next);
+    const monsters = p.cells
+        .map((c, i) => (c.kind === 'monster' ? { i, m: MONSTERS[c.id] } : null))
+        .filter((x): x is { i: number; m: MonsterDef } => !!x);
+    const hard = (m: MonsterDef) => {
+        const r = simulateCombat(hero, m);
+        return !r.canAttack || !r.canWin ? Infinity : r.damage;
+    };
+    const must = monsters.filter(x => blocks(p.cells, p.w, p.h, p.start, x.i));
+    const route = solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, next, ch).best?.plan ?? [];
+    const onRoute = monsters.filter(x => route.includes(x.i) && !must.includes(x));
+    const pool = must.length || onRoute.length ? [...must, ...onRoute] : monsters;
+    const pick = [...pool].sort((a, b) => TRAIT_RANK(b.m) - TRAIT_RANK(a.m) || hard(b.m) - hard(a.m))[0];
+    return { cell: pick.i, mustFight: must.includes(pick) };
+}
+
 /**
  * @param next 下一层
  * @param hero 主角现在的属性
@@ -75,12 +93,19 @@ export function stairIntel(next: FloorDef, hero: Hero, ch: CharacterDef, current
         const r = simulateCombat(hero, m);
         return !r.canAttack || !r.canWin ? Infinity : r.damage;
     };
-    const must = monsters.filter(x => blocks(p.cells, p.w, p.h, p.start, x.i));
-    const route = solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, next, ch).best?.plan ?? [];
-    const onRoute = monsters.filter(x => route.includes(x.i) && !must.includes(x));
-    const pool = must.length || onRoute.length ? [...must, ...onRoute] : monsters;
-    const pick = [...pool].sort((a, b) => TRAIT_RANK(b.m) - TRAIT_RANK(a.m) || hard(b.m) - hard(a.m))[0].m;
-    const mustFight = must.some(x => x.m === pick);
+    let pick: MonsterDef;
+    let mustFight: boolean;
+    if (next.intelPick) {
+        // 关卡数据里已经选好了（设计时用 choosePick 算出来）
+        const c = p.cells[next.intelPick.cell];
+        if (c.kind !== 'monster') throw new Error(`${next.name}：intelPick 指向的格子不是怪物`);
+        pick = MONSTERS[c.id];
+        mustFight = next.intelPick.mustFight;
+    } else {
+        const chosen = choosePick(next, hero, ch);
+        pick = MONSTERS[(p.cells[chosen.cell] as { id: MonsterId }).id];
+        mustFight = chosen.mustFight;
+    }
 
     const where = mustFight ? '挡在必经之路上' : '守在主要路线上';
     let headline: string;

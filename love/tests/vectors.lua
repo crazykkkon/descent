@@ -23635,5 +23635,3595 @@ return {
       status = "dead",
       heroHp = 0
     }
+  },
+  rolls = {
+    {
+      seed = 1,
+      key = 0,
+      machine = "risky",
+      seq = { "harpoon,leech,harpoon", "leech,leech,leech", "harpoon,coin,harpoon", "blade,potion,harpoon", "leech,blade,leech", "hammer,leech,harpoon", "leech,leech,leech", "leech,blade,blade", "leech,hammer,potion", "coin,hammer,coin", "blade,blade,harpoon", "coin,leech,leech", "leech,potion,coin", "harpoon,leech,leech", "potion,hammer,coin", "blade,leech,coin", "potion,potion,hammer", "harpoon,coin,harpoon", "harpoon,potion,leech", "hammer,blade,coin", "harpoon,coin,leech", "blade,hammer,harpoon", "blade,leech,harpoon", "coin,harpoon,potion", "coin,leech,leech", "harpoon,leech,leech", "blade,hammer,coin", "coin,leech,harpoon", "blade,blade,coin", "hammer,hammer,harpoon", "potion,hammer,coin", "harpoon,potion,hammer", "coin,blade,coin", "coin,hammer,blade", "hammer,potion,hammer", "blade,hammer,leech", "leech,harpoon,leech", "leech,leech,leech", "coin,harpoon,leech", "coin,coin,coin" }
+    },
+    {
+      seed = 1,
+      key = 0,
+      machine = "steady",
+      seq = { "coin,blade,coin", "coin,blade,potion", "coin,leech,coin", "potion,potion,coin", "coin,potion,blade", "potion,blade,coin", "coin,coin,blade", "blade,potion,potion", "coin,potion,coin", "leech,coin,leech", "potion,potion,coin", "leech,coin,potion", "coin,potion,leech", "coin,blade,potion", "coin,potion,leech", "potion,coin,leech", "coin,potion,potion", "coin,leech,coin", "coin,potion,potion", "potion,potion,leech", "coin,leech,potion", "potion,coin,coin", "potion,coin,coin", "leech,coin,coin", "leech,coin,potion", "coin,coin,potion", "potion,potion,leech", "leech,coin,coin", "potion,potion,leech", "potion,potion,coin", "coin,potion,leech", "coin,potion,potion", "leech,potion,leech", "leech,potion,potion", "potion,potion,potion", "potion,coin,blade", "blade,coin,potion", "blade,blade,blade", "leech,coin,potion", "leech,leech,leech" }
+    },
+    {
+      seed = 1,
+      key = 1003,
+      machine = "risky",
+      seq = { "harpoon,blade,harpoon", "coin,leech,blade", "blade,leech,leech", "leech,hammer,harpoon", "coin,potion,potion", "hammer,harpoon,harpoon", "harpoon,hammer,coin", "leech,hammer,coin", "leech,potion,blade", "blade,hammer,harpoon", "blade,blade,harpoon", "harpoon,hammer,blade", "blade,leech,coin", "harpoon,harpoon,coin", "potion,leech,harpoon", "leech,hammer,potion", "blade,hammer,coin", "leech,blade,harpoon", "coin,harpoon,hammer", "blade,coin,leech", "harpoon,hammer,hammer", "hammer,blade,potion", "blade,leech,leech", "hammer,leech,coin", "harpoon,potion,hammer", "harpoon,harpoon,harpoon", "coin,hammer,blade", "hammer,harpoon,blade", "leech,blade,coin", "leech,hammer,harpoon", "hammer,leech,leech", "leech,leech,hammer", "blade,coin,harpoon", "coin,leech,coin", "coin,blade,potion", "leech,blade,blade", "blade,leech,hammer", "leech,hammer,leech", "hammer,harpoon,leech", "leech,leech,potion" }
+    },
+    {
+      seed = 1,
+      key = 1003,
+      machine = "steady",
+      seq = { "coin,potion,coin", "leech,coin,potion", "potion,blade,blade", "coin,potion,coin", "leech,potion,coin", "potion,coin,coin", "coin,potion,leech", "coin,potion,leech", "coin,potion,potion", "potion,potion,coin", "potion,potion,coin", "coin,potion,potion", "potion,coin,leech", "coin,coin,leech", "coin,blade,coin", "blade,potion,coin", "potion,potion,leech", "coin,potion,coin", "leech,coin,potion", "potion,leech,potion", "coin,potion,potion", "potion,potion,coin", "potion,blade,blade", "potion,blade,leech", "coin,potion,potion", "coin,coin,coin", "leech,coin,potion", "potion,coin,potion", "blade,potion,leech", "coin,potion,coin", "potion,blade,potion", "coin,blade,potion", "potion,leech,coin", "leech,blade,leech", "leech,potion,coin", "blade,potion,potion", "potion,coin,potion", "coin,potion,potion", "potion,coin,potion", "blade,coin,coin" }
+    },
+    {
+      seed = 1,
+      key = 4021,
+      machine = "risky",
+      seq = { "leech,hammer,harpoon", "hammer,leech,blade", "potion,leech,harpoon", "leech,leech,leech", "hammer,leech,leech", "potion,leech,potion", "leech,potion,leech", "leech,harpoon,potion", "potion,hammer,harpoon", "blade,leech,coin", "blade,leech,leech", "leech,harpoon,harpoon", "blade,potion,leech", "hammer,leech,hammer", "harpoon,hammer,coin", "harpoon,coin,leech", "coin,potion,leech", "blade,coin,harpoon", "coin,leech,coin", "leech,hammer,leech", "leech,coin,coin", "leech,leech,harpoon", "coin,leech,blade", "hammer,coin,leech", "leech,hammer,harpoon", "blade,hammer,harpoon", "leech,hammer,coin", "harpoon,harpoon,coin", "blade,blade,leech", "leech,harpoon,coin", "potion,blade,harpoon", "blade,leech,harpoon", "coin,leech,blade", "harpoon,hammer,coin", "coin,leech,leech", "potion,coin,leech", "coin,blade,harpoon", "leech,coin,potion", "hammer,potion,leech", "blade,harpoon,hammer" }
+    },
+    {
+      seed = 1,
+      key = 4021,
+      machine = "steady",
+      seq = { "coin,coin,coin", "potion,coin,potion", "coin,blade,coin", "coin,coin,blade", "potion,blade,blade", "coin,blade,coin", "coin,potion,blade", "coin,coin,coin", "coin,coin,coin", "potion,coin,leech", "potion,blade,blade", "coin,coin,coin", "potion,potion,potion", "potion,blade,potion", "coin,potion,leech", "coin,leech,potion", "leech,potion,potion", "potion,leech,coin", "leech,coin,leech", "blade,potion,potion", "blade,leech,leech", "coin,blade,coin", "leech,blade,potion", "potion,leech,blade", "coin,potion,coin", "potion,potion,coin", "coin,coin,leech", "coin,coin,leech", "potion,potion,potion", "blade,coin,leech", "coin,potion,coin", "potion,blade,coin", "leech,coin,potion", "coin,coin,leech", "leech,coin,potion", "coin,leech,potion", "leech,potion,coin", "coin,leech,coin", "potion,potion,potion", "potion,coin,potion" }
+    },
+    {
+      seed = 7,
+      key = 0,
+      machine = "risky",
+      seq = { "hammer,leech,leech", "harpoon,hammer,blade", "coin,harpoon,harpoon", "potion,hammer,harpoon", "potion,coin,blade", "potion,hammer,hammer", "hammer,harpoon,potion", "leech,hammer,harpoon", "potion,leech,leech", "blade,coin,coin", "leech,potion,blade", "leech,potion,leech", "hammer,leech,harpoon", "blade,coin,blade", "leech,leech,potion", "blade,coin,coin", "leech,leech,coin", "leech,leech,leech", "potion,harpoon,leech", "harpoon,harpoon,potion", "blade,hammer,potion", "coin,hammer,coin", "hammer,coin,harpoon", "hammer,potion,leech", "blade,coin,harpoon", "potion,hammer,leech", "coin,blade,blade", "potion,harpoon,leech", "hammer,hammer,hammer", "leech,blade,leech", "harpoon,leech,harpoon", "potion,harpoon,potion", "potion,coin,hammer", "hammer,coin,blade", "blade,potion,potion", "leech,potion,blade", "blade,hammer,leech", "coin,harpoon,potion", "leech,harpoon,leech", "harpoon,hammer,harpoon" }
+    },
+    {
+      seed = 7,
+      key = 0,
+      machine = "steady",
+      seq = { "potion,coin,blade", "coin,coin,potion", "leech,coin,coin", "coin,coin,coin", "coin,leech,potion", "coin,coin,potion", "potion,coin,coin", "coin,potion,coin", "coin,coin,blade", "potion,leech,leech", "blade,potion,potion", "coin,potion,blade", "potion,coin,coin", "potion,leech,potion", "blade,blade,coin", "potion,leech,leech", "blade,blade,leech", "blade,coin,potion", "coin,coin,potion", "coin,coin,coin", "potion,coin,coin", "leech,potion,leech", "potion,leech,coin", "potion,potion,potion", "potion,leech,coin", "coin,potion,potion", "leech,potion,potion", "coin,coin,potion", "potion,coin,potion", "coin,potion,potion", "coin,coin,coin", "coin,coin,coin", "coin,leech,potion", "potion,leech,potion", "potion,potion,coin", "coin,potion,potion", "potion,coin,blade", "leech,coin,coin", "coin,coin,potion", "coin,coin,coin" }
+    },
+    {
+      seed = 7,
+      key = 1003,
+      machine = "risky",
+      seq = { "leech,hammer,harpoon", "coin,potion,coin", "leech,leech,harpoon", "potion,potion,harpoon", "hammer,potion,leech", "leech,coin,harpoon", "leech,harpoon,potion", "potion,harpoon,coin", "potion,leech,harpoon", "leech,leech,coin", "leech,hammer,potion", "potion,coin,blade", "hammer,leech,coin", "potion,leech,blade", "leech,hammer,harpoon", "leech,blade,harpoon", "harpoon,blade,harpoon", "harpoon,harpoon,leech", "harpoon,coin,coin", "coin,blade,blade", "blade,hammer,coin", "leech,leech,harpoon", "potion,potion,harpoon", "potion,hammer,blade", "leech,coin,potion", "blade,leech,hammer", "hammer,hammer,blade", "potion,leech,coin", "blade,hammer,harpoon", "blade,potion,leech", "blade,hammer,potion", "blade,harpoon,leech", "harpoon,leech,blade", "harpoon,potion,leech", "hammer,hammer,potion", "hammer,hammer,potion", "potion,coin,harpoon", "hammer,leech,leech", "harpoon,potion,coin", "coin,harpoon,coin" }
+    },
+    {
+      seed = 7,
+      key = 1003,
+      machine = "steady",
+      seq = { "blade,coin,coin", "leech,potion,leech", "coin,blade,coin", "coin,potion,coin", "potion,potion,potion", "coin,leech,coin", "coin,coin,coin", "coin,coin,leech", "coin,coin,coin", "blade,blade,leech", "blade,potion,coin", "coin,leech,potion", "potion,coin,leech", "coin,coin,potion", "coin,potion,coin", "blade,potion,coin", "coin,potion,coin", "coin,coin,potion", "coin,leech,leech", "leech,potion,potion", "potion,coin,leech", "blade,coin,coin", "coin,potion,coin", "coin,coin,potion", "blade,leech,coin", "potion,blade,potion", "potion,coin,potion", "coin,blade,leech", "potion,coin,coin", "potion,potion,blade", "potion,coin,coin", "potion,coin,blade", "coin,blade,potion", "coin,potion,blade", "potion,potion,coin", "potion,potion,coin", "coin,leech,coin", "potion,blade,blade", "coin,potion,leech", "leech,coin,leech" }
+    },
+    {
+      seed = 7,
+      key = 4021,
+      machine = "risky",
+      seq = { "hammer,leech,hammer", "hammer,hammer,harpoon", "blade,blade,potion", "blade,leech,harpoon", "leech,leech,potion", "harpoon,hammer,harpoon", "blade,blade,harpoon", "coin,hammer,leech", "blade,hammer,harpoon", "potion,hammer,blade", "coin,coin,leech", "leech,leech,hammer", "leech,leech,potion", "leech,leech,blade", "hammer,leech,blade", "leech,hammer,leech", "leech,harpoon,potion", "potion,blade,blade", "potion,coin,blade", "blade,coin,leech", "hammer,coin,coin", "harpoon,coin,leech", "coin,potion,hammer", "blade,hammer,hammer", "hammer,hammer,hammer", "leech,coin,blade", "leech,blade,potion", "leech,hammer,potion", "hammer,potion,potion", "potion,hammer,harpoon", "leech,hammer,leech", "hammer,potion,harpoon", "blade,hammer,harpoon", "coin,hammer,coin", "hammer,leech,coin", "potion,blade,harpoon", "potion,blade,harpoon", "blade,leech,leech", "blade,hammer,harpoon", "blade,coin,leech" }
+    },
+    {
+      seed = 7,
+      key = 4021,
+      machine = "steady",
+      seq = { "potion,blade,potion", "potion,potion,coin", "potion,potion,coin", "potion,coin,coin", "coin,coin,coin", "coin,coin,coin", "potion,potion,coin", "leech,potion,blade", "potion,potion,coin", "coin,coin,potion", "leech,leech,blade", "coin,blade,potion", "coin,coin,coin", "coin,coin,potion", "potion,blade,potion", "coin,potion,blade", "coin,coin,coin", "coin,potion,potion", "coin,leech,potion", "potion,leech,potion", "potion,leech,leech", "coin,leech,blade", "leech,potion,potion", "potion,coin,potion", "potion,coin,potion", "coin,leech,potion", "coin,potion,coin", "blade,coin,coin", "potion,potion,coin", "coin,potion,coin", "coin,coin,potion", "potion,potion,coin", "potion,potion,coin", "leech,potion,leech", "potion,coin,leech", "coin,potion,coin", "coin,potion,coin", "potion,blade,blade", "potion,coin,coin", "potion,leech,potion" }
+    },
+    {
+      seed = 12345,
+      key = 0,
+      machine = "risky",
+      seq = { "coin,potion,potion", "leech,hammer,leech", "blade,leech,harpoon", "leech,hammer,hammer", "leech,potion,hammer", "leech,leech,blade", "leech,hammer,coin", "coin,coin,coin", "coin,harpoon,harpoon", "coin,potion,potion", "blade,blade,leech", "blade,leech,hammer", "blade,potion,coin", "coin,blade,hammer", "hammer,leech,harpoon", "blade,coin,coin", "blade,coin,leech", "leech,potion,hammer", "blade,harpoon,hammer", "leech,hammer,blade", "blade,leech,leech", "leech,coin,leech", "potion,coin,leech", "hammer,hammer,coin", "leech,coin,harpoon", "hammer,coin,coin", "leech,harpoon,blade", "potion,coin,leech", "blade,potion,potion", "leech,harpoon,hammer", "harpoon,harpoon,blade", "blade,hammer,hammer", "potion,harpoon,harpoon", "blade,hammer,harpoon", "harpoon,blade,hammer", "blade,blade,leech", "hammer,harpoon,leech", "leech,hammer,potion", "coin,hammer,harpoon", "potion,hammer,hammer" }
+    },
+    {
+      seed = 12345,
+      key = 0,
+      machine = "steady",
+      seq = { "leech,potion,coin", "blade,potion,potion", "potion,blade,coin", "blade,potion,potion", "blade,potion,potion", "coin,coin,potion", "coin,coin,leech", "leech,leech,leech", "leech,coin,coin", "leech,potion,coin", "potion,potion,blade", "potion,coin,potion", "potion,potion,leech", "leech,potion,potion", "potion,blade,coin", "potion,leech,leech", "potion,leech,potion", "blade,potion,potion", "potion,coin,potion", "coin,potion,potion", "potion,blade,potion", "coin,leech,blade", "coin,leech,blade", "potion,coin,leech", "blade,leech,coin", "potion,leech,leech", "coin,coin,potion", "coin,leech,blade", "potion,potion,coin", "blade,coin,potion", "coin,coin,potion", "potion,potion,potion", "coin,coin,coin", "potion,potion,coin", "coin,potion,potion", "potion,potion,potion", "potion,coin,blade", "coin,coin,coin", "leech,potion,coin", "coin,potion,potion" }
+    },
+    {
+      seed = 12345,
+      key = 1003,
+      machine = "risky",
+      seq = { "blade,potion,blade", "potion,harpoon,coin", "potion,leech,leech", "leech,coin,hammer", "leech,blade,harpoon", "blade,potion,leech", "hammer,harpoon,coin", "coin,potion,harpoon", "harpoon,blade,leech", "blade,harpoon,potion", "blade,leech,hammer", "potion,leech,leech", "harpoon,potion,hammer", "leech,hammer,coin", "coin,hammer,hammer", "leech,hammer,harpoon", "coin,leech,hammer", "harpoon,leech,harpoon", "hammer,potion,coin", "harpoon,hammer,blade", "potion,leech,hammer", "potion,hammer,potion", "hammer,harpoon,coin", "leech,leech,potion", "leech,blade,blade", "leech,coin,blade", "leech,potion,leech", "blade,blade,leech", "blade,hammer,potion", "potion,potion,leech", "blade,hammer,harpoon", "potion,hammer,hammer", "potion,hammer,hammer", "leech,coin,harpoon", "leech,hammer,harpoon", "harpoon,potion,hammer", "leech,hammer,harpoon", "harpoon,leech,blade", "blade,potion,leech", "hammer,leech,leech" }
+    },
+    {
+      seed = 12345,
+      key = 1003,
+      machine = "steady",
+      seq = { "potion,potion,potion", "coin,coin,leech", "coin,coin,blade", "blade,leech,potion", "coin,potion,coin", "potion,potion,blade", "potion,coin,leech", "leech,potion,coin", "coin,potion,potion", "potion,coin,coin", "potion,coin,potion", "coin,coin,blade", "coin,potion,potion", "blade,potion,leech", "leech,coin,potion", "coin,potion,coin", "leech,blade,potion", "coin,blade,coin", "potion,potion,leech", "coin,coin,potion", "coin,blade,potion", "coin,coin,coin", "potion,coin,leech", "blade,coin,coin", "blade,potion,potion", "coin,leech,potion", "coin,potion,potion", "potion,potion,blade", "potion,potion,coin", "coin,potion,blade", "potion,potion,coin", "coin,coin,potion", "coin,potion,potion", "blade,leech,coin", "coin,coin,coin", "coin,potion,potion", "blade,potion,coin", "coin,blade,potion", "potion,potion,potion", "potion,blade,blade" }
+    },
+    {
+      seed = 12345,
+      key = 4021,
+      machine = "risky",
+      seq = { "blade,coin,harpoon", "harpoon,harpoon,blade", "hammer,potion,leech", "leech,leech,coin", "harpoon,potion,coin", "potion,leech,leech", "blade,coin,potion", "blade,hammer,blade", "harpoon,harpoon,potion", "harpoon,hammer,leech", "leech,leech,harpoon", "potion,hammer,leech", "coin,blade,harpoon", "hammer,potion,coin", "potion,hammer,harpoon", "leech,leech,harpoon", "harpoon,leech,leech", "coin,leech,blade", "blade,harpoon,leech", "hammer,potion,potion", "harpoon,blade,harpoon", "potion,blade,blade", "potion,hammer,coin", "leech,blade,hammer", "blade,leech,hammer", "coin,leech,potion", "harpoon,potion,potion", "blade,leech,leech", "hammer,hammer,leech", "potion,leech,potion", "blade,hammer,harpoon", "blade,leech,coin", "leech,hammer,hammer", "coin,leech,leech", "blade,leech,coin", "harpoon,potion,potion", "hammer,leech,coin", "hammer,hammer,potion", "hammer,blade,blade", "leech,leech,leech" }
+    },
+    {
+      seed = 12345,
+      key = 4021,
+      machine = "steady",
+      seq = { "potion,leech,coin", "coin,coin,potion", "potion,potion,blade", "coin,coin,leech", "coin,potion,leech", "coin,blade,potion", "potion,leech,coin", "potion,coin,potion", "coin,coin,coin", "coin,coin,blade", "coin,coin,coin", "coin,potion,blade", "leech,potion,coin", "potion,potion,leech", "coin,coin,coin", "coin,coin,coin", "coin,coin,potion", "leech,blade,potion", "potion,coin,blade", "potion,potion,coin", "coin,potion,coin", "coin,potion,potion", "coin,potion,leech", "coin,potion,potion", "potion,blade,potion", "leech,coin,coin", "coin,potion,coin", "potion,coin,blade", "potion,potion,potion", "coin,blade,coin", "potion,potion,coin", "potion,coin,leech", "coin,potion,potion", "leech,blade,blade", "potion,blade,leech", "coin,potion,coin", "potion,coin,leech", "potion,coin,coin", "potion,potion,potion", "blade,coin,potion" }
+    },
+    {
+      seed = 2147483647,
+      key = 0,
+      machine = "risky",
+      seq = { "hammer,coin,coin", "leech,blade,leech", "coin,harpoon,coin", "coin,coin,leech", "hammer,blade,harpoon", "blade,hammer,hammer", "blade,coin,hammer", "coin,potion,blade", "blade,hammer,leech", "potion,potion,coin", "harpoon,potion,coin", "potion,leech,hammer", "coin,potion,blade", "harpoon,hammer,blade", "leech,leech,hammer", "coin,blade,coin", "coin,coin,leech", "blade,leech,harpoon", "blade,potion,harpoon", "coin,blade,harpoon", "harpoon,coin,coin", "blade,harpoon,coin", "blade,blade,hammer", "coin,coin,leech", "leech,hammer,coin", "hammer,blade,coin", "hammer,hammer,coin", "blade,leech,blade", "potion,coin,harpoon", "blade,blade,potion", "harpoon,coin,potion", "blade,coin,potion", "blade,potion,coin", "blade,leech,blade", "potion,hammer,harpoon", "leech,leech,coin", "hammer,hammer,blade", "harpoon,hammer,leech", "leech,potion,leech", "leech,harpoon,potion" }
+    },
+    {
+      seed = 2147483647,
+      key = 0,
+      machine = "steady",
+      seq = { "potion,leech,leech", "coin,potion,potion", "leech,coin,leech", "leech,leech,blade", "potion,potion,coin", "potion,coin,potion", "potion,leech,potion", "leech,potion,potion", "potion,potion,blade", "coin,potion,leech", "coin,potion,leech", "coin,coin,potion", "leech,potion,potion", "coin,coin,potion", "blade,coin,potion", "leech,potion,leech", "leech,leech,potion", "potion,blade,coin", "potion,potion,coin", "leech,potion,coin", "coin,leech,leech", "potion,coin,leech", "potion,potion,potion", "leech,leech,potion", "blade,potion,leech", "potion,potion,leech", "potion,potion,leech", "potion,blade,potion", "coin,leech,coin", "potion,potion,coin", "coin,leech,coin", "potion,leech,coin", "potion,potion,leech", "potion,blade,potion", "coin,coin,coin", "coin,coin,leech", "potion,potion,potion", "coin,coin,blade", "blade,potion,blade", "coin,coin,coin" }
+    },
+    {
+      seed = 2147483647,
+      key = 1003,
+      machine = "risky",
+      seq = { "leech,hammer,leech", "blade,coin,harpoon", "blade,coin,potion", "potion,blade,coin", "hammer,coin,harpoon", "blade,potion,blade", "blade,hammer,leech", "leech,harpoon,leech", "hammer,blade,blade", "harpoon,harpoon,harpoon", "potion,hammer,harpoon", "harpoon,potion,leech", "blade,harpoon,harpoon", "hammer,potion,harpoon", "leech,leech,leech", "leech,blade,coin", "harpoon,hammer,harpoon", "hammer,harpoon,leech", "coin,hammer,leech", "potion,potion,coin", "coin,hammer,leech", "leech,coin,potion", "leech,leech,harpoon", "harpoon,potion,leech", "potion,leech,harpoon", "blade,hammer,potion", "potion,hammer,hammer", "blade,leech,hammer", "leech,hammer,hammer", "hammer,hammer,leech", "potion,potion,hammer", "blade,leech,leech", "hammer,coin,coin", "blade,hammer,coin", "coin,leech,harpoon", "harpoon,leech,hammer", "blade,hammer,coin", "potion,potion,blade", "leech,hammer,leech", "harpoon,harpoon,harpoon" }
+    },
+    {
+      seed = 2147483647,
+      key = 1003,
+      machine = "steady",
+      seq = { "blade,coin,blade", "potion,leech,coin", "potion,leech,coin", "coin,potion,leech", "potion,leech,coin", "potion,potion,potion", "potion,coin,blade", "coin,coin,blade", "potion,potion,potion", "coin,coin,coin", "coin,potion,coin", "coin,potion,potion", "potion,coin,coin", "potion,potion,coin", "blade,coin,potion", "coin,potion,leech", "coin,potion,coin", "potion,coin,potion", "leech,coin,potion", "coin,potion,leech", "leech,potion,blade", "blade,leech,coin", "blade,blade,coin", "coin,potion,blade", "coin,blade,coin", "potion,coin,coin", "coin,coin,potion", "potion,coin,potion", "coin,coin,potion", "potion,coin,potion", "coin,potion,potion", "potion,coin,blade", "potion,leech,leech", "potion,potion,leech", "leech,coin,coin", "coin,coin,potion", "potion,coin,leech", "coin,potion,potion", "coin,potion,potion", "coin,coin,coin" }
+    },
+    {
+      seed = 2147483647,
+      key = 4021,
+      machine = "risky",
+      seq = { "hammer,hammer,leech", "harpoon,coin,harpoon", "harpoon,hammer,leech", "blade,coin,blade", "potion,harpoon,harpoon", "potion,harpoon,leech", "blade,coin,harpoon", "harpoon,blade,coin", "potion,harpoon,leech", "hammer,leech,coin", "blade,blade,coin", "leech,hammer,harpoon", "blade,potion,leech", "blade,hammer,harpoon", "blade,harpoon,harpoon", "leech,potion,harpoon", "blade,leech,leech", "leech,potion,blade", "hammer,leech,blade", "harpoon,leech,coin", "coin,potion,harpoon", "harpoon,potion,potion", "harpoon,hammer,harpoon", "leech,harpoon,coin", "leech,blade,potion", "blade,hammer,potion", "leech,hammer,potion", "hammer,coin,leech", "coin,leech,leech", "leech,potion,hammer", "hammer,potion,coin", "harpoon,leech,leech", "leech,hammer,hammer", "hammer,leech,leech", "hammer,hammer,harpoon", "harpoon,hammer,blade", "leech,hammer,leech", "blade,potion,coin", "harpoon,leech,harpoon", "blade,leech,coin" }
+    },
+    {
+      seed = 2147483647,
+      key = 4021,
+      machine = "steady",
+      seq = { "potion,potion,potion", "coin,leech,coin", "coin,coin,blade", "potion,leech,potion", "coin,coin,coin", "coin,coin,blade", "potion,leech,coin", "coin,potion,leech", "coin,coin,potion", "potion,blade,leech", "potion,potion,leech", "coin,potion,coin", "potion,potion,blade", "potion,potion,coin", "potion,coin,coin", "coin,potion,coin", "potion,blade,potion", "blade,potion,potion", "potion,coin,potion", "coin,coin,leech", "leech,potion,coin", "coin,potion,coin", "coin,coin,coin", "blade,coin,leech", "coin,potion,coin", "potion,potion,coin", "coin,coin,coin", "potion,leech,blade", "leech,blade,blade", "blade,potion,potion", "potion,potion,leech", "coin,blade,potion", "coin,potion,potion", "potion,blade,blade", "potion,coin,coin", "coin,coin,potion", "coin,potion,potion", "potion,potion,leech", "coin,blade,coin", "potion,blade,leech" }
+    },
+    {
+      seed = 987654321,
+      key = 0,
+      machine = "risky",
+      seq = { "blade,hammer,blade", "harpoon,hammer,harpoon", "potion,hammer,harpoon", "hammer,hammer,leech", "hammer,hammer,harpoon", "hammer,coin,harpoon", "potion,hammer,harpoon", "coin,coin,coin", "leech,leech,harpoon", "leech,leech,leech", "hammer,hammer,blade", "blade,potion,harpoon", "harpoon,coin,leech", "blade,harpoon,harpoon", "hammer,blade,blade", "leech,hammer,leech", "hammer,coin,leech", "harpoon,hammer,blade", "blade,potion,harpoon", "hammer,coin,blade", "harpoon,potion,harpoon", "hammer,hammer,harpoon", "leech,leech,leech", "coin,hammer,blade", "leech,blade,coin", "potion,potion,leech", "blade,hammer,leech", "harpoon,hammer,harpoon", "potion,coin,potion", "harpoon,hammer,leech", "harpoon,hammer,hammer", "hammer,blade,hammer", "hammer,hammer,coin", "leech,harpoon,harpoon", "harpoon,coin,harpoon", "leech,blade,potion", "coin,hammer,leech", "hammer,potion,harpoon", "potion,harpoon,leech", "leech,hammer,harpoon" }
+    },
+    {
+      seed = 987654321,
+      key = 0,
+      machine = "steady",
+      seq = { "potion,potion,potion", "coin,coin,coin", "coin,coin,coin", "potion,coin,blade", "potion,potion,coin", "potion,leech,coin", "coin,potion,coin", "leech,leech,leech", "blade,coin,coin", "blade,blade,potion", "potion,coin,potion", "potion,potion,coin", "coin,leech,blade", "potion,coin,coin", "potion,potion,potion", "blade,potion,blade", "potion,leech,potion", "coin,potion,potion", "potion,potion,coin", "potion,leech,potion", "coin,potion,coin", "potion,potion,coin", "blade,blade,potion", "leech,potion,potion", "blade,potion,leech", "coin,potion,potion", "potion,potion,blade", "coin,coin,coin", "coin,leech,coin", "coin,coin,potion", "coin,coin,potion", "potion,potion,potion", "potion,potion,leech", "coin,coin,coin", "coin,leech,coin", "blade,potion,coin", "leech,potion,potion", "potion,potion,coin", "coin,coin,blade", "blade,coin,coin" }
+    },
+    {
+      seed = 987654321,
+      key = 1003,
+      machine = "risky",
+      seq = { "blade,potion,harpoon", "hammer,potion,harpoon", "potion,leech,blade", "blade,leech,hammer", "harpoon,potion,harpoon", "blade,potion,potion", "leech,hammer,coin", "leech,leech,leech", "potion,blade,coin", "leech,hammer,harpoon", "harpoon,leech,harpoon", "potion,blade,hammer", "leech,blade,hammer", "blade,hammer,hammer", "leech,harpoon,harpoon", "blade,leech,harpoon", "harpoon,hammer,potion", "leech,leech,harpoon", "potion,leech,hammer", "leech,hammer,hammer", "leech,blade,blade", "leech,harpoon,coin", "coin,leech,leech", "blade,leech,harpoon", "coin,hammer,leech", "leech,leech,harpoon", "leech,hammer,coin", "blade,hammer,harpoon", "hammer,coin,harpoon", "potion,leech,leech", "blade,leech,potion", "harpoon,blade,hammer", "potion,hammer,coin", "leech,harpoon,hammer", "coin,blade,leech", "blade,blade,hammer", "coin,hammer,leech", "potion,leech,coin", "coin,coin,hammer", "blade,harpoon,leech" }
+    },
+    {
+      seed = 987654321,
+      key = 1003,
+      machine = "steady",
+      seq = { "potion,potion,coin", "potion,potion,coin", "coin,coin,potion", "potion,blade,potion", "coin,potion,coin", "potion,potion,coin", "coin,coin,leech", "blade,blade,blade", "coin,potion,leech", "blade,coin,coin", "coin,blade,coin", "coin,potion,potion", "coin,potion,potion", "potion,potion,potion", "coin,coin,coin", "potion,coin,coin", "coin,potion,coin", "coin,blade,coin", "coin,coin,potion", "blade,coin,potion", "blade,potion,potion", "blade,coin,leech", "leech,coin,potion", "potion,blade,coin", "leech,coin,blade", "coin,blade,coin", "coin,coin,leech", "potion,coin,coin", "potion,leech,coin", "coin,blade,blade", "potion,coin,coin", "coin,potion,potion", "coin,potion,leech", "coin,coin,potion", "leech,potion,blade", "potion,potion,potion", "leech,coin,potion", "coin,coin,leech", "leech,leech,potion", "potion,coin,potion" }
+    },
+    {
+      seed = 987654321,
+      key = 4021,
+      machine = "risky",
+      seq = { "leech,leech,blade", "leech,leech,leech", "potion,blade,harpoon", "blade,coin,leech", "blade,blade,potion", "blade,leech,potion", "blade,harpoon,leech", "harpoon,hammer,leech", "coin,hammer,leech", "leech,hammer,harpoon", "coin,hammer,leech", "blade,hammer,potion", "potion,harpoon,coin", "potion,blade,potion", "blade,hammer,coin", "hammer,leech,harpoon", "hammer,coin,hammer", "blade,hammer,leech", "leech,coin,leech", "coin,blade,potion", "blade,potion,harpoon", "leech,hammer,coin", "potion,leech,harpoon", "blade,leech,potion", "harpoon,harpoon,coin", "leech,coin,hammer", "hammer,potion,hammer", "leech,blade,leech", "leech,hammer,leech", "blade,leech,harpoon", "coin,coin,harpoon", "leech,coin,potion", "hammer,blade,leech", "potion,leech,coin", "leech,hammer,harpoon", "harpoon,coin,leech", "coin,coin,potion", "harpoon,coin,coin", "leech,leech,coin", "blade,harpoon,blade" }
+    },
+    {
+      seed = 987654321,
+      key = 4021,
+      machine = "steady",
+      seq = { "coin,coin,potion", "coin,blade,potion", "coin,potion,coin", "potion,leech,blade", "potion,potion,coin", "potion,blade,coin", "potion,coin,blade", "coin,coin,blade", "leech,potion,potion", "blade,coin,coin", "leech,potion,potion", "potion,potion,coin", "coin,coin,leech", "coin,potion,coin", "potion,coin,leech", "potion,coin,coin", "potion,leech,potion", "potion,potion,potion", "coin,leech,blade", "leech,potion,coin", "potion,potion,coin", "blade,coin,leech", "coin,blade,coin", "potion,blade,coin", "coin,coin,leech", "coin,leech,potion", "potion,potion,potion", "blade,potion,potion", "blade,potion,potion", "potion,blade,coin", "leech,leech,coin", "blade,leech,coin", "potion,potion,blade", "coin,coin,leech", "blade,coin,coin", "coin,leech,blade", "leech,leech,coin", "coin,leech,leech", "blade,coin,leech", "potion,coin,potion" }
+    }
+  },
+  slotSessions = {
+    {
+      seed = 3,
+      machine = "S",
+      script = 0,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "coin,potion,harpoon",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "harpoon,harpoon,coin",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "harpoon,leech,harpoon",
+          bite = 15,
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个鱼叉：得到一颗赤晶" },
+          hero = {
+            hp = 385,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "leech,blade,leech",
+          bite = 30,
+          hero = {
+            hp = 250,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 250,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 3,
+      machine = "S",
+      script = 1,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "coin,potion,harpoon",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "coin,potion,harpoon",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "harpoon,potion,harpoon",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个鱼叉：得到一颗赤晶" },
+          hero = {
+            hp = 370,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "coin,leech,harpoon",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "leech,blade,leech",
+          bite = 30,
+          hero = {
+            hp = 325,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 325,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 3,
+      machine = "T",
+      script = 0,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "leech,potion,coin",
+          bite = 15,
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "coin,coin,leech",
+          bite = 15,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "coin,coin,coin",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "3 个金币：+45 金币" },
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 270
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "blade,potion,blade",
+          bite = 0,
+          hero = {
+            hp = 265,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 270
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个骨刀：得到一颗赤晶" },
+          hero = {
+            hp = 265,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 270
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 3,
+      machine = "T",
+      script = 1,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "leech,potion,coin",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "leech,potion,coin",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "coin,potion,coin",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个金币：+30 金币" },
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "leech,coin,coin",
+          bite = 15,
+          hero = {
+            hp = 340,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 220
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,potion,blade",
+          bite = 0,
+          hero = {
+            hp = 340,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 150
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个骨刀：得到一颗赤晶" },
+          hero = {
+            hp = 340,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 150
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 11,
+      machine = "S",
+      script = 0,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "leech,hammer,blade",
+          bite = 15,
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,potion,harpoon",
+          bite = 0,
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "blade,hammer,harpoon",
+          bite = 0,
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "hammer,harpoon,harpoon",
+          bite = 0,
+          hero = {
+            hp = 280,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个鱼叉：得到一颗赤晶" },
+          hero = {
+            hp = 280,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 11,
+      machine = "S",
+      script = 1,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "leech,hammer,blade",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "leech,hammer,blade",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "potion,hammer,blade",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "harpoon,hammer,harpoon",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "hammer,harpoon,harpoon",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个鱼叉：得到一颗赤晶" },
+          hero = {
+            hp = 355,
+            atk = 19,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 11,
+      machine = "T",
+      script = 0,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,coin,potion",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,potion,coin",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "potion,coin,coin",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个金币：+30 金币" },
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 255
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "potion,coin,coin",
+          bite = 0,
+          hero = {
+            hp = 295,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 255
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个金币：+30 金币" },
+          hero = {
+            hp = 295,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 11,
+      machine = "T",
+      script = 1,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "blade,coin,potion",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "blade,coin,potion",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "coin,coin,potion",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个金币：+30 金币" },
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "coin,coin,coin",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 220
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,coin,coin",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 165
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个金币：+30 金币" },
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 195
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 2024,
+      machine = "S",
+      script = 0,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "hammer,leech,hammer",
+          bite = 15,
+          hero = {
+            hp = 385,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个破壳锤：得到一颗赤晶" },
+          hero = {
+            hp = 385,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "coin,blade,leech",
+          bite = 15,
+          hero = {
+            hp = 370,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "coin,hammer,coin",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个金币：+30 金币" },
+          hero = {
+            hp = 370,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 255
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "blade,potion,leech",
+          bite = 15,
+          hero = {
+            hp = 250,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 255
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 250,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 255
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 2024,
+      machine = "S",
+      script = 1,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "hammer,leech,hammer",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "hammer,leech,coin",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "blade,leech,coin",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "leech,hammer,coin",
+          bite = 15,
+          hero = {
+            hp = 340,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,potion,leech",
+          bite = 15,
+          hero = {
+            hp = 325,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 325,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 2024,
+      machine = "T",
+      script = 0,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,coin,potion",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个血瓶：+80 生命" },
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "leech,potion,blade",
+          bite = 15,
+          hero = {
+            hp = 465,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "leech,coin,leech",
+          bite = 15,
+          hero = {
+            hp = 450,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 450,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "potion,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 345,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "3 个血瓶：+120 生命" },
+          hero = {
+            hp = 465,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 2024,
+      machine = "T",
+      script = 1,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "potion,coin,potion",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "potion,coin,leech",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "potion,coin,leech",
+          bite = 0,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,coin,leech",
+          bite = 15,
+          hero = {
+            hp = 340,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 340,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "3 个血瓶：+120 生命" },
+          hero = {
+            hp = 460,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 99991,
+      machine = "S",
+      script = 0,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,potion,hammer",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个血瓶：+80 生命" },
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,coin,blade",
+          bite = 0,
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "blade,hammer,hammer",
+          bite = 0,
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "两个破壳锤：得到一颗赤晶" },
+          hero = {
+            hp = 480,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "blade,leech,potion",
+          bite = 15,
+          hero = {
+            hp = 360,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 360,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 99991,
+      machine = "S",
+      script = 1,
+      map = { "@.>", ".S." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "potion,potion,hammer",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "potion,potion,blade",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "coin,potion,blade",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,hammer,hammer",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "blade,leech,potion",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 355,
+            atk = 16,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 99991,
+      machine = "T",
+      script = 0,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "coin,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 400,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个血瓶：+80 生命" },
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 280
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,leech,potion",
+          bite = 15,
+          hero = {
+            hp = 465,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 250
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          result = "potion,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 465,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "3 个血瓶：+120 生命" },
+          hero = {
+            hp = 585,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "potion,blade,coin",
+          bite = 0,
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 480,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 225
+          },
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 99991,
+      machine = "T",
+      script = 1,
+      map = { "@.>", ".T." },
+      steps = {
+        {
+          act = "spin",
+          pay = "blood",
+          ok = true,
+          result = "coin,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          result = "coin,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 370,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 285
+          },
+          spins = 2,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          result = "leech,potion,potion",
+          bite = 15,
+          hero = {
+            hp = 355,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "2 个血瓶：+80 生命" },
+          hero = {
+            hp = 435,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,potion,potion",
+          bite = 0,
+          hero = {
+            hp = 435,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 4,
+          status = "playing"
+        },
+        {
+          act = "spin",
+          pay = "gold",
+          ok = true,
+          result = "potion,blade,coin",
+          bite = 0,
+          hero = {
+            hp = 555,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          spins = 5,
+          status = "playing"
+        },
+        {
+          act = "collect",
+          lines = { "什么都没有" },
+          hero = {
+            hp = 555,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 90
+          },
+          status = "playing"
+        }
+      }
+    }
+  },
+  weaponChoices = {
+    {
+      seed = 1,
+      floorIndex = 1,
+      choices = { "boneKnife", "mossBlade", "hammer" }
+    },
+    {
+      seed = 1,
+      floorIndex = 1,
+      current = "boneKnife",
+      choices = { "harpoon", "mossBlade", "saltDagger" }
+    },
+    {
+      seed = 1,
+      floorIndex = 1,
+      current = "hammer",
+      choices = { "boneKnife", "mossBlade", "saltDagger" }
+    },
+    {
+      seed = 1,
+      floorIndex = 4,
+      choices = { "wellHook", "rustSword", "harpoon" }
+    },
+    {
+      seed = 1,
+      floorIndex = 4,
+      current = "boneKnife",
+      choices = { "wellHook", "hammer", "bellStaff" }
+    },
+    {
+      seed = 1,
+      floorIndex = 4,
+      current = "hammer",
+      choices = { "wellHook", "harpoon", "bellStaff" }
+    },
+    {
+      seed = 1,
+      floorIndex = 10,
+      choices = { "harpoon", "boneKnife", "mossBlade" }
+    },
+    {
+      seed = 1,
+      floorIndex = 10,
+      current = "boneKnife",
+      choices = { "bellStaff", "rustSword", "harpoon" }
+    },
+    {
+      seed = 1,
+      floorIndex = 10,
+      current = "hammer",
+      choices = { "bellStaff", "rustSword", "boneKnife" }
+    },
+    {
+      seed = 5,
+      floorIndex = 1,
+      choices = { "bellStaff", "wellHook", "rustSword" }
+    },
+    {
+      seed = 5,
+      floorIndex = 1,
+      current = "boneKnife",
+      choices = { "rustSword", "hammer", "bellStaff" }
+    },
+    {
+      seed = 5,
+      floorIndex = 1,
+      current = "hammer",
+      choices = { "rustSword", "harpoon", "bellStaff" }
+    },
+    {
+      seed = 5,
+      floorIndex = 4,
+      choices = { "mossBlade", "hammer", "saltDagger" }
+    },
+    {
+      seed = 5,
+      floorIndex = 4,
+      current = "boneKnife",
+      choices = { "rustSword", "harpoon", "wellHook" }
+    },
+    {
+      seed = 5,
+      floorIndex = 4,
+      current = "hammer",
+      choices = { "rustSword", "boneKnife", "wellHook" }
+    },
+    {
+      seed = 5,
+      floorIndex = 10,
+      choices = { "saltDagger", "bellStaff", "wellHook" }
+    },
+    {
+      seed = 5,
+      floorIndex = 10,
+      current = "boneKnife",
+      choices = { "saltDagger", "bellStaff", "wellHook" }
+    },
+    {
+      seed = 5,
+      floorIndex = 10,
+      current = "hammer",
+      choices = { "saltDagger", "bellStaff", "wellHook" }
+    },
+    {
+      seed = 77,
+      floorIndex = 1,
+      choices = { "bellStaff", "wellHook", "rustSword" }
+    },
+    {
+      seed = 77,
+      floorIndex = 1,
+      current = "boneKnife",
+      choices = { "rustSword", "bellStaff", "saltDagger" }
+    },
+    {
+      seed = 77,
+      floorIndex = 1,
+      current = "hammer",
+      choices = { "rustSword", "bellStaff", "saltDagger" }
+    },
+    {
+      seed = 77,
+      floorIndex = 4,
+      choices = { "mossBlade", "hammer", "saltDagger" }
+    },
+    {
+      seed = 77,
+      floorIndex = 4,
+      current = "boneKnife",
+      choices = { "hammer", "rustSword", "wellHook" }
+    },
+    {
+      seed = 77,
+      floorIndex = 4,
+      current = "hammer",
+      choices = { "harpoon", "rustSword", "wellHook" }
+    },
+    {
+      seed = 77,
+      floorIndex = 10,
+      choices = { "saltDagger", "bellStaff", "wellHook" }
+    },
+    {
+      seed = 77,
+      floorIndex = 10,
+      current = "boneKnife",
+      choices = { "wellHook", "bellStaff", "hammer" }
+    },
+    {
+      seed = 77,
+      floorIndex = 10,
+      current = "hammer",
+      choices = { "wellHook", "bellStaff", "harpoon" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 1,
+      choices = { "boneKnife", "mossBlade", "hammer" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 1,
+      current = "boneKnife",
+      choices = { "hammer", "harpoon", "wellHook" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 1,
+      current = "hammer",
+      choices = { "harpoon", "boneKnife", "wellHook" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 4,
+      choices = { "wellHook", "rustSword", "harpoon" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 4,
+      current = "boneKnife",
+      choices = { "rustSword", "hammer", "harpoon" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 4,
+      current = "hammer",
+      choices = { "rustSword", "harpoon", "boneKnife" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 10,
+      choices = { "harpoon", "boneKnife", "mossBlade" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 10,
+      current = "boneKnife",
+      choices = { "rustSword", "bellStaff", "saltDagger" }
+    },
+    {
+      seed = 31337,
+      floorIndex = 10,
+      current = "hammer",
+      choices = { "rustSword", "bellStaff", "saltDagger" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 1,
+      choices = { "rustSword", "saltDagger", "bellStaff" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 1,
+      current = "boneKnife",
+      choices = { "harpoon", "wellHook", "rustSword" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 1,
+      current = "hammer",
+      choices = { "boneKnife", "wellHook", "rustSword" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 4,
+      choices = { "harpoon", "boneKnife", "wellHook" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 4,
+      current = "boneKnife",
+      choices = { "bellStaff", "mossBlade", "hammer" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 4,
+      current = "hammer",
+      choices = { "bellStaff", "mossBlade", "harpoon" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 10,
+      choices = { "wellHook", "rustSword", "saltDagger" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 10,
+      current = "boneKnife",
+      choices = { "bellStaff", "mossBlade", "hammer" }
+    },
+    {
+      seed = 2147483647,
+      floorIndex = 10,
+      current = "hammer",
+      choices = { "bellStaff", "mossBlade", "harpoon" }
+    }
+  },
+  intels = {
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 23,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 13 / 防 13）打它：-60", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-48", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-45", "两种都拿（攻 16 / 防 16）：-36" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 23,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 19 / 防 16）打它：-27", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-27", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-18", "两种都拿（攻 22 / 防 19）：-18" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 23,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 10 / 防 10）打它：-75", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-60", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-60", "两种都拿（攻 13 / 防 13）：-48" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 8,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠挡在必经之路上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 13 / 防 13）打它：-60", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-48", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-45", "两种都拿（攻 16 / 防 16）：-36" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 8,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠挡在必经之路上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 19 / 防 16）打它：-27", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-27", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-18", "两种都拿（攻 22 / 防 19）：-18" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 8,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有先手攻击的回声蝠挡在必经之路上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 10 / 防 10）打它：-75", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-60", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-60", "两种都拿（攻 13 / 防 13）：-48" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 2,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层的盲鳗守在主要路线上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 13 / 防 13）打它：-35", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-28", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-20", "两种都拿（攻 16 / 防 16）：-16" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 2,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层的盲鳗守在主要路线上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 19 / 防 16）打它：-12", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-8", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-3", "两种都拿（攻 22 / 防 19）：-2" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 2,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层的盲鳗守在主要路线上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 10 / 防 10）打它：-40", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-30", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-28", "两种都拿（攻 13 / 防 13）：-21" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..f.#B..h.", ".###.#.###.", ".#v.D....#>", ".#.###k#.#.", "...#r..#...", "##v#.###.#.", "h..f.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 57,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 13 / 防 13）打它：-60", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-48", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-45", "两种都拿（攻 16 / 防 16）：-36" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..f.#B..h.", ".###.#.###.", ".#v.D....#>", ".#.###k#.#.", "...#r..#...", "##v#.###.#.", "h..f.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 57,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 19 / 防 16）打它：-27", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-27", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-18", "两种都拿（攻 22 / 防 19）：-18" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..f.#B..h.", ".###.#.###.", ".#v.D....#>", ".#.###k#.#.", "...#r..#...", "##v#.###.#.", "h..f.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 57,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 10 / 防 10）打它：-75", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-60", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-60", "两种都拿（攻 13 / 防 13）：-48" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..v.#e..h.", ".###.#.###.", ".#D.x....#>", ".#.###r#.#.", "...#k..#...", "##B#.###.#.", "h..v.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 69,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 13 / 防 13）打它：-60", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-48", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-45", "两种都拿（攻 16 / 防 16）：-36" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..v.#e..h.", ".###.#.###.", ".#D.x....#>", ".#.###r#.#.", "...#k..#...", "##B#.###.#.", "h..v.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 69,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 19 / 防 16）打它：-27", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-27", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-18", "两种都拿（攻 22 / 防 19）：-18" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@..v.#e..h.", ".###.#.###.", ".#D.x....#>", ".#.###r#.#.", "...#k..#...", "##B#.###.#.", "h..v.....bb" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 69,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 10 / 防 10）打它：-75", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-60", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-60", "两种都拿（攻 13 / 防 13）：-48" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@...D...g..", ".###.#.###.", ".#k..h..h#.", ".#.###.##..", ".#..r..f#.>", ".##.###.#b.", "..v.c...B.b" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 70,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 13 / 防 13）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-95", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：打不动", "两种都拿（攻 16 / 防 16）：-38" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@...D...g..", ".###.#.###.", ".#k..h..h#.", ".#.###.##..", ".#..r..f#.>", ".##.###.#b.", "..v.c...B.b" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 70,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 19 / 防 16）打它：-14", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-8", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-0", "两种都拿（攻 22 / 防 19）：-0" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@...D...g..", ".###.#.###.", ".#k..h..h#.", ".#.###.##..", ".#..r..f#.>", ".##.###.#b.", "..v.c...B.b" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 70,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 10 / 防 10）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-104", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：打不动", "两种都拿（攻 13 / 防 13）：-65" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@...f...x..", ".###.#.###.", ".#b..h..h#.", ".#.###.##..", ".#..r..c#.>", ".##.###.#k.", "..f.D...B.b" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 51,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 13 / 防 13）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-95", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：打不动", "两种都拿（攻 16 / 防 16）：-38" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@...f...x..", ".###.#.###.", ".#b..h..h#.", ".#.###.##..", ".#..r..c#.>", ".##.###.#k.", "..f.D...B.b" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 51,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 19 / 防 16）打它：-14", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-8", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-0", "两种都拿（攻 22 / 防 19）：-0" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "@...f...x..", ".###.#.###.", ".#b..h..h#.", ".#.###.##..", ".#..r..c#.>", ".##.###.#k.", "..f.D...B.b" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 51,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 10 / 防 10）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-104", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：打不动", "两种都拿（攻 13 / 防 13）：-65" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "#k#.f.#e#.b", "#c#.#.#r#.#", "#.#.#.#.#.#", "@....f...B>", "#.#.#.#.#.#", "#f#.v.#h#b#", "#h#.#.#.#.#" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 12,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 13 / 防 13）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-95", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：打不动", "两种都拿（攻 16 / 防 16）：-38" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "#k#.f.#e#.b", "#c#.#.#r#.#", "#.#.#.#.#.#", "@....f...B>", "#.#.#.#.#.#", "#f#.v.#h#b#", "#h#.#.#.#.#" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 12,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 19 / 防 16）打它：-14", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-8", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-0", "两种都拿（攻 22 / 防 19）：-0" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "#k#.f.#e#.b", "#c#.#.#r#.#", "#.#.#.#.#.#", "@....f...B>", "#.#.#.#.#.#", "#f#.v.#h#b#", "#h#.#.#.#.#" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 12,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有高防守卫：锈甲虫守在主要路线上",
+      lines = { "锈甲虫：生命 40　攻击 18　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 10 / 防 10）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-104", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：打不动", "两种都拿（攻 13 / 防 13）：-65" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "#h#.v.#b#.v", "#x#.#.#b#.#", "#.#.#.#.#.#", "@....B...e>", "#.#.#.#.#.#", "#v#...#e#k#", "#r#.#.#h#.#" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 42,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层的盲鳗挡在必经之路上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 13 / 防 13）打它：-35", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-28", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-20", "两种都拿（攻 16 / 防 16）：-16" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "#h#.v.#b#.v", "#x#.#.#b#.#", "#.#.#.#.#.#", "@....B...e>", "#.#.#.#.#.#", "#v#...#e#k#", "#r#.#.#h#.#" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 42,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层的盲鳗挡在必经之路上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 19 / 防 16）打它：-12", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-8", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-3", "两种都拿（攻 22 / 防 19）：-2" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { "#h#.v.#b#.v", "#x#.#.#b#.#", "#.#.#.#.#.#", "@....B...e>", "#.#.#.#.#.#", "#v#...#e#k#", "#r#.#.#h#.#" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 42,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层的盲鳗挡在必经之路上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 10 / 防 10）打它：-40", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-30", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-28", "两种都拿（攻 13 / 防 13）：-21" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 1,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 13 / 防 13）打它：-60", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-48", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-45", "两种都拿（攻 16 / 防 16）：-36" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 1,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 19 / 防 16）打它：-27", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-27", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-18", "两种都拿（攻 22 / 防 19）：-18" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 1,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有先手攻击的回声蝠守在主要路线上",
+      lines = { "回声蝠：生命 35　攻击 25　防御 6", "它会先打你一下，防御越高越好打", "按你现在的属性（攻 10 / 防 10）打它：-75", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-60", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-60", "两种都拿（攻 13 / 防 13）：-48" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { ".e.D.....hB", ".#k#######.", ".#########.", "@...v...x.>", "##c####e###", "##r##..hb##", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 1,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层的盲鳗守在主要路线上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 13 / 防 13）打它：-35", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-28", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：-20", "两种都拿（攻 16 / 防 16）：-16" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { ".e.D.....hB", ".#k#######.", ".#########.", "@...v...x.>", "##c####e###", "##r##..hb##", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 1,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层的盲鳗守在主要路线上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 19 / 防 16）打它：-12", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-8", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-3", "两种都拿（攻 22 / 防 19）：-2" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 3 层 · 回声",
+        map = { ".e.D.....hB", ".#k#######.", ".#########.", "@...v...x.>", "##c####e###", "##r##..hb##", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20,
+        rent = 30
+      },
+      intelPick = {
+        cell = 1,
+        mustFight = false
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层的盲鳗守在主要路线上",
+      lines = { "盲鳗：生命 45　攻击 20　防御 5", "按你现在的属性（攻 10 / 防 10）打它：-40", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-30", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：-28", "两种都拿（攻 13 / 防 13）：-21" },
+      mustFight = false
+    },
+    {
+      floor = {
+        name = "第 5 层 · 鳞厅",
+        map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 49,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：石鳞守卫挡在必经之路上",
+      lines = { "石鳞守卫：生命 90　攻击 26　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 13 / 防 13）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-1144", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：打不动", "两种都拿（攻 16 / 防 16）：-880" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 5 层 · 鳞厅",
+        map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 49,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：石鳞守卫挡在必经之路上",
+      lines = { "石鳞守卫：生命 90　攻击 26　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 19 / 防 16）打它：-340", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-220", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-238", "两种都拿（攻 22 / 防 19）：-154" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 5 层 · 鳞厅",
+        map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 49,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有高防守卫：石鳞守卫挡在必经之路上",
+      lines = { "石鳞守卫：生命 90　攻击 26　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 10 / 防 10）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-928", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：打不动", "两种都拿（攻 13 / 防 13）：-754" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 5 层 · 鳞厅",
+        map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 49,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：石鳞守卫挡在必经之路上",
+      lines = { "石鳞守卫：生命 90　攻击 26　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 13 / 防 13）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 16）打它：-1144", "本层还有 1 颗青晶没拿，拿了以后（防 16）打它：打不动", "两种都拿（攻 16 / 防 16）：-880" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 5 层 · 鳞厅",
+        map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 49,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 120,
+        atk = 19,
+        def = 16,
+        keys = 0,
+        gold = 0
+      },
+      headline = "下一层有高防守卫：石鳞守卫挡在必经之路上",
+      lines = { "石鳞守卫：生命 90　攻击 26　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 19 / 防 16）打它：-340", "本层还有 1 颗赤晶没拿，拿了以后（攻 22）打它：-220", "本层还有 1 颗青晶没拿，拿了以后（防 19）打它：-238", "两种都拿（攻 22 / 防 19）：-154" },
+      mustFight = true
+    },
+    {
+      floor = {
+        name = "第 5 层 · 鳞厅",
+        map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      intelPick = {
+        cell = 49,
+        mustFight = true
+      },
+      current = {
+        name = "第 1 层 · 井口",
+        map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+        bloodCost = 40,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      },
+      headline = "下一层有高防守卫：石鳞守卫挡在必经之路上",
+      lines = { "石鳞守卫：生命 90　攻击 26　防御 14", "攻击要高于 14 才打得动它", "按你现在的属性（攻 10 / 防 10）打它：打不动", "本层还有 1 颗赤晶没拿，拿了以后（攻 13）打它：-928", "本层还有 1 颗青晶没拿，拿了以后（防 13）打它：打不动", "两种都拿（攻 13 / 防 13）：-754" },
+      mustFight = true
+    }
   }
 }

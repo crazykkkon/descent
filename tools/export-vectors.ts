@@ -7,11 +7,14 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { CHARACTERS, Hero, MONSTERS, MonsterId, WEAPONS, WeaponId } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
-import { FloorDef } from '../src/core/floor';
+import { FloorDef, parseFloor } from '../src/core/floor';
+const parseFloorCells = (f: FloorDef) => parseFloor(f).cells;
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, buildFloor } from '../src/core/levels';
 import { keepVersion } from '../src/core/contract';
 import { solveFromStart } from '../src/core/solver';
+import { SLOTS, SlotId, newSlotState, roll } from '../src/core/slot';
+import { choosePick, stairIntel } from '../src/core/intel';
 
 // ---------- 把 JS 值写成 Lua 表 ----------
 function lua(v: unknown, indent = ''): string {
@@ -122,10 +125,85 @@ const deaths = (['frog', 'beetle', 'wraith'] as MonsterId[]).map(id => {
     return { monster: id, map: f.map, hp: 30, ok: r.ok, status: run.status, heroHp: run.hero.hp };
 });
 
+// ---------- 4. 井中轮 ----------
+// 4a. 纯转轮：同一个种子、同一台机器，连续转 40 次的图案（验证随机数完全一致）
+const rolls: unknown[] = [];
+for (const seed of [1, 7, 12345, 2147483647, 987654321]) {
+    for (const key of [0, 1003, 4021]) {
+        for (const id of ['risky', 'steady'] as SlotId[]) {
+            const st = newSlotState();
+            const seq: string[] = [];
+            for (let k = 0; k < 40; k++) seq.push(roll(SLOTS[id], st, seed, key).result.join(','));
+            rolls.push({ seed, key, machine: id, seq });
+        }
+    }
+}
+// 4b. 完整操作：转、锁轴重转、收下、血注，每一步之后的属性和机器状态
+type SlotAct = { kind: 'spin'; pay: 'gold' | 'blood'; held?: boolean[] } | { kind: 'collect' };
+const slotSessions: unknown[] = [];
+const sessionScripts: SlotAct[][] = [
+    [{ kind: 'spin', pay: 'gold' }, { kind: 'collect' }, { kind: 'spin', pay: 'gold' }, { kind: 'spin', pay: 'gold', held: [true, false, false] }, { kind: 'collect' }, { kind: 'spin', pay: 'blood' }, { kind: 'collect' }],
+    [{ kind: 'spin', pay: 'blood' }, { kind: 'spin', pay: 'gold', held: [true, true, false] }, { kind: 'spin', pay: 'gold', held: [false, true, true] }, { kind: 'collect' }, { kind: 'spin', pay: 'gold' }, { kind: 'spin', pay: 'gold' }, { kind: 'collect' }],
+];
+for (const seed of [3, 11, 2024, 99991]) {
+    for (const [mi, map] of [['S', ['@.>', '.S.']], ['T', ['@.>', '.T.']]] as const) {
+        sessionScripts.forEach((script, si) => {
+            const f: FloorDef = { name: 't', map: [...map], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
+            const run = new Run([f], 'digger', seed);
+            run.move(0, 1);
+            run.hero = { hp: 400, atk: 13, def: 13, keys: 0, gold: 300 };
+            const steps: unknown[] = [];
+            for (const a of script) {
+                if (a.kind === 'spin') {
+                    const r = run.slotSpin(4, a.pay, a.held);
+                    steps.push({ act: 'spin', pay: a.pay, held: a.held, ok: r.ok, result: r.result?.join(','), bite: r.bite, hero: { ...run.hero }, spins: run.slotState(4).spins, status: run.status });
+                } else {
+                    const lines = run.slotCollect(4);
+                    steps.push({ act: 'collect', lines, hero: { ...run.hero }, status: run.status });
+                }
+            }
+            slotSessions.push({ seed, machine: mi, script: si, map, steps });
+        });
+    }
+}
+
+// ---------- 5. 精英倒下后三选一的武器 ----------
+const weaponChoices: unknown[] = [];
+for (const seed of [1, 5, 77, 31337, 2147483647]) {
+    for (const floors of [1, 4, 10]) {
+        for (const current of [undefined, 'boneKnife', 'hammer'] as (WeaponId | undefined)[]) {
+            const fs: FloorDef[] = [];
+            for (let k = 0; k < floors; k++) fs.push({ name: 't', map: ['@>'], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 });
+            fs[floors - 1] = { ...fs[floors - 1], map: ['@G>'], eliteReward: true };
+            const run = new Run(fs, 'digger', seed);
+            for (let k = 0; k < floors - 1; k++) { run.move(1, 0); run.finishFloor(false); }
+            run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0, weapon: current };
+            run.move(1, 0);
+            weaponChoices.push({ seed, floorIndex: floors, current, choices: run.pendingWeapons });
+        }
+    }
+}
+
+// ---------- 6. 楼梯口情报（情报怪事先选好，写进关卡数据） ----------
+const intels: unknown[] = [];
+const intelHeroes: Hero[] = [{ hp: 150, atk: 13, def: 13, keys: 0, gold: 0 }, { hp: 120, atk: 19, def: 16, keys: 0, gold: 0 }, { hp: 200, atk: 10, def: 10, keys: 0, gold: 0, weapon: 'hammer' }];
+for (const fi of [1, 2, 4]) {
+    DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
+        const base = buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi });
+        const next: FloorDef = { ...base, intel: undefined, intelPick: choosePick(base, intelHeroes[0], CHARACTERS.digger) };
+        const cur = buildFloor(DEMO_POOLS[0], { layout: 0, variant: 0 });
+        const curCells = parseFloorCells(cur);
+        for (const h of intelHeroes) {
+            const it = stairIntel(next, h, CHARACTERS.digger, { floor: cur, cells: curCells })!;
+            intels.push({ floor: floorParams(next), intelPick: next.intelPick, current: floorParams(cur), hero: h, headline: it.headline, lines: it.lines, mustFight: it.mustFight });
+        }
+    }));
+}
+
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, deaths })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, deaths, rolls, slotSessions, weaponChoices, intels })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
-console.log(`战斗算例 ${combat.length} 条；楼层算例 ${scenarios.length} 条（共 ${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死算例 ${deaths.length} 条`);
+console.log(`战斗 ${combat.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);

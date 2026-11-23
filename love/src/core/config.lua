@@ -44,6 +44,9 @@ M.WEAPONS = {
     wellHook   = { id = 'wellHook',   name = '井神的钩', desc = '每次签契约，押金 −20', atk = 0, def = 0, contractDiscount = 20, sell = 40 },
 }
 
+-- 武器的固定顺序（和原型 WEAPONS 的键顺序一致，三选一的随机数按这个顺序取）
+M.WEAPON_ORDER = { 'boneKnife', 'harpoon', 'hammer', 'mossBlade', 'bellStaff', 'saltDagger', 'rustSword', 'wellHook' }
+
 M.ITEM_NAMES = {
     smallPotion = '小血瓶', bigPotion = '大血瓶', redGem = '赤晶', blueGem = '青晶', key = '骨钥', gold = '金币袋',
 }

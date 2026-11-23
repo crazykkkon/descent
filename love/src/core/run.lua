@@ -1,5 +1,5 @@
 -- 一局游戏的状态和操作：移动、交互、契约、出口结算、存档。
--- 和 TypeScript 原型 src/core/game.ts 的 Run 一致（井中轮、井租、精英武器后续再移植）。
+-- 和 TypeScript 原型 src/core/game.ts 的 Run 一致（含井中轮、井租、精英武器三选一）。
 -- 没有撤回、没有重开本层：死了就整局重来。
 
 local config = require('core.config')
@@ -7,6 +7,7 @@ local combat = require('core.combat')
 local floorMod = require('core.floor')
 local rules = require('core.rules')
 local contract = require('core.contract')
+local slot = require('core.slot')
 
 local Run = {}
 Run.__index = Run
@@ -28,7 +29,9 @@ function Run.new(floors, characterId, seed)
     self.floors = floors
     self.ch = config.CHARACTERS[characterId or 'digger']
     self.hero = config.copyHero(self.ch.base)
-    self.seed = seed or 1
+    self.seed = slot.u32(seed or 1)
+    self.slots = {}           -- 井中轮状态，键是 '层:格子'
+    self.pendingWeapons = nil -- 精英倒下后等着三选一的武器
     self.totalSteps = 0
     self.contract = nil -- { def, floorIndex, broken }
     self:loadFloor(1)
@@ -86,6 +89,105 @@ function Run:contractActive()
     return c ~= nil and c.floorIndex == self.floorIndex and not c.broken
 end
 
+-- ---------- 武器 ----------
+
+-- 换上新武器；旧武器当场卖掉换金币
+function Run:equip(id)
+    local old = self.hero.weapon
+    self.hero.weapon = id
+    if old and old ~= id then
+        local w = config.WEAPONS[old]
+        self.hero.gold = self.hero.gold + w.sell
+        return '换上' .. config.WEAPONS[id].name .. '，旧的' .. w.name .. '卖了 ' .. w.sell .. ' 金币'
+    end
+    return '拿到' .. config.WEAPONS[id].name
+end
+
+-- 和原型逐位相同的三选一（原型的层号从 0 开始）
+function Run:rollWeaponChoices()
+    local pool = {}
+    for _, w in ipairs(config.WEAPON_ORDER) do if w ~= self.hero.weapon then pool[#pool + 1] = w end end
+    local out, n = {}, 0
+    while #out < 3 and #out < #pool do
+        n = n + 1
+        local x = slot.imul(slot.bxor(self.seed, (self.floorIndex - 1) * 7919 + n * 104729), 2654435761)
+        local w = pool[x % #pool + 1]
+        if not contains(out, w) then out[#out + 1] = w end
+    end
+    return out
+end
+
+function Run:chooseWeapon(id)
+    if not self.pendingWeapons or not contains(self.pendingWeapons, id) then return '' end
+    self.pendingWeapons = nil
+    return self:equip(id)
+end
+
+-- ---------- 井中轮 ----------
+
+function Run:slotState(i)
+    local key = self.floorIndex .. ':' .. i
+    if not self.slots[key] then self.slots[key] = slot.newState() end
+    return self.slots[key]
+end
+
+-- 下一次转的价格；hold：锁轴重转（半价）
+function Run:slotPrice(i, hold)
+    local base = slot.spinPrice(self:slotState(i).spins)
+    local gold = hold and slot.holdPrice(base) or base
+    return { gold = gold, blood = slot.bloodPrice(gold) }
+end
+
+local function any(t) for i = 1, 3 do if t[i] then return true end end return false end
+local function all(t) for i = 1, 3 do if not t[i] then return false end end return true end
+
+-- 转一次。held 不为空时是锁轴重转：放弃当前结果，锁住的转轮不变，其余重转。
+-- 不锁轴时如果机器上还有没收下的结果，先自动收下。返回 { ok, msg, result, fresh, bite }
+function Run:slotSpin(i, pay, held)
+    local c = self.cells[i]
+    if self.status ~= 'playing' or not c or c.kind ~= 'slot' then return { ok = false, msg = '' } end
+    if not contains(floorMod.neighbors(self.pos, self.w, self.h), i) then return { ok = false, msg = '站在井中轮旁边才能用它' } end
+    local st = self:slotState(i)
+    local hold = held ~= nil and any(held)
+    if hold and (not st.pending or all(held)) then return { ok = false, msg = '要锁住一两个转轮，留至少一个重转' } end
+    if not hold and st.pending then self:slotCollect(i) end
+    local price = self:slotPrice(i, hold)
+    if pay == 'gold' then
+        if self.hero.gold < price.gold then return { ok = false, msg = '金币不够（要 ' .. price.gold .. '）' } end
+        self.hero.gold = self.hero.gold - price.gold
+    else
+        if self.hero.hp <= price.blood then return { ok = false, msg = '生命不够押（要 ' .. price.blood .. '）' } end
+        self.hero.hp = self.hero.hp - price.blood
+    end
+    local result, fresh = slot.roll(slot.SLOTS[c.id], st, self.seed, (self.floorIndex - 1) * 1000 + (i - 1), hold and held or nil)
+    st.spins = st.spins + 1
+    st.pending = result
+    local bite = slot.leechBite(result, fresh)
+    self.hero.hp = self.hero.hp - bite
+    if self.hero.hp <= 0 then
+        self.hero.hp = 0
+        self.status = 'dead'
+        return { ok = true, msg = '你倒下了。井蛭吸干了你最后一点血', result = result, fresh = fresh, bite = bite }
+    end
+    return { ok = true, msg = bite > 0 and ('井蛭咬掉了 ' .. bite .. ' 生命') or '', result = result, fresh = fresh, bite = bite }
+end
+
+-- 收下机器上当前的结果；返回说明文字列表
+function Run:slotCollect(i)
+    local c = self.cells[i]
+    local st = self:slotState(i)
+    if not c or c.kind ~= 'slot' or not st.pending then return {} end
+    local p = slot.payout(st.pending)
+    st.pending = nil
+    local lines = {}
+    for k, l in ipairs(p.lines) do lines[k] = l end
+    if p.gems > 0 then self.hero.atk = self.hero.atk + p.gems * (self:floor().gem + self.ch.gemBonus) end
+    self.hero.hp = self.hero.hp + p.hp
+    self.hero.gold = self.hero.gold + p.gold
+    if p.weapon then lines[#lines + 1] = self:equip(p.weapon) end
+    return lines
+end
+
 -- ---------- 移动和交互 ----------
 
 -- 往相邻格子走一步（或和它交互）。返回 { ok, msg }
@@ -94,6 +196,7 @@ function Run:step(i)
     if not contains(floorMod.neighbors(self.pos, self.w, self.h), i) then return { ok = false, msg = '' } end
     local c = self.cells[i]
     if c.kind == 'wall' then return { ok = false, msg = '' } end
+    if c.kind == 'slot' then return { ok = false, msg = '站在井中轮旁边才能用它' } end
     if c.kind == 'exit' and self:eliteAlive() then return { ok = false, msg = '精英守卫还活着，出口被封住了' } end
 
     if c.kind == 'floor' or c.kind == 'exit' then
@@ -122,6 +225,8 @@ function Run:step(i)
         self.kills = self.kills + 1
         local m = config.MONSTERS[c.id]
         msg = '击败' .. m.name .. '，损失 ' .. lost .. ' 生命，获得 ' .. m.gold .. ' 金币'
+        -- 精英倒下：三选一拿武器
+        if m.elite and self:floor().eliteReward then self.pendingWeapons = self:rollWeaponChoices() end
     else
         self.pos = i
         if c.kind == 'item' then msg = '获得' .. config.ITEM_NAMES[c.id]
@@ -266,6 +371,8 @@ function Run:save()
         contract = self.contract,
         seed = self.seed,
         rentPaid = self.rentPaid,
+        slots = self.slots,
+        pendingWeapons = self.pendingWeapons,
     }
 end
 
@@ -278,6 +385,8 @@ function Run.load(floors, s)
     run.status = s.status
     run.contract = s.contract
     run.rentPaid = s.rentPaid or false
+    run.slots = s.slots or {}
+    run.pendingWeapons = s.pendingWeapons
     return run
 end
 

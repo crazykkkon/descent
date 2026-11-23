@@ -6,6 +6,9 @@ local config = require('core.config')
 local combat = require('core.combat')
 local Run = require('core.run')
 local serialize = require('core.serialize')
+local slot = require('core.slot')
+local intel = require('core.intel')
+local floorMod = require('core.floor')
 local V = dofile('tests/vectors.lua')
 
 local pass, fail = 0, 0
@@ -70,5 +73,66 @@ for _, d in ipairs(V.deaths) do
     check(r.ok == d.ok and run.status == d.status and run.hero.hp == d.heroHp, '硬打 ' .. d.monster)
 end
 
-print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d 条、楼层 %d 条、致死 %d 条）', pass, fail, #V.combat, #V.scenarios, #V.deaths))
+-- 4a. 井中轮转轮序列（随机数逐位一致）
+for _, r in ipairs(V.rolls) do
+    local st = slot.newState()
+    for k, want in ipairs(r.seq) do
+        local res = slot.roll(slot.SLOTS[r.machine], st, r.seed, r.key)
+        local got = table.concat(res, ',')
+        check(got == want, string.format('转轮 种子%d 键%d %s 第 %d 次：期望 %s，实际 %s', r.seed, r.key, r.machine, k, want, got))
+    end
+end
+
+-- 4b. 井中轮完整操作（每一步都存档读档）
+local function slotHeroEq(h, e)
+    return heroEq(h, e) and h.weapon == e.weapon
+end
+for _, ss in ipairs(V.slotSessions) do
+    local f = { name = 't', map = ss.map, bloodCost = 40, gem = 2, smallPotion = 50, bigPotion = 150, gold = 20 }
+    local run = Run.new({ f }, 'digger', ss.seed)
+    run:step(4)
+    run.hero = { hp = 400, atk = 13, def = 13, keys = 0, gold = 300 }
+    for k, st in ipairs(ss.steps) do
+        local tag = string.format('井中轮 种子%d %s 脚本%d 第 %d 步', ss.seed, ss.machine, ss.script, k)
+        if st.act == 'spin' then
+            local r = run:slotSpin(5, st.pay, st.held)
+            check(r.ok == st.ok and (r.result and table.concat(r.result, ',')) == st.result and r.bite == st.bite
+                and slotHeroEq(run.hero, st.hero) and run:slotState(5).spins == st.spins and run.status == st.status,
+                string.format('%s：期望 %s 咬%s 生命%d 金%d，实际 %s 咬%s 生命%d 金%d', tag, tostring(st.result), tostring(st.bite), st.hero.hp, st.hero.gold,
+                    tostring(r.result and table.concat(r.result, ',')), tostring(r.bite), run.hero.hp, run.hero.gold))
+        else
+            local lines = run:slotCollect(5)
+            check(table.concat(lines, '|') == table.concat(st.lines, '|') and slotHeroEq(run.hero, st.hero) and run.status == st.status,
+                tag .. '：收下 期望 ' .. table.concat(st.lines, '|') .. '，实际 ' .. table.concat(lines, '|'))
+        end
+        run = Run.load(run.floors, serialize.load(serialize.dump(run:save())))
+    end
+end
+
+-- 5. 精英倒下后的武器三选一
+for _, wc in ipairs(V.weaponChoices) do
+    local fs = {}
+    for k = 1, wc.floorIndex do fs[k] = { name = 't', map = { '@>' }, bloodCost = 40, gem = 2, smallPotion = 50, bigPotion = 150, gold = 20 } end
+    fs[wc.floorIndex] = { name = 't', map = { '@G>' }, bloodCost = 40, gem = 2, smallPotion = 50, bigPotion = 150, gold = 20, eliteReward = true }
+    local run = Run.new(fs, 'digger', wc.seed)
+    for _ = 1, wc.floorIndex - 1 do run:step(2); run:finishFloor(false) end
+    run.hero = { hp = 999, atk = 60, def = 60, keys = 0, gold = 0, weapon = wc.current }
+    run:step(2)
+    local got = table.concat(run.pendingWeapons or {}, ',')
+    local want = table.concat(wc.choices or {}, ',')
+    check(got == want, string.format('武器三选一 种子%d 第%d层 现有%s：期望 %s，实际 %s', wc.seed, wc.floorIndex, tostring(wc.current), want, got))
+end
+
+-- 6. 楼梯口情报
+for _, it in ipairs(V.intels) do
+    local next = {}
+    for k, v in pairs(it.floor) do next[k] = v end
+    next.intelPick = { cell = it.intelPick.cell + 1, mustFight = it.intelPick.mustFight }
+    local cur = it.current
+    local r = intel.stairIntel(next, it.hero, config.CHARACTERS.digger, { floor = cur, cells = floorMod.parse(cur).cells })
+    check(r and r.headline == it.headline and table.concat(r.lines, '|') == table.concat(it.lines, '|') and r.mustFight == it.mustFight,
+        '情报 ' .. it.floor.name .. '：期望 ' .. it.headline .. ' / ' .. table.concat(it.lines, '|') .. '，实际 ' .. (r and (r.headline .. ' / ' .. table.concat(r.lines, '|')) or 'nil'))
+end
+
+print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d、致死 %d、转轮 %d、井中轮 %d、三选一 %d、情报 %d）', pass, fail, #V.combat, #V.scenarios, #V.deaths, #V.rolls, #V.slotSessions, #V.weaponChoices, #V.intels))
 os.exit(fail == 0 and 0 or 1)

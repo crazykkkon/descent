@@ -29,6 +29,8 @@ export interface FloorDef {
     contract?: ContractDef;
     /** 上一层楼梯口显示的情报（手写，必须是真话）；不写就自动从地图里挑 */
     intel?: string;
+    /** 楼梯口情报挑哪只怪：设计时用求解器选好写进关卡数据（Lua 版不带求解器，直接用这个） */
+    intelPick?: { cell: number; mustFight: boolean };
     /** 离开这一层时要交的井租（金币） */
     rent?: number;
     /** 打败本层精英后三选一拿武器 */

@@ -8,6 +8,7 @@
 --   D  骨门      B  血门
 --   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
 --   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
+--   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
 
 local M = {}
 
@@ -32,6 +33,8 @@ local LEGEND = {
     g = { kind = 'monster', id = 'wraith' },
     x = { kind = 'monster', id = 'crab' },
     G = { kind = 'monster', id = 'guardian' },
+    S = { kind = 'slot', id = 'risky' },
+    T = { kind = 'slot', id = 'steady' },
 }
 
 local function copyCell(c)
