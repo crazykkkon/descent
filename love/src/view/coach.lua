@@ -46,7 +46,7 @@ local FLOORS = {
     -- 第 4 层：精英
     function(run)
         if not run:eliteAlive() then return '精英倒下了，出口开了。' end
-        return '带「守」字的是精英：它不倒，出口就打不开。它每回合打你两下——先把宝石和血瓶都拿到手，再去打它。'
+        return '披着厚石鳞的守卫是精英：它不倒，出口就打不开。它每回合打你两下——先把宝石和血瓶都拿到手，再去打它。'
     end,
     -- 第 5 层：井底之眼
     function()
