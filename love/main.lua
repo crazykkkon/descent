@@ -1146,9 +1146,7 @@ local function drawTile(i)
     setColor(base); g.rectangle('fill', x + 1, y + 1, TILE - 2, TILE - lip, 3, 3)
     setColor(shade(base, 1.25)); g.rectangle('fill', x + 2, y + 1, TILE - 4, 1)
     local cx, cy = x + TILE / 2, y + TILE / 2 - 2
-    if c.kind == 'monster' then
-        monsters.draw(c.id, cx, y + TILE - lip - 1, clock, i, battle.monster(i))
-    elseif c.kind == 'item' then
+    if c.kind == 'item' then
         if c.id == 'smallPotion' or c.id == 'bigPotion' then
             local s = (c.id == 'bigPotion' and 1.3 or 1) * K
             setColor({ 0, 0, 0 }, 0.3); g.ellipse('fill', cx, cy + 9 * s, 7 * s, 2)
@@ -1162,12 +1160,6 @@ local function drawTile(i)
             g.polygon('fill', cx, cy - 10 * s, cx + 10 * s, cy, cx, cy + 10 * s, cx - 10 * s, cy)
             setColor({ 1, 1, 1 }, 0.45); g.polygon('fill', cx, cy - 10 * s, cx + 4 * s, cy - 4 * s, cx, cy, cx - 4 * s, cy - 4 * s)
         end
-    elseif c.kind == 'exit' then
-        -- 往下的台阶（越往下越暗）
-        for k = 0, 3 do
-            setColor(shade(C.exit, 1.3 - k * 0.22))
-            g.rectangle('fill', x + 4 + k * 2, y + 3 + k * 4, TILE - 8 - k * 4, 3)
-        end
     end
 end
 
@@ -1176,6 +1168,18 @@ local function drawExitFx(i, level)
     local g = love.graphics
     local x, y = tileXY(i)
     local cx = x + TILE / 2
+    -- 近处的踏鼻最宽最亮，沿两侧石壁往井底收窄。
+    local warm = run.tutorial and run.floorIndex == 1
+    g.setColor(0.07, 0.14, 0.16)
+    g.polygon('fill', x + 1, y + 2, x + TILE - 1, y + 2, x + TILE - 3, y + TILE - 2, x + 3, y + TILE - 2)
+    g.setColor(0.19, 0.32, 0.32)
+    g.polygon('fill', x + 2, y + 3, x + 8, y + 6, x + 5, y + TILE - 4, x + 3, y + TILE - 3)
+    for step = 0, 3 do
+        local width = 9 + 3 * step
+        local depth = 0.54 + 0.15 * step
+        g.setColor((warm and 0.98 or 0.49) * depth, (warm and 0.80 or 0.84) * depth, (warm and 0.48 or 0.76) * depth)
+        g.rectangle('fill', cx - width / 2, y + 5 + step * 5, width, 2)
+    end
     if level == 'loud' then
         for k = 0, 5 do
             local t = (clock * 0.7 + k / 6) % 1
@@ -1223,9 +1227,6 @@ local function drawPixel()
             if c.kind ~= 'wall' then
                 local x, y = tileXY(i)
                 wellhead.drawObject(c, x, y, TILE)
-                if c.kind == 'monster' then
-                    monsters.draw(c.id, x + TILE / 2, y + TILE - 5, clock, i, battle.monster(i))
-                end
             end
         end
     else
@@ -1253,13 +1254,24 @@ local function drawPixel()
     end
     local bdx, bdy, bflash = battle.heroOffset()
     hx, hy = hx + bdx, hy + bdy
-    setColor({ 0, 0, 0 }, 0.35); g.ellipse('fill', hx + TILE / 2, hy + TILE - 5, 7, 2)
-    miner.draw(facing, hx + TILE / 2, hy + TILE - 4, run.status == 'dead', 22)
-    if bflash > 0 then
-        g.setBlendMode('add'); setColor({ 1, 0.2, 0.2 }, bflash * 0.5)
-        g.ellipse('fill', hx + TILE / 2, hy + TILE / 2 - 2, 8, 11)
-        g.setBlendMode('alpha')
+    local heroFeet = hy + TILE - 4
+    local function drawMiner()
+        miner.drawOnMap(facing, hx + TILE / 2, heroFeet, run.status == 'dead', bflash)
     end
+    -- 地面画完才画角色。按脚底从远到近绘制，移动经过相邻怪物时也遵循这个顺序。
+    local minerDrawn = false
+    for i, c in ipairs(run.cells) do
+        if c.kind == 'monster' then
+            local x, y = tileXY(i)
+            local feet = y + TILE - 5
+            if not minerDrawn and feet > heroFeet then
+                drawMiner()
+                minerDrawn = true
+            end
+            monsters.draw(c.id, x + TILE / 2, feet, clock, i, battle.monster(i), 1.4)
+        end
+    end
+    if not minerDrawn then drawMiner() end
     -- 矿灯：主角附近暖、远处冷暗（最暗也看得清格子）
     fx.lamp(MAP_X, MAP_Y - 4, run.w * TILE, run.h * TILE + 4, hx + TILE / 2, hy + TILE / 2 - 4, 170)
     -- 断臂转轮（机械小臂）。刻图案时整条手臂移到画面中间、放大，其余压暗
@@ -1485,7 +1497,7 @@ local function drawUI()
         end
         -- 深度条的数字
         for d = 1, 20 do text(tostring(d), 8, MAP_Y + (d - 1) * 14 + 2, 5.5, d == run.floorIndex and { 0.1, 0.07, 0.02 } or { 0.45, 0.52, 0.55 }, 'center', 18) end
-        -- 格子上的字；怪物头上挂"掉多少血"的牌子
+        -- 印记、门和设施等格子标记
         for i, c in ipairs(picker and {} or run.cells) do  -- 刻图案时地图上的字不画（地图被压暗了）
             local x, y = tileXY(i)
             if c.kind == 'monster' then
@@ -1496,8 +1508,6 @@ local function drawUI()
                 text(c.door == 'bone' and '骨钥' or ('−' .. run:floor().bloodCost), x - 4, y + 14, 5, C.dim, 'center', TILE + 8)
             elseif c.kind == 'item' and (c.id == 'key' or c.id == 'gold') then
                 text(c.id == 'key' and '钥' or '金', x, y + 5, 10, C.gold, 'center', TILE)
-            elseif c.kind == 'exit' then
-                text('出口', x - 4, y + TILE - 11, 5, { 0.8, 1, 0.9 }, 'center', TILE + 8)
             elseif floorMod.isFacility(c) then
                 local g = FACILITY_GLYPH[c.kind]
                 text(g[1], x, y + 3, 10, C.gold, 'center', TILE)

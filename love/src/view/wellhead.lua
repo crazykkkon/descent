@@ -19,14 +19,7 @@ function M.drawObject(c, x, y, tile)
     -- 石缝属于画面。靠近路线边缘的短刻线标明实际格子的边界。
     g.setColor(0.10, 0.17, 0.18, 0.62)
     g.rectangle('fill', x, y + tile - 4, 1, 3)
-    if c.kind == 'exit' then
-        g.setColor(0.04, 0.14, 0.16)
-        g.rectangle('fill', x + 2, y + 1, tile - 4, tile - 2)
-        for i = 0, 3 do
-            g.setColor(0.92 - i * 0.13, 0.75 - i * 0.09, 0.41)
-            g.rectangle('fill', x + 5 + i, y + 3 + i * 4, tile - 10 - i * 2, 2)
-        end
-    elseif c.kind == 'item' then
+    if c.kind == 'item' then
         if c.id == 'smallPotion' then
             g.setColor(1, 1, 1)
             g.draw(potion, cx, cy + 9, 0, 0.43, 0.43, potion:getWidth() / 2, potion:getHeight())

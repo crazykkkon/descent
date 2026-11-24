@@ -20,7 +20,7 @@ local FLOORS = {
     function(run, s)
         local h = run.hero
         if items(run, 'smallPotion') < s.potions then
-            return '血瓶走上去就喝，生命 +' .. run:floor().smallPotion .. '。最后打掉盲鳗，走到左边绿色的台阶（出口）就进下一层。不用把怪打完。'
+            return '血瓶走上去就喝，生命 +' .. run:floor().smallPotion .. '。最后打掉盲鳗，走下左边的石阶就进下一层。不用把怪打完。'
         end
         if h.def > s.def then return '青晶加防御：怪打你没那么疼了。鼠标停在格子上，能看到它的详细数值。' end
         if h.atk > s.atk then return '攻击变高了，打下一只井苔要的回合更少，挨打也更少。先拿宝石再打，更划算。' end

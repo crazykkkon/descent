@@ -19,11 +19,12 @@ function M.size(id)
     return sprite:getDimensions()
 end
 
-function M.draw(id, cx, feet, clock, tileIndex, fx)
+function M.draw(id, cx, feet, clock, tileIndex, fx, sizeMultiplier)
     local g = love.graphics
     local sprite = sprites[id]
     local w, h = sprite:getDimensions()
-    local alpha, scale = fx and fx.alpha or 1, fx and fx.scale or 1
+    local alpha = fx and fx.alpha or 1
+    local scale = (sizeMultiplier or 1) * (fx and fx.scale or 1)
     cx, feet = cx + (fx and fx.dx or 0), feet + (fx and fx.dy or 0)
     g.setColor(0.035, 0.027, 0.055, 0.62 * alpha)
     g.ellipse('fill', cx, feet - 0.5, w * 0.18 * scale, 1.8)
