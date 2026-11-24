@@ -93291,7 +93291,7 @@ return {
       weapon = "boneKnife",
       reel = 0,
       ok = false,
-      msg = "第 1 个轮子刻满了，选一格覆盖",
+      msg = "第 1 个轮子刻满了。要刻在这个轮子上，先去当铺擦掉一格",
       reels = {
         { "wild", "boneKnife", "hammer", "bellStaff", "saltDagger" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -93310,8 +93310,8 @@ return {
       weapon = "hammer",
       reel = 0,
       cell = 2,
-      ok = true,
-      msg = "把破壳锤刻在第 1 个轮子的第 3 格，转到它才拿得到",
+      ok = false,
+      msg = "这一格已经有破壳锤了，不能覆盖。要刻在这里，先去当铺把它擦掉",
       reels = {
         { "wild", "boneKnife", "hammer", "bellStaff", "saltDagger" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -98802,7 +98802,7 @@ return {
           op = "redeem",
           a = 0,
           ok = false,
-          msg = "第 2 个轮子刻满了，选一格覆盖",
+          msg = "第 2 个轮子刻满了。要刻在这个轮子上，先去当铺擦掉一格",
           hero = {
             hp = 200,
             atk = 10,
@@ -98887,21 +98887,26 @@ return {
           op = "redeem",
           a = 0,
           b = 3,
-          ok = true,
-          msg = "赎回了骨刀",
+          ok = false,
+          msg = "这一格已经有破壳锤了，不能覆盖。要刻在这里，先去当铺把它擦掉",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 232
+            gold = 290
           },
           reels = {
             { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "harpoon", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -98921,14 +98926,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 172
+            gold = 230
           },
           reels = {
             { "blank", "blank", "wellHook", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "harpoon", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -98947,14 +98957,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 22
+            gold = 80
           },
           reels = {
             { "blank", "wild", "wellHook", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "harpoon", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -98973,14 +98988,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 2
+            gold = 60
           },
           reels = {
             { "blank", "wild", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "harpoon", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -98999,14 +99019,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 2
+            gold = 60
           },
           reels = {
             { "blank", "wild", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "harpoon", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99025,14 +99050,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 2
+            gold = 60
           },
           reels = {
             { "blank", "wild", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "harpoon", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99274,7 +99304,7 @@ return {
           op = "redeem",
           a = 0,
           ok = false,
-          msg = "第 2 个轮子刻满了，选一格覆盖",
+          msg = "第 2 个轮子刻满了。要刻在这个轮子上，先去当铺擦掉一格",
           hero = {
             hp = 200,
             atk = 10,
@@ -99359,21 +99389,26 @@ return {
           op = "redeem",
           a = 0,
           b = 3,
-          ok = true,
-          msg = "赎回了骨刀",
+          ok = false,
+          msg = "这一格已经有破壳锤了，不能覆盖。要刻在这里，先去当铺把它擦掉",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 37
+            gold = 95
           },
           reels = {
             { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99386,21 +99421,26 @@ return {
           a = 0,
           b = 0,
           c = 2,
-          ok = false,
-          msg = "金币不够（要 60）",
+          ok = true,
+          msg = "花 60 金币刻上了井神的钩",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 37
+            gold = 35
           },
           reels = {
-            { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "wellHook", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99419,14 +99459,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 37
+            gold = 35
           },
           reels = {
-            { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "wellHook", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99438,21 +99483,26 @@ return {
           op = "erase",
           a = 0,
           b = 2,
-          ok = false,
-          msg = "这一格是空的",
+          ok = true,
+          msg = "擦掉了第 1 个轮子第 3 格的井神的钩",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 37
+            gold = 15
           },
           reels = {
             { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99471,14 +99521,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 37
+            gold = 15
           },
           reels = {
             { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99497,14 +99552,19 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 37
+            gold = 15
           },
           reels = {
             { "blank", "blank", "blank", "blank", "blank" },
-            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
           pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
             {
               weapon = "hammer",
               reel = 1,
@@ -99822,7 +99882,7 @@ return {
           a = 0,
           b = 3,
           ok = false,
-          msg = "金币不够（要 58）",
+          msg = "这一格已经有破壳锤了，不能覆盖。要刻在这里，先去当铺把它擦掉",
           hero = {
             hp = 200,
             atk = 10,

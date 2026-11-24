@@ -101,6 +101,25 @@ function M.start()
             say(string.format('鼠标点轮子 %d 下面一格：刻在第 %d 格（应该是 %d），%s', r, want, want, tostring(run.arm.reels[r][want])))
             return
         end
+        -- 用鼠标点一个已经有图案的格子：不能覆盖，场景不关、图案不变
+        if not shots['07c-occupied'] then
+            local run = game.getRun()
+            for rr = 1, 3 do
+                for row = 0, 2 do
+                    local k = ((run.arm.stops[rr] - 1) + (row - 1)) % 5 + 1
+                    local old = run.arm.reels[rr][k]
+                    if old and not shots['07c-occupied'] then
+                        shots['07c-occupied'] = true
+                        local x, y = game.pickerCellScreen(rr, row)
+                        love.mouse.setPosition(x, y)
+                        love.mousepressed(x, y, 1); love.mousereleased(x, y, 1)
+                        sleep(0.2)
+                        shot('07c-occupied')
+                        say(string.format('点有图案的格子（轮子 %d 第 %d 格 %s）：还是 %s，场景还开着 %s', rr, k, old, tostring(run.arm.reels[rr][k]), tostring(game.inPicker())))
+                    end
+                end
+            end
+        end
         game.pickCell(r)
         for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
     end

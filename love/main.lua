@@ -211,6 +211,7 @@ local function openPicker(opts)
     picker = { sym = opts.sym, apply = opts.apply, after = opts.after, cancel = opts.cancel, onlyReel = opts.onlyReel,
         t = 0, closing = false, hold = 0, offs = { 0, 0, 0 } }
     fx.play('lever')
+    setMsg('')
 end
 local function pickerBusy() return picker ~= nil and (picker.t < 1 or picker.closing) end
 
@@ -229,8 +230,19 @@ local function pickerCellAt(lx, ly)
     return nil
 end
 
--- 刻到第 r 个轮子第 k 格；有图案的格子先问一次
-local function pickerChoose(r, k, confirmed)
+-- 这个场景里还有没有能刻的空格（赎回只看原来那个轮子）
+local function pickerHasBlank()
+    if not picker or not run.arm then return false end
+    for r = 1, armMod.REELS do
+        if not picker.onlyReel or r == picker.onlyReel then
+            if armMod.firstBlank(run.arm, r) then return true end
+        end
+    end
+    return false
+end
+
+-- 刻到第 r 个轮子第 k 格。只能刻在空格上：有图案的格子不能覆盖，要先去当铺擦掉（制作人定）
+local function pickerChoose(r, k)
     if not picker or pickerBusy() then return end
     if picker.onlyReel and r ~= picker.onlyReel then
         setMsg('只能刻回第 ' .. picker.onlyReel .. ' 个轮子。', true)
@@ -238,12 +250,9 @@ local function pickerChoose(r, k, confirmed)
         return
     end
     local old = run.arm.reels[r][k]
-    if old and not confirmed then
-        openModal('覆盖这一格？', { '第 ' .. r .. ' 个轮子第 ' .. k .. ' 格的「' .. W(old) .. '」会被覆盖掉，原来的图案就没了。' }, {
-            { label = '覆盖', danger = true, fn = function() closeModal(); pickerChoose(r, k, true) end },
-            { label = '算了', primary = true, fn = closeModal },
-        })
-        modal.onEscape = closeModal
+    if old then
+        setMsg('这一格已经有「' .. W(old) .. '」了，不能覆盖。要刻在这里，先去当铺把它擦掉。', true)
+        fx.shake(1)
         return
     end
     picker.result = picker.apply(r, k)
@@ -1185,8 +1194,12 @@ local function drawPickerUI()
     rect({ 0.01, 0.02, 0.03 }, 0, 0, LW, 46, 0.92 * e)
     local col = picker.sym == armMod.WILD and C.ok or { 1, 0.9, 0.6 }
     text('把「' .. W(picker.sym) .. '」刻在哪一格？', 0, 10 - (1 - e) * 20, 13, col, 'center', LW)
-    text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一格刻上去') or '点一格刻上去 · 按住轮子上下拨动看整圈',
-        0, 32 - (1 - e) * 20, 7.5, C.dim, 'center', LW)
+    if pickerHasBlank() then
+        text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '点一个空格刻上去 · 有图案的格子不能覆盖 · 按住轮子上下拨动看整圈',
+            0, 32 - (1 - e) * 20, 7.5, C.dim, 'center', LW)
+    else
+        text((picker.onlyReel and ('第 ' .. picker.onlyReel .. ' 个轮子') or '转轮') .. '刻满了，刻不上。先去当铺擦掉一格。', 0, 32 - (1 - e) * 20, 8, C.warn, 'center', LW)
+    end
     if not picker.closing then
         -- 鼠标所在的格子：亮框
         local mx, my = love.mouse.getPosition()
@@ -1195,12 +1208,13 @@ local function drawPickerUI()
             local x, y = armView.reelRect(r)
             local row = ((k - (run.arm.stops[r] - picker.offs[r])) + 1) % armMod.SIZE
             local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
-            local ok = not picker.onlyReel or r == picker.onlyReel
+            local ok = (not picker.onlyReel or r == picker.onlyReel) and not run.arm.reels[r][k]
             setColor(ok and { 1, 0.85, 0.4 } or C.warn)
             love.graphics.setLineWidth(2)
             love.graphics.rectangle('line', OX + sx * S, OY + sy * S, armView.REEL_W * kk * S, armView.CELL_H * kk * S, 3 * S, 3 * S)
             love.graphics.setLineWidth(1)
         end
+        if msgErr and msg ~= '' then text(msg, 0, PICK_CANCEL.y - 16, 7.5, C.warn, 'center', LW) end
         local b = PICK_CANCEL
         rect({ 0.11, 0.16, 0.19 }, b.x, b.y, b.w, b.h, 0.95, 4)
         text('不刻了（Esc）', b.x, b.y + 4, 7.5, C.text, 'center', b.w)
@@ -1342,7 +1356,7 @@ local function drawUI()
             rect(C.accent, x + 5, y + 7, 20, 11, 1, 3)
             text('教学', x + 5, y + 8, 6, { 0.04, 0.1, 0.09 }, 'center', 20)
             text(tip, x + 30, y + 3, 7, C.text, 'left', w - 36)
-        elseif msg ~= '' then
+        elseif msg ~= '' and not picker then
             text(msg, MAP_X, LH - 22, 7.5, msgErr and C.warn or C.text, 'left', PANEL_X - MAP_X - 8)
         end
     end
@@ -1827,11 +1841,16 @@ return {
         return OX + sx * S, OY + sy * S
     end,
     pickerReady = function() return picker ~= nil and not pickerBusy() end,
-    -- 自动测试：刻在第 r 个轮子上（有空格刻在默认的空格，刻满了覆盖第 1 格）
+    -- 自动测试：刻在第 r 个轮子的空格上；这个轮子刻满了就换一个有空格的；都满了就不刻
     pickCell = function(r)
         if not picker then return end
         r = picker.onlyReel or r
-        pickerChoose(r, armMod.blankFor(run.arm, r) or 1, true)
+        for i = 0, 2 do
+            local rr = picker.onlyReel or ((r - 1 + i) % 3 + 1)
+            local k = armMod.blankFor(run.arm, rr)
+            if k then pickerChoose(rr, k); return end
+        end
+        pickerCancel()
     end,
     openSettings = function() openSettings(closeModal) end,
     openPause = function() openPause() end,

@@ -137,13 +137,14 @@ export function blankFor(arm: ArmState, r: number): number {
 }
 
 /**
- * 在第 r 个轮子上刻一个图案（武器或赖子）：cell 不给就按 blankFor 找空格；这个轮子刻满了必须指定覆盖哪一格。
+ * 在第 r 个轮子上刻一个图案（武器或赖子）：cell 不给就按 blankFor 找空格。
+ * 只能刻在空格上：有图案的格子不能覆盖，要先去当铺擦掉（制作人 2026-11-24 定）。
  * 轮子不动，手上的武器也不变——要转到才拿得到。返回刻在第几格（-1 = 不行）
  */
 export function engraveCell(arm: ArmState, r: number, id: EngraveSym, cell?: number): number {
     if (r < 0 || r >= REELS) return -1;
     const k = cell ?? blankFor(arm, r);
-    if (k < 0 || k >= REEL_SIZE) return -1;
+    if (k < 0 || k >= REEL_SIZE || arm.reels[r][k] !== null) return -1;
     arm.reels[r][k] = id;
     return k;
 }

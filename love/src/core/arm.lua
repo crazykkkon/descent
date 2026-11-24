@@ -119,11 +119,12 @@ function M.blankFor(arm, r)
     return nil
 end
 
--- 在第 r 个轮子上刻一把武器：cell 不给就按 blankFor 找空格；刻满了必须指定格子。轮子不动，手上的武器也不变
+-- 在第 r 个轮子上刻一把武器：cell 不给就按 blankFor 找空格。只能刻在空格上（有图案的格子要先去当铺擦掉）。
+-- 轮子不动，手上的武器也不变
 function M.engraveCell(arm, r, id, cell)
     if not r or r < 1 or r > M.REELS then return nil end
     local k = cell or M.blankFor(arm, r)
-    if not k or k < 1 or k > M.SIZE then return nil end
+    if not k or k < 1 or k > M.SIZE or arm.reels[r][k] then return nil end
     arm.reels[r][k] = id
     return k
 end

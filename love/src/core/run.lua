@@ -170,7 +170,10 @@ end
 -- 这个轮子刻满了（又没指定格子）时的提示
 function Run:fullReel(reel, cell)
     if not self.arm or not reel or reel < 1 or reel > armMod.REELS then return { ok = false, msg = '' } end
-    if not cell and not armMod.firstBlank(self.arm, reel) then return { ok = false, msg = '第 ' .. reel .. ' 个轮子刻满了，选一格覆盖' } end
+    -- 只能刻在空格上；有图案的格子要先去当铺擦掉（制作人定）
+    if not cell and not armMod.firstBlank(self.arm, reel) then return { ok = false, msg = '第 ' .. reel .. ' 个轮子刻满了。要刻在这个轮子上，先去当铺擦掉一格' } end
+    local old = cell and self.arm.reels[reel][cell]
+    if old then return { ok = false, msg = '这一格已经有' .. symName(old) .. '了，不能覆盖。要刻在这里，先去当铺把它擦掉' } end
     return nil
 end
 

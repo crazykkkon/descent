@@ -285,11 +285,14 @@ export class Run {
     /** 刻满时的提示（没刻满返回 null） */
     private fullReel(reel: number, cell?: number): ActResult | null {
         if (!this.arm || reel < 0 || reel >= this.arm.reels.length) return { ok: false, msg: '' };
-        if (cell === undefined && firstBlank(this.arm, reel) < 0) return { ok: false, msg: `第 ${reel + 1} 个轮子刻满了，选一格覆盖` };
+        // 只能刻在空格上；有图案的格子要先去当铺擦掉（制作人定）
+        if (cell === undefined && firstBlank(this.arm, reel) < 0) return { ok: false, msg: `第 ${reel + 1} 个轮子刻满了。要刻在这个轮子上，先去当铺擦掉一格` };
+        const old = cell === undefined ? null : this.arm.reels[reel][cell];
+        if (old) return { ok: false, msg: `这一格已经有${symName(old)}了，不能覆盖。要刻在这里，先去当铺把它擦掉` };
         return null;
     }
 
-    /** 把等待中的图案刻到第 reel 个轮子上（这个轮子刻满时要指定覆盖哪一格）；刻上武器就拿在手上（赖子拿不了） */
+    /** 把等待中的图案刻到第 reel 个轮子的空格上（有图案的格子不能覆盖）；刻上不等于拿到，要转到才行 */
     engrave(id: EngraveSym, reel: number, cell?: number): ActResult {
         const p = this.pendingEngrave;
         if (!this.arm || !p || !p.choices.includes(id)) return { ok: false, msg: '' };
@@ -298,7 +301,7 @@ export class Run {
         const k = engraveCell(this.arm, reel, id, cell);
         if (k < 0) return { ok: false, msg: '' };
         this.engraveQueue.shift();
-        // 刻上不等于拿到：要拉杆转到才换成这把武器。覆盖掉了手上这把的最后一格就变空手
+        // 刻上不等于拿到：要拉杆转到才换成这把武器
         this.checkHold();
         return { ok: true, msg: `把${symName(id)}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，转到它才拿得到` };
     }
@@ -470,7 +473,7 @@ export class Run {
         return Math.ceil(PAWN.pawnGold * Math.pow(PAWN.redeemRate, this.floorIndex - p.floor));
     }
 
-    /** 当铺：赎回当掉的第 j 件，刻回原来那个轮子（刻满时指定覆盖哪一格） */
+    /** 当铺：赎回当掉的第 j 件，刻回原来那个轮子的空格（刻满了要先擦掉一格） */
     pawnRedeem(i: number, j: number, cell?: number): ActResult {
         const bad = this.facility(i, 'pawn', '当铺');
         if (bad) return bad;

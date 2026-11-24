@@ -379,12 +379,15 @@ test('断臂转轮：开局是空的，打败印记怪可以刻武器；刻上�
     run.engrave('harpoon', 0); run.engrave('harpoon', 2);
     assert.equal(run.hero.weapon, undefined);
     assert.deepEqual(run.arm!.stops.map((k, r) => run.arm!.reels[r][k]), [null, null, null], '中间一行还是空的');
-    // 覆盖掉手上这把武器的最后一格：变空手
-    run.hero.weapon = 'harpoon';
+    // 有图案的格子不能覆盖（制作人定：要先去当铺擦掉）
     run.arm!.reels = reels([], ['harpoon'], []);
     run.engraveQueue = [{ from: 'mark', choices: ['boneKnife'] }];
-    assert.ok(run.engrave('boneKnife', 1, 0).ok);
-    assert.equal(run.hero.weapon, undefined, '手上的鱼叉被覆盖掉了');
+    const r = run.engrave('boneKnife', 1, 0);
+    assert.equal(r.ok, false);
+    assert.match(r.msg, /不能覆盖/);
+    assert.equal(run.arm!.reels[1][0], 'harpoon', '原来的图案还在');
+    assert.ok(run.pendingEngrave, '图案还等着刻');
+    run.skipEngrave();
     assert.equal(run.pendingEngrave, null);
 });
 
@@ -438,7 +441,7 @@ test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁�
     assert.equal(run.armPrice().blood, 15);
 });
 
-test('断臂转轮：一个轮子刻满 5 格后再刻要选一格覆盖；精英倒下三选一', () => {
+test('断臂转轮：一个轮子刻满 5 格后就刻不上了，要先去当铺擦掉；精英倒下三选一', () => {
     const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 3);
     run.arm!.reels = reels(['boneKnife', 'hammer', 'harpoon', 'boneKnife', 'hammer'], [], []);
     run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
@@ -446,9 +449,10 @@ test('断臂转轮：一个轮子刻满 5 格后再刻要选一格覆盖；精�
     const p = run.pendingEngrave!;
     assert.equal(p.from, 'elite');
     assert.equal(p.choices.length, 3);
-    assert.equal(run.engrave(p.choices[0], 0).ok, false, '第 1 个轮子刻满了要选格子');
-    assert.ok(run.engrave(p.choices[0], 0, 3).ok);
-    assert.equal(run.arm!.reels[0][3], p.choices[0]);
+    assert.match(run.engrave(p.choices[0], 0).msg, /刻满了/);
+    assert.equal(run.engrave(p.choices[0], 0, 3).ok, false, '不能覆盖');
+    assert.equal(run.arm!.reels[0][3], 'boneKnife');
+    assert.ok(run.engrave(p.choices[0], 1).ok, '换一个有空格的轮子就行');
 });
 
 test('骨坛移来的特性：先攻多打一下、反伤、腐蚀、吸血（不超过这一仗掉的血）', () => {

@@ -193,7 +193,7 @@ for (const seed of [1, 9, 4242, 2147483647]) {
         });
     }
 }
-// 刻图案：选轮子、刻满时选格子覆盖
+// 刻图案：选轮子、选格子；刻满了或格子上有图案就刻不上（要先去当铺擦掉）
 const engraveOps: unknown[] = [];
 {
     const run = new Run([tiny(['@.>'])], 'digger', 1);
