@@ -71,7 +71,7 @@ M.WEAPONS = {
     bellStaff  = { id = 'bellStaff',  name = '回声铃杖', desc = '攻击 +1；敌人的"先攻"失效', atk = 1, def = 0, noFirstStrike = true, sell = 25 },
     saltDagger = { id = 'saltDagger', name = '盐晶匕首', desc = '对会吸血的怪伤害翻倍', atk = 0, def = 0, antiLifesteal = true, sell = 25 },
     rustSword  = { id = 'rustSword',  name = '锈蚀大剑', desc = '攻击 +9，防御 −5（诅咒）', atk = 9, def = -5, sell = 35 },
-    wellHook   = { id = 'wellHook',   name = '井神的钩', desc = '每次签契约，押金 −20', atk = 0, def = 0, contractDiscount = 20, sell = 40 },
+    wellHook   = { id = 'wellHook',   name = '井神的钩', desc = '每次击杀多得 5 金币', atk = 0, def = 0, killGold = 5, sell = 40 },
 }
 
 -- 武器的固定顺序（和原型 WEAPONS 的键顺序一致，三选一的随机数按这个顺序取）
@@ -92,8 +92,31 @@ M.CHARACTERS = {
 -- 出口交易
 M.EXIT = { leftoverPotionGold = 5, keySellGold = 15 }
 
+-- 骨坛能移到武器上的特性（来自杀过的怪）
+M.BOON_NAMES = { lifesteal = '吸血', firstStrike = '先攻', thorns = '反伤', corrode = '腐蚀' }
+M.BOON_DESC = {
+    lifesteal = '你每次命中回复造成伤害的四分之一（不超过这一仗掉的血）',
+    firstStrike = '开打前你先打一下',
+    thorns = '怪每打你一下，它自己掉 3 血',
+    corrode = '你每打中一下，怪这一仗的防御 −1',
+}
+M.BOON_ORDER = { 'lifesteal', 'firstStrike', 'thorns', 'corrode' }
+
+-- 印记怪：打败后可以把对应的武器刻到断臂转轮上
+M.MARK_WEAPON = { eel = 'harpoon', moss = 'mossBlade', frog = 'boneKnife', bat = 'bellStaff', wraith = 'saltDagger', crab = 'hammer', beetle = 'rustSword', rat = 'wellHook' }
+-- 杀过这种怪，骨坛上就能移它的特性
+M.MONSTER_BOON = { wraith = 'lifesteal', bat = 'firstStrike', crab = 'thorns', slug = 'corrode' }
+
+local function copyList(t)
+    if not t then return nil end
+    local o = {}
+    for i, x in ipairs(t) do o[i] = x end
+    return o
+end
+M.copyList = copyList
+
 function M.copyHero(h)
-    return { hp = h.hp, atk = h.atk, def = h.def, keys = h.keys, gold = h.gold, weapon = h.weapon }
+    return { hp = h.hp, atk = h.atk, def = h.def, keys = h.keys, gold = h.gold, weapon = h.weapon, boons = copyList(h.boons) }
 end
 
 return M

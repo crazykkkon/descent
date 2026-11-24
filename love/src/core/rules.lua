@@ -28,7 +28,7 @@ function M.interact(cell, hero, floor, ch, allowFatal, mon)
         local h = config.copyHero(hero)
         local w = hero.weapon and config.WEAPONS[hero.weapon]
         h.hp = hero.hp - r.damage + (w and w.killHeal or 0)
-        h.gold = hero.gold + m.gold
+        h.gold = hero.gold + m.gold + (w and w.killGold or 0)
         return { ok = true, hero = h }
     elseif cell.kind == 'item' then
         local h = config.copyHero(hero)

@@ -1,25 +1,24 @@
 /**
  * 从 TypeScript 原型导出"标准算例"：同一组输入在原型里算出的结果。
- * LÖVE + Lua 版用这些算例逐条对账，保证移植后战损、扣血、押金、退还、毁约完全一致。
+ * LÖVE + Lua 版用这些算例逐条对账，保证移植后战损、断臂转轮、大转盘、当铺、骨坛、诏令、路线、存档完全一致。
  *
- * 用法：npx tsx tools/export-vectors.ts   → 写出 love/tests/vectors.lua
+ * 同时导出 Lua 版的地图池（love/src/data/pools.lua）：路线生成在 Lua 里按同样的算法跑，地图数据只在原型里写一份。
+ *
+ * 用法：npx tsx tools/export-vectors.ts
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { CHARACTERS, Hero, MONSTERS, MonsterId, WEAPONS, WeaponId } from '../src/core/config';
+import { Boon, CHARACTERS, Hero, MONSTERS, MonsterId, WEAPONS, WeaponId } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
-import { FloorDef, parseFloor } from '../src/core/floor';
-const parseFloorCells = (f: FloorDef) => parseFloor(f).cells;
+import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
-import { DEMO_POOLS, buildFloor } from '../src/core/levels';
-import { contractPreview, keepVersion } from '../src/core/contract';
-import { solveFromStart } from '../src/core/solver';
-import { SLOTS, SlotId, newSlotState, roll } from '../src/core/slot';
-import { choosePick, stairIntel } from '../src/core/intel';
-import { MAINLINE, buildMainline, pickMainline } from '../src/core/mainline';
-import { solveChain } from '../src/core/solver';
-import { pickChoices, FloorChoice } from '../src/core/levels';
+import { DEMO_POOLS, F2_CONTRACT, buildFloor } from '../src/core/levels';
+import { solveChain, solveFromStart } from '../src/core/solver';
+import { decreeFor } from '../src/core/decree';
+import { whisper } from '../src/core/whisper';
+import * as R from '../src/core/route';
 
 // ---------- 把 JS 值写成 Lua 表 ----------
+const LUA_KEYWORDS = new Set(['and', 'break', 'do', 'else', 'elseif', 'end', 'false', 'for', 'function', 'goto', 'if', 'in', 'local', 'nil', 'not', 'or', 'repeat', 'return', 'then', 'true', 'until', 'while']);
 function lua(v: unknown, indent = ''): string {
     const next = indent + '  ';
     if (v === null || v === undefined) return 'nil';
@@ -28,274 +27,292 @@ function lua(v: unknown, indent = ''): string {
     if (Array.isArray(v)) {
         if (!v.length) return '{}';
         const simple = v.every(x => typeof x !== 'object' || x === null);
+        // 数组里有 null 时用显式下标，避免 Lua 表出洞
+        if (v.some(x => x === null || x === undefined)) return `{ ${v.map((x, i) => `[${i + 1}] = ${lua(x, next)}`).join(', ')}, n = ${v.length} }`;
         if (simple) return `{ ${v.map(x => lua(x)).join(', ')} }`;
         return `{\n${v.map(x => next + lua(x, next)).join(',\n')}\n${indent}}`;
     }
     const entries = Object.entries(v as Record<string, unknown>).filter(([, x]) => x !== undefined);
     if (!entries.length) return '{}';
-    return `{\n${entries.map(([k, x]) => `${next}${/^[A-Za-z_]\w*$/.test(k) ? k : `[${JSON.stringify(k)}]`} = ${lua(x, next)}`).join(',\n')}\n${indent}}`;
+    return `{\n${entries.map(([k, x]) => `${next}${/^[A-Za-z_]\w*$/.test(k) && !LUA_KEYWORDS.has(k) ? k : `[${JSON.stringify(k)}]`} = ${lua(x, next)}`).join(',\n')}\n${indent}}`;
 }
+const tiny = (map: string[], extra: Partial<FloorDef> = {}): FloorDef => ({ name: 't', map, bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20, ...extra });
+const heroOf = (h: Hero) => ({ hp: h.hp, atk: h.atk, def: h.def, keys: h.keys, gold: h.gold, weapon: h.weapon, boons: h.boons });
 
-// ---------- 1. 战斗算例 ----------
-const STATS: [number, number][] = [[10, 10], [13, 10], [10, 13], [13, 13], [16, 13], [16, 16], [19, 16], [19, 19], [22, 19], [22, 22], [25, 22], [30, 25], [36, 28], [44, 34]];
+// ---------- 1. 战斗算例（含骨坛移来的特性） ----------
+const STATS: [number, number][] = [[10, 10], [13, 10], [13, 13], [16, 13], [16, 16], [19, 16], [22, 19], [25, 22], [30, 25], [36, 28], [44, 34]];
 const weapons: (WeaponId | null)[] = [null, ...(Object.keys(WEAPONS) as WeaponId[])];
+const boonSets: Boon[][] = [[], ['lifesteal'], ['firstStrike'], ['thorns'], ['corrode'], ['lifesteal', 'corrode', 'thorns', 'firstStrike']];
 const combat: unknown[] = [];
 for (const id of Object.keys(MONSTERS) as MonsterId[]) {
     for (const [atk, def] of STATS) {
         for (const w of weapons) {
-            const r = simulateCombat({ atk, def, weapon: w ?? undefined }, MONSTERS[id]);
-            combat.push({ monster: id, atk, def, weapon: w ?? undefined, canAttack: r.canAttack, canWin: r.canWin, damage: r.damage, hits: r.hits });
+            for (const b of (w === null || w === 'harpoon' ? boonSets : [[]])) {
+                const boons = b.length ? b : undefined;
+                const r = simulateCombat({ atk, def, weapon: w ?? undefined, boons }, MONSTERS[id]);
+                combat.push({ monster: id, atk, def, weapon: w ?? undefined, boons, canAttack: r.canAttack, canWin: r.canWin, damage: r.damage, hits: r.hits });
+            }
         }
     }
 }
 
-// ---------- 2. 楼层逐步算例 ----------
-type Step = { cell: number; ok: boolean; hp: number; atk: number; def: number; keys: number; gold: number; pos: number; status: string; contractActive: boolean };
-
+// ---------- 2. 楼层逐步算例：按求解器路线一步步走，每一步之后的状态 ----------
 function floorParams(f: FloorDef) {
-    return { name: f.name, map: f.map, bloodCost: f.bloodCost, gem: f.gem, smallPotion: f.smallPotion, bigPotion: f.bigPotion, gold: f.gold, rent: f.rent, eliteReward: f.eliteReward };
+    return {
+        name: f.name, map: f.map, bloodCost: f.bloodCost, gem: f.gem, smallPotion: f.smallPotion, bigPotion: f.bigPotion, gold: f.gold,
+        rent: f.rent, eliteReward: f.eliteReward, kind: f.kind, marks: f.marks, shop: f.shop, stall: f.stall, hint: f.hint,
+    };
 }
 
-function scenario(name: string, f: FloorDef, entry: Hero, mode: 'refuse' | 'keep' | 'break' | 'any') {
-    const c = f.contract;
-    const sign = mode === 'keep' || mode === 'break';
-    // 第 0 层只是一个"入口 → 出口"的空层，用来在它的楼梯口签约
-    const run = new Run([{ ...f, contract: undefined, intel: undefined, rent: undefined, map: ['@>'] }, f]);
+function scenario(name: string, f: FloorDef, entry: Hero) {
+    const run = new Run([f]);
     run.hero = { ...entry };
-    run.move(1, 0);
-    run.finishFloor(false, sign);
-    const start = { ...run.hero };
-    // 求解器给出这条路线，再一步一步走
-    const signedHero = { ...run.hero };
-    const plan = (mode === 'keep' && c ? solveFromStart(keepVersion(f), signedHero) : solveFromStart(f, signedHero)).best;
+    const plan = solveFromStart(f, { ...entry }).best;
     if (!plan) return null;
-    if (run.floorIndex !== 1) throw new Error(`${name}：没能进入要测的楼层`);
     const targets = [...plan.plan, run.cells.findIndex(x => x.kind === 'exit')];
-    const steps: Step[] = [];
+    const steps: unknown[] = [];
     for (const t of targets) {
         const path = run.findPath(t);
         if (!path) break;
         for (const cell of path) {
             const r = run.step(cell);
-            steps.push({ cell, ok: r.ok, hp: run.hero.hp, atk: run.hero.atk, def: run.hero.def, keys: run.hero.keys, gold: run.hero.gold, pos: run.pos, status: run.status, contractActive: run.contractActive() });
+            steps.push({ cell, ok: r.ok, hero: heroOf(run.hero), pos: run.pos, status: run.status, queue: run.engraveQueue.length });
+            run.engraveQueue = [];
             if (!r.ok) break;
         }
     }
-    if (mode === 'break' && !steps.some(s => !s.contractActive)) return null; // 这条路线没有喝药，算不上毁约
-    const summary = run.exitSummary();
-    // 有井租先交：金币够就交金币，不够就用攻击抵
+    const s = run.exitSummary();
     const rentMethod = run.rentDue() ? (run.hero.gold >= run.rentDue() ? 'gold' : 'atk') : undefined;
     if (rentMethod) run.payRent(rentMethod);
     run.finishFloor(false);
-    return {
-        name, mode, floor: floorParams(f), contract: c, sign, entry, start, steps, rentMethod,
-        exit: { kept: summary.contract?.kept, leftoverPotions: summary.leftoverPotions, potionGold: summary.potionGold },
-        final: { hp: run.hero.hp, atk: run.hero.atk, def: run.hero.def, keys: run.hero.keys, gold: run.hero.gold, status: run.status },
-    };
+    return { name, floor: floorParams(f), entry, steps, rentMethod, exit: { leftoverPotions: s.leftoverPotions, potionGold: s.potionGold }, final: { ...heroOf(run.hero), status: run.status } };
 }
 
 const scenarios: unknown[] = [];
-const entries: Hero[] = [
-    { hp: 150, atk: 13, def: 13, keys: 0, gold: 0 },
-    { hp: 200, atk: 10, def: 13, keys: 0, gold: 5 },
-    { hp: 175, atk: 13, def: 10, keys: 1, gold: 12 },
-];
-DEMO_POOLS[1].layouts.forEach((l, li) => {
-    const f = buildFloor(DEMO_POOLS[1], { layout: li, variant: 0 });
-    entries.forEach((e, ei) => {
-        for (const mode of ['refuse', 'keep', 'break'] as const) {
-            const sc = scenario(`${l.name}·入场${ei + 1}·${mode}`, f, e, mode);
-            if (sc) scenarios.push(sc);
-        }
-    });
-});
-// 第 1 层（宝石、骨钥、骨门、血门）和第 3 层的若干张图，不签约，验证基本规则
-for (const fi of [0, 2]) {
+for (const fi of [0, 1, 2]) {
     DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
-        const f = buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi });
+        const f = { ...buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi }), rent: undefined };
         const e = fi === 0 ? { ...CHARACTERS.digger.base } : { hp: 170, atk: 16, def: 16, keys: 1, gold: 20 };
-        const sc = scenario(`第${fi + 1}层·${l.name}${vi + 1}`, f, e, 'any');
+        const sc = scenario(`第${fi + 1}层·${l.name}${vi + 1}`, f, e);
         if (sc) scenarios.push(sc);
     }));
 }
-
-// 新怪（群居、腐蚀、庇护、守门人）：伤害要按周围还活着的怪算
+// 新怪（群居、腐蚀、庇护、守门人）
 const AURA_MAPS: string[][] = [
     ['@.www..', '.#####.', '...u..>'],
     ['@..p...', '.#.K.#.', '.#.p.#>'],
     ['@.wpw..', '.#.w.#.', 'u...pK>'],
     ['@ppp...', '..w#...', '.www..>'],
 ];
-const auraEntries: Hero[] = [{ hp: 1500, atk: 40, def: 30, keys: 0, gold: 0 }, { hp: 2500, atk: 33, def: 26, keys: 0, gold: 0, weapon: 'hammer' }];
 const monsterViews: unknown[] = [];
 AURA_MAPS.forEach((map, mi) => {
-    const f: FloorDef = { name: `新怪${mi + 1}`, map, bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
-    auraEntries.forEach((e, ei) => {
-        const sc = scenario(`新怪${mi + 1}·入场${ei + 1}`, f, e, 'any');
-        if (!sc) throw new Error(`新怪${mi + 1}·入场${ei + 1}：走不通`);
+    const f = tiny(map, { name: `新怪${mi + 1}` });
+    for (const e of [{ hp: 1500, atk: 40, def: 30, keys: 0, gold: 0 }, { hp: 2500, atk: 33, def: 26, keys: 0, gold: 0, weapon: 'hammer' as WeaponId, boons: ['corrode', 'thorns'] as Boon[] }]) {
+        const sc = scenario(`新怪${mi + 1}`, f, e);
+        if (!sc) throw new Error(`新怪${mi + 1} 走不通`);
         scenarios.push(sc);
-    });
+    }
     const run = new Run([f]);
-    run.cells.forEach((c, i) => {
-        if (c.kind === 'monster') { const m = run.monsterAt(i); monsterViews.push({ map, cell: i, atk: m.atk, def: m.def }); }
-    });
+    run.cells.forEach((c, i) => { if (c.kind === 'monster') { const m = run.monsterAt(i); monsterViews.push({ map, cell: i, atk: m.atk, def: m.def }); } });
 });
+// 路线里的每一层（种子 1，按两种选法连续求解时的入场状态）
+const routeWalks: unknown[] = [];
+{
+    const plan = R.buildRoute(1);
+    for (const k of [0, 1]) {
+        const floors = plan.map(o => o[Math.min(k, o.length - 1)]);
+        const chain = solveChain(floors);
+        floors.forEach((f, d) => {
+            if (d === 0) return;
+            const sc = scenario(`路线 选法${k} 第${d + 1}层`, f, chain[d - 1].best!);
+            if (!sc) throw new Error(`路线第 ${d + 1} 层走不通`);
+            routeWalks.push(sc);
+        });
+    }
+}
 
 // ---------- 3. 硬打致死 ----------
 const deaths = (['frog', 'beetle', 'wraith'] as MonsterId[]).map(id => {
-    const f: FloorDef = { name: 't', map: ['@' + Object.entries({ frog: 'f', beetle: 'c', wraith: 'g' }).find(([k]) => k === id)![1] + '>'], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
+    const f = tiny(['@' + ({ frog: 'f', beetle: 'c', wraith: 'g' } as Record<string, string>)[id] + '>']);
     const run = new Run([f]);
     run.hero.hp = 30;
     const r = run.step(1);
     return { monster: id, map: f.map, hp: 30, ok: r.ok, status: run.status, heroHp: run.hero.hp };
 });
 
-// ---------- 4. 井中轮 ----------
-// 4a. 纯转轮：同一个种子、同一台机器，连续转 40 次的图案（验证随机数完全一致）
-const rolls: unknown[] = [];
-for (const seed of [1, 7, 12345, 2147483647, 987654321]) {
-    for (const key of [0, 1003, 4021]) {
-        for (const id of ['risky', 'steady'] as SlotId[]) {
-            const st = newSlotState();
-            const seq: string[] = [];
-            for (let k = 0; k < 40; k++) seq.push(roll(SLOTS[id], st, seed, key).result.join(','));
-            rolls.push({ seed, key, machine: id, seq });
-        }
-    }
-}
-// 4b. 完整操作：转、锁轴重转、收下、血注，每一步之后的属性和机器状态
-type SlotAct = { kind: 'spin'; pay: 'gold' | 'blood'; held?: boolean[] } | { kind: 'collect' };
-const slotSessions: unknown[] = [];
-const sessionScripts: SlotAct[][] = [
-    [{ kind: 'spin', pay: 'gold' }, { kind: 'collect' }, { kind: 'spin', pay: 'gold' }, { kind: 'spin', pay: 'gold', held: [true, false, false] }, { kind: 'collect' }, { kind: 'spin', pay: 'blood' }, { kind: 'collect' }],
-    [{ kind: 'spin', pay: 'blood' }, { kind: 'spin', pay: 'gold', held: [true, true, false] }, { kind: 'spin', pay: 'gold', held: [false, true, true] }, { kind: 'collect' }, { kind: 'spin', pay: 'gold' }, { kind: 'spin', pay: 'gold' }, { kind: 'collect' }],
+// ---------- 4. 断臂转轮：转、锁轴、空手 ----------
+type ArmAct = { pay: 'gold' | 'blood'; held?: boolean[] };
+const armScripts: ArmAct[][] = [
+    [{ pay: 'gold' }, { pay: 'gold' }, { pay: 'gold', held: [true, false, false] }, { pay: 'blood' }, { pay: 'gold', held: [true, true, false] }, { pay: 'gold' }],
+    [{ pay: 'blood' }, { pay: 'gold', held: [false, true, false] }, { pay: 'gold', held: [false, true, true] }, { pay: 'gold' }, { pay: 'gold' }, { pay: 'blood' }, { pay: 'gold' }],
 ];
-for (const seed of [3, 11, 2024, 99991]) {
-    for (const [mi, map] of [['S', ['@.>', '.S.']], ['T', ['@.>', '.T.']]] as const) {
-        sessionScripts.forEach((script, si) => {
-            const f: FloorDef = { name: 't', map: [...map], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
-            const run = new Run([f], 'digger', seed);
-            run.move(0, 1);
-            run.hero = { hp: 400, atk: 13, def: 13, keys: 0, gold: 300 };
-            const steps: unknown[] = [];
-            for (const a of script) {
-                if (a.kind === 'spin') {
-                    const r = run.slotSpin(4, a.pay, a.held);
-                    steps.push({ act: 'spin', pay: a.pay, held: a.held, ok: r.ok, result: r.result?.join(','), bite: r.bite, hero: { ...run.hero }, spins: run.slotState(4).spins, status: run.status });
-                } else {
-                    const lines = run.slotCollect(4);
-                    steps.push({ act: 'collect', lines, hero: { ...run.hero }, status: run.status });
-                }
-            }
-            slotSessions.push({ seed, machine: mi, script: si, map, steps });
+const armRows: (WeaponId | null)[][] = [['boneKnife', null, null], ['hammer', 'hammer', null], ['harpoon', 'mossBlade', 'saltDagger'], ['rustSword', null, 'rustSword']];
+const armSessions: unknown[] = [];
+for (const seed of [1, 9, 4242, 2147483647]) {
+    for (const rows of armRows) {
+        armScripts.forEach((script, si) => {
+            const run = new Run([tiny(['@.>'])], 'digger', seed);
+            run.arm!.rows = [...rows];
+            run.hero = { hp: 500, atk: 13, def: 13, keys: 0, gold: 300 };
+            const steps = script.map(a => {
+                const r = run.armSpin(a.pay, a.held);
+                return { pay: a.pay, held: a.held, ok: r.ok, faces: r.faces ? r.faces.map(x => x ?? 'blank') : undefined, hero: heroOf(run.hero), spins: run.arm!.spins };
+            });
+            armSessions.push({ seed, rows: rows.map(x => x ?? 'blank'), script: si, steps });
         });
     }
 }
 
-// ---------- 5. 精英倒下后三选一的武器 ----------
-const weaponChoices: unknown[] = [];
-for (const seed of [1, 5, 77, 31337, 2147483647]) {
+// ---------- 5. 刻图案：精英三选一、印记怪 ----------
+const engraves: unknown[] = [];
+for (const seed of [1, 5, 77, 31337]) {
     for (const floors of [1, 4, 10]) {
         for (const current of [undefined, 'boneKnife', 'hammer'] as (WeaponId | undefined)[]) {
             const fs: FloorDef[] = [];
-            for (let k = 0; k < floors; k++) fs.push({ name: 't', map: ['@>'], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 });
-            fs[floors - 1] = { ...fs[floors - 1], map: ['@G>'], eliteReward: true };
+            for (let k = 0; k < floors; k++) fs.push(tiny(['@>']));
+            fs[floors - 1] = tiny(['@Ge>'], { eliteReward: true, marks: [2] });
             const run = new Run(fs, 'digger', seed);
             for (let k = 0; k < floors - 1; k++) { run.move(1, 0); run.finishFloor(false); }
             run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0, weapon: current };
             run.move(1, 0);
-            weaponChoices.push({ seed, floorIndex: floors, current, choices: run.pendingWeapons });
+            run.move(1, 0);
+            engraves.push({ seed, floorIndex: floors, current, queue: run.engraveQueue.map(p => ({ from: p.from, choices: p.choices })) });
         }
     }
 }
 
-// ---------- 6. 楼梯口情报（情报怪事先选好，写进关卡数据） ----------
-const intels: unknown[] = [];
-const intelHeroes: Hero[] = [{ hp: 150, atk: 13, def: 13, keys: 0, gold: 0 }, { hp: 120, atk: 19, def: 16, keys: 0, gold: 0 }, { hp: 200, atk: 10, def: 10, keys: 0, gold: 0, weapon: 'hammer' }];
-for (const fi of [1, 2, 4]) {
-    DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
-        const base = buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi });
-        const next: FloorDef = { ...base, intel: undefined, intelPick: choosePick(base, intelHeroes[0], CHARACTERS.digger) };
-        const cur = buildFloor(DEMO_POOLS[0], { layout: 0, variant: 0 });
-        const curCells = parseFloorCells(cur);
-        for (const h of intelHeroes) {
-            const it = stairIntel(next, h, CHARACTERS.digger, { floor: cur, cells: curCells })!;
-            intels.push({ floor: floorParams(next), intelPick: next.intelPick, current: floorParams(cur), hero: h, headline: it.headline, lines: it.lines, mustFight: it.mustFight });
-        }
-    }));
+// ---------- 6. 大转盘 ----------
+const wheels: unknown[] = [];
+for (const seed of [3, 11, 2024, 99991, 4000000000]) {
+    const run = new Run([tiny(['@.>', '.S.'])], 'digger', seed);
+    run.move(0, 1);
+    run.hero = { hp: 3000, atk: 13, def: 13, keys: 0, gold: 3000 };
+    run.arm!.rows = ['boneKnife', 'hammer', 'harpoon'];
+    run.arm!.stops = [0, 0, 0];
+    run.hero.weapon = 'boneKnife';
+    const steps: unknown[] = [];
+    for (let k = 0; k < 24; k++) {
+        const r = run.wheelSpin(4, k % 3 === 2 ? 'blood' : 'gold');
+        steps.push({ ok: r.ok, sector: r.sector, hero: heroOf(run.hero), rows: run.arm!.rows.map(x => x ?? 'blank'), queue: run.engraveQueue.map(p => p.choices[0]), status: run.status });
+        run.engraveQueue = [];
+    }
+    wheels.push({ seed, steps });
 }
 
-// ---------- 6b. 签约卡的签前 / 签后对照 ----------
-const previews: unknown[] = [];
-const previewHeroes: Hero[] = [{ hp: 150, atk: 13, def: 13, keys: 0, gold: 0 }, { hp: 200, atk: 10, def: 10, keys: 0, gold: 0 }, { hp: 300, atk: 22, def: 19, keys: 0, gold: 0, weapon: 'boneKnife' }];
-const previewContracts = [{ condition: 'noPotion' as const, deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 }, { condition: 'noPotion' as const, deposit: 120, atk: 5, def: 2, refund: 150, gold: 30 }];
-for (const pool of [DEMO_POOLS[1], ...MAINLINE.slice(4, 8)]) {
-    pool.layouts.forEach((_, li) => {
-        const f = buildFloor(pool, { layout: li, variant: 0 });
-        for (const h of previewHeroes) for (const c of previewContracts) previews.push({ floor: floorParams(f), hero: h, contract: c, rows: contractPreview(f, h, c) });
+// ---------- 7. 当铺、骨坛、补给摊 ----------
+const shops: unknown[] = [];
+{
+    const plan = [tiny(['@.>', 'N..'], { shop: ['hammer', 'harpoon'] }), tiny(['@.>', 'N..'], { shop: ['boneKnife', 'saltDagger'] }), tiny(['@.>', 'N..'], { shop: ['wellHook', 'harpoon'] })];
+    type Op = [string, ...number[]];
+    const ops: Op[] = [['key'], ['key'], ['pawn', 0], ['buy', 0], ['buy', 0], ['buy', 1], ['erase', 1], ['next'], ['redeem', 0], ['pawn', 0], ['next'], ['redeem', 0], ['buy', 0, 2], ['erase', 2]];
+    for (const [gold, keys] of [[300, 2], [60, 1], [0, 0]]) {
+        const run = new Run(plan, 'digger', 1);
+        run.hero.gold = gold; run.hero.keys = keys;
+        run.arm!.rows = ['boneKnife', null, null];
+        run.arm!.stops = [0, 0, 0];
+        run.hero.weapon = 'boneKnife';
+        const steps = ops.map(([op, a, b]) => {
+            let r = { ok: true, msg: '' };
+            if (op === 'key') r = run.pawnSellKey(3);
+            else if (op === 'pawn') r = run.pawnRow(3, a);
+            else if (op === 'buy') r = run.pawnBuy(3, a, b);
+            else if (op === 'erase') r = run.pawnErase(3, a);
+            else if (op === 'redeem') r = run.pawnRedeem(3, a, b);
+            else { run.move(1, 0); run.move(1, 0); run.finishFloor(false); }
+            return { op, a, b, ok: r.ok, msg: r.msg, hero: heroOf(run.hero), rows: run.arm!.rows.map(x => x ?? 'blank'), pawned: run.pawned.map(p => ({ weapon: p.weapon, floor: p.floor })) };
+        });
+        shops.push({ gold, keys, plan: plan.map(floorParams), steps });
+    }
+}
+const altars: unknown[] = [];
+for (const kills of ['vgx', 'g', 'u']) {
+    const map = ['@' + kills + '.A>'];
+    const run = new Run([tiny(map)], 'digger', 1);
+    run.hero = { hp: 9999, atk: 60, def: 60, keys: 1, gold: 0 };
+    run.arm!.rows = ['boneKnife', 'hammer', null];
+    run.arm!.stops = [0, 0, 0];
+    run.hero.weapon = 'boneKnife';
+    for (let k = 0; k <= kills.length; k++) run.move(1, 0);
+    const altar = kills.length + 2;
+    const tries: [('atk' | 'key'), Boon, WeaponId][] = [['atk', 'lifesteal', 'boneKnife'], ['key', 'firstStrike', 'boneKnife'], ['atk', 'thorns', 'hammer'], ['atk', 'corrode', 'boneKnife'], ['atk', 'thorns', 'harpoon']];
+    const steps = tries.map(([pay, boon, w]) => {
+        const r = run.altarOffer(altar, pay, boon, w);
+        return { pay, boon, weapon: w, ok: r.ok, msg: r.msg, hero: heroOf(run.hero), boons: JSON.parse(JSON.stringify(run.arm!.boons)) };
     });
+    altars.push({ map, seen: run.boonsSeen, steps: JSON.parse(JSON.stringify(steps)) });
 }
-
-// ---------- 7. 补给摊 ----------
-const stallFloor: FloorDef = { name: 't', map: ['@.M>'], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20, stall: [{ id: 'atk', amount: 2, price: 40 }, { id: 'hp', amount: 80, price: 25 }, { id: 'key', amount: 1, price: 30 }] };
 const stalls: unknown[] = [];
-for (const [gold, buys] of [[100, [0, 0, 1, 2]], [50, [2, 1, 0]], [200, [1, 2, 0, 1]]] as [number, number[]][]) {
-    const run = new Run([stallFloor]);
-    run.hero.gold = gold;
-    const pre = run.stallBuy(2, 0).ok; // 还没走到旁边
-    run.move(1, 0);
-    const steps = buys.map(k => { const r = run.stallBuy(2, k); return { k, ok: r.ok, msg: r.msg, hero: { ...run.hero } }; });
-    stalls.push({ floor: floorParams(stallFloor), stall: stallFloor.stall, gold, pre, steps });
+{
+    const stallFloor = tiny(['@.M>'], { stall: [{ id: 'atk', amount: 2, price: 40 }, { id: 'hp', amount: 80, price: 25 }, { id: 'key', amount: 1, price: 30 }] });
+    for (const [gold, buys] of [[100, [0, 0, 1, 2]], [50, [2, 1, 0]]] as [number, number[]][]) {
+        const run = new Run([stallFloor]);
+        run.hero.gold = gold;
+        run.move(1, 0);
+        const steps = buys.map(k => { const r = run.stallBuy(2, k); return { k, ok: r.ok, msg: r.msg, hero: heroOf(run.hero) }; });
+        stalls.push({ floor: floorParams(stallFloor), gold, steps });
+    }
 }
 
-// ---------- 8. 主线：选图 + 每层按求解器路线走一遍 ----------
-const picks: unknown[] = [];
-let prevChoice: FloorChoice[] | undefined;
-for (const seed of [1, 2, 3, 99, 12345, 4000000000]) {
-    const c = pickMainline(seed, prevChoice);
-    picks.push({ seed, avoid: prevChoice, choices: c });
-    prevChoice = c;
-}
-const mainScenarios: unknown[] = [];
+// ---------- 8. 诏令 ----------
+const decreeDraws: unknown[] = [];
+for (const seed of [1, 2, 3, 77, 31337, 2147483647, 4000000000]) for (const fi of [2, 7, 12, 5]) decreeDraws.push({ seed, floorIndex: fi, def: decreeFor(seed, fi) });
+const decreeRuns: unknown[] = [];
 {
-    const floors = buildMainline(pickMainline(1));
-    const chain = solveChain(floors);
-    floors.forEach((f, i) => {
-        if (i === 0) return; // 第 1 层已经在上面的楼层算例里
-        const entry = chain[i - 1].best!;
-        const sc = scenario(`主线第${i + 1}层`, f, entry, f.contract ? 'keep' : 'any');
-        if (!sc) throw new Error(`主线第 ${i + 1} 层走不通`);
-        mainScenarios.push({ ...sc, floorIndex: i + 1, stall: f.stall, eliteReward: f.eliteReward });
-    });
+    // 6 层：第 3 层接诏令，后面各层分别做到 / 做不到
+    const maps = [['@.>', 'm..'], ['@.>', 'm..'], ['@vh>'], ['@m.>'], ['@gx>'], ['@.>']];
+    const kinds = ['killTrait', 'noPotion', 'clear', 'noLoss', 'gold'] as const;
+    for (const kind of kinds) {
+        for (const n of [1, 2]) {
+            const run = new Run(maps.map(m => tiny(m)), 'digger', 1);
+            run.hero = { hp: 600, atk: 40, def: 30, keys: 0, gold: 0 };
+            const log: unknown[] = [];
+            for (let d = 0; d < maps.length; d++) {
+                if (run.decreeOffer) {
+                    run.decreeOffer = { kind, tier: n === 1 ? 'bronze' : 'silver', n: kind === 'gold' ? 30 : n, text: kind };
+                    run.acceptDecree();
+                }
+                // 一路打过去（用格子顺序），走到出口
+                for (let guard = 0; guard < 20 && run.status === 'playing'; guard++) run.move(1, 0);
+                run.engraveQueue = [];
+                run.finishFloor(false);
+                log.push({ d, hero: heroOf(run.hero), decree: JSON.parse(JSON.stringify(run.decree)), notes: run.notes.splice(0), status: run.status });
+            }
+            decreeRuns.push({ kind, n, maps, log: JSON.parse(JSON.stringify(log)) });
+        }
+    }
 }
 
-// ---------- 主线关卡数据（Lua 版直接读这一份，不另外手写） ----------
-{
-    const ref = solveChain(buildMainline(pickMainline(1)));
-    const pools = MAINLINE.map((pool, fi) => ({
-        params: pool.params,
-        layouts: pool.layouts.map(l => ({
-            name: l.name,
-            variants: l.variants.map(v => {
-                const f = { ...buildFloor(pool, { layout: 0, variant: 0 }), map: v.map, contract: v.contract, intel: v.intel };
-                // 楼梯口情报说哪只怪：用"按求解器最优走到上一层出口"的属性选（Lua 版没有求解器）
-                const hero = fi === 0 ? CHARACTERS.digger.base : ref[fi - 1].best!;
-                const pick = v.intel || !parseFloor(f).cells.some(c => c.kind === 'monster') ? undefined : choosePick(f, hero, CHARACTERS.digger);
-                return { map: v.map, contract: v.contract, intel: v.intel, intelPick: pick && { cell: pick.cell + 1, mustFight: pick.mustFight } };
-            }),
-        })),
-    }));
-    writeFileSync('love/src/data/mainline.lua', `-- 由 tools/export-vectors.ts 从 src/core/mainline.ts 自动生成，不要手改。
--- 20 层主线白盒：每层的参数、布局和配置。intelPick 的格子下标已经换成 Lua 的 1 开始。
--- 层位、地图、数值、井租、补给摊价格都是讨论项（见 src/core/mainline.ts 开头的说明）。
-return ${lua({ pools })}
-`);
+// ---------- 9. 路线和楼梯口的话 ----------
+const routes: unknown[] = [];
+for (const seed of [1, 2, 3, 42, 99, 12345, 2147483647, 4000000000]) {
+    routes.push({ seed, plan: R.buildRoute(seed).map(o => o.map(f => ({ ...floorParams(f), whisper: whisper(f) }))) });
 }
+const tutorials = [1, 7, 31337].map(seed => ({ seed, plan: R.buildTutorial(seed).map(o => o.map(floorParams)) }));
+
+// ---------- 10. 存档 ----------
+// （每一步对账时 Lua 都会存档再读回来）
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, stalls, picks, mainScenarios, previews, deaths, rolls, slotSessions, weaponChoices, intels })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
-console.log(`战斗 ${combat.length}；新怪属性 ${monsterViews.length}；补给摊 ${stalls.length}；签约对照 ${previews.length}；主线选图 ${picks.length}；主线楼层 ${mainScenarios.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);
+
+// ---------- Lua 版的地图池 ----------
+const pools = {
+    SHALLOW: R.SHALLOW, DEEP: R.DEEP, BOTTOM: R.BOTTOM, RENTS: Object.entries(R.RENTS).map(([d, v]) => ({ floor: +d, rent: v })),
+    F1: { params: DEMO_POOLS[0].params, maps: DEMO_POOLS[0].layouts.flatMap((l, li) => l.variants.map((_, vi) => buildFloor(DEMO_POOLS[0], { layout: li, variant: vi }).map)) },
+    F2: { params: F2_CONTRACT.params, maps: F2_CONTRACT.layouts.flatMap((l, li) => l.variants.map((_, vi) => buildFloor(F2_CONTRACT, { layout: li, variant: vi }).map)) },
+    NORMAL_SHALLOW: R.NORMAL_SHALLOW, NORMAL_DEEP: R.NORMAL_DEEP, ELITE_SHALLOW: R.ELITE_SHALLOW, ELITE_DEEP: R.ELITE_DEEP,
+    WHEEL_MAPS: R.WHEEL_MAPS, PAWN_MAPS: R.PAWN_MAPS, ALTAR_MAPS: R.ALTAR_MAPS, CAMP_MAPS: R.CAMP_MAPS,
+    MID_ELITE: R.MID_ELITE, GATE: R.GATE, BOSS: R.BOSS, TUTORIAL_BOSS: R.TUTORIAL_BOSS,
+    TUTORIAL_F3: DEMO_POOLS[2].layouts.flatMap((l, li) => l.variants.map((_, vi) => buildFloor(DEMO_POOLS[2], { layout: li, variant: vi }).map)),
+};
+mkdirSync('love/src/data', { recursive: true });
+writeFileSync('love/src/data/pools.lua', `-- 由 tools/export-vectors.ts 从 src/core/route.ts 自动生成，不要手改。
+-- 路线用的地图池和各段数值。路线生成（love/src/core/route.lua）和原型用同一套算法。
+-- 地图、数值、出现比例都是讨论项（设计方案第二十五章）。
+return ${lua(pools)}
+`);
+console.log(`战斗 ${combat.length}；楼层 ${scenarios.length}；新怪属性 ${monsterViews.length}；路线逐层 ${routeWalks.length}；致死 ${deaths.length}；断臂转轮 ${armSessions.length}；刻图案 ${engraves.length}；大转盘 ${wheels.length}；当铺 ${shops.length}；骨坛 ${altars.length}；补给摊 ${stalls.length}；诏令 ${decreeDraws.length}+${decreeRuns.length}；路线 ${routes.length}；教程 ${tutorials.length}`);

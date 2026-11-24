@@ -1,16 +1,23 @@
--- 一局游戏的状态和操作：移动、交互、契约、出口结算、存档。
--- 和 TypeScript 原型 src/core/game.ts 的 Run 一致（含井中轮、井租、精英武器三选一）。
+-- 一局游戏的状态和操作（断臂转轮版）：和原型 src/core/game.ts 的 Run 一致。
 -- 没有撤回、没有重开本层：死了就整局重来。
+-- 楼层之内完全确定；随机只发生在楼层之间和设施上，全部由本局种子决定。
+-- 层号、格子下标、转轮行号在 Lua 里都从 1 开始；随机数的键按原型的 0 开始计算。
 
 local config = require('core.config')
 local combat = require('core.combat')
 local floorMod = require('core.floor')
 local rules = require('core.rules')
-local contract = require('core.contract')
-local slot = require('core.slot')
+local rng = require('core.rng')
+local armMod = require('core.arm')
+local wheelMod = require('core.wheel')
+local decreeMod = require('core.decree')
 
 local Run = {}
 Run.__index = Run
+
+Run.PAWN = { keyPrice = 15, pawnGold = 40, redeemRate = 1.2, buyPrice = 60, erasePrice = 20 }
+Run.ALTAR_ATK_COST = 3
+Run.RENT_STAT_COST = 3
 
 local function copyCells(cells)
     local t = {}
@@ -19,36 +26,54 @@ local function copyCells(cells)
 end
 
 local function contains(list, v)
-    for _, x in ipairs(list) do if x == v then return true end end
+    for _, x in ipairs(list or {}) do if x == v then return true end end
     return false
 end
+Run.contains = contains
 
--- floors：楼层定义列表（1 开始）；seed：本局随机种子
-function Run.new(floors, characterId, seed)
+-- plan：每层的候选楼层 plan[层] = { 楼层1, 楼层2? }；传一维列表时每层只有一个候选
+-- opts.tutorial：新手教程局（没有断臂转轮、没有诏令）
+function Run.new(plan, characterId, seed, opts)
     local self = setmetatable({}, Run)
-    self.floors = floors
+    local p = {}
+    for i, x in ipairs(plan) do p[i] = x.map and { x } or x end
+    self.plan = p
     self.ch = config.CHARACTERS[characterId or 'digger']
     self.hero = config.copyHero(self.ch.base)
-    self.seed = slot.u32(seed or 1)
-    self.slots = {}           -- 井中轮状态，键是 '层:格子'
-    self.pendingWeapons = nil -- 精英倒下后等着三选一的武器
-    self.stallBought = {}     -- 补给摊上买过的货，键是 '层:第几样'（原型的层号从 0 开始）
+    self.seed = rng.u32(seed or 1)
+    self.tutorial = (opts and opts.tutorial) and true or false
+    self.arm = (not self.tutorial) and armMod.new() or nil
+    self.picks = { 1 }
     self.totalSteps = 0
-    self.contract = nil -- { def, floorIndex, broken }
+    self.wheels = {}
+    self.pawned = {}
+    self.bought = {}
+    self.altarUsed = {}
+    self.boonsSeen = {}
+    self.decree = nil
+    self.decreeOffer = nil
+    self.engraveQueue = {}
+    self.notes = {}
     self:loadFloor(1)
     return self
 end
 
-function Run:floor() return self.floors[self.floorIndex] end
+function Run:floor() return self.plan[self.floorIndex][self.picks[self.floorIndex] or 1] end
+
+-- 下一层的候选（最后一层返回空表）
+function Run:nextOptions() return self.plan[self.floorIndex + 1] or {} end
 
 function Run:loadFloor(i)
     self.floorIndex = i
-    local p = floorMod.parse(self.floors[i])
+    local p = floorMod.parse(self:floor())
     self.w, self.h, self.cells, self.pos = p.w, p.h, p.cells, p.start
     self.steps = 0
     self.kills = 0
     self.status = 'playing'
     self.rentPaid = false
+    self.drank = false
+    if self.arm then self.arm.spins = 0 end
+    self.decreeOffer = (not self.tutorial and not self.decree) and decreeMod.decreeFor(self.seed, i) or nil
     self.floorStart = self:snapshot()
 end
 
@@ -60,7 +85,6 @@ function Run:restore(s)
     self.hero = config.copyHero(s.hero)
     self.cells = copyCells(s.cells)
     self.pos, self.steps, self.kills = s.pos, s.steps, s.kills
-    self.status = 'playing'
 end
 
 function Run:floorStartHero() return config.copyHero(self.floorStart.hero) end
@@ -76,120 +100,118 @@ function Run:eliteAlive()
     return false
 end
 
--- ---------- 契约 ----------
+-- ---------- 断臂转轮 ----------
 
--- 楼梯口挂出的契约（作用在下一层）
-function Run:offeredContract()
-    local nf = self.floors[self.floorIndex + 1]
-    return nf and nf.contract or nil
-end
-
--- 本层的契约是否还在守约中
-function Run:contractActive()
-    local c = self.contract
-    return c ~= nil and c.floorIndex == self.floorIndex and not c.broken
-end
-
--- ---------- 武器 ----------
-
--- 换上新武器；旧武器当场卖掉换金币
-function Run:equip(id)
-    local old = self.hero.weapon
-    self.hero.weapon = id
-    if old and old ~= id then
-        local w = config.WEAPONS[old]
-        self.hero.gold = self.hero.gold + w.sell
-        return '换上' .. config.WEAPONS[id].name .. '，旧的' .. w.name .. '卖了 ' .. w.sell .. ' 金币'
+-- 把手上的武器换成 id（nil = 空手），带上骨坛移来的特性
+function Run:hold(id)
+    if id then
+        self.hero.weapon = id
+        local b = self.arm and self.arm.boons[id]
+        self.hero.boons = (b and #b > 0) and config.copyList(b) or nil
+    else
+        self.hero.weapon, self.hero.boons = nil, nil
     end
-    return '拿到' .. config.WEAPONS[id].name
 end
 
--- 和原型逐位相同的三选一（原型的层号从 0 开始）
-function Run:rollWeaponChoices()
+function Run:checkHold()
+    if not self.arm then return end
+    if self.hero.weapon and not armMod.has(self.arm, self.hero.weapon) then
+        self:hold(nil)
+        self.arm.stops = nil
+    end
+end
+
+function Run:pendingEngrave() return self.engraveQueue[1] end
+
+-- 精英、诏令给的三选一（不含手上这把）；和原型逐位相同
+function Run:rollWeaponChoices(salt)
+    salt = salt or 0
     local pool = {}
     for _, w in ipairs(config.WEAPON_ORDER) do if w ~= self.hero.weapon then pool[#pool + 1] = w end end
     local out, n = {}, 0
     while #out < 3 and #out < #pool do
         n = n + 1
-        local x = slot.imul(slot.bxor(self.seed, (self.floorIndex - 1) * 7919 + n * 104729), 2654435761)
+        local x = rng.imul(rng.bxor(self.seed, (self.floorIndex - 1) * 7919 + salt * 131 + n * 104729), 2654435761)
         local w = pool[x % #pool + 1]
         if not contains(out, w) then out[#out + 1] = w end
     end
     return out
 end
 
-function Run:chooseWeapon(id)
-    if not self.pendingWeapons or not contains(self.pendingWeapons, id) then return '' end
-    self.pendingWeapons = nil
-    return self:equip(id)
+-- 把等待中的图案刻上去；转轮刻满时要指定覆盖哪一行
+function Run:engrave(id, row)
+    local p = self.engraveQueue[1]
+    if not self.arm or not p or not contains(p.choices, id) then return { ok = false, msg = '' } end
+    if not row and not armMod.firstBlank(self.arm) then return { ok = false, msg = '转轮刻满了，选一行覆盖' } end
+    local k = armMod.engraveRow(self.arm, id, row)
+    if not k then return { ok = false, msg = '' } end
+    table.remove(self.engraveQueue, 1)
+    self:hold(id)
+    return { ok = true, msg = '把' .. config.WEAPONS[id].name .. '刻在转轮第 ' .. k .. ' 行，转轮停在它上面' }
 end
 
--- ---------- 井中轮 ----------
+function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
 
-function Run:slotState(i)
-    local key = self.floorIndex .. ':' .. i
-    if not self.slots[key] then self.slots[key] = slot.newState() end
-    return self.slots[key]
+function Run:armPrice(hold)
+    local base = rng.risingPrice(armMod.BASE_PRICE, self.arm and self.arm.spins or 0)
+    local gold = hold and rng.halfPrice(base) or base
+    return { gold = gold, blood = rng.bloodPrice(gold) }
 end
 
--- 下一次转的价格；hold：锁轴重转（半价）
-function Run:slotPrice(i, hold)
-    local base = slot.spinPrice(self:slotState(i).spins)
-    local gold = hold and slot.holdPrice(base) or base
-    return { gold = gold, blood = slot.bloodPrice(gold) }
-end
+local function anyHeld(t) return t and (t[1] or t[2] or t[3]) and true or false end
+local function allHeld(t) return t[1] and t[2] and t[3] and true or false end
 
-local function any(t) for i = 1, 3 do if t[i] then return true end end return false end
-local function all(t) for i = 1, 3 do if not t[i] then return false end end return true end
-
--- 转一次。held 不为空时是锁轴重转：放弃当前结果，锁住的转轮不变，其余重转。
--- 不锁轴时如果机器上还有没收下的结果，先自动收下。返回 { ok, msg, result, fresh, bite }
-function Run:slotSpin(i, pay, held)
-    local c = self.cells[i]
-    if self.status ~= 'playing' or not c or c.kind ~= 'slot' then return { ok = false, msg = '' } end
-    if not contains(floorMod.neighbors(self.pos, self.w, self.h), i) then return { ok = false, msg = '站在井中轮旁边才能用它' } end
-    local st = self:slotState(i)
-    local hold = held ~= nil and any(held)
-    if hold and (not st.pending or all(held)) then return { ok = false, msg = '要锁住一两个转轮，留至少一个重转' } end
-    if not hold and st.pending then self:slotCollect(i) end
-    local price = self:slotPrice(i, hold)
+-- 转断臂转轮；held[i] 为 true 的轮子锁住不动（半价）。返回 { ok, msg, faces }
+function Run:armSpin(pay, held)
+    local arm = self.arm
+    if self.status ~= 'playing' or not arm then return { ok = false, msg = '' } end
+    if not (arm.rows[1] or arm.rows[2] or arm.rows[3]) then return { ok = false, msg = '转轮上还没有刻任何图案' } end
+    local hold = anyHeld(held)
+    if hold and (not arm.stops or allHeld(held)) then return { ok = false, msg = '要锁住一两个轮子，留至少一个重转' } end
+    local price = self:armPrice(hold)
     if pay == 'gold' then
         if self.hero.gold < price.gold then return { ok = false, msg = '金币不够（要 ' .. price.gold .. '）' } end
         self.hero.gold = self.hero.gold - price.gold
     else
-        if self.hero.hp <= price.blood then return { ok = false, msg = '生命不够押（要 ' .. price.blood .. '）' } end
+        if self.hero.hp <= price.blood then return { ok = false, msg = '生命不够（要 ' .. price.blood .. '）' } end
         self.hero.hp = self.hero.hp - price.blood
     end
-    local result, fresh = slot.roll(slot.SLOTS[c.id], st, self.seed, (self.floorIndex - 1) * 1000 + (i - 1), hold and held or nil)
-    st.spins = st.spins + 1
-    st.pending = result
-    local bite = slot.leechBite(result, fresh)
-    self.hero.hp = self.hero.hp - bite
-    if self.hero.hp <= 0 then
-        self.hero.hp = 0
-        self.status = 'dead'
-        return { ok = true, msg = '你倒下了。井蛭吸干了你最后一点血', result = result, fresh = fresh, bite = bite }
+    local faces = armMod.roll(arm, self.seed, (self.floorIndex - 1) * 1000 + 999, hold and held or nil)
+    arm.spins = arm.spins + 1
+    local kind, id = armMod.outcome(faces)
+    if kind == 'weapon' then
+        local same = self.hero.weapon == id
+        self:hold(id)
+        local name = config.WEAPONS[id].name
+        return { ok = true, msg = same and ('三个轮子都停在' .. name .. '上，还是它') or ('三个轮子都停在' .. name .. '上，换成了' .. name), faces = faces }
+    elseif kind == 'empty' then
+        self:hold(nil)
+        return { ok = true, msg = '三个轮子都停在空格上，手里空了', faces = faces }
     end
-    return { ok = true, msg = bite > 0 and ('井蛭咬掉了 ' .. bite .. ' 生命') or '', result = result, fresh = fresh, bite = bite }
+    return { ok = true, msg = '没有连成一线，手上的武器不变', faces = faces }
 end
 
--- 收下机器上当前的结果；返回说明文字列表
-function Run:slotCollect(i)
+-- ---------- 设施 ----------
+
+function Run:nextTo(i) return contains(floorMod.neighbors(self.pos, self.w, self.h), i) end
+
+local FACILITY_NAMES = { stall = '补给摊', wheel = '大转盘', pawn = '当铺', altar = '骨坛' }
+
+function Run:checkFacility(i, kind)
     local c = self.cells[i]
-    local st = self:slotState(i)
-    if not c or c.kind ~= 'slot' or not st.pending then return {} end
-    local p = slot.payout(st.pending)
-    st.pending = nil
-    local lines = {}
-    for k, l in ipairs(p.lines) do lines[k] = l end
-    if p.gems > 0 then self.hero.atk = self.hero.atk + p.gems * (self:floor().gem + self.ch.gemBonus) end
-    self.hero.hp = self.hero.hp + p.hp
-    self.hero.gold = self.hero.gold + p.gold
-    if p.weapon then lines[#lines + 1] = self:equip(p.weapon) end
-    return lines
+    if self.status ~= 'playing' or not c or c.kind ~= kind then return { ok = false, msg = '' } end
+    if not self:nextTo(i) then return { ok = false, msg = '站在' .. FACILITY_NAMES[kind] .. '旁边才能用它' } end
+    return nil
 end
 
--- ---------- 补给摊 ----------
+function Run:pay(gold)
+    if self.hero.gold < gold then return { ok = false, msg = '金币不够（要 ' .. gold .. '）' } end
+    self.hero.gold = self.hero.gold - gold
+    return nil
+end
+
+function Run:sold(i, k) return self.bought[self.floorIndex .. ':' .. i .. ':' .. k] == true end
+function Run:markSold(i, k) self.bought[self.floorIndex .. ':' .. i .. ':' .. k] = true end
 
 function Run.stallText(o)
     if o.id == 'atk' then return '攻击 +' .. o.amount
@@ -198,37 +220,226 @@ function Run.stallText(o)
     return '骨钥 ×' .. o.amount
 end
 
-function Run:stallSold(k)
-    return self.stallBought[(self.floorIndex - 1) .. ':' .. (k - 1)] == true
-end
-
--- 在第 i 格的补给摊买第 k 样货（k 从 1 开始）
+-- 补给摊（营火层）：买第 k 样（k 从 1 开始）
 function Run:stallBuy(i, k)
-    local c = self.cells[i]
     local o = self:floor().stall and self:floor().stall[k]
-    if self.status ~= 'playing' or not c or c.kind ~= 'stall' or not o then return { ok = false, msg = '' } end
-    if not contains(floorMod.neighbors(self.pos, self.w, self.h), i) then return { ok = false, msg = '站在补给摊旁边才能买东西' } end
-    if self:stallSold(k) then return { ok = false, msg = '这样已经买过了' } end
-    if self.hero.gold < o.price then return { ok = false, msg = '金币不够（要 ' .. o.price .. '）' } end
-    self.hero.gold = self.hero.gold - o.price
+    local bad = self:checkFacility(i, 'stall') or ((not o) and { ok = false, msg = '' }) or nil
+    if bad then return bad end
+    if self:sold(i, k) then return { ok = false, msg = '这样已经买过了' } end
+    local unpaid = self:pay(o.price)
+    if unpaid then return unpaid end
     if o.id == 'atk' then self.hero.atk = self.hero.atk + o.amount
     elseif o.id == 'def' then self.hero.def = self.hero.def + o.amount
     elseif o.id == 'hp' then self.hero.hp = self.hero.hp + o.amount
     else self.hero.keys = self.hero.keys + o.amount end
-    self.stallBought[(self.floorIndex - 1) .. ':' .. (k - 1)] = true
+    self:markSold(i, k)
     return { ok = true, msg = '买下' .. Run.stallText(o) .. '，花了 ' .. o.price .. ' 金币' }
+end
+
+function Run:wheelState(i)
+    local key = self.floorIndex .. ':' .. i
+    if not self.wheels[key] then self.wheels[key] = { spins = 0, draws = 0 } end
+    return self.wheels[key]
+end
+
+function Run:wheelPrice(i)
+    local gold = wheelMod.price(self:wheelState(i).spins)
+    return { gold = gold, blood = rng.bloodPrice(gold) }
+end
+
+-- 转大转盘：返回 { ok, msg, sector }（sector 从 1 开始）
+function Run:wheelSpin(i, pay)
+    local bad = self:checkFacility(i, 'wheel')
+    if bad then return bad end
+    local st = self:wheelState(i)
+    local price = self:wheelPrice(i)
+    if pay == 'gold' then
+        local unpaid = self:pay(price.gold)
+        if unpaid then return unpaid end
+    else
+        if self.hero.hp <= price.blood then return { ok = false, msg = '生命不够（要 ' .. price.blood .. '）' } end
+        self.hero.hp = self.hero.hp - price.blood
+    end
+    local key = (self.floorIndex - 1) * 1000 + (i - 1)
+    local n = st.draws
+    st.draws = st.draws + 1
+    local sector = wheelMod.stop(self.seed, key, n)
+    st.spins = st.spins + 1
+    local s = wheelMod.SECTORS[sector]
+    local msg = '停在「' .. s.text .. '」'
+    local h = self.hero
+    if s.prize == 'gold' then h.gold = h.gold + s.amount
+    elseif s.prize == 'hp' then h.hp = h.hp + s.amount
+    elseif s.prize == 'atk' then h.atk = h.atk + s.amount
+    elseif s.prize == 'def' then h.def = h.def + s.amount
+    elseif s.prize == 'engrave' then
+        local all = config.WEAPON_ORDER
+        local w = all[rng.pick(self.seed, key + 500, n, #all) + 1]
+        if self.arm then
+            self.engraveQueue[#self.engraveQueue + 1] = { from = 'wheel', choices = { w } }
+            msg = msg .. '：' .. config.WEAPONS[w].name
+        end
+    elseif s.prize == 'leech' then
+        h.hp = h.hp - s.amount
+        if h.hp <= 0 then
+            h.hp = 0
+            self.status = 'dead'
+            return { ok = true, msg = '你倒下了。井蛭吸干了你最后一点血', sector = sector }
+        end
+    elseif s.prize == 'erase' then
+        local rows = {}
+        if self.arm then for k = 1, armMod.ROWS do if self.arm.rows[k] then rows[#rows + 1] = k end end end
+        if #rows == 0 then
+            msg = msg .. '：转轮上没有图案，什么也没擦掉'
+        else
+            local k = rows[rng.pick(self.seed, key + 600, n, #rows) + 1]
+            msg = msg .. '：第 ' .. k .. ' 行的' .. config.WEAPONS[self.arm.rows[k]].name .. '没了'
+            self.arm.rows[k] = false
+            self:checkHold()
+        end
+    end
+    return { ok = true, msg = msg, sector = sector }
+end
+
+-- 当铺：卖一把骨钥
+function Run:pawnSellKey(i)
+    local bad = self:checkFacility(i, 'pawn')
+    if bad then return bad end
+    if self.hero.keys <= 0 then return { ok = false, msg = '你没有骨钥' } end
+    self.hero.keys = self.hero.keys - 1
+    self.hero.gold = self.hero.gold + Run.PAWN.keyPrice
+    return { ok = true, msg = '卖了一把骨钥，得 ' .. Run.PAWN.keyPrice .. ' 金币' }
+end
+
+-- 当铺：当掉转轮上的一行（row 从 1 开始）
+function Run:pawnRow(i, row)
+    local bad = self:checkFacility(i, 'pawn')
+    if bad then return bad end
+    local w = self.arm and self.arm.rows[row]
+    if not w then return { ok = false, msg = '这一行是空的' } end
+    self.arm.rows[row] = false
+    self.pawned[#self.pawned + 1] = { weapon = w, floor = self.floorIndex }
+    self.hero.gold = self.hero.gold + Run.PAWN.pawnGold
+    self:checkHold()
+    return { ok = true, msg = '当掉了' .. config.WEAPONS[w].name .. '，得 ' .. Run.PAWN.pawnGold .. ' 金币' }
+end
+
+-- 赎回当掉的第 j 件现在要多少钱（每过一层涨 20%）
+function Run:redeemPrice(j)
+    local p = self.pawned[j]
+    return math.ceil(Run.PAWN.pawnGold * Run.PAWN.redeemRate ^ (self.floorIndex - p.floor))
+end
+
+function Run:pawnRedeem(i, j, row)
+    local bad = self:checkFacility(i, 'pawn')
+    if bad then return bad end
+    local p = self.pawned[j]
+    if not p or not self.arm then return { ok = false, msg = '' } end
+    if not row and not armMod.firstBlank(self.arm) then return { ok = false, msg = '转轮刻满了，选一行覆盖' } end
+    local unpaid = self:pay(self:redeemPrice(j))
+    if unpaid then return unpaid end
+    armMod.engraveRow(self.arm, p.weapon, row)
+    table.remove(self.pawned, j)
+    self:hold(p.weapon)
+    return { ok = true, msg = '赎回了' .. config.WEAPONS[p.weapon].name }
+end
+
+-- 当铺：买第 k 个武器图案刻上去（k 从 1 开始）
+function Run:pawnBuy(i, k, row)
+    local bad = self:checkFacility(i, 'pawn')
+    if bad then return bad end
+    local w = self:floor().shop and self:floor().shop[k]
+    if not w or not self.arm then return { ok = false, msg = '' } end
+    if self:sold(i, k) then return { ok = false, msg = '这样已经买过了' } end
+    if not row and not armMod.firstBlank(self.arm) then return { ok = false, msg = '转轮刻满了，选一行覆盖' } end
+    local unpaid = self:pay(Run.PAWN.buyPrice)
+    if unpaid then return unpaid end
+    armMod.engraveRow(self.arm, w, row)
+    self:markSold(i, k)
+    self:hold(w)
+    return { ok = true, msg = '花 ' .. Run.PAWN.buyPrice .. ' 金币刻上了' .. config.WEAPONS[w].name }
+end
+
+function Run:pawnErase(i, row)
+    local bad = self:checkFacility(i, 'pawn')
+    if bad then return bad end
+    local w = self.arm and self.arm.rows[row]
+    if not w then return { ok = false, msg = '这一行是空的' } end
+    local unpaid = self:pay(Run.PAWN.erasePrice)
+    if unpaid then return unpaid end
+    self.arm.rows[row] = false
+    self:checkHold()
+    return { ok = true, msg = '擦掉了第 ' .. row .. ' 行的' .. config.WEAPONS[w].name }
+end
+
+-- 骨坛：献 3 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座用一次）
+function Run:altarOffer(i, pay, boon, weapon)
+    local bad = self:checkFacility(i, 'altar')
+    if bad then return bad end
+    local key = self.floorIndex .. ':' .. i
+    if contains(self.altarUsed, key) then return { ok = false, msg = '这座骨坛已经用过了' } end
+    if not contains(self.boonsSeen, boon) then return { ok = false, msg = '这一局还没杀过带「' .. config.BOON_NAMES[boon] .. '」的怪' } end
+    if not self.arm or not armMod.has(self.arm, weapon) then return { ok = false, msg = '转轮上没有这把武器' } end
+    local list = self.arm.boons[weapon] or {}
+    self.arm.boons[weapon] = list
+    if contains(list, boon) then return { ok = false, msg = config.WEAPONS[weapon].name .. '已经有「' .. config.BOON_NAMES[boon] .. '」了' } end
+    if pay == 'key' then
+        if self.hero.keys <= 0 then return { ok = false, msg = '你没有骨钥' } end
+        self.hero.keys = self.hero.keys - 1
+    else
+        self.hero.atk = self.hero.atk - Run.ALTAR_ATK_COST
+    end
+    list[#list + 1] = boon
+    self.altarUsed[#self.altarUsed + 1] = key
+    if self.hero.weapon == weapon then self:hold(weapon) end
+    return { ok = true, msg = config.WEAPONS[weapon].name .. '得到了「' .. config.BOON_NAMES[boon] .. '」' }
+end
+
+-- ---------- 诏令 ----------
+
+function Run:acceptDecree()
+    if not self.decreeOffer then return { ok = false, msg = '' } end
+    self.decree = { def = self.decreeOffer, ['until'] = self.floorIndex + decreeMod.SPAN - 1, progress = 0 }
+    self.decreeOffer = nil
+    return { ok = true, msg = '接下' .. decreeMod.TIER_NAMES[self.decree.def.tier] .. '诏令：' .. self.decree.def.text }
+end
+
+function Run:refuseDecree() self.decreeOffer = nil end
+
+function Run:completeDecree()
+    local d = self.decree
+    self.engraveQueue[#self.engraveQueue + 1] = { from = 'decree', choices = self:rollWeaponChoices(1) }
+    if d.def.tier == 'silver' then self.hero.hp = self.hero.hp + decreeMod.SILVER_BONUS_HP end
+    self.notes[#self.notes + 1] = '诏令完成：' .. d.def.text .. '。' .. (d.def.tier == 'silver' and ('生命 +' .. decreeMod.SILVER_BONUS_HP .. '，') or '') .. '可以刻一把武器'
+    self.decree = nil
+end
+
+function Run:settleDecree()
+    local d = self.decree
+    if not d then return end
+    local def = d.def
+    local met = (def.kind == 'noPotion' and not self.drank)
+        or (def.kind == 'clear' and self:monstersLeft() == 0)
+        or (def.kind == 'noLoss' and self.hero.hp >= self.floorStart.hero.hp)
+        or (def.kind == 'gold' and self.hero.gold >= def.n)
+    if met then self:completeDecree(); return end
+    if self.floorIndex >= d['until'] then
+        local lose = decreeMod.PENALTY[def.tier]
+        self.hero.atk = self.hero.atk - lose
+        self.notes[#self.notes + 1] = '诏令逾期：' .. def.text .. '。攻击 −' .. lose
+        self.decree = nil
+    end
 end
 
 -- ---------- 移动和交互 ----------
 
--- 往相邻格子走一步（或和它交互）。返回 { ok, msg }
+-- 往相邻格子走一步（或和它交互）。打败怪物后站到它的格子上。返回 { ok, msg }
 function Run:step(i)
     if self.status ~= 'playing' then return { ok = false, msg = '' } end
     if not contains(floorMod.neighbors(self.pos, self.w, self.h), i) then return { ok = false, msg = '' } end
     local c = self.cells[i]
     if c.kind == 'wall' then return { ok = false, msg = '' } end
-    if c.kind == 'slot' then return { ok = false, msg = '站在井中轮旁边才能用它' } end
-    if c.kind == 'stall' then return { ok = false, msg = '站在补给摊旁边才能买东西' } end
+    if floorMod.isFacility(c) then return { ok = false, msg = '站在旁边才能用它' } end
     if c.kind == 'exit' and self:eliteAlive() then return { ok = false, msg = '精英守卫还活着，出口被封住了' } end
 
     if c.kind == 'floor' or c.kind == 'exit' then
@@ -240,9 +451,7 @@ function Run:step(i)
 
     local r = rules.interact(c, self.hero, self:floor(), self.ch, true, c.kind == 'monster' and self:monsterAt(i) or nil)
     if not r.ok then return { ok = false, msg = r.reason } end
-    -- 喝下血瓶的那一刻就毁约
-    local breaks = rules.isPotion(c) and self:contractActive()
-    if breaks then self.contract.broken = true end
+    if rules.isPotion(c) then self.drank = true end
     if r.fatal then
         self.hero = r.hero
         self.steps = self.steps + 1
@@ -257,13 +466,24 @@ function Run:step(i)
         self.kills = self.kills + 1
         local m = config.MONSTERS[c.id]
         msg = '击败' .. m.name .. '，' .. (lost >= 0 and ('损失 ' .. lost) or ('回复 ' .. -lost)) .. ' 生命，获得 ' .. m.gold .. ' 金币'
-        -- 精英倒下：三选一拿武器
-        if m.elite and self:floor().eliteReward then self.pendingWeapons = self:rollWeaponChoices() end
+        local boon = config.MONSTER_BOON[c.id]
+        if boon and not contains(self.boonsSeen, boon) then self.boonsSeen[#self.boonsSeen + 1] = boon end
+        if self.arm then
+            if m.elite and self:floor().eliteReward then
+                self.engraveQueue[#self.engraveQueue + 1] = { from = 'elite', choices = self:rollWeaponChoices() }
+            end
+            if contains(self:floor().marks, i) and config.MARK_WEAPON[c.id] then
+                self.engraveQueue[#self.engraveQueue + 1] = { from = 'mark', choices = { config.MARK_WEAPON[c.id] } }
+            end
+        end
+        if self.decree and decreeMod.killCounts(self.decree.def, m) then
+            self.decree.progress = self.decree.progress + 1
+            if self.decree.progress >= self.decree.def.n then self:completeDecree() end
+        end
     else
         if c.kind == 'item' then msg = '获得' .. config.ITEM_NAMES[c.id]
         elseif c.door == 'bone' then msg = '打开骨门'
         else msg = '穿过血门，损失 ' .. lost .. ' 生命' end
-        if breaks then msg = msg .. '。契约已毁：押下的 ' .. self.contract.def.deposit .. ' 生命归井了' end
     end
     self.pos = i
     self.cells[i] = { kind = 'floor' }
@@ -298,7 +518,6 @@ function Run:findPath(target)
     return nil
 end
 
--- 走到目标格子（目标是怪物 / 道具 / 门 / 出口时，最后一步和它交互）
 function Run:tapCell(target)
     if self.status ~= 'playing' or target == self.pos then return { ok = false, msg = '' } end
     local path = self:findPath(target)
@@ -311,13 +530,24 @@ function Run:tapCell(target)
     return last
 end
 
+-- 方向键移动一步
+function Run:move(dx, dy)
+    local x = (self.pos - 1) % self.w + dx
+    local y = math.floor((self.pos - 1) / self.w) + dy
+    if x < 0 or y < 0 or x >= self.w or y >= self.h then return { ok = false, msg = '' } end
+    return self:step(y * self.w + x + 1)
+end
+
 -- ---------- 战斗预览和格子信息 ----------
 
--- 第 i 格怪物这一刻的真实属性（算上相邻的井鼠、骸骨祭司）
 function Run:monsterAt(i)
     local c = self.cells[i]
     assert(c.kind == 'monster', '不是怪物')
     return config.monsterInContext(config.MONSTERS[c.id], floorMod.adjacentMonsters(self.cells, self.w, self.h, i))
+end
+
+function Run:marked(i)
+    return self.arm ~= nil and contains(self:floor().marks, i) and self.cells[i].kind == 'monster'
 end
 
 function Run:preview(i)
@@ -331,12 +561,7 @@ end
 function Run:exitSummary()
     local leftover = 0
     for _, c in ipairs(self.cells) do if rules.isPotion(c) then leftover = leftover + 1 end end
-    local ct = nil
-    if self.contract and self.contract.floorIndex == self.floorIndex then
-        ct = { def = self.contract.def, kept = not self.contract.broken }
-    end
     return {
-        contract = ct,
         leftoverPotions = leftover,
         potionGold = leftover * config.EXIT.leftoverPotionGold,
         keys = self.hero.keys,
@@ -344,7 +569,6 @@ function Run:exitSummary()
     }
 end
 
--- 本层出口要交的井租（交过了就是 0）
 function Run:rentDue()
     local f = self:floor()
     if f.rent and not self.rentPaid then return f.rent end
@@ -358,76 +582,63 @@ function Run:payRent(method)
     if method == 'gold' then
         if self.hero.gold < due then return { ok = false, msg = '金币不够' } end
         self.hero.gold = self.hero.gold - due
-    elseif method == 'atk' then self.hero.atk = self.hero.atk - 3
-    else self.hero.def = self.hero.def - 3 end
+    elseif method == 'atk' then self.hero.atk = self.hero.atk - Run.RENT_STAT_COST
+    else self.hero.def = self.hero.def - Run.RENT_STAT_COST end
     self.rentPaid = true
     return { ok = true, msg = '' }
 end
 
--- 结算后进入下一层；sign：签下楼梯口挂出的契约（作用在下一层）
-function Run:finishFloor(sellKeys, sign)
+-- 结算后进入下一层；choice：楼梯二选一时选第几条（从 1 开始）
+function Run:finishFloor(sellKeys, choice)
     if self.status ~= 'floorDone' then return end
     if self:rentDue() > 0 then return end
     local s = self:exitSummary()
     self.hero.gold = self.hero.gold + s.potionGold
-    if s.contract then
-        if s.contract.kept then
-            self.hero.hp = self.hero.hp + s.contract.def.refund
-            self.hero.gold = self.hero.gold + (s.contract.def.gold or 0)
-        end
-        self.contract = nil
-    end
-    local offer = self:offeredContract()
-    if sign and offer and self.hero.hp > contract.depositFor(offer, self.hero) then
-        local deposit = contract.depositFor(offer, self.hero)
-        self.hero.hp = self.hero.hp - deposit
-        self.hero.atk = self.hero.atk + (offer.atk or 0)
-        self.hero.def = self.hero.def + (offer.def or 0)
-        local def = {}
-        for k, v in pairs(offer) do def[k] = v end
-        def.deposit = deposit
-        self.contract = { def = def, floorIndex = self.floorIndex + 1, broken = false }
-    end
     if sellKeys then
         self.hero.gold = self.hero.gold + s.keyGold
         self.hero.keys = 0
     end
+    self:settleDecree()
     self.totalSteps = self.totalSteps + self.steps
-    if self.floorIndex >= #self.floors then self.status = 'finished'
-    else self:loadFloor(self.floorIndex + 1) end
+    if self.floorIndex >= #self.plan then self.status = 'finished'; return end
+    local opts = self.plan[self.floorIndex + 1]
+    self.picks[self.floorIndex + 1] = math.max(1, math.min(#opts, choice or 1))
+    self:loadFloor(self.floorIndex + 1)
 end
 
 -- ---------- 存档 ----------
 
 function Run:save()
     return {
-        characterId = self.ch.id,
-        floorIndex = self.floorIndex,
-        current = self:snapshot(),
-        floorStart = self.floorStart,
-        totalSteps = self.totalSteps,
-        status = self.status,
-        contract = self.contract,
-        seed = self.seed,
-        rentPaid = self.rentPaid,
-        slots = self.slots,
-        pendingWeapons = self.pendingWeapons,
-        stallBought = self.stallBought,
+        characterId = self.ch.id, seed = self.seed, tutorial = self.tutorial, picks = self.picks,
+        floorIndex = self.floorIndex, current = self:snapshot(), floorStart = self.floorStart,
+        totalSteps = self.totalSteps, status = self.status, rentPaid = self.rentPaid,
+        arm = self.arm, wheels = self.wheels, pawned = self.pawned, bought = self.bought,
+        altarUsed = self.altarUsed, boonsSeen = self.boonsSeen, decree = self.decree,
+        decreeOffer = self.decreeOffer, engraveQueue = self.engraveQueue, drank = self.drank,
     }
 end
 
-function Run.load(floors, s)
-    local run = Run.new(floors, s.characterId, s.seed)
+function Run.load(plan, s)
+    local run = Run.new(plan, s.characterId, s.seed, { tutorial = s.tutorial })
+    run.picks = {}
+    for k, v in pairs(s.picks) do run.picks[k] = v end
     run:loadFloor(s.floorIndex)
     run.floorStart = s.floorStart
     run:restore(s.current)
     run.totalSteps = s.totalSteps
     run.status = s.status
-    run.contract = s.contract
     run.rentPaid = s.rentPaid or false
-    run.slots = s.slots or {}
-    run.pendingWeapons = s.pendingWeapons
-    run.stallBought = s.stallBought or {}
+    run.arm = s.arm
+    run.wheels = s.wheels or {}
+    run.pawned = s.pawned or {}
+    run.bought = s.bought or {}
+    run.altarUsed = s.altarUsed or {}
+    run.boonsSeen = s.boonsSeen or {}
+    run.decree = s.decree
+    run.decreeOffer = s.decreeOffer
+    run.engraveQueue = s.engraveQueue or {}
+    run.drank = s.drank or false
     return run
 end
 
