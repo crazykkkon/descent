@@ -134,7 +134,7 @@ const add = (e: R.MapEntry, two: boolean) => {
     if (j) j.two ||= two;
     else jobs.set(k, { e, two, base: { ...R.SHALLOW, name: e.name, map: e.small, kind: e.kind }, heroes: [] });
 };
-for (const e of [...R.F1_MAPS, ...R.F2_MAPS, ...R.TUTORIAL_F3_MAPS, R.MID_ELITE, R.GATE, R.BOSS, R.TUTORIAL_BOSS]) add(e, false);
+for (const e of [...R.F1_MAPS, ...R.F2_MAPS, R.MID_ELITE, R.GATE, R.BOSS, R.TUTORIAL_BOSS]) add(e, false);
 for (const e of [...R.NORMAL_SHALLOW, ...R.NORMAL_DEEP, ...R.ELITE_SHALLOW, ...R.ELITE_DEEP, ...R.WHEEL_MAPS, ...R.PAWN_MAPS, ...R.ALTAR_MAPS, ...R.CAMP_MAPS]) add(e, true);
 
 const bySmallOrBig = new Map<string, string>();

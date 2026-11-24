@@ -62,10 +62,9 @@ function poolMaps(pool: FloorPool, kind: FloorKind, hint: string, from?: number)
 
 const E = (name: string, hint: string, kind: FloorKind, map: string[], from?: number): MapEntry => ({ name, hint, kind, map: big(map), small: map, from });
 
-/** 第 1、2 层和教程第 3 层的图（只有一个出口） */
+/** 第 1、2 层的图（只有一个出口） */
 export const F1_MAPS: MapEntry[] = poolMaps(DEMO_POOLS[0], 'normal', DEMO_POOLS[0].params.hint);
 export const F2_MAPS: MapEntry[] = poolMaps(F2_CONTRACT, 'normal', F2_CONTRACT.params.hint);
-export const TUTORIAL_F3_MAPS: MapEntry[] = poolMaps(DEMO_POOLS[2], 'normal', DEMO_POOLS[2].params.hint);
 
 /** 普通层：前段（第 3～9 层） */
 export const NORMAL_SHALLOW: MapEntry[] = [
@@ -367,14 +366,44 @@ export function buildRoute(seed: number): FloorDef[][] {
     return plan;
 }
 
+/**
+ * 新手教程局的地图：固定 5 张，一层只教一件事（制作人：开局 5 层做成教学关卡的样子）。
+ * 直接画成 16×11，不走放大工具。每一步的教学提示在 LÖVE 界面里（love/src/view/coach.lua）。
+ * 第 1 层：走路、打怪、宝石让掉血变少、出口。第 2 层：骨钥和骨门、打不动的怪、血瓶。
+ * 第 3 层：两条路怎么选（血门扣血 / 绕路打怪）。第 4 层：精英封住出口。第 5 层：井底之眼，打不过。
+ */
+const TW = '################';
+const tut = (rows: string[]) => {
+    const top = Math.floor((MAP_H - rows.length) / 2);
+    return [...Array(top).fill(TW), ...rows, ...Array(MAP_H - top - rows.length).fill(TW)];
+};
+export const TUTORIAL_FLOORS: FloorDef[] = [
+    { ...DEMO_POOLS[0].params, name: '第 1 层 · 井口', kind: 'normal', map: tut([
+        '#@..m..r..m....#',
+        '##############.#',
+        '#>..e..h..b....#',
+    ]) },
+    { ...F2_CONTRACT.params, name: '第 2 层 · 骨门', kind: 'normal', map: tut([
+        '#@..e...D.r...>#',
+        '####m#h####c####',
+        '####k######$####',
+    ]) },
+    { ...SHALLOW, bloodCost: 50, name: '第 3 层 · 岔路', kind: 'normal', map: tut([
+        '#@..v...B.....>#',
+        '#h############.#',
+        '#...f..r..e....#',
+    ]) },
+    { ...SHALLOW, name: '第 4 层 · 鳞厅', kind: 'elite', map: tut([
+        '#@..m..r..e..b.#',
+        '#############.##',
+        '#.h..r..b..H...#',
+        '#.##############',
+        '#.....G.......>#',
+    ]) },
+    { ...SHALLOW, name: '第 5 层 · 井底', hint: TUTORIAL_BOSS.hint, kind: 'boss', map: TUTORIAL_BOSS.map },
+];
+
 /** 新手教程局：第 1～5 层，第 5 层遇到打不过的井底之眼（每层只有一个出口） */
-export function buildTutorial(seed: number): FloorDef[][] {
-    const floors: FloorDef[] = [
-        { ...DEMO_POOLS[0].params, map: F1_MAPS[pick(seed, 8000, 0, F1_MAPS.length)].map, kind: 'normal' },
-        { ...F2_CONTRACT.params, map: F2_MAPS[pick(seed, 8001, 0, F2_MAPS.length)].map, kind: 'normal' },
-        { ...SHALLOW, name: '第 3 层 · 回声', hint: NORMAL_SHALLOW[0].hint, map: TUTORIAL_F3_MAPS[pick(seed, 8002, 0, TUTORIAL_F3_MAPS.length)].map, kind: 'normal' },
-        { ...SHALLOW, name: '第 4 层 · 鳞厅', hint: '石鳞守卫封住了出口。先拿宝石，再去打它。', map: ELITE_SHALLOW[0].map, kind: 'elite' },
-        { ...SHALLOW, name: '第 5 层 · 井底', hint: TUTORIAL_BOSS.hint, map: TUTORIAL_BOSS.map, kind: 'boss' },
-    ];
-    return floors.map(f => [{ ...f, map: oneExit(f.map) }]);
+export function buildTutorial(_seed: number): FloorDef[][] {
+    return TUTORIAL_FLOORS.map(f => [{ ...f, map: oneExit(f.map) }]);
 }

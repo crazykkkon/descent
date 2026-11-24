@@ -129,21 +129,14 @@ function M.build(seed)
     return plan
 end
 
--- 新手教程局：第 1～5 层，第 5 层遇到打不过的井底之眼
-function M.tutorial(seed)
-    local f1 = copy(P.F1.params)
-    f1.map, f1.kind = P.F1.maps[rng.pick(seed, 8000, 0, #P.F1.maps) + 1], 'normal'
-    local f2 = copy(P.F2.params)
-    f2.map, f2.kind = P.F2.maps[rng.pick(seed, 8001, 0, #P.F2.maps) + 1], 'normal'
-    local f3 = copy(P.SHALLOW)
-    f3.name, f3.hint, f3.kind = '第 3 层 · 回声', P.NORMAL_SHALLOW[1].hint, 'normal'
-    f3.map = P.TUTORIAL_F3[rng.pick(seed, 8002, 0, #P.TUTORIAL_F3) + 1]
-    local f4 = copy(P.SHALLOW)
-    f4.name, f4.hint, f4.map, f4.kind = '第 4 层 · 鳞厅', '石鳞守卫封住了出口。先拿宝石，再去打它。', P.ELITE_SHALLOW[1].map, 'elite'
-    local f5 = copy(P.SHALLOW)
-    f5.name, f5.hint, f5.map, f5.kind = '第 5 层 · 井底', P.TUTORIAL_BOSS.hint, P.TUTORIAL_BOSS.map, 'boss'
+-- 新手教程局：固定 5 张教学地图（原型 TUTORIAL_FLOORS），第 5 层遇到打不过的井底之眼；每层只有一个出口
+function M.tutorial(_seed)
     local out = {}
-    for i, f in ipairs({ f1, f2, f3, f4, f5 }) do f.map = oneExit(f.map); out[i] = { f } end
+    for i, t in ipairs(P.TUTORIAL) do
+        local f = copy(t)
+        f.map = oneExit(t.map)
+        out[i] = { f }
+    end
     return out
 end
 

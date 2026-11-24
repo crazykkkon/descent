@@ -350,7 +350,7 @@ const pools = {
     NORMAL_SHALLOW: ent(R.NORMAL_SHALLOW), NORMAL_DEEP: ent(R.NORMAL_DEEP), ELITE_SHALLOW: ent(R.ELITE_SHALLOW), ELITE_DEEP: ent(R.ELITE_DEEP),
     WHEEL_MAPS: ent(R.WHEEL_MAPS), PAWN_MAPS: ent(R.PAWN_MAPS), ALTAR_MAPS: ent(R.ALTAR_MAPS), CAMP_MAPS: ent(R.CAMP_MAPS),
     MID_ELITE: ent([R.MID_ELITE])[0], GATE: ent([R.GATE])[0], BOSS: ent([R.BOSS])[0], TUTORIAL_BOSS: ent([R.TUTORIAL_BOSS])[0],
-    TUTORIAL_F3: R.TUTORIAL_F3_MAPS.map(e => e.map),
+    TUTORIAL: R.TUTORIAL_FLOORS,
 };
 mkdirSync('love/src/data', { recursive: true });
 writeFileSync('love/src/data/pools.lua', `-- 由 tools/export-vectors.ts 从 src/core/route.ts 自动生成，不要手改。

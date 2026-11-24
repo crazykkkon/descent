@@ -601,6 +601,22 @@ test('两个出口：走哪个出口就进哪个候选；求解器可以指定�
     assert.ok(solveFromStart(f, hero, undefined, 0).solvable && solveFromStart(f, hero, undefined, 1).solvable);
 });
 
+test('新手教程：前 4 层一层教一件事，怎么走都不会走进死路（第 2 层打不打锈甲虫、第 3 层走哪条路都能走到第 4 层出口）', () => {
+    const plan = buildTutorial(1).map(o => o[0]);
+    let heroes = [{ ...CHARACTERS.digger.base }];
+    for (let d = 0; d < 4; d++) {
+        const next = [];
+        for (const h of heroes) {
+            const r = solveFromStart(plan[d], h);
+            assert.ok(r.solvable, `第 ${d + 1} 层从 ${h.hp}/${h.atk}/${h.def} 走不通`);
+            next.push(...r.pareto.map(o => o.hero));
+        }
+        heroes = next;
+    }
+    assert.ok(Math.min(...heroes.map(h => h.hp)) > 100, '第 4 层出来至少还剩 100 多血');
+    assert.ok(plan[3].kind === 'elite' && plan[4].kind === 'boss');
+});
+
 test('新手教程局：5 层、没有断臂转轮、没有诏令，第 5 层的井底之眼打不过', () => {
     const plan = buildTutorial(1);
     assert.equal(plan.length, 5);

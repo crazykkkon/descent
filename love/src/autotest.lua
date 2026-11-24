@@ -120,6 +120,15 @@ function M.start()
         button('往下走')
         for f = 1, 5 do
             local run = game.getRun()
+            sleep(0.1)
+            shot('01c-coach-' .. f)
+            if f == 1 then
+                -- 第 1 层：先往右走几步打第一只井苔，看教学提示换没换
+                game.pressKey('right', true); sleep(1.2); game.pressKey('right', false); settle()
+                local mon = find(function(c) return c.kind == 'monster' end)
+                go(mon); settle(); sleep(0.2)
+                shot('01d-coach-after-kill')
+            end
             if f < 5 then
                 strong()
                 local h = run.hero

@@ -20,6 +20,7 @@ local route = require('core.route')
 local miner = require('view.miner')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
+local coach = require('view.coach')
 
 -- ---------- 尺寸 ----------
 local LW, LH = 640, 360          -- 逻辑画布
@@ -474,7 +475,7 @@ local function nextFloor(sell)
     floats, walking, heroAnim = {}, nil, nil
     saveGame()
     if run.status == 'finished' then openVictory(); return end
-    setMsg(run:floor().hint or '')
+    setMsg('')
     continueFlow()
 end
 
@@ -678,11 +679,10 @@ function newGame(seed)
     if tutorial then
         openModal('坠井', {
             '你失足掉进了一口很深的井。',
-            '怪物格子上的数字是打它要掉的血。奖励都在怪物身后，值不值得打，自己算。',
-            '走过不能撤回。死了就从第 1 层重来。',
-        }, { { label = '往下走', primary = true, fn = function() closeModal(); setMsg(run:floor().hint or '') end } })
+            '往下走，找出口。画面下方会一步步告诉你怎么走。',
+        }, { { label = '往下走', primary = true, fn = function() closeModal(); setMsg('') end } })
     else
-        setMsg(run:floor().hint or '')
+        setMsg('')
         continueFlow()
     end
 end
@@ -1012,7 +1012,7 @@ local function drawArmUI()
     local b = armView.BLOOD
     text('用血转 ' .. price.blood, b.x, b.y + 4, 7, { 1, 0.85, 0.88 }, 'center', b.w)
     text(armHint(), PANEL_X + 2, armView.Y + 222, 6.5, C.dim, 'left', PANEL_W)
-    text('按住轮子上下拨动看整圈', PANEL_X + 2, armView.Y + 258, 6, { 0.42, 0.48, 0.5 }, 'left', PANEL_W)
+    if not meta.dragged then text('按住轮子上下拨动看整圈', PANEL_X + 2, armView.Y + 258, 6, { 0.42, 0.48, 0.5 }, 'left', PANEL_W) end
     -- 连成一线：大字跳一下
     local kind, t = armView.flashInfo()
     if kind == 'win' and run.hero.weapon then
@@ -1075,8 +1075,22 @@ local function drawUI()
         drawArmUI()
         if hovered and not modal and not walking and run.cells[hovered].kind ~= 'wall' and run.cells[hovered].kind ~= 'floor' then drawTooltip(hovered) end
         -- 底部：消息和提示
-        text(msg ~= '' and msg or (run:floor().hint or ''), MAP_X, LH - 30, 7.5, msgErr and C.warn or (msg ~= '' and C.text or C.dim), 'left', PANEL_X - MAP_X - 8)
-        text('走过不能撤回 · 死了从第 1 层重来 · F2 老电视滤镜', MAP_X, LH - 12, 6, { 0.38, 0.44, 0.47 }, 'left', 400)
+        -- 底部：教程局是教学提示条；正式局只显示刚发生的事（不再有楼层提示和小字说明）
+        local tip, age = coach.current(run, clock)
+        if tip and not msgErr then
+            local x, y, w, hh = MAP_X, LH - 28, PANEL_X - MAP_X - 8, 25
+            local glow = math.max(0, 1 - age / 0.6)
+            rect({ 0.06, 0.12, 0.11 }, x, y, w, hh, 0.95, 4)
+            setColor({ 0.37 + 0.5 * glow, 0.82, 0.71 }, 0.6 + 0.4 * glow)
+            love.graphics.setLineWidth(1 + glow * 2)
+            love.graphics.rectangle('line', OX + x * S, OY + y * S, w * S, hh * S, 4 * S, 4 * S)
+            love.graphics.setLineWidth(1)
+            rect(C.accent, x + 5, y + 7, 20, 11, 1, 3)
+            text('教学', x + 5, y + 8, 6, { 0.04, 0.1, 0.09 }, 'center', 20)
+            text(tip, x + 30, y + 3, 7, C.text, 'left', w - 36)
+        elseif msg ~= '' then
+            text(msg, MAP_X, LH - 22, 7.5, msgErr and C.warn or C.text, 'left', PANEL_X - MAP_X - 8)
+        end
     end
 
     -- 弹窗
@@ -1128,7 +1142,12 @@ function love.mousepressed(mx, my, button)
         if inRect(lx, ly, b.x, b.y, b.w, b.h) then spinArm('blood'); return end
         for r = 1, armMod.REELS do
             local x, y, w, h = armView.reelRect(r)
-            if inRect(lx, ly, x, y, w, h) then armDrag = { reel = r, y0 = ly, off = 0 }; return end
+            if inRect(lx, ly, x, y, w, h) then
+                armDrag = { reel = r, y0 = ly, off = 0 }
+                -- 拨过一次就不再显示"按住轮子上下拨动"
+                if not meta.dragged then meta.dragged = true; saveMeta() end
+                return
+            end
             if inRect(lx, ly, armView.lockRect(r)) then toggleHold(r); return end
         end
     end
