@@ -14,6 +14,7 @@ import { Run } from '../src/core/game';
 import { DEMO_POOLS, F2_CONTRACT, buildFloor } from '../src/core/levels';
 import { solveChain, solveFromStart } from '../src/core/solver';
 import { decreeFor } from '../src/core/decree';
+import { ArmSym, EngraveSym, armOutcomeCounts, newArm } from '../src/core/arm';
 import { whisper } from '../src/core/whisper';
 import * as R from '../src/core/route';
 
@@ -146,15 +147,31 @@ const armScripts: ArmAct[][] = [
     [{ pay: 'gold' }, { pay: 'gold' }, { pay: 'gold', held: [true, false, false] }, { pay: 'blood' }, { pay: 'gold', held: [true, true, false] }, { pay: 'gold' }],
     [{ pay: 'blood' }, { pay: 'gold', held: [false, true, false] }, { pay: 'gold', held: [false, true, true] }, { pay: 'gold' }, { pay: 'gold' }, { pay: 'blood' }, { pay: 'gold' }],
 ];
-type Reels = (WeaponId | null)[][];
-const R5 = (...rs: (WeaponId | null)[][]): Reels => rs.map(r => [...r, ...Array(5 - r.length).fill(null)]);
+type Reels = ArmSym[][];
+const R5 = (...rs: ArmSym[][]): Reels => rs.map(r => [...r, ...Array(5 - r.length).fill(null)]);
 const reelsOut = (rs: Reels) => rs.map(r => r.map(x => x ?? 'blank'));
 const armSets: Reels[] = [
     R5(['boneKnife'], ['boneKnife'], ['boneKnife']),
     R5(['hammer', 'hammer'], ['hammer', null, 'hammer'], ['hammer']),
     R5(['harpoon', 'mossBlade', 'saltDagger', 'harpoon', 'harpoon'], ['harpoon', 'harpoon', 'mossBlade', 'harpoon', 'saltDagger'], ['harpoon', 'harpoon', 'harpoon', 'mossBlade', 'harpoon']),
     R5(['rustSword', null, 'rustSword'], [], ['rustSword']),
+    // 赖子
+    R5(['boneKnife', 'wild', null, 'hammer'], ['wild', 'boneKnife', 'hammer'], ['boneKnife', 'wild', 'hammer', null, 'wild']),
+    R5(['wild', 'wild', 'wild', 'wild', 'wild'], ['wild', 'harpoon', null], ['harpoon', 'wild']),
 ];
+// 各种结果的机会（界面显示用）：不锁、锁住各种组合
+const armOddsVec: unknown[] = [];
+for (const set of armSets) {
+    for (const stops of [[0, 0, 0], [1, 2, 3], [4, 1, 0]]) {
+        for (const held of [undefined, [true, false, false], [false, true, true], [true, false, true]]) {
+            const arm = newArm();
+            arm.reels = set.map(r => [...r]);
+            arm.stops = [...stops];
+            const { counts, total } = armOutcomeCounts(arm, held);
+            armOddsVec.push({ reels: reelsOut(set), stops, held, counts, total });
+        }
+    }
+}
 const armSessions: unknown[] = [];
 for (const seed of [1, 9, 4242, 2147483647]) {
     for (const set of armSets) {
@@ -164,6 +181,7 @@ for (const seed of [1, 9, 4242, 2147483647]) {
             run.hero = { hp: 500, atk: 13, def: 13, keys: 0, gold: 300 };
             const steps = script.map(a => {
                 const r = run.armSpin(a.pay, a.held);
+                void 0;
                 return { pay: a.pay, held: a.held, ok: r.ok, faces: r.faces ? r.faces.map(x => x ?? 'blank') : undefined, stops: [...run.arm!.stops], hero: heroOf(run.hero), spins: run.arm!.spins };
             });
             armSessions.push({ seed, reels: reelsOut(set), script: si, steps });
@@ -174,7 +192,7 @@ for (const seed of [1, 9, 4242, 2147483647]) {
 const engraveOps: unknown[] = [];
 {
     const run = new Run([tiny(['@.>'])], 'digger', 1);
-    const ws: WeaponId[] = ['boneKnife', 'hammer', 'harpoon', 'mossBlade', 'bellStaff', 'saltDagger', 'rustSword'];
+    const ws: EngraveSym[] = ['boneKnife', 'hammer', 'wild', 'mossBlade', 'bellStaff', 'saltDagger', 'wild'];
     const tries: [number, number?][] = [[0], [0], [1], [2], [0], [0], [0], [0], [0, 2], [1], [2, 4], [3], [1, 9]];
     tries.forEach(([reel, cell], k) => {
         const w = ws[k % ws.length];
@@ -186,7 +204,7 @@ const engraveOps: unknown[] = [];
 
 // ---------- 5. 刻图案：精英三选一、印记怪 ----------
 const engraves: unknown[] = [];
-for (const seed of [1, 5, 77, 31337]) {
+for (const seed of [1, 5, 77, 31337, 2, 3, 4, 6, 8, 13, 21, 34]) {
     for (const floors of [1, 4, 10]) {
         for (const current of [undefined, 'boneKnife', 'hammer'] as (WeaponId | undefined)[]) {
             const fs: FloorDef[] = [];
@@ -204,7 +222,7 @@ for (const seed of [1, 5, 77, 31337]) {
 
 // ---------- 6. 大转盘 ----------
 const wheels: unknown[] = [];
-for (const seed of [3, 11, 2024, 99991, 4000000000]) {
+for (const seed of [3, 11, 2024, 99991, 4000000000, 5, 6, 7]) {
     const run = new Run([tiny(['@.>', '.S.'])], 'digger', seed);
     run.move(0, 1);
     run.hero = { hp: 3000, atk: 13, def: 13, keys: 0, gold: 3000 };
@@ -222,10 +240,10 @@ for (const seed of [3, 11, 2024, 99991, 4000000000]) {
 // ---------- 7. 当铺、骨坛、补给摊 ----------
 const shops: unknown[] = [];
 {
-    const plan = [tiny(['@.>', 'N..'], { shop: ['hammer', 'harpoon'] }), tiny(['@.>', 'N..'], { shop: ['boneKnife', 'saltDagger'] }), tiny(['@.>', 'N..'], { shop: ['wellHook', 'harpoon'] })];
+    const plan = [tiny(['@.>', 'N..'], { shop: ['hammer', 'harpoon'] }), tiny(['@.>', 'N..'], { shop: ['boneKnife', 'saltDagger'] }), tiny(['@.>', 'N..'], { shop: ['wellHook', 'wild'] })];
     type Op = [string, ...number[]];
     // pawn 轮子,格子；buy 第几样,轮子,格子?；erase 轮子,格子；redeem 第几件,格子?
-    const ops: Op[] = [['key'], ['key'], ['pawn', 1, 0], ['buy', 0, 1], ['buy', 0, 1], ['buy', 1, 2], ['erase', 2, 0], ['next'], ['redeem', 0], ['pawn', 1, 0], ['next'], ['redeem', 0, 3], ['buy', 0, 0, 2], ['erase', 0, 2], ['pawn', 0, 4]];
+    const ops: Op[] = [['key'], ['key'], ['pawn', 1, 0], ['buy', 0, 1], ['buy', 0, 1], ['buy', 1, 2], ['erase', 2, 0], ['next'], ['redeem', 0], ['pawn', 1, 0], ['next'], ['redeem', 0, 3], ['buy', 0, 0, 2], ['buy', 1, 0], ['erase', 0, 2], ['pawn', 0, 0], ['pawn', 0, 4]];
     for (const [gold, keys] of [[300, 2], [60, 1], [0, 0]]) {
         const run = new Run(plan, 'digger', 1);
         run.hero.gold = gold; run.hero.keys = keys;
@@ -303,7 +321,7 @@ const decreeRuns: unknown[] = [];
 
 // ---------- 9. 路线和楼梯口的话 ----------
 const routes: unknown[] = [];
-for (const seed of [1, 2, 3, 42, 99, 12345, 2147483647, 4000000000]) {
+for (const seed of [1, 2, 3, 42, 99, 12345, 2147483647, 4000000000, 4, 5, 6, 7, 8, 9]) {
     routes.push({ seed, plan: R.buildRoute(seed).map(o => o.map(f => ({ ...floorParams(f), whisper: whisper(f) }))) });
 }
 const tutorials = [1, 7, 31337].map(seed => ({ seed, plan: R.buildTutorial(seed).map(o => o.map(floorParams)) }));
@@ -313,7 +331,7 @@ const tutorials = [1, 7, 31337].map(seed => ({ seed, plan: R.buildTutorial(seed)
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);

@@ -244,10 +244,11 @@ local function act(i)
 end
 
 -- ---------- 场景 ----------
-local W = function(id) return config.WEAPONS[id].name end
-local SHORTW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩' }
+local W = function(id) return id == armMod.WILD and armMod.WILD_NAME or config.WEAPONS[id].name end
+local SHORTW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', wild = '赖' }
 
 local function weaponLine(id)
+    if id == armMod.WILD then return '赖子：能顶替任何武器（不顶替空格），自己不能拿在手上；很难得到' end
     local b = run.arm and run.arm.boons[id]
     local extra = ''
     if b and #b > 0 then
@@ -323,7 +324,8 @@ function openEngrave()
     local p = run:pendingEngrave()
     if not p then return end
     local from = ({ elite = '精英倒下了，它身上压着几件东西的印子', mark = '这只怪身上的印记亮了起来', decree = '井神兑现了诏令', wheel = '大转盘吐出一个图案' })[p.from]
-    local lines = { from .. '。刻到断臂转轮的一个轮子上（刻上就先拿在手上）：' }
+    local onlyWild = #p.choices == 1 and p.choices[1] == armMod.WILD
+    local lines = { from .. '。刻到断臂转轮的一个轮子上' .. (onlyWild and '：' or '（刻上武器就先拿在手上）：') }
     for _, w in ipairs(p.choices) do lines[#lines + 1] = weaponLine(w) end
     for _, l in ipairs(armReelsText()) do lines[#lines + 1] = l end
     local buttons = {}
@@ -369,24 +371,11 @@ local function armHint()
     local arm = run.arm
     if armMod.empty(arm) then return '转轮还是空的。打败带「印」的怪或精英，就能往上刻武器。' end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
-    if anyHeld then
-        local target, p = armMod.holdOdds(arm, armHeld)
-        if target == nil then return '锁住的图案不一样，重转连不成一线。' end
-        return '锁住后重转，连成「' .. (target and W(target) or '空手') .. '」的机会 ' .. pct(p)
-    end
-    local seen, parts = {}, {}
-    for r = 1, armMod.REELS do
-        for k = 1, armMod.SIZE do
-            local w = arm.reels[r][k]
-            if w and not seen[w] then
-                seen[w] = true
-                local o = armMod.odds(arm, w)
-                if o > 0 then parts[#parts + 1] = W(w) .. ' ' .. pct(o) end
-            end
-        end
-    end
-    parts[#parts + 1] = '空手 ' .. pct(armMod.odds(arm, false))
-    return '中间一行连成：' .. table.concat(parts, '，')
+    local list = armMod.holdOdds(arm, anyHeld and armHeld or nil, config.WEAPON_ORDER)
+    local parts = {}
+    for _, o in ipairs(list) do parts[#parts + 1] = (o.target and W(o.target) or '空手') .. ' ' .. pct(o.p) end
+    if #parts == 0 then return anyHeld and '锁住的图案连不成一线，重转也没用。' or '中间一行现在连不成任何武器。' end
+    return (anyHeld and '锁住后重转：' or '中间一行连成：') .. table.concat(parts, '，')
 end
 
 function spinArm(pay)
@@ -526,7 +515,7 @@ function openPawn(i)
     local lines = { '当铺不收攻击和防御。你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.keys .. ' 把骨钥。' }
     for _, l in ipairs(armReelsText()) do lines[#lines + 1] = l end
     for j, p in ipairs(run.pawned) do lines[#lines + 1] = '当着的：' .. W(p.weapon) .. '（原来在轮子 ' .. p.reel .. '），赎回 ' .. run:redeemPrice(j) .. ' 金（每过一层涨 20%）' end
-    for k, w in ipairs(f.shop or {}) do lines[#lines + 1] = '卖：' .. weaponLine(w) .. '　' .. Run.PAWN.buyPrice .. ' 金' .. (run:sold(i, k) and '（已卖出）' or '') end
+    for k, w in ipairs(f.shop or {}) do lines[#lines + 1] = '卖：' .. weaponLine(w) .. '　' .. run:shopPrice(w) .. ' 金' .. (run:sold(i, k) and '（已卖出）' or '') end
     local function after(r)
         setMsg(r.msg, not r.ok)
         saveGame()
@@ -550,7 +539,7 @@ function openPawn(i)
     end
     for k, w in ipairs(f.shop or {}) do
         if not run:sold(i, k) then
-            buttons[#buttons + 1] = { label = '买' .. W(w) .. ' −' .. Run.PAWN.buyPrice, fn = function()
+            buttons[#buttons + 1] = { label = '买' .. W(w) .. ' −' .. run:shopPrice(w), fn = function()
                 chooseSlot('买' .. W(w), function(reel, cell) after(run:pawnBuy(i, k, reel, cell)) end)
             end }
         end
@@ -579,7 +568,7 @@ function openAltar(i, boon, weapon)
         local seen = {}
         for _, c in ipairs(armMod.engravedCells(run.arm)) do
             local w = run.arm.reels[c[1]][c[2]]
-            if not seen[w] then
+            if w ~= armMod.WILD and not seen[w] then
                 seen[w] = true
                 buttons[#buttons + 1] = { label = W(w), fn = function() openAltar(i, boon, w) end }
             end
@@ -834,7 +823,7 @@ function drawArmPanel()
             setColor(mid and (held[r] and { 0.32, 0.26, 0.10 } or { 0.20, 0.32, 0.28 }) or { 0.09, 0.12, 0.14 })
             love.graphics.rectangle('fill', OX + x * S, OY + cy * S, ARM.rw * S, (ARM.ch - 1) * S)
             local w = run.arm.reels[r][k]
-            text(w and SHORTW[w] or '·', x, cy + 2, mid and 8 or 7, w and (mid and C.text or C.dim) or C.dim, 'center', ARM.rw)
+            text(w and SHORTW[w] or '·', x, cy + 2, mid and 8 or 7, w == armMod.WILD and C.ok or (w and (mid and C.text or C.dim) or C.dim), 'center', ARM.rw)
         end
         local lx, ly, lw, lh = lockRect(r)
         setColor(held[r] and { 0.45, 0.35, 0.12 } or { 0.11, 0.16, 0.19 })
@@ -1051,6 +1040,7 @@ return {
         newGame(seed)
     end,
     spinArm = function(pay) spinArm(pay) end,
+    continue = function() continueFlow() end,
     toggleHold = function(k) toggleHold(k) end,
     dragReel = function(r, off) armDrag = off and { reel = r, y0 = 0, off = off } or nil end,
     getMeta = function() return meta end,

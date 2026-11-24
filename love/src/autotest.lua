@@ -139,6 +139,17 @@ function M.start()
             strong()
             handlePopups()
             if f == 1 then once('03-floor1') end
+            if f == 3 then
+                -- 测试用：塞一个赖子进来，看界面
+                run.engraveQueue[#run.engraveQueue + 1] = { from = 'wheel', choices = { 'wild' } }
+                game.continue()
+                sleep(0.1)
+                once('06a-engrave-wild')
+                handlePopups()
+                say('刻赖子后：' .. tostring(run.arm.reels[engraveTurn][1]) .. ' / 手上 ' .. tostring(run.hero.weapon))
+                sleep(0.2)
+                once('06b-wild-reel')
+            end
             -- 印记怪：先打它，拿第一把武器
             local mark = find(function(c, i) return run:marked(i) end)
             if mark then

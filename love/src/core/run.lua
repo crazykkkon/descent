@@ -12,11 +12,15 @@ local armMod = require('core.arm')
 local wheelMod = require('core.wheel')
 local decreeMod = require('core.decree')
 
+-- 图案的名字（武器名或"赖子"）
+local function symName(id) return id == armMod.WILD and armMod.WILD_NAME or config.WEAPONS[id].name end
+
 local Run = {}
 Run.__index = Run
 
 Run.PAWN = { keyPrice = 15, pawnGold = 40, redeemRate = 1.2, buyPrice = 60, erasePrice = 20 }
 Run.ALTAR_ATK_COST = 3
+Run.symName = function(id) return id == 'wild' and '赖子' or config.WEAPONS[id].name end
 Run.RENT_STAT_COST = 3
 
 local function copyCells(cells)
@@ -132,6 +136,8 @@ function Run:rollWeaponChoices(salt)
         local w = pool[x % #pool + 1]
         if not contains(out, w) then out[#out + 1] = w end
     end
+    -- 很小的机会第三个换成赖子
+    if #out == 3 and rng.draw(self.seed, 9100 + (self.floorIndex - 1) * 10 + salt, 0) < armMod.WILD_CHANCE then out[3] = armMod.WILD end
     return out
 end
 
@@ -151,6 +157,10 @@ function Run:engrave(id, reel, cell)
     local k = armMod.engraveCell(self.arm, reel, id, cell)
     if not k then return { ok = false, msg = '' } end
     table.remove(self.engraveQueue, 1)
+    if id == armMod.WILD then
+        self:checkHold()
+        return { ok = true, msg = '把赖子刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格' }
+    end
     self:hold(id)
     return { ok = true, msg = '把' .. config.WEAPONS[id].name .. '刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格，先拿在手上' }
 end
@@ -279,10 +289,12 @@ function Run:wheelSpin(i, pay)
     elseif s.prize == 'def' then h.def = h.def + s.amount
     elseif s.prize == 'engrave' then
         local all = config.WEAPON_ORDER
-        local w = all[rng.pick(self.seed, key + 500, n, #all) + 1]
+        local w
+        if rng.draw(self.seed, key + 700, n) < armMod.WILD_CHANCE then w = armMod.WILD
+        else w = all[rng.pick(self.seed, key + 500, n, #all) + 1] end
         if self.arm then
             self.engraveQueue[#self.engraveQueue + 1] = { from = 'wheel', choices = { w } }
-            msg = msg .. '：' .. config.WEAPONS[w].name
+            msg = msg .. '：' .. symName(w)
         end
     elseif s.prize == 'leech' then
         h.hp = h.hp - s.amount
@@ -298,7 +310,7 @@ function Run:wheelSpin(i, pay)
         else
             local c = cells[rng.pick(self.seed, key + 600, n, #cells) + 1]
             local r, k = c[1], c[2]
-            msg = msg .. '：第 ' .. r .. ' 个轮子第 ' .. k .. ' 格的' .. config.WEAPONS[self.arm.reels[r][k]].name .. '没了'
+            msg = msg .. '：第 ' .. r .. ' 个轮子第 ' .. k .. ' 格的' .. symName(self.arm.reels[r][k]) .. '没了'
             self.arm.reels[r][k] = false
             self:checkHold()
         end
@@ -326,7 +338,7 @@ function Run:pawnCell(i, reel, cell)
     self.pawned[#self.pawned + 1] = { weapon = w, reel = reel, floor = self.floorIndex }
     self.hero.gold = self.hero.gold + Run.PAWN.pawnGold
     self:checkHold()
-    return { ok = true, msg = '当掉了' .. config.WEAPONS[w].name .. '，得 ' .. Run.PAWN.pawnGold .. ' 金币' }
+    return { ok = true, msg = '当掉了' .. symName(w) .. '，得 ' .. Run.PAWN.pawnGold .. ' 金币' }
 end
 
 -- 赎回当掉的第 j 件现在要多少钱（每过一层涨 20%）
@@ -347,8 +359,8 @@ function Run:pawnRedeem(i, j, cell)
     if unpaid then return unpaid end
     armMod.engraveCell(self.arm, p.reel, p.weapon, cell)
     table.remove(self.pawned, j)
-    self:hold(p.weapon)
-    return { ok = true, msg = '赎回了' .. config.WEAPONS[p.weapon].name }
+    if p.weapon ~= armMod.WILD then self:hold(p.weapon) end
+    return { ok = true, msg = '赎回了' .. symName(p.weapon) }
 end
 
 -- 当铺：买第 k 个武器图案刻到第 reel 个轮子上（k 从 1 开始）
@@ -360,12 +372,18 @@ function Run:pawnBuy(i, k, reel, cell)
     if self:sold(i, k) then return { ok = false, msg = '这样已经买过了' } end
     local full = self:fullReel(reel, cell)
     if full then return full end
-    local unpaid = self:pay(Run.PAWN.buyPrice)
+    local price = self:shopPrice(w)
+    local unpaid = self:pay(price)
     if unpaid then return unpaid end
     armMod.engraveCell(self.arm, reel, w, cell)
     self:markSold(i, k)
-    self:hold(w)
-    return { ok = true, msg = '花 ' .. Run.PAWN.buyPrice .. ' 金币刻上了' .. config.WEAPONS[w].name }
+    if w ~= armMod.WILD then self:hold(w) end
+    return { ok = true, msg = '花 ' .. price .. ' 金币刻上了' .. symName(w) }
+end
+
+-- 当铺里一件图案的价格（赖子贵得多）
+function Run:shopPrice(w)
+    return w == armMod.WILD and armMod.WILD_PRICE or Run.PAWN.buyPrice
 end
 
 function Run:pawnErase(i, reel, cell)
@@ -377,7 +395,7 @@ function Run:pawnErase(i, reel, cell)
     if unpaid then return unpaid end
     self.arm.reels[reel][cell] = false
     self:checkHold()
-    return { ok = true, msg = '擦掉了第 ' .. reel .. ' 个轮子第 ' .. cell .. ' 格的' .. config.WEAPONS[w].name }
+    return { ok = true, msg = '擦掉了第 ' .. reel .. ' 个轮子第 ' .. cell .. ' 格的' .. symName(w) }
 end
 
 -- 骨坛：献 3 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座用一次）

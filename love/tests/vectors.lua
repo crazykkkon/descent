@@ -39677,7 +39677,7 @@ return {
         bigPotion = 150,
         gold = 25,
         kind = "pawn",
-        shop = { "rustSword", "hammer" },
+        shop = { "rustSword", "wild" },
         hint = "有人在这里收东西，也卖东西。"
       },
       entry = {
@@ -61578,7 +61578,7 @@ return {
         gold = 30,
         rent = 250,
         kind = "pawn",
-        shop = { "rustSword", "saltDagger" },
+        shop = { "rustSword", "wild" },
         hint = "有人在这里收东西，也卖东西。"
       },
       entry = {
@@ -65012,6 +65012,425 @@ return {
       }
     },
     {
+      seed = 1,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "wild", "blank" },
+          stops = { 4, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "blank", "wild", "blank" },
+          stops = { 4, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "hammer", "boneKnife", "hammer" },
+          stops = { 3, 1, 2 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "hammer", "boneKnife", "wild" },
+          stops = { 3, 1, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "wild" },
+          stops = { 1, 0, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 1,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "hammer", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "blank", "hammer", "boneKnife" },
+          stops = { 4, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "hammer", "hammer", "boneKnife" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 3, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "hammer", "wild" },
+          stops = { 1, 2, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "hammer"
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "wild", "wild" },
+          stops = { 1, 0, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "hammer"
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "boneKnife", "hammer", "wild" },
+          stops = { 0, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75,
+            weapon = "hammer"
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 1,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 4, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 4, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "harpoon", "blank" },
+          stops = { 3, 1, 2 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "wild", "harpoon", "blank" },
+          stops = { 3, 1, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 1, 0, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 1,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "wild", "blank", "harpoon" },
+          stops = { 4, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "wild", "blank", "harpoon" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 0, 3, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 1, 2, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 1, 0, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 0, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
       seed = 9,
       reels = {
         { "boneKnife", "blank", "blank", "blank", "blank" },
@@ -65855,6 +66274,430 @@ return {
       }
     },
     {
+      seed = 9,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "wild", "wild" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "boneKnife", "wild" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "blank", "boneKnife", "boneKnife" },
+          stops = { 4, 1, 0 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "hammer", "blank", "wild" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "hammer", "blank", "wild" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "wild" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "wild", "wild" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "blank", "wild", "wild" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "wild", "wild", "wild" },
+          stops = { 1, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 1, 0, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "boneKnife", "wild" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "hammer", "wild" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "wild", "wild" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "harpoon", "wild" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275,
+            weapon = "harpoon"
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "wild", "harpoon", "harpoon" },
+          stops = { 4, 1, 0 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260,
+            weapon = "harpoon"
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260,
+            weapon = "harpoon"
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235,
+            weapon = "harpoon"
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160,
+            weapon = "harpoon"
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "wild", "wild", "wild" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "wild", "wild", "wild" },
+          stops = { 1, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 1, 0, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "harpoon", "wild" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "harpoon"
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "harpoon"
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "wild", "wild" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75,
+            weapon = "harpoon"
+          },
+          spins = 7
+        }
+      }
+    },
+    {
       seed = 4242,
       reels = {
         { "boneKnife", "blank", "blank", "blank", "blank" },
@@ -66683,6 +67526,428 @@ return {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 4242,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "hammer", "boneKnife" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "boneKnife", "wild" },
+          stops = { 3, 1, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "hammer", "wild", "blank" },
+          stops = { 3, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "boneKnife", "hammer", "wild" },
+          stops = { 0, 2, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "boneKnife", "hammer", "wild" },
+          stops = { 0, 2, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "hammer" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 4242,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "hammer", "hammer", "boneKnife" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "hammer", "hammer", "wild" },
+          stops = { 3, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290,
+            weapon = "hammer"
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "blank", "hammer", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275,
+            weapon = "hammer"
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "boneKnife", "blank", "boneKnife" },
+          stops = { 0, 3, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240,
+            weapon = "hammer"
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "wild" },
+          stops = { 2, 4, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "hammer"
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "hammer", "hammer" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "hammer"
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "blank", "hammer" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75,
+            weapon = "hammer"
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 4242,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "harpoon" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "harpoon", "blank" },
+          stops = { 3, 1, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "wild", "wild", "blank" },
+          stops = { 3, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 0, 2, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 0, 2, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 4242,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "harpoon" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 3, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "harpoon" },
+          stops = { 0, 3, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 2, 4, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
           stops = { 3, 3, 2 },
           hero = {
             hp = 372,
@@ -67539,6 +68804,1418 @@ return {
           spins = 7
         }
       }
+    },
+    {
+      seed = 2147483647,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "blank", "hammer" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "boneKnife", "hammer" },
+          stops = { 1, 1, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "wild", "blank", "hammer" },
+          stops = { 1, 4, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "boneKnife", "blank" },
+          stops = { 1, 1, 3 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "wild", "boneKnife", "wild" },
+          stops = { 1, 1, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235,
+            weapon = "boneKnife"
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "boneKnife", "boneKnife", "wild" },
+          stops = { 0, 1, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160,
+            weapon = "boneKnife"
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 2147483647,
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "hammer", "blank", "hammer" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 1, 3, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "blank", "blank", "wild" },
+          stops = { 2, 3, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 1, 3, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "boneKnife", "boneKnife", "wild" },
+          stops = { 0, 1, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "boneKnife"
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "hammer" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75,
+            weapon = "boneKnife"
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 2147483647,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "harpoon", "blank" },
+          stops = { 1, 1, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 1, 4, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "harpoon", "blank" },
+          stops = { 1, 1, 3 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "wild", "harpoon", "blank" },
+          stops = { 1, 1, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "harpoon", "wild" },
+          stops = { 0, 1, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160,
+            weapon = "harpoon"
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 2147483647,
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 1, 3, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 2, 3, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "wild" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 1, 3, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "wild", "harpoon", "wild" },
+          stops = { 0, 1, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "harpoon"
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "wild", "blank", "blank" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75,
+            weapon = "harpoon"
+          },
+          spins = 7
+        }
+      }
+    }
+  },
+  armOddsVec = {
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      counts = {
+        boneKnife = 1,
+        none = 60,
+        empty = 64
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, false },
+      counts = {
+        boneKnife = 1,
+        none = 24
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { false, true, true },
+      counts = {
+        boneKnife = 1,
+        none = 4
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, true },
+      counts = {
+        boneKnife = 1,
+        none = 4
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      counts = {
+        boneKnife = 1,
+        none = 60,
+        empty = 64
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, false },
+      counts = {
+        none = 9,
+        empty = 16
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { false, true, true },
+      counts = {
+        none = 1,
+        empty = 4
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, true },
+      counts = {
+        none = 1,
+        empty = 4
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      counts = {
+        boneKnife = 1,
+        none = 60,
+        empty = 64
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, false },
+      counts = {
+        none = 9,
+        empty = 16
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      counts = {
+        hammer = 4,
+        none = 85,
+        empty = 36
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, false },
+      counts = {
+        hammer = 2,
+        none = 23
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { false, true, true },
+      counts = {
+        hammer = 2,
+        none = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, true },
+      counts = {
+        hammer = 2,
+        none = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      counts = {
+        hammer = 4,
+        none = 85,
+        empty = 36
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, false },
+      counts = {
+        hammer = 2,
+        none = 23
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      counts = {
+        hammer = 4,
+        none = 85,
+        empty = 36
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, false },
+      counts = {
+        none = 13,
+        empty = 12
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 0, 0, 0 },
+      counts = {
+        harpoon = 36,
+        none = 88,
+        mossBlade = 1
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, false },
+      counts = {
+        harpoon = 12,
+        none = 13
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 0, 0, 0 },
+      held = { false, true, true },
+      counts = {
+        harpoon = 3,
+        none = 2
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, true },
+      counts = {
+        harpoon = 3,
+        none = 2
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 1, 2, 3 },
+      counts = {
+        harpoon = 36,
+        none = 88,
+        mossBlade = 1
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, false },
+      counts = {
+        none = 24,
+        mossBlade = 1
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 1, 2, 3 },
+      held = { false, true, true },
+      counts = {
+        none = 4,
+        mossBlade = 1
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, true },
+      counts = {
+        none = 4,
+        mossBlade = 1
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 4, 1, 0 },
+      counts = {
+        harpoon = 36,
+        none = 88,
+        mossBlade = 1
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, false },
+      counts = {
+        harpoon = 12,
+        none = 13
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 4, 1, 0 },
+      held = { false, true, true },
+      counts = {
+        harpoon = 3,
+        none = 2
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, true },
+      counts = {
+        harpoon = 3,
+        none = 2
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      counts = {
+        none = 65,
+        empty = 60
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, false },
+      counts = {
+        none = 25
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      counts = {
+        none = 65,
+        empty = 60
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, false },
+      counts = {
+        none = 5,
+        empty = 20
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { false, true, true },
+      counts = {
+        none = 2,
+        empty = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, true },
+      counts = {
+        empty = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      counts = {
+        none = 65,
+        empty = 60
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, false },
+      counts = {
+        none = 5,
+        empty = 20
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 0, 0, 0 },
+      counts = {
+        boneKnife = 10,
+        none = 101,
+        hammer = 10,
+        empty = 4
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, false },
+      counts = {
+        boneKnife = 6,
+        none = 19
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 0, 0, 0 },
+      held = { false, true, true },
+      counts = {
+        boneKnife = 2,
+        none = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, true },
+      counts = {
+        boneKnife = 2,
+        none = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 1, 2, 3 },
+      counts = {
+        boneKnife = 10,
+        none = 101,
+        hammer = 10,
+        empty = 4
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, false },
+      counts = {
+        boneKnife = 4,
+        none = 17,
+        hammer = 4
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 1, 2, 3 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 4, 1, 0 },
+      counts = {
+        boneKnife = 10,
+        none = 101,
+        hammer = 10,
+        empty = 4
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, false },
+      counts = {
+        none = 23,
+        empty = 2
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 4, 1, 0 },
+      held = { false, true, true },
+      counts = {
+        boneKnife = 2,
+        none = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "boneKnife", "wild", "blank", "hammer", "blank" },
+        { "wild", "boneKnife", "hammer", "blank", "blank" },
+        { "boneKnife", "wild", "hammer", "blank", "wild" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      counts = {
+        harpoon = 15,
+        none = 110
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, false },
+      counts = {
+        harpoon = 3,
+        none = 22
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { false, true, true },
+      counts = {
+        harpoon = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      held = { true, false, true },
+      counts = {
+        harpoon = 2,
+        none = 3
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      counts = {
+        harpoon = 15,
+        none = 110
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, false },
+      counts = {
+        harpoon = 3,
+        none = 22
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { false, true, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 1, 2, 3 },
+      held = { true, false, true },
+      counts = {
+        none = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      counts = {
+        harpoon = 15,
+        none = 110
+      },
+      total = 125
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, false },
+      counts = {
+        harpoon = 3,
+        none = 22
+      },
+      total = 25
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { false, true, true },
+      counts = {
+        harpoon = 5
+      },
+      total = 5
+    },
+    {
+      reels = {
+        { "wild", "wild", "wild", "wild", "wild" },
+        { "wild", "harpoon", "blank", "blank", "blank" },
+        { "harpoon", "wild", "blank", "blank", "blank" }
+      },
+      stops = { 4, 1, 0 },
+      held = { true, false, true },
+      counts = {
+        harpoon = 2,
+        none = 3
+      },
+      total = 5
     }
   },
   engraveOps = {
@@ -67583,13 +70260,13 @@ return {
       }
     },
     {
-      weapon = "harpoon",
+      weapon = "wild",
       reel = 1,
       ok = true,
-      msg = "把鱼叉刻在第 2 个轮子的第 1 格，先拿在手上",
+      msg = "把赖子刻在第 2 个轮子的第 1 格",
       reels = {
         { "boneKnife", "hammer", "blank", "blank", "blank" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "blank", "blank", "blank", "blank", "blank" }
       },
       stops = { 1, 0, 0 },
@@ -67599,7 +70276,7 @@ return {
         def = 10,
         keys = 0,
         gold = 0,
-        weapon = "harpoon"
+        weapon = "hammer"
       }
     },
     {
@@ -67609,7 +70286,7 @@ return {
       msg = "把苔衣短剑刻在第 3 个轮子的第 1 格，先拿在手上",
       reels = {
         { "boneKnife", "hammer", "blank", "blank", "blank" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 1, 0, 0 },
@@ -67629,7 +70306,7 @@ return {
       msg = "把回声铃杖刻在第 1 个轮子的第 3 格，先拿在手上",
       reels = {
         { "boneKnife", "hammer", "bellStaff", "blank", "blank" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 2, 0, 0 },
@@ -67649,7 +70326,7 @@ return {
       msg = "把盐晶匕首刻在第 1 个轮子的第 4 格，先拿在手上",
       reels = {
         { "boneKnife", "hammer", "bellStaff", "saltDagger", "blank" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 3, 0, 0 },
@@ -67663,13 +70340,13 @@ return {
       }
     },
     {
-      weapon = "rustSword",
+      weapon = "wild",
       reel = 0,
       ok = true,
-      msg = "把锈蚀大剑刻在第 1 个轮子的第 5 格，先拿在手上",
+      msg = "把赖子刻在第 1 个轮子的第 5 格",
       reels = {
-        { "boneKnife", "hammer", "bellStaff", "saltDagger", "rustSword" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "bellStaff", "saltDagger", "wild" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 4, 0, 0 },
@@ -67679,7 +70356,7 @@ return {
         def = 10,
         keys = 0,
         gold = 0,
-        weapon = "rustSword"
+        weapon = "saltDagger"
       }
     },
     {
@@ -67688,8 +70365,8 @@ return {
       ok = false,
       msg = "第 1 个轮子刻满了，选一格覆盖",
       reels = {
-        { "boneKnife", "hammer", "bellStaff", "saltDagger", "rustSword" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "bellStaff", "saltDagger", "wild" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 4, 0, 0 },
@@ -67699,7 +70376,7 @@ return {
         def = 10,
         keys = 0,
         gold = 0,
-        weapon = "rustSword"
+        weapon = "saltDagger"
       }
     },
     {
@@ -67709,8 +70386,8 @@ return {
       ok = true,
       msg = "把破壳锤刻在第 1 个轮子的第 3 格，先拿在手上",
       reels = {
-        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
-        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "hammer", "saltDagger", "wild" },
+        { "wild", "blank", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 2, 0, 0 },
@@ -67724,13 +70401,13 @@ return {
       }
     },
     {
-      weapon = "harpoon",
+      weapon = "wild",
       reel = 1,
       ok = true,
-      msg = "把鱼叉刻在第 2 个轮子的第 2 格，先拿在手上",
+      msg = "把赖子刻在第 2 个轮子的第 2 格",
       reels = {
-        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
-        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "hammer", "saltDagger", "wild" },
+        { "wild", "wild", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "blank" }
       },
       stops = { 2, 1, 0 },
@@ -67740,7 +70417,7 @@ return {
         def = 10,
         keys = 0,
         gold = 0,
-        weapon = "harpoon"
+        weapon = "hammer"
       }
     },
     {
@@ -67750,8 +70427,8 @@ return {
       ok = true,
       msg = "把苔衣短剑刻在第 3 个轮子的第 5 格，先拿在手上",
       reels = {
-        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
-        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "hammer", "saltDagger", "wild" },
+        { "wild", "wild", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "mossBlade" }
       },
       stops = { 2, 1, 4 },
@@ -67770,8 +70447,8 @@ return {
       ok = false,
       msg = "",
       reels = {
-        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
-        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "hammer", "saltDagger", "wild" },
+        { "wild", "wild", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "mossBlade" }
       },
       stops = { 2, 1, 4 },
@@ -67791,8 +70468,8 @@ return {
       ok = false,
       msg = "",
       reels = {
-        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
-        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "boneKnife", "hammer", "hammer", "saltDagger", "wild" },
+        { "wild", "wild", "blank", "blank", "blank" },
         { "mossBlade", "blank", "blank", "blank", "mossBlade" }
       },
       stops = { 2, 1, 4 },
@@ -68209,7 +70886,7 @@ return {
       queue = {
         {
           from = "elite",
-          choices = { "boneKnife", "mossBlade", "hammer" }
+          choices = { "boneKnife", "mossBlade", "wild" }
         },
         {
           from = "mark",
@@ -68224,7 +70901,7 @@ return {
       queue = {
         {
           from = "elite",
-          choices = { "hammer", "harpoon", "wellHook" }
+          choices = { "hammer", "harpoon", "wild" }
         },
         {
           from = "mark",
@@ -68239,7 +70916,7 @@ return {
       queue = {
         {
           from = "elite",
-          choices = { "harpoon", "boneKnife", "wellHook" }
+          choices = { "harpoon", "boneKnife", "wild" }
         },
         {
           from = "mark",
@@ -68297,7 +70974,7 @@ return {
       queue = {
         {
           from = "elite",
-          choices = { "harpoon", "boneKnife", "mossBlade" }
+          choices = { "harpoon", "boneKnife", "wild" }
         },
         {
           from = "mark",
@@ -68312,7 +70989,7 @@ return {
       queue = {
         {
           from = "elite",
-          choices = { "rustSword", "bellStaff", "saltDagger" }
+          choices = { "rustSword", "bellStaff", "wild" }
         },
         {
           from = "mark",
@@ -68327,7 +71004,1063 @@ return {
       queue = {
         {
           from = "elite",
-          choices = { "rustSword", "bellStaff", "saltDagger" }
+          choices = { "rustSword", "bellStaff", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "boneKnife", "harpoon" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "harpoon", "saltDagger", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "boneKnife", "saltDagger", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "hammer" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "harpoon", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "boneKnife", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "hammer", "mossBlade", "boneKnife" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "rustSword", "wellHook" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 2,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "rustSword", "wellHook" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "hammer", "harpoon", "boneKnife" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "hammer", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "harpoon", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "bellStaff", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "harpoon", "wellHook", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "boneKnife", "wellHook", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "hammer", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "saltDagger", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 3,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "saltDagger", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "rustSword", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "harpoon", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "boneKnife", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "hammer", "mossBlade", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "harpoon", "hammer", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "boneKnife", "harpoon", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 4,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "bellStaff", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "rustSword", "hammer", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "rustSword", "harpoon", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "boneKnife", "harpoon", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "hammer", "mossBlade", "harpoon" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "harpoon", "mossBlade", "boneKnife" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "rustSword", "wellHook", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "bellStaff", "wellHook" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 6,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "bellStaff", "wellHook" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "harpoon", "hammer", "mossBlade" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "hammer", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "harpoon", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "rustSword", "wellHook", "boneKnife" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "harpoon", "hammer" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "boneKnife", "harpoon" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "boneKnife", "harpoon", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "hammer", "harpoon", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 8,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "harpoon", "boneKnife", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "wellHook", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "harpoon", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "boneKnife", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "hammer", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "hammer", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "harpoon", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "bellStaff", "wellHook" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 13,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "wellHook", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "rustSword", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "rustSword", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "hammer", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "mossBlade", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "mossBlade", "saltDagger" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "bellStaff", "wellHook" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "hammer", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 21,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "wellHook", "harpoon", "bellStaff" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 1,
+      queue = {
+        {
+          from = "elite",
+          choices = { "mossBlade", "boneKnife", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 1,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "harpoon", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 1,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "boneKnife", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 4,
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 4,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 4,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "bellStaff", "saltDagger", "wild" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 10,
+      queue = {
+        {
+          from = "elite",
+          choices = { "hammer", "mossBlade", "boneKnife" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 10,
+      current = "boneKnife",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "hammer", "rustSword" }
+        },
+        {
+          from = "mark",
+          choices = { "harpoon" }
+        }
+      }
+    },
+    {
+      seed = 34,
+      floorIndex = 10,
+      current = "hammer",
+      queue = {
+        {
+          from = "elite",
+          choices = { "saltDagger", "harpoon", "rustSword" }
         },
         {
           from = "mark",
@@ -70571,6 +74304,1347 @@ return {
           status = "playing"
         }
       }
+    },
+    {
+      seed = 5,
+      steps = {
+        {
+          ok = true,
+          sector = 5,
+          hero = {
+            hp = 3000,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2970,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 4,
+          hero = {
+            hp = 3000,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2955,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 2895,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2955,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "saltDagger" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 2,
+          hero = {
+            hp = 2895,
+            atk = 15,
+            def = 15,
+            keys = 0,
+            gold = 2855,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 4,
+          hero = {
+            hp = 2895,
+            atk = 15,
+            def = 15,
+            keys = 0,
+            gold = 2735,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 0,
+          hero = {
+            hp = 2550,
+            atk = 15,
+            def = 15,
+            keys = 0,
+            gold = 2765,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 4,
+          hero = {
+            hp = 2550,
+            atk = 15,
+            def = 15,
+            keys = 0,
+            gold = 2455,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 1,
+          hero = {
+            hp = 2610,
+            atk = 15,
+            def = 15,
+            keys = 0,
+            gold = 1940,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 5,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 1940,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 4,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1455,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 815,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 6,
+      steps = {
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 3000,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 2970,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "wild" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 2,
+          hero = {
+            hp = 3000,
+            atk = 15,
+            def = 13,
+            keys = 0,
+            gold = 2925,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 0,
+          hero = {
+            hp = 2895,
+            atk = 15,
+            def = 13,
+            keys = 0,
+            gold = 2955,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 5,
+          hero = {
+            hp = 2895,
+            atk = 15,
+            def = 15,
+            keys = 0,
+            gold = 2855,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 5,
+          hero = {
+            hp = 2895,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 2705,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 1,
+          hero = {
+            hp = 2610,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 2705,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 2610,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 2365,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "wellHook" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 2610,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 1850,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "wellHook" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 6,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 17,
+            keys = 0,
+            gold = 1850,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 5,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1415,
+            atk = 15,
+            def = 19,
+            keys = 0,
+            gold = 695,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        }
+      }
+    },
+    {
+      seed = 7,
+      steps = {
+        {
+          ok = true,
+          sector = 6,
+          hero = {
+            hp = 2960,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 2970,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 1,
+          hero = {
+            hp = 3020,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 2925,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 0,
+          hero = {
+            hp = 2915,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 2955,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 5,
+          hero = {
+            hp = 2915,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2855,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 2915,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2705,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "bellStaff" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 2570,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2705,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "wild" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 1,
+          hero = {
+            hp = 2630,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 2365,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 3,
+          hero = {
+            hp = 2630,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 1850,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = { "saltDagger" },
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 4,
+          hero = {
+            hp = 1475,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 1880,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = true,
+          sector = 1,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 1535,
+            atk = 13,
+            def = 15,
+            keys = 0,
+            gold = 725,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
+          queue = {},
+          status = "playing"
+        }
+      }
     }
   },
   shops = {
@@ -70606,7 +75680,7 @@ return {
           smallPotion = 50,
           bigPotion = 150,
           gold = 20,
-          shop = { "wellHook", "harpoon" }
+          shop = { "wellHook", "wild" }
         }
       },
       steps = {
@@ -70946,20 +76020,48 @@ return {
           }
         },
         {
-          op = "erase",
-          a = 0,
-          b = 2,
+          op = "buy",
+          a = 1,
+          b = 0,
           ok = true,
-          msg = "擦掉了第 1 个轮子第 3 格的井神的钩",
+          msg = "花 150 金币刻上了赖子",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 132
+            gold = 2,
+            weapon = "wellHook"
           },
           reels = {
-            { "blank", "blank", "blank", "blank", "blank" },
+            { "wild", "blank", "wellHook", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "erase",
+          a = 0,
+          b = 2,
+          ok = false,
+          msg = "金币不够（要 20）",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 2,
+            weapon = "wellHook"
+          },
+          reels = {
+            { "wild", "blank", "wellHook", "blank", "blank" },
             { "blank", "hammer", "hammer", "boneKnife", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
@@ -70974,18 +76076,19 @@ return {
         {
           op = "pawn",
           a = 0,
-          b = 4,
-          ok = false,
-          msg = "这一格是空的",
+          b = 0,
+          ok = true,
+          msg = "当掉了赖子，得 40 金币",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 132
+            gold = 42,
+            weapon = "wellHook"
           },
           reels = {
-            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "blank", "wellHook", "blank", "blank" },
             { "blank", "hammer", "hammer", "boneKnife", "hammer" },
             { "blank", "blank", "blank", "blank", "blank" }
           },
@@ -70994,6 +76097,43 @@ return {
               weapon = "hammer",
               reel = 1,
               floor = 1
+            },
+            {
+              weapon = "wild",
+              reel = 0,
+              floor = 2
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 0,
+          b = 4,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 42,
+            weapon = "wellHook"
+          },
+          reels = {
+            { "blank", "blank", "wellHook", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            },
+            {
+              weapon = "wild",
+              reel = 0,
+              floor = 2
             }
           }
         }
@@ -71031,7 +76171,7 @@ return {
           smallPotion = 50,
           bigPotion = 150,
           gold = 20,
-          shop = { "wellHook", "harpoon" }
+          shop = { "wellHook", "wild" }
         }
       },
       steps = {
@@ -71376,9 +76516,63 @@ return {
           }
         },
         {
+          op = "buy",
+          a = 1,
+          b = 0,
+          ok = false,
+          msg = "金币不够（要 150）",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 37,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
           op = "erase",
           a = 0,
           b = 2,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 37,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 0,
+          b = 0,
           ok = false,
           msg = "这一格是空的",
           hero = {
@@ -71463,7 +76657,7 @@ return {
           smallPotion = 50,
           bigPotion = 150,
           gold = 20,
-          shop = { "wellHook", "harpoon" }
+          shop = { "wellHook", "wild" }
         }
       },
       steps = {
@@ -71788,9 +76982,61 @@ return {
           }
         },
         {
+          op = "buy",
+          a = 1,
+          b = 0,
+          ok = false,
+          msg = "金币不够（要 150）",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 40
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
+        },
+        {
           op = "erase",
           a = 0,
           b = 2,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 40
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 0,
+          b = 0,
           ok = false,
           msg = "这一格是空的",
           hero = {
@@ -73571,7 +78817,7 @@ return {
             bigPotion = 150,
             gold = 25,
             kind = "pawn",
-            shop = { "rustSword", "hammer" },
+            shop = { "rustSword", "wild" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
           },
@@ -74021,7 +79267,7 @@ return {
             gold = 30,
             rent = 250,
             kind = "pawn",
-            shop = { "rustSword", "saltDagger" },
+            shop = { "rustSword", "wild" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
           }
@@ -76139,7 +81385,7 @@ return {
             bigPotion = 120,
             gold = 30,
             kind = "pawn",
-            shop = { "harpoon", "rustSword" },
+            shop = { "harpoon", "wild" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
           }
@@ -76678,7 +81924,7 @@ return {
             bigPotion = 120,
             gold = 30,
             kind = "pawn",
-            shop = { "hammer", "boneKnife" },
+            shop = { "hammer", "wild" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
           }
@@ -76994,7 +82240,7 @@ return {
             bigPotion = 150,
             gold = 25,
             kind = "pawn",
-            shop = { "bellStaff", "rustSword" },
+            shop = { "bellStaff", "wild" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
           }
@@ -77512,7 +82758,7 @@ return {
             bigPotion = 150,
             gold = 25,
             kind = "pawn",
-            shop = { "wellHook", "harpoon" },
+            shop = { "wellHook", "wild" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
           }
@@ -77983,6 +83229,3450 @@ return {
             shop = { "bellStaff", "mossBlade" },
             hint = "有人在这里收东西，也卖东西。",
             whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
+            whisper = "下面有什么东西在动。"
+          }
+        }
+      }
+    },
+    {
+      seed = 4,
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "#r#h..#b#", "#m###e#e#", "#.#...#.#", "@.....e.>", "#.#.#.###", "#e#D#m..#", "#k#h#..h#" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 33 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 近路1",
+            map = { ".m.D......h", ".#k#######.", ".#########.", "@...e...f.>", "##e####m###", "##r##..bh##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 37 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 3 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 环道1",
+            map = { "@...D...g..", ".###.#.###.", ".#k..h..h#.", ".#.###.##..", ".#..r..f#.>", ".##.###.#b.", "..v.c...B.b" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 70 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 5 层 · 侧室1",
+            map = { "#k#.f.#e#.b", "#c#.#.#r#.#", "#.#.#.#.#.#", "@....f...B>", "#.#.#.#.#.#", "#f#.v.#h#b#", "#h#.#.#.#.#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 4 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 6 层 · 侧室2",
+            map = { "#h#.v.#b#.v", "#x#.#.#b#.#", "#.#.#.#.#.#", "@....B...e>", "#.#.#.#.#.#", "#v#...#e#k#", "#r#.#.#h#.#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 7 层 · 近路2",
+            map = { ".e.D.....hB", ".#k#######.", ".#########.", "@...v...x.>", "##c####e###", "##r##..hb##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 46 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 环道2",
+            map = { "@...f...x..", ".###.#.###.", ".#b..h..h#.", ".#.###.##..", ".#..r..c#.>", ".##.###.#k.", "..f.D...B.b" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 8 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 8 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 骨龛",
+            map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "normal",
+            marks = { 40 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "pawn",
+            shop = { "bellStaff", "wellHook" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 11 层 · 双井道",
+            map = { "@.w..#..x.h", ".#w#.#.###.", ".#r#...g...", ".#.#####.#.", ".v...k...#.", ".#####D###.", "h....u....>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "两条井道，一条要钥匙。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 三道2",
+            map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 12 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 13 层 · 锈栅",
+            map = { "@..k.#.p.$.", ".###.#.u##.", ".#$.D......", ".#.#####.#.", ".w.w...g.#.", ".#####.###.", ".....h...x>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 14 层 · 蓄水窖",
+            map = { "@.H.u.h...>", ".####.####.", ".x..g..w.w.", ".#########.", ".b..m..$...", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 26 },
+            hint = "近路上全是血瓶。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 绳桥",
+            map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 2 },
+            hint = "短短一段，桥那头有光。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 15 层 · 回声库",
+            map = { "@..g..$.$..", ".#########.", ".k.D..x..h.", ".#########.", "..u..b..w.w", "##########.", "##########>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "守卫身后是金币。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "rustSword", "hammer" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 16 层 · 裂石廊",
+            map = { "@...r...w.>", ".#########.", "...h...u...", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "头顶的石头在掉渣。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 17 层 · 抵押厅",
+            map = { "@..x...u..$", ".#####.###.", ".h..p.g...$", ".#.#####.#.", ".w...r...#.", ".#.#####.#.", ".....$...u>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "normal",
+            marks = { 28 },
+            hint = "每一格都有人押过东西。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "bellStaff", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 18 层 · 收租口",
+            map = { "@..f..$..g.", ".#####.###.", ".B.......#.", ".#.#####.#.", ".#..$..c.#.", ".#######.#.", "...w.w...$>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
+            whisper = "下面有什么东西在动。"
+          }
+        }
+      }
+    },
+    {
+      seed = 5,
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "..m.r#...", ".#####.#.", "@...e...>", ".###.###.", ".#b.m#h..", ".#####.#.", "....m...." },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 22 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 岔路2",
+            map = { "@..e.#D..b.", ".###.#.###.", ".#m.e....#>", ".#.###k#.#.", "...#r..#...", "##f#.###.#.", "h..e.....rv" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 3 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 4 层 · 环道1",
+            map = { "@...f...D..", ".###.#.###.", ".#h..e..r#.", ".#.###.##..", ".#..r..m#.>", ".##.###.#b.", "..m.e...f.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 三道2",
+            map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 环道2",
+            map = { "@...f...x..", ".###.#.###.", ".#b..h..h#.", ".#.###.##..", ".#..r..c#.>", ".##.###.#k.", "..f.D...B.b" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 8 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 6 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 近路1",
+            map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 41 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 7 层 · 近路2",
+            map = { ".e.D.....hB", ".#k#######.", ".#########.", "@...v...x.>", "##c####e###", "##r##..hb##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 1 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 侧室1",
+            map = { "#h#.m.#b#.r", "#e#.#.#f#.#", "#.#.#.#.#.#", "@....m...D>", "#.#.#.#.#.#", "#e#.c.#m#h#", "#k#.#.#r#.#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "@..e.#m..r.", ".###.#.###.", ".#e.k....#>", ".#.###D#.#.", "...#b..#...", "##e#.###.#.", "h..f.....rv" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "pawn",
+            shop = { "saltDagger", "wild" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 25 },
+            hint = "短短一段，桥那头有光。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 11 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 双井道",
+            map = { "@.w..#..x.h", ".#w#.#.###.", ".#r#...g...", ".#.#####.#.", ".v...k...#.", ".#####D###.", "h....u....>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 45 },
+            hint = "两条井道，一条要钥匙。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "@..r.#..b..", ".###.#.###.", ".#h..x...#.", ".#.#####.#.", ".u...pG..#.", ".#######.#.", ".........>." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
+            whisper = "下面传来一阵闷响。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 13 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 14 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "harpoon", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 15 层 · 收租口",
+            map = { "@..f..$..g.", ".#####.###.", ".B.......#.", ".#.#####.#.", ".#..$..c.#.", ".#######.#.", "...w.w...$>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 暗河",
+            map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          },
+          {
+            name = "第 16 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "hammer", "bellStaff" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 17 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 18 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
+            whisper = "下面有什么东西在动。"
+          }
+        }
+      }
+    },
+    {
+      seed = 6,
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "..m.b#.h.", ".#####.#.", "@...e...>", ".###.###.", ".#r.m#...", ".#####.#.", "....m..m." },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 61 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 6 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 3 层 · 环道1",
+            map = { "@...f...D..", ".###.#.###.", ".#h..e..r#.", ".#.###.##..", ".#..r..m#.>", ".##.###.#b.", "..m.e...f.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 4 层 · 侧室1",
+            map = { "#k#.f.#e#.b", "#c#.#.#r#.#", "#.#.#.#.#.#", "@....f...B>", "#.#.#.#.#.#", "#f#.v.#h#b#", "#h#.#.#.#.#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 岔路2",
+            map = { "@..e.#D..b.", ".###.#.###.", ".#m.e....#>", ".#.###k#.#.", "...#r..#...", "##f#.###.#.", "h..e.....rv" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 5 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 三道2",
+            map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 6 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "harpoon", "rustSword" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 盐窟",
+            map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 24 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 7 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 8 层 · 环道2",
+            map = { "@...e...f..", ".###.#.###.", ".#r..D..e#.", ".#.###.##..", ".#..b..f#.>", ".##.###.#h.", "..e.e...r.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 4 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 9 层 · 近路1",
+            map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 骨龛",
+            map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 40 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 11 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "mossBlade", "harpoon" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 12 层 · 锈栅",
+            map = { "@..k.#.p.$.", ".###.#.u##.", ".#$.D......", ".#.#####.#.", ".w.w...g.#.", ".#####.###.", ".....h...x>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 47 },
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 绳桥",
+            map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "短短一段，桥那头有光。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 13 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 回声库",
+            map = { "@..g..$.$..", ".#########.", ".k.D..x..h.", ".#########.", "..u..b..w.w", "##########.", "##########>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "守卫身后是金币。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 收租口",
+            map = { "@..f..$..g.", ".#####.###.", ".B.......#.", ".#.#####.#.", ".#..$..c.#.", ".#######.#.", "...w.w...$>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 15 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "bellStaff", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 蓄水窖",
+            map = { "@.H.u.h...>", ".####.####.", ".x..g..w.w.", ".#########.", ".b..m..$...", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "近路上全是血瓶。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 16 层 · 裂石廊",
+            map = { "@...r...w.>", ".#########.", "...h...u...", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "头顶的石头在掉渣。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 锈厅",
+            map = { "@..r.#..b..", ".###.#.###.", ".#h..x...#.", ".#.#####.#.", ".u...pG..#.", ".#######.#.", ".........>." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
+            whisper = "下面传来一阵闷响。"
+          },
+          {
+            name = "第 17 层 · 暗河",
+            map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 18 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
+            whisper = "下面有什么东西在动。"
+          }
+        }
+      }
+    },
+    {
+      seed = 7,
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "@...m....", ".###.###.", ".#b.$..#.", ".##...##.", "..e.#.m..", ".#######m", "...m.r.e>" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 4 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 3 层 · 环道1",
+            map = { "@...f...D..", ".###.#.###.", ".#h..e..r#.", ".#.###.##..", ".#..r..m#.>", ".##.###.#b.", "..m.e...f.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 近路1",
+            map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 4 层 · 岔路1",
+            map = { "@..f.#B..h.", ".###.#.###.", ".#v.D....#>", ".#.###k#.#.", "...#r..#...", "##v#.###.#.", "h..f.....bb" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 岔路2",
+            map = { "@..v.#e..h.", ".###.#.###.", ".#D.x....#>", ".#.###r#.#.", "...#k..#...", "##B#.###.#.", "h..v.....bb" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 6 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 6 层 · 侧室2",
+            map = { "#b#.c.#r#.h", "#m#.#.#m#.#", "#.#.#.#.#.#", "@........f>", "#.#.#.#.#.#", "#e#.v.#c#m#", "#r#.#.#$#$#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有什么东西在动。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "bellStaff", "hammer" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 7 层 · 环道2",
+            map = { "@...e...f..", ".###.#.###.", ".#r..D..e#.", ".#.###.##..", ".#..b..f#.>", ".##.###.#h.", "..e.e...r.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 70 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 近路2",
+            map = { ".m.D......h", ".#h#######.", ".#########.", "@...m...c.>", "##m####e###", "##r##..kb##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 9 层 · 三道2",
+            map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 抵押厅",
+            map = { "@..x...u..$", ".#####.###.", ".h..p.g...$", ".#.#####.#.", ".w...r...#.", ".#.#####.#.", ".....$...u>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "每一格都有人押过东西。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 11 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 12 层 · 暗河",
+            map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "hammer", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 13 层 · 盐窟",
+            map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 24 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 14 层 · 双井道",
+            map = { "@.w..#..x.h", ".#w#.#.###.", ".#r#...g...", ".#.#####.#.", ".v...k...#.", ".#####D###.", "h....u....>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 13 },
+            hint = "两条井道，一条要钥匙。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 锈厅",
+            map = { "@..r.#..b..", ".###.#.###.", ".#h..x...#.", ".#.#####.#.", ".u...pG..#.", ".#######.#.", ".........>." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
+            whisper = "下面传来一阵闷响。"
+          },
+          {
+            name = "第 15 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "harpoon", "hammer" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 骨龛",
+            map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 69 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 16 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "mossBlade", "harpoon" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 17 层 · 裂石廊",
+            map = { "@...r...w.>", ".#########.", "...h...u...", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "normal",
+            marks = { 8 },
+            hint = "头顶的石头在掉渣。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 蓄水窖",
+            map = { "@.H.u.h...>", ".####.####.", ".x..g..w.w.", ".#########.", ".b..m..$...", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "近路上全是血瓶。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 18 层 · 绳桥",
+            map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "短短一段，桥那头有光。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
+            whisper = "下面有什么东西在动。"
+          }
+        }
+      }
+    },
+    {
+      seed = 8,
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "@...m....", ".###.###.", ".#b.$..#.", ".##...##.", "..e.#.m..", ".#######m", "...m.r.e>" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 38 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "rustSword", "bellStaff" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 3 层 · 环道2",
+            map = { "@...e...f..", ".###.#.###.", ".#r..D..e#.", ".#.###.##..", ".#..b..f#.>", ".##.###.#h.", "..e.e...r.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 30 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "saltDagger", "hammer" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 4 层 · 侧室1",
+            map = { "#h#.m.#b#.r", "#e#.#.#f#.#", "#.#.#.#.#.#", "@....m...D>", "#.#.#.#.#.#", "#e#.c.#m#h#", "#k#.#.#r#.#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 近路1",
+            map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 37 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 6 层 · 环道1",
+            map = { "@...f...D..", ".###.#.###.", ".#h..e..r#.", ".#.###.##..", ".#..r..m#.>", ".##.###.#b.", "..m.e...f.k" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 27 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 侧室2",
+            map = { "#h#.v.#b#.v", "#x#.#.#b#.#", "#.#.#.#.#.#", "@....B...e>", "#.#.#.#.#.#", "#v#...#e#k#", "#r#.#.#h#.#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 4 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 7 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 8 层 · 三道2",
+            map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "pawn",
+            shop = { "rustSword", "hammer" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 收租口",
+            map = { "@..f..$..g.", ".#####.###.", ".B.......#.", ".#.#####.#.", ".#..$..c.#.", ".#######.#.", "...w.w...$>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 11 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "pawn",
+            shop = { "harpoon", "rustSword" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 12 层 · 盐窟",
+            map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 13 层 · 锈厅",
+            map = { "@..r.#..b..", ".###.#.###.", ".#h..x...#.", ".#.#####.#.", ".u...pG..#.", ".#######.#.", ".........>." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
+            whisper = "下面传来一阵闷响。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 14 层 · 双井道",
+            map = { "@.w..#..x.h", ".#w#.#.###.", ".#r#...g...", ".#.#####.#.", ".v...k...#.", ".#####D###.", "h....u....>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 2 },
+            hint = "两条井道，一条要钥匙。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 15 层 · 抵押厅",
+            map = { "@..x...u..$", ".#####.###.", ".h..p.g...$", ".#.#####.#.", ".w...r...#.", ".#.#####.#.", ".....$...u>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "每一格都有人押过东西。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 16 层 · 绳桥",
+            map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "短短一段，桥那头有光。",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 17 层 · 三道2",
+            map = { "@.v.b.e.$", ".#######.", ".m.r.f.h.", ".#######.", ".e.$...c.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 蓄水窖",
+            map = { "@.H.u.h...>", ".####.####.", ".x..g..w.w.", ".#########.", ".b..m..$...", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "近路上全是血瓶。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 18 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "@..r..b..h.", ".#########.", ".u..w.w..u.", ".###...###.", ".###pKp###.", "#####.#####", "#####>#####" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "@...h.h...b", ".#########.", ".g.r.E.r.g.", ".####.####.", ".####>####.", "###########", "###########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
+            whisper = "下面有什么东西在动。"
+          }
+        }
+      }
+    },
+    {
+      seed = 9,
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "..m.b#.h.", ".#####.#.", "@...e...>", ".###.###.", ".#r.m#...", ".#####.#.", "....m..m." },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 2 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 28 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室2",
+            map = { "#b#.c.#r#.h", "#m#.#.#m#.#", "#.#.#.#.#.#", "@........f>", "#.#.#.#.#.#", "#e#.v.#c#m#", "#r#.#.#$#$#" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 12 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有什么东西在动。"
+          },
+          {
+            name = "第 3 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 4 层 · 近路1",
+            map = { ".v.D......h", ".#k#######.", ".#########.", "@...e...g.>", "##f####x###", "##r##..bh##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 近路2",
+            map = { ".e.D.....hB", ".#k#######.", ".#########.", "@...v...x.>", "##c####e###", "##r##..hb##", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 5 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 暗河",
+            map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          },
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 环道1",
+            map = { "@...D...g..", ".###.#.###.", ".#k..h..h#.", ".#.###.##..", ".#..r..f#.>", ".##.###.#b.", "..v.c...B.b" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 8 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
+            whisper = "下面隐约有回声。"
+          },
+          {
+            name = "第 7 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "boneKnife", "hammer" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 8 层 · 岔路1",
+            map = { "@..e.#m..r.", ".###.#.###.", ".#e.k....#>", ".#.###D#.#.", "...#b..#...", "##e#.###.#.", "h..f.....rv" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 6 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 赌坊",
+            map = { "@...v...b", ".##S####.", "......$eh", "####.####", ".$..e..r.", ".#######.", "....>...." },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "@..e.#D..b.", ".###.#.###.", ".#m.e....#>", ".#.###k#.#.", "...#r..#...", "##f#.###.#.", "h..e.....rv" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            kind = "normal",
+            marks = { 76 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。",
+            whisper = "下面有爪子挠石头的声音。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "@..b.#..h..", ".###.#.###.", ".#h..e...#.", ".#.#####.#.", ".c...up..#.", ".#####G.##.", "######>####" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
+            whisper = "风从下面往上吹，带着一股腥味。"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 锈厅",
+            map = { "@..r.#..b..", ".###.#.###.", ".#h..x...#.", ".#.#####.#.", ".u...pG..#.", ".#######.#.", ".........>." },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
+            whisper = "下面传来一阵闷响。"
+          },
+          {
+            name = "第 11 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 抵押厅",
+            map = { "@..x...u..$", ".#####.###.", ".h..p.g...$", ".#.#####.#.", ".w...r...#.", ".#.#####.#.", ".....$...u>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 28 },
+            hint = "每一格都有人押过东西。",
+            whisper = "下面有点潮。"
+          },
+          {
+            name = "第 12 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "@...r...w.>", ".#########.", "...h...u...", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 8 },
+            hint = "头顶的石头在掉渣。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 回声库",
+            map = { "@..g..$.$..", ".#########.", ".k.D..x..h.", ".#########.", "..u..b..w.w", "##########.", "##########>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            hint = "守卫身后是金币。",
+            whisper = "下面有爪子挠石头的声音。"
+          },
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "@..v...h...", ".#######.#.", ".r..A..g.#.", ".#######.#.", "..b..c.r..>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
+            whisper = "下面黑得看不见底。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 15 层 · 三道1",
+            map = { "@.m.r.e.h", ".#######.", ".v.b.f.$.", ".#######.", ".c.$...e.", "####G####", "####>####" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
+            whisper = "下面有什么东西在动。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 75 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
+            whisper = "下面有点潮。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 当铺",
+            map = { "@...m...r..", ".###.###.#.", ".#b..N..e#.", ".#.#####.#.", "...f..k...>", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "pawn",
+            shop = { "mossBlade", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。",
+            whisper = "下面黑得看不见底。"
+          },
+          {
+            name = "第 17 层 · 骨龛",
+            map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            kind = "normal",
+            marks = { 75 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
+            whisper = "下面隐约有回声。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "@...h...H..", ".###M###...", "...e.r..b.>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。",
+            whisper = "下面滴答滴答地漏着水。"
+          },
+          {
+            name = "第 18 层 · 绳桥",
+            map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            kind = "normal",
+            marks = { 25 },
+            hint = "短短一段，桥那头有光。",
+            whisper = "下面隐约有回声。"
           }
         },
         {

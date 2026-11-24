@@ -46,8 +46,8 @@ export interface FloorDef {
     kind?: FloorKind;
     /** 带印记的怪（格子下标）：打败后可以把对应的武器刻到断臂转轮上 */
     marks?: number[];
-    /** 当铺卖的武器图案 */
-    shop?: WeaponId[];
+    /** 当铺卖的图案（武器或赖子 'wild'） */
+    shop?: (WeaponId | 'wild')[];
     /** 离开这一层时要交的井租（金币） */
     rent?: number;
     /** 打败本层精英后三选一拿武器 */

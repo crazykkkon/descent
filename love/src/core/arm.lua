@@ -5,6 +5,12 @@
 local rng = require('core.rng')
 local M = {}
 
+-- 赖子：能顶替任何武器，不顶替空格；三个赖子不变；不能拿在手上。拿到的机会很小
+M.WILD = 'wild'
+M.WILD_NAME = '赖子'
+M.WILD_CHANCE = 0.1
+M.WILD_PRICE = 150
+
 M.REELS = 3
 M.SIZE = 5
 M.BASE_PRICE = 10
@@ -36,13 +42,19 @@ function M.roll(arm, seed, key, held)
     return M.faces(arm)
 end
 
--- 'weapon'（换成 id）、'empty'（空手）、'none'（不变）
+-- 'weapon'（换成 id）、'empty'（三个空格 → 空手）、'none'（不变）
 function M.outcome(f)
-    if f[1] == f[2] and f[2] == f[3] then
-        if f[1] then return 'weapon', f[1] end
-        return 'empty'
+    if not f[1] and not f[2] and not f[3] then return 'empty' end
+    if not f[1] or not f[2] or not f[3] then return 'none' end
+    local target = nil
+    for r = 1, 3 do
+        if f[r] ~= M.WILD then
+            if target and f[r] ~= target then return 'none' end
+            target = f[r]
+        end
     end
-    return 'none'
+    if not target then return 'none' end -- 三个赖子
+    return 'weapon', target
 end
 
 function M.reelCount(arm, r, id)
@@ -51,32 +63,44 @@ function M.reelCount(arm, r, id)
     return n
 end
 
--- 转一次连成这把武器（id = false 时是三个空格）的概率
-function M.odds(arm, id)
-    local num = 1
-    for r = 1, M.REELS do num = num * M.reelCount(arm, r, id) end
-    return num / (M.SIZE ^ M.REELS)
+-- 把没锁住的轮子的所有停法都数一遍：返回 counts（键：武器 id、'empty'、'none'）和总数
+function M.outcomeCounts(arm, held)
+    local counts, total = {}, 0
+    local f = M.faces(arm)
+    local cur = {}
+    local function walk(r)
+        if r > M.REELS then
+            local kind, id = M.outcome(cur)
+            local key = kind == 'weapon' and id or kind
+            counts[key] = (counts[key] or 0) + 1
+            total = total + 1
+            return
+        end
+        if held and held[r] then
+            cur[r] = f[r]; walk(r + 1)
+        else
+            for k = 1, M.SIZE do cur[r] = arm.reels[r][k]; walk(r + 1) end
+        end
+    end
+    walk(1)
+    return counts, total
 end
 
--- 锁住一些轮子后重转连成一线的概率；锁住的图案不一样时返回 nil
-function M.holdOdds(arm, held)
-    local f = M.faces(arm)
-    local target, nheld = nil, 0
-    for r = 1, M.REELS do
-        if held[r] then
-            if nheld > 0 and f[r] ~= target then return nil end
-            target, nheld = f[r], nheld + 1
-        end
+-- 转一次连成这把武器的概率（id = false 时是三个空格变空手）
+function M.odds(arm, id)
+    local counts, total = M.outcomeCounts(arm)
+    return (counts[id or 'empty'] or 0) / total
+end
+
+-- 锁住一些轮子后重转，各种结果的概率：{ { target = 武器 id 或 false（空手）, p } }，按武器顺序
+function M.holdOdds(arm, held, order)
+    local counts, total = M.outcomeCounts(arm, held)
+    local out = {}
+    for _, id in ipairs(order) do
+        if counts[id] then out[#out + 1] = { target = id, p = counts[id] / total } end
     end
-    if nheld == 0 then return nil end
-    local num, den = 1, 1
-    for r = 1, M.REELS do
-        if not held[r] then
-            num = num * M.reelCount(arm, r, target)
-            den = den * M.SIZE
-        end
-    end
-    return target, num / den
+    if counts.empty then out[#out + 1] = { target = false, p = counts.empty / total } end
+    return out
 end
 
 function M.firstBlank(arm, r)

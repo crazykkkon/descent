@@ -270,6 +270,8 @@ function toFloor(seed: number, d: number, slot: number, e: MapEntry): FloorDef {
         let b = pick(seed, 8500 + d * 10 + slot, 1, all.length - 1);
         if (b >= a) b++;
         f.shop = [all[a], all[b]];
+        // 很小的机会第二件换成赖子
+        if (draw(seed, 8600 + d * 10 + slot, 0) < 0.1) f.shop[1] = 'wild';
     }
     if (RENTS[d]) f.rent = RENTS[d];
     return f;

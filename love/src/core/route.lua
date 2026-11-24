@@ -52,6 +52,8 @@ local function toFloor(seed, d, slot, e)
         local b = rng.pick(seed, 8500 + d * 10 + slot, 1, #all - 1)
         if b >= a then b = b + 1 end
         f.shop = { all[a + 1], all[b + 1] }
+        -- 很小的机会第二件换成赖子
+        if rng.draw(seed, 8600 + d * 10 + slot, 0) < 0.1 then f.shop[2] = 'wild' end
     end
     if RENT[d] then f.rent = RENT[d] end
     return f

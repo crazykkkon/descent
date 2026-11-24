@@ -9,7 +9,8 @@ import { CombatResult, simulateCombat } from './combat';
 import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
 import { solveFloor } from './solver';
-import { ArmState, ArmSym, ARM_BASE_PRICE, armEmpty, armHas, armOutcome, armRoll, engraveCell, engravedCells, firstBlank, newArm } from './arm';
+import { ArmState, ArmSym, ARM_BASE_PRICE, armEmpty, armHas, armOutcome, armRoll, engraveCell, engravedCells, EngraveSym, firstBlank, newArm, WILD, WILD_CHANCE, WILD_NAME, WILD_PRICE } from './arm';
+import { draw } from './rng';
 import { WHEEL, WheelSector, wheelPrice, wheelStop } from './wheel';
 import { ActiveDecree, DECREE_PENALTY, DECREE_SPAN, DecreeDef, SILVER_BONUS_HP, TIER_NAMES, decreeFor, killCounts } from './decree';
 import { bloodPrice, halfPrice, pick, risingPrice } from './rng';
@@ -37,6 +38,11 @@ export function stallText(o: StallOffer): string {
     return { atk: `攻击 +${o.amount}`, def: `防御 +${o.amount}`, hp: `生命 +${o.amount}`, key: `骨钥 ×${o.amount}` }[o.id];
 }
 
+/** 图案的名字（武器名或"赖子"） */
+export function symName(id: EngraveSym): string {
+    return id === WILD ? WILD_NAME : WEAPONS[id].name;
+}
+
 /** 当铺的价格 */
 export const PAWN = { keyPrice: 15, pawnGold: 40, redeemRate: 1.2, buyPrice: 60, erasePrice: 20 };
 /** 骨坛：献 3 点攻击或 1 把骨钥 */
@@ -45,11 +51,11 @@ export const ALTAR_ATK_COST = 3;
 /** 等着玩家决定要不要刻的图案 */
 export interface PendingEngrave {
     from: 'elite' | 'mark' | 'decree' | 'wheel';
-    choices: WeaponId[];
+    choices: EngraveSym[];
 }
 
 export interface PawnedRow {
-    weapon: WeaponId;
+    weapon: EngraveSym;
     /** 原来刻在哪个轮子上（从 0 开始） */
     reel: number;
     /** 当掉时在第几层（从 0 开始） */
@@ -224,8 +230,8 @@ export class Run {
 
     get pendingEngrave(): PendingEngrave | null { return this.engraveQueue[0] ?? null; }
 
-    /** 精英、诏令给的三选一（不含手上这把） */
-    private rollWeaponChoices(salt = 0): WeaponId[] {
+    /** 精英、诏令给的三选一（不含手上这把）；有很小的机会第三个换成赖子 */
+    private rollWeaponChoices(salt = 0): EngraveSym[] {
         const pool = (Object.keys(WEAPONS) as WeaponId[]).filter(w => w !== this.hero.weapon);
         const out: WeaponId[] = [];
         let n = 0;
@@ -233,7 +239,9 @@ export class Run {
             const r = ((Math.imul(this.seed ^ (this.floorIndex * 7919 + salt * 131 + ++n * 104729), 2654435761) >>> 0) % pool.length);
             if (!out.includes(pool[r])) out.push(pool[r]);
         }
-        return out;
+        const res: EngraveSym[] = [...out];
+        if (res.length === 3 && draw(this.seed, 9100 + this.floorIndex * 10 + salt, 0) < WILD_CHANCE) res[2] = WILD;
+        return res;
     }
 
     /** 刻满时的提示（没刻满返回 null） */
@@ -243,8 +251,8 @@ export class Run {
         return null;
     }
 
-    /** 把等待中的图案刻到第 reel 个轮子上（这个轮子刻满时要指定覆盖哪一格）；刻上就拿在手上 */
-    engrave(id: WeaponId, reel: number, cell?: number): ActResult {
+    /** 把等待中的图案刻到第 reel 个轮子上（这个轮子刻满时要指定覆盖哪一格）；刻上武器就拿在手上（赖子拿不了） */
+    engrave(id: EngraveSym, reel: number, cell?: number): ActResult {
         const p = this.pendingEngrave;
         if (!this.arm || !p || !p.choices.includes(id)) return { ok: false, msg: '' };
         const full = this.fullReel(reel, cell);
@@ -252,6 +260,10 @@ export class Run {
         const k = engraveCell(this.arm, reel, id, cell);
         if (k < 0) return { ok: false, msg: '' };
         this.engraveQueue.shift();
+        if (id === WILD) {
+            this.checkHold();
+            return { ok: true, msg: `把赖子刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格` };
+        }
         this.hold(id);
         return { ok: true, msg: `把${WEAPONS[id].name}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，先拿在手上` };
     }
@@ -366,8 +378,8 @@ export class Run {
             case 'def': this.hero.def += s.amount; break;
             case 'engrave': {
                 const all = Object.keys(WEAPONS) as WeaponId[];
-                const w = all[pick(this.seed, key + 500, n, all.length)];
-                if (this.arm) { this.engraveQueue.push({ from: 'wheel', choices: [w] }); msg += `：${WEAPONS[w].name}`; }
+                const w: EngraveSym = draw(this.seed, key + 700, n) < WILD_CHANCE ? WILD : all[pick(this.seed, key + 500, n, all.length)];
+                if (this.arm) { this.engraveQueue.push({ from: 'wheel', choices: [w] }); msg += `：${symName(w)}`; }
                 break;
             }
             case 'leech':
@@ -382,7 +394,7 @@ export class Run {
                 const cells = this.arm ? engravedCells(this.arm) : [];
                 if (!cells.length) { msg += '：转轮上没有图案，什么也没擦掉'; break; }
                 const [r, k] = cells[pick(this.seed, key + 600, n, cells.length)];
-                msg += `：第 ${r + 1} 个轮子第 ${k + 1} 格的${WEAPONS[this.arm!.reels[r][k]!].name}没了`;
+                msg += `：第 ${r + 1} 个轮子第 ${k + 1} 格的${symName(this.arm!.reels[r][k]!)}没了`;
                 this.arm!.reels[r][k] = null;
                 this.checkHold();
                 break;
@@ -411,7 +423,7 @@ export class Run {
         this.pawned.push({ weapon: w, reel, floor: this.floorIndex });
         this.hero.gold += PAWN.pawnGold;
         this.checkHold();
-        return { ok: true, msg: `当掉了${WEAPONS[w].name}，得 ${PAWN.pawnGold} 金币` };
+        return { ok: true, msg: `当掉了${symName(w)}，得 ${PAWN.pawnGold} 金币` };
     }
 
     /** 赎回当掉的第 j 件现在要多少钱（每过一层涨 20%） */
@@ -432,8 +444,8 @@ export class Run {
         if (unpaid) return unpaid;
         engraveCell(this.arm, p.reel, p.weapon, cell);
         this.pawned.splice(j, 1);
-        this.hold(p.weapon);
-        return { ok: true, msg: `赎回了${WEAPONS[p.weapon].name}` };
+        if (p.weapon !== WILD) this.hold(p.weapon);
+        return { ok: true, msg: `赎回了${symName(p.weapon)}` };
     }
 
     /** 当铺：买第 k 个武器图案刻到第 reel 个轮子上 */
@@ -445,13 +457,17 @@ export class Run {
         if (this.sold(i, k)) return { ok: false, msg: '这样已经买过了' };
         const full = this.fullReel(reel, cell);
         if (full) return full;
-        const unpaid = this.pay(PAWN.buyPrice);
+        const price = this.shopPrice(w);
+        const unpaid = this.pay(price);
         if (unpaid) return unpaid;
         engraveCell(this.arm, reel, w, cell);
         this.bought.push(`${this.floorIndex}:${i}:${k}`);
-        this.hold(w);
-        return { ok: true, msg: `花 ${PAWN.buyPrice} 金币刻上了${WEAPONS[w].name}` };
+        if (w !== WILD) this.hold(w);
+        return { ok: true, msg: `花 ${price} 金币刻上了${symName(w)}` };
     }
+
+    /** 当铺里一件图案的价格（赖子贵得多） */
+    shopPrice(w: EngraveSym): number { return w === WILD ? WILD_PRICE : PAWN.buyPrice; }
 
     /** 当铺：花钱擦掉一格 */
     pawnErase(i: number, reel: number, cell: number): ActResult {
@@ -463,7 +479,7 @@ export class Run {
         if (unpaid) return unpaid;
         this.arm!.reels[reel][cell] = null;
         this.checkHold();
-        return { ok: true, msg: `擦掉了第 ${reel + 1} 个轮子第 ${cell + 1} 格的${WEAPONS[w].name}` };
+        return { ok: true, msg: `擦掉了第 ${reel + 1} 个轮子第 ${cell + 1} 格的${symName(w)}` };
     }
 
     /** 骨坛：献 3 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座骨坛用一次） */

@@ -142,6 +142,18 @@ for _, a in ipairs(V.armSessions) do
     end
 end
 
+-- 4a. 各种结果的机会
+for n, o in ipairs(V.armOddsVec) do
+    local arm = require('core.arm').new()
+    arm.reels = reelsIn(o.reels)
+    arm.stops = { o.stops[1] + 1, o.stops[2] + 1, o.stops[3] + 1 }
+    local counts, total = require('core.arm').outcomeCounts(arm, o.held and list(o.held) or nil)
+    local same = total == o.total
+    for k, v in pairs(o.counts) do same = same and counts[k] == v end
+    for k, v in pairs(counts) do same = same and o.counts[k] == v end
+    check(same, '转轮机会 ' .. n .. ' ' .. reelsStr(o.reels))
+end
+
 -- 4b. 刻在哪个轮子、刻满时覆盖
 do
     local run = Run.new({ tiny({ '@.>' }) }, 'digger', 1)

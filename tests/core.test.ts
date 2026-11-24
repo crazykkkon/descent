@@ -390,7 +390,7 @@ test('断臂转轮：三个轮子各 5 格；概率是三个轮子上各自占�
     assert.equal(armOdds(arm, 'boneKnife'), 2 / 125);
     assert.equal(armOdds(arm, null), (3 * 4 * 4) / 125, '三个都停在空格上');
     arm.stops = [0, 0, 0];
-    assert.deepEqual(armHoldOdds(arm, [true, true, false]), { target: 'boneKnife', p: 1 / 5 }, '锁住两个，剩下那个轮子 1/5');
+    assert.deepEqual(armHoldOdds(arm, [true, true, false]).find(o => o.target === 'boneKnife')?.p, 1 / 5, '锁住两个，剩下那个轮子 1/5');
     assert.deepEqual(armOutcome(['hammer', 'hammer', 'hammer']), { kind: 'weapon', id: 'hammer' });
     assert.deepEqual(armOutcome([null, null, null]), { kind: 'empty' });
     assert.deepEqual(armOutcome(['hammer', null, 'hammer']), { kind: 'none' });
@@ -584,4 +584,45 @@ test('存档读档：断臂转轮、当铺、诏令、选过的楼梯都保留',
     assert.deepEqual(back.pawned, run.pawned);
     assert.deepEqual(back.hero, run.hero);
     assert.equal(back.floor.map.join(''), run.floor.map.join(''));
+});
+
+test('赖子：顶替任何武器，不顶替空格；三个赖子不变；不能拿在手上', () => {
+    assert.deepEqual(armOutcome(['boneKnife', 'wild', 'boneKnife']), { kind: 'weapon', id: 'boneKnife' });
+    assert.deepEqual(armOutcome(['wild', 'wild', 'hammer']), { kind: 'weapon', id: 'hammer' });
+    assert.deepEqual(armOutcome(['wild', 'boneKnife', 'hammer']), { kind: 'none' });
+    assert.deepEqual(armOutcome(['wild', null, null]), { kind: 'none' }, '赖子不顶替空格');
+    assert.deepEqual(armOutcome(['wild', 'wild', 'wild']), { kind: 'none' });
+    assert.deepEqual(armOutcome([null, null, null]), { kind: 'empty' });
+    const arm = newArm();
+    engraveCell(arm, 0, 'boneKnife');
+    engraveCell(arm, 1, 'wild');
+    engraveCell(arm, 2, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 1 / 125, '赖子在中间那个轮子上顶替骨刀');
+    engraveCell(arm, 1, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 2 / 125);
+    // 刻赖子：手上的武器不变
+    const run = new Run([tiny(['@.>'])], 'digger', 1);
+    run.hero.weapon = 'hammer';
+    run.arm!.reels = reels(['hammer'], ['hammer'], ['hammer']);
+    run.engraveQueue = [{ from: 'wheel', choices: ['wild'] }];
+    assert.ok(run.engrave('wild', 0).ok);
+    assert.equal(run.hero.weapon, 'hammer');
+    assert.equal(run.arm!.reels[0][1], 'wild');
+});
+
+test('赖子很难拿到：精英三选一、大转盘新图案、当铺大约各 10%', () => {
+    let elite = 0;
+    for (let seed = 1; seed <= 400; seed++) {
+        const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', seed);
+        run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
+        run.move(1, 0);
+        if (run.pendingEngrave!.choices.includes('wild')) elite++;
+    }
+    assert.ok(elite > 15 && elite < 70, `精英三选一里出现赖子 ${elite} / 400`);
+    let shops = 0;
+    let pawns = 0;
+    for (let seed = 1; seed <= 60; seed++) for (const opts of buildRoute(seed)) for (const f of opts) {
+        if (f.kind === 'pawn') { pawns++; if (f.shop!.includes('wild')) shops++; }
+    }
+    assert.ok(pawns > 20 && shops < pawns / 3, `当铺卖赖子 ${shops} / ${pawns}`);
 });
