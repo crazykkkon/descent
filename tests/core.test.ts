@@ -519,11 +519,13 @@ test('诏令：第 3 层开头送来，可以拒绝；完成给刻图案；逾�
     assert.equal(r2.pendingEngrave?.from, 'decree');
 });
 
-test('楼梯口的一句话：按下一层的内容挑，不说类型和数字', () => {
-    assert.match(whisper({ ...tiny(['@S>']), kind: 'wheel' }), /木轮/);
-    assert.match(whisper(tiny(['@G>'])), /呼吸/);
-    assert.match(whisper(tiny(['@mmmmmmmm>'])), /动静很大/);
-    assert.match(whisper(tiny(['@m>'])), /安静/);
+test('楼梯口的一句话：只说大概有多凶，设施层没有专门的句子', async () => {
+    const { WHISPERS } = await import('../src/core/whisper');
+    assert.ok(WHISPERS.loud.includes(whisper(tiny(['@G>']))));
+    assert.ok(WHISPERS.loud.includes(whisper(tiny(['@mmmmmmmm>']))));
+    assert.ok(WHISPERS.quiet.includes(whisper(tiny(['@m>']))));
+    assert.ok(WHISPERS.quiet.includes(whisper({ ...tiny(['@S>']), kind: 'wheel' })), '大转盘层和怪少的普通层说法一样');
+    for (const s of [...WHISPERS.loud, ...WHISPERS.quiet, ...WHISPERS.mid]) assert.doesNotMatch(s, /转盘|当铺|骨坛|营火|精英|\d/);
 });
 
 test('路线：由种子决定；第 3 层起每层两条楼梯（第 10、19、20 层固定）；第 9、17 层交井租', () => {

@@ -1,17 +1,24 @@
--- 楼梯口的一句话：和原型 src/core/whisper.ts 一致。按下一层的真实内容挑，但不说破。
+-- 楼梯口的一句话：和原型 src/core/whisper.ts 一致。只透露"下面有多凶"的大概，不说类型、不给数字。
 local config = require('core.config')
 local floorMod = require('core.floor')
 local M = {}
 
-local KIND = {
-    wheel = '下面传来木轮转动的吱呀声。',
-    pawn = '下面有人在拨算盘。',
-    altar = '下面飘上来一股骨灰味。',
-    camp = '下面有火光，暖暖的。',
+M.WHISPERS = {
+    loud = { '下面有什么东西在动。', '下面传来一阵闷响。', '风从下面往上吹，带着一股腥味。' },
+    quiet = { '下面很安静。', '下面黑得看不见底。', '下面滴答滴答地漏着水。' },
+    mid = { '下面有爪子挠石头的声音。', '下面隐约有回声。', '下面有点潮。' },
 }
 
+-- 按地图字符算一个稳定的编号（地图只有 ASCII 字符，和原型的 charCodeAt 一样）
+local function mapCode(map)
+    local n = 0
+    for _, row in ipairs(map) do
+        for i = 1, #row do n = (n + row:byte(i) * i) % 9973 end
+    end
+    return n
+end
+
 function M.whisper(f)
-    if KIND[f.kind] then return KIND[f.kind] end
     local n, elite = 0, false
     for _, c in ipairs(floorMod.parse(f).cells) do
         if c.kind == 'monster' then
@@ -19,10 +26,9 @@ function M.whisper(f)
             if config.MONSTERS[c.id].elite then elite = true end
         end
     end
-    if elite then return '下面有很沉的呼吸声。' end
-    if n >= 8 then return '下面动静很大，像有一群东西在爬。' end
-    if n <= 3 then return '下面很安静。' end
-    return '下面有爪子挠石头的声音。'
+    local level = (elite or n >= 8) and 'loud' or (n <= 3 and 'quiet' or 'mid')
+    local list = M.WHISPERS[level]
+    return list[mapCode(f.map) % #list + 1]
 end
 
 return M

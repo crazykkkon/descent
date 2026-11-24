@@ -72109,7 +72109,7 @@ return {
             kind = "normal",
             marks = { 27 },
             hint = "苔壁湿滑，血瓶藏在怪物身后。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72124,7 +72124,7 @@ return {
             kind = "pawn",
             shop = { "rustSword", "hammer" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 3 层 · 侧室1",
@@ -72136,7 +72136,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -72150,7 +72150,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 4 层 · 环道2",
@@ -72178,7 +72178,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "saltDagger" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 5 层 · 近路1",
@@ -72191,7 +72191,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72206,7 +72206,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 6 层 · 当铺",
@@ -72219,7 +72219,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "boneKnife" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -72250,7 +72250,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 7 层 · 三道1",
@@ -72263,7 +72263,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -72278,7 +72278,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 8 层 · 营火",
@@ -72307,7 +72307,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -72323,7 +72323,7 @@ return {
             kind = "normal",
             marks = { 3 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 9 层 · 岔路2",
@@ -72351,7 +72351,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -72365,7 +72365,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 11 层 · 暗河",
@@ -72377,7 +72377,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -72391,7 +72391,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 12 层 · 骨龛",
@@ -72403,7 +72403,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -72418,7 +72418,7 @@ return {
             kind = "normal",
             marks = { 8 },
             hint = "头顶的石头在掉渣。",
-            whisper = "下面很安静。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 13 层 · 营火",
@@ -72447,7 +72447,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -72478,7 +72478,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 14 层 · 绳桥",
@@ -72491,7 +72491,7 @@ return {
             kind = "normal",
             marks = { 31 },
             hint = "短短一段，桥那头有光。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -72505,7 +72505,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 15 层 · 锈栅",
@@ -72517,7 +72517,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72531,7 +72531,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 16 层 · 盐窟",
@@ -72544,7 +72544,7 @@ return {
             kind = "normal",
             marks = { 75 },
             hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72560,7 +72560,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 17 层 · 当铺",
@@ -72574,7 +72574,7 @@ return {
             kind = "pawn",
             shop = { "rustSword", "saltDagger" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -72605,7 +72605,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 18 层 · 抵押厅",
@@ -72618,7 +72618,7 @@ return {
             kind = "normal",
             marks = { 45 },
             hint = "每一格都有人押过东西。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72633,7 +72633,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -72648,7 +72648,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -72668,7 +72668,7 @@ return {
             kind = "normal",
             marks = { 33 },
             hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72682,7 +72682,7 @@ return {
             gold = 20,
             kind = "normal",
             hint = "苔壁湿滑，血瓶藏在怪物身后。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -72713,7 +72713,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 3 层 · 侧室2",
@@ -72725,7 +72725,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -72739,7 +72739,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 4 层 · 环道2",
@@ -72752,7 +72752,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -72767,7 +72767,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 5 层 · 当铺",
@@ -72780,7 +72780,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "boneKnife" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -72808,7 +72808,7 @@ return {
             kind = "normal",
             marks = { 1 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -72822,7 +72822,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 7 层 · 营火",
@@ -72851,7 +72851,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -72865,7 +72865,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 8 层 · 三道2",
@@ -72878,7 +72878,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -72894,7 +72894,7 @@ return {
             kind = "normal",
             marks = { 38 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 9 层 · 当铺",
@@ -72908,7 +72908,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "bellStaff" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -72923,7 +72923,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -72938,7 +72938,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 11 层 · 骨坛",
@@ -72950,7 +72950,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -72965,7 +72965,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 12 层 · 赌坊",
@@ -72977,7 +72977,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -72991,7 +72991,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 13 层 · 三道2",
@@ -73004,7 +73004,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -73035,7 +73035,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 14 层 · 暗河",
@@ -73048,7 +73048,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -73063,7 +73063,7 @@ return {
             kind = "pawn",
             shop = { "rustSword", "wellHook" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 15 层 · 收租口",
@@ -73076,7 +73076,7 @@ return {
             kind = "normal",
             marks = { 71 },
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -73090,7 +73090,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 16 层 · 回声库",
@@ -73119,7 +73119,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 17 层 · 裂石廊",
@@ -73132,7 +73132,7 @@ return {
             rent = 250,
             kind = "normal",
             hint = "头顶的石头在掉渣。",
-            whisper = "下面很安静。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73147,7 +73147,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 18 层 · 骨坛",
@@ -73159,7 +73159,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73174,7 +73174,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -73189,7 +73189,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -73209,7 +73209,7 @@ return {
             kind = "normal",
             marks = { 50 },
             hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -73223,7 +73223,7 @@ return {
             gold = 20,
             kind = "normal",
             hint = "苔壁湿滑，血瓶藏在怪物身后。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -73238,7 +73238,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "saltDagger" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 3 层 · 环道1",
@@ -73278,7 +73278,7 @@ return {
             gold = 25,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73292,7 +73292,7 @@ return {
             gold = 25,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 5 层 · 侧室2",
@@ -73304,7 +73304,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -73319,7 +73319,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 6 层 · 营火",
@@ -73348,7 +73348,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73362,7 +73362,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 7 层 · 骨龛",
@@ -73374,7 +73374,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -73405,7 +73405,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 8 层 · 近路1",
@@ -73433,7 +73433,7 @@ return {
             kind = "normal",
             marks = { 4 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 9 层 · 环道2",
@@ -73461,7 +73461,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -73476,7 +73476,7 @@ return {
             kind = "normal",
             marks = { 69 },
             hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 11 层 · 赌坊",
@@ -73488,7 +73488,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73503,7 +73503,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           },
           {
             name = "第 12 层 · 赌坊",
@@ -73515,7 +73515,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73529,7 +73529,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "两条井道，一条要钥匙。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 13 层 · 当铺",
@@ -73542,7 +73542,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "saltDagger" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73557,7 +73557,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 14 层 · 当铺",
@@ -73570,7 +73570,7 @@ return {
             kind = "pawn",
             shop = { "saltDagger", "rustSword" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73585,7 +73585,7 @@ return {
             kind = "normal",
             marks = { 8 },
             hint = "头顶的石头在掉渣。",
-            whisper = "下面很安静。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 15 层 · 营火",
@@ -73614,7 +73614,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73640,7 +73640,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73656,7 +73656,7 @@ return {
             kind = "normal",
             marks = { 2 },
             hint = "短短一段，桥那头有光。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 17 层 · 收租口",
@@ -73669,7 +73669,7 @@ return {
             rent = 250,
             kind = "normal",
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -73684,7 +73684,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 18 层 · 营火",
@@ -73713,7 +73713,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73728,7 +73728,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -73743,7 +73743,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -73791,7 +73791,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 3 层 · 营火",
@@ -73820,7 +73820,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73835,7 +73835,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "hammer" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 4 层 · 岔路1",
@@ -73847,7 +73847,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -73878,7 +73878,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 5 层 · 环道2",
@@ -73890,7 +73890,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -73905,7 +73905,7 @@ return {
             kind = "normal",
             marks = { 51 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 6 层 · 骨坛",
@@ -73917,7 +73917,7 @@ return {
             gold = 25,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73932,7 +73932,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 7 层 · 赌坊",
@@ -73944,7 +73944,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -73959,7 +73959,7 @@ return {
             kind = "normal",
             marks = { 75 },
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 8 层 · 当铺",
@@ -73972,7 +73972,7 @@ return {
             kind = "pawn",
             shop = { "hammer", "rustSword" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -73988,7 +73988,7 @@ return {
             kind = "normal",
             marks = { 12 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 9 层 · 骨坛",
@@ -74001,7 +74001,7 @@ return {
             rent = 120,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74016,7 +74016,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -74060,7 +74060,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74074,7 +74074,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 12 层 · 绳桥",
@@ -74086,7 +74086,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "短短一段，桥那头有光。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -74100,7 +74100,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 13 层 · 蓄水窖",
@@ -74128,7 +74128,7 @@ return {
             kind = "normal",
             marks = { 75 },
             hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 14 层 · 赌坊",
@@ -74140,7 +74140,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74155,7 +74155,7 @@ return {
             kind = "pawn",
             shop = { "bellStaff", "mossBlade" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 15 层 · 三道2",
@@ -74168,7 +74168,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -74183,7 +74183,7 @@ return {
             kind = "normal",
             marks = { 45 },
             hint = "两条井道，一条要钥匙。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 16 层 · 骨坛",
@@ -74195,7 +74195,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74211,7 +74211,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 17 层 · 赌坊",
@@ -74224,7 +74224,7 @@ return {
             rent = 250,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74238,7 +74238,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 18 层 · 抵押厅",
@@ -74251,7 +74251,7 @@ return {
             kind = "normal",
             marks = { 3 },
             hint = "每一格都有人押过东西。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -74266,7 +74266,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -74281,7 +74281,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -74301,7 +74301,7 @@ return {
             kind = "normal",
             marks = { 50 },
             hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -74316,7 +74316,7 @@ return {
             kind = "normal",
             marks = { 2 },
             hint = "苔壁湿滑，血瓶藏在怪物身后。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -74330,7 +74330,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 3 层 · 近路2",
@@ -74342,7 +74342,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -74357,7 +74357,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "harpoon" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 4 层 · 环道1",
@@ -74384,7 +74384,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           },
           {
             name = "第 5 层 · 当铺",
@@ -74397,7 +74397,7 @@ return {
             kind = "pawn",
             shop = { "boneKnife", "bellStaff" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74441,7 +74441,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74456,7 +74456,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 7 层 · 当铺",
@@ -74469,7 +74469,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "rustSword" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74484,7 +74484,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 8 层 · 赌坊",
@@ -74496,7 +74496,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74525,7 +74525,7 @@ return {
             kind = "normal",
             marks = { 3 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -74540,7 +74540,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -74554,7 +74554,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 11 层 · 营火",
@@ -74583,7 +74583,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74610,7 +74610,7 @@ return {
             kind = "pawn",
             shop = { "boneKnife", "bellStaff" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74625,7 +74625,7 @@ return {
             kind = "normal",
             marks = { 2 },
             hint = "短短一段，桥那头有光。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 13 层 · 赌坊",
@@ -74637,7 +74637,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74652,7 +74652,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 14 层 · 赌坊",
@@ -74664,7 +74664,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74679,7 +74679,7 @@ return {
             kind = "normal",
             marks = { 8 },
             hint = "头顶的石头在掉渣。",
-            whisper = "下面很安静。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 15 层 · 当铺",
@@ -74692,7 +74692,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "rustSword" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74707,7 +74707,7 @@ return {
             kind = "pawn",
             shop = { "hammer", "bellStaff" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 16 层 · 回声库",
@@ -74735,7 +74735,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 17 层 · 营火",
@@ -74765,7 +74765,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74780,7 +74780,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 18 层 · 营火",
@@ -74809,7 +74809,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74824,7 +74824,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -74839,7 +74839,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -74901,7 +74901,7 @@ return {
             kind = "pawn",
             shop = { "rustSword", "mossBlade" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -74916,7 +74916,7 @@ return {
             kind = "normal",
             marks = { 8 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 4 层 · 赌坊",
@@ -74928,7 +74928,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74943,7 +74943,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 5 层 · 营火",
@@ -74972,7 +74972,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -74987,7 +74987,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 6 层 · 营火",
@@ -75016,7 +75016,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75043,7 +75043,7 @@ return {
             gold = 25,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75058,7 +75058,7 @@ return {
             kind = "pawn",
             shop = { "bellStaff", "saltDagger" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 8 层 · 环道2",
@@ -75071,7 +75071,7 @@ return {
             kind = "normal",
             marks = { 68 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -75087,7 +75087,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 9 层 · 营火",
@@ -75117,7 +75117,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75132,7 +75132,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -75163,7 +75163,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 11 层 · 锈栅",
@@ -75176,7 +75176,7 @@ return {
             kind = "normal",
             marks = { 45 },
             hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -75191,7 +75191,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "bellStaff" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 12 层 · 锈厅",
@@ -75204,7 +75204,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           }
         },
         {
@@ -75218,7 +75218,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 13 层 · 当铺",
@@ -75231,7 +75231,7 @@ return {
             kind = "pawn",
             shop = { "hammer", "boneKnife" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75245,7 +75245,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "两条井道，一条要钥匙。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 14 层 · 骨坛",
@@ -75257,7 +75257,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75272,7 +75272,7 @@ return {
             kind = "normal",
             marks = { 24 },
             hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 15 层 · 裂石廊",
@@ -75285,7 +75285,7 @@ return {
             kind = "normal",
             marks = { 8 },
             hint = "头顶的石头在掉渣。",
-            whisper = "下面很安静。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75300,7 +75300,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 16 层 · 营火",
@@ -75329,7 +75329,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75345,7 +75345,7 @@ return {
             kind = "normal",
             marks = { 75 },
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 17 层 · 骨坛",
@@ -75358,7 +75358,7 @@ return {
             rent = 250,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75372,7 +75372,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 18 层 · 回声库",
@@ -75399,7 +75399,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -75414,7 +75414,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -75463,7 +75463,7 @@ return {
             kind = "normal",
             marks = { 56 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 3 层 · 营火",
@@ -75492,7 +75492,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75507,7 +75507,7 @@ return {
             kind = "pawn",
             shop = { "rustSword", "mossBlade" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 4 层 · 侧室1",
@@ -75519,7 +75519,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -75534,7 +75534,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 5 层 · 当铺",
@@ -75547,7 +75547,7 @@ return {
             kind = "pawn",
             shop = { "bellStaff", "rustSword" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75561,7 +75561,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 6 层 · 赌坊",
@@ -75573,7 +75573,7 @@ return {
             gold = 25,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75587,7 +75587,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 7 层 · 营火",
@@ -75616,7 +75616,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75631,7 +75631,7 @@ return {
             kind = "normal",
             marks = { 3 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 8 层 · 营火",
@@ -75660,7 +75660,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -75676,7 +75676,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "hammer" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 9 层 · 近路2",
@@ -75689,7 +75689,7 @@ return {
             rent = 120,
             kind = "normal",
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -75704,7 +75704,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -75719,7 +75719,7 @@ return {
             kind = "pawn",
             shop = { "wellHook", "rustSword" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 11 层 · 抵押厅",
@@ -75732,7 +75732,7 @@ return {
             kind = "normal",
             marks = { 28 },
             hint = "每一格都有人押过东西。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -75763,7 +75763,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 12 层 · 绳桥",
@@ -75775,7 +75775,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "短短一段，桥那头有光。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -75789,7 +75789,7 @@ return {
             gold = 30,
             kind = "wheel",
             hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。",
-            whisper = "下面传来木轮转动的吱呀声。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 13 层 · 盐窟",
@@ -75802,7 +75802,7 @@ return {
             kind = "normal",
             marks = { 75 },
             hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -75817,7 +75817,7 @@ return {
             kind = "normal",
             marks = { 8 },
             hint = "头顶的石头在掉渣。",
-            whisper = "下面很安静。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 14 层 · 骨坛",
@@ -75829,7 +75829,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -75843,7 +75843,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 15 层 · 收租口",
@@ -75856,7 +75856,7 @@ return {
             kind = "normal",
             marks = { 71 },
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -75887,7 +75887,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 16 层 · 三道2",
@@ -75900,7 +75900,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -75916,7 +75916,7 @@ return {
             kind = "normal",
             marks = { 50 },
             hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           },
           {
             name = "第 17 层 · 回声库",
@@ -75960,7 +75960,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 18 层 · 双井道",
@@ -75973,7 +75973,7 @@ return {
             kind = "normal",
             marks = { 29 },
             hint = "两条井道，一条要钥匙。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -75988,7 +75988,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -76003,7 +76003,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
@@ -76023,7 +76023,7 @@ return {
             kind = "normal",
             marks = { 46 },
             hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -76052,7 +76052,7 @@ return {
             gold = 25,
             kind = "normal",
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 3 层 · 当铺",
@@ -76065,7 +76065,7 @@ return {
             kind = "pawn",
             shop = { "wellHook", "harpoon" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76080,7 +76080,7 @@ return {
             kind = "normal",
             marks = { 18 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面动静很大，像有一群东西在爬。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 4 层 · 骨坛",
@@ -76092,7 +76092,7 @@ return {
             gold = 25,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76107,7 +76107,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           },
           {
             name = "第 5 层 · 当铺",
@@ -76120,7 +76120,7 @@ return {
             kind = "pawn",
             shop = { "mossBlade", "bellStaff" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76148,7 +76148,7 @@ return {
             kind = "pawn",
             shop = { "hammer", "harpoon" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76175,7 +76175,7 @@ return {
             kind = "normal",
             marks = { 70 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -76190,7 +76190,7 @@ return {
             kind = "normal",
             marks = { 1 },
             hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 8 层 · 营火",
@@ -76219,7 +76219,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -76234,7 +76234,7 @@ return {
             rent = 120,
             kind = "normal",
             hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 9 层 · 岔路1",
@@ -76248,7 +76248,7 @@ return {
             kind = "normal",
             marks = { 57 },
             hint = "锈甲虫防御很高，攻击不够就打不动。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           }
         },
         {
@@ -76263,7 +76263,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -76294,7 +76294,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 11 层 · 锈厅",
@@ -76307,7 +76307,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           }
         },
         {
@@ -76322,7 +76322,7 @@ return {
             kind = "normal",
             marks = { 71 },
             hint = "血门近路省战力，多打一场能凑金币。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 12 层 · 三道1",
@@ -76335,7 +76335,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         },
         {
@@ -76350,7 +76350,7 @@ return {
             kind = "pawn",
             shop = { "harpoon", "wellHook" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           },
           {
             name = "第 13 层 · 双井道",
@@ -76362,7 +76362,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "两条井道，一条要钥匙。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -76393,7 +76393,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           },
           {
             name = "第 14 层 · 骨龛",
@@ -76405,7 +76405,7 @@ return {
             gold = 30,
             kind = "normal",
             hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           }
         },
         {
@@ -76420,7 +76420,7 @@ return {
             kind = "normal",
             marks = { 25 },
             hint = "短短一段，桥那头有光。",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面隐约有回声。"
           },
           {
             name = "第 15 层 · 营火",
@@ -76449,7 +76449,7 @@ return {
               }
             },
             hint = "火边有个补给摊。",
-            whisper = "下面有火光，暖暖的。"
+            whisper = "下面滴答滴答地漏着水。"
           }
         },
         {
@@ -76475,7 +76475,7 @@ return {
             gold = 30,
             kind = "altar",
             hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。",
-            whisper = "下面飘上来一股骨灰味。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76491,7 +76491,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面传来一阵闷响。"
           },
           {
             name = "第 17 层 · 当铺",
@@ -76505,7 +76505,7 @@ return {
             kind = "pawn",
             shop = { "rustSword", "boneKnife" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76520,7 +76520,7 @@ return {
             kind = "normal",
             marks = { 75 },
             hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？",
-            whisper = "下面有爪子挠石头的声音。"
+            whisper = "下面有点潮。"
           },
           {
             name = "第 18 层 · 当铺",
@@ -76533,7 +76533,7 @@ return {
             kind = "pawn",
             shop = { "bellStaff", "mossBlade" },
             hint = "有人在这里收东西，也卖东西。",
-            whisper = "下面有人在拨算盘。"
+            whisper = "下面黑得看不见底。"
           }
         },
         {
@@ -76548,7 +76548,7 @@ return {
             eliteReward = true,
             kind = "elite",
             hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "风从下面往上吹，带着一股腥味。"
           }
         },
         {
@@ -76563,7 +76563,7 @@ return {
             eliteReward = false,
             kind = "boss",
             hint = "（Boss 站位战还没做，先是一场确定的战斗。）",
-            whisper = "下面有很沉的呼吸声。"
+            whisper = "下面有什么东西在动。"
           }
         }
       }
