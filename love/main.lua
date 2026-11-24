@@ -1202,6 +1202,16 @@ function love.keypressed(key)
         love.filesystem.write(META_FILE, serialize.dump(meta))
         return
     end
+    -- F9：重新走一遍新手教程（试玩用；已经打过教程的存档默认不会再进教程）
+    if key == 'f9' then
+        meta.tutorialDone = false
+        saveMeta()
+        love.filesystem.remove(SAVE_FILE)
+        closeModal()
+        walking, hold = nil, nil
+        newGame()
+        return
+    end
     if modal then
         if key == 'return' or key == 'space' then
             for _, b in ipairs(modal.buttons) do if b.primary then b.fn(); return end end
