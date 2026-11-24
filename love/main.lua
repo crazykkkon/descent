@@ -18,6 +18,7 @@ local decreeMod = require('core.decree')
 local whisperMod = require('core.whisper')
 local route = require('core.route')
 local miner = require('view.miner')
+local monsters = require('view.monsters')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
 local coach = require('view.coach')
@@ -31,7 +32,7 @@ local K = TILE / 40              -- 按原来 40 像素一格画的图形，乘�
 local MAP_X, MAP_Y = 34, 44      -- 地图在逻辑画布上的位置（地图占画面大半）
 local PANEL_X, PANEL_W = 482, 154 -- 右侧：断臂转轮
 local S, OX, OY = 2, 0, 0        -- 放大倍数和黑边偏移
-local canvas
+local canvas, mapCanvas
 local frame      -- 整帧先画到这里，再加老电视滤镜
 local clock = 0
 local fonts = {}
@@ -874,11 +875,16 @@ end
 local function makeFrame()
     local w, h = love.graphics.getDimensions()
     frame = love.graphics.newCanvas(w, h)
+    -- 地图格仍为 26 个逻辑像素。保留怪物贴图在默认 2 倍窗口中的像素细节。
+    if not mapCanvas or mapCanvas:getDPIScale() ~= S then
+        mapCanvas = S == 1 and canvas or love.graphics.newCanvas(LW, LH, { dpiscale = S })
+    end
 end
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     miner.load()
+    monsters.load(config.MONSTERS)
     fx.load()
     fx.loadShader()
     fx.loadLight()
@@ -992,8 +998,7 @@ local function drawTile(i)
     setColor(shade(base, 1.25)); g.rectangle('fill', x + 2, y + 1, TILE - 4, 1)
     local cx, cy = x + TILE / 2, y + TILE / 2 - 2
     if c.kind == 'monster' then
-        -- 怪物脚下的影子
-        setColor({ 0, 0, 0 }, 0.35); g.ellipse('fill', cx, y + TILE - lip - 3, 8, 2)
+        monsters.draw(c.id, cx, y + TILE - lip - 1, clock, i)
     elseif c.kind == 'item' then
         if c.id == 'smallPotion' or c.id == 'bigPotion' then
             local s = (c.id == 'bigPotion' and 1.3 or 1) * K
@@ -1048,7 +1053,7 @@ end
 local armTexts = {}
 local function drawPixel()
     local g = love.graphics
-    g.setCanvas(canvas)
+    g.setCanvas(mapCanvas)
     g.clear(C.bg[1], C.bg[2], C.bg[3])
     armTexts = {}
     -- 顶栏底色
@@ -1106,7 +1111,6 @@ local function drawPixel()
 end
 
 -- ---------- 绘制：UI 层 ----------
-local SHORT = { thornMoss = '棘', spikeEel = '刺', armorFrog = '铠', ironBeetle = '铁', shriekBat = '啸', grudgeWraith = '怨', shardCrab = '碎', moss = '苔', eel = '鳗', frog = '蛙', beetle = '甲', bat = '蝠', wraith = '魂', crab = '蟹', guardian = '守', rat = '鼠', slug = '蝓', priest = '祭', gatekeeper = '门', eye = '眼' }
 
 local FACILITY_GLYPH = {
     stall = { '摊', '补给', '补给摊', '火边的补给摊，花金币买生命、攻击或防御。' },
@@ -1320,7 +1324,6 @@ local function drawUI()
             local x, y = tileXY(i)
             if c.kind == 'monster' then
                 local p = preview(i)
-                text(SHORT[c.id], x, y + 5, 10, { 1, 0.86, 0.88 }, 'center', TILE)
                 local tag = p.fatal and (p.text == '会死' and '会死' or p.text) or ('−' .. p.lose)
                 if run.tutorial and c.id == 'eye' then tag = '？？？' end
                 local tw = math.max(16, #tag * 2.1 + 6)
@@ -1367,7 +1370,9 @@ local function drawUI()
 end
 
 function love.draw()
+    local sceneCanvas = mapCanvas
     if scene == 'title' or scene == 'shop' then
+        sceneCanvas = canvas
         love.graphics.setCanvas(canvas)
         titleView.draw(LW, LH, clock)
         love.graphics.setCanvas()
@@ -1377,7 +1382,7 @@ function love.draw()
     love.graphics.setCanvas(frame)
     love.graphics.clear(0, 0, 0)
     love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(canvas, OX, OY, 0, S, S)
+    love.graphics.draw(sceneCanvas, OX, OY, 0, S, S)
     if scene == 'title' then drawTitleUI(); drawModal()
     elseif scene == 'shop' then drawShopUI(); drawModal()
     else drawUI() end
