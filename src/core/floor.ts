@@ -1,7 +1,5 @@
 /** 楼层：用文字地图配置，解析成格子数组。 */
-import { ItemId, MonsterId } from './config';
-import type { ContractDef } from './contract';
-import type { SlotId } from './slot';
+import { ItemId, MonsterId, WeaponId } from './config';
 
 export type Cell =
     | { kind: 'wall' }
@@ -10,10 +8,20 @@ export type Cell =
     | { kind: 'monster'; id: MonsterId }
     | { kind: 'item'; id: ItemId }
     | { kind: 'door'; door: 'bone' | 'blood' }
-    /** 井中轮（老虎机）：不能走过去，站在旁边使用 */
-    | { kind: 'slot'; id: SlotId }
-    /** 补给摊：不能走过去，站在旁边买（货品和价格写在楼层的 stall 里） */
-    | { kind: 'stall' };
+    /** 设施：不能走过去，站在旁边使用。stall 补给摊、wheel 大转盘、pawn 当铺、altar 骨坛 */
+    | { kind: 'stall' }
+    | { kind: 'wheel' }
+    | { kind: 'pawn' }
+    | { kind: 'altar' };
+
+/** 设施格子（站在旁边用，不能走上去） */
+export const FACILITY_KINDS = ['stall', 'wheel', 'pawn', 'altar'] as const;
+export function isFacility(c: Cell): boolean {
+    return (FACILITY_KINDS as readonly string[]).includes(c.kind);
+}
+
+/** 楼层类型（楼梯二选一时不告诉玩家，只给一句不说破的话） */
+export type FloorKind = 'normal' | 'elite' | 'wheel' | 'pawn' | 'altar' | 'camp' | 'boss';
 
 /** 补给摊上的一样货：每样只能买一次（货品和价格都是讨论项） */
 export interface StallOffer {
@@ -34,12 +42,12 @@ export interface FloorDef {
     smallPotion: number;
     bigPotion: number;
     gold: number;
-    /** 进入这一层之前，上一层楼梯口挂出的契约 */
-    contract?: ContractDef;
-    /** 上一层楼梯口显示的情报（手写，必须是真话）；不写就自动从地图里挑 */
-    intel?: string;
-    /** 楼梯口情报挑哪只怪：设计时用求解器选好写进关卡数据（Lua 版不带求解器，直接用这个） */
-    intelPick?: { cell: number; mustFight: boolean };
+    /** 楼层类型（不写就是普通层） */
+    kind?: FloorKind;
+    /** 带印记的怪（格子下标）：打败后可以把对应的武器刻到断臂转轮上 */
+    marks?: number[];
+    /** 当铺卖的武器图案 */
+    shop?: WeaponId[];
     /** 离开这一层时要交的井租（金币） */
     rent?: number;
     /** 打败本层精英后三选一拿武器 */
@@ -55,8 +63,7 @@ export interface FloorDef {
  *   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
  *   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
  *   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）  E  井底之眼（Boss 占位）
- *   M  补给摊（站在旁边买，货品写在楼层的 stall 里）
- *   S  井中轮·骨轮（武器多、井蛭多）       T  井中轮·苔轮（血瓶金币多）
+ *   M  补给摊（货品写在楼层的 stall 里）   S  大转盘（井中轮）   N  当铺   A  骨坛（设施都站在旁边用）
  */
 const LEGEND: Record<string, Cell> = {
     '#': { kind: 'wall' },
@@ -84,9 +91,10 @@ const LEGEND: Record<string, Cell> = {
     p: { kind: 'monster', id: 'priest' },
     K: { kind: 'monster', id: 'gatekeeper' },
     E: { kind: 'monster', id: 'eye' },
-    S: { kind: 'slot', id: 'risky' },
-    T: { kind: 'slot', id: 'steady' },
     M: { kind: 'stall' },
+    S: { kind: 'wheel' },
+    N: { kind: 'pawn' },
+    A: { kind: 'altar' },
 };
 
 export interface ParsedFloor {

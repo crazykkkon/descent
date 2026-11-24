@@ -6,9 +6,8 @@
  * 每个状态只保留生命最高的那条路线。主角在已打通区域里可以随便走（M1 不计步数）。
  */
 import { CharacterDef, CHARACTERS, Hero, MONSTERS, monsterInContext } from './config';
-import { adjacentMonsters, Cell, FloorDef, neighbors, parseFloor } from './floor';
+import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor } from './floor';
 import { interact, isElite, isEntity } from './rules';
-import { keepVersion } from './contract';
 
 export interface FloorState {
     w: number;
@@ -78,7 +77,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
                 if (seen[n]) continue;
                 seen[n] = 1;
                 const c = cells[n];
-                if (c.kind === 'wall' || c.kind === 'slot' || c.kind === 'stall') continue;
+                if (c.kind === 'wall' || isFacility(c)) continue;
                 if (c.kind === 'exit') { atExit = true; continue; }
                 if (c.kind === 'floor') { stack.push(n); continue; }
                 const k = bit.get(n)!;
@@ -176,7 +175,7 @@ export function solveFromStart(floor: FloorDef, hero: Hero, ch: CharacterDef = C
     return solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, floor, ch);
 }
 
-/** 连续多层求解：每层把所有不被压制的结果带到下一层（有契约的层把签约 / 不签都算上），返回最后一层的最高剩余生命 */
+/** 连续多层求解：每层把所有不被压制的结果带到下一层，返回最后一层的最高剩余生命 */
 export function solveRun(floors: FloorDef[], ch: CharacterDef = CHARACTERS.digger): { bestHp: number; perFloor: number[] } {
     let heroes: Hero[] = [{ ...ch.base }];
     const perFloor: number[] = [];
@@ -184,13 +183,6 @@ export function solveRun(floors: FloorDef[], ch: CharacterDef = CHARACTERS.digge
         const outs: Hero[] = [];
         for (const hh of heroes) {
             outs.push(...solveFromStart(f, hh, ch).pareto.map(o => o.hero));
-            // 这一层有契约：再算"签约后守约"和"签约后毁约（或不碰血瓶但没守到）"两条分支
-            const c = f.contract;
-            if (c && hh.hp > c.deposit) {
-                const signed = { ...hh, hp: hh.hp - c.deposit, atk: hh.atk + c.atk, def: hh.def + c.def };
-                outs.push(...solveFromStart(f, signed, ch).pareto.map(o => o.hero));
-                outs.push(...solveFromStart(keepVersion(f), signed, ch).pareto.map(o => ({ ...o.hero, hp: o.hero.hp + c.refund, gold: o.hero.gold + c.gold })));
-            }
         }
         heroes = paretoFilter(outs);
         if (!heroes.length) { perFloor.push(-1); return { bestHp: -1, perFloor }; }
@@ -248,7 +240,7 @@ function reachable(cells: Cell[], w: number, h: number, pos: number): { next: nu
             if (seen[n]) continue;
             seen[n] = 1;
             const c = cells[n];
-            if (c.kind === 'wall' || c.kind === 'slot' || c.kind === 'stall') continue;
+            if (c.kind === 'wall' || isFacility(c)) continue;
             if (c.kind === 'exit') atExit = true;
             else if (c.kind === 'floor') stack.push(n);
             else next.push(n);
@@ -283,12 +275,6 @@ export function solveChain(floors: FloorDef[], ch: CharacterDef = CHARACTERS.dig
         let outs: Hero[] = [];
         for (const hh of heroes) {
             outs.push(...solveFromStart(f, hh, ch).pareto.map(o => o.hero));
-            const c = f.contract;
-            if (c && hh.hp > c.deposit) {
-                const signed = { ...hh, hp: hh.hp - c.deposit, atk: hh.atk + c.atk, def: hh.def + c.def };
-                outs.push(...solveFromStart(f, signed, ch).pareto.map(o => o.hero));
-                outs.push(...solveFromStart(keepVersion(f), signed, ch).pareto.map(o => ({ ...o.hero, hp: o.hero.hp + c.refund, gold: o.hero.gold + c.gold })));
-            }
         }
         if (f.rent) {
             const rent = f.rent;

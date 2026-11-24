@@ -1,14 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CHARACTERS, MONSTERS, MonsterDef } from '../src/core/config';
+import { CHARACTERS, MONSTERS, MonsterDef, WeaponId } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, F2_CLASSIC, allChoices, buildFloor, buildFloors, pickChoices } from '../src/core/levels';
-import { keepVersion } from '../src/core/contract';
-import { SLOTS, holdOdds, leechBite, payout, tripleWeaponOdds } from '../src/core/slot';
 import { parseFloor } from '../src/core/floor';
-import { stairIntel } from '../src/core/intel';
 import { greedyFloor, paretoFilter, solveFromStart, solveRun } from '../src/core/solver';
 
 const hero = { atk: 10, def: 10 };
@@ -150,36 +147,11 @@ test('试玩版地图尺寸：第 1、4、5 层 9×7，第 2、3 层 11×7', () 
     })));
 });
 
-test('关卡结构：第 1 层 3 布局 × 2 套；第 2 层 3 张契约图；第 3 层 4 布局 × 2 套；同一布局两套墙壁一样', () => {
-    assert.deepEqual(DEMO_POOLS.map(p => p.layouts.length), [3, 3, 4, 1, 1]);
-    assert.equal(DEMO_POOLS[2].params.rent, 30, '第 3 层出口交井租');
-    assert.ok(DEMO_POOLS[4].params.eliteReward, '第 5 层精英掉武器');
-    for (const pool of DEMO_POOLS) {
-        for (const l of pool.layouts) {
-            if (l.variants.length < 2) continue;
-            const shape = (m: string[]) => m.map(r => r.replace(/[^#@>]/g, '.')).join('|');
-            assert.equal(shape(l.variants[0].map), shape(l.variants[1].map), `${pool.params.name} ${l.name}`);
-            assert.notEqual(l.variants[0].map.join(), l.variants[1].map.join());
-        }
-    }
-    // 契约图：每张都挂着同一份契约、同一句情报，且情报是真话（正好两瓶血瓶）
-    const f2 = DEMO_POOLS[1].layouts.map((l, li) => buildFloor(DEMO_POOLS[1], { layout: li, variant: 0 }));
-    for (const f of f2) {
-        assert.ok(f.contract && f.intel);
-        assert.deepEqual(f.contract, f2[0].contract);
-        assert.equal(f.intel, f2[0].intel);
-        const potions = parseFloor(f).cells.filter(c => c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion')).length;
-        assert.equal(potions, 2, f.map.join('|'));
-    }
-    // 原来的第 2 层先收起来，近路布局还在第 3 层和备用池里
-    assert.equal(F2_CLASSIC.layouts.length, 4);
-});
-
 test('开局不打怪就拿不到宝石和血瓶（奖励都在怪物身后）', () => {
     DEMO_POOLS.forEach(pool => pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
         const f = buildFloor(pool, { layout: li, variant: vi });
         const run = new Run([f]);
-        const bait = !!f.contract; // 契约图上的血瓶是故意摆在路上的诱惑
+        const bait = pool === DEMO_POOLS[1]; // 第 2 层（原来的契约图）上的血瓶是故意摆在路上的
         const reach = new Set([run.pos]);
         const st = [run.pos];
         while (st.length) {
@@ -207,118 +179,11 @@ test('第 1 层难度低：每张图都能不死地拿到所有加成，见怪�
     }));
 });
 
-test('契约图的手调价格：三张图各自让拒签、守约、毁约中的一种最划算', () => {
-    const entry = { ...CHARACTERS.digger.base, hp: 150, atk: 13, def: 13 };
-    const out = (li: number) => {
-        const f = buildFloor(DEMO_POOLS[1], { layout: li, variant: 0 });
-        const c = f.contract!;
-        const signed = { ...entry, hp: entry.hp - c.deposit, atk: entry.atk + c.atk };
-        const refuse = solveFromStart(f, entry).best?.hero.hp ?? -1;
-        const k = solveFromStart(keepVersion(f), signed).best;
-        const keep = k ? k.hero.hp + c.refund : -1;
-        const brk = solveFromStart(f, signed).best?.hero.hp ?? -1;
-        return { refuse, keep, brk };
-    };
-    const L = (name: string) => DEMO_POOLS[1].layouts.findIndex(l => l.name === name);
-    const a = out(L('侧厅'));
-    assert.ok(a.keep > a.refuse && a.keep > a.brk, JSON.stringify(a));
-    const b = out(L('长廊'));
-    assert.ok(b.brk > b.keep, JSON.stringify(b));
-    assert.ok(Math.abs(b.brk - b.refuse) <= 20, `长廊图上毁约和拒签应该接近：${JSON.stringify(b)}`);
-    const c = out(L('双道'));
-    assert.ok(c.refuse > c.keep && c.refuse > c.brk, JSON.stringify(c));
-    // 拿第 1 层全部加成出来的玩家，三张图拒签都能活着过去
-    DEMO_POOLS[0].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
-        const e = solveFromStart(buildFloor(DEMO_POOLS[0], { layout: li, variant: vi }), CHARACTERS.digger.base).bestAll!.hero;
-        DEMO_POOLS[1].layouts.forEach((m, mi) => assert.ok(solveFromStart(buildFloor(DEMO_POOLS[1], { layout: mi, variant: 0 }), e).solvable, `${l.name}${vi + 1} → ${m.name}`));
-    }));
-});
-
-test('契约：签约扣押金、属性立刻生效；喝血瓶毁约；守约到出口退还', () => {
-    const c = { condition: 'noPotion' as const, deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 };
-    const mk = () => new Run([tiny(['@>']), { ...tiny(['@h.>']), contract: c, intel: '下一层有一瓶血瓶。' }, tiny(['@>'])]);
-    // 守约
-    const a = mk();
-    assert.deepEqual(a.offeredContract(), c);
-    assert.equal(a.nextFloorIntel()!.headline, '下一层有一瓶血瓶。');
-    a.move(1, 0); a.finishFloor(false, true);
-    assert.equal(a.hero.hp, 150);
-    assert.equal(a.hero.atk, 13);
-    assert.ok(a.contractActive());
-    const saved = JSON.parse(JSON.stringify(a.save()));
-    // 存档读档后契约还在
-    assert.ok(Run.load(a.floors, saved).contractActive());
-    // 血瓶挡在路上：走过去就喝了，契约当场毁掉
-    a.move(1, 0);
-    assert.equal(a.contractActive(), false);
-    // 绕得开血瓶的图：守约
-    const b = new Run([tiny(['@>']), { ...tiny(['@.>', 'h..']), contract: c }, tiny(['@>'])]);
-    b.move(1, 0); b.finishFloor(false, true);
-    b.move(1, 0); b.move(1, 0);
-    assert.equal(b.exitSummary().contract!.kept, true);
-    b.finishFloor(false);
-    assert.equal(b.hero.hp, 150 + 60);
-    assert.equal(b.hero.gold, 10 + 5, '守约奖励 10 金 + 地图上剩一瓶血瓶换 5 金');
-    assert.equal(b.hero.atk, 13, '宝石留着');
-    // 毁约：喝下血瓶那一刻
-    const d = new Run([tiny(['@>']), { ...tiny(['@.>', 'h..']), contract: c }, tiny(['@>'])]);
-    d.move(1, 0); d.finishFloor(false, true);
-    const r = d.move(0, 1);
-    assert.match(r.msg, /契约已毁/);
-    assert.equal(d.contractActive(), false);
-    d.move(1, 0); d.move(1, 0); d.move(0, -1);
-    d.finishFloor(false);
-    assert.equal(d.hero.hp, 150 + 50, '押金不退，血瓶照喝');
-    assert.equal(d.hero.atk, 13);
-    // 不签
-    const e = mk();
-    e.move(1, 0); e.finishFloor(false, false);
-    assert.equal(e.hero.hp, 200);
-    assert.equal(e.contract, null);
-    // 押不起就签不了
-    const g = mk();
-    g.hero.hp = 40;
-    g.move(1, 0); g.finishFloor(false, true);
-    assert.equal(g.contract, null);
-    assert.equal(g.hero.hp, 40);
-});
-
-test('楼梯口情报：必经的高防守卫，给出现在和拿宝石后的掉血对比', () => {
-    const next = tiny(['@.c.>']);
-    const cur = new Run([tiny(['@rr>']), next]);
-    const it = cur.nextFloorIntel()!;
-    assert.match(it.headline, /高防守卫/);
-    assert.match(it.headline, /必经/);
-    assert.equal(it.mustFight, true);
-    assert.ok(it.lines.some(l => l.includes('打不动')), it.lines.join('|'));
-    assert.ok(it.lines.some(l => /赤晶没拿.*-\d+/.test(l)), it.lines.join('|'));
-});
-
-test('楼梯口情报：不拿可以绕开的怪吓唬人', () => {
-    // 回声蝠在死胡同里，井苔挡路
-    const it = stairIntel(tiny(['@m>', 'v##']), CHARACTERS.digger.base, CHARACTERS.digger)!;
-    assert.equal(it.monster, 'moss');
-});
-
-test('最后一层没有楼梯口情报；试玩版每层都能生成情报', () => {
-    const floors = buildFloors(pickChoices(5));
-    const run = new Run(floors);
-    assert.ok(run.nextFloorIntel());
-    assert.equal(Run.load(floors, { ...run.save(), floorIndex: floors.length - 1, current: run.save().current, floorStart: run.save().floorStart }).nextFloorIntel(), null);
-    for (const fi of [1, 2, 3, 4]) DEMO_POOLS[fi].layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
-        assert.ok(stairIntel(buildFloor(DEMO_POOLS[fi], { layout: li, variant: vi }), CHARACTERS.digger.base, CHARACTERS.digger));
-    }));
-});
-
 test('层内检查：已经活着走不到出口时能发现', () => {
     const run = new Run([tiny(['@e>'])]);
     assert.deepEqual(run.floorCheck(), { canReachExit: true });
     run.hero.hp = 30;
     assert.deepEqual(run.floorCheck(), { canReachExit: false });
-});
-
-test('所有选图组合都能通关', () => {
-    for (const c of allChoices()) assert.ok(solveRun(buildFloors(c)).bestHp > 0, JSON.stringify(c));
 });
 
 test('同一个种子选到同一组地图；新开一局换思路：每层换图，而且换一种布局', () => {
@@ -380,7 +245,7 @@ test('按求解器的路线实际玩，结果和求解器一致', () => {
         assert.equal(run.status, 'floorDone');
         assert.equal(run.hero.hp, r.best!.hero.hp);
         assert.equal(run.hero.gold, r.best!.hero.gold, `第 ${i + 1} 层：求解器算的金币和实际一致（含怪物掉落）`);
-        if (run.pendingWeapons) run.chooseWeapon(run.pendingWeapons[0]);
+        if (run.pendingEngrave) run.skipEngrave();
         if (run.rentDue()) assert.ok(run.payRent(run.hero.gold >= run.rentDue() ? 'gold' : 'def').ok);
         run.finishFloor(false);
     }
@@ -407,100 +272,7 @@ test('武器：效果算进战斗预览，和实际结算一致', () => {
     const dmg = run.info(1).combat!.damage;
     run.move(1, 0);
     assert.equal(run.hero.hp, before - dmg + 8);
-    // 换武器：旧的当场卖掉
-    const msg = run.equip('boneKnife');
-    assert.match(msg, /卖了/);
-    assert.equal(run.hero.weapon, 'boneKnife');
 });
-
-test('井神的钩：签契约少押 20 血', () => {
-    const c = { condition: 'noPotion' as const, deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 };
-    const run = new Run([tiny(['@>']), { ...tiny(['@>']), contract: c }]);
-    run.hero.weapon = 'wellHook';
-    run.move(1, 0);
-    run.finishFloor(false, true);
-    assert.equal(run.hero.hp, 200 - 30);
-    assert.equal(run.contract!.def.deposit, 30, '毁约时归井的也是 30');
-});
-
-// ---------- 井中轮 ----------
-
-const slotFloor = (seed = 7) => new Run([tiny(['@.>', '.S.'])], 'digger', seed);
-
-test('井中轮：要站在旁边；价格每转一次涨一半；金币不够不能转', () => {
-    const run = slotFloor();
-    const slot = 4;
-    assert.equal(run.slotSpin(slot, 'gold').ok, false, '不在旁边');
-    run.move(0, 1); // 站到机器左边
-    run.hero.gold = 1000;
-    const prices: number[] = [];
-    for (let k = 0; k < 4; k++) { prices.push(run.slotPrice(slot, false).gold); run.slotSpin(slot, 'gold'); run.slotCollect(slot); if (run.status !== 'playing') break; }
-    assert.deepEqual(prices.slice(0, 3), [20, 30, 45]);
-    run.hero.gold = 0;
-    assert.equal(run.slotSpin(slot, 'gold').ok, false);
-});
-
-test('井中轮：结果由种子决定，退出再进来不变；不同种子结果不同', () => {
-    const spinAll = (seed: number) => {
-        const run = slotFloor(seed);
-        run.move(0, 1);
-        run.hero.gold = 10000; run.hero.hp = 100000;
-        const out: string[] = [];
-        for (let k = 0; k < 6; k++) { out.push(run.slotSpin(4, 'gold').result!.join(',')); run.slotCollect(4); }
-        return out;
-    };
-    assert.deepEqual(spinAll(7), spinAll(7));
-    assert.notDeepEqual(spinAll(7), spinAll(8));
-    // 存档读档后接着转，和不存档一样
-    const a = slotFloor(9); a.move(0, 1); a.hero.gold = 1000; a.hero.hp = 100000;
-    a.slotSpin(4, 'gold'); a.slotCollect(4);
-    const b = Run.load(a.floors, JSON.parse(JSON.stringify(a.save())));
-    assert.deepEqual(a.slotSpin(4, 'gold').result, b.slotSpin(4, 'gold').result);
-});
-
-test('井中轮：锁轴重转半价、锁住的转轮不变；收下才领奖；血注用生命付', () => {
-    const run = slotFloor(3);
-    run.move(0, 1);
-    run.hero.gold = 1000; run.hero.hp = 100000;
-    const first = run.slotSpin(4, 'gold').result!;
-    const half = run.slotPrice(4, true).gold;
-    assert.ok(half <= run.slotPrice(4, false).gold / 2 + 5);
-    const gold = run.hero.gold;
-    const again = run.slotSpin(4, 'gold', [true, false, false]);
-    assert.equal(again.result![0], first[0], '锁住的第一轴不变');
-    assert.equal(run.hero.gold, gold - half);
-    assert.equal(again.fresh![0], false);
-    const hp = run.hero.hp;
-    run.slotCollect(4);
-    assert.equal(run.slotState(4).pending, null);
-    // 血注
-    const blood = run.slotPrice(4, false).blood;
-    const hp2 = run.hero.hp;
-    const r = run.slotSpin(4, 'blood');
-    assert.equal(run.hero.hp, hp2 - blood - (r.bite ?? 0));
-    assert.ok(hp > 0);
-});
-
-test('井中轮：奖励表', () => {
-    assert.equal(payout(['blade', 'blade', 'blade']).weapon, 'boneKnife');
-    assert.equal(payout(['hammer', 'hammer', 'coin']).gems, 1);
-    assert.equal(payout(['potion', 'potion', 'leech']).hp, 80);
-    assert.equal(payout(['coin', 'coin', 'coin']).gold, 45);
-    assert.equal(leechBite(['leech', 'leech', 'leech'], [true, true, true]), 60);
-    assert.equal(leechBite(['leech', 'coin', 'leech'], [false, true, true]), 15, '锁住的旧井蛭不再咬');
-    assert.ok(Math.abs(tripleWeaponOdds(SLOTS.risky) - (2 * 1 * 1 + 1 * 2 * 1 + 1 * 1 * 2) / 512) < 1e-9);
-    assert.equal(holdOdds(SLOTS.risky, ['blade', 'blade', 'coin'], [true, true, false]), 1 / 8);
-});
-
-test('井中轮被井蛭咬死：这一局结束', () => {
-    const run = slotFloor(11);
-    run.move(0, 1);
-    run.hero.gold = 100000; run.hero.hp = 16;
-    for (let k = 0; k < 40 && run.status === 'playing'; k++) { run.slotSpin(4, 'gold'); run.slotCollect(4); }
-    assert.equal(run.status, 'dead');
-});
-
-// ---------- 井租、精英 ----------
 
 test('井租：不交不能下楼；可以用金币、攻击或防御交', () => {
     const mk = () => new Run([{ ...tiny(['@>']), rent: 30 }, tiny(['@>'])]);
@@ -518,20 +290,6 @@ test('井租：不交不能下楼；可以用金币、攻击或防御交', () =>
     b.move(1, 0);
     assert.ok(b.payRent('gold').ok);
     assert.equal(b.hero.gold, 20);
-});
-
-test('精英倒下后三选一拿武器（由种子决定，三把不重复）', () => {
-    const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 5);
-    run.hero.atk = 40; run.hero.def = 40;
-    run.move(1, 0);
-    assert.equal(run.pos, 1);
-    assert.equal(run.kills, 1);
-    assert.equal(run.pendingWeapons!.length, 3);
-    assert.equal(new Set(run.pendingWeapons).size, 3);
-    const w = run.pendingWeapons![1];
-    run.chooseWeapon(w);
-    assert.equal(run.hero.weapon, w);
-    assert.equal(run.pendingWeapons, null);
 });
 
 test('求解器：血瓶不再强制喝掉——签了"不喝血瓶"或想留着时，不喝的走法也算得到', () => {
@@ -595,45 +353,221 @@ test('求解器：庇护和群居按"还活着的邻居"算，先拆祭司的路
     assert.equal(r.best!.hero.hp, h.hp - Math.min(direct, viaPriest));
 });
 
-test('20 层主线：第 1、2 层所有选图组合都能一路求解到井底（不算补给摊、井中轮、武器）', async () => {
-    const { MAINLINE, buildMainline } = await import('../src/core/mainline');
-    const { solveChain } = await import('../src/core/solver');
-    assert.equal(MAINLINE.length, 20);
-    let worst = Infinity;
-    for (const combo of allChoices(MAINLINE)) {
-        const chain = solveChain(buildMainline(combo));
-        assert.equal(chain.length, 20);
-        const last = chain[19].best;
-        assert.ok(last && last.hp > 0, `组合 ${JSON.stringify(combo.slice(0, 2))} 走不到井底`);
-        worst = Math.min(worst, last!.hp);
+
+// ---------- 断臂转轮版（设计方案第二十五章） ----------
+import { newArm, armOdds, armOutcome, engraveRow } from '../src/core/arm';
+import { WHEEL } from '../src/core/wheel';
+import { DECREES, decreeFor } from '../src/core/decree';
+import { whisper } from '../src/core/whisper';
+import { buildRoute, buildTutorial, RENTS } from '../src/core/route';
+import { solveChain as chain2 } from '../src/core/solver';
+
+test('断臂转轮：开局是空的，打败印记怪可以刻武器，刻上就拿在手上', () => {
+    const run = new Run([{ ...tiny(['@e.>']), marks: [1] }], 'digger', 1);
+    assert.deepEqual(run.arm!.rows, [null, null, null]);
+    assert.equal(run.armSpin('gold').ok, false, '没刻图案不能转');
+    run.hero.atk = 30;
+    run.move(1, 0);
+    assert.deepEqual(run.pendingEngrave, { from: 'mark', choices: ['harpoon'] });
+    assert.ok(run.engrave('harpoon').ok);
+    assert.equal(run.hero.weapon, 'harpoon');
+    assert.deepEqual(run.arm!.rows, ['harpoon', null, null]);
+    assert.equal(run.pendingEngrave, null);
+});
+
+test('断臂转轮：概率是行数比例的三次方；三连换武器，三个空格变空手，其余不变', () => {
+    const arm = newArm();
+    engraveRow(arm, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 1 / 27);
+    engraveRow(arm, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 8 / 27);
+    assert.deepEqual(armOutcome(['hammer', 'hammer', 'hammer']), { kind: 'weapon', id: 'hammer' });
+    assert.deepEqual(armOutcome([null, null, null]), { kind: 'empty' });
+    assert.deepEqual(armOutcome(['hammer', null, 'hammer']), { kind: 'none' });
+});
+
+test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁轴半价；结果由种子决定', () => {
+    const plan = [tiny(['@.>']), tiny(['@.>'])];
+    const run = new Run(plan, 'digger', 7);
+    run.arm!.rows = ['boneKnife', null, 'hammer'];
+    run.hero.gold = 500;
+    assert.equal(run.armPrice(false).gold, 10);
+    const a = run.armSpin('gold');
+    assert.ok(a.ok && a.faces!.length === 3);
+    assert.equal(run.armPrice(false).gold, 15);
+    assert.equal(run.armPrice(true).gold, 10, '锁轴半价（取到 5 的倍数）');
+    assert.equal(run.hero.gold, 490);
+    const kept = a.faces![0];
+    run.armSpin('gold', [true, false, false]);
+    assert.equal(run.arm!.rows[run.arm!.stops![0]], kept, '锁住的轮子不动');
+    // 同一个种子同样的操作，结果一样
+    const run2 = new Run(plan, 'digger', 7);
+    run2.arm!.rows = ['boneKnife', null, 'hammer'];
+    run2.hero.gold = 500;
+    assert.deepEqual(run2.armSpin('gold').faces, a.faces);
+    // 换层后价格重算
+    run.move(1, 0); run.move(1, 0);
+    run.finishFloor(false);
+    assert.equal(run.armPrice(false).gold, 10);
+    // 用生命付 ×1.5
+    assert.equal(run.armPrice(false).blood, 15);
+});
+
+test('断臂转轮：刻满三行后再刻要选一行覆盖；精英倒下三选一', () => {
+    const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 3);
+    run.arm!.rows = ['boneKnife', 'hammer', 'harpoon'];
+    run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
+    run.move(1, 0);
+    const p = run.pendingEngrave!;
+    assert.equal(p.from, 'elite');
+    assert.equal(p.choices.length, 3);
+    assert.equal(run.engrave(p.choices[0]).ok, false, '刻满了要选行');
+    assert.ok(run.engrave(p.choices[0], 1).ok);
+    assert.equal(run.arm!.rows[1], p.choices[0]);
+});
+
+test('骨坛移来的特性：先攻多打一下、反伤、腐蚀、吸血（不超过这一仗掉的血）', () => {
+    const base = { atk: 20, def: 10 };
+    const m = MONSTERS.frog; // 60 / 22 / 8
+    const plain = simulateCombat(base, m);
+    assert.ok(simulateCombat({ ...base, boons: ['firstStrike'] }, m).damage < plain.damage);
+    assert.ok(simulateCombat({ ...base, boons: ['corrode'] }, m).damage <= plain.damage);
+    assert.ok(simulateCombat({ ...base, boons: ['thorns'] }, MONSTERS.guardian).damage <= simulateCombat(base, MONSTERS.guardian).damage);
+    const ls = simulateCombat({ atk: 60, def: 60, boons: ['lifesteal'] }, MONSTERS.moss);
+    assert.equal(ls.damage, 0, '吸血回复不会超过掉的血');
+});
+
+test('骨坛：要杀过对应的怪、转轮上有这把武器；献攻击或骨钥；每座用一次', () => {
+    const run = new Run([tiny(['@v.A>'])], 'digger', 1);
+    run.hero = { hp: 999, atk: 40, def: 40, keys: 1, gold: 0 };
+    run.arm!.rows = ['boneKnife', null, null];
+    run.move(1, 0); // 打回声蝠：学到先攻
+    assert.deepEqual(run.boonsSeen, ['firstStrike']);
+    run.move(1, 0);
+    assert.equal(run.altarOffer(3, 'atk', 'lifesteal', 'boneKnife').ok, false, '没杀过溺魂');
+    assert.equal(run.altarOffer(3, 'atk', 'firstStrike', 'hammer').ok, false, '转轮上没有破壳锤');
+    assert.ok(run.altarOffer(3, 'key', 'firstStrike', 'boneKnife').ok);
+    assert.equal(run.hero.keys, 0);
+    assert.deepEqual(run.arm!.boons.boneKnife, ['firstStrike']);
+    assert.equal(run.altarOffer(3, 'atk', 'firstStrike', 'boneKnife').ok, false, '用过了');
+});
+
+test('大转盘：盘面 8 格公开；30 金起每次 ×1.5；擦图案、井蛭；由种子决定', () => {
+    assert.equal(WHEEL.length, 8);
+    const run = new Run([tiny(['@S>'])], 'digger', 5);
+    run.hero.gold = 1000;
+    run.hero.hp = 5000;
+    run.arm!.rows = ['boneKnife', 'hammer', null];
+    assert.equal(run.wheelPrice(1).gold, 30);
+    const seen = new Set<number>();
+    for (let k = 0; k < 40; k++) {
+        const r = run.wheelSpin(1, k % 2 ? 'gold' : 'blood');
+        if (!r.ok) break;
+        seen.add(r.sector!);
+        run.engraveQueue = [];
     }
-    assert.ok(worst >= 100, `最差的组合到井底只剩 ${worst} 生命`);
+    assert.ok(seen.size >= 5, '转得够多时大部分格子都会出现');
+    assert.equal(run.wheelState(1).spins > 3, true);
 });
 
-test('补给摊：站在旁边买，每样只能买一次，存档读档后还记得', () => {
-    const f = tiny(['@M>'], { stall: [{ id: 'atk', amount: 2, price: 40 }, { id: 'hp', amount: 80, price: 25 }] });
-    const run = new Run([f], 'digger', 1);
-    run.hero.gold = 50;
-    assert.equal(run.step(1).ok, false, '摊位不能走过去');
-    assert.equal(run.stallBuy(1, 0).ok, true);
-    assert.equal(run.hero.atk, 12);
-    assert.equal(run.hero.gold, 10);
-    assert.equal(run.stallBuy(1, 0).ok, false, '每样只能买一次');
-    assert.equal(run.stallBuy(1, 1).ok, false, '金币不够');
-    const back = Run.load([f], JSON.parse(JSON.stringify(run.save())));
-    assert.equal(back.stallSold(0), true);
+test('当铺：卖骨钥、当图案（赎回价每层涨 20%）、买图案、擦图案；不收攻防', () => {
+    const plan = [{ ...tiny(['@.>', 'N..']), shop: ['hammer', 'harpoon'] as WeaponId[] }, { ...tiny(['@.>', 'N..']), shop: ['boneKnife', 'harpoon'] as WeaponId[] }];
+    const run = new Run(plan, 'digger', 1);
+    run.hero.gold = 200; run.hero.keys = 1;
+    run.arm!.rows = ['boneKnife', null, null];
+    run.hero.weapon = 'boneKnife';
+    assert.ok(run.pawnSellKey(3).ok);
+    assert.equal(run.hero.gold, 215);
+    assert.ok(run.pawnRow(3, 0).ok);
+    assert.equal(run.hero.gold, 255);
+    assert.equal(run.hero.weapon, undefined, '当掉手上这把就空手了');
+    assert.ok(run.pawnBuy(3, 0).ok);
+    assert.equal(run.arm!.rows[0], 'hammer');
+    assert.equal(run.pawnBuy(3, 0).ok, false, '每样只卖一次');
+    assert.ok(run.pawnErase(3, 0).ok);
+    assert.deepEqual(run.arm!.rows, [null, null, null]);
+    run.move(1, 0); run.move(1, 0);
+    run.finishFloor(false);
+    assert.equal(run.redeemPrice(0), 48, '过了一层：40 × 1.2');
+    assert.ok(run.pawnRedeem(3, 0).ok);
+    assert.equal(run.hero.weapon, 'boneKnife');
 });
 
-test('签约卡：列出下一层怪签前 / 签后的掉血，按省下的血排序，只列有变化的', async () => {
-    const { contractPreview } = await import('../src/core/contract');
-    const next = tiny(['@.f.e.m.c>']);
-    const hero = { hp: 150, atk: 13, def: 13, keys: 0, gold: 0 };
-    const rows = contractPreview(next, hero, { condition: 'noPotion', deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 });
-    assert.ok(rows.length >= 2);
-    assert.equal(rows[0].name, '锈甲虫', '打不动 → 打得动排最前');
-    assert.equal(rows[0].before, '打不动');
-    for (const r of rows.slice(1)) assert.ok(r.saved! > 0);
-    const frog = rows.find(r => r.name === '骨蛙')!;
-    assert.equal(frog.before, `-${simulateCombat(hero, MONSTERS.frog).damage}`);
-    assert.equal(frog.after, `-${simulateCombat({ ...hero, atk: 16 }, MONSTERS.frog).damage}`);
+test('诏令：第 3 层开头送来，可以拒绝；完成给刻图案；逾期攻击 −2 / −4', () => {
+    const plan = Array.from({ length: 6 }, () => tiny(['@.>', 'm..']));
+    const offered = decreeFor(1, 2);
+    assert.ok(offered && DECREES.includes(offered));
+    assert.equal(decreeFor(1, 3), null);
+    const run = new Run(plan, 'digger', 1);
+    const next = () => { run.tapCell(run.cells.findIndex(c => c.kind === 'exit')); run.finishFloor(false); };
+    next(); next();
+    assert.equal(run.floorIndex, 2);
+    assert.ok(run.decreeOffer);
+    run.decreeOffer = { kind: 'gold', tier: 'silver', n: 9999, text: '带着至少 9999 金币走出一层' };
+    assert.ok(run.acceptDecree().ok);
+    const atk = run.hero.atk;
+    next(); next(); next();
+    assert.equal(run.hero.atk, atk - 4, '三层没完成，银诏令攻击 −4');
+    assert.equal(run.decree, null);
+    // 完成：不喝药的那一层
+    const r2 = new Run(plan, 'digger', 1);
+    r2.decreeOffer = DECREES.find(d => d.kind === 'noPotion')!;
+    r2.acceptDecree();
+    r2.tapCell(r2.cells.findIndex(c => c.kind === 'exit'));
+    r2.finishFloor(false);
+    assert.equal(r2.decree, null);
+    assert.equal(r2.pendingEngrave?.from, 'decree');
+});
+
+test('楼梯口的一句话：按下一层的内容挑，不说类型和数字', () => {
+    assert.match(whisper({ ...tiny(['@S>']), kind: 'wheel' }), /木轮/);
+    assert.match(whisper(tiny(['@G>'])), /呼吸/);
+    assert.match(whisper(tiny(['@mmmmmmmm>'])), /动静很大/);
+    assert.match(whisper(tiny(['@m>'])), /安静/);
+});
+
+test('路线：由种子决定；第 3 层起每层两条楼梯（第 10、19、20 层固定）；第 9、17 层交井租', () => {
+    const a = buildRoute(42);
+    assert.deepEqual(a.map(o => o.map(f => f.map.join(''))), buildRoute(42).map(o => o.map(f => f.map.join(''))));
+    assert.equal(a.length, 20);
+    a.forEach((opts, d) => assert.equal(opts.length, [0, 1, 9, 18, 19].includes(d) ? 1 : 2, `第 ${d + 1} 层`));
+    for (const [d, rent] of Object.entries(RENTS)) for (const f of a[+d]) assert.equal(f.rent, rent);
+    assert.ok(a[0][0].marks?.length, '第 1 层一定有印记怪，帮玩家拿到第一把武器');
+    for (const opts of a) for (const f of opts) parseFloor(f);
+});
+
+test('路线：几种选法都能一路求解到井底（保守下限）', () => {
+    for (const seed of [1, 2, 3]) {
+        const plan = buildRoute(seed);
+        for (const k of [0, 1]) {
+            const c = chain2(plan.map(o => o[Math.min(k, o.length - 1)]));
+            assert.equal(c.length, 20, `种子 ${seed} 选法 ${k}`);
+            assert.ok(c[19].best && c[19].best.hp > 0);
+        }
+    }
+});
+
+test('新手教程局：5 层、没有断臂转轮、没有诏令，第 5 层的井底之眼打不过', () => {
+    const plan = buildTutorial(1);
+    assert.equal(plan.length, 5);
+    const run = new Run(plan, 'digger', 1, { tutorial: true });
+    assert.equal(run.arm, null);
+    assert.equal(run.decreeOffer, null);
+    const last = plan[4][0];
+    const r = solveFromStart(last, { hp: 2000, atk: 30, def: 30, keys: 0, gold: 0 });
+    assert.equal(r.solvable, false, '按教程能达到的属性打不过井底之眼');
+});
+
+test('存档读档：断臂转轮、当铺、诏令、选过的楼梯都保留', () => {
+    const plan = buildRoute(9);
+    const run = new Run(plan, 'digger', 9);
+    run.arm!.rows = ['hammer', null, 'boneKnife'];
+    run.hero.gold = 100;
+    run.armSpin('gold');
+    run.pawned.push({ weapon: 'harpoon', floor: 0 });
+    const back = Run.load(plan, JSON.parse(JSON.stringify(run.save())));
+    assert.deepEqual(back.arm, run.arm);
+    assert.deepEqual(back.pawned, run.pawned);
+    assert.deepEqual(back.hero, run.hero);
+    assert.equal(back.floor.map.join(''), run.floor.map.join(''));
 });

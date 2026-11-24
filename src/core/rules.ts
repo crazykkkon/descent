@@ -21,8 +21,8 @@ export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterD
             else if (!r.canWin) reason = `打不死${m.name}：它回血比你打得快`;
             else if (r.damage >= hero.hp) reason = `打${m.name}要损失 ${r.damage} 生命，你会死`;
             if (reason) return allowFatal ? { ok: true, hero: { ...hero, hp: 0 }, fatal: true, reason } : { ok: false, reason };
-            const heal = hero.weapon ? WEAPONS[hero.weapon].killHeal ?? 0 : 0;
-            return { ok: true, hero: { ...hero, hp: hero.hp - r.damage + heal, gold: hero.gold + m.gold } };
+            const w = hero.weapon ? WEAPONS[hero.weapon] : undefined;
+            return { ok: true, hero: { ...hero, hp: hero.hp - r.damage + (w?.killHeal ?? 0), gold: hero.gold + m.gold + (w?.killGold ?? 0) } };
         }
         case 'item': {
             const h = { ...hero };

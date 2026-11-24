@@ -93,9 +93,21 @@ export interface Hero {
     def: number;
     keys: number;
     gold: number;
-    /** 手上的武器（只有一个武器格） */
+    /** 断臂转轮现在停在的武器（空手时没有） */
     weapon?: WeaponId;
+    /** 这把武器在骨坛上移来的特性 */
+    boons?: Boon[];
 }
+
+/** 骨坛能移到武器上的特性（来自杀过的怪） */
+export type Boon = 'lifesteal' | 'firstStrike' | 'thorns' | 'corrode';
+export const BOON_NAMES: Record<Boon, string> = { lifesteal: '吸血', firstStrike: '先攻', thorns: '反伤', corrode: '腐蚀' };
+export const BOON_DESC: Record<Boon, string> = {
+    lifesteal: '你每次命中回复造成伤害的四分之一（不超过这一仗掉的血）',
+    firstStrike: '开打前你先打一下',
+    thorns: '怪每打你一下，它自己掉 3 血',
+    corrode: '你每打中一下，怪这一仗的防御 −1',
+};
 
 export type WeaponId = 'boneKnife' | 'harpoon' | 'hammer' | 'mossBlade' | 'bellStaff' | 'saltDagger' | 'rustSword' | 'wellHook';
 
@@ -115,8 +127,8 @@ export interface WeaponDef {
     noFirstStrike?: boolean;
     /** 对会吸血的怪伤害翻倍 */
     antiLifesteal?: boolean;
-    /** 签契约时押金减少 */
-    contractDiscount?: number;
+    /** 每次击杀多得的金币 */
+    killGold?: number;
     /** 出口卖掉换多少金币 */
     sell: number;
 }
@@ -130,7 +142,7 @@ export const WEAPONS: Record<WeaponId, WeaponDef> = {
     bellStaff: { id: 'bellStaff', name: '回声铃杖', desc: '攻击 +1；敌人的"先攻"失效', atk: 1, def: 0, noFirstStrike: true, sell: 25 },
     saltDagger: { id: 'saltDagger', name: '盐晶匕首', desc: '对会吸血的怪伤害翻倍', atk: 0, def: 0, antiLifesteal: true, sell: 25 },
     rustSword: { id: 'rustSword', name: '锈蚀大剑', desc: '攻击 +9，防御 −5（诅咒）', atk: 9, def: -5, sell: 35 },
-    wellHook: { id: 'wellHook', name: '井神的钩', desc: '每次签契约，押金 −20', atk: 0, def: 0, contractDiscount: 20, sell: 40 },
+    wellHook: { id: 'wellHook', name: '井神的钩', desc: '每次击杀多得 5 金币', atk: 0, def: 0, killGold: 5, sell: 40 },
 };
 
 export interface CharacterDef {
@@ -154,4 +166,15 @@ export const CHARACTERS: Record<string, CharacterDef> = {
 export const EXIT = {
     leftoverPotionGold: 5,
     keySellGold: 15,
+};
+
+/** 印记怪：打败后可以把对应的武器刻到断臂转轮上 */
+export const MARK_WEAPON: Partial<Record<MonsterId, WeaponId>> = {
+    eel: 'harpoon', moss: 'mossBlade', frog: 'boneKnife', bat: 'bellStaff',
+    wraith: 'saltDagger', crab: 'hammer', beetle: 'rustSword', rat: 'wellHook',
+};
+
+/** 杀过这种怪，骨坛上就能移它的特性 */
+export const MONSTER_BOON: Partial<Record<MonsterId, Boon>> = {
+    wraith: 'lifesteal', bat: 'firstStrike', crab: 'thorns', slug: 'corrode',
 };

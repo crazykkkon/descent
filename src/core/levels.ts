@@ -4,7 +4,6 @@
  * 地图字符说明见 floor.ts。
  */
 import { FloorDef, StallOffer } from './floor';
-import { ContractDef } from './contract';
 
 export interface FloorParams {
     name: string;
@@ -26,10 +25,8 @@ export interface VariantDef {
     /** 这套配置的设计意图（给设计者看，不在游戏里显示，免得剧透） */
     note: string;
     map: string[];
-    /** 上一层楼梯口挂出的契约（作用在这一层） */
-    contract?: ContractDef;
-    /** 上一层楼梯口显示的情报（手写，必须是真话） */
-    intel?: string;
+    /** 带印记的怪（格子下标） */
+    marks?: number[];
 }
 
 export interface LayoutDef {
@@ -180,8 +177,6 @@ export const F2_CLASSIC: FloorPool = {
 };
 
 /** 契约试玩：第 1 层楼梯口挂出契约，押血换攻击 +3，条件是第 2 层一瓶血瓶都不喝 */
-const NO_POTION: ContractDef = { condition: 'noPotion', deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 };
-const F2_INTEL = '下一层有两瓶血瓶。';
 
 /**
  * 契约试玩用的第 2 层：3 张手调的图，每局抽一张。三张图都正好有两瓶小血瓶、共用同一句情报，
@@ -193,7 +188,7 @@ export const F2_CONTRACT: FloorPool = {
     params: {
         ...base,
         name: '第 2 层 · 苔壁',
-        hint: '如果签了契约：喝下任何一瓶血瓶都会毁约，押金不退。',
+        hint: '苔壁湿滑，血瓶藏在怪物身后。',
         bloodCost: 60,
     },
     layouts: [
@@ -201,8 +196,6 @@ export const F2_CONTRACT: FloorPool = {
             name: '侧厅',
             variants: [{
                 note: '血瓶都在侧室里、门口是回声蝠，喝一瓶要先挨 60 血，不太值；主路不经过血瓶，守约很自然，攻击 +3 还能让骨蛙少打几下',
-                contract: NO_POTION,
-                intel: F2_INTEL,
                 map: [
                     '@.....f...>',
                     '##.#.######',
@@ -218,8 +211,6 @@ export const F2_CONTRACT: FloorPool = {
             name: '长廊',
             variants: [{
                 note: '主路上的骨蛙和回声蝠非打不可，攻击 +3 在这里能省下近 50 血；两瓶血瓶（第二瓶是大血瓶）都堵在主路上，守约要绕下面打井苔和盲鳗。签约、然后主动毁约喝药，可能是最划算的',
-                contract: NO_POTION,
-                intel: F2_INTEL,
                 map: [
                     '@.h.f.H.v.>',
                     '.##.#.#.###',
@@ -235,8 +226,6 @@ export const F2_CONTRACT: FloorPool = {
             name: '双道',
             variants: [{
                 note: '两瓶血瓶都在主路上、只有盲鳗守着，本层自己还有赤晶；守约要绕下面的长路打盲鳗和骨蛙，不签最划算',
-                contract: NO_POTION,
-                intel: F2_INTEL,
                 map: [
                     '@.e.h.e.h.>',
                     '.#########.',
@@ -257,7 +246,7 @@ export const F4_GAMBLE: FloorPool = {
     params: {
         ...base,
         name: '第 4 层 · 赌坊',
-        hint: '井壁上嵌着两台井中轮。站到旁边点它，花金币或者生命转一次。下一层就是精英。',
+        hint: '井壁上嵌着一台大转盘。站到旁边点它，花金币或者生命转一次。',
         bloodCost: 60,
     },
     layouts: [
@@ -265,10 +254,9 @@ export const F4_GAMBLE: FloorPool = {
             name: '赌坊',
             variants: [{
                 note: '骨轮（武器多、井蛭多）和苔轮（血瓶金币多）一左一右，从入口走过去不用打怪；四袋金币里有两袋要打怪才拿得到',
-                intel: '下一层是赌坊：两台井中轮，一台武器多，一台血瓶多。',
                 map: [
-                    '@...v...$',
-                    '.##S#T##.',
+                    '@...v...b',
+                    '.##S####.',
                     '......$eh',
                     '####.####',
                     '.$..e..r.',
@@ -557,7 +545,7 @@ export const DEMO_POOLS: FloorPool[] = [
 export function buildFloor(pool: FloorPool, choice: FloorChoice): FloorDef {
     const layout = pool.layouts[choice.layout];
     const v = layout.variants[choice.variant];
-    return { ...pool.params, name: `${pool.params.name}`, hint: pool.params.hint, map: v.map, contract: v.contract, intel: v.intel };
+    return { ...pool.params, name: `${pool.params.name}`, hint: pool.params.hint, map: v.map, marks: v.marks };
 }
 
 /** 可重复的随机数（同一个种子得到同一串数） */
