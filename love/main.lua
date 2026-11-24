@@ -90,6 +90,7 @@ local function saveGame()
 end
 
 local openStairs, openSummary, openDeath, openVictory, openEngrave, openDecree, openArm, openWheel, openPawn, openAltar, openStall, newGame, loadGame, continueFlow
+local spinArm, toggleHold, ARM_SPIN, ARM_BLOOD, SPIN_TIME
 
 local function setMsg(s, err) msg, msgErr = s or '', err or false end
 
@@ -257,13 +258,17 @@ local function weaponLine(id)
     return W(id) .. '：' .. config.WEAPONS[id].desc .. extra
 end
 
-local function armRowsText()
+local function reelText(r)
     local t = {}
-    for k = 1, armMod.ROWS do
-        local r = run.arm.rows[k]
-        t[k] = '第 ' .. k .. ' 行：' .. (r and W(r) or '空')
+    for k = 1, armMod.SIZE do
+        local w = run.arm.reels[r][k]
+        t[k] = w and SHORTW[w] or '空'
     end
-    return t
+    return '轮子 ' .. r .. '：' .. table.concat(t, ' · ')
+end
+
+local function armReelsText()
+    return { reelText(1), reelText(2), reelText(3) }
 end
 
 -- 依次处理：要刻的图案 → 诏令 → 诏令的消息
@@ -279,13 +284,38 @@ function continueFlow()
     if run.decreeOffer then openDecree(); return end
 end
 
--- 刻满了：选一行覆盖
-local function chooseRow(title, onRow)
-    local lines = armRowsText()
-    lines[#lines + 1] = '转轮刻满了。选一行覆盖掉（原来的图案就没了）。'
+-- 选刻在哪个轮子；这个轮子刻满了再选覆盖哪一格。onPick(轮子, 格子或 nil)
+local function chooseSlot(title, onPick)
+    local lines = armReelsText()
+    lines[#lines + 1] = '刻在哪个轮子上？要三个轮子都刻了同一把，才可能转出它。'
     local buttons = {}
-    for k = 1, armMod.ROWS do buttons[#buttons + 1] = { label = '覆盖第 ' .. k .. ' 行', fn = function() closeModal(); onRow(k) end } end
+    for r = 1, armMod.REELS do
+        buttons[#buttons + 1] = { label = '刻在轮子 ' .. r, fn = function()
+            closeModal()
+            if armMod.firstBlank(run.arm, r) then onPick(r, nil); return end
+            local l2 = { reelText(r), '轮子 ' .. r .. ' 刻满了。选一格覆盖掉（原来的图案就没了）。' }
+            local b2 = {}
+            for k = 1, armMod.SIZE do
+                local w = run.arm.reels[r][k]
+                b2[#b2 + 1] = { label = '覆盖第 ' .. k .. ' 格（' .. (w and W(w) or '空') .. '）', fn = function() closeModal(); onPick(r, k) end }
+            end
+            b2[#b2 + 1] = { label = '算了', fn = function() closeModal(); continueFlow() end }
+            openModal(title, l2, b2)
+        end }
+    end
     buttons[#buttons + 1] = { label = '算了', fn = function() closeModal(); continueFlow() end }
+    openModal(title, lines, buttons)
+end
+
+-- 从转轮上挑一格（当掉、擦掉用）。onPick(轮子, 格子)
+local function chooseCell(title, onPick)
+    local lines = armReelsText()
+    local buttons = {}
+    for _, c in ipairs(armMod.engravedCells(run.arm)) do
+        local r, k = c[1], c[2]
+        buttons[#buttons + 1] = { label = '轮子' .. r .. '·' .. k .. ' ' .. W(run.arm.reels[r][k]), fn = function() closeModal(); onPick(r, k) end }
+    end
+    buttons[#buttons + 1] = { label = '算了', fn = function() closeModal() end }
     openModal(title, lines, buttons)
 end
 
@@ -293,20 +323,19 @@ function openEngrave()
     local p = run:pendingEngrave()
     if not p then return end
     local from = ({ elite = '精英倒下了，它身上压着几件东西的印子', mark = '这只怪身上的印记亮了起来', decree = '井神兑现了诏令', wheel = '大转盘吐出一个图案' })[p.from]
-    local lines = { from .. '。刻到断臂转轮上，转轮就会停在它上面（立刻拿在手上）：' }
+    local lines = { from .. '。刻到断臂转轮的一个轮子上（刻上就先拿在手上）：' }
     for _, w in ipairs(p.choices) do lines[#lines + 1] = weaponLine(w) end
-    for _, l in ipairs(armRowsText()) do lines[#lines + 1] = l end
+    for _, l in ipairs(armReelsText()) do lines[#lines + 1] = l end
     local buttons = {}
     for _, w in ipairs(p.choices) do
         buttons[#buttons + 1] = { label = '刻' .. W(w), primary = #p.choices == 1, fn = function()
             closeModal()
-            local function done(row)
-                local r = run:engrave(w, row)
+            chooseSlot('刻' .. W(w), function(reel, cell)
+                local r = run:engrave(w, reel, cell)
                 setMsg(r.msg, not r.ok)
                 saveGame()
                 continueFlow()
-            end
-            if armMod.firstBlank(run.arm) then done(nil) else chooseRow('刻' .. W(w), done) end
+            end)
         end }
     end
     buttons[#buttons + 1] = { label = '不刻', fn = function() closeModal(); run:skipEngrave(); saveGame(); continueFlow() end }
@@ -328,60 +357,55 @@ function openDecree()
     })
 end
 
--- 断臂转轮
+-- 断臂转轮：直接在右侧操作（不弹窗）
 local armHeld = { false, false, false }
-function openArm()
-    if not run.arm then return end
+local armAnim = nil   -- 转动动画 { t }
+local armDrag = nil   -- 拨动 { reel, y0, off }
+
+local function pct(x) return math.floor(x * 1000 + 0.5) / 10 .. '%' end
+
+-- 右侧转轮下面那行说明
+local function armHint()
     local arm = run.arm
-    local lines = {}
-    for _, l in ipairs(armRowsText()) do lines[#lines + 1] = l end
-    local seen, odds = {}, {}
-    for k = 1, armMod.ROWS do
-        local r = arm.rows[k] or false
-        if not seen[r] then
-            seen[r] = true
-            odds[#odds + 1] = (r and W(r) or '空手') .. ' ' .. math.floor(armMod.odds(arm, r) * 1000 + 0.5) / 10 .. '%'
+    if armMod.empty(arm) then return '转轮还是空的。打败带「印」的怪或精英，就能往上刻武器。' end
+    local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
+    if anyHeld then
+        local target, p = armMod.holdOdds(arm, armHeld)
+        if target == nil then return '锁住的图案不一样，重转连不成一线。' end
+        return '锁住后重转，连成「' .. (target and W(target) or '空手') .. '」的机会 ' .. pct(p)
+    end
+    local seen, parts = {}, {}
+    for r = 1, armMod.REELS do
+        for k = 1, armMod.SIZE do
+            local w = arm.reels[r][k]
+            if w and not seen[w] then
+                seen[w] = true
+                local o = armMod.odds(arm, w)
+                if o > 0 then parts[#parts + 1] = W(w) .. ' ' .. pct(o) end
+            end
         end
     end
-    lines[#lines + 1] = '三个轮子连成一线的机会：' .. table.concat(odds, '，') .. '。其他情况手上的武器不变。'
-    local faces = armMod.faces(arm)
-    local anyHeld = faces and (armHeld[1] or armHeld[2] or armHeld[3])
-    if faces then
-        local t = {}
-        for k = 1, 3 do
-            local f = faces[k] and SHORTW[faces[k]] or '空'
-            t[k] = armHeld[k] and ('[' .. f .. ']') or f
-        end
-        lines[#lines + 1] = '现在停在：' .. table.concat(t, ' ')
-        if anyHeld then
-            local target, p = armMod.holdOdds(arm, armHeld)
-            lines[#lines + 1] = target ~= nil and ('锁住后重转，连成「' .. (target and W(target) or '空手') .. '」的机会 ' .. math.floor(p * 1000 + 0.5) / 10 .. '%')
-                or '锁住的图案不一样，重转连不成一线。'
-        end
-    end
-    lines[#lines + 1] = '手上：' .. (run.hero.weapon and weaponLine(run.hero.weapon) or '空手')
-    local price = run:armPrice(anyHeld)
-    lines[#lines + 1] = (anyHeld and '锁轴重转' or '转一次') .. '：' .. price.gold .. ' 金币，或 ' .. price.blood .. ' 生命（每层第一次 10 金，之后每次 ×1.5）'
-    local function spin(pay)
-        local r = run:armSpin(pay, anyHeld and { armHeld[1], armHeld[2], armHeld[3] } or nil)
-        if not r.ok then setMsg(r.msg, true); return end
-        armHeld = { false, false, false }
-        setMsg(r.msg)
-        saveGame()
-        openArm()
-    end
-    local buttons = {
-        { label = '金币 ' .. price.gold, primary = true, fn = function() spin('gold') end },
-        { label = '生命 ' .. price.blood, danger = true, fn = function() spin('blood') end },
-    }
-    if faces then
-        for k = 1, 3 do
-            buttons[#buttons + 1] = { label = (armHeld[k] and '解锁 ' or '锁 ') .. k, fn = function() armHeld[k] = not armHeld[k]; openArm() end }
-        end
-    end
-    buttons[#buttons + 1] = { label = '收起', fn = function() armHeld = { false, false, false }; closeModal() end }
-    openModal('断臂转轮', lines, buttons)
+    parts[#parts + 1] = '空手 ' .. pct(armMod.odds(arm, false))
+    return '中间一行连成：' .. table.concat(parts, '，')
 end
+
+function spinArm(pay)
+    if not run.arm or run.status ~= 'playing' or walking or modal then return end
+    local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
+    local r = run:armSpin(pay, anyHeld and { armHeld[1], armHeld[2], armHeld[3] } or nil)
+    if not r.ok then setMsg(r.msg, true); return end
+    armAnim = { t = 0, held = { armHeld[1], armHeld[2], armHeld[3] } }
+    armHeld = { false, false, false }
+    setMsg(r.msg)
+    saveGame()
+end
+
+function toggleHold(k)
+    if not run.arm or modal then return end
+    armHeld[k] = not armHeld[k]
+end
+
+function openArm() end
 
 -- 走上楼梯（已经在楼梯口确认过）
 local function stepOntoExit()
@@ -500,8 +524,8 @@ end
 function openPawn(i)
     local f = run:floor()
     local lines = { '当铺不收攻击和防御。你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.keys .. ' 把骨钥。' }
-    for _, l in ipairs(armRowsText()) do lines[#lines + 1] = l end
-    for j, p in ipairs(run.pawned) do lines[#lines + 1] = '当着的：' .. W(p.weapon) .. '，赎回 ' .. run:redeemPrice(j) .. ' 金（每过一层涨 20%）' end
+    for _, l in ipairs(armReelsText()) do lines[#lines + 1] = l end
+    for j, p in ipairs(run.pawned) do lines[#lines + 1] = '当着的：' .. W(p.weapon) .. '（原来在轮子 ' .. p.reel .. '），赎回 ' .. run:redeemPrice(j) .. ' 金（每过一层涨 20%）' end
     for k, w in ipairs(f.shop or {}) do lines[#lines + 1] = '卖：' .. weaponLine(w) .. '　' .. Run.PAWN.buyPrice .. ' 金' .. (run:sold(i, k) and '（已卖出）' or '') end
     local function after(r)
         setMsg(r.msg, not r.ok)
@@ -510,22 +534,24 @@ function openPawn(i)
     end
     local buttons = {}
     if run.hero.keys > 0 then buttons[#buttons + 1] = { label = '卖骨钥 +' .. Run.PAWN.keyPrice, fn = function() after(run:pawnSellKey(i)) end } end
-    for k = 1, armMod.ROWS do
-        local w = run.arm.rows[k]
-        if w then
-            buttons[#buttons + 1] = { label = '当' .. W(w) .. ' +' .. Run.PAWN.pawnGold, fn = function() after(run:pawnRow(i, k)) end }
-            buttons[#buttons + 1] = { label = '擦第 ' .. k .. ' 行 −' .. Run.PAWN.erasePrice, fn = function() after(run:pawnErase(i, k)) end }
-        end
+    if not armMod.empty(run.arm) then
+        buttons[#buttons + 1] = { label = '当掉一格 +' .. Run.PAWN.pawnGold, fn = function() chooseCell('当掉哪一格？', function(r, k) after(run:pawnCell(i, r, k)) end) end }
+        buttons[#buttons + 1] = { label = '擦掉一格 −' .. Run.PAWN.erasePrice, fn = function() chooseCell('擦掉哪一格？', function(r, k) after(run:pawnErase(i, r, k)) end) end }
     end
     for j, p in ipairs(run.pawned) do
         buttons[#buttons + 1] = { label = '赎' .. W(p.weapon) .. ' −' .. run:redeemPrice(j), fn = function()
-            if armMod.firstBlank(run.arm) then after(run:pawnRedeem(i, j)) else chooseRow('赎回' .. W(p.weapon), function(row) after(run:pawnRedeem(i, j, row)) end) end
+            if armMod.firstBlank(run.arm, p.reel) then after(run:pawnRedeem(i, j)); return end
+            local l2 = { reelText(p.reel), '轮子 ' .. p.reel .. ' 刻满了。选一格覆盖。' }
+            local b2 = {}
+            for k = 1, armMod.SIZE do b2[#b2 + 1] = { label = '覆盖第 ' .. k .. ' 格', fn = function() closeModal(); after(run:pawnRedeem(i, j, k)) end } end
+            b2[#b2 + 1] = { label = '算了', fn = function() closeModal(); openPawn(i) end }
+            openModal('赎回' .. W(p.weapon), l2, b2)
         end }
     end
     for k, w in ipairs(f.shop or {}) do
         if not run:sold(i, k) then
             buttons[#buttons + 1] = { label = '买' .. W(w) .. ' −' .. Run.PAWN.buyPrice, fn = function()
-                if armMod.firstBlank(run.arm) then after(run:pawnBuy(i, k)) else chooseRow('买' .. W(w), function(row) after(run:pawnBuy(i, k, row)) end) end
+                chooseSlot('买' .. W(w), function(reel, cell) after(run:pawnBuy(i, k, reel, cell)) end)
             end }
         end
     end
@@ -551,9 +577,9 @@ function openAltar(i, boon, weapon)
     elseif not weapon then
         lines[#lines + 1] = '移「' .. config.BOON_NAMES[boon] .. '」到哪一把上？'
         local seen = {}
-        for k = 1, armMod.ROWS do
-            local w = run.arm.rows[k]
-            if w and not seen[w] then
+        for _, c in ipairs(armMod.engravedCells(run.arm)) do
+            local w = run.arm.reels[c[1]][c[2]]
+            if not seen[w] then
                 seen[w] = true
                 buttons[#buttons + 1] = { label = W(w), fn = function() openAltar(i, boon, w) end }
             end
@@ -689,6 +715,10 @@ function love.update(dt)
         walking.t = walking.t + dt
         if walking.t >= STEP_TIME then walking.t = 0; walkStep() end
     end
+    if armAnim then
+        armAnim.t = armAnim.t + dt
+        if armAnim.t > SPIN_TIME + 0.4 then armAnim = nil end
+    end
     if heroAnim then
         heroAnim.t = heroAnim.t + dt / STEP_TIME
         if heroAnim.t >= 1 then heroAnim = nil end
@@ -772,27 +802,59 @@ local FACILITY_GLYPH = {
 }
 
 -- 右侧的断臂转轮：3×3 格子，亮的是现在停的位置
-ARM_BTN = { x = PANEL_X + 150, y = 230, w = 80, h = 18 }
-local ARM_SHORT = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩' }
+-- 右侧的断臂转轮：三个轮子并排，每个露出上中下 3 格，中间一行是结果。按住一个轮子上下拨动可以看整圈，松手弹回。
+local ARM = { x = PANEL_X + 6, y = 206, rw = 38, gap = 6, ch = 15 }
+ARM_SPIN = { x = PANEL_X + 146, y = 206, w = 84, h = 18 }
+ARM_BLOOD = { x = PANEL_X + 146, y = 228, w = 84, h = 18 }
+local function reelRect(r) return ARM.x + (r - 1) * (ARM.rw + ARM.gap), ARM.y + 10 end
+local function lockRect(r) local x, y = reelRect(r); return x, y + ARM.ch * 3 + 3, ARM.rw, 11 end
+local function inRect(lx, ly, x, y, w, h) return lx >= x and lx <= x + w and ly >= y and ly <= y + h end
+SPIN_TIME = 0.45
+
+-- 动画里每个轮子还要多滚几格
+local function animOffset(r)
+    if not armAnim or (armAnim.held and armAnim.held[r]) then return 0 end
+    local dur = SPIN_TIME + (r - 1) * 0.15
+    local t = math.min(1, armAnim.t / dur)
+    return math.floor((1 - t) * (1 - t) * (8 + r * 4) + 0.5)
+end
+
 function drawArmPanel()
     if not run.arm then return end
-    local x0, y0 = PANEL_X + 6, 214
-    text('断臂转轮', x0, y0 - 2, 8, C.accent)
-    local stops = run.arm.stops
-    for reel = 1, 3 do
-        for row = 1, 3 do
-            local x, y = x0 + (reel - 1) * 34, y0 + 12 + (row - 1) * 16
-            local lit = stops and stops[reel] == row
-            setColor(lit and { 0.20, 0.32, 0.28 } or { 0.10, 0.14, 0.16 })
-            love.graphics.rectangle('fill', OX + x * S, OY + y * S, 32 * S, 14 * S)
-            local w = run.arm.rows[row]
-            text(w and ARM_SHORT[w] or '·', x, y + 2, 7.5, w and C.text or C.dim, 'center', 32)
+    text('断臂转轮', ARM.x, ARM.y - 4, 8, C.accent)
+    local held = armHeld
+    for r = 1, armMod.REELS do
+        local x, y = reelRect(r)
+        local off = animOffset(r) + ((armDrag and armDrag.reel == r) and armDrag.off or 0)
+        local center = run.arm.stops[r] - off
+        for row = -1, 1 do
+            local k = (center + row - 1) % armMod.SIZE + 1
+            local cy = y + (row + 1) * ARM.ch
+            local mid = row == 0
+            setColor(mid and (held[r] and { 0.32, 0.26, 0.10 } or { 0.20, 0.32, 0.28 }) or { 0.09, 0.12, 0.14 })
+            love.graphics.rectangle('fill', OX + x * S, OY + cy * S, ARM.rw * S, (ARM.ch - 1) * S)
+            local w = run.arm.reels[r][k]
+            text(w and SHORTW[w] or '·', x, cy + 2, mid and 8 or 7, w and (mid and C.text or C.dim) or C.dim, 'center', ARM.rw)
         end
+        local lx, ly, lw, lh = lockRect(r)
+        setColor(held[r] and { 0.45, 0.35, 0.12 } or { 0.11, 0.16, 0.19 })
+        love.graphics.rectangle('fill', OX + lx * S, OY + ly * S, lw * S, lh * S)
+        text(held[r] and '已锁' or '锁', lx, ly + 2, 6, C.text, 'center', lw)
     end
+    -- 中间一行的标线
+    setColor(C.ok, 0.8)
+    local x1, y1 = reelRect(1)
+    love.graphics.rectangle('line', OX + (x1 - 2) * S, OY + (y1 + ARM.ch - 1) * S, (ARM.rw * 3 + ARM.gap * 2 + 4) * S, (ARM.ch + 1) * S)
+    local anyHeld = held[1] or held[2] or held[3]
+    local price = run:armPrice(anyHeld)
     setColor({ 0.12, 0.35, 0.3 })
-    love.graphics.rectangle('fill', OX + ARM_BTN.x * S, OY + ARM_BTN.y * S, ARM_BTN.w * S, ARM_BTN.h * S)
-    text('转动（R）', ARM_BTN.x, ARM_BTN.y + 4, 7.5, C.text, 'center', ARM_BTN.w)
-    text(run:armPrice(false).gold .. ' 金 / ' .. run:armPrice(false).blood .. ' 血', ARM_BTN.x, ARM_BTN.y + 22, 6.5, C.dim, 'center', ARM_BTN.w)
+    love.graphics.rectangle('fill', OX + ARM_SPIN.x * S, OY + ARM_SPIN.y * S, ARM_SPIN.w * S, ARM_SPIN.h * S)
+    text((anyHeld and '重转 ' or '转动 ') .. price.gold .. ' 金（R）', ARM_SPIN.x, ARM_SPIN.y + 4, 7, C.text, 'center', ARM_SPIN.w)
+    setColor({ 0.35, 0.12, 0.16 })
+    love.graphics.rectangle('fill', OX + ARM_BLOOD.x * S, OY + ARM_BLOOD.y * S, ARM_BLOOD.w * S, ARM_BLOOD.h * S)
+    text('用血转 ' .. price.blood, ARM_BLOOD.x, ARM_BLOOD.y + 4, 7, C.text, 'center', ARM_BLOOD.w)
+    text('按住轮子上下拨动看整圈', ARM_SPIN.x, ARM_BLOOD.y + 22, 6, C.dim, 'left', ARM_SPIN.w)
+    text(armHint(), ARM.x, ARM.y + 76, 6.5, C.dim, 'left', PANEL_W - 12)
 end
 
 local function drawUI()
@@ -931,13 +993,28 @@ function love.mousepressed(mx, my, button)
         end
         return
     end
-    if run.arm and run.status == 'playing' and not walking and lx >= ARM_BTN.x and lx <= ARM_BTN.x + ARM_BTN.w and ly >= ARM_BTN.y and ly <= ARM_BTN.y + ARM_BTN.h then
-        openArm()
-        return
+    if run.arm and run.status == 'playing' and not walking then
+        if inRect(lx, ly, ARM_SPIN.x, ARM_SPIN.y, ARM_SPIN.w, ARM_SPIN.h) then spinArm('gold'); return end
+        if inRect(lx, ly, ARM_BLOOD.x, ARM_BLOOD.y, ARM_BLOOD.w, ARM_BLOOD.h) then spinArm('blood'); return end
+        for r = 1, armMod.REELS do
+            local x, y = reelRect(r)
+            if inRect(lx, ly, x, y, ARM.rw, ARM.ch * 3) then armDrag = { reel = r, y0 = ly, off = 0 }; return end
+            if inRect(lx, ly, lockRect(r)) then toggleHold(r); return end
+        end
     end
     local i = tileAt(lx, ly)
     if i then act(i) end
 end
+
+function love.mousemoved(mx, my)
+    if armDrag then
+        local ly = (my - OY) / S
+        armDrag.off = math.floor((ly - armDrag.y0) / ARM.ch + 0.5)
+    end
+end
+
+-- 松手：转轮弹回转到的那一格
+function love.mousereleased() armDrag = nil end
 
 local DIRS = { up = { 0, -1 }, down = { 0, 1 }, left = { -1, 0 }, right = { 1, 0 }, w = { 0, -1 }, s = { 0, 1 }, a = { -1, 0 }, d = { 1, 0 } }
 
@@ -950,7 +1027,7 @@ function love.keypressed(key)
         if n and modal.buttons[n] then modal.buttons[n].fn() end
         return
     end
-    if key == 'r' and run.arm and run.status == 'playing' and not walking then openArm(); return end
+    if key == 'r' and run.arm and run.status == 'playing' and not walking then spinArm('gold'); return end
     local d = DIRS[key]
     if d and not walking and run.status == 'playing' then
         local x = (run.pos - 1) % run.w + d[1]
@@ -973,7 +1050,9 @@ return {
         meta.tutorialDone = not tutorial
         newGame(seed)
     end,
-    openArm = function() openArm() end,
+    spinArm = function(pay) spinArm(pay) end,
+    toggleHold = function(k) toggleHold(k) end,
+    dragReel = function(r, off) armDrag = off and { reel = r, y0 = 0, off = off } or nil end,
     getMeta = function() return meta end,
     setHover = function(i) hovered = i end,
 }

@@ -115,10 +115,7 @@ end
 
 function Run:checkHold()
     if not self.arm then return end
-    if self.hero.weapon and not armMod.has(self.arm, self.hero.weapon) then
-        self:hold(nil)
-        self.arm.stops = nil
-    end
+    if self.hero.weapon and not armMod.has(self.arm, self.hero.weapon) then self:hold(nil) end
 end
 
 function Run:pendingEngrave() return self.engraveQueue[1] end
@@ -138,16 +135,24 @@ function Run:rollWeaponChoices(salt)
     return out
 end
 
--- 把等待中的图案刻上去；转轮刻满时要指定覆盖哪一行
-function Run:engrave(id, row)
+-- 这个轮子刻满了（又没指定格子）时的提示
+function Run:fullReel(reel, cell)
+    if not self.arm or not reel or reel < 1 or reel > armMod.REELS then return { ok = false, msg = '' } end
+    if not cell and not armMod.firstBlank(self.arm, reel) then return { ok = false, msg = '第 ' .. reel .. ' 个轮子刻满了，选一格覆盖' } end
+    return nil
+end
+
+-- 把等待中的图案刻到第 reel 个轮子上（刻满时要指定格子）；刻上就拿在手上
+function Run:engrave(id, reel, cell)
     local p = self.engraveQueue[1]
     if not self.arm or not p or not contains(p.choices, id) then return { ok = false, msg = '' } end
-    if not row and not armMod.firstBlank(self.arm) then return { ok = false, msg = '转轮刻满了，选一行覆盖' } end
-    local k = armMod.engraveRow(self.arm, id, row)
+    local full = self:fullReel(reel, cell)
+    if full then return full end
+    local k = armMod.engraveCell(self.arm, reel, id, cell)
     if not k then return { ok = false, msg = '' } end
     table.remove(self.engraveQueue, 1)
     self:hold(id)
-    return { ok = true, msg = '把' .. config.WEAPONS[id].name .. '刻在转轮第 ' .. k .. ' 行，转轮停在它上面' }
+    return { ok = true, msg = '把' .. config.WEAPONS[id].name .. '刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格，先拿在手上' }
 end
 
 function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
@@ -165,9 +170,9 @@ local function allHeld(t) return t[1] and t[2] and t[3] and true or false end
 function Run:armSpin(pay, held)
     local arm = self.arm
     if self.status ~= 'playing' or not arm then return { ok = false, msg = '' } end
-    if not (arm.rows[1] or arm.rows[2] or arm.rows[3]) then return { ok = false, msg = '转轮上还没有刻任何图案' } end
+    if armMod.empty(arm) then return { ok = false, msg = '转轮上还没有刻任何图案' } end
     local hold = anyHeld(held)
-    if hold and (not arm.stops or allHeld(held)) then return { ok = false, msg = '要锁住一两个轮子，留至少一个重转' } end
+    if hold and allHeld(held) then return { ok = false, msg = '要锁住一两个轮子，留至少一个重转' } end
     local price = self:armPrice(hold)
     if pay == 'gold' then
         if self.hero.gold < price.gold then return { ok = false, msg = '金币不够（要 ' .. price.gold .. '）' } end
@@ -287,14 +292,14 @@ function Run:wheelSpin(i, pay)
             return { ok = true, msg = '你倒下了。井蛭吸干了你最后一点血', sector = sector }
         end
     elseif s.prize == 'erase' then
-        local rows = {}
-        if self.arm then for k = 1, armMod.ROWS do if self.arm.rows[k] then rows[#rows + 1] = k end end end
-        if #rows == 0 then
+        local cells = self.arm and armMod.engravedCells(self.arm) or {}
+        if #cells == 0 then
             msg = msg .. '：转轮上没有图案，什么也没擦掉'
         else
-            local k = rows[rng.pick(self.seed, key + 600, n, #rows) + 1]
-            msg = msg .. '：第 ' .. k .. ' 行的' .. config.WEAPONS[self.arm.rows[k]].name .. '没了'
-            self.arm.rows[k] = false
+            local c = cells[rng.pick(self.seed, key + 600, n, #cells) + 1]
+            local r, k = c[1], c[2]
+            msg = msg .. '：第 ' .. r .. ' 个轮子第 ' .. k .. ' 格的' .. config.WEAPONS[self.arm.reels[r][k]].name .. '没了'
+            self.arm.reels[r][k] = false
             self:checkHold()
         end
     end
@@ -311,14 +316,14 @@ function Run:pawnSellKey(i)
     return { ok = true, msg = '卖了一把骨钥，得 ' .. Run.PAWN.keyPrice .. ' 金币' }
 end
 
--- 当铺：当掉转轮上的一行（row 从 1 开始）
-function Run:pawnRow(i, row)
+-- 当铺：当掉转轮上的一格
+function Run:pawnCell(i, reel, cell)
     local bad = self:checkFacility(i, 'pawn')
     if bad then return bad end
-    local w = self.arm and self.arm.rows[row]
-    if not w then return { ok = false, msg = '这一行是空的' } end
-    self.arm.rows[row] = false
-    self.pawned[#self.pawned + 1] = { weapon = w, floor = self.floorIndex }
+    local w = self.arm and self.arm.reels[reel] and self.arm.reels[reel][cell]
+    if not w then return { ok = false, msg = '这一格是空的' } end
+    self.arm.reels[reel][cell] = false
+    self.pawned[#self.pawned + 1] = { weapon = w, reel = reel, floor = self.floorIndex }
     self.hero.gold = self.hero.gold + Run.PAWN.pawnGold
     self:checkHold()
     return { ok = true, msg = '当掉了' .. config.WEAPONS[w].name .. '，得 ' .. Run.PAWN.pawnGold .. ' 金币' }
@@ -330,46 +335,49 @@ function Run:redeemPrice(j)
     return math.ceil(Run.PAWN.pawnGold * Run.PAWN.redeemRate ^ (self.floorIndex - p.floor))
 end
 
-function Run:pawnRedeem(i, j, row)
+-- 赎回当掉的第 j 件，刻回原来那个轮子（刻满时指定格子）
+function Run:pawnRedeem(i, j, cell)
     local bad = self:checkFacility(i, 'pawn')
     if bad then return bad end
     local p = self.pawned[j]
     if not p or not self.arm then return { ok = false, msg = '' } end
-    if not row and not armMod.firstBlank(self.arm) then return { ok = false, msg = '转轮刻满了，选一行覆盖' } end
+    local full = self:fullReel(p.reel, cell)
+    if full then return full end
     local unpaid = self:pay(self:redeemPrice(j))
     if unpaid then return unpaid end
-    armMod.engraveRow(self.arm, p.weapon, row)
+    armMod.engraveCell(self.arm, p.reel, p.weapon, cell)
     table.remove(self.pawned, j)
     self:hold(p.weapon)
     return { ok = true, msg = '赎回了' .. config.WEAPONS[p.weapon].name }
 end
 
--- 当铺：买第 k 个武器图案刻上去（k 从 1 开始）
-function Run:pawnBuy(i, k, row)
+-- 当铺：买第 k 个武器图案刻到第 reel 个轮子上（k 从 1 开始）
+function Run:pawnBuy(i, k, reel, cell)
     local bad = self:checkFacility(i, 'pawn')
     if bad then return bad end
     local w = self:floor().shop and self:floor().shop[k]
     if not w or not self.arm then return { ok = false, msg = '' } end
     if self:sold(i, k) then return { ok = false, msg = '这样已经买过了' } end
-    if not row and not armMod.firstBlank(self.arm) then return { ok = false, msg = '转轮刻满了，选一行覆盖' } end
+    local full = self:fullReel(reel, cell)
+    if full then return full end
     local unpaid = self:pay(Run.PAWN.buyPrice)
     if unpaid then return unpaid end
-    armMod.engraveRow(self.arm, w, row)
+    armMod.engraveCell(self.arm, reel, w, cell)
     self:markSold(i, k)
     self:hold(w)
     return { ok = true, msg = '花 ' .. Run.PAWN.buyPrice .. ' 金币刻上了' .. config.WEAPONS[w].name }
 end
 
-function Run:pawnErase(i, row)
+function Run:pawnErase(i, reel, cell)
     local bad = self:checkFacility(i, 'pawn')
     if bad then return bad end
-    local w = self.arm and self.arm.rows[row]
-    if not w then return { ok = false, msg = '这一行是空的' } end
+    local w = self.arm and self.arm.reels[reel] and self.arm.reels[reel][cell]
+    if not w then return { ok = false, msg = '这一格是空的' } end
     local unpaid = self:pay(Run.PAWN.erasePrice)
     if unpaid then return unpaid end
-    self.arm.rows[row] = false
+    self.arm.reels[reel][cell] = false
     self:checkHold()
-    return { ok = true, msg = '擦掉了第 ' .. row .. ' 行的' .. config.WEAPONS[w].name }
+    return { ok = true, msg = '擦掉了第 ' .. reel .. ' 个轮子第 ' .. cell .. ' 格的' .. config.WEAPONS[w].name }
 end
 
 -- 骨坛：献 3 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座用一次）

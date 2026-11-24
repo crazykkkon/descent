@@ -64178,13 +64178,18 @@ return {
   armSessions = {
     {
       seed = 1,
-      rows = { "boneKnife", "blank", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "blank", "boneKnife" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64198,6 +64203,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "blank", "boneKnife", "blank" },
+          stops = { 4, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64212,6 +64218,7 @@ return {
           held = { true, false, false },
           ok = true,
           faces = { "blank", "boneKnife", "blank" },
+          stops = { 4, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64224,7 +64231,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "blank", "boneKnife", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 2 },
           hero = {
             hp = 447,
             atk = 13,
@@ -64238,7 +64246,8 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "blank", "boneKnife", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -64251,7 +64260,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "boneKnife", "boneKnife", "blank" },
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 1, 0, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -64265,13 +64275,18 @@ return {
     },
     {
       seed = 1,
-      rows = { "boneKnife", "blank", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "blank", "blank", "boneKnife" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64286,6 +64301,7 @@ return {
           held = { false, true, false },
           ok = true,
           faces = { "blank", "blank", "boneKnife" },
+          stops = { 4, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64300,6 +64316,7 @@ return {
           held = { false, true, true },
           ok = true,
           faces = { "blank", "blank", "boneKnife" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64313,6 +64330,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 3, 3 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64325,7 +64343,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "boneKnife", "blank", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 2, 4 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64338,7 +64357,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "boneKnife", "boneKnife", "blank" },
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
@@ -64352,6 +64372,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
@@ -64365,205 +64386,18 @@ return {
     },
     {
       seed = 1,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { true, false, false },
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260
-          },
-          spins = 3
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          held = { true, true, false },
           ok = true,
           faces = { "blank", "hammer", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 235
-          },
-          spins = 5
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 160
-          },
-          spins = 6
-        }
-      }
-    },
-    {
-      seed = 1,
-      rows = { "hammer", "hammer", "blank" },
-      script = 1,
-      steps = {
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 300
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          held = { false, true, false },
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { false, true, true },
-          ok = true,
-          faces = { "hammer", "hammer", "hammer" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275,
-            weapon = "hammer"
-          },
-          spins = 3
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 240,
-            weapon = "hammer"
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190,
-            weapon = "hammer"
-          },
-          spins = 5
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190,
-            weapon = "hammer"
-          },
-          spins = 6
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 75,
-            weapon = "hammer"
-          },
-          spins = 7
-        }
-      }
-    },
-    {
-      seed = 1,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
-      script = 0,
-      steps = {
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64576,7 +64410,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "saltDagger", "harpoon", "mossBlade" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64590,7 +64425,8 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "saltDagger", "harpoon", "mossBlade" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64603,7 +64439,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "saltDagger", "harpoon", "mossBlade" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 2 },
           hero = {
             hp = 447,
             atk = 13,
@@ -64617,7 +64454,8 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "saltDagger", "harpoon", "saltDagger" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -64630,7 +64468,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "harpoon", "saltDagger" },
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 1, 0, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -64644,13 +64483,18 @@ return {
     },
     {
       seed = 1,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64664,7 +64508,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "blank", "hammer", "hammer" },
+          stops = { 4, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64678,7 +64523,8 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "mossBlade", "mossBlade", "harpoon" },
+          faces = { "blank", "hammer", "hammer" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64691,7 +64537,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "mossBlade", "saltDagger" },
+          faces = { "hammer", "blank", "blank" },
+          stops = { 0, 3, 3 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64704,7 +64551,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "mossBlade", "saltDagger" },
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 1, 2, 4 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64717,7 +64565,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "harpoon", "harpoon", "saltDagger" },
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
@@ -64730,7 +64579,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "mossBlade", "saltDagger" },
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
@@ -64744,13 +64594,18 @@ return {
     },
     {
       seed = 1,
-      rows = { "rustSword", "blank", "rustSword" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64763,7 +64618,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "harpoon", "harpoon", "mossBlade" },
+          stops = { 4, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64777,7 +64633,8 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "harpoon", "harpoon", "mossBlade" },
+          stops = { 4, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -64790,13 +64647,15 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 3, 1, 2 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 260,
+            weapon = "harpoon"
           },
           spins = 4
         },
@@ -64804,28 +64663,30 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 235,
-            weapon = "rustSword"
+            weapon = "harpoon"
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 0, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 160,
-            weapon = "rustSword"
+            weapon = "harpoon"
           },
           spins = 6
         }
@@ -64833,13 +64694,18 @@ return {
     },
     {
       seed = 1,
-      rows = { "rustSword", "blank", "rustSword" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64853,7 +64719,216 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 3, 2, 0 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "harpoon", "harpoon", "mossBlade" },
+          stops = { 0, 3, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "mossBlade", "mossBlade", "harpoon" },
+          stops = { 1, 2, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 0, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 0, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 1,
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 0, 3 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 2 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 0, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 1,
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "blank", "blank", "rustSword" },
+          stops = { 4, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64868,6 +64943,7 @@ return {
           held = { false, true, true },
           ok = true,
           faces = { "blank", "blank", "rustSword" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -64880,196 +64956,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 240
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190
-          },
-          spins = 5
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190,
-            weapon = "rustSword"
-          },
-          spins = 6
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 75,
-            weapon = "rustSword"
-          },
-          spins = 7
-        }
-      }
-    },
-    {
-      seed = 9,
-      rows = { "boneKnife", "blank", "blank" },
-      script = 0,
-      steps = {
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "boneKnife", "blank" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "boneKnife" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { true, false, false },
-          ok = true,
-          faces = { "blank", "boneKnife", "boneKnife" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260
-          },
-          spins = 3
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          held = { true, true, false },
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 235
-          },
-          spins = 5
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 160
-          },
-          spins = 6
-        }
-      }
-    },
-    {
-      seed = 9,
-      rows = { "boneKnife", "blank", "blank" },
-      script = 1,
-      steps = {
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "blank", "boneKnife", "blank" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 300
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          held = { false, true, false },
-          ok = true,
-          faces = { "blank", "boneKnife", "blank" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { false, true, true },
-          ok = true,
-          faces = { "boneKnife", "boneKnife", "blank" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
-          },
-          spins = 3
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "boneKnife", "boneKnife", "blank" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 0, 3, 3 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65083,6 +64971,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 1, 2, 4 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65096,6 +64985,7 @@ return {
           pay = "blood",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
@@ -65108,7 +64998,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "boneKnife", "boneKnife" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
@@ -65122,13 +65013,18 @@ return {
     },
     {
       seed = 9,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "hammer", "blank" },
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 2, 0, 4 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65141,7 +65037,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 1, 1 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65155,7 +65052,8 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "blank", "hammer", "hammer" },
+          faces = { "blank", "blank", "boneKnife" },
+          stops = { 4, 1, 0 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65168,7 +65066,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "blank", "blank", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 4, 1 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65182,7 +65081,8 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "blank", "blank", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 4, 1 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65195,7 +65095,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "hammer", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65209,13 +65110,18 @@ return {
     },
     {
       seed = 9,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "hammer", "hammer", "blank" },
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 2, 0, 4 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65229,7 +65135,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "blank", "hammer", "hammer" },
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 4, 0, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65243,103 +65150,318 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 1, 0, 1 },
           hero = {
             hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 1, 0, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "boneKnife", "blank" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "blank", "blank", "hammer" },
+          stops = { 4, 1, 0 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 1, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 1, 0, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "saltDagger", "harpoon", "harpoon" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 275,
-            weapon = "hammer"
-          },
-          spins = 3
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 240,
-            weapon = "hammer"
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190,
-            weapon = "hammer"
-          },
-          spins = 5
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "blank", "hammer", "blank" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190,
-            weapon = "hammer"
-          },
-          spins = 6
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 75,
-            weapon = "hammer"
-          },
-          spins = 7
-        }
-      }
-    },
-    {
-      seed = 9,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
-      script = 0,
-      steps = {
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "mossBlade", "harpoon", "saltDagger" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
+            weapon = "harpoon"
           },
           spins = 2
         },
@@ -65347,26 +65469,30 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "saltDagger", "harpoon", "harpoon" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 4, 1, 0 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 260,
+            weapon = "harpoon"
           },
           spins = 3
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "saltDagger", "saltDagger", "mossBlade" },
+          faces = { "harpoon", "saltDagger", "harpoon" },
+          stops = { 3, 4, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 260,
+            weapon = "harpoon"
           },
           spins = 4
         },
@@ -65374,217 +65500,30 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "saltDagger", "saltDagger", "mossBlade" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 235
-          },
-          spins = 5
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "saltDagger", "mossBlade", "saltDagger" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 160
-          },
-          spins = 6
-        }
-      }
-    },
-    {
-      seed = 9,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
-      script = 1,
-      steps = {
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "mossBlade", "harpoon", "saltDagger" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 300
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          held = { false, true, false },
-          ok = true,
-          faces = { "saltDagger", "harpoon", "mossBlade" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { false, true, true },
-          ok = true,
-          faces = { "harpoon", "harpoon", "mossBlade" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
-          },
-          spins = 3
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "harpoon", "harpoon", "saltDagger" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 240
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "saltDagger", "mossBlade", "mossBlade" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190
-          },
-          spins = 5
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "saltDagger", "mossBlade", "saltDagger" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190
-          },
-          spins = 6
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "saltDagger", "harpoon", "harpoon" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 75
-          },
-          spins = 7
-        }
-      }
-    },
-    {
-      seed = 9,
-      rows = { "rustSword", "blank", "rustSword" },
-      script = 0,
-      steps = {
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "rustSword", "rustSword" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { true, false, false },
-          ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260,
-            weapon = "rustSword"
-          },
-          spins = 3
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260,
-            weapon = "rustSword"
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          held = { true, true, false },
-          ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "harpoon", "saltDagger", "harpoon" },
+          stops = { 3, 4, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 235,
-            weapon = "rustSword"
+            weapon = "harpoon"
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 160,
-            weapon = "rustSword"
+            weapon = "harpoon"
           },
           spins = 6
         }
@@ -65592,13 +65531,18 @@ return {
     },
     {
       seed = 9,
-      rows = { "rustSword", "blank", "rustSword" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "blank", "rustSword", "rustSword" },
+          faces = { "saltDagger", "harpoon", "harpoon" },
+          stops = { 2, 0, 4 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65612,7 +65556,222 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290,
+            weapon = "harpoon"
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 0, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275,
+            weapon = "harpoon"
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "mossBlade", "harpoon", "mossBlade" },
+          stops = { 1, 0, 3 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240,
+            weapon = "harpoon"
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "harpoon"
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190,
+            weapon = "harpoon"
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 4, 0, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75,
+            weapon = "harpoon"
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 1, 1 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "blank", "blank", "rustSword" },
+          stops = { 4, 1, 0 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 4, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 9,
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 0, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 0, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65626,7 +65785,8 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 0, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65639,56 +65799,56 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 0, 3 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240,
-            weapon = "rustSword"
+            gold = 240
           },
           spins = 4
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 1, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "rustSword"
+            gold = 190
           },
           spins = 5
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "rustSword"
+            gold = 190
           },
           spins = 6
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 0, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
-            weapon = "rustSword"
+            gold = 75
           },
           spins = 7
         }
@@ -65696,13 +65856,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "boneKnife", "blank", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "boneKnife" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65715,7 +65880,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "boneKnife", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65730,6 +65896,7 @@ return {
           held = { true, false, false },
           ok = true,
           faces = { "blank", "boneKnife", "blank" },
+          stops = { 3, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65743,6 +65910,7 @@ return {
           pay = "blood",
           ok = true,
           faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65756,7 +65924,8 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "boneKnife", "blank", "boneKnife" },
+          faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 2, 1 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65770,6 +65939,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65783,13 +65953,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "boneKnife", "blank", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
           faces = { "blank", "blank", "boneKnife" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65803,7 +65978,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "blank", "blank", "boneKnife" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65817,7 +65993,8 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "blank", "blank", "boneKnife" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65831,6 +66008,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "boneKnife", "blank", "boneKnife" },
+          stops = { 0, 3, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65843,7 +66021,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "blank", "boneKnife" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 2, 4, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65857,6 +66036,7 @@ return {
           pay = "blood",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
@@ -65870,6 +66050,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 372,
             atk = 13,
@@ -65883,13 +66064,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
           faces = { "blank", "hammer", "hammer" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65902,7 +66088,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "hammer", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65917,6 +66104,7 @@ return {
           held = { true, false, false },
           ok = true,
           faces = { "blank", "hammer", "blank" },
+          stops = { 3, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -65930,6 +66118,7 @@ return {
           pay = "blood",
           ok = true,
           faces = { "hammer", "hammer", "blank" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -65943,28 +66132,28 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "hammer", "hammer", "blank" },
+          stops = { 0, 2, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
-            weapon = "hammer"
+            gold = 235
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
-            weapon = "hammer"
+            gold = 160
           },
           spins = 6
         }
@@ -65972,13 +66161,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
           faces = { "blank", "hammer", "hammer" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -65992,7 +66186,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "blank", "hammer", "hammer" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 3, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66006,7 +66201,8 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "blank", "hammer", "hammer" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66020,6 +66216,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "hammer", "blank", "hammer" },
+          stops = { 0, 3, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66032,7 +66229,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "blank", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 2, 4, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66045,28 +66243,28 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "hammer"
+            gold = 190
           },
           spins = 6
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "blank", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
-            weapon = "hammer"
+            gold = 75
           },
           spins = 7
         }
@@ -66074,13 +66272,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 500,
             atk = 13,
@@ -66093,13 +66296,15 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "saltDagger", "harpoon", "saltDagger" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 275,
+            weapon = "harpoon"
           },
           spins = 2
         },
@@ -66107,26 +66312,30 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "saltDagger", "harpoon", "saltDagger" },
+          faces = { "harpoon", "harpoon", "mossBlade" },
+          stops = { 3, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 260,
+            weapon = "harpoon"
           },
           spins = 3
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "harpoon", "mossBlade", "saltDagger" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 260,
+            weapon = "harpoon"
           },
           spins = 4
         },
@@ -66135,26 +66344,29 @@ return {
           held = { true, true, false },
           ok = true,
           faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 0, 2, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 235,
+            weapon = "harpoon"
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "mossBlade", "mossBlade", "mossBlade" },
+          faces = { "saltDagger", "mossBlade", "harpoon" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 160,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 6
         }
@@ -66162,13 +66374,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66182,7 +66399,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 3, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66196,7 +66414,8 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66209,54 +66428,60 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "saltDagger", "harpoon" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 0, 3, 0 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 240,
+            weapon = "harpoon"
           },
           spins = 4
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "mossBlade", "saltDagger", "harpoon" },
+          faces = { "saltDagger", "saltDagger", "harpoon" },
+          stops = { 2, 4, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 190,
+            weapon = "harpoon"
           },
           spins = 5
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "mossBlade", "mossBlade", "mossBlade" },
+          faces = { "saltDagger", "mossBlade", "harpoon" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 190,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "saltDagger", "saltDagger", "mossBlade" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 75,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 7
         }
@@ -66264,13 +66489,18 @@ return {
     },
     {
       seed = 4242,
-      rows = { "rustSword", "blank", "rustSword" },
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "blank", "blank", "rustSword" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 500,
             atk = 13,
@@ -66283,200 +66513,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275,
-            weapon = "rustSword"
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { true, false, false },
-          ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260,
-            weapon = "rustSword"
-          },
-          spins = 3
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 260,
-            weapon = "rustSword"
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          held = { true, true, false },
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 235,
-            weapon = "rustSword"
-          },
-          spins = 5
-        },
-        {
-          pay = "gold",
-          ok = true,
           faces = { "blank", "blank", "blank" },
-          hero = {
-            hp = 447,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 160
-          },
-          spins = 6
-        }
-      }
-    },
-    {
-      seed = 4242,
-      rows = { "rustSword", "blank", "rustSword" },
-      script = 1,
-      steps = {
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 300
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          held = { false, true, false },
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 2
-        },
-        {
-          pay = "gold",
-          held = { false, true, true },
-          ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 275
-          },
-          spins = 3
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 240,
-            weapon = "rustSword"
-          },
-          spins = 4
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "rustSword", "rustSword" },
-          hero = {
-            hp = 485,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190,
-            weapon = "rustSword"
-          },
-          spins = 5
-        },
-        {
-          pay = "blood",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 190
-          },
-          spins = 6
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
-          hero = {
-            hp = 372,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 75
-          },
-          spins = 7
-        }
-      }
-    },
-    {
-      seed = 2147483647,
-      rows = { "boneKnife", "blank", "blank" },
-      script = 0,
-      steps = {
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          hero = {
-            hp = 500,
-            atk = 13,
-            def = 13,
-            keys = 0,
-            gold = 290
-          },
-          spins = 1
-        },
-        {
-          pay = "gold",
-          ok = true,
-          faces = { "boneKnife", "blank", "blank" },
+          stops = { 3, 1, 4 },
           hero = {
             hp = 500,
             atk = 13,
@@ -66490,7 +66528,8 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "boneKnife", "blank", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 0, 3 },
           hero = {
             hp = 500,
             atk = 13,
@@ -66503,7 +66542,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "boneKnife", "boneKnife", "blank" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 0, 2, 4 },
           hero = {
             hp = 447,
             atk = 13,
@@ -66517,7 +66557,8 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "boneKnife", "boneKnife", "blank" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 0, 2, 1 },
           hero = {
             hp = 447,
             atk = 13,
@@ -66530,7 +66571,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "boneKnife", "blank", "boneKnife" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 447,
             atk = 13,
@@ -66543,14 +66585,19 @@ return {
       }
     },
     {
-      seed = 2147483647,
-      rows = { "boneKnife", "blank", "blank" },
+      seed = 4242,
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "blank", "blank", "blank" },
+          faces = { "blank", "blank", "rustSword" },
+          stops = { 3, 2, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66564,7 +66611,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "boneKnife", "blank", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66579,6 +66627,7 @@ return {
           held = { false, true, true },
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66591,7 +66640,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "blank", "boneKnife" },
+          faces = { "rustSword", "blank", "rustSword" },
+          stops = { 0, 3, 0 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66604,7 +66654,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "boneKnife", "blank", "blank" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 4, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -66617,7 +66668,8 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "boneKnife", "blank", "boneKnife" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
@@ -66631,6 +66683,7 @@ return {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 372,
             atk = 13,
@@ -66644,34 +66697,38 @@ return {
     },
     {
       seed = 2147483647,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290,
-            weapon = "hammer"
+            gold = 290
           },
           spins = 1
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 1, 2 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275,
-            weapon = "hammer"
+            gold = 275
           },
           spins = 2
         },
@@ -66679,28 +66736,28 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "hammer", "blank", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 4, 2 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
-            weapon = "hammer"
+            gold = 260
           },
           spins = 3
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "hammer", "hammer", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 1, 3 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
-            weapon = "hammer"
+            gold = 260
           },
           spins = 4
         },
@@ -66708,28 +66765,28 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "hammer", "hammer", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 1, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
-            weapon = "hammer"
+            gold = 235
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 1, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
-            weapon = "hammer"
+            gold = 160
           },
           spins = 6
         }
@@ -66737,20 +66794,24 @@ return {
     },
     {
       seed = 2147483647,
-      rows = { "hammer", "hammer", "blank" },
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "boneKnife", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 300,
-            weapon = "hammer"
+            gold = 300
           },
           spins = 1
         },
@@ -66758,14 +66819,14 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 3, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290,
-            weapon = "hammer"
+            gold = 290
           },
           spins = 2
         },
@@ -66773,28 +66834,236 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 2, 3, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275,
-            weapon = "hammer"
+            gold = 275
           },
           spins = 3
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "hammer", "hammer" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240,
-            weapon = "hammer"
+            gold = 240
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 3, 4 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 5
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "boneKnife", "blank", "blank" },
+          stops = { 0, 1, 1 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 190
+          },
+          spins = 6
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 2, 2, 2 },
+          hero = {
+            hp = 372,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 75
+          },
+          spins = 7
+        }
+      }
+    },
+    {
+      seed = 2147483647,
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      script = 0,
+      steps = {
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "blank", "blank" },
+          stops = { 1, 1, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { true, false, false },
+          ok = true,
+          faces = { "hammer", "blank", "blank" },
+          stops = { 1, 4, 2 },
+          hero = {
+            hp = 500,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 3
+        },
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "hammer", "blank", "blank" },
+          stops = { 1, 1, 3 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 260
+          },
+          spins = 4
+        },
+        {
+          pay = "gold",
+          held = { true, true, false },
+          ok = true,
+          faces = { "hammer", "blank", "blank" },
+          stops = { 1, 1, 4 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 235
+          },
+          spins = 5
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "hammer", "blank", "blank" },
+          stops = { 0, 1, 1 },
+          hero = {
+            hp = 447,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 160
+          },
+          spins = 6
+        }
+      }
+    },
+    {
+      seed = 2147483647,
+      reels = {
+        { "hammer", "hammer", "blank", "blank", "blank" },
+        { "hammer", "blank", "hammer", "blank", "blank" },
+        { "hammer", "blank", "blank", "blank", "blank" }
+      },
+      script = 1,
+      steps = {
+        {
+          pay = "blood",
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 300
+          },
+          spins = 1
+        },
+        {
+          pay = "gold",
+          held = { false, true, false },
+          ok = true,
+          faces = { "hammer", "blank", "blank" },
+          stops = { 1, 3, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 290
+          },
+          spins = 2
+        },
+        {
+          pay = "gold",
+          held = { false, true, true },
+          ok = true,
+          faces = { "blank", "blank", "blank" },
+          stops = { 2, 3, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 275
+          },
+          spins = 3
+        },
+        {
+          pay = "gold",
+          ok = true,
+          faces = { "blank", "hammer", "blank" },
+          stops = { 4, 2, 1 },
+          hero = {
+            hp = 485,
+            atk = 13,
+            def = 13,
+            keys = 0,
+            gold = 240
           },
           spins = 4
         },
@@ -66802,41 +67071,41 @@ return {
           pay = "gold",
           ok = true,
           faces = { "hammer", "blank", "blank" },
+          stops = { 1, 3, 4 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "hammer"
+            gold = 190
           },
           spins = 5
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "hammer", "blank", "blank" },
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "hammer"
+            gold = 190
           },
           spins = 6
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "hammer", "hammer", "hammer" },
+          faces = { "blank", "hammer", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
-            weapon = "hammer"
+            gold = 75
           },
           spins = 7
         }
@@ -66844,34 +67113,40 @@ return {
     },
     {
       seed = 2147483647,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
-          faces = { "mossBlade", "mossBlade", "mossBlade" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 290,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 1
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "mossBlade", "mossBlade" },
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 1, 2 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 275,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 2
         },
@@ -66879,28 +67154,30 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "harpoon", "saltDagger", "mossBlade" },
+          faces = { "mossBlade", "saltDagger", "harpoon" },
+          stops = { 1, 4, 2 },
           hero = {
             hp = 500,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 260,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 3
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "harpoon", "harpoon", "saltDagger" },
+          faces = { "mossBlade", "harpoon", "mossBlade" },
+          stops = { 1, 1, 3 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 260,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 4
         },
@@ -66908,28 +67185,30 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "harpoon", "harpoon", "saltDagger" },
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 1, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 235,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "mossBlade", "harpoon" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 0, 1, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 160,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 6
         }
@@ -66937,20 +67216,25 @@ return {
     },
     {
       seed = 2147483647,
-      rows = { "harpoon", "mossBlade", "saltDagger" },
+      reels = {
+        { "harpoon", "mossBlade", "saltDagger", "harpoon", "harpoon" },
+        { "harpoon", "harpoon", "mossBlade", "harpoon", "saltDagger" },
+        { "harpoon", "harpoon", "harpoon", "mossBlade", "harpoon" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
-          faces = { "mossBlade", "mossBlade", "mossBlade" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 300,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 1
         },
@@ -66958,14 +67242,15 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "harpoon", "mossBlade", "mossBlade" },
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 3, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 290,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 2
         },
@@ -66973,70 +67258,75 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "mossBlade", "mossBlade", "mossBlade" },
+          faces = { "saltDagger", "harpoon", "harpoon" },
+          stops = { 2, 3, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 275,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 3
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
+          faces = { "harpoon", "mossBlade", "harpoon" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 240,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 4
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "harpoon", "saltDagger", "saltDagger" },
+          faces = { "mossBlade", "harpoon", "harpoon" },
+          stops = { 1, 3, 4 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 190,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 5
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "harpoon", "mossBlade", "harpoon" },
+          faces = { "harpoon", "harpoon", "harpoon" },
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 190,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "mossBlade", "mossBlade", "mossBlade" },
+          faces = { "saltDagger", "mossBlade", "harpoon" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
             gold = 75,
-            weapon = "mossBlade"
+            weapon = "harpoon"
           },
           spins = 7
         }
@@ -67044,13 +67334,18 @@ return {
     },
     {
       seed = 2147483647,
-      rows = { "rustSword", "blank", "rustSword" },
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
       script = 0,
       steps = {
         {
           pay = "gold",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 500,
             atk = 13,
@@ -67063,7 +67358,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 1, 2 },
           hero = {
             hp = 500,
             atk = 13,
@@ -67077,7 +67373,8 @@ return {
           pay = "gold",
           held = { true, false, false },
           ok = true,
-          faces = { "rustSword", "rustSword", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 4, 2 },
           hero = {
             hp = 500,
             atk = 13,
@@ -67090,14 +67387,14 @@ return {
         {
           pay = "blood",
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 1, 3 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
-            weapon = "rustSword"
+            gold = 260
           },
           spins = 4
         },
@@ -67105,28 +67402,28 @@ return {
           pay = "gold",
           held = { true, true, false },
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 1, 4 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
-            weapon = "rustSword"
+            gold = 235
           },
           spins = 5
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 0, 1, 1 },
           hero = {
             hp = 447,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
-            weapon = "rustSword"
+            gold = 160
           },
           spins = 6
         }
@@ -67134,13 +67431,18 @@ return {
     },
     {
       seed = 2147483647,
-      rows = { "rustSword", "blank", "rustSword" },
+      reels = {
+        { "rustSword", "blank", "rustSword", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "rustSword", "blank", "blank", "blank", "blank" }
+      },
       script = 1,
       steps = {
         {
           pay = "blood",
           ok = true,
           faces = { "blank", "blank", "blank" },
+          stops = { 3, 3, 2 },
           hero = {
             hp = 485,
             atk = 13,
@@ -67154,7 +67456,8 @@ return {
           pay = "gold",
           held = { false, true, false },
           ok = true,
-          faces = { "rustSword", "blank", "blank" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 3, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -67168,7 +67471,8 @@ return {
           pay = "gold",
           held = { false, true, true },
           ok = true,
-          faces = { "blank", "blank", "blank" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 3, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -67181,7 +67485,8 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 4, 2, 1 },
           hero = {
             hp = 485,
             atk = 13,
@@ -67194,35 +67499,36 @@ return {
         {
           pay = "gold",
           ok = true,
-          faces = { "rustSword", "rustSword", "rustSword" },
+          faces = { "blank", "blank", "blank" },
+          stops = { 1, 3, 4 },
           hero = {
             hp = 485,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "rustSword"
+            gold = 190
           },
           spins = 5
         },
         {
           pay = "blood",
           ok = true,
-          faces = { "rustSword", "blank", "rustSword" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
-            weapon = "rustSword"
+            gold = 190
           },
           spins = 6
         },
         {
           pay = "gold",
           ok = true,
-          faces = { "blank", "blank", "blank" },
+          faces = { "rustSword", "blank", "blank" },
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
@@ -67232,6 +67538,271 @@ return {
           },
           spins = 7
         }
+      }
+    }
+  },
+  engraveOps = {
+    {
+      weapon = "boneKnife",
+      reel = 0,
+      ok = true,
+      msg = "把骨刀刻在第 1 个轮子的第 1 格，先拿在手上",
+      reels = {
+        { "boneKnife", "blank", "blank", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 0, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      }
+    },
+    {
+      weapon = "hammer",
+      reel = 0,
+      ok = true,
+      msg = "把破壳锤刻在第 1 个轮子的第 2 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "blank", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      }
+    },
+    {
+      weapon = "harpoon",
+      reel = 1,
+      ok = true,
+      msg = "把鱼叉刻在第 2 个轮子的第 1 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "blank", "blank", "blank" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "blank", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "harpoon"
+      }
+    },
+    {
+      weapon = "mossBlade",
+      reel = 2,
+      ok = true,
+      msg = "把苔衣短剑刻在第 3 个轮子的第 1 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "blank", "blank", "blank" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 1, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "mossBlade"
+      }
+    },
+    {
+      weapon = "bellStaff",
+      reel = 0,
+      ok = true,
+      msg = "把回声铃杖刻在第 1 个轮子的第 3 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "bellStaff", "blank", "blank" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 2, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "bellStaff"
+      }
+    },
+    {
+      weapon = "saltDagger",
+      reel = 0,
+      ok = true,
+      msg = "把盐晶匕首刻在第 1 个轮子的第 4 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "bellStaff", "saltDagger", "blank" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 3, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "saltDagger"
+      }
+    },
+    {
+      weapon = "rustSword",
+      reel = 0,
+      ok = true,
+      msg = "把锈蚀大剑刻在第 1 个轮子的第 5 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "bellStaff", "saltDagger", "rustSword" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "rustSword"
+      }
+    },
+    {
+      weapon = "boneKnife",
+      reel = 0,
+      ok = false,
+      msg = "第 1 个轮子刻满了，选一格覆盖",
+      reels = {
+        { "boneKnife", "hammer", "bellStaff", "saltDagger", "rustSword" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 4, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "rustSword"
+      }
+    },
+    {
+      weapon = "hammer",
+      reel = 0,
+      cell = 2,
+      ok = true,
+      msg = "把破壳锤刻在第 1 个轮子的第 3 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
+        { "harpoon", "blank", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 2, 0, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "hammer"
+      }
+    },
+    {
+      weapon = "harpoon",
+      reel = 1,
+      ok = true,
+      msg = "把鱼叉刻在第 2 个轮子的第 2 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
+        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "blank" }
+      },
+      stops = { 2, 1, 0 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "harpoon"
+      }
+    },
+    {
+      weapon = "mossBlade",
+      reel = 2,
+      cell = 4,
+      ok = true,
+      msg = "把苔衣短剑刻在第 3 个轮子的第 5 格，先拿在手上",
+      reels = {
+        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
+        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "mossBlade" }
+      },
+      stops = { 2, 1, 4 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "mossBlade"
+      }
+    },
+    {
+      weapon = "bellStaff",
+      reel = 3,
+      ok = false,
+      msg = "",
+      reels = {
+        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
+        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "mossBlade" }
+      },
+      stops = { 2, 1, 4 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "mossBlade"
+      }
+    },
+    {
+      weapon = "saltDagger",
+      reel = 1,
+      cell = 9,
+      ok = false,
+      msg = "",
+      reels = {
+        { "boneKnife", "hammer", "hammer", "saltDagger", "rustSword" },
+        { "harpoon", "harpoon", "blank", "blank", "blank" },
+        { "mossBlade", "blank", "blank", "blank", "mossBlade" }
+      },
+      stops = { 2, 1, 4 },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0,
+        weapon = "mossBlade"
       }
     }
   },
@@ -67780,7 +68351,11 @@ return {
             gold = 2970,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67792,9 +68367,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2925
+            gold = 2925,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67806,9 +68386,14 @@ return {
             atk = 15,
             def = 13,
             keys = 0,
-            gold = 2925
+            gold = 2925,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67820,9 +68405,14 @@ return {
             atk = 15,
             def = 13,
             keys = 0,
-            gold = 2825
+            gold = 2825,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = { "wellHook" },
           status = "playing"
         },
@@ -67834,9 +68424,14 @@ return {
             atk = 15,
             def = 13,
             keys = 0,
-            gold = 2675
+            gold = 2675,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = { "boneKnife" },
           status = "playing"
         },
@@ -67848,9 +68443,14 @@ return {
             atk = 15,
             def = 13,
             keys = 0,
-            gold = 2675
+            gold = 2675,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67862,9 +68462,14 @@ return {
             atk = 15,
             def = 13,
             keys = 0,
-            gold = 2365
+            gold = 2365,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67876,9 +68481,14 @@ return {
             atk = 17,
             def = 13,
             keys = 0,
-            gold = 1850
+            gold = 1850,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67890,9 +68500,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 1850
+            gold = 1850,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67904,9 +68519,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67917,9 +68537,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67930,9 +68555,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67943,9 +68573,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67956,9 +68591,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67969,9 +68609,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67982,9 +68627,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -67995,9 +68645,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68008,9 +68663,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68021,9 +68681,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68034,9 +68699,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68047,9 +68717,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68060,9 +68735,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68073,9 +68753,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68086,9 +68771,14 @@ return {
             atk = 17,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         }
@@ -68108,7 +68798,11 @@ return {
             gold = 2970,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68123,7 +68817,11 @@ return {
             gold = 2925,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68138,7 +68836,11 @@ return {
             gold = 2955,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68153,7 +68855,11 @@ return {
             gold = 2885,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68168,7 +68874,11 @@ return {
             gold = 2735,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68183,7 +68893,11 @@ return {
             gold = 2735,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = { "wellHook" },
           status = "playing"
         },
@@ -68198,7 +68912,11 @@ return {
             gold = 2395,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68213,7 +68931,11 @@ return {
             gold = 1880,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = { "rustSword" },
           status = "playing"
         },
@@ -68228,7 +68950,11 @@ return {
             gold = 1880,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68243,7 +68969,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = { "boneKnife" },
           status = "playing"
         },
@@ -68257,7 +68987,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68271,7 +69005,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68285,7 +69023,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68299,7 +69041,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68313,7 +69059,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68327,7 +69077,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68341,7 +69095,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68355,7 +69113,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68369,7 +69131,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68383,7 +69149,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68397,7 +69167,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68411,7 +69185,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68425,7 +69203,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68439,7 +69221,11 @@ return {
             gold = 725,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         }
@@ -68459,7 +69245,11 @@ return {
             gold = 2970,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68474,7 +69264,11 @@ return {
             gold = 2955,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68489,7 +69283,11 @@ return {
             gold = 2955,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68504,7 +69302,11 @@ return {
             gold = 2855,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68519,7 +69321,11 @@ return {
             gold = 2735,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68534,7 +69340,11 @@ return {
             gold = 2735,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68549,7 +69359,11 @@ return {
             gold = 2395,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68564,7 +69378,11 @@ return {
             gold = 1880,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68579,7 +69397,11 @@ return {
             gold = 1910,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68594,7 +69416,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68608,7 +69434,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68622,7 +69452,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68636,7 +69470,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68650,7 +69488,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68664,7 +69506,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68678,7 +69524,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68692,7 +69542,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68706,7 +69560,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68720,7 +69578,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68734,7 +69596,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68748,7 +69614,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68762,7 +69632,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68776,7 +69650,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68790,7 +69668,11 @@ return {
             gold = 755,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         }
@@ -68810,7 +69692,11 @@ return {
             gold = 2970,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68822,9 +69708,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2925
+            gold = 2925,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68836,9 +69727,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2925
+            gold = 2925,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68850,9 +69746,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2855
+            gold = 2855,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68864,9 +69765,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2705
+            gold = 2705,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68878,9 +69784,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2735
+            gold = 2735,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68892,9 +69803,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 2395
+            gold = 2395,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68906,9 +69822,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 1880
+            gold = 1880,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68920,9 +69841,14 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 1880
+            gold = 1880,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68934,9 +69860,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68947,9 +69878,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68960,9 +69896,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68973,9 +69914,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68986,9 +69932,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -68999,9 +69950,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69012,9 +69968,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69025,9 +69986,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69038,9 +70004,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69051,9 +70022,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69064,9 +70040,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69077,9 +70058,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69090,9 +70076,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69103,9 +70094,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69116,9 +70112,14 @@ return {
             atk = 13,
             def = 15,
             keys = 0,
-            gold = 725
+            gold = 725,
+            weapon = "boneKnife"
           },
-          rows = { "blank", "hammer", "blank" },
+          reels = {
+            { "boneKnife", "blank", "blank", "blank", "blank" },
+            { "harpoon", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         }
@@ -69138,7 +70139,11 @@ return {
             gold = 3000,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69153,7 +70158,11 @@ return {
             gold = 2955,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69168,7 +70177,11 @@ return {
             gold = 2955,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69183,7 +70196,11 @@ return {
             gold = 2885,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "hammer", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "harpoon", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69198,7 +70215,11 @@ return {
             gold = 2735,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69213,7 +70234,11 @@ return {
             gold = 2735,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = { "bellStaff" },
           status = "playing"
         },
@@ -69228,7 +70253,11 @@ return {
             gold = 2425,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69243,7 +70272,11 @@ return {
             gold = 1940,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69258,7 +70291,11 @@ return {
             gold = 1940,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69273,7 +70310,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69287,7 +70328,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69301,7 +70346,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69315,7 +70364,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69329,7 +70382,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69343,7 +70400,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69357,7 +70418,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69371,7 +70436,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69385,7 +70454,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69399,7 +70472,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69413,7 +70490,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69427,7 +70508,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69441,7 +70526,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69455,7 +70544,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         },
@@ -69469,7 +70562,11 @@ return {
             gold = 785,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "harpoon" },
+          reels = {
+            { "boneKnife", "hammer", "blank", "blank", "blank" },
+            { "blank", "blank", "boneKnife", "blank", "blank" },
+            { "boneKnife", "blank", "blank", "blank", "blank" }
+          },
           queue = {},
           status = "playing"
         }
@@ -69525,7 +70622,11 @@ return {
             gold = 315,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {}
         },
         {
@@ -69540,12 +70641,17 @@ return {
             gold = 330,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {}
         },
         {
           op = "pawn",
-          a = 0,
+          a = 1,
+          b = 0,
           ok = true,
           msg = "当掉了骨刀，得 40 金币",
           hero = {
@@ -69555,10 +70661,15 @@ return {
             keys = 0,
             gold = 370
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69566,6 +70677,7 @@ return {
         {
           op = "buy",
           a = 0,
+          b = 1,
           ok = true,
           msg = "花 60 金币刻上了破壳锤",
           hero = {
@@ -69576,10 +70688,15 @@ return {
             gold = 310,
             weapon = "hammer"
           },
-          rows = { "hammer", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69587,6 +70704,7 @@ return {
         {
           op = "buy",
           a = 0,
+          b = 1,
           ok = false,
           msg = "这样已经买过了",
           hero = {
@@ -69597,10 +70715,15 @@ return {
             gold = 310,
             weapon = "hammer"
           },
-          rows = { "hammer", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69608,6 +70731,7 @@ return {
         {
           op = "buy",
           a = 1,
+          b = 2,
           ok = true,
           msg = "花 60 金币刻上了鱼叉",
           hero = {
@@ -69618,19 +70742,25 @@ return {
             gold = 250,
             weapon = "harpoon"
           },
-          rows = { "hammer", "harpoon", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "harpoon", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
         },
         {
           op = "erase",
-          a = 1,
+          a = 2,
+          b = 0,
           ok = true,
-          msg = "擦掉了第 2 行的鱼叉",
+          msg = "擦掉了第 3 个轮子第 1 格的鱼叉",
           hero = {
             hp = 200,
             atk = 10,
@@ -69638,10 +70768,15 @@ return {
             keys = 0,
             gold = 230
           },
-          rows = { "hammer", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69657,10 +70792,15 @@ return {
             keys = 0,
             gold = 230
           },
-          rows = { "hammer", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69668,22 +70808,32 @@ return {
         {
           op = "redeem",
           a = 0,
-          ok = true,
-          msg = "赎回了骨刀",
+          ok = false,
+          msg = "第 2 个轮子刻满了，选一格覆盖",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 182,
-            weapon = "boneKnife"
+            gold = 230
           },
-          rows = { "hammer", "boneKnife", "blank" },
-          pawned = {}
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
         },
         {
           op = "pawn",
-          a = 0,
+          a = 1,
+          b = 0,
           ok = true,
           msg = "当掉了破壳锤，得 40 金币",
           hero = {
@@ -69691,13 +70841,22 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 222,
-            weapon = "boneKnife"
+            gold = 270
           },
-          rows = { "blank", "boneKnife", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
+            {
               weapon = "hammer",
+              reel = 1,
               floor = 1
             }
           }
@@ -69711,13 +70870,22 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 222,
-            weapon = "boneKnife"
+            gold = 270
           },
-          rows = { "blank", "boneKnife", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
+            {
               weapon = "hammer",
+              reel = 1,
               floor = 1
             }
           }
@@ -69725,23 +70893,35 @@ return {
         {
           op = "redeem",
           a = 0,
+          b = 3,
           ok = true,
-          msg = "赎回了破壳锤",
+          msg = "赎回了骨刀",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 174,
-            weapon = "hammer"
+            gold = 212,
+            weapon = "boneKnife"
           },
-          rows = { "hammer", "boneKnife", "blank" },
-          pawned = {}
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
         },
         {
           op = "buy",
           a = 0,
-          b = 2,
+          b = 0,
+          c = 2,
           ok = true,
           msg = "花 60 金币刻上了井神的钩",
           hero = {
@@ -69749,26 +70929,73 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 114,
+            gold = 152,
             weapon = "wellHook"
           },
-          rows = { "hammer", "boneKnife", "wellHook" },
-          pawned = {}
+          reels = {
+            { "blank", "blank", "wellHook", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
         },
         {
           op = "erase",
-          a = 2,
+          a = 0,
+          b = 2,
           ok = true,
-          msg = "擦掉了第 3 行的井神的钩",
+          msg = "擦掉了第 1 个轮子第 3 格的井神的钩",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 94
+            gold = 132
           },
-          rows = { "hammer", "boneKnife", "blank" },
-          pawned = {}
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 0,
+          b = 4,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 132
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
         }
       }
     },
@@ -69820,7 +71047,11 @@ return {
             gold = 75,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {}
         },
         {
@@ -69835,12 +71066,17 @@ return {
             gold = 75,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {}
         },
         {
           op = "pawn",
-          a = 0,
+          a = 1,
+          b = 0,
           ok = true,
           msg = "当掉了骨刀，得 40 金币",
           hero = {
@@ -69850,10 +71086,15 @@ return {
             keys = 0,
             gold = 115
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69861,6 +71102,7 @@ return {
         {
           op = "buy",
           a = 0,
+          b = 1,
           ok = true,
           msg = "花 60 金币刻上了破壳锤",
           hero = {
@@ -69871,10 +71113,15 @@ return {
             gold = 55,
             weapon = "hammer"
           },
-          rows = { "hammer", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69882,6 +71129,7 @@ return {
         {
           op = "buy",
           a = 0,
+          b = 1,
           ok = false,
           msg = "这样已经买过了",
           hero = {
@@ -69892,10 +71140,15 @@ return {
             gold = 55,
             weapon = "hammer"
           },
-          rows = { "hammer", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -69903,146 +71156,6 @@ return {
         {
           op = "buy",
           a = 1,
-          ok = false,
-          msg = "金币不够（要 60）",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 55,
-            weapon = "hammer"
-          },
-          rows = { "hammer", "blank", "blank" },
-          pawned = {
-            {
-              weapon = "boneKnife",
-              floor = 0
-            }
-          }
-        },
-        {
-          op = "erase",
-          a = 1,
-          ok = false,
-          msg = "这一行是空的",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 55,
-            weapon = "hammer"
-          },
-          rows = { "hammer", "blank", "blank" },
-          pawned = {
-            {
-              weapon = "boneKnife",
-              floor = 0
-            }
-          }
-        },
-        {
-          op = "next",
-          ok = true,
-          msg = "",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 55,
-            weapon = "hammer"
-          },
-          rows = { "hammer", "blank", "blank" },
-          pawned = {
-            {
-              weapon = "boneKnife",
-              floor = 0
-            }
-          }
-        },
-        {
-          op = "redeem",
-          a = 0,
-          ok = true,
-          msg = "赎回了骨刀",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 7,
-            weapon = "boneKnife"
-          },
-          rows = { "hammer", "boneKnife", "blank" },
-          pawned = {}
-        },
-        {
-          op = "pawn",
-          a = 0,
-          ok = true,
-          msg = "当掉了破壳锤，得 40 金币",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 47,
-            weapon = "boneKnife"
-          },
-          rows = { "blank", "boneKnife", "blank" },
-          pawned = {
-            {
-              weapon = "hammer",
-              floor = 1
-            }
-          }
-        },
-        {
-          op = "next",
-          ok = true,
-          msg = "",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 47,
-            weapon = "boneKnife"
-          },
-          rows = { "blank", "boneKnife", "blank" },
-          pawned = {
-            {
-              weapon = "hammer",
-              floor = 1
-            }
-          }
-        },
-        {
-          op = "redeem",
-          a = 0,
-          ok = false,
-          msg = "金币不够（要 48）",
-          hero = {
-            hp = 200,
-            atk = 10,
-            def = 10,
-            keys = 0,
-            gold = 47,
-            weapon = "boneKnife"
-          },
-          rows = { "blank", "boneKnife", "blank" },
-          pawned = {
-            {
-              weapon = "hammer",
-              floor = 1
-            }
-          }
-        },
-        {
-          op = "buy",
-          a = 0,
           b = 2,
           ok = false,
           msg = "金币不够（要 60）",
@@ -70051,34 +71164,267 @@ return {
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 47,
-            weapon = "boneKnife"
+            gold = 55,
+            weapon = "hammer"
           },
-          rows = { "blank", "boneKnife", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
-              weapon = "hammer",
-              floor = 1
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
             }
           }
         },
         {
           op = "erase",
           a = 2,
+          b = 0,
           ok = false,
-          msg = "这一行是空的",
+          msg = "这一格是空的",
           hero = {
             hp = 200,
             atk = 10,
             def = 10,
             keys = 0,
-            gold = 47,
+            gold = 55,
+            weapon = "hammer"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
+        },
+        {
+          op = "next",
+          ok = true,
+          msg = "",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 55,
+            weapon = "hammer"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
+        },
+        {
+          op = "redeem",
+          a = 0,
+          ok = false,
+          msg = "第 2 个轮子刻满了，选一格覆盖",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 55,
+            weapon = "hammer"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "hammer", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 1,
+          b = 0,
+          ok = true,
+          msg = "当掉了破壳锤，得 40 金币",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 95,
+            weapon = "hammer"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "next",
+          ok = true,
+          msg = "",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 95,
+            weapon = "hammer"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            },
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "redeem",
+          a = 0,
+          b = 3,
+          ok = true,
+          msg = "赎回了骨刀",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 37,
             weapon = "boneKnife"
           },
-          rows = { "blank", "boneKnife", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "buy",
+          a = 0,
+          b = 0,
+          c = 2,
+          ok = false,
+          msg = "金币不够（要 60）",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 37,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "erase",
+          a = 0,
+          b = 2,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 37,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
+              floor = 1
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 0,
+          b = 4,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 37,
+            weapon = "boneKnife"
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "boneKnife", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "hammer",
+              reel = 1,
               floor = 1
             }
           }
@@ -70133,7 +71479,11 @@ return {
             gold = 0,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {}
         },
         {
@@ -70148,12 +71498,17 @@ return {
             gold = 0,
             weapon = "boneKnife"
           },
-          rows = { "boneKnife", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "boneKnife", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {}
         },
         {
           op = "pawn",
-          a = 0,
+          a = 1,
+          b = 0,
           ok = true,
           msg = "当掉了骨刀，得 40 金币",
           hero = {
@@ -70163,10 +71518,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70174,6 +71534,7 @@ return {
         {
           op = "buy",
           a = 0,
+          b = 1,
           ok = false,
           msg = "金币不够（要 60）",
           hero = {
@@ -70183,10 +71544,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70194,6 +71560,7 @@ return {
         {
           op = "buy",
           a = 0,
+          b = 1,
           ok = false,
           msg = "金币不够（要 60）",
           hero = {
@@ -70203,10 +71570,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70214,6 +71586,7 @@ return {
         {
           op = "buy",
           a = 1,
+          b = 2,
           ok = false,
           msg = "金币不够（要 60）",
           hero = {
@@ -70223,19 +71596,25 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
         },
         {
           op = "erase",
-          a = 1,
+          a = 2,
+          b = 0,
           ok = false,
-          msg = "这一行是空的",
+          msg = "这一格是空的",
           hero = {
             hp = 200,
             atk = 10,
@@ -70243,10 +71622,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70262,10 +71646,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70282,19 +71671,25 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
         },
         {
           op = "pawn",
-          a = 0,
+          a = 1,
+          b = 0,
           ok = false,
-          msg = "这一行是空的",
+          msg = "这一格是空的",
           hero = {
             hp = 200,
             atk = 10,
@@ -70302,10 +71697,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70321,10 +71721,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70332,6 +71737,7 @@ return {
         {
           op = "redeem",
           a = 0,
+          b = 3,
           ok = false,
           msg = "金币不够（要 58）",
           hero = {
@@ -70341,10 +71747,15 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
@@ -70352,7 +71763,8 @@ return {
         {
           op = "buy",
           a = 0,
-          b = 2,
+          b = 0,
+          c = 2,
           ok = false,
           msg = "金币不够（要 60）",
           hero = {
@@ -70362,19 +71774,25 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }
         },
         {
           op = "erase",
-          a = 2,
+          a = 0,
+          b = 2,
           ok = false,
-          msg = "这一行是空的",
+          msg = "这一格是空的",
           hero = {
             hp = 200,
             atk = 10,
@@ -70382,10 +71800,41 @@ return {
             keys = 0,
             gold = 40
           },
-          rows = { "blank", "blank", "blank" },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
           pawned = {
             {
               weapon = "boneKnife",
+              reel = 1,
+              floor = 0
+            }
+          }
+        },
+        {
+          op = "pawn",
+          a = 0,
+          b = 4,
+          ok = false,
+          msg = "这一格是空的",
+          hero = {
+            hp = 200,
+            atk = 10,
+            def = 10,
+            keys = 0,
+            gold = 40
+          },
+          reels = {
+            { "blank", "blank", "blank", "blank", "blank" },
+            { "blank", "hammer", "hammer", "hammer", "hammer" },
+            { "blank", "blank", "blank", "blank", "blank" }
+          },
+          pawned = {
+            {
+              weapon = "boneKnife",
+              reel = 1,
               floor = 0
             }
           }

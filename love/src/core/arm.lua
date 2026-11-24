@@ -1,34 +1,38 @@
--- 断臂转轮：和原型 src/core/arm.ts 一致。三个轮子，每个轮子一圈 3 格；刻一把武器 = 占满同一行。
--- Lua 里空行用 false 表示（避免表里出洞）；行号从 1 开始。
+-- 断臂转轮：和原型 src/core/arm.ts 一致。三个轮子并排，每个轮子一圈 5 格；刻图案只刻在一个轮子的一格上。
+-- 只看中间一行：三个轮子停的格子是同一把武器 → 换成这把；三个都是空格 → 空手；其他 → 不变。
+-- Lua 里空格用 false 表示；轮子号、格子号都从 1 开始。
 
 local rng = require('core.rng')
 local M = {}
 
-M.ROWS = 3
+M.REELS = 3
+M.SIZE = 5
 M.BASE_PRICE = 10
 
 function M.new()
-    return { rows = { false, false, false }, boons = {}, spins = 0, draws = 0, stops = nil }
+    local reels = {}
+    for r = 1, M.REELS do
+        reels[r] = {}
+        for k = 1, M.SIZE do reels[r][k] = false end
+    end
+    return { reels = reels, boons = {}, spins = 0, draws = 0, stops = { 1, 1, 1 } }
 end
 
--- 三个轮子停下的图案（false = 空格）
+-- 中间一行：三个轮子停着的图案
 function M.faces(arm)
-    if not arm.stops then return nil end
-    return { arm.rows[arm.stops[1]], arm.rows[arm.stops[2]], arm.rows[arm.stops[3]] }
+    local f = {}
+    for r = 1, M.REELS do f[r] = arm.reels[r][arm.stops[r]] end
+    return f
 end
 
--- 转一次；held[i] 为 true 的轮子不动
+-- 转一次；held[r] 为 true 的轮子不动
 function M.roll(arm, seed, key, held)
-    local stops = {}
-    for i = 1, 3 do
-        if held and held[i] and arm.stops then
-            stops[i] = arm.stops[i]
-        else
-            stops[i] = math.floor(rng.draw(seed, key, arm.draws) * M.ROWS) + 1
+    for r = 1, M.REELS do
+        if not (held and held[r]) then
+            arm.stops[r] = math.floor(rng.draw(seed, key, arm.draws) * M.SIZE) + 1
             arm.draws = arm.draws + 1
         end
     end
-    arm.stops = stops
     return M.faces(arm)
 end
 
@@ -41,51 +45,71 @@ function M.outcome(f)
     return 'none'
 end
 
-local function count(arm, id)
+function M.reelCount(arm, r, id)
     local n = 0
-    for k = 1, M.ROWS do if arm.rows[k] == id then n = n + 1 end end
+    for k = 1, M.SIZE do if arm.reels[r][k] == id then n = n + 1 end end
     return n
 end
-M.count = count
 
+-- 转一次连成这把武器（id = false 时是三个空格）的概率
 function M.odds(arm, id)
-    local n = count(arm, id)
-    return n * n * n / (M.ROWS * M.ROWS * M.ROWS)
+    local num = 1
+    for r = 1, M.REELS do num = num * M.reelCount(arm, r, id) end
+    return num / (M.SIZE ^ M.REELS)
 end
 
--- 锁住一些轮子后重转凑成三连的概率；不可能时返回 nil
+-- 锁住一些轮子后重转连成一线的概率；锁住的图案不一样时返回 nil
 function M.holdOdds(arm, held)
     local f = M.faces(arm)
-    if not f then return nil end
     local target, nheld = nil, 0
-    for i = 1, 3 do
-        if held[i] then
-            if nheld > 0 and f[i] ~= target then return nil end
-            target, nheld = f[i], nheld + 1
+    for r = 1, M.REELS do
+        if held[r] then
+            if nheld > 0 and f[r] ~= target then return nil end
+            target, nheld = f[r], nheld + 1
         end
     end
     if nheld == 0 then return nil end
-    local share = count(arm, target) / M.ROWS
-    return target, share ^ (3 - nheld)
+    local num, den = 1, 1
+    for r = 1, M.REELS do
+        if not held[r] then
+            num = num * M.reelCount(arm, r, target)
+            den = den * M.SIZE
+        end
+    end
+    return target, num / den
 end
 
-function M.firstBlank(arm)
-    for k = 1, M.ROWS do if not arm.rows[k] then return k end end
+function M.firstBlank(arm, r)
+    for k = 1, M.SIZE do if not arm.reels[r][k] then return k end end
     return nil
 end
 
--- 刻一把武器：有空行就刻在第一个空行；没有空行时必须指定行。返回刻在哪一行（nil = 不行）
-function M.engraveRow(arm, id, row)
-    local k = row or M.firstBlank(arm)
-    if not k or k < 1 or k > M.ROWS then return nil end
-    arm.rows[k] = id
-    arm.stops = { k, k, k }
+-- 在第 r 个轮子上刻一把武器：cell 不给就刻在第一个空格；刻满了必须指定格子。刻好后这个轮子转到这一格
+function M.engraveCell(arm, r, id, cell)
+    if not r or r < 1 or r > M.REELS then return nil end
+    local k = cell or M.firstBlank(arm, r)
+    if not k or k < 1 or k > M.SIZE then return nil end
+    arm.reels[r][k] = id
+    arm.stops[r] = k
     return k
 end
 
 function M.has(arm, id)
-    for k = 1, M.ROWS do if arm.rows[k] == id then return true end end
+    for r = 1, M.REELS do
+        for k = 1, M.SIZE do if arm.reels[r][k] == id then return true end end
+    end
     return false
 end
+
+-- 所有刻了图案的格子 { {r, k}, ... }，按轮子、格子的顺序
+function M.engravedCells(arm)
+    local out = {}
+    for r = 1, M.REELS do
+        for k = 1, M.SIZE do if arm.reels[r][k] then out[#out + 1] = { r, k } end end
+    end
+    return out
+end
+
+function M.empty(arm) return #M.engravedCells(arm) == 0 end
 
 return M

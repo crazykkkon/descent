@@ -9,7 +9,7 @@ import { CombatResult, simulateCombat } from './combat';
 import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
 import { solveFloor } from './solver';
-import { ArmState, ArmSym, ARM_BASE_PRICE, armHas, armOutcome, armRoll, engraveRow, newArm } from './arm';
+import { ArmState, ArmSym, ARM_BASE_PRICE, armEmpty, armHas, armOutcome, armRoll, engraveCell, engravedCells, firstBlank, newArm } from './arm';
 import { WHEEL, WheelSector, wheelPrice, wheelStop } from './wheel';
 import { ActiveDecree, DECREE_PENALTY, DECREE_SPAN, DecreeDef, SILVER_BONUS_HP, TIER_NAMES, decreeFor, killCounts } from './decree';
 import { bloodPrice, halfPrice, pick, risingPrice } from './rng';
@@ -50,6 +50,8 @@ export interface PendingEngrave {
 
 export interface PawnedRow {
     weapon: WeaponId;
+    /** 原来刻在哪个轮子上（从 0 开始） */
+    reel: number;
     /** 当掉时在第几层（从 0 开始） */
     floor: number;
 }
@@ -217,10 +219,7 @@ export class Run {
     /** 图案被擦掉 / 当掉后：手上的武器要是已经不在转轮上，就变空手 */
     private checkHold() {
         if (!this.arm) return;
-        if (this.hero.weapon && !armHas(this.arm, this.hero.weapon)) {
-            this.hold(undefined);
-            this.arm.stops = null;
-        }
+        if (this.hero.weapon && !armHas(this.arm, this.hero.weapon)) this.hold(undefined);
     }
 
     get pendingEngrave(): PendingEngrave | null { return this.engraveQueue[0] ?? null; }
@@ -237,16 +236,24 @@ export class Run {
         return out;
     }
 
-    /** 把等待中的图案刻上去。转轮刻满时要指定覆盖哪一行 */
-    engrave(id: WeaponId, row?: number): ActResult {
+    /** 刻满时的提示（没刻满返回 null） */
+    private fullReel(reel: number, cell?: number): ActResult | null {
+        if (!this.arm || reel < 0 || reel >= this.arm.reels.length) return { ok: false, msg: '' };
+        if (cell === undefined && firstBlank(this.arm, reel) < 0) return { ok: false, msg: `第 ${reel + 1} 个轮子刻满了，选一格覆盖` };
+        return null;
+    }
+
+    /** 把等待中的图案刻到第 reel 个轮子上（这个轮子刻满时要指定覆盖哪一格）；刻上就拿在手上 */
+    engrave(id: WeaponId, reel: number, cell?: number): ActResult {
         const p = this.pendingEngrave;
         if (!this.arm || !p || !p.choices.includes(id)) return { ok: false, msg: '' };
-        if (row === undefined && !this.arm.rows.includes(null)) return { ok: false, msg: '转轮刻满了，选一行覆盖' };
-        const k = engraveRow(this.arm, id, row);
+        const full = this.fullReel(reel, cell);
+        if (full) return full;
+        const k = engraveCell(this.arm, reel, id, cell);
         if (k < 0) return { ok: false, msg: '' };
         this.engraveQueue.shift();
         this.hold(id);
-        return { ok: true, msg: `把${WEAPONS[id].name}刻在转轮第 ${k + 1} 行，转轮停在它上面` };
+        return { ok: true, msg: `把${WEAPONS[id].name}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，先拿在手上` };
     }
 
     /** 不刻 */
@@ -263,9 +270,9 @@ export class Run {
     armSpin(pay: 'gold' | 'blood', held?: boolean[]): ArmSpinResult {
         const arm = this.arm;
         if (this.status !== 'playing' || !arm) return { ok: false, msg: '' };
-        if (arm.rows.every(r => r === null)) return { ok: false, msg: '转轮上还没有刻任何图案' };
+        if (armEmpty(arm)) return { ok: false, msg: '转轮上还没有刻任何图案' };
         const hold = !!held && held.some(Boolean);
-        if (hold && (!arm.stops || held!.every(Boolean))) return { ok: false, msg: '要锁住一两个轮子，留至少一个重转' };
+        if (hold && held!.every(Boolean)) return { ok: false, msg: '要锁住一两个轮子，留至少一个重转' };
         const price = this.armPrice(hold);
         if (pay === 'gold') {
             if (this.hero.gold < price.gold) return { ok: false, msg: `金币不够（要 ${price.gold}）` };
@@ -372,11 +379,11 @@ export class Run {
                 }
                 break;
             case 'erase': {
-                const rows = this.arm ? this.arm.rows.map((r, k) => (r ? k : -1)).filter(k => k >= 0) : [];
-                if (!rows.length) { msg += '：转轮上没有图案，什么也没擦掉'; break; }
-                const k = rows[pick(this.seed, key + 600, n, rows.length)];
-                msg += `：第 ${k + 1} 行的${WEAPONS[this.arm!.rows[k]!].name}没了`;
-                this.arm!.rows[k] = null;
+                const cells = this.arm ? engravedCells(this.arm) : [];
+                if (!cells.length) { msg += '：转轮上没有图案，什么也没擦掉'; break; }
+                const [r, k] = cells[pick(this.seed, key + 600, n, cells.length)];
+                msg += `：第 ${r + 1} 个轮子第 ${k + 1} 格的${WEAPONS[this.arm!.reels[r][k]!].name}没了`;
+                this.arm!.reels[r][k] = null;
                 this.checkHold();
                 break;
             }
@@ -394,14 +401,14 @@ export class Run {
         return { ok: true, msg: `卖了一把骨钥，得 ${PAWN.keyPrice} 金币` };
     }
 
-    /** 当铺：当掉转轮上的一行武器图案 */
-    pawnRow(i: number, row: number): ActResult {
+    /** 当铺：当掉转轮上的一格武器图案 */
+    pawnCell(i: number, reel: number, cell: number): ActResult {
         const bad = this.facility(i, 'pawn', '当铺');
         if (bad) return bad;
-        const w = this.arm?.rows[row];
-        if (!w) return { ok: false, msg: '这一行是空的' };
-        this.arm!.rows[row] = null;
-        this.pawned.push({ weapon: w, floor: this.floorIndex });
+        const w = this.arm?.reels[reel]?.[cell];
+        if (!w) return { ok: false, msg: '这一格是空的' };
+        this.arm!.reels[reel][cell] = null;
+        this.pawned.push({ weapon: w, reel, floor: this.floorIndex });
         this.hero.gold += PAWN.pawnGold;
         this.checkHold();
         return { ok: true, msg: `当掉了${WEAPONS[w].name}，得 ${PAWN.pawnGold} 金币` };
@@ -413,48 +420,50 @@ export class Run {
         return Math.ceil(PAWN.pawnGold * Math.pow(PAWN.redeemRate, this.floorIndex - p.floor));
     }
 
-    /** 当铺：赎回当掉的第 j 件，刻回转轮（刻满时指定覆盖哪一行） */
-    pawnRedeem(i: number, j: number, row?: number): ActResult {
+    /** 当铺：赎回当掉的第 j 件，刻回原来那个轮子（刻满时指定覆盖哪一格） */
+    pawnRedeem(i: number, j: number, cell?: number): ActResult {
         const bad = this.facility(i, 'pawn', '当铺');
         if (bad) return bad;
         const p = this.pawned[j];
         if (!p || !this.arm) return { ok: false, msg: '' };
-        if (row === undefined && !this.arm.rows.includes(null)) return { ok: false, msg: '转轮刻满了，选一行覆盖' };
+        const full = this.fullReel(p.reel, cell);
+        if (full) return full;
         const unpaid = this.pay(this.redeemPrice(j));
         if (unpaid) return unpaid;
-        engraveRow(this.arm, p.weapon, row);
+        engraveCell(this.arm, p.reel, p.weapon, cell);
         this.pawned.splice(j, 1);
         this.hold(p.weapon);
         return { ok: true, msg: `赎回了${WEAPONS[p.weapon].name}` };
     }
 
-    /** 当铺：买第 k 个武器图案刻上去 */
-    pawnBuy(i: number, k: number, row?: number): ActResult {
+    /** 当铺：买第 k 个武器图案刻到第 reel 个轮子上 */
+    pawnBuy(i: number, k: number, reel: number, cell?: number): ActResult {
         const bad = this.facility(i, 'pawn', '当铺');
         if (bad) return bad;
         const w = this.floor.shop?.[k];
         if (!w || !this.arm) return { ok: false, msg: '' };
         if (this.sold(i, k)) return { ok: false, msg: '这样已经买过了' };
-        if (row === undefined && !this.arm.rows.includes(null)) return { ok: false, msg: '转轮刻满了，选一行覆盖' };
+        const full = this.fullReel(reel, cell);
+        if (full) return full;
         const unpaid = this.pay(PAWN.buyPrice);
         if (unpaid) return unpaid;
-        engraveRow(this.arm, w, row);
+        engraveCell(this.arm, reel, w, cell);
         this.bought.push(`${this.floorIndex}:${i}:${k}`);
         this.hold(w);
         return { ok: true, msg: `花 ${PAWN.buyPrice} 金币刻上了${WEAPONS[w].name}` };
     }
 
-    /** 当铺：花钱擦掉一行 */
-    pawnErase(i: number, row: number): ActResult {
+    /** 当铺：花钱擦掉一格 */
+    pawnErase(i: number, reel: number, cell: number): ActResult {
         const bad = this.facility(i, 'pawn', '当铺');
         if (bad) return bad;
-        const w = this.arm?.rows[row];
-        if (!w) return { ok: false, msg: '这一行是空的' };
+        const w = this.arm?.reels[reel]?.[cell];
+        if (!w) return { ok: false, msg: '这一格是空的' };
         const unpaid = this.pay(PAWN.erasePrice);
         if (unpaid) return unpaid;
-        this.arm!.rows[row] = null;
+        this.arm!.reels[reel][cell] = null;
         this.checkHold();
-        return { ok: true, msg: `擦掉了第 ${row + 1} 行的${WEAPONS[w].name}` };
+        return { ok: true, msg: `擦掉了第 ${reel + 1} 个轮子第 ${cell + 1} 格的${WEAPONS[w].name}` };
     }
 
     /** 骨坛：献 3 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座骨坛用一次） */
@@ -604,7 +613,7 @@ export class Run {
             case 'wheel':
                 return { title: '大转盘', lines: [WHEEL.map(s => s.text).join('、'), `转一次 ${this.wheelPrice(i).gold} 金`] };
             case 'pawn':
-                return { title: '当铺', lines: ['卖骨钥、当掉或赎回武器图案、买图案、擦图案'] };
+                return { title: '当铺', lines: ['卖骨钥、当掉或赎回武器图案、买图案、擦图案（都按格子算）'] };
             case 'altar':
                 return { title: '骨坛', lines: [`献 ${ALTAR_ATK_COST} 点攻击或 1 把骨钥，把杀过的怪的特性移到一把武器上`] };
             default:

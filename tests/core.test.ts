@@ -355,7 +355,8 @@ test('求解器：庇护和群居按"还活着的邻居"算，先拆祭司的路
 
 
 // ---------- 断臂转轮版（设计方案第二十五章） ----------
-import { newArm, armOdds, armOutcome, engraveRow } from '../src/core/arm';
+import { newArm, armOdds, armOutcome, armHoldOdds, engraveCell } from '../src/core/arm';
+const reels = (...rs: (WeaponId | null)[][]) => rs.map(r => [...r, ...Array(5 - r.length).fill(null)]);
 import { WHEEL } from '../src/core/wheel';
 import { DECREES, decreeFor } from '../src/core/decree';
 import { whisper } from '../src/core/whisper';
@@ -364,23 +365,32 @@ import { solveChain as chain2 } from '../src/core/solver';
 
 test('断臂转轮：开局是空的，打败印记怪可以刻武器，刻上就拿在手上', () => {
     const run = new Run([{ ...tiny(['@e.>']), marks: [1] }], 'digger', 1);
-    assert.deepEqual(run.arm!.rows, [null, null, null]);
+    assert.deepEqual(run.arm!.reels, reels([], [], []));
     assert.equal(run.armSpin('gold').ok, false, '没刻图案不能转');
     run.hero.atk = 30;
     run.move(1, 0);
     assert.deepEqual(run.pendingEngrave, { from: 'mark', choices: ['harpoon'] });
-    assert.ok(run.engrave('harpoon').ok);
-    assert.equal(run.hero.weapon, 'harpoon');
-    assert.deepEqual(run.arm!.rows, ['harpoon', null, null]);
+    assert.ok(run.engrave('harpoon', 1).ok, '刻在第 2 个轮子上');
+    assert.equal(run.hero.weapon, 'harpoon', '刻上就拿在手上');
+    assert.deepEqual(run.arm!.reels, reels([], ['harpoon'], []));
+    assert.equal(run.arm!.stops[1], 0, '刻的那个轮子转到这一格');
     assert.equal(run.pendingEngrave, null);
 });
 
-test('断臂转轮：概率是行数比例的三次方；三连换武器，三个空格变空手，其余不变', () => {
+test('断臂转轮：三个轮子各 5 格；概率是三个轮子上各自占的比例相乘；只看中间一行', () => {
     const arm = newArm();
-    engraveRow(arm, 'boneKnife');
-    assert.equal(armOdds(arm, 'boneKnife'), 1 / 27);
-    engraveRow(arm, 'boneKnife');
-    assert.equal(armOdds(arm, 'boneKnife'), 8 / 27);
+    assert.equal(arm.reels.length, 3);
+    assert.ok(arm.reels.every(r => r.length === 5));
+    engraveCell(arm, 0, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 0, '只有一个轮子上有，连不成一线');
+    engraveCell(arm, 1, 'boneKnife');
+    engraveCell(arm, 2, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 1 / 125, '三个轮子各 1 格：0.8%');
+    engraveCell(arm, 0, 'boneKnife');
+    assert.equal(armOdds(arm, 'boneKnife'), 2 / 125);
+    assert.equal(armOdds(arm, null), (3 * 4 * 4) / 125, '三个都停在空格上');
+    arm.stops = [0, 0, 0];
+    assert.deepEqual(armHoldOdds(arm, [true, true, false]), { target: 'boneKnife', p: 1 / 5 }, '锁住两个，剩下那个轮子 1/5');
     assert.deepEqual(armOutcome(['hammer', 'hammer', 'hammer']), { kind: 'weapon', id: 'hammer' });
     assert.deepEqual(armOutcome([null, null, null]), { kind: 'empty' });
     assert.deepEqual(armOutcome(['hammer', null, 'hammer']), { kind: 'none' });
@@ -389,7 +399,7 @@ test('断臂转轮：概率是行数比例的三次方；三连换武器，三�
 test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁轴半价；结果由种子决定', () => {
     const plan = [tiny(['@.>']), tiny(['@.>'])];
     const run = new Run(plan, 'digger', 7);
-    run.arm!.rows = ['boneKnife', null, 'hammer'];
+    run.arm!.reels = reels(['boneKnife'], [null, 'hammer'], ['hammer', 'boneKnife']);
     run.hero.gold = 500;
     assert.equal(run.armPrice(false).gold, 10);
     const a = run.armSpin('gold');
@@ -397,12 +407,13 @@ test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁�
     assert.equal(run.armPrice(false).gold, 15);
     assert.equal(run.armPrice(true).gold, 10, '锁轴半价（取到 5 的倍数）');
     assert.equal(run.hero.gold, 490);
-    const kept = a.faces![0];
+    const kept = run.arm!.stops[0];
     run.armSpin('gold', [true, false, false]);
-    assert.equal(run.arm!.rows[run.arm!.stops![0]], kept, '锁住的轮子不动');
+    assert.equal(run.arm!.stops[0], kept, '锁住的轮子不动');
+    assert.equal(run.armSpin('gold', [true, true, true]).ok, false, '不能三个都锁');
     // 同一个种子同样的操作，结果一样
     const run2 = new Run(plan, 'digger', 7);
-    run2.arm!.rows = ['boneKnife', null, 'hammer'];
+    run2.arm!.reels = reels(['boneKnife'], [null, 'hammer'], ['hammer', 'boneKnife']);
     run2.hero.gold = 500;
     assert.deepEqual(run2.armSpin('gold').faces, a.faces);
     // 换层后价格重算
@@ -413,17 +424,17 @@ test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁�
     assert.equal(run.armPrice(false).blood, 15);
 });
 
-test('断臂转轮：刻满三行后再刻要选一行覆盖；精英倒下三选一', () => {
+test('断臂转轮：一个轮子刻满 5 格后再刻要选一格覆盖；精英倒下三选一', () => {
     const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 3);
-    run.arm!.rows = ['boneKnife', 'hammer', 'harpoon'];
+    run.arm!.reels = reels(['boneKnife', 'hammer', 'harpoon', 'boneKnife', 'hammer'], [], []);
     run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
     run.move(1, 0);
     const p = run.pendingEngrave!;
     assert.equal(p.from, 'elite');
     assert.equal(p.choices.length, 3);
-    assert.equal(run.engrave(p.choices[0]).ok, false, '刻满了要选行');
-    assert.ok(run.engrave(p.choices[0], 1).ok);
-    assert.equal(run.arm!.rows[1], p.choices[0]);
+    assert.equal(run.engrave(p.choices[0], 0).ok, false, '第 1 个轮子刻满了要选格子');
+    assert.ok(run.engrave(p.choices[0], 0, 3).ok);
+    assert.equal(run.arm!.reels[0][3], p.choices[0]);
 });
 
 test('骨坛移来的特性：先攻多打一下、反伤、腐蚀、吸血（不超过这一仗掉的血）', () => {
@@ -440,7 +451,7 @@ test('骨坛移来的特性：先攻多打一下、反伤、腐蚀、吸血（�
 test('骨坛：要杀过对应的怪、转轮上有这把武器；献攻击或骨钥；每座用一次', () => {
     const run = new Run([tiny(['@v.A>'])], 'digger', 1);
     run.hero = { hp: 999, atk: 40, def: 40, keys: 1, gold: 0 };
-    run.arm!.rows = ['boneKnife', null, null];
+    run.arm!.reels = reels([], ['boneKnife'], []);
     run.move(1, 0); // 打回声蝠：学到先攻
     assert.deepEqual(run.boonsSeen, ['firstStrike']);
     run.move(1, 0);
@@ -457,7 +468,7 @@ test('大转盘：盘面 8 格公开；30 金起每次 ×1.5；擦图案、井�
     const run = new Run([tiny(['@S>'])], 'digger', 5);
     run.hero.gold = 1000;
     run.hero.hp = 5000;
-    run.arm!.rows = ['boneKnife', 'hammer', null];
+    run.arm!.reels = reels(['boneKnife', 'hammer'], ['hammer'], []);
     assert.equal(run.wheelPrice(1).gold, 30);
     const seen = new Set<number>();
     for (let k = 0; k < 40; k++) {
@@ -474,22 +485,23 @@ test('当铺：卖骨钥、当图案（赎回价每层涨 20%）、买图案、�
     const plan = [{ ...tiny(['@.>', 'N..']), shop: ['hammer', 'harpoon'] as WeaponId[] }, { ...tiny(['@.>', 'N..']), shop: ['boneKnife', 'harpoon'] as WeaponId[] }];
     const run = new Run(plan, 'digger', 1);
     run.hero.gold = 200; run.hero.keys = 1;
-    run.arm!.rows = ['boneKnife', null, null];
+    run.arm!.reels = reels([], ['boneKnife'], []);
     run.hero.weapon = 'boneKnife';
     assert.ok(run.pawnSellKey(3).ok);
     assert.equal(run.hero.gold, 215);
-    assert.ok(run.pawnRow(3, 0).ok);
+    assert.ok(run.pawnCell(3, 1, 0).ok);
     assert.equal(run.hero.gold, 255);
     assert.equal(run.hero.weapon, undefined, '当掉手上这把就空手了');
-    assert.ok(run.pawnBuy(3, 0).ok);
-    assert.equal(run.arm!.rows[0], 'hammer');
-    assert.equal(run.pawnBuy(3, 0).ok, false, '每样只卖一次');
-    assert.ok(run.pawnErase(3, 0).ok);
-    assert.deepEqual(run.arm!.rows, [null, null, null]);
+    assert.ok(run.pawnBuy(3, 0, 2).ok);
+    assert.equal(run.arm!.reels[2][0], 'hammer');
+    assert.equal(run.pawnBuy(3, 0, 2).ok, false, '每样只卖一次');
+    assert.ok(run.pawnErase(3, 2, 0).ok);
+    assert.deepEqual(run.arm!.reels, reels([], [], []));
     run.move(1, 0); run.move(1, 0);
     run.finishFloor(false);
     assert.equal(run.redeemPrice(0), 48, '过了一层：40 × 1.2');
     assert.ok(run.pawnRedeem(3, 0).ok);
+    assert.equal(run.arm!.reels[1][0], 'boneKnife', '赎回刻回原来那个轮子');
     assert.equal(run.hero.weapon, 'boneKnife');
 });
 
@@ -563,10 +575,10 @@ test('新手教程局：5 层、没有断臂转轮、没有诏令，第 5 层的
 test('存档读档：断臂转轮、当铺、诏令、选过的楼梯都保留', () => {
     const plan = buildRoute(9);
     const run = new Run(plan, 'digger', 9);
-    run.arm!.rows = ['hammer', null, 'boneKnife'];
+    run.arm!.reels = reels(['hammer'], [null, 'boneKnife'], ['boneKnife']);
     run.hero.gold = 100;
     run.armSpin('gold');
-    run.pawned.push({ weapon: 'harpoon', floor: 0 });
+    run.pawned.push({ weapon: 'harpoon', reel: 2, floor: 0 });
     const back = Run.load(plan, JSON.parse(JSON.stringify(run.save())));
     assert.deepEqual(back.arm, run.arm);
     assert.deepEqual(back.pawned, run.pawned);

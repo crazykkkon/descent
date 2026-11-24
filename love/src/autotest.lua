@@ -60,7 +60,10 @@ function M.start()
             if t == '刻图案' then
                 local m = game.getModal()
                 m.buttons[1].fn()
-                if modalTitle() and modalTitle():sub(1, 3) == '刻' then button('覆盖第 1 行') end
+                -- 选轮子：轮流刻在 1、2、3 号轮子上；刻满了覆盖第 1 格
+                engraveTurn = engraveTurn % 3 + 1
+                button('刻在轮子 ' .. engraveTurn)
+                if modalTitle() and modalTitle():find('^刻') then button('覆盖第 1 格') end
             elseif t and t:find('诏令') and game.getModal().buttons[2] and game.getModal().buttons[2].label == '接下' then button('接下')
             elseif t == '井神的诏令' then button('知道了')
             else return end
@@ -90,6 +93,7 @@ function M.start()
         h.hp, h.atk, h.def, h.keys = math.max(h.hp, 99999), math.max(h.atk, 300), math.max(h.def, 300), 9
         h.gold = math.max(h.gold, 3000)
     end
+    engraveTurn = 0
     local shots = {}
     local function once(name) if not shots[name] then shots[name] = true; shot(name) end end
 
@@ -141,7 +145,7 @@ function M.start()
                 go(mark); sleep(0.2)
                 once('04-engrave')
                 handlePopups()
-                say(string.format('第 %d 层印记怪：转轮 %s，手上 %s', f, tostring(run.arm.rows[1]), tostring(run.hero.weapon)))
+                say(string.format('第 %d 层印记怪：手上 %s', f, tostring(run.hero.weapon)))
             end
             -- 设施
             local fac = find(function(c) return floorMod.isFacility(c) end)
@@ -153,7 +157,7 @@ function M.start()
                 once('05-' .. kind)
                 if kind == 'wheel' then button('金币'); sleep(0.1); handlePopups(); if modalTitle() == '大转盘' then button('离开') end
                 elseif kind == 'pawn' then
-                    if not button('买') then button('卖骨钥') end
+                    if button('买') then button('刻在轮子 3'); if modalTitle() and modalTitle():find('^买') then button('覆盖第 1 格') end else button('卖骨钥') end
                     handlePopups(); if modalTitle() == '当铺' then button('离开') end
                 elseif kind == 'altar' then
                     local m = game.getModal()
@@ -164,18 +168,23 @@ function M.start()
                 handlePopups()
             end
             -- 断臂转轮：有图案就转两次（第二次锁住第 1 个轮子）
-            if run.arm.rows[1] or run.arm.rows[2] or run.arm.rows[3] then
-                game.openArm(); sleep(0.1)
-                button('金币'); button('锁 1')
-                if f == 4 or not shots['06-arm'] then once('06-arm') end
-                button('金币'); button('收起')
+            local armCells = 0
+            for r = 1, 3 do for k = 1, 5 do if run.arm.reels[r][k] then armCells = armCells + 1 end end end
+            if armCells > 0 then
+                game.spinArm('gold'); sleep(0.9)
+                game.toggleHold(1)
+                game.dragReel(2, 2)
+                if armCells >= 3 then once('06-arm') end
+                game.dragReel(2, nil)
+                game.spinArm('gold'); sleep(0.2)
+                say(string.format('第 %d 层转了两次（锁住轮子 1）：手上 %s', f, tostring(run.hero.weapon)))
             end
             local elite = find(function(c) return c.kind == 'monster' and config.MONSTERS[c.id].elite end)
             if elite then
                 go(elite); sleep(0.2)
                 if modalTitle() == '刻图案' then once('07-elite-engrave') end
                 handlePopups()
-                say(string.format('第 %d 层精英倒下，转轮：%s / %s / %s', f, tostring(run.arm.rows[1]), tostring(run.arm.rows[2]), tostring(run.arm.rows[3])))
+                say(string.format('第 %d 层精英倒下，手上 %s', f, tostring(run.hero.weapon)))
             end
             go(find(function(c) return c.kind == 'exit' end))
             if modalTitle() ~= '楼梯口' then say('第 ' .. f .. ' 层没走到楼梯口：' .. tostring(modalTitle())); break end

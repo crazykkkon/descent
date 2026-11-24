@@ -48,6 +48,22 @@ end
 local function heroStr(h)
     return string.format('生命%d 攻%d 防%d 钥%d 金%d 武器%s %s', h.hp, h.atk, h.def, h.keys, h.gold, tostring(h.weapon), str(h.boons))
 end
+-- 原型导出的 reels（'blank' = 空格）→ Lua 的 reels（false = 空格）
+local function reelsIn(rs)
+    local o = {}
+    for r, reel in ipairs(rs) do o[r] = list(reel) end
+    return o
+end
+local function reelsStr(rs)
+    local t = {}
+    for r = 1, 3 do t[r] = str(list(rs[r])) end
+    return table.concat(t, ' / ')
+end
+local function stopsEq(lua, ts)
+    for r = 1, 3 do if lua[r] ~= ts[r] + 1 then return false end end
+    return true
+end
+
 local function reload(run)
     return Run.load(run.plan, serialize.load(serialize.dump(run:save())))
 end
@@ -115,14 +131,25 @@ end
 -- 4. 断臂转轮
 for _, a in ipairs(V.armSessions) do
     local run = Run.new({ tiny({ '@.>' }) }, 'digger', a.seed)
-    run.arm.rows = list(a.rows)
+    run.arm.reels = reelsIn(a.reels)
     run.hero = { hp = 500, atk = 13, def = 13, keys = 0, gold = 300 }
     for k, st in ipairs(a.steps) do
         local r = run:armSpin(st.pay, st.held and list(st.held) or nil)
-        local tag = string.format('断臂转轮 种子%d 图案%s 脚本%d 第%d次', a.seed, str(a.rows), a.script, k)
-        check(r.ok == st.ok and sameList(r.faces, st.faces) and heroEq(run.hero, st.hero) and run.arm.spins == st.spins,
+        local tag = string.format('断臂转轮 种子%d 图案%s 脚本%d 第%d次', a.seed, reelsStr(a.reels), a.script, k)
+        check(r.ok == st.ok and sameList(r.faces, st.faces) and stopsEq(run.arm.stops, st.stops) and heroEq(run.hero, st.hero) and run.arm.spins == st.spins,
             tag .. '：期望 ' .. str(list(st.faces)) .. ' ' .. heroStr(st.hero) .. '，实际 ' .. str(r.faces) .. ' ' .. heroStr(run.hero))
         run = reload(run)
+    end
+end
+
+-- 4b. 刻在哪个轮子、刻满时覆盖
+do
+    local run = Run.new({ tiny({ '@.>' }) }, 'digger', 1)
+    for k, e in ipairs(V.engraveOps) do
+        run.engraveQueue = { { from = 'elite', choices = { e.weapon } } }
+        local r = run:engrave(e.weapon, e.reel + 1, e.cell and e.cell + 1)
+        check(r.ok == e.ok and r.msg == e.msg and reelsStr(run.arm.reels) == reelsStr(e.reels) and stopsEq(run.arm.stops, e.stops) and heroEq(run.hero, e.hero),
+            string.format('刻图案 第%d次 %s 轮%d：期望 %s「%s」 %s，实际 %s「%s」 %s', k, e.weapon, e.reel + 1, tostring(e.ok), e.msg, reelsStr(e.reels), tostring(r.ok), r.msg, reelsStr(run.arm.reels)))
     end
 end
 
@@ -147,17 +174,16 @@ for _, w in ipairs(V.wheels) do
     local run = Run.new({ tiny({ '@.>', '.S.' }) }, 'digger', w.seed)
     run:move(0, 1)
     run.hero = { hp = 3000, atk = 13, def = 13, keys = 0, gold = 3000 }
-    run.arm.rows = { 'boneKnife', 'hammer', 'harpoon' }
-    run.arm.stops = { 1, 1, 1 }
+    run.arm.reels = reelsIn({ { 'boneKnife', 'hammer', 'blank', 'blank', 'blank' }, { 'harpoon', 'blank', 'boneKnife', 'blank', 'blank' }, { 'boneKnife', 'blank', 'blank', 'blank', 'blank' } })
     run.hero.weapon = 'boneKnife'
     for k, st in ipairs(w.steps) do
         local r = run:wheelSpin(5, (k - 1) % 3 == 2 and 'blood' or 'gold')
         local q = {}
         for _, p in ipairs(run.engraveQueue) do q[#q + 1] = p.choices[1] end
         run.engraveQueue = {}
-        check(r.ok == st.ok and (r.sector and r.sector - 1) == st.sector and heroEq(run.hero, st.hero) and sameList(run.arm.rows, st.rows)
+        check(r.ok == st.ok and (r.sector and r.sector - 1) == st.sector and heroEq(run.hero, st.hero) and reelsStr(run.arm.reels) == reelsStr(st.reels)
             and table.concat(q, ',') == table.concat(st.queue, ',') and run.status == st.status,
-            string.format('大转盘 种子%d 第%d次：期望 格%s %s 图案%s，实际 格%s %s 图案%s', w.seed, k, tostring(st.sector), heroStr(st.hero), str(list(st.rows)), tostring(r.sector and r.sector - 1), heroStr(run.hero), str(run.arm.rows)))
+            string.format('大转盘 种子%d 第%d次：期望 格%s %s 图案%s，实际 格%s %s 图案%s', w.seed, k, tostring(st.sector), heroStr(st.hero), reelsStr(st.reels), tostring(r.sector and r.sector - 1), heroStr(run.hero), reelsStr(run.arm.reels)))
         run = reload(run)
     end
 end
@@ -168,23 +194,23 @@ for n, sh in ipairs(V.shops) do
     for k, fp in ipairs(sh.plan) do plan[k] = luaFloor(fp) end
     local run = Run.new(plan, 'digger', 1)
     run.hero.gold, run.hero.keys = sh.gold, sh.keys
-    run.arm.rows = { 'boneKnife', false, false }
-    run.arm.stops = { 1, 1, 1 }
+    run.arm.reels = reelsIn({ { 'blank', 'blank', 'blank', 'blank', 'blank' }, { 'boneKnife', 'hammer', 'hammer', 'hammer', 'hammer' }, { 'blank', 'blank', 'blank', 'blank', 'blank' } })
     run.hero.weapon = 'boneKnife'
     for k, st in ipairs(sh.steps) do
         local a = st.a and st.a + 1
         local b = st.b and st.b + 1
+        local c = st.c and st.c + 1
         local r = { ok = true, msg = '' }
         if st.op == 'key' then r = run:pawnSellKey(4)
-        elseif st.op == 'pawn' then r = run:pawnRow(4, a)
-        elseif st.op == 'buy' then r = run:pawnBuy(4, a, b)
-        elseif st.op == 'erase' then r = run:pawnErase(4, a)
+        elseif st.op == 'pawn' then r = run:pawnCell(4, a, b)
+        elseif st.op == 'buy' then r = run:pawnBuy(4, a, b, c)
+        elseif st.op == 'erase' then r = run:pawnErase(4, a, b)
         elseif st.op == 'redeem' then r = run:pawnRedeem(4, a, b)
         else run:move(1, 0); run:move(1, 0); run:finishFloor(false) end
         local pw, want = {}, {}
-        for _, p in ipairs(run.pawned) do pw[#pw + 1] = p.weapon .. '@' .. (p.floor - 1) end
-        for _, p in ipairs(st.pawned) do want[#want + 1] = p.weapon .. '@' .. p.floor end
-        check(r.ok == st.ok and r.msg == st.msg and heroEq(run.hero, st.hero) and sameList(run.arm.rows, st.rows) and table.concat(pw, ',') == table.concat(want, ','),
+        for _, p in ipairs(run.pawned) do pw[#pw + 1] = p.weapon .. '#' .. (p.reel - 1) .. '@' .. (p.floor - 1) end
+        for _, p in ipairs(st.pawned) do want[#want + 1] = p.weapon .. '#' .. p.reel .. '@' .. p.floor end
+        check(r.ok == st.ok and r.msg == st.msg and heroEq(run.hero, st.hero) and reelsStr(run.arm.reels) == reelsStr(st.reels) and table.concat(pw, ',') == table.concat(want, ','),
             string.format('当铺 %d 第%d步 %s：期望 %s「%s」 %s，实际 %s「%s」 %s', n, k, st.op, tostring(st.ok), st.msg, heroStr(st.hero), tostring(r.ok), r.msg, heroStr(run.hero)))
         run = reload(run)
     end
@@ -192,8 +218,7 @@ end
 for n, al in ipairs(V.altars) do
     local run = Run.new({ tiny(al.map) }, 'digger', 1)
     run.hero = { hp = 9999, atk = 60, def = 60, keys = 1, gold = 0 }
-    run.arm.rows = { 'boneKnife', 'hammer', false }
-    run.arm.stops = { 1, 1, 1 }
+    run.arm.reels = reelsIn({ { 'boneKnife', 'blank', 'blank', 'blank', 'blank' }, { 'hammer', 'blank', 'blank', 'blank', 'blank' }, { 'blank', 'blank', 'blank', 'blank', 'blank' } })
     run.hero.weapon = 'boneKnife'
     local kills = #al.map[1] - 4
     for _ = 0, kills do run:move(1, 0) end
