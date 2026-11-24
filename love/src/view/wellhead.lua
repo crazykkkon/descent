@@ -2,8 +2,8 @@ local M = {}
 local map, potion
 
 function M.load()
-    map = love.graphics.newImage('assets / art / wellhead / map.png')
-    potion = love.graphics.newImage('assets / art / wellhead / potion.png')
+    map = love.graphics.newImage('assets/art/wellhead/map.png')
+    potion = love.graphics.newImage('assets/art/wellhead/potion.png')
     map:setFilter('linear', 'nearest')
 end
 
