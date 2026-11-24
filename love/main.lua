@@ -18,14 +18,20 @@ local decreeMod = require('core.decree')
 local whisperMod = require('core.whisper')
 local route = require('core.route')
 local miner = require('view.miner')
+local fx = require('view.fx')
+local armView = require('view.arm_view')
+local stairsView = require('view.stairs_view')
 
 -- ---------- 尺寸 ----------
 local LW, LH = 640, 360          -- 逻辑画布
-local TILE = 32
-local MAP_X, MAP_Y = 16, 44      -- 地图在逻辑画布上的位置
-local PANEL_X, PANEL_W = 384, 240
+local TILE = 40
+local MAP_X, MAP_Y = 34, 46      -- 地图在逻辑画布上的位置（地图占画面大半）
+local PANEL_X, PANEL_W = 482, 154 -- 右侧：断臂转轮
 local S, OX, OY = 2, 0, 0        -- 放大倍数和黑边偏移
 local canvas
+local frame      -- 整帧先画到这里，再加老电视滤镜
+local stairs = nil -- 楼梯口场景 { opts }
+local clock = 0
 local fonts = {}
 local FONT_FILE = 'assets/fonts/NotoSansSC-Regular-subset.ttf'
 local SAVE_FILE = 'save.lua'
@@ -51,7 +57,7 @@ local walking = nil        -- { path, i, t, from, confirmedFatal, confirmedBreak
 local facing = 'down'
 local heroAnim = nil       -- { from, to, t }
 local floats = {}          -- 飘字 { text, x, y, t, color }
-local meta = { tutorialDone = false }
+local meta = { tutorialDone = false, crt = true }
 local facilityOpener
 
 local function font(px)
@@ -90,7 +96,7 @@ local function saveGame()
 end
 
 local openStairs, openSummary, openDeath, openVictory, openEngrave, openDecree, openArm, openWheel, openPawn, openAltar, openStall, newGame, loadGame, continueFlow
-local spinArm, toggleHold, ARM_SPIN, ARM_BLOOD, SPIN_TIME
+local spinArm, toggleHold
 
 local function setMsg(s, err) msg, msgErr = s or '', err or false end
 
@@ -207,6 +213,8 @@ local function walkStep()
         else facing = ty > fy and 'down' or 'up' end
         heroAnim = { from = from, to = run.pos, t = 0 }
     end
+    if c.kind == 'monster' then fx.play('hit'); fx.shake(1.2)
+    elseif c.kind == 'item' then fx.play('pick') end
     local lost = before.hp - run.hero.hp
     if lost > 0 then float(cell, '-' .. lost, C.warn)
     elseif run.hero.hp > before.hp then float(cell, '+' .. (run.hero.hp - before.hp), { 0.5, 1, 0.7 })
@@ -361,7 +369,6 @@ end
 
 -- 断臂转轮：直接在右侧操作（不弹窗）
 local armHeld = { false, false, false }
-local armAnim = nil   -- 转动动画 { t }
 local armDrag = nil   -- 拨动 { reel, y0, off }
 
 local function pct(x) return math.floor(x * 1000 + 0.5) / 10 .. '%' end
@@ -379,11 +386,12 @@ local function armHint()
 end
 
 function spinArm(pay)
-    if not run.arm or run.status ~= 'playing' or walking or modal then return end
+    if not run.arm or run.status ~= 'playing' or walking or modal or stairs or armView.busy() then return end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
-    local r = run:armSpin(pay, anyHeld and { armHeld[1], armHeld[2], armHeld[3] } or nil)
+    local held = { armHeld[1], armHeld[2], armHeld[3] }
+    local r = run:armSpin(pay, anyHeld and held or nil)
     if not r.ok then setMsg(r.msg, true); return end
-    armAnim = { t = 0, held = { armHeld[1], armHeld[2], armHeld[3] } }
+    armView.startSpin(held, r.faces)
     armHeld = { false, false, false }
     setMsg(r.msg)
     saveGame()
@@ -407,28 +415,26 @@ local function stepOntoExit()
 end
 
 local pendingChoice = 1
+-- 楼梯口：画成井壁上的洞口（不再用弹窗）。最后一层的出口也画成一个洞
 function openStairs()
     local opts = run:nextOptions()
-    local lines = { '下楼之后就回不来了。' }
-    local due = run:rentDue()
-    if due > 0 then lines[#lines + 1] = '楼梯口坐着收租的井神：下楼前要交 ' .. due .. ' 金币（你有 ' .. run.hero.gold .. '）。' end
-    local back = { label = '再想想', fn = function() closeModal(); setMsg('留在本层。想好了再走到楼梯口。') end }
-    local function down(k) closeModal(); pendingChoice = k; stepOntoExit() end
-    local buttons = { back }
-    if #opts == 2 then
-        lines[#lines + 1] = '这里有两条往下的楼梯。'
-        lines[#lines + 1] = '左边的楼梯：' .. whisperMod.whisper(opts[1])
-        lines[#lines + 1] = '右边的楼梯：' .. whisperMod.whisper(opts[2])
-        buttons[#buttons + 1] = { label = '走左边', fn = function() down(1) end }
-        buttons[#buttons + 1] = { label = '走右边', fn = function() down(2) end }
-    elseif #opts == 1 then
-        lines[#lines + 1] = whisperMod.whisper(opts[1])
-        buttons[#buttons + 1] = { label = '下楼', primary = true, fn = function() down(1) end }
-    else
-        lines[#lines + 1] = '这是最后一层的出口。'
-        buttons[#buttons + 1] = { label = '出去', primary = true, fn = function() down(1) end }
-    end
-    openModal('楼梯口', lines, buttons)
+    local levels, words = {}, {}
+    for k, f in ipairs(opts) do levels[k] = whisperMod.level(f); words[k] = whisperMod.whisper(f) end
+    if #opts == 0 then levels[1] = 'mid'; words[1] = '井底的出口。外面有风。' end
+    stairs = { n = #levels, words = words, last = #opts == 0 }
+    stairsView.open(levels)
+end
+
+local function chooseStairs(k)
+    if not stairs or k < 1 or k > stairs.n then return end
+    stairs = nil
+    pendingChoice = k
+    stepOntoExit()
+end
+
+local function leaveStairs()
+    stairs = nil
+    setMsg('留在本层。想好了再走到楼梯口。')
 end
 
 local function openRent(thenFn)
@@ -681,13 +687,25 @@ function loadGame(data)
 end
 
 -- ---------- LÖVE 回调 ----------
+local function makeFrame()
+    local w, h = love.graphics.getDimensions()
+    frame = love.graphics.newCanvas(w, h)
+end
+
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     miner.load()
+    fx.load()
+    fx.loadShader()
+    fx.loadLight()
     canvas = love.graphics.newCanvas(LW, LH)
     relayout()
+    makeFrame()
     local m = love.filesystem.getInfo(META_FILE) and serialize.load(love.filesystem.read(META_FILE))
-    if m then meta = m end
+    if m then
+        meta = m
+        if meta.crt == nil then meta.crt = true end
+    end
     local data = love.filesystem.getInfo(SAVE_FILE) and serialize.load(love.filesystem.read(SAVE_FILE))
     if data and data.run and data.run.picks then
         loadGame(data)
@@ -697,16 +715,37 @@ function love.load()
     if os.getenv('DESCENT_AUTOTEST') then require('autotest').start() end
 end
 
-function love.resize() relayout() end
+function love.resize()
+    relayout()
+    makeFrame()
+end
+
+-- 墙缝滴水的位置：下面是空地的墙（每层算一次）
+local dripCache = { floor = nil, spots = {} }
+local function dripSpots()
+    local key = tostring(run.floorIndex) .. ':' .. tostring(run.picks[run.floorIndex])
+    if dripCache.floor == key then return dripCache.spots end
+    local spots = {}
+    for i, c in ipairs(run.cells) do
+        local below = i + run.w
+        if c.kind == 'wall' and below <= #run.cells and run.cells[below].kind ~= 'wall' then
+            local x, y = tileXY(i)
+            spots[#spots + 1] = { x + 8 + love.math.random(0, TILE - 16), y + TILE - 2 }
+        end
+    end
+    dripCache = { floor = key, spots = spots }
+    fx.clearDrips()
+    return spots
+end
 
 function love.update(dt)
+    clock = clock + dt
+    fx.update(dt)
+    armView.update(dt)
+    if stairs then stairsView.update(dt) end
     if walking and not modal then
         walking.t = walking.t + dt
         if walking.t >= STEP_TIME then walking.t = 0; walkStep() end
-    end
-    if armAnim then
-        armAnim.t = armAnim.t + dt
-        if armAnim.t > SPIN_TIME + 0.4 then armAnim = nil end
     end
     if heroAnim then
         heroAnim.t = heroAnim.t + dt / STEP_TIME
@@ -716,19 +755,30 @@ function love.update(dt)
         floats[k].t = floats[k].t + dt
         if floats[k].t > 0.9 then table.remove(floats, k) end
     end
+    if not stairs then fx.updateDrips(dt, dripSpots()) end
     local mx, my = love.mouse.getPosition()
     hovered = tileAt((mx - OX) / S, (my - OY) / S)
 end
 
 -- ---------- 绘制：像素层 ----------
+-- 斜俯视的立体感：地面有一道前沿（厚度），墙往上凸，有顶面和正面
+local function shade(c, k) return { c[1] * k, c[2] * k, c[3] * k } end
+
 local function drawTile(i)
     local c = run.cells[i]
     local x, y = tileXY(i)
     local g = love.graphics
     if c.kind == 'wall' then
-        setColor(C.wall); g.rectangle('fill', x, y, TILE, TILE)
-        setColor(C.wall2)
-        for k = 0, TILE - 1, 6 do g.rectangle('fill', x + k, y + k % 12, 2, 2) end
+        -- 正面（砖缝）
+        setColor({ 0.17, 0.14, 0.11 }); g.rectangle('fill', x, y + TILE - 12, TILE, 12)
+        setColor({ 0.12, 0.10, 0.08 })
+        g.rectangle('fill', x, y + TILE - 7, TILE, 1)
+        g.rectangle('fill', x + 13, y + TILE - 12, 1, 5); g.rectangle('fill', x + 29, y + TILE - 6, 1, 6)
+        -- 顶面
+        setColor({ 0.27, 0.23, 0.19 }); g.rectangle('fill', x, y - 6, TILE, TILE - 6)
+        setColor({ 0.33, 0.29, 0.23 }); g.rectangle('fill', x, y - 6, TILE, 2)
+        setColor({ 0.22, 0.19, 0.15 })
+        for k = 0, TILE - 1, 9 do g.rectangle('fill', x + k + (i % 3) * 2, y + (k % 14) - 2, 3, 2) end
         return
     end
     local base = C.floor
@@ -737,47 +787,89 @@ local function drawTile(i)
     elseif c.kind == 'door' then base = c.door == 'blood' and C.blood or C.door
     elseif c.kind == 'exit' then base = C.exit
     elseif floorMod.isFacility(c) then base = C.door end
-    setColor(base); g.rectangle('fill', x + 1, y + 1, TILE - 2, TILE - 2)
-    if c.kind == 'item' then
+    -- 前沿（厚度）和顶面
+    setColor(shade(base, 0.55)); g.rectangle('fill', x + 1, y + TILE - 7, TILE - 2, 6, 2, 2)
+    setColor(base); g.rectangle('fill', x + 1, y + 1, TILE - 2, TILE - 7, 3, 3)
+    setColor(shade(base, 1.25)); g.rectangle('fill', x + 2, y + 1, TILE - 4, 1)
+    local cx, cy = x + TILE / 2, y + TILE / 2 - 3
+    if c.kind == 'monster' then
+        -- 怪物脚下的影子
+        setColor({ 0, 0, 0 }, 0.35); g.ellipse('fill', cx, y + TILE - 10, 11, 3)
+    elseif c.kind == 'item' then
         if c.id == 'smallPotion' or c.id == 'bigPotion' then
-            local s = c.id == 'bigPotion' and 1.25 or 1
-            setColor({ 0.62, 0.7, 0.73 }); g.rectangle('fill', x + 14, y + 16 - 9 * s, 4, 3)
-            setColor(C.hp); g.rectangle('fill', x + 16 - 6 * s, y + 16 - 6 * s, 12 * s, 14 * s)
+            local s = c.id == 'bigPotion' and 1.3 or 1
+            setColor({ 0, 0, 0 }, 0.3); g.ellipse('fill', cx, cy + 9 * s, 7 * s, 2)
+            setColor({ 0.62, 0.7, 0.73 }); g.rectangle('fill', cx - 2, cy - 10 * s, 4, 3)
+            setColor(C.hp); g.rectangle('fill', cx - 6 * s, cy - 7 * s, 12 * s, 15 * s, 2, 2)
+            setColor({ 1, 0.7, 0.75 }); g.rectangle('fill', cx - 4 * s, cy - 5 * s, 2, 6 * s)
         elseif c.id == 'redGem' or c.id == 'blueGem' then
+            setColor({ 0, 0, 0 }, 0.3); g.ellipse('fill', cx, cy + 10, 8, 2)
             setColor(c.id == 'redGem' and { 0.89, 0.33, 0.23 } or { 0.18, 0.5, 0.84 })
-            g.polygon('fill', x + 16, y + 7, x + 25, y + 16, x + 16, y + 25, x + 7, y + 16)
+            g.polygon('fill', cx, cy - 10, cx + 10, cy, cx, cy + 10, cx - 10, cy)
+            setColor({ 1, 1, 1 }, 0.45); g.polygon('fill', cx, cy - 10, cx + 4, cy - 4, cx, cy, cx - 4, cy - 4)
         end
     elseif c.kind == 'exit' then
-        setColor(C.accent); g.polygon('fill', x + 9, y + 10, x + 23, y + 10, x + 16, y + 20)
+        -- 往下的台阶
+        for k = 0, 3 do
+            setColor(shade(C.exit, 1.3 - k * 0.22)); g.rectangle('fill', x + 6 + k * 3, y + 6 + k * 6, TILE - 12 - k * 6, 5)
+        end
     end
 end
 
+local armTexts = {}
 local function drawPixel()
-    love.graphics.setCanvas(canvas)
-    love.graphics.clear(C.bg[1], C.bg[2], C.bg[3])
-    -- 面板底色
-    setColor(C.panel)
-    love.graphics.rectangle('fill', 8, 6, LW - 16, 30)
-    love.graphics.rectangle('fill', PANEL_X - 4, MAP_Y - 4, PANEL_W + 8, LH - MAP_Y - 4)
-    setColor(C.line)
-    love.graphics.rectangle('line', MAP_X - 2.5, MAP_Y - 2.5, run.w * TILE + 5, run.h * TILE + 5)
-    for i = 1, #run.cells do drawTile(i) end
+    local g = love.graphics
+    g.setCanvas(canvas)
+    g.clear(C.bg[1], C.bg[2], C.bg[3])
+    armTexts = {}
+    if stairs then
+        stairsView.draw(stairsView.hit((love.mouse.getX() - OX) / S, (love.mouse.getY() - OY) / S), clock)
+        g.setCanvas()
+        return
+    end
+    -- 顶栏底色
+    setColor(C.panel); g.rectangle('fill', 0, 0, LW, 30)
+    -- 左边的深度条：1～20 层
+    for d = 1, 20 do
+        local y = MAP_Y + (d - 1) * 14
+        local now = d == run.floorIndex
+        local col = d < run.floorIndex and { 0.16, 0.24, 0.20 } or (now and { 0.85, 0.64, 0.25 } or { 0.10, 0.13, 0.15 })
+        setColor(col); g.rectangle('fill', 8, y, 18, 12, 2, 2)
+        if (d == 9 or d == 17) and not run.tutorial then setColor({ 0.79, 0.55, 0.23 }); g.rectangle('line', 8.5, y + 0.5, 17, 11, 2, 2) end
+        if (d == 10 or d == 19) and not run.tutorial then setColor({ 0.88, 0.4, 0.45 }); g.circle('fill', 23, y + 3, 1.5) end
+        if d == 20 and not run.tutorial then setColor({ 0.5, 0.15, 0.2 }); g.rectangle('fill', 8, y + 10, 18, 2) end
+    end
+    -- 地图：一行一行画（墙会盖住上一行的下沿，看起来是立着的）
+    for i = 1, #run.cells do
+        if run.cells[i].kind ~= 'wall' then drawTile(i) end
+        if i % run.w == 0 then
+            for k = i - run.w + 1, i do if run.cells[k].kind == 'wall' then drawTile(k) end end
+        end
+    end
     -- 悬停框
     if hovered and run.cells[hovered].kind ~= 'wall' and not modal then
         local x, y = tileXY(hovered)
-        setColor({ 1, 1, 1 }, 0.5); love.graphics.rectangle('line', x + 0.5, y + 0.5, TILE - 1, TILE - 1)
+        setColor({ 1, 0.9, 0.6 }, 0.6); g.rectangle('line', x + 0.5, y + 0.5, TILE - 1, TILE - 7, 3, 3)
     end
+    fx.drawDrips()
     -- 主角（走路时在两格之间插值）
     local hx, hy = tileXY(run.pos)
     if heroAnim then
-        local fx, fy = tileXY(heroAnim.from)
-        hx = fx + (hx - fx) * heroAnim.t
-        hy = fy + (hy - fy) * heroAnim.t
+        local fx0, fy0 = tileXY(heroAnim.from)
+        hx = fx0 + (hx - fx0) * heroAnim.t
+        hy = fy0 + (hy - fy0) * heroAnim.t
     end
-    miner.draw(facing, hx + 16, hy + 29, run.status == 'dead')
-    love.graphics.setCanvas()
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(canvas, OX, OY, 0, S, S)
+    setColor({ 0, 0, 0 }, 0.35); g.ellipse('fill', hx + TILE / 2, hy + TILE - 9, 10, 3)
+    miner.draw(facing, hx + TILE / 2, hy + TILE - 8, run.status == 'dead')
+    -- 矿灯：主角附近暖、远处冷暗（最暗也看得清格子）
+    fx.lamp(MAP_X, MAP_Y - 6, run.w * TILE, run.h * TILE + 6, hx + TILE / 2, hy + TILE / 2 - 6, 230)
+    -- 断臂转轮（机械小臂）
+    if run.arm then
+        armView.draw(run.arm, armHeld, armDrag and armDrag.reel, armDrag and armDrag.off or 0, function(x, y, w, h, sym, mid, alpha, top, bottom)
+            armTexts[#armTexts + 1] = { x = x, y = y, w = w, h = h, sym = sym, mid = mid, alpha = alpha, top = top, bottom = bottom }
+        end)
+    end
+    g.setCanvas()
 end
 
 -- ---------- 绘制：UI 层 ----------
@@ -790,160 +882,180 @@ local FACILITY_GLYPH = {
     altar = { '坛', '骨坛', '骨坛', '献 3 点攻击或 1 把骨钥，把杀过的怪的本事移到一把武器上。' },
 }
 
--- 右侧的断臂转轮：3×3 格子，亮的是现在停的位置
--- 右侧的断臂转轮：三个轮子并排，每个露出上中下 3 格，中间一行是结果。按住一个轮子上下拨动可以看整圈，松手弹回。
-local ARM = { x = PANEL_X + 6, y = 206, rw = 38, gap = 6, ch = 15 }
-ARM_SPIN = { x = PANEL_X + 146, y = 206, w = 84, h = 18 }
-ARM_BLOOD = { x = PANEL_X + 146, y = 228, w = 84, h = 18 }
-local function reelRect(r) return ARM.x + (r - 1) * (ARM.rw + ARM.gap), ARM.y + 10 end
-local function lockRect(r) local x, y = reelRect(r); return x, y + ARM.ch * 3 + 3, ARM.rw, 11 end
 local function inRect(lx, ly, x, y, w, h) return lx >= x and lx <= x + w and ly >= y and ly <= y + h end
-SPIN_TIME = 0.45
-
--- 动画里每个轮子还要多滚几格
-local function animOffset(r)
-    if not armAnim or (armAnim.held and armAnim.held[r]) then return 0 end
-    local dur = SPIN_TIME + (r - 1) * 0.15
-    local t = math.min(1, armAnim.t / dur)
-    return math.floor((1 - t) * (1 - t) * (8 + r * 4) + 0.5)
+local function rect(c, x, y, w, h, a, r)
+    setColor(c, a)
+    love.graphics.rectangle('fill', OX + x * S, OY + y * S, w * S, h * S, (r or 0) * S, (r or 0) * S)
 end
 
-function drawArmPanel()
-    if not run.arm then return end
-    text('断臂转轮', ARM.x, ARM.y - 4, 8, C.accent)
-    local held = armHeld
-    for r = 1, armMod.REELS do
-        local x, y = reelRect(r)
-        local off = animOffset(r) + ((armDrag and armDrag.reel == r) and armDrag.off or 0)
-        local center = run.arm.stops[r] - off
-        for row = -1, 1 do
-            local k = (center + row - 1) % armMod.SIZE + 1
-            local cy = y + (row + 1) * ARM.ch
-            local mid = row == 0
-            setColor(mid and (held[r] and { 0.32, 0.26, 0.10 } or { 0.20, 0.32, 0.28 }) or { 0.09, 0.12, 0.14 })
-            love.graphics.rectangle('fill', OX + x * S, OY + cy * S, ARM.rw * S, (ARM.ch - 1) * S)
-            local w = run.arm.reels[r][k]
-            text(w and SHORTW[w] or '·', x, cy + 2, mid and 8 or 7, w == armMod.WILD and C.ok or (w and (mid and C.text or C.dim) or C.dim), 'center', ARM.rw)
-        end
-        local lx, ly, lw, lh = lockRect(r)
-        setColor(held[r] and { 0.45, 0.35, 0.12 } or { 0.11, 0.16, 0.19 })
-        love.graphics.rectangle('fill', OX + lx * S, OY + ly * S, lw * S, lh * S)
-        text(held[r] and '已锁' or '锁', lx, ly + 2, 6, C.text, 'center', lw)
+-- 一个数值：小图标 + 数字，变化时跳一下
+local function stat(key, label, value, x, color)
+    local k, up = fx.watch(key, value)
+    rect(color, x, 10, 6, 6, 1, 1)
+    local col = up == nil and C.text or (up and { 0.6, 1, 0.7 } or C.warn)
+    text(label, x + 9, 8, 7, C.dim)
+    text(tostring(value), x + 9 + (#label > 0 and 14 or 0), 6 - (k - 1) * 6, 10 * k, col)
+end
+
+-- 悬停卡片的内容
+local function hoverLines(i)
+    local c = run.cells[i]
+    if c.kind == 'monster' then
+        local m = run:monsterAt(i)
+        local p = preview(i)
+        local base = config.MONSTERS[c.id]
+        local L = { { m.name, 10, C.text }, { '生命 ' .. m.hp .. '  攻 ' .. m.atk .. '  防 ' .. m.def, 7, C.dim } }
+        if m.atk ~= base.atk then L[#L + 1] = { '群居：攻击 ' .. base.atk .. ' → ' .. m.atk, 7, C.warn } end
+        if m.def ~= base.def then L[#L + 1] = { '被庇护：防御 ' .. base.def .. ' → ' .. m.def, 7, C.warn } end
+        for k in pairs(m.traits) do L[#L + 1] = { config.TRAIT_NAMES[k] .. '：' .. config.TRAIT_DESC[k], 6.5, C.dim } end
+        if p.fatal then L[#L + 1] = { p.text == '会死' and ('预计 −' .. p.lose .. '，你会死') or (p.text .. '，硬打会死'), 8.5, C.warn }
+        else L[#L + 1] = { '预计 −' .. p.lose .. '，打完剩 ' .. p.left, 8.5, C.ok } end
+        L[#L + 1] = { '掉落 ' .. p.gold .. ' 金', 6.5, C.gold }
+        if run:marked(i) then L[#L + 1] = { '印：打败后可刻' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name, 6.5, C.ok } end
+        return L
+    elseif c.kind == 'item' then
+        local f = run:floor()
+        local gem = f.gem + run.ch.gemBonus
+        local eff = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
+        return { { config.ITEM_NAMES[c.id], 10, C.text }, { eff, 8, C.text } }
+    elseif c.kind == 'door' then
+        return { { c.door == 'bone' and '骨门' or '血门', 10, C.text }, { c.door == 'bone' and '消耗 1 把骨钥' or ('通过时扣 ' .. run:floor().bloodCost .. ' 生命'), 7.5, C.text } }
+    elseif c.kind == 'exit' then
+        return { { '出口', 10, C.text }, { run:eliteAlive() and '精英还活着，出口被封住了' or '走到这里结束本层', 7.5, C.text } }
+    elseif floorMod.isFacility(c) then
+        local g = FACILITY_GLYPH[c.kind]
+        return { { g[3], 10, C.text }, { g[4], 6.5, C.dim } }
     end
-    -- 中间一行的标线
-    setColor(C.ok, 0.8)
-    local x1, y1 = reelRect(1)
-    love.graphics.rectangle('line', OX + (x1 - 2) * S, OY + (y1 + ARM.ch - 1) * S, (ARM.rw * 3 + ARM.gap * 2 + 4) * S, (ARM.ch + 1) * S)
-    local anyHeld = held[1] or held[2] or held[3]
+    return nil
+end
+
+local function drawTooltip(i)
+    local L = hoverLines(i)
+    if not L then return end
+    local x, y = tileXY(i)
+    local w = 150
+    local h = 8
+    for _, l in ipairs(L) do h = h + (l[2] >= 9 and 14 or (l[2] >= 7.5 and 12 or (#l[1] > 40 and 20 or 11))) end
+    local tx = x + TILE + 4
+    if tx + w > PANEL_X - 4 then tx = x - w - 4 end
+    local ty = math.max(32, math.min(y - 4, LH - h - 26))
+    rect({ 0.05, 0.07, 0.08 }, tx, ty, w, h, 0.94, 4)
+    setColor({ 0.4, 0.33, 0.2 }); love.graphics.rectangle('line', OX + tx * S, OY + ty * S, w * S, h * S, 4 * S, 4 * S)
+    local yy = ty + 5
+    for _, l in ipairs(L) do
+        text(l[1], tx + 6, yy, l[2], l[3], 'left', w - 12)
+        yy = yy + (l[2] >= 9 and 14 or (l[2] >= 7.5 and 12 or (#l[1] > 40 and 20 or 11)))
+    end
+end
+
+local function drawStairsUI()
+    text('楼梯口', 0, 26, 14, C.accent, 'center', LW)
+    text('下楼之后就回不来了。', 0, 48, 8, C.dim, 'center', LW)
+    local due = run:rentDue()
+    if due > 0 then text('收租的井神坐在洞口：下楼前要交 ' .. due .. ' 金币（你有 ' .. run.hero.gold .. '）', 0, 62, 8, C.gold, 'center', LW) end
+    for k, h in ipairs(stairsView.holes) do
+        local label = stairs.n == 2 and (k == 1 and '左边的洞口' or '右边的洞口') or (stairs.last and '井底的出口' or '往下的洞口')
+        text(label, h.cx - 90, h.cy + h.ry + 16, 9, C.text, 'center', 180)
+        text(stairs.words[k], h.cx - 100, h.cy + h.ry + 32, 8, { 0.78, 0.84, 0.86 }, 'center', 200)
+    end
+    text('点洞口往下走', 0, 300, 7, C.dim, 'center', LW)
+    local b = stairsView.back
+    text('再想想', b.x, b.y + 5, 8, C.text, 'center', b.w)
+end
+
+local SYMW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', wild = '赖' }
+
+local function drawArmUI()
+    if not run.arm then return end
+    local g = love.graphics
+    text('断臂转轮', armView.X + 10, armView.Y + 26, 8, { 0.96, 0.85, 0.6 })
+    -- 轮子上的图案（大字，一眼认得出；只画在窗口里）
+    for _, t in ipairs(armTexts) do
+        g.setScissor(OX + t.x * S, OY + t.top * S, t.w * S, (t.bottom - t.top) * S)
+        local col = t.sym == armMod.WILD and C.ok or (t.sym and (t.mid and { 1, 0.96, 0.88 } or { 0.62, 0.62, 0.6 }) or { 0.3, 0.32, 0.33 })
+        setColor(col, t.alpha)
+        love.graphics.setFont(font((t.sym and (t.mid and 15 or 12) or 10) * S))
+        love.graphics.printf(t.sym and SYMW[t.sym] or '·', OX + t.x * S, OY + (t.y + (t.mid and 4 or 6)) * S, t.w * S, 'center')
+        g.setScissor()
+    end
+    for r = 1, 3 do
+        local lx, ly, lw = armView.lockRect(r)
+        text(armHeld[r] and '已锁' or '锁', lx, ly + 2, 6.5, armHeld[r] and { 0.15, 0.1, 0.02 } or { 0.85, 0.75, 0.55 }, 'center', lw)
+    end
     local price = run:armPrice(armHeld)
-    setColor({ 0.12, 0.35, 0.3 })
-    love.graphics.rectangle('fill', OX + ARM_SPIN.x * S, OY + ARM_SPIN.y * S, ARM_SPIN.w * S, ARM_SPIN.h * S)
-    text((anyHeld and '重转 ' or '转动 ') .. price.gold .. ' 金（R）', ARM_SPIN.x, ARM_SPIN.y + 4, 7, C.text, 'center', ARM_SPIN.w)
-    setColor({ 0.35, 0.12, 0.16 })
-    love.graphics.rectangle('fill', OX + ARM_BLOOD.x * S, OY + ARM_BLOOD.y * S, ARM_BLOOD.w * S, ARM_BLOOD.h * S)
-    text('用血转 ' .. price.blood, ARM_BLOOD.x, ARM_BLOOD.y + 4, 7, C.text, 'center', ARM_BLOOD.w)
-    text('按住轮子上下拨动看整圈', ARM_SPIN.x, ARM_BLOOD.y + 22, 6, C.dim, 'left', ARM_SPIN.w)
-    text(armHint(), ARM.x, ARM.y + 76, 6.5, C.dim, 'left', PANEL_W - 12)
+    local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
+    text((anyHeld and '拉杆重转 ' or '拉杆 ') .. price.gold .. ' 金（R）', armView.X + 10, armView.Y + 160, 7.5, { 0.96, 0.85, 0.6 })
+    local b = armView.BLOOD
+    text('用血转 ' .. price.blood, b.x, b.y + 4, 7, { 1, 0.85, 0.88 }, 'center', b.w)
+    text(armHint(), PANEL_X + 2, armView.Y + 222, 6.5, C.dim, 'left', PANEL_W)
+    text('按住轮子上下拨动看整圈', PANEL_X + 2, armView.Y + 258, 6, { 0.42, 0.48, 0.5 }, 'left', PANEL_W)
+    -- 连成一线：大字跳一下
+    local kind, t = armView.flashInfo()
+    if kind == 'win' and run.hero.weapon then
+        local k = 1 + 0.6 * math.max(0, 1 - t / 0.25)
+        text(config.WEAPONS[run.hero.weapon].name .. '！', armView.X - 20, armView.Y + 112 - (k - 1) * 10, 13 * k, C.ok, 'center', 170)
+    elseif kind == 'lose' then
+        text('空手……', armView.X - 20, armView.Y + 112, 12, C.dim, 'center', 170)
+    end
 end
 
 local function drawUI()
-    local h = run.hero
-    local atk, def = combat.effectiveStats(h)
-    text(run:floor().name, 16, 10, 10, C.accent)
-    text('血 ' .. h.hp, 190, 10, 10, C.hp)
-    text('攻 ' .. atk, 250, 10, 10, C.atk)
-    text('防 ' .. def, 300, 10, 10, C.def)
-    text('钥 ' .. h.keys, 350, 10, 10, { 0.85, 0.76, 0.48 })
-    text('金 ' .. h.gold, 400, 10, 10, C.gold)
-    text('步 ' .. run.steps, 460, 10, 10, C.dim)
-    text(h.weapon and ('⚔ ' .. config.WEAPONS[h.weapon].name) or (run.arm and '空手' or ''), 510, 9, 7.5, h.weapon and C.atk or C.dim)
-    if h.boons then
-        local names = {}
-        for k, b in ipairs(h.boons) do names[k] = config.BOON_NAMES[b] end
-        text(table.concat(names, '·'), 510, 21, 6.5, C.accent)
-    end
-    if run.decree then
-        text('诏令：' .. run.decree.def.text .. (run.decree.def.kind == 'killTrait' and ('（' .. run.decree.progress .. '/' .. run.decree.def.n .. '）') or '') .. '，第 ' .. run.decree['until'] .. ' 层前', 16, 26, 6.5, C.ok)
-    end
-
-    -- 格子上的字：怪物名和战损、门、钥匙、金币
-    for i, c in ipairs(run.cells) do
-        local x, y = tileXY(i)
-        if c.kind == 'monster' then
-            local p = preview(i)
-            text(SHORT[c.id], x, y + 3, 10, { 1, 0.84, 0.86 }, 'center', TILE)
-            if run:marked(i) then text('印', x + 22, y, 7, C.ok) end
-            text(p.fatal and (p.text == '会死' and ('-' .. p.lose) or p.text) or ('-' .. p.lose), x, y + 19, 6.5, p.fatal and C.warn or C.ok, 'center', TILE)
-        elseif c.kind == 'door' then
-            text(c.door == 'bone' and '门' or '血门', x, y + 5, 9, { 0.95, 0.84, 0.6 }, 'center', TILE)
-            text(c.door == 'bone' and '骨钥' or ('-' .. run:floor().bloodCost), x, y + 20, 6, C.dim, 'center', TILE)
-        elseif c.kind == 'item' and (c.id == 'key' or c.id == 'gold') then
-            text(c.id == 'key' and '钥' or '金', x, y + 8, 11, C.gold, 'center', TILE)
-        elseif c.kind == 'exit' then
-            text('出口', x, y + 21, 6, C.accent, 'center', TILE)
-        elseif floorMod.isFacility(c) then
-            local g = FACILITY_GLYPH[c.kind]
-            text(g[1], x, y + 4, 11, C.gold, 'center', TILE)
-            text(g[2], x, y + 20, 6, C.dim, 'center', TILE)
-        end
-    end
-    for _, f in ipairs(floats) do
-        text(f.text, f.x, f.y - f.t * 18, 9, f.color, 'center', TILE)
-    end
-
-    -- 右侧信息栏
-    local px, py = PANEL_X + 6, MAP_Y + 4
-    local i = hovered
-    if i and run.cells[i].kind ~= 'wall' and run.cells[i].kind ~= 'floor' and not modal then
-        local c = run.cells[i]
-        if c.kind == 'monster' then
-            local m = run:monsterAt(i)
-            local p = preview(i)
-            text(m.name, px, py, 11, C.text)
-            text('生命 ' .. m.hp .. '　攻击 ' .. m.atk .. '　防御 ' .. m.def, px, py + 18, 7.5, C.text)
-            local ty = py + 32
-            local base = config.MONSTERS[c.id]
-            if m.atk ~= base.atk then text('（群居：身边有同类，攻击从 ' .. base.atk .. ' 涨到 ' .. m.atk .. '）', px, ty, 7, C.warn, 'left', PANEL_W - 12); ty = ty + 12 end
-            if m.def ~= base.def then text('（被骸骨祭司庇护，防御从 ' .. base.def .. ' 涨到 ' .. m.def .. '）', px, ty, 7, C.warn, 'left', PANEL_W - 12); ty = ty + 12 end
-            for k in pairs(m.traits) do
-                text('【' .. config.TRAIT_NAMES[k] .. '】' .. config.TRAIT_DESC[k], px, ty, 7, C.dim, 'left', PANEL_W - 12)
-                ty = ty + 12
-            end
-            if p.fatal then
-                text(p.text == '会死' and ('预计损失 ' .. p.lose .. '，你会死') or (p.text .. '，硬打会死'), px, ty + 4, 9, C.warn, 'left', PANEL_W - 12)
-            else
-                text('预计损失', px, ty + 4, 7, C.dim)
-                text('打完剩余', px + 110, ty + 4, 7, C.dim)
-                text('-' .. p.lose, px, ty + 14, 16, C.warn)
-                text(tostring(p.left), px + 110, ty + 14, 16, C.accent)
-            end
-            text('掉落 ' .. p.gold .. ' 金币', px, ty + 38, 7.5, C.gold)
-            if run:marked(i) then text('印记：打败后可以把' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name .. '刻到转轮上', px, ty + 52, 7, C.ok, 'left', PANEL_W - 12) end
-        elseif c.kind == 'item' then
-            text(config.ITEM_NAMES[c.id], px, py, 11, C.text)
-            local f = run:floor()
-            local gem = f.gem + run.ch.gemBonus
-            local eff = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
-            text(eff, px, py + 18, 8, C.text)
-        elseif c.kind == 'door' then
-            text(c.door == 'bone' and '骨门' or '血门', px, py, 11, C.text)
-            text(c.door == 'bone' and '消耗 1 把骨钥打开' or ('通过时扣 ' .. run:floor().bloodCost .. ' 生命'), px, py + 18, 8, C.text)
-        elseif c.kind == 'exit' then
-            text('出口', px, py, 11, C.text)
-            text(run:eliteAlive() and '精英还活着，出口被封住了' or '走到这里结束本层', px, py + 18, 8, C.text)
-        elseif floorMod.isFacility(c) then
-            local g = FACILITY_GLYPH[c.kind]
-            text(g[3], px, py, 11, C.text)
-            text(g[4], px, py + 18, 7.5, C.text, 'left', PANEL_W - 12)
-            text('点它走到旁边使用', px, py + 44, 7, C.dim, 'left', PANEL_W - 12)
-        end
+    if stairs then
+        drawStairsUI()
     else
-        text(run:floor().name, px, py, 11, C.text)
-        text('鼠标移到格子上看详情，点击行动；点空地直接走过去。方向键 / WASD 也能走。', px, py + 18, 7.5, C.dim, 'left', PANEL_W - 12)
+        local h = run.hero
+        local atk, def = combat.effectiveStats(h)
+        text(run:floor().name, MAP_X, 7, 10, C.accent)
+        stat('hp', '', h.hp, 190, C.hp)
+        stat('atk', '攻', atk, 250, C.atk)
+        stat('def', '防', def, 300, C.def)
+        stat('keys', '钥', h.keys, 350, { 0.85, 0.76, 0.48 })
+        stat('gold', '金', h.gold, 396, C.gold)
+        local wname = h.weapon and config.WEAPONS[h.weapon].name or (run.arm and '空手' or '')
+        text(wname, 452, 8, 8.5, h.weapon and C.atk or C.dim)
+        if h.boons then
+            local names = {}
+            for k, b in ipairs(h.boons) do names[k] = config.BOON_NAMES[b] end
+            text(table.concat(names, '·'), 452, 20, 6, C.accent)
+        end
+        if run.decree then
+            text('诏令：' .. run.decree.def.text .. (run.decree.def.kind == 'killTrait' and ('（' .. run.decree.progress .. '/' .. run.decree.def.n .. '）') or '') .. '，第 ' .. run.decree['until'] .. ' 层前', MAP_X, 33, 6.5, C.ok)
+        end
+        -- 深度条的数字
+        for d = 1, 20 do text(tostring(d), 8, MAP_Y + (d - 1) * 14 + 2, 5.5, d == run.floorIndex and { 0.1, 0.07, 0.02 } or { 0.45, 0.52, 0.55 }, 'center', 18) end
+        -- 格子上的字；怪物头上挂"掉多少血"的牌子
+        for i, c in ipairs(run.cells) do
+            local x, y = tileXY(i)
+            if c.kind == 'monster' then
+                local p = preview(i)
+                text(SHORT[c.id], x, y + 7, 13, { 1, 0.86, 0.88 }, 'center', TILE)
+                local tag = p.fatal and (p.text == '会死' and '会死' or p.text) or ('−' .. p.lose)
+                local tw = math.max(22, #tag * 2.6 + 8)
+                rect(p.fatal and { 0.75, 0.2, 0.25 } or { 0.94, 0.77, 0.42 }, x + (TILE - tw) / 2, y - 7, tw, 10, 1, 5)
+                text(tag, x, y - 6, 6.5, p.fatal and { 1, 0.95, 0.95 } or { 0.12, 0.08, 0.02 }, 'center', TILE)
+                if run:marked(i) then text('印', x + TILE - 10, y + 1, 7, C.ok) end
+            elseif c.kind == 'door' then
+                text(c.door == 'bone' and '门' or '血门', x, y + 8, 10, { 0.95, 0.84, 0.6 }, 'center', TILE)
+                text(c.door == 'bone' and '骨钥' or ('−' .. run:floor().bloodCost), x, y + 22, 6, C.dim, 'center', TILE)
+            elseif c.kind == 'item' and (c.id == 'key' or c.id == 'gold') then
+                text(c.id == 'key' and '钥' or '金', x, y + 9, 13, C.gold, 'center', TILE)
+            elseif c.kind == 'exit' then
+                text('出口', x, y + 25, 6, { 0.8, 1, 0.9 }, 'center', TILE)
+            elseif floorMod.isFacility(c) then
+                local g = FACILITY_GLYPH[c.kind]
+                text(g[1], x, y + 6, 13, C.gold, 'center', TILE)
+                text(g[2], x, y + 23, 6, C.dim, 'center', TILE)
+            end
+        end
+        for _, f in ipairs(floats) do
+            text(f.text, f.x, f.y - f.t * 18, 9, f.color, 'center', TILE)
+        end
+        drawArmUI()
+        if hovered and not modal and not walking and run.cells[hovered].kind ~= 'wall' and run.cells[hovered].kind ~= 'floor' then drawTooltip(hovered) end
+        -- 底部：消息和提示
+        text(msg ~= '' and msg or (run:floor().hint or ''), MAP_X, LH - 30, 7.5, msgErr and C.warn or (msg ~= '' and C.text or C.dim), 'left', PANEL_X - MAP_X - 8)
+        text('走过不能撤回 · 死了从第 1 层重来 · F2 老电视滤镜', MAP_X, LH - 12, 6, { 0.38, 0.44, 0.47 }, 'left', 400)
     end
-    drawArmPanel()
-    text(msg, px, LH - 60, 7.5, msgErr and C.warn or C.text, 'left', PANEL_W - 12)
-    text('走过不能撤回 · 死了从第 1 层重来', px, LH - 20, 6.5, C.dim, 'left', PANEL_W - 12)
 
     -- 弹窗
     if modal then
@@ -966,9 +1078,15 @@ local function drawUI()
 end
 
 function love.draw()
-    love.graphics.clear(0, 0, 0)
     drawPixel()
+    love.graphics.setCanvas(frame)
+    love.graphics.clear(0, 0, 0)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(canvas, OX, OY, 0, S, S)
     drawUI()
+    love.graphics.setCanvas()
+    love.graphics.clear(0, 0, 0)
+    fx.drawCRT(frame, meta.crt)
 end
 
 -- ---------- 输入 ----------
@@ -982,13 +1100,21 @@ function love.mousepressed(mx, my, button)
         end
         return
     end
+    if stairs then
+        local k = stairsView.hit(lx, ly)
+        if k then chooseStairs(k); return end
+        local b = stairsView.back
+        if inRect(lx, ly, b.x, b.y, b.w, b.h) then leaveStairs() end
+        return
+    end
     if run.arm and run.status == 'playing' and not walking then
-        if inRect(lx, ly, ARM_SPIN.x, ARM_SPIN.y, ARM_SPIN.w, ARM_SPIN.h) then spinArm('gold'); return end
-        if inRect(lx, ly, ARM_BLOOD.x, ARM_BLOOD.y, ARM_BLOOD.w, ARM_BLOOD.h) then spinArm('blood'); return end
+        if inRect(lx, ly, armView.leverRect()) then spinArm('gold'); return end
+        local b = armView.BLOOD
+        if inRect(lx, ly, b.x, b.y, b.w, b.h) then spinArm('blood'); return end
         for r = 1, armMod.REELS do
-            local x, y = reelRect(r)
-            if inRect(lx, ly, x, y, ARM.rw, ARM.ch * 3) then armDrag = { reel = r, y0 = ly, off = 0 }; return end
-            if inRect(lx, ly, lockRect(r)) then toggleHold(r); return end
+            local x, y, w, h = armView.reelRect(r)
+            if inRect(lx, ly, x, y, w, h) then armDrag = { reel = r, y0 = ly, off = 0 }; return end
+            if inRect(lx, ly, armView.lockRect(r)) then toggleHold(r); return end
         end
     end
     local i = tileAt(lx, ly)
@@ -998,7 +1124,7 @@ end
 function love.mousemoved(mx, my)
     if armDrag then
         local ly = (my - OY) / S
-        armDrag.off = math.floor((ly - armDrag.y0) / ARM.ch + 0.5)
+        armDrag.off = math.floor((ly - armDrag.y0) / armView.CELL_H + 0.5)
     end
 end
 
@@ -1008,12 +1134,22 @@ function love.mousereleased() armDrag = nil end
 local DIRS = { up = { 0, -1 }, down = { 0, 1 }, left = { -1, 0 }, right = { 1, 0 }, w = { 0, -1 }, s = { 0, 1 }, a = { -1, 0 }, d = { 1, 0 } }
 
 function love.keypressed(key)
+    if key == 'f2' then
+        meta.crt = not meta.crt
+        love.filesystem.write(META_FILE, serialize.dump(meta))
+        return
+    end
     if modal then
         if key == 'return' or key == 'space' then
             for _, b in ipairs(modal.buttons) do if b.primary then b.fn(); return end end
         end
         local n = tonumber(key)
         if n and modal.buttons[n] then modal.buttons[n].fn() end
+        return
+    end
+    if stairs then
+        local n = tonumber(key)
+        if n then chooseStairs(n) elseif key == 'escape' then leaveStairs() end
         return
     end
     if key == 'r' and run.arm and run.status == 'playing' and not walking then spinArm('gold'); return end
@@ -1032,10 +1168,11 @@ end
 return {
     getRun = function() return run end,
     getModal = function() return modal end,
-    busy = function() return walking ~= nil end,
+    busy = function() return walking ~= nil or armView.busy() end,
     act = act,
     newGame = function(seed, tutorial)
         closeModal()
+        stairs = nil
         meta.tutorialDone = not tutorial
         newGame(seed)
     end,
@@ -1045,4 +1182,7 @@ return {
     dragReel = function(r, off) armDrag = off and { reel = r, y0 = 0, off = off } or nil end,
     getMeta = function() return meta end,
     setHover = function(i) hovered = i end,
+    inStairs = function() return stairs ~= nil end,
+    chooseStairs = function(k) chooseStairs(k) end,
+    setCRT = function(on) meta.crt = on end,
 }

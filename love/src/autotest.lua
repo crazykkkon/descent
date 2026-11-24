@@ -25,6 +25,16 @@ function M.start()
         end
         return false
     end
+    -- 鼠标移到某个格子上（和 main.lua 的地图位置一致：每格 40，左上角 34, 46）
+    local function hoverCell(i)
+        local run = game.getRun()
+        local x = (i - 1) % run.w
+        local y = math.floor((i - 1) / run.w)
+        local w, h = love.graphics.getDimensions()
+        local S = math.max(1, math.min(math.floor(w / 640), math.floor(h / 360)))
+        local OX, OY = math.floor((w - 640 * S) / 2), math.floor((h - 360 * S) / 2)
+        love.mouse.setPosition(OX + (34 + x * 40 + 20) * S, OY + (46 + y * 40 + 16) * S)
+    end
     local function find(pred)
         for i, c in ipairs(game.getRun().cells) do if pred(c, i) then return i end end
     end
@@ -78,7 +88,7 @@ function M.start()
             settle()
             handlePopups()
             local t = modalTitle()
-            if t == '楼梯口' or t == '你倒下了' or t == '……' then return end
+            if game.inStairs() or t == '你倒下了' or t == '……' then return end
         end
     end
     local function near(i)
@@ -124,7 +134,8 @@ function M.start()
             local elite = find(function(c) return c.kind == 'monster' and config.MONSTERS[c.id].elite end)
             if elite then go(elite) end
             go(find(function(c) return c.kind == 'exit' end))
-            button('下楼'); settle(); sleep(0.1)
+            if f == 1 then shot('01b-stairs-single') end
+            game.chooseStairs(1); settle(); sleep(0.1)
             button('下楼'); sleep(0.1)
         end
         shot('02-arm-story')
@@ -138,7 +149,11 @@ function M.start()
             local run = game.getRun()
             strong()
             handlePopups()
-            if f == 1 then once('03-floor1') end
+            if f == 1 then
+                once('03-floor1')
+                local mon = find(function(c) return c.kind == 'monster' end)
+                if mon then hoverCell(mon); sleep(0.3); once('03b-hover'); love.mouse.setPosition(1, 1) end
+            end
             if f == 3 then
                 -- 测试用：塞一个赖子进来，看界面
                 run.engraveQueue[#run.engraveQueue + 1] = { from = 'wheel', choices = { 'wild' } }
@@ -182,7 +197,9 @@ function M.start()
             local armCells = 0
             for r = 1, 3 do for k = 1, 5 do if run.arm.reels[r][k] then armCells = armCells + 1 end end end
             if armCells > 0 then
-                game.spinArm('gold'); sleep(0.9)
+                game.spinArm('gold'); sleep(0.62)
+                if not shots['06c-spinning'] then once('06c-spinning') end
+                sleep(0.3)
                 game.toggleHold(1)
                 game.dragReel(2, 2)
                 if armCells >= 3 then once('06-arm') end
@@ -198,7 +215,7 @@ function M.start()
                 say(string.format('第 %d 层精英倒下，手上 %s', f, tostring(run.hero.weapon)))
             end
             go(find(function(c) return c.kind == 'exit' end))
-            if modalTitle() ~= '楼梯口' then say('第 ' .. f .. ' 层没走到楼梯口：' .. tostring(modalTitle())); break end
+            if not game.inStairs() then say('第 ' .. f .. ' 层没走到楼梯口：' .. tostring(modalTitle())); break end
             -- 楼梯二选一：优先去还没去过的设施层
             local opts = run:nextOptions()
             if #opts == 2 then
@@ -208,9 +225,9 @@ function M.start()
                     local kind = opts[k].kind
                     if kind ~= 'normal' and kind ~= 'elite' and not visited[kind] then pickRight = (k == 2); break end
                 end
-                if not button(pickRight and '走右边' or '走左边') then break end
+                game.chooseStairs(pickRight and 2 or 1)
             else
-                if not (button('下楼') or button('出去')) then break end
+                game.chooseStairs(1)
             end
             settle(); sleep(0.2)
             if modalTitle() ~= run:floor().name .. ' 完成' then say('第 ' .. f .. ' 层没出结算：' .. tostring(modalTitle())); break end

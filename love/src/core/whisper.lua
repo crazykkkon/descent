@@ -18,6 +18,18 @@ local function mapCode(map)
     return n
 end
 
+-- 下面有多凶：'loud' | 'quiet' | 'mid'（楼梯口的画面效果用，不说破类型）
+function M.level(f)
+    local n, elite = 0, false
+    for _, c in ipairs(floorMod.parse(f).cells) do
+        if c.kind == 'monster' then
+            n = n + 1
+            if config.MONSTERS[c.id].elite then elite = true end
+        end
+    end
+    return (elite or n >= 8) and 'loud' or (n <= 3 and 'quiet' or 'mid')
+end
+
 function M.whisper(f)
     local n, elite = 0, false
     for _, c in ipairs(floorMod.parse(f).cells) do
