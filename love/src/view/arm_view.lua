@@ -80,7 +80,8 @@ local function leverDown()
 end
 
 -- 像素层：手臂、轮子窗口、锁扣、拉杆。drawCellText(x, y, w, h, sym, isMid, alpha) 由调用方在 UI 层画字
-function M.draw(arm, held, dragReel, dragOff, drawCellText)
+-- offs：每个轮子另外拨过几格（刻图案时拨开看的位置，松手不弹回）；可以不给。noControls：刻图案时不画"用血转"按钮
+function M.draw(arm, held, dragReel, dragOff, drawCellText, offs, noControls)
     local g = love.graphics
     local x0, y0 = M.X, M.Y
     -- 上臂（从画面上方伸下来，接在断口）
@@ -136,12 +137,12 @@ function M.draw(arm, held, dragReel, dragOff, drawCellText)
     g.setColor(0.80, 0.25, 0.18); g.circle('fill', kx, ky, 6)
     g.setColor(1.0, 0.6, 0.5); g.circle('fill', kx - 2, ky - 2, 1.5)
     -- 用血转的按钮
-    g.setColor(0.33, 0.11, 0.14); g.rectangle('fill', M.BLOOD.x, M.BLOOD.y, M.BLOOD.w, M.BLOOD.h, 3, 3)
+    if not noControls then g.setColor(0.33, 0.11, 0.14); g.rectangle('fill', M.BLOOD.x, M.BLOOD.y, M.BLOOD.w, M.BLOOD.h, 3, 3) end
 
     -- 轮子上的图案（交给 UI 层画字）：带小数偏移，滚动时画拖影
     for r = 1, 3 do
         local rx, ry, rw = M.reelRect(r)
-        local off = rolling(r) + ((dragReel == r) and dragOff or 0)
+        local off = rolling(r) + ((dragReel == r) and dragOff or 0) + (offs and offs[r] or 0)
         local center = arm.stops[r] - off
         local base = math.floor(center)
         local frac = center - base

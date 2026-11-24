@@ -264,7 +264,8 @@ export class Run {
         const k = engraveCell(this.arm, reel, id, cell);
         if (k < 0) return { ok: false, msg: '' };
         this.engraveQueue.shift();
-        // 刻上不等于拿到：要拉杆转到才换成这把武器
+        // 刻上不等于拿到：要拉杆转到才换成这把武器。覆盖掉了手上这把的最后一格就变空手
+        this.checkHold();
         return { ok: true, msg: `把${symName(id)}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，转到它才拿得到` };
     }
 
@@ -445,6 +446,7 @@ export class Run {
         if (unpaid) return unpaid;
         engraveCell(this.arm, p.reel, p.weapon, cell);
         this.pawned.splice(j, 1);
+        this.checkHold();
         return { ok: true, msg: `赎回了${symName(p.weapon)}` };
     }
 
@@ -462,6 +464,7 @@ export class Run {
         if (unpaid) return unpaid;
         engraveCell(this.arm, reel, w, cell);
         this.bought.push(`${this.floorIndex}:${i}:${k}`);
+        this.checkHold();
         return { ok: true, msg: `花 ${price} 金币刻上了${symName(w)}` };
     }
 

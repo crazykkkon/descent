@@ -158,6 +158,7 @@ function Run:engrave(id, reel, cell)
     local k = armMod.engraveCell(self.arm, reel, id, cell)
     if not k then return { ok = false, msg = '' } end
     table.remove(self.engraveQueue, 1)
+    self:checkHold()
     return { ok = true, msg = '把' .. symName(id) .. '刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格，转到它才拿得到' }
 end
 
@@ -358,6 +359,7 @@ function Run:pawnRedeem(i, j, cell)
     if unpaid then return unpaid end
     armMod.engraveCell(self.arm, p.reel, p.weapon, cell)
     table.remove(self.pawned, j)
+    self:checkHold()
     return { ok = true, msg = '赎回了' .. symName(p.weapon) }
 end
 
@@ -375,6 +377,7 @@ function Run:pawnBuy(i, k, reel, cell)
     if unpaid then return unpaid end
     armMod.engraveCell(self.arm, reel, w, cell)
     self:markSold(i, k)
+    self:checkHold()
     return { ok = true, msg = '花 ' .. price .. ' 金币刻上了' .. symName(w) }
 end
 

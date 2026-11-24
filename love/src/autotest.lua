@@ -64,16 +64,18 @@ function M.start()
         end
     end
     -- 处理路上弹出来的东西：刻图案（刻第一个，刻满了覆盖第 1 行）、诏令（接下）、消息
+    local shots = {}
+    local function once(name) if not shots[name] then shots[name] = true; shot(name) end end
+    local pickCell
     local function handlePopups()
         for _ = 1, 10 do
             local t = modalTitle()
             if t == '刻图案' then
                 local m = game.getModal()
                 m.buttons[1].fn()
-                -- 选轮子：轮流刻在 1、2、3 号轮子上；刻满了覆盖第 1 格
+                -- 刻图案的场景：手臂移到中间，点一格刻上去。轮流刻在 1、2、3 号轮子上；刻满了覆盖第 1 格
                 engraveTurn = engraveTurn % 3 + 1
-                button('刻在轮子 ' .. engraveTurn)
-                if modalTitle() and modalTitle():find('^刻') then button('覆盖第 1 格') end
+                pickCell(engraveTurn)
             elseif t and t:find('诏令') and game.getModal().buttons[2] and game.getModal().buttons[2].label == '接下' then button('接下')
             elseif t == '井神的诏令' then button('知道了')
             else return end
@@ -82,6 +84,26 @@ function M.start()
     end
     -- 走上出口前的确认弹窗
     local function isExit(t) return t ~= nil and (t == '出口' or t:find('的出口$') ~= nil) end
+    -- 等刻图案的场景打开，点一格，再等它关上
+    pickCell = function(r)
+        for _ = 1, 40 do if game.pickerReady() then break end; sleep(0.05) end
+        if not shots['07b-engrave-picker'] then
+            shots['07b-engrave-picker'] = true
+            -- 第一次用真的鼠标点：点第 r 个轮子下面那一格，应该刻在"中间那格的下一格"
+            local run = game.getRun()
+            local stop = run.arm.stops[r]
+            local want = stop % 5 + 1
+            local x, y = game.pickerCellScreen(r, 2)
+            love.mouse.setPosition(x, y); sleep(0.1)
+            shot('07b-engrave-picker')
+            love.mousepressed(x, y, 1); love.mousereleased(x, y, 1)
+            for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
+            say(string.format('鼠标点轮子 %d 下面一格：刻在第 %d 格（应该是 %d），%s', r, want, want, tostring(run.arm.reels[r][want])))
+            return
+        end
+        game.pickCell(r)
+        for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
+    end
     local function go(target)
         for _, cell in ipairs(route(target)) do
             local run = game.getRun()
@@ -106,8 +128,6 @@ function M.start()
         h.gold = math.max(h.gold, 3000)
     end
     engraveTurn = 0
-    local shots = {}
-    local function once(name) if not shots[name] then shots[name] = true; shot(name) end end
 
     co = coroutine.create(function()
         love.filesystem.remove('save.lua')
@@ -204,7 +224,9 @@ function M.start()
                 sleep(0.1)
                 once('06a-engrave-wild')
                 handlePopups()
-                say('刻赖子后：' .. tostring(run.arm.reels[engraveTurn][1]) .. ' / 手上 ' .. tostring(run.hero.weapon))
+                local hasWild = false
+                for k = 1, 5 do if run.arm.reels[engraveTurn][k] == 'wild' then hasWild = true end end
+                say('刻赖子后：轮子 ' .. engraveTurn .. ' 上有赖子 ' .. tostring(hasWild) .. ' / 手上 ' .. tostring(run.hero.weapon))
                 sleep(0.2)
                 once('06b-wild-reel')
             end
@@ -226,7 +248,7 @@ function M.start()
                 once('05-' .. kind)
                 if kind == 'wheel' then button('金币'); sleep(0.1); handlePopups(); if modalTitle() == '大转盘' then button('离开') end
                 elseif kind == 'pawn' then
-                    if button('买') then button('刻在轮子 3'); if modalTitle() and modalTitle():find('^买') then button('覆盖第 1 格') end else button('卖骨钥') end
+                    if button('买') then pickCell(3) else button('卖骨钥') end
                     handlePopups(); if modalTitle() == '当铺' then button('离开') end
                 elseif kind == 'altar' then
                     local m = game.getModal()

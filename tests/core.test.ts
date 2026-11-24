@@ -379,6 +379,12 @@ test('断臂转轮：开局是空的，打败印记怪可以刻武器；刻上�
     run.engrave('harpoon', 0); run.engrave('harpoon', 2);
     assert.equal(run.hero.weapon, undefined);
     assert.deepEqual(run.arm!.stops.map((k, r) => run.arm!.reels[r][k]), [null, null, null], '中间一行还是空的');
+    // 覆盖掉手上这把武器的最后一格：变空手
+    run.hero.weapon = 'harpoon';
+    run.arm!.reels = reels([], ['harpoon'], []);
+    run.engraveQueue = [{ from: 'mark', choices: ['boneKnife'] }];
+    assert.ok(run.engrave('boneKnife', 1, 0).ok);
+    assert.equal(run.hero.weapon, undefined, '手上的鱼叉被覆盖掉了');
     assert.equal(run.pendingEngrave, null);
 });
 
