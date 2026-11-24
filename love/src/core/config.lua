@@ -44,7 +44,7 @@ M.MONSTERS = {
     priest     = { id = 'priest',     name = '骸骨祭司', hp = 100, atk = 30, def = 22, gold = 16, traits = T('shelter') },
     gatekeeper = { id = 'gatekeeper', name = '守门人',   hp = 160, atk = 44, def = 24, gold = 80, traits = T('double'), elite = true },
     -- 第 20 层 Boss 的占位（站位战还没做）
-    eye        = { id = 'eye',        name = '井底之眼', hp = 360, atk = 60, def = 32, gold = 0,  traits = T(), elite = true },
+    eye        = { id = 'eye',        name = '井底之眼', hp = 500, atk = 70, def = 34, gold = 0,  traits = T(), elite = true },
 }
 
 -- 按周围格子算出怪物这一刻的真实属性（群居、庇护）。adjacent：相邻格子上还活着的怪物 id 列表

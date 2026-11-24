@@ -61,7 +61,7 @@ export const MONSTERS: Record<MonsterId, MonsterDef> = {
     priest: { id: 'priest', name: '骸骨祭司', hp: 100, atk: 30, def: 22, traits: ['shelter'], gold: 16 },
     gatekeeper: { id: 'gatekeeper', name: '守门人', hp: 160, atk: 44, def: 24, traits: ['double'], elite: true, gold: 80 },
     // 第 20 层 Boss 的占位：回合制站位战（召唤、落石、危区）还没做，先用一场确定的战斗代替
-    eye: { id: 'eye', name: '井底之眼', hp: 360, atk: 60, def: 32, traits: [], elite: true, gold: 0 },
+    eye: { id: 'eye', name: '井底之眼', hp: 500, atk: 70, def: 34, traits: [], elite: true, gold: 0 },
 };
 
 /**

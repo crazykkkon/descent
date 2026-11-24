@@ -27159,10 +27159,10 @@ return {
       atk = 25,
       def = 22,
       weapon = "rustSword",
-      canAttack = true,
-      canWin = true,
-      damage = 7697,
-      hits = 180
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
     },
     {
       monster = "eye",
@@ -27238,10 +27238,10 @@ return {
       atk = 30,
       def = 25,
       weapon = "boneKnife",
-      canAttack = true,
-      canWin = true,
-      damage = 6265,
-      hits = 180
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
     },
     {
       monster = "eye",
@@ -27313,10 +27313,10 @@ return {
       atk = 30,
       def = 25,
       weapon = "hammer",
-      canAttack = true,
-      canWin = true,
-      damage = 6265,
-      hits = 180
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
     },
     {
       monster = "eye",
@@ -27355,8 +27355,8 @@ return {
       weapon = "rustSword",
       canAttack = true,
       canWin = true,
-      damage = 2040,
-      hits = 52
+      damage = 4950,
+      hits = 100
     },
     {
       monster = "eye",
@@ -27374,8 +27374,8 @@ return {
       def = 28,
       canAttack = true,
       canWin = true,
-      damage = 2848,
-      hits = 90
+      damage = 10458,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27384,8 +27384,8 @@ return {
       boons = { "lifesteal" },
       canAttack = true,
       canWin = true,
-      damage = 2758,
-      hits = 90
+      damage = 10458,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27394,8 +27394,8 @@ return {
       boons = { "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 2816,
-      hits = 90
+      damage = 10416,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27404,8 +27404,8 @@ return {
       boons = { "thorns" },
       canAttack = true,
       canWin = true,
-      damage = 1632,
-      hits = 52
+      damage = 4200,
+      hits = 100
     },
     {
       monster = "eye",
@@ -27414,8 +27414,8 @@ return {
       boons = { "corrode" },
       canAttack = true,
       canWin = true,
-      damage = 736,
-      hits = 24
+      damage = 1260,
+      hits = 31
     },
     {
       monster = "eye",
@@ -27424,8 +27424,8 @@ return {
       boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 568,
-      hits = 22
+      damage = 994,
+      hits = 28
     },
     {
       monster = "eye",
@@ -27434,8 +27434,8 @@ return {
       weapon = "boneKnife",
       canAttack = true,
       canWin = true,
-      damage = 1408,
-      hits = 45
+      damage = 3486,
+      hits = 84
     },
     {
       monster = "eye",
@@ -27444,8 +27444,8 @@ return {
       weapon = "harpoon",
       canAttack = true,
       canWin = true,
-      damage = 2816,
-      hits = 90
+      damage = 10416,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27455,8 +27455,8 @@ return {
       boons = { "lifesteal" },
       canAttack = true,
       canWin = true,
-      damage = 2726,
-      hits = 90
+      damage = 10416,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27466,8 +27466,8 @@ return {
       boons = { "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 2784,
-      hits = 90
+      damage = 10374,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27477,8 +27477,8 @@ return {
       boons = { "thorns" },
       canAttack = true,
       canWin = true,
-      damage = 1632,
-      hits = 52
+      damage = 4200,
+      hits = 101
     },
     {
       monster = "eye",
@@ -27488,8 +27488,8 @@ return {
       boons = { "corrode" },
       canAttack = true,
       canWin = true,
-      damage = 704,
-      hits = 24
+      damage = 1218,
+      hits = 31
     },
     {
       monster = "eye",
@@ -27499,8 +27499,8 @@ return {
       boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 536,
-      hits = 22
+      damage = 952,
+      hits = 28
     },
     {
       monster = "eye",
@@ -27509,8 +27509,8 @@ return {
       weapon = "hammer",
       canAttack = true,
       canWin = true,
-      damage = 1408,
-      hits = 45
+      damage = 3486,
+      hits = 84
     },
     {
       monster = "eye",
@@ -27519,8 +27519,8 @@ return {
       weapon = "mossBlade",
       canAttack = true,
       canWin = true,
-      damage = 2848,
-      hits = 90
+      damage = 10458,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27529,8 +27529,8 @@ return {
       weapon = "bellStaff",
       canAttack = true,
       canWin = true,
-      damage = 2272,
-      hits = 72
+      damage = 6972,
+      hits = 167
     },
     {
       monster = "eye",
@@ -27539,8 +27539,8 @@ return {
       weapon = "saltDagger",
       canAttack = true,
       canWin = true,
-      damage = 2848,
-      hits = 90
+      damage = 10458,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27549,8 +27549,8 @@ return {
       weapon = "rustSword",
       canAttack = true,
       canWin = true,
-      damage = 999,
-      hits = 28
+      damage = 2115,
+      hits = 46
     },
     {
       monster = "eye",
@@ -27559,8 +27559,8 @@ return {
       weapon = "wellHook",
       canAttack = true,
       canWin = true,
-      damage = 2848,
-      hits = 90
+      damage = 10458,
+      hits = 250
     },
     {
       monster = "eye",
@@ -27568,8 +27568,8 @@ return {
       def = 34,
       canAttack = true,
       canWin = true,
-      damage = 754,
-      hits = 30
+      damage = 1764,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27578,8 +27578,8 @@ return {
       boons = { "lifesteal" },
       canAttack = true,
       canWin = true,
-      damage = 664,
-      hits = 30
+      damage = 1664,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27588,8 +27588,8 @@ return {
       boons = { "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 728,
-      hits = 30
+      damage = 1728,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27598,8 +27598,8 @@ return {
       boons = { "thorns" },
       canAttack = true,
       canWin = true,
-      damage = 624,
-      hits = 24
+      damage = 1368,
+      hits = 39
     },
     {
       monster = "eye",
@@ -27608,8 +27608,8 @@ return {
       boons = { "corrode" },
       canAttack = true,
       canWin = true,
-      damage = 442,
-      hits = 18
+      damage = 828,
+      hits = 24
     },
     {
       monster = "eye",
@@ -27618,8 +27618,8 @@ return {
       boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 311,
-      hits = 17
+      damage = 616,
+      hits = 22
     },
     {
       monster = "eye",
@@ -27628,8 +27628,8 @@ return {
       weapon = "boneKnife",
       canAttack = true,
       canWin = true,
-      damage = 572,
-      hits = 23
+      damage = 1260,
+      hits = 36
     },
     {
       monster = "eye",
@@ -27638,8 +27638,8 @@ return {
       weapon = "harpoon",
       canAttack = true,
       canWin = true,
-      damage = 728,
-      hits = 30
+      damage = 1728,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27649,8 +27649,8 @@ return {
       boons = { "lifesteal" },
       canAttack = true,
       canWin = true,
-      damage = 638,
-      hits = 30
+      damage = 1628,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27660,8 +27660,8 @@ return {
       boons = { "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 702,
-      hits = 30
+      damage = 1692,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27671,8 +27671,8 @@ return {
       boons = { "thorns" },
       canAttack = true,
       canWin = true,
-      damage = 598,
-      hits = 25
+      damage = 1332,
+      hits = 39
     },
     {
       monster = "eye",
@@ -27682,8 +27682,8 @@ return {
       boons = { "corrode" },
       canAttack = true,
       canWin = true,
-      damage = 416,
-      hits = 18
+      damage = 792,
+      hits = 24
     },
     {
       monster = "eye",
@@ -27693,8 +27693,8 @@ return {
       boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
       canAttack = true,
       canWin = true,
-      damage = 285,
-      hits = 17
+      damage = 580,
+      hits = 22
     },
     {
       monster = "eye",
@@ -27703,8 +27703,8 @@ return {
       weapon = "hammer",
       canAttack = true,
       canWin = true,
-      damage = 572,
-      hits = 23
+      damage = 1260,
+      hits = 36
     },
     {
       monster = "eye",
@@ -27713,8 +27713,8 @@ return {
       weapon = "mossBlade",
       canAttack = true,
       canWin = true,
-      damage = 754,
-      hits = 30
+      damage = 1764,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27723,8 +27723,8 @@ return {
       weapon = "bellStaff",
       canAttack = true,
       canWin = true,
-      damage = 702,
-      hits = 28
+      damage = 1620,
+      hits = 46
     },
     {
       monster = "eye",
@@ -27733,8 +27733,8 @@ return {
       weapon = "saltDagger",
       canAttack = true,
       canWin = true,
-      damage = 754,
-      hits = 30
+      damage = 1764,
+      hits = 50
     },
     {
       monster = "eye",
@@ -27743,8 +27743,8 @@ return {
       weapon = "rustSword",
       canAttack = true,
       canWin = true,
-      damage = 527,
-      hits = 18
+      damage = 1066,
+      hits = 27
     },
     {
       monster = "eye",
@@ -27753,8 +27753,8 @@ return {
       weapon = "wellHook",
       canAttack = true,
       canWin = true,
-      damage = 754,
-      hits = 30
+      damage = 1764,
+      hits = 50
     }
   },
   scenarios = {
@@ -55400,7 +55400,7 @@ return {
           queue = 0
         },
         {
-          cell = 73,
+          cell = 75,
           ok = true,
           hero = {
             hp = 1341,
@@ -55409,12 +55409,12 @@ return {
             keys = 3,
             gold = 702
           },
-          pos = 73,
+          pos = 75,
           status = "playing",
           queue = 0
         },
         {
-          cell = 72,
+          cell = 76,
           ok = true,
           hero = {
             hp = 1341,
@@ -55423,12 +55423,12 @@ return {
             keys = 3,
             gold = 702
           },
-          pos = 72,
+          pos = 76,
           status = "playing",
           queue = 0
         },
         {
-          cell = 71,
+          cell = 77,
           ok = true,
           hero = {
             hp = 1341,
@@ -55437,12 +55437,12 @@ return {
             keys = 3,
             gold = 702
           },
-          pos = 71,
+          pos = 77,
           status = "playing",
           queue = 0
         },
         {
-          cell = 70,
+          cell = 78,
           ok = true,
           hero = {
             hp = 1341,
@@ -55451,49 +55451,245 @@ return {
             keys = 3,
             gold = 702
           },
-          pos = 70,
+          pos = 78,
           status = "playing",
           queue = 0
         },
         {
-          cell = 69,
+          cell = 62,
           ok = true,
           hero = {
             hp = 1341,
-            atk = 73,
+            atk = 70,
             def = 61,
             keys = 3,
             gold = 702
           },
-          pos = 69,
+          pos = 62,
           status = "playing",
           queue = 0
         },
         {
-          cell = 68,
+          cell = 46,
           ok = true,
           hero = {
             hp = 1341,
-            atk = 73,
+            atk = 70,
             def = 61,
             keys = 3,
             gold = 702
           },
-          pos = 68,
+          pos = 46,
           status = "playing",
           queue = 0
         },
         {
-          cell = 67,
+          cell = 45,
           ok = true,
           hero = {
             hp = 1341,
-            atk = 73,
+            atk = 70,
             def = 61,
             keys = 3,
             gold = 702
           },
-          pos = 67,
+          pos = 45,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 44,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 44,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 43,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 43,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 42,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 42,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 41,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 41,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 40,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 40,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 39,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 39,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 38,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 38,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 37,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 37,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 36,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 36,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 35,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 35,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 34,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 34,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 33,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 33,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 49,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 49,
+          status = "playing",
+          queue = 0
+        },
+        {
+          cell = 65,
+          ok = true,
+          hero = {
+            hp = 1341,
+            atk = 70,
+            def = 61,
+            keys = 3,
+            gold = 702
+          },
+          pos = 65,
           status = "playing",
           queue = 0
         },
@@ -55502,7 +55698,7 @@ return {
           ok = true,
           hero = {
             hp = 1341,
-            atk = 73,
+            atk = 70,
             def = 61,
             keys = 3,
             gold = 718
@@ -55516,7 +55712,7 @@ return {
           ok = true,
           hero = {
             hp = 1341,
-            atk = 73,
+            atk = 70,
             def = 61,
             keys = 3,
             gold = 718
@@ -55530,7 +55726,7 @@ return {
           ok = true,
           hero = {
             hp = 1341,
-            atk = 73,
+            atk = 70,
             def = 61,
             keys = 3,
             gold = 718
@@ -55571,7 +55767,7 @@ return {
           cell = 71,
           ok = true,
           hero = {
-            hp = 1341,
+            hp = 1233,
             atk = 73,
             def = 61,
             keys = 3,
@@ -55585,7 +55781,7 @@ return {
           cell = 87,
           ok = true,
           hero = {
-            hp = 1341,
+            hp = 1233,
             atk = 73,
             def = 61,
             keys = 3,
@@ -55599,7 +55795,7 @@ return {
           cell = 103,
           ok = true,
           hero = {
-            hp = 1341,
+            hp = 1233,
             atk = 73,
             def = 61,
             keys = 3,
@@ -55613,7 +55809,7 @@ return {
           cell = 119,
           ok = true,
           hero = {
-            hp = 1341,
+            hp = 1233,
             atk = 73,
             def = 61,
             keys = 3,
@@ -55627,7 +55823,7 @@ return {
           cell = 135,
           ok = true,
           hero = {
-            hp = 1341,
+            hp = 1233,
             atk = 73,
             def = 61,
             keys = 3,
@@ -55643,7 +55839,7 @@ return {
         potionGold = 0
       },
       final = {
-        hp = 1341,
+        hp = 1233,
         atk = 73,
         def = 61,
         keys = 3,
@@ -73569,7 +73765,7 @@ return {
           cell = 71,
           ok = true,
           hero = {
-            hp = 1417,
+            hp = 1242,
             atk = 67,
             def = 55,
             keys = 6,
@@ -73583,7 +73779,7 @@ return {
           cell = 87,
           ok = true,
           hero = {
-            hp = 1417,
+            hp = 1242,
             atk = 67,
             def = 55,
             keys = 6,
@@ -73597,7 +73793,7 @@ return {
           cell = 103,
           ok = true,
           hero = {
-            hp = 1417,
+            hp = 1242,
             atk = 67,
             def = 55,
             keys = 6,
@@ -73611,7 +73807,7 @@ return {
           cell = 119,
           ok = true,
           hero = {
-            hp = 1417,
+            hp = 1242,
             atk = 67,
             def = 55,
             keys = 6,
@@ -73625,7 +73821,7 @@ return {
           cell = 135,
           ok = true,
           hero = {
-            hp = 1417,
+            hp = 1242,
             atk = 67,
             def = 55,
             keys = 6,
@@ -73641,7 +73837,7 @@ return {
         potionGold = 0
       },
       final = {
-        hp = 1417,
+        hp = 1242,
         atk = 67,
         def = 55,
         keys = 6,
