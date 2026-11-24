@@ -10,6 +10,7 @@ local slot = require('core.slot')
 local intel = require('core.intel')
 local floorMod = require('core.floor')
 local levels = require('core.levels')
+local contractMod = require('core.contract')
 local mainline = require('data.mainline')
 local V = dofile('tests/vectors.lua')
 
@@ -144,6 +145,17 @@ for _, it in ipairs(V.intels) do
     local r = intel.stairIntel(next, it.hero, config.CHARACTERS.digger, { floor = cur, cells = floorMod.parse(cur).cells })
     check(r and r.headline == it.headline and table.concat(r.lines, '|') == table.concat(it.lines, '|') and r.mustFight == it.mustFight,
         '情报 ' .. it.floor.name .. '：期望 ' .. it.headline .. ' / ' .. table.concat(it.lines, '|') .. '，实际 ' .. (r and (r.headline .. ' / ' .. table.concat(r.lines, '|')) or 'nil'))
+end
+
+-- 6b. 签约卡对照
+for n, pv in ipairs(V.previews) do
+    local rows = contractMod.preview(pv.floor, pv.hero, pv.contract)
+    local function fmt(rs)
+        local t = {}
+        for _, r in ipairs(rs) do t[#t + 1] = r.name .. r.before .. '>' .. r.after .. '/' .. tostring(r.saved) end
+        return table.concat(t, '|')
+    end
+    check(fmt(rows) == fmt(pv.rows), '签约对照 ' .. n .. ' ' .. pv.floor.name .. '：期望 ' .. fmt(pv.rows) .. '，实际 ' .. fmt(rows))
 end
 
 -- 7. 补给摊

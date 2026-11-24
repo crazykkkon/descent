@@ -302,6 +302,14 @@ function openStairs()
         lines[#lines + 1] = '得　' .. t.get
         lines[#lines + 1] = '约　' .. t.cond
         lines[#lines + 1] = '还　' .. t.reward
+        local rows = contractMod.preview(run.floors[run.floorIndex + 1], run.hero, c)
+        if #rows == 0 then
+            lines[#lines + 1] = '签了以后，下一层的怪打起来没有区别。'
+        else
+            local parts = {}
+            for _, r in ipairs(rows) do parts[#parts + 1] = r.name .. ' ' .. r.before .. ' → ' .. r.after end
+            lines[#lines + 1] = '签了以后，下一层这些怪：' .. table.concat(parts, '；')
+        end
         buttons[#buttons + 1] = { label = '不签，下楼', fn = function() down(false) end }
         if run.hero.hp > dep then
             buttons[#buttons + 1] = { label = '签约（押 ' .. dep .. ' 血）', primary = true, fn = function() down(true) end }

@@ -11,7 +11,7 @@ import { FloorDef, parseFloor } from '../src/core/floor';
 const parseFloorCells = (f: FloorDef) => parseFloor(f).cells;
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, buildFloor } from '../src/core/levels';
-import { keepVersion } from '../src/core/contract';
+import { contractPreview, keepVersion } from '../src/core/contract';
 import { solveFromStart } from '../src/core/solver';
 import { SLOTS, SlotId, newSlotState, roll } from '../src/core/slot';
 import { choosePick, stairIntel } from '../src/core/intel';
@@ -225,6 +225,17 @@ for (const fi of [1, 2, 4]) {
     }));
 }
 
+// ---------- 6b. 签约卡的签前 / 签后对照 ----------
+const previews: unknown[] = [];
+const previewHeroes: Hero[] = [{ hp: 150, atk: 13, def: 13, keys: 0, gold: 0 }, { hp: 200, atk: 10, def: 10, keys: 0, gold: 0 }, { hp: 300, atk: 22, def: 19, keys: 0, gold: 0, weapon: 'boneKnife' }];
+const previewContracts = [{ condition: 'noPotion' as const, deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 }, { condition: 'noPotion' as const, deposit: 120, atk: 5, def: 2, refund: 150, gold: 30 }];
+for (const pool of [DEMO_POOLS[1], ...MAINLINE.slice(4, 8)]) {
+    pool.layouts.forEach((_, li) => {
+        const f = buildFloor(pool, { layout: li, variant: 0 });
+        for (const h of previewHeroes) for (const c of previewContracts) previews.push({ floor: floorParams(f), hero: h, contract: c, rows: contractPreview(f, h, c) });
+    });
+}
+
 // ---------- 7. 补给摊 ----------
 const stallFloor: FloorDef = { name: 't', map: ['@.M>'], bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20, stall: [{ id: 'atk', amount: 2, price: 40 }, { id: 'hp', amount: 80, price: 25 }, { id: 'key', amount: 1, price: 30 }] };
 const stalls: unknown[] = [];
@@ -283,8 +294,8 @@ return ${lua({ pools })}
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, stalls, picks, mainScenarios, deaths, rolls, slotSessions, weaponChoices, intels })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, stalls, picks, mainScenarios, previews, deaths, rolls, slotSessions, weaponChoices, intels })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
-console.log(`战斗 ${combat.length}；新怪属性 ${monsterViews.length}；补给摊 ${stalls.length}；主线选图 ${picks.length}；主线楼层 ${mainScenarios.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);
+console.log(`战斗 ${combat.length}；新怪属性 ${monsterViews.length}；补给摊 ${stalls.length}；签约对照 ${previews.length}；主线选图 ${picks.length}；主线楼层 ${mainScenarios.length}；楼层 ${scenarios.length} 条（${scenarios.reduce((n: number, s) => n + (s as { steps: unknown[] }).steps.length, 0)} 步）；致死 ${deaths.length}；转轮 ${rolls.length} 组；井中轮操作 ${slotSessions.length} 组；武器三选一 ${weaponChoices.length}；情报 ${intels.length}`);

@@ -623,3 +623,17 @@ test('补给摊：站在旁边买，每样只能买一次，存档读档后还�
     const back = Run.load([f], JSON.parse(JSON.stringify(run.save())));
     assert.equal(back.stallSold(0), true);
 });
+
+test('签约卡：列出下一层怪签前 / 签后的掉血，按省下的血排序，只列有变化的', async () => {
+    const { contractPreview } = await import('../src/core/contract');
+    const next = tiny(['@.f.e.m.c>']);
+    const hero = { hp: 150, atk: 13, def: 13, keys: 0, gold: 0 };
+    const rows = contractPreview(next, hero, { condition: 'noPotion', deposit: 50, atk: 3, def: 0, refund: 60, gold: 10 });
+    assert.ok(rows.length >= 2);
+    assert.equal(rows[0].name, '锈甲虫', '打不动 → 打得动排最前');
+    assert.equal(rows[0].before, '打不动');
+    for (const r of rows.slice(1)) assert.ok(r.saved! > 0);
+    const frog = rows.find(r => r.name === '骨蛙')!;
+    assert.equal(frog.before, `-${simulateCombat(hero, MONSTERS.frog).damage}`);
+    assert.equal(frog.after, `-${simulateCombat({ ...hero, atk: 16 }, MONSTERS.frog).damage}`);
+});

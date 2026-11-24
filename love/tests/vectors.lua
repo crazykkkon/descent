@@ -42586,6 +42586,1996 @@ return {
       floorIndex = 20
     }
   },
+  previews = {
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-63",
+          saved = 36
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-48",
+          saved = 12
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-35",
+          saved = 64
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-30",
+          saved = 30
+        },
+        {
+          name = "井苔",
+          before = "-4",
+          after = "-0",
+          saved = 4
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-132",
+          saved = 216
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-75",
+          saved = 60
+        },
+        {
+          name = "井苔",
+          before = "-15",
+          after = "-10",
+          saved = 5
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-80",
+          saved = 268
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-52",
+          saved = 83
+        },
+        {
+          name = "井苔",
+          before = "-15",
+          after = "-6",
+          saved = 9
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-6",
+          saved = 3
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.....f...>", "##.#.######", "hv.#.vh####", "####.######", "####m..r###", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-2",
+          saved = 7
+        },
+        {
+          name = "回声蝠",
+          before = "-12",
+          after = "-8",
+          saved = 4
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-63",
+          saved = 36
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-48",
+          saved = 12
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-28",
+          saved = 7
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-35",
+          saved = 64
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-30",
+          saved = 30
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-15",
+          saved = 20
+        },
+        {
+          name = "井苔",
+          before = "-4",
+          after = "-0",
+          saved = 4
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-132",
+          saved = 216
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-75",
+          saved = 60
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-50",
+          saved = 30
+        },
+        {
+          name = "井苔",
+          before = "-15",
+          after = "-10",
+          saved = 5
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-80",
+          saved = 268
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-52",
+          saved = 83
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-32",
+          saved = 48
+        },
+        {
+          name = "井苔",
+          before = "-15",
+          after = "-6",
+          saved = 9
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-6",
+          saved = 3
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-1",
+          saved = 1
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.h.f.H.v.>", ".##.#.#.###", ".m..#.e.###", "###########", "###########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-2",
+          saved = 7
+        },
+        {
+          name = "回声蝠",
+          before = "-12",
+          after = "-8",
+          saved = 4
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-0",
+          saved = 2
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-63",
+          saved = 36
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-28",
+          saved = 7
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-35",
+          saved = 64
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-15",
+          saved = 20
+        },
+        {
+          name = "井苔",
+          before = "-4",
+          after = "-0",
+          saved = 4
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-132",
+          saved = 216
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-50",
+          saved = 30
+        },
+        {
+          name = "井苔",
+          before = "-15",
+          after = "-10",
+          saved = 5
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-80",
+          saved = 268
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-32",
+          saved = 48
+        },
+        {
+          name = "井苔",
+          before = "-15",
+          after = "-6",
+          saved = 9
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-6",
+          saved = 3
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-1",
+          saved = 1
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 2 层 · 苔壁",
+        map = { "@.e.h.e.h.>", ".#########.", ".....e...f.", "#m#########", "#r#########", "###########", "###########" },
+        bloodCost = 60,
+        gem = 2,
+        smallPotion = 50,
+        bigPotion = 150,
+        gold = 20
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-2",
+          saved = 7
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-0",
+          saved = 2
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-589",
+          saved = nil
+        },
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-494",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-63",
+          saved = 36
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-48",
+          saved = 12
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-261",
+          saved = nil
+        },
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-216",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-35",
+          saved = 64
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-30",
+          saved = 30
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-132",
+          saved = 216
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-75",
+          saved = 60
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-50",
+          saved = 30
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-1248",
+          saved = nil
+        },
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-1053",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-80",
+          saved = 268
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-52",
+          saved = 83
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "-75",
+          after = "-50",
+          saved = 25
+        },
+        {
+          name = "井鼠",
+          before = "-60",
+          after = "-40",
+          saved = 20
+        },
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-6",
+          saved = 3
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-1",
+          saved = 1
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 5 层 · 暗河",
+        map = { "@....#.wwr.", ".###.#.w##.", ".#h......#.", ".#.##.##.#.", ".e.#..ww.#.", ".###...w.#.", "....v.#..f>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "-75",
+          after = "-46",
+          saved = 29
+        },
+        {
+          name = "井鼠",
+          before = "-60",
+          after = "-36",
+          saved = 24
+        },
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-2",
+          saved = 7
+        },
+        {
+          name = "回声蝠",
+          before = "-12",
+          after = "-8",
+          saved = 4
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "锈甲虫",
+          before = "打不动",
+          after = "-95",
+          saved = nil
+        },
+        {
+          name = "裂岩蟹",
+          before = "-1383",
+          after = "-343",
+          saved = 1040
+        },
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-63",
+          saved = 36
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-28",
+          saved = 7
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "锈甲虫",
+          before = "打不动",
+          after = "-27",
+          saved = nil
+        },
+        {
+          name = "裂岩蟹",
+          before = "-1383",
+          after = "-201",
+          saved = 1182
+        },
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-35",
+          saved = 64
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-15",
+          saved = 20
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "裂岩蟹",
+          before = "打不动",
+          after = "-1590",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-132",
+          saved = 216
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-50",
+          saved = 30
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "锈甲虫",
+          before = "打不动",
+          after = "-234",
+          saved = nil
+        },
+        {
+          name = "裂岩蟹",
+          before = "打不动",
+          after = "-486",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-80",
+          saved = 268
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-32",
+          saved = 48
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "盐蚀蛞蝓",
+          before = "-264",
+          after = "-180",
+          saved = 84
+        },
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-6",
+          saved = 3
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-1",
+          saved = 1
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 6 层 · 盐窟",
+        map = { "@..k.#..u.$", ".###.#.####", ".#e..D....h", ".#.#####.#.", ".c.#u.b#.#.", ".#.#.###.#.", "...f.....x>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "盐蚀蛞蝓",
+          before = "-264",
+          after = "-117",
+          saved = 147
+        },
+        {
+          name = "裂岩蟹",
+          before = "-59",
+          after = "-39",
+          saved = 20
+        },
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-2",
+          saved = 7
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-0",
+          saved = 2
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-63",
+          saved = 36
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-48",
+          saved = 12
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-28",
+          saved = 7
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "溺魂",
+          before = "打不死",
+          after = "-468",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-99",
+          after = "-35",
+          saved = 64
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-30",
+          saved = 30
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-15",
+          saved = 20
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "溺魂",
+          before = "打不动",
+          after = "打不死",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-132",
+          saved = 216
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-75",
+          saved = 60
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-50",
+          saved = 30
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "溺魂",
+          before = "打不动",
+          after = "打不死",
+          saved = nil
+        },
+        {
+          name = "骨蛙",
+          before = "-348",
+          after = "-80",
+          saved = 268
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-52",
+          saved = 83
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-32",
+          saved = 48
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "骸骨祭司",
+          before = "-264",
+          after = "-154",
+          saved = 110
+        },
+        {
+          name = "裂岩蟹",
+          before = "-115",
+          after = "-87",
+          saved = 28
+        },
+        {
+          name = "溺魂",
+          before = "-54",
+          after = "-45",
+          saved = 9
+        },
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-6",
+          saved = 3
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 7 层 · 骨龛",
+        map = { "@...e..#..h", ".#####.#.#.", ".#r..B.p..h", ".#.####x###", ".....g...f.", ".###.#.###.", "h..m.#...v>" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "骸骨祭司",
+          before = "-264",
+          after = "-99",
+          saved = 165
+        },
+        {
+          name = "裂岩蟹",
+          before = "-115",
+          after = "-63",
+          saved = 52
+        },
+        {
+          name = "溺魂",
+          before = "-54",
+          after = "-28",
+          saved = 26
+        },
+        {
+          name = "骨蛙",
+          before = "-9",
+          after = "-2",
+          saved = 7
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-399",
+          saved = nil
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-48",
+          saved = 12
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-28",
+          saved = 7
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 150,
+        atk = 13,
+        def = 13,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-171",
+          saved = nil
+        },
+        {
+          name = "回声蝠",
+          before = "-60",
+          after = "-30",
+          saved = 30
+        },
+        {
+          name = "盲鳗",
+          before = "-35",
+          after = "-15",
+          saved = 20
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-75",
+          saved = 60
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-50",
+          saved = 30
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "打不动",
+          after = "-858",
+          saved = nil
+        },
+        {
+          name = "回声蝠",
+          before = "-135",
+          after = "-52",
+          saved = 83
+        },
+        {
+          name = "盲鳗",
+          before = "-80",
+          after = "-32",
+          saved = 48
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 50,
+        atk = 3,
+        def = 0,
+        refund = 60,
+        gold = 10
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "-45",
+          after = "-30",
+          saved = 15
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-1",
+          saved = 1
+        }
+      }
+    },
+    {
+      floor = {
+        name = "第 8 层 · 绳桥",
+        map = { "@.e.$#..h..", ".###.#.###.", "...v...w.w>", "###########", "###########", "###########", "###########" },
+        bloodCost = 80,
+        gem = 2,
+        smallPotion = 40,
+        bigPotion = 100,
+        gold = 25
+      },
+      hero = {
+        hp = 300,
+        atk = 22,
+        def = 19,
+        keys = 0,
+        gold = 0,
+        weapon = "boneKnife"
+      },
+      contract = {
+        condition = "noPotion",
+        deposit = 120,
+        atk = 5,
+        def = 2,
+        refund = 150,
+        gold = 30
+      },
+      rows = {
+        {
+          name = "井鼠",
+          before = "-45",
+          after = "-26",
+          saved = 19
+        },
+        {
+          name = "回声蝠",
+          before = "-12",
+          after = "-8",
+          saved = 4
+        },
+        {
+          name = "盲鳗",
+          before = "-2",
+          after = "-0",
+          saved = 2
+        }
+      }
+    }
+  },
   deaths = {
     {
       monster = "frog",

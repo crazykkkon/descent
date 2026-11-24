@@ -12,7 +12,7 @@ import { effectiveStats, simulateCombat } from '../src/core/combat';
 import { Run, RunSave } from '../src/core/game';
 import { DEMO_POOLS, FloorChoice, buildFloors, pickChoices } from '../src/core/levels';
 import { solveFloor, solveFromStart } from '../src/core/solver';
-import { contractText, depositFor, keepVersion } from '../src/core/contract';
+import { contractPreview, contractText, depositFor, keepVersion } from '../src/core/contract';
 import { SLOTS, Sym, holdHint, machineOdds, payout } from '../src/core/slot';
 import { RENT_STAT_COST } from '../src/core/game';
 
@@ -576,6 +576,14 @@ function showDeath() {
 /** 下楼时要不要签楼梯口的契约（在出口结算后生效） */
 let pendingSign = false;
 
+function previewRowsHtml(c: NonNullable<ReturnType<typeof run.offeredContract>>): string {
+    const next = run.floors[run.floorIndex + 1];
+    if (!next) return '';
+    const rows = contractPreview(next, run.hero, c);
+    if (!rows.length) return '<div class="small">签了以后，下一层的怪打起来没有区别。</div>';
+    return `<div class="small">签了以后，下一层这些怪：${rows.map(r => `${r.name} ${r.before} → <b>${r.after}</b>`).join('；')}</div>`;
+}
+
 function contractCardHtml(): string {
     const c = run.offeredContract();
     if (!c) return '';
@@ -587,6 +595,7 @@ function contractCardHtml(): string {
         <div class="contractRow"><span>得</span><b>${t.get}</b></div>
         <div class="contractRow"><span>约</span><b>${t.cond}</b></div>
         <div class="contractRow"><span>还</span><b>${t.reward}</b></div>
+        ${previewRowsHtml(c)}
         <div class="small">下一层可以随时喝血瓶，喝下那一刻就算毁约：押下的生命归井，拿到的属性归你。${afford ? '' : '<br><b class="warnText">你的生命不够押。</b>'}</div></div>`;
 }
 

@@ -9,8 +9,9 @@
  *
  * 价格是设计者手调的，求解器只负责验算（tools/contract.ts 列出拒签 / 守约 / 毁约三条路的结果）。
  */
-import { FloorDef } from './floor';
-import { Hero, WEAPONS } from './config';
+import { FloorDef, adjacentMonsters, parseFloor } from './floor';
+import { Hero, MONSTERS, WEAPONS, monsterInContext } from './config';
+import { simulateCombat } from './combat';
 
 export interface ContractDef {
     condition: 'noPotion';
@@ -57,4 +58,44 @@ export function depositFor(c: ContractDef, hero: Hero): number {
 /** 守约时这一层的样子：血瓶不能碰，相当于墙（求解器用来验算守约的走法） */
 export function keepVersion(floor: FloorDef): FloorDef {
     return { ...floor, map: floor.map.map(r => r.replace(/[hH]/g, '#')) };
+}
+
+export interface ContractPreviewRow {
+    name: string;
+    /** 不签时打它的掉血（"-99"、"打不动"、"打不死"） */
+    before: string;
+    /** 签约拿到属性后打它的掉血 */
+    after: string;
+    /** 少掉多少血（打不动 / 打不死变成打得过时为 null） */
+    saved: number | null;
+}
+
+/**
+ * 签约卡上的"签前 / 签后"对照：下一层每种怪（按开局时周围的怪算真实攻防）各算一次，
+ * 只列签约后有变化的，按省下的血从多到少排，最多 max 行。打不动 → 打得动排在最前。
+ */
+export function contractPreview(next: FloorDef, hero: Hero, c: ContractDef, max = 4): ContractPreviewRow[] {
+    const p = parseFloor(next);
+    const signed: Hero = { ...hero, atk: hero.atk + c.atk, def: hero.def + c.def };
+    const seen = new Set<string>();
+    const rows: ContractPreviewRow[] = [];
+    const text = (h: Hero, m: ReturnType<typeof monsterInContext>) => {
+        const r = simulateCombat(h, m);
+        return { t: !r.canAttack ? '打不动' : !r.canWin ? '打不死' : `-${r.damage}`, d: r.canAttack && r.canWin ? r.damage : null };
+    };
+    p.cells.forEach((cell, i) => {
+        if (cell.kind !== 'monster') return;
+        const m = monsterInContext(MONSTERS[cell.id], adjacentMonsters(p.cells, p.w, p.h, i));
+        const key = `${m.id}:${m.atk}:${m.def}`;
+        if (seen.has(key)) return;
+        seen.add(key);
+        const a = text(hero, m);
+        const b = text(signed, m);
+        if (a.t === b.t) return;
+        rows.push({ name: m.name, before: a.t, after: b.t, saved: a.d !== null && b.d !== null ? a.d - b.d : null });
+    });
+    // 省得多的在前；打不动 / 打不死变成打得过的（saved 为 null）排最前；相同时保持出现顺序
+    const v = (r: ContractPreviewRow) => r.saved ?? Infinity;
+    rows.sort((x, y) => (v(x) === v(y) ? 0 : v(y) > v(x) ? 1 : -1));
+    return rows.slice(0, max);
 }
