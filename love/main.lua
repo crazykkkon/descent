@@ -1030,6 +1030,7 @@ end
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     miner.load()
+    battle.load()
     wellhead.load()
     monsters.load(config.MONSTERS)
     fx.load()
@@ -1551,7 +1552,7 @@ local function drawUI()
     end
 
     if scene == 'game' then
-        battle.drawUI({ text = text, rect = rect, S = S, OX = OX, OY = OY, LW = LW, LH = LH,
+        battle.drawUI({ text = text, rect = rect, font = font, S = S, OX = OX, OY = OY, LW = LW, LH = LH,
             monster = function(id, cx, feet, f) monsters.draw(id, cx, feet, clock, 0, f) end,
             miner = function(cx, feet, dead, tall, a) miner.draw('right', cx, feet, dead, tall, a) end })
     end

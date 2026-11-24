@@ -1,4 +1,5 @@
 Noto Sans SC（已裁剪为常用字子集，用于开发白盒；正式版字体待定）
+impact-digits.otf：Noto Serif CJK SC Bold 的数字与符号子集。
 Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
 Noto is a trademark of Google Inc.
 

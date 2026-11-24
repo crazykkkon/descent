@@ -6,9 +6,10 @@
 --   伤害数字大字弹出，先手 / 连击 / 破甲 / 克制 / 腐蚀 / 反伤 / 吸血用不同颜色；
 --   打死时顿住一下，怪的头像碎掉；打不过时矿工被一点点耗死。
 -- 打完窗口关上，地图上方再出"算准了 / 千钧一发 / 无伤 / 连杀"的大字。
--- 白盒阶段全部是程序画的，正式美术由 Codex 替换，接口不变。
+-- 场地与数字取套色木刻方向，数值和招式来自战斗记录。
 
 local fx = require('view.fx')
+local feedback = require('view.battle_feedback')
 
 local M = {}
 
@@ -29,7 +30,12 @@ local HAND_X, HAND_Y, HERO_FRONT = 16, -33, 26
 local WEAPON_SCALE = 1.7
 
 local fight = nil
-local popups, parts, slashes, banners = {}, {}, {}, {}
+local parts, slashes, banners = {}, {}, {}
+local stage
+function M.load()
+    stage = love.graphics.newImage('assets/art/battle/cistern.jpg')
+    stage:setFilter('linear', 'linear')
+end
 
 local WEAPON_FX = {
     none = { 'slash', { 0.95, 0.93, 0.88 } },
@@ -69,22 +75,6 @@ local WEAPON_SHAPE = {
 -- 打中那一刻，武器（拳头）伸出身体前沿多远：主角冲到正好用它打到怪身上
 local REACH = { fist = 20, blade = 20, spear = 44, hammer = 20, hook = 20 }
 
-local TAG_FX = {
-    first = { '先手！', { 1.0, 0.85, 0.35 } },
-    double = { '连击', { 1.0, 0.55, 0.4 } },
-    pierce = { '破甲', { 1.0, 0.6, 0.25 } },
-    anti = { '克制 ×2', { 0.45, 0.9, 1.0 } },
-    corrode = { '腐蚀', { 0.6, 0.95, 0.3 } },
-}
-local C_MON_LOSS = { 1.0, 0.97, 0.9 }
-local C_HERO_LOSS = { 1.0, 0.35, 0.4 }
-local C_HEAL = { 0.45, 1.0, 0.55 }
-local C_THORNS = { 0.8, 0.45, 1.0 }
-local C_LIFESTEAL = { 0.95, 0.2, 0.35 }
-
-local function popup(text, x, y, color, size, w)
-    popups[#popups + 1] = { text = text, x = x, y = y, t = 0, color = color, size = size or 14, life = 0.9, w = w or 100 }
-end
 local function burst(x, y, color, n, speed)
     for _ = 1, n do
         local a = love.math.random() * math.pi * 2
@@ -113,12 +103,13 @@ local function compress(log)
 end
 
 function M.start(o)
+    parts, slashes = {}, {}
     o.log = compress(o.log)
     local n = math.max(1, #o.log + SKIP_SLOTS - 1)
     local slot = math.min(SLOT, MAX_TOTAL / n) / (o.speed or 1)
     fight = { o = o, log = o.log, i = 0, t = 0, slot = slot, stop = 0, phase = 'open', pt = 0,
         hhp = o.heroHp, hshow = o.heroHp, hmax = math.max(o.heroHp, 1), mhp = o.monHp, mshow = o.monHp, mmax = math.max(o.monHp, 1), round = 0,
-        heroFlash = 0, monFlash = 0, shake = 0, monDead = false, heroDead = false,
+        readouts = feedback.new(), heroFlash = 0, monFlash = 0, shake = 0, monDead = false, heroDead = false,
         monFront = MON_CX - (o.monW or 40) * MON_SCALE / 4 }
     fx.play('lever', 0.7)
 end
@@ -135,7 +126,9 @@ end
 
 function M.active() return fight ~= nil end
 -- 打到一半时主角还剩多少血（顶栏跟着往下掉）
-function M.heroHp() return fight and math.max(0, fight.hhp) or nil end
+-- 吸血能抵销本战后续的损伤，规则只结算非负的净战损。
+local function visibleHp(value, maximum) return math.max(0, math.min(value, maximum)) end
+function M.heroHp() return fight and visibleHp(fight.hhp, fight.hmax) or nil end
 -- 地图上不再演（都在窗口里），留着接口
 function M.heroOffset() return 0, 0, 0 end
 function M.monster() return nil end
@@ -152,7 +145,7 @@ function M.skip()
     if not fight then return end
     local f = fight
     if f.phase == 'close' then return end
-    for k = math.max(1, f.i), #f.log do
+    for k = math.max(1, f.i + (f.fired and 1 or 0)), #f.log do
         local e = f.log[k]
         f.mhp = e.mhp
         f.hhp = f.hhp - e.loss
@@ -163,19 +156,19 @@ function M.skip()
     end
     f.i = #f.log + 1
     f.mshow, f.hshow = f.mhp, f.hhp
-    f.phase, f.pt = 'close', 0
+    f.phase, f.pt, f.stop, f.contact = 'close', 0, 0, nil
+    f.readouts, parts, slashes = feedback.new(), {}, {}
 end
 
 local function impact(f, e)
+    local previousMhp = f.mhp
     f.mhp = e.mhp
     f.hhp = f.hhp - e.loss
     local tags = {}
     for _, t in ipairs(e.tags) do tags[t] = true end
-    local my, hy = FEET - 50, FEET - 50
+    feedback.hit(f.readouts, e, tags, previousMhp)
     if e.who == 'skip' then
         f.round = f.round + e.rounds
-        popup('…… 又打了 ' .. e.rounds .. ' 回合 ……', (HERO_CX + MON_CX) / 2, WY + 62, { 0.85, 0.8, 0.65 }, 11, 240)
-        if e.loss > 0 then popup('−' .. e.loss, HERO_CX, hy - 12, C_HERO_LOSS, 18) end
         fx.play('thud', 0.7)
         return
     end
@@ -183,22 +176,18 @@ local function impact(f, e)
         f.round = f.round + 1
         local wfx = WEAPON_FX[f.o.weapon or 'none'] or WEAPON_FX.none
         slashes[#slashes + 1] = { kind = wfx[1], x = f.monFront + 6, y = FEET - 34, t = 0, color = wfx[2] }
-        f.monFlash = 1
+        f.monFlash = e.hit > 0 and 0.85 or 0.35
         if e.hit > 0 then
-            popup('−' .. e.hit, MON_CX + (love.math.random() - 0.5) * 16, my - 12, tags.anti and TAG_FX.anti[2] or C_MON_LOSS, tags.kill and 26 or 19)
             burst(MON_CX, FEET - 40, wfx[2], tags.kill and 26 or 8, tags.kill and 120 or 60)
-            fx.play('hit', 0.9 + love.math.random() * 0.25)
+            fx.play(f.o.weapon == 'hammer' and 'hammer' or 'hit', 0.95 + love.math.random() * 0.12)
         else
             -- 破不了防：一下打在硬壳上
-            popup('0', MON_CX + (love.math.random() - 0.5) * 16, my - 12, { 0.6, 0.65, 0.7 }, 17)
             burst(MON_CX, FEET - 40, { 0.6, 0.6, 0.65 }, 4, 40)
-            fx.play('click', 0.7)
+            fx.play('guard')
         end
-        f.shake = tags.kill and 6 or 2
-        if tags.thorns then popup('−' .. (e.loss > 0 and e.loss or 3) .. ' 反伤', HERO_CX, hy - 30, C_THORNS, 11) end
-        if tags.drain then popup('+' .. -e.loss .. ' 吸血', HERO_CX, hy - 30, C_HEAL, 11) end
+        f.shake = tags.kill and 6 or (e.hit == 0 and 1 or 2)
     else
-        f.heroFlash = 1
+        f.heroFlash = e.hit > 0 and 1 or 0.35
         local st = styleOf(f.o.mon.id)
         local hx = HERO_CX + HERO_FRONT - 6
         if st[1] == 'bite' or st[1] == 'claw' then
@@ -208,28 +197,24 @@ local function impact(f, e)
         else
             burst(hx, FEET - 38, st[2], 12, 80)
         end
-        if e.hit > 0 then popup('−' .. e.hit, HERO_CX + (love.math.random() - 0.5) * 16, hy - 12, C_HERO_LOSS, 18)
-        else popup('格挡', HERO_CX, hy - 12, { 0.6, 0.75, 0.85 }, 13) end
         burst(HERO_CX, FEET - 40, { 0.9, 0.3, 0.3 }, e.hit > 0 and 6 or 2, 50)
-        fx.play('thud', 0.9 + love.math.random() * 0.2)
+        fx.play(e.hit > 0 and 'thud' or 'guard', 0.95 + love.math.random() * 0.1)
         f.shake = e.hit > 0 and 3 or 1
-        if tags.lifesteal then popup('吸血', MON_CX, my - 34, C_LIFESTEAL, 11) end
-        if tags.spikes then popup('−3 反伤', MON_CX, my - 34, C_THORNS, 11) end
     end
-    local tx = e.who == 'hero' and MON_CX or HERO_CX
-    local ty = (e.who == 'hero' and my or hy) - 44
-    for _, t in ipairs({ 'first', 'double', 'pierce', 'corrode' }) do
-        if tags[t] then popup(TAG_FX[t][1], tx, ty, TAG_FX[t][2], 11); ty = ty - 14 end
-    end
+    local dir = e.who == 'hero' and 1 or -1
+    local heavy = tags.kill or tags.dead or (dir == 1 and f.o.weapon == 'hammer')
+    f.contact = { x = dir == 1 and f.monFront + 9 or HERO_CX + HERO_FRONT - 7,
+        y = FEET - 37, dir = dir, t = 0, heavy = heavy, guard = e.hit == 0 }
+    f.stop = math.min(f.slot * 0.16, heavy and 0.055 or 0.032)
     if tags.kill then
         f.stop, f.monDead = HITSTOP, true
         burst(MON_CX, FEET - 40, { 0.6, 0.15, 0.2 }, 14, 90)
-        fx.play('kill'); fx.shake(3)
+        fx.play('kill')
     end
     if tags.dead then
         f.stop, f.heroDead = HITSTOP, true
         burst(HERO_CX, FEET - 40, { 0.8, 0.1, 0.15 }, 20, 90)
-        fx.play('lose'); fx.shake(3)
+        fx.play('lose')
     end
 end
 
@@ -239,9 +224,14 @@ function M.update(dt)
         f.heroFlash = math.max(0, f.heroFlash - dt * 5)
         f.monFlash = math.max(0, f.monFlash - dt * 5)
         f.shake = math.max(0, f.shake - dt * 20)
-        -- 血量数字滚动着追上去
-        f.hshow = f.hshow + (f.hhp - f.hshow) * math.min(1, dt * 14)
-        f.mshow = f.mshow + (f.mhp - f.mshow) * math.min(1, dt * 14)
+        feedback.update(f.readouts, dt)
+        if f.contact then
+            f.contact.t = f.contact.t + dt
+            if f.contact.t > 0.16 then f.contact = nil end
+        end
+        -- 浅色残条追上即时血量
+        f.hshow = f.hshow + (f.hhp - f.hshow) * math.min(1, dt * 8)
+        f.mshow = f.mshow + (f.mhp - f.mshow) * math.min(1, dt * 8)
         if f.phase == 'open' then
             f.pt = f.pt + dt
             if f.pt >= OPEN then f.phase, f.i, f.t = 'fight', 1, 0 end
@@ -254,8 +244,12 @@ function M.update(dt)
                 f.t = f.t + dt
                 local e = f.log[f.i]
                 local len = (e and e.who == 'skip') and f.slot * SKIP_SLOTS or f.slot
-                if e and not f.fired and f.t >= f.slot * HIT then f.fired = true; impact(f, e) end
-                if f.t >= len then
+                if e and not f.fired and f.t >= f.slot * HIT then
+                    f.fired = true
+                    impact(f, e)
+                    if f.stop > 0 then f.t = f.slot * HIT end
+                end
+                if f.stop <= 0 and f.t >= len then
                     f.i, f.t, f.fired = f.i + 1, 0, false
                     if f.i > #f.log then f.phase, f.pt = 'hold', 0 end
                 end
@@ -268,7 +262,6 @@ function M.update(dt)
             if f.pt >= CLOSE then finish() end
         end
     end
-    for k = #popups, 1, -1 do popups[k].t = popups[k].t + dt; if popups[k].t > popups[k].life then table.remove(popups, k) end end
     for k = #parts, 1, -1 do
         local p = parts[k]
         p.t = p.t + dt
@@ -305,7 +298,8 @@ local function offsets(f)
     local e = f.log[f.i]
     if f.phase ~= 'fight' or not e or e.who == 'skip' then return 0, 0, nil, e end
     local p = math.min(1, f.t / f.slot)
-    local knock = f.fired and 9 * math.max(0, 1 - (p - HIT) / 0.35) or 0
+    local recoil = e.hit == 0 and 3 or 10
+    local knock = f.fired and recoil * math.max(0, 1 - (p - HIT) / 0.35) or 0
     if e.who == 'hero' then
         local shape = WEAPON_SHAPE[f.o.weapon or 'none'] or 'blade'
         local D = f.monFront - (HERO_CX + HERO_FRONT + REACH[shape] - 12)
@@ -319,6 +313,25 @@ local function offsets(f)
     end
     local D = f.monFront - (HERO_CX + HERO_FRONT - 4)
     return -knock, -lunge(p, D), p, e
+end
+
+-- 从脚底变形：预备时微蹲，出手时前倾，受击时向后折一下。
+local function stance(G, cx, p, attacker, dir, guarded)
+    if not p then return end
+    local wind = math.max(0, 1 - math.abs(p - 0.23) / 0.23)
+    local strike = math.max(0, 1 - math.abs(p - HIT) / 0.22)
+    local recoil = p >= HIT and math.max(0, 1 - (p - HIT) / 0.36) or 0
+    local lean, squash
+    if attacker then
+        lean, squash = dir * (0.055 * wind - 0.09 * strike), 0.045 * wind
+    else
+        local weight = guarded and 0.40 or 1
+        lean, squash = dir * 0.12 * recoil * weight, 0.055 * recoil * weight
+    end
+    G.translate(cx, FEET)
+    G.shear(lean, 0)
+    G.scale(1 + squash, 1 - squash)
+    G.translate(-cx, -FEET)
 end
 
 -- 矿工手上的武器（白盒：程序画的，正式美术换成帧动画）
@@ -420,6 +433,8 @@ local function drawMonAttack(G, f, p, hdx, mdx, a)
             G.setBlendMode('add'); G.setColor(col[1], col[2], col[3], a * 0.8)
             G.circle('fill', ex, ey, 3 + 10 * (p / 0.3)); G.setBlendMode('alpha')
         elseif p < 0.66 then
+            local reach = ease((p - 0.3) / (HIT - 0.3))
+            tx, ty = ex + (tx - ex) * reach, ey + (ty - ey) * reach
             local w = 7 * (1 - (p - 0.3) / 0.36) + 1.5
             G.setBlendMode('add')
             G.setColor(col[1], col[2], col[3], a * 0.85); G.setLineWidth(w); G.line(ex, ey, tx, ty)
@@ -454,7 +469,7 @@ local function drawMonAttack(G, f, p, hdx, mdx, a)
         end
         G.setLineWidth(1)
     elseif kind == 'wisp' then
-        local x, y = lerp(q); y = y + math.sin(q * 14) * 5
+        local x, y = lerp(q); y = y + math.sin(q * 4 * math.pi) * 5
         G.setBlendMode('add')
         G.setColor(col[1], col[2], col[3], a * 0.5); G.circle('fill', x, y, 8)
         G.setColor(col[1], col[2], col[3], a); G.circle('fill', x, y, 4)
@@ -484,51 +499,43 @@ function M.drawUI(g)
         G.push()
         G.translate(g.OX + (g.LW / 2) * g.S, g.OY + (WY + WH / 2) * g.S)
         G.scale(sc, sc)
-        G.translate(-(g.OX + (g.LW / 2) * g.S) + sx * g.S, -(g.OY + (WY + WH / 2) * g.S) + sy * g.S)
-        -- 窗口和两张卡片
-        g.rect({ 0.05, 0.07, 0.08 }, WX, WY, WW, WH, 0.97 * a, 8)
-        G.setColor(0.30, 0.25, 0.19, a); G.setLineWidth(2 * g.S)
-        G.rectangle('line', g.OX + WX * g.S, g.OY + WY * g.S, WW * g.S, WH * g.S, 8 * g.S, 8 * g.S)
-        G.setLineWidth(1)
-        -- 同一块场地：后面是井壁，脚下一条石地，矿灯在左边、怪那边发暗红
-        g.rect({ 0.035, 0.045, 0.055 }, WX + 18, WY + 40, WW - 36, FEET - WY - 22, a, 6)
+        G.translate(-(g.OX + (g.LW / 2) * g.S), -(g.OY + (WY + WH / 2) * g.S))
+        -- 墨青底板，赭金细边。页眉和数字不随出拳晃动。
+        g.rect({ 0.035, 0.075, 0.085 }, WX, WY, WW, WH, a)
+        g.rect({ 0.74, 0.52, 0.28 }, WX, WY, WW, 1, a)
+        g.rect({ 0.42, 0.34, 0.23 }, WX, WY + WH - 2, WW, 2, a)
+        g.text('战斗', WX + 16, WY + 5, 13, { 1, 0.88, 0.66 }, nil, nil, a)
+        local title, titleColor = '第 ' .. math.max(1, f.round) .. ' 回合', { 0.86, 0.84, 0.71 }
+        if f.phase == 'hold' or f.phase == 'close' then
+            if f.heroDead then title, titleColor = '你倒下了', { 1, 0.5, 0.39 }
+            elseif f.monDead then title, titleColor = '击败', { 1, 0.82, 0.4 } end
+        elseif f.log[f.i] and f.log[f.i].who == 'skip' then title = '快进 · ' .. f.log[f.i].rounds .. ' 回合' end
+        g.text(title, WX + 104, WY + 9, 9, titleColor, 'center', WW - 208, a)
+        g.text('点一下跳过', WX + WW - 92, WY + 10, 7.5, { 0.71, 0.75, 0.69 }, 'right', 78, a)
         G.push(); G.translate(g.OX, g.OY); G.scale(g.S, g.S)
-        -- 井壁的砖缝（整齐的几排，很暗）
-        G.setColor(0.075, 0.085, 0.095, a)
-        G.setLineWidth(0.6)
-        for row = 0, 5 do
-            local y = WY + 44 + row * 18
-            if y < FEET - 6 then
-                G.line(WX + 20, y, WX + WW - 20, y)
-                for bx = WX + 20 + (row % 2) * 14, WX + WW - 22, 28 do G.line(bx, y, bx, math.min(y + 18, FEET - 2)) end
-            end
-        end
-        G.setLineWidth(1)
-        -- 矿灯的暖光、怪那边的暗红：一圈圈叠起来，边缘是软的
-        G.setBlendMode('add')
-        for k = 1, 6 do
-            local r = k / 6
-            G.setColor(0.2, 0.14, 0.05, 0.05 * a); G.ellipse('fill', HERO_CX, FEET - 36, 100 * r, 62 * r)
-            G.setColor(0.2, 0.03, 0.05, 0.045 * a); G.ellipse('fill', MON_CX, FEET - 36, 100 * r, 62 * r)
-        end
-        G.setBlendMode('alpha')
-        G.setColor(0.13, 0.1, 0.08, a); G.rectangle('fill', WX + 18, FEET - 2, WW - 36, 16)
-        G.setColor(0.2, 0.16, 0.12, a); G.rectangle('fill', WX + 18, FEET - 2, WW - 36, 2)
+        G.setColor(0.70, 0.73, 0.72, a)
+        G.draw(stage, WX + 7, WY + 31, 0, (WW - 14) / stage:getWidth(), 134 / stage:getHeight())
         G.pop()
-        g.text('战　斗', 0, WY + 6, 11, { 0.94, 0.77, 0.42 }, 'center', g.LW, a)
-        g.text('第 ' .. math.max(1, f.round) .. ' 回合', 0, WY + 22, 7.5, { 0.75, 0.7, 0.58 }, 'center', g.LW, a)
         -- 头像（素材按 nearest 放大）
         local hdx, mdx, p, e = offsets(f)
         G.push(); G.translate(g.OX, g.OY); G.scale(g.S, g.S)
+        G.translate(sx, sy)
         local heroTurn = e and e.who == 'hero'
+        local guarded = e and e.hit == 0
+        G.setColor(0.025, 0.045, 0.04, a * 0.48)
+        G.ellipse('fill', HERO_CX + hdx, FEET, 23, 3.5)
         local function drawHero()
             if not f.heroDead or f.stop > 0 then
+                G.push()
+                stance(G, HERO_CX + hdx, p, heroTurn, 1, guarded)
                 g.miner(HERO_CX + hdx, FEET, f.heroDead, 96, a)
                 if not f.heroDead then drawWeapon(G, f, HERO_CX + hdx, p, heroTurn, a) end
                 if f.heroFlash > 0 then
-                    G.setBlendMode('add'); G.setColor(1, 0.15, 0.15, f.heroFlash * 0.45 * a)
-                    G.ellipse('fill', HERO_CX + hdx, FEET - 45, 34, 46); G.setBlendMode('alpha')
+                    G.setBlendMode('add')
+                    g.miner(HERO_CX + hdx, FEET, false, 96, f.heroFlash * 0.55 * a)
+                    G.setBlendMode('alpha')
                 end
+                G.pop()
             else
                 -- 倒下：躺平、变暗
                 -- 绕脚底转 90°：头朝左躺在地上（素材 96 高、约 82 宽，往上抬半个身宽）
@@ -539,7 +546,10 @@ function M.drawUI(g)
         end
         local function drawMon()
             if not f.monDead or f.stop > 0 then
+                G.push()
+                stance(G, MON_CX + mdx, p, not heroTurn, -1, guarded)
                 g.monster(f.o.mon.id, MON_CX + mdx, FEET, { scale = MON_SCALE, flash = f.monFlash, alpha = a })
+                G.pop()
             end
         end
         if heroTurn then drawMon(); drawHero() else drawHero(); drawMon() end
@@ -572,40 +582,46 @@ function M.drawUI(g)
             end
             G.setLineWidth(1)
         end
+        if f.contact then
+            local c = f.contact
+            local progress = c.t / 0.16
+            local size = (c.guard and 0.60 or c.heavy and 1.35 or 1) * (1 + progress * 0.4)
+            G.push()
+            G.translate(c.x, c.y); G.scale(c.dir * size, size)
+            -- 木刻刀痕由接触点向外炸开，中心白光只停留几帧。
+            for k = 1, 7 do
+                G.rotate(math.pi * 2 / 7)
+                local near = 3 + progress * 11
+                local far = near + (k % 3 == 0 and 19 or 13) * (1 - progress)
+                G.setColor(c.guard and 0.65 or 1, c.guard and 0.87 or 0.68, c.guard and 0.91 or 0.27, (1 - progress) * a)
+                G.polygon('fill', near, -2.4, far, -1, near + 2, 1.5)
+            end
+            G.setColor(1, 0.96, 0.8, math.max(0, 1 - progress * 1.8) * a)
+            G.polygon('fill', -8, 2, -2, -2, 4, -10, 3, -2, 10, 0, 3, 3, -2, 10, -2, 4)
+            G.pop()
+        end
         for _, pt in ipairs(parts) do
             G.setColor(pt.color[1], pt.color[2], pt.color[3], (1 - pt.t / pt.life) * a)
             G.rectangle('fill', pt.x, pt.y, pt.size, pt.size)
         end
         G.pop()
-        -- 名字、属性
-        g.text(f.o.hero.name, WX + 18, WY + 180, 10, { 0.95, 0.92, 0.85 }, 'center', 176, a)
-        g.text(f.o.hero.line, WX + 18, WY + 194, 7, { 0.6, 0.66, 0.68 }, 'center', 176, a)
-        g.text(f.o.mon.name .. (f.o.mon.traits ~= '' and ('　' .. f.o.mon.traits) or ''), WX + WW - 194, WY + 180, 10, { 1, 0.85, 0.86 }, 'center', 176, a)
-        g.text(f.o.mon.line, WX + WW - 194, WY + 194, 7, { 0.6, 0.66, 0.68 }, 'center', 176, a)
-        -- 血条和数字（数字滚动）
-        local function bar(x, val, max, col, right)
-            local w = 176
-            g.rect({ 0.16, 0.08, 0.09 }, x, WY + 214, w, 8, a, 4)
-            g.rect(col, x, WY + 214, w * math.max(0, math.min(1, val / max)), 8, a, 4)
-            local num = tostring(math.max(0, math.floor(val + 0.5)))
-            g.text(num .. ' / ' .. max, x, WY + 204, 7.5, { 0.95, 0.95, 0.95 }, right and 'right' or 'left', w, a)
+        -- 数字立即结算，浅色的尾条短暂保留命中前的血量。
+        local function vitals(x, name, stats, value, trail, maximum, color, right)
+            local w, y = 191, WY + 200
+            local function fill(v) return w * math.min(1, math.max(0, v / maximum)) end
+            local align = right and 'right' or 'left'
+            g.text(name, x, WY + 169, 11, { 0.98, 0.91, 0.77 }, align, w, a)
+            g.text(stats, x, WY + 187, 7.5, { 0.70, 0.76, 0.72 }, align, w, a)
+            g.rect({ 0.16, 0.22, 0.22 }, x, y, w, 7, a)
+            g.rect({ 0.97, 0.83, 0.59 }, x, y, fill(trail), 7, a)
+            g.rect(color, x, y, fill(value), 7, a)
+            g.text(visibleHp(value, maximum) .. ' / ' .. maximum, x, WY + 210, 10, { 1, 0.93, 0.79 }, align, w, a)
         end
-        bar(WX + 18, f.hshow, f.hmax, { 0.94, 0.72, 0.3 })
-        bar(WX + WW - 194, f.mshow, f.mmax, { 0.85, 0.25, 0.3 }, true)
-        if f.monDead and f.phase ~= 'fight' then g.text('击败！', MON_CX - 60, WY + 46, 18, { 1, 0.85, 0.4 }, 'center', 120, a) end
-        if f.heroDead and f.phase ~= 'fight' then g.text('你倒下了', HERO_CX - 60, WY + 46, 16, { 1, 0.35, 0.4 }, 'center', 120, a) end
-        g.text('点一下跳过', WX, WY + WH - 14, 6.5, { 0.42, 0.48, 0.5 }, 'right', WW - 12, a)
-        -- 伤害数字（带描边）
-        for _, p in ipairs(popups) do
-            local pop = p.t < 0.12 and (1.7 - 0.7 * p.t / 0.12) or 1
-            local pa = (p.t > p.life - 0.3 and (p.life - p.t) / 0.3 or 1) * a
-            local size = p.size * pop
-            local y = p.y - math.min(p.t, 0.6) * 26 - size / 2
-            for _, o in ipairs({ { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } }) do
-                g.text(p.text, p.x - p.w / 2 + o[1], y + o[2], size, { 0.05, 0.03, 0.03 }, 'center', p.w, pa * 0.9)
-            end
-            g.text(p.text, p.x - p.w / 2, y, size, p.color, 'center', p.w, pa)
-        end
+        local monName = f.o.mon.name .. (f.o.mon.traits ~= '' and ('　' .. f.o.mon.traits) or '')
+        vitals(WX + 16, f.o.hero.name, f.o.hero.line, f.hhp, f.hshow, f.hmax, { 0.87, 0.64, 0.28 }, false)
+        vitals(WX + WW - 207, monName, f.o.mon.line, f.mhp, f.mshow, f.mmax, { 0.82, 0.32, 0.23 }, true)
+        feedback.draw(g, f.readouts.hero, WX + 70, WY + 76, HERO_CX, WY + 151, a)
+        feedback.draw(g, f.readouts.mon, WX + WW - 70, WY + 76, MON_CX, WY + 151, a)
         G.pop()
     else
         -- 窗口关上以后，地图上的碎片
@@ -627,6 +643,6 @@ function M.drawUI(g)
     end
 end
 
-function M.clear() popups, parts, slashes, banners = {}, {}, {}, {} end
+function M.clear() parts, slashes, banners = {}, {}, {} end
 
 return M

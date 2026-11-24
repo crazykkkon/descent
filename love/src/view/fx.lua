@@ -35,6 +35,15 @@ function M.load()
         sounds.lose = makeSound(0.3, function(t, p) return math.sin(t * 2 * math.pi * (110 - 50 * p)) * (1 - p) ^ 2 * 0.45 end)
         -- 打怪
         sounds.hit = makeSound(0.12, function(t, p) return noise() * (1 - p) ^ 2 * 0.35 + math.sin(t * 2 * math.pi * 140) * (1 - p) * 0.3 end)
+        -- 锤头先落下，再听到低频余响；挡住的攻击只留短促的金石声。
+        sounds.hammer = makeSound(0.21, function(t, p)
+            local body = math.sin(2 * math.pi * (69 * t + 0.85 * (1 - math.exp(-35 * t))))
+            return body * (1 - p) ^ 2 * 0.62 + noise() * math.exp(-67 * t) * 0.3
+        end)
+        sounds.guard = makeSound(0.10, function(t, p)
+            local ring = math.sin(t * 2 * math.pi * 830) + 0.35 * math.sin(t * 2 * math.pi * 1430)
+            return ring * (1 - p) ^ 3 * 0.21 + noise() * math.exp(-120 * t) * 0.12
+        end)
         -- 捡东西
         sounds.pick = makeSound(0.14, function(t, p) return math.sin(t * 2 * math.pi * (880 + 440 * p)) * (1 - p) * 0.22 end)
         -- 滴水

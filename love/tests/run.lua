@@ -395,6 +395,8 @@ for _, cr in ipairs(V.charRuns) do
     end
 end
 
+dofile('tests/battle_feedback.lua')
+
 print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d+%d、断臂转轮 %d、刻图案 %d、大转盘 %d、当铺 %d、骨坛 %d、诏令 %d+%d、路线 %d、教程 %d、碎片 %d+%d+%d+%d）',
     pass, fail, #V.combat, #V.scenarios, #V.routeWalks, #V.armSessions, #V.engraves, #V.wheels, #V.shops, #V.altars, #V.decreeDraws, #V.decreeRuns, #V.routes, #V.tutorials, #V.shardsVec, #V.perkRuns, #V.metaRoutes, #V.charRuns) .. '；精英奖励 ' .. #V.rewardRuns)
 os.exit(fail == 0 and 0 or 1)
