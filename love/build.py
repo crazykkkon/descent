@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.join(ROOT, 'dist')
 CACHE = os.path.join(ROOT, '.cache')
 GAME_NAME = '坠井者'
-BUNDLE_ID = 'com.crazykkkon.descent'
+BUNDLE_ID = 'com.crazykkkon.descent.wellheadpreview'
 # 打进游戏包的文件（测试和打包脚本本身不打进去）
 INCLUDE = ['conf.lua', 'main.lua', 'src', 'assets']
 EXCLUDE_FILES = {'src/autotest.lua'}
@@ -80,7 +80,7 @@ def build_windows(love_file):
                 wz.writestr(f'{folder}/{name}', data)
         wz.writestr(f'{folder}/LICENSE-LOVE.txt', rz.read([i for i in rz.namelist() if i.endswith('license.txt')][0]))
         wz.write(os.path.join(ROOT, 'assets/fonts/OFL.txt'), f'{folder}/LICENSE-FONT.txt')
-        wz.writestr(f'{folder}/怎么运行.txt', '双击 坠井者.exe 开始游戏。\nWindows 可能提示"未知发布者"：点"更多信息" → "仍要运行"。\n存档在 %APPDATA%\\LOVE\\descent\\ 里。\n')
+        wz.writestr(f'{folder}/怎么运行.txt', '双击 坠井者.exe 开始游戏。\nWindows 可能提示"未知发布者"：点"更多信息" → "仍要运行"。\n存档在 %APPDATA%\\LOVE\\descent-wellhead-print-preview\\ 里。\n')
     print('生成', out, os.path.getsize(out) // 1024, 'KB')
 
 
@@ -113,7 +113,7 @@ def build_mac(love_file):
         zi.compress_type = zipfile.ZIP_DEFLATED
         wz.writestr(zi, game)
         wz.write(os.path.join(ROOT, 'assets/fonts/OFL.txt'), 'LICENSE-FONT.txt')
-        wz.writestr('怎么运行.txt', '解压后打开 坠井者.app。\n这个包没有经过苹果签名：第一次打开请在图标上右键 → 打开 → 打开。\n如果提示"已损坏"，在"终端"里运行：xattr -cr 坠井者.app\n存档在 ~/Library/Application Support/LOVE/descent/ 里。\n')
+        wz.writestr('怎么运行.txt', '解压后打开 坠井者.app。\n这个包没有经过苹果签名：第一次打开请在图标上右键 → 打开 → 打开。\n如果提示"已损坏"，在"终端"里运行：xattr -cr 坠井者.app\n存档在 ~/Library/Application Support/LOVE/descent-wellhead-print-preview/ 里。\n')
     print('生成', out, os.path.getsize(out) // 1024, 'KB')
 
 

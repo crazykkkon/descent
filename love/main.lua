@@ -19,6 +19,7 @@ local whisperMod = require('core.whisper')
 local route = require('core.route')
 local miner = require('view.miner')
 local monsters = require('view.monsters')
+local wellhead = require('view.wellhead')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
 local coach = require('view.coach')
@@ -1029,6 +1030,7 @@ end
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     miner.load()
+    wellhead.load()
     monsters.load(config.MONSTERS)
     fx.load()
     fx.loadShader()
@@ -1215,11 +1217,24 @@ local function drawPixel()
         if (d == 10 or d == 19) and not run.tutorial then setColor({ 0.88, 0.4, 0.45 }); g.circle('fill', 23, y + 3, 1.5) end
         if d == 20 and not run.tutorial then setColor({ 0.5, 0.15, 0.2 }); g.rectangle('fill', 8, y + 10, 18, 2) end
     end
-    -- 地图：一行一行画（墙会盖住上一行的下沿，看起来是立着的）
-    for i = 1, #run.cells do
-        if run.cells[i].kind ~= 'wall' then drawTile(i) end
-        if i % run.w == 0 then
-            for k = i - run.w + 1, i do if run.cells[k].kind == 'wall' then drawTile(k) end end
+    if run.tutorial and run.floorIndex == 1 then
+        wellhead.drawMap(MAP_X, MAP_Y, run.w * TILE, run.h * TILE)
+        for i, c in ipairs(run.cells) do
+            if c.kind ~= 'wall' then
+                local x, y = tileXY(i)
+                wellhead.drawObject(c, x, y, TILE)
+                if c.kind == 'monster' then
+                    monsters.draw(c.id, x + TILE / 2, y + TILE - 5, clock, i, battle.monster(i))
+                end
+            end
+        end
+    else
+        -- 地图：一行一行画（墙会盖住上一行的下沿，看起来是立着的）
+        for i = 1, #run.cells do
+            if run.cells[i].kind ~= 'wall' then drawTile(i) end
+            if i % run.w == 0 then
+                for k = i - run.w + 1, i do if run.cells[k].kind == 'wall' then drawTile(k) end end
+            end
         end
     end
     -- 悬停框
