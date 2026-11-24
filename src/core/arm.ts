@@ -124,15 +124,27 @@ export function firstBlank(arm: ArmState, r: number): number {
 }
 
 /**
- * 在第 r 个轮子上刻一个图案（武器或赖子）：cell 不给就刻在第一个空格；这个轮子刻满了必须指定覆盖哪一格。
- * 刻好后这个轮子转到这一格。返回刻在第几格（-1 = 不行）
+ * 刻图案时默认刻在哪一格：从中间那格的下一格开始往后找空格，尽量不刻在中间那格
+ * （制作人：刻上去的图案不能直接落在中间一行，不然三个轮子刻一样的，不用转就拿到武器了）。
+ * 只剩中间那格是空的才刻在中间。没有空格返回 -1。
+ */
+export function blankFor(arm: ArmState, r: number): number {
+    for (let i = 1; i <= REEL_SIZE; i++) {
+        const k = (arm.stops[r] + i) % REEL_SIZE;
+        if (arm.reels[r][k] === null) return k;
+    }
+    return -1;
+}
+
+/**
+ * 在第 r 个轮子上刻一个图案（武器或赖子）：cell 不给就按 blankFor 找空格；这个轮子刻满了必须指定覆盖哪一格。
+ * 轮子不动，手上的武器也不变——要转到才拿得到。返回刻在第几格（-1 = 不行）
  */
 export function engraveCell(arm: ArmState, r: number, id: EngraveSym, cell?: number): number {
     if (r < 0 || r >= REELS) return -1;
-    const k = cell ?? firstBlank(arm, r);
+    const k = cell ?? blankFor(arm, r);
     if (k < 0 || k >= REEL_SIZE) return -1;
     arm.reels[r][k] = id;
-    arm.stops[r] = k;
     return k;
 }
 

@@ -123,7 +123,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
                 const cell = cells[entities[k]];
                 // 群居、庇护：只算还活着的邻居
                 const mon = cell.kind === 'monster'
-                    ? monsterInContext(MONSTERS[cell.id], adjacentMonsters(cells, w, h, entities[k], j => !(mask & (1 << bit.get(j)!))))
+                    ? monsterInContext(MONSTERS[cell.id], adjacentMonsters(cells, w, h, entities[k], j => !(mask & (1 << bit.get(j)!))), floor.power)
                     : undefined;
                 const r = interact(cell, stats, floor, ch, false, mon);
                 if (!r.ok) continue;
@@ -218,7 +218,7 @@ export function greedyFloor(floor: FloorDef, hero: Hero, ch: CharacterDef = CHAR
         for (const i of reach.next) {
             if (mode === 'clear' && canLeave && cells[i].kind !== 'monster') continue;
             const c = cells[i];
-            const mon = c.kind === 'monster' ? monsterInContext(MONSTERS[c.id], adjacentMonsters(cells, p.w, p.h, i)) : undefined;
+            const mon = c.kind === 'monster' ? monsterInContext(MONSTERS[c.id], adjacentMonsters(cells, p.w, p.h, i), floor.power) : undefined;
             const r = interact(c, hh, floor, ch, false, mon);
             if (r.ok && (!bestHero || r.hero.hp > bestHero.hp)) { bestI = i; bestHero = r.hero; }
         }

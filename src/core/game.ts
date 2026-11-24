@@ -4,7 +4,7 @@
  *
  * 楼层之内完全确定；随机只发生在楼层之间和设施上（断臂转轮、大转盘、诏令、选路线），全部由本局种子决定。
  */
-import { Boon, BOON_NAMES, CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MARK_WEAPON, MONSTER_BOON, MONSTERS, MonsterDef, monsterInContext, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
+import { Boon, BOON_NAMES, CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MARK_WEAPON, MONSTER_BOON, MONSTERS, MonsterDef, monsterInContext, powered, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
 import { CombatResult, simulateCombat } from './combat';
 import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
@@ -264,12 +264,8 @@ export class Run {
         const k = engraveCell(this.arm, reel, id, cell);
         if (k < 0) return { ok: false, msg: '' };
         this.engraveQueue.shift();
-        if (id === WILD) {
-            this.checkHold();
-            return { ok: true, msg: `把赖子刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格` };
-        }
-        this.hold(id);
-        return { ok: true, msg: `把${WEAPONS[id].name}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，先拿在手上` };
+        // 刻上不等于拿到：要拉杆转到才换成这把武器
+        return { ok: true, msg: `把${symName(id)}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，转到它才拿得到` };
     }
 
     /** 不刻 */
@@ -449,7 +445,6 @@ export class Run {
         if (unpaid) return unpaid;
         engraveCell(this.arm, p.reel, p.weapon, cell);
         this.pawned.splice(j, 1);
-        if (p.weapon !== WILD) this.hold(p.weapon);
         return { ok: true, msg: `赎回了${symName(p.weapon)}` };
     }
 
@@ -467,7 +462,6 @@ export class Run {
         if (unpaid) return unpaid;
         engraveCell(this.arm, reel, w, cell);
         this.bought.push(`${this.floorIndex}:${i}:${k}`);
-        if (w !== WILD) this.hold(w);
         return { ok: true, msg: `花 ${price} 金币刻上了${symName(w)}` };
     }
 
@@ -581,7 +575,7 @@ export class Run {
     monsterAt(i: number): MonsterDef {
         const c = this.cells[i];
         if (c.kind !== 'monster') throw new Error('不是怪物');
-        return monsterInContext(MONSTERS[c.id], adjacentMonsters(this.cells, this.w, this.h, i));
+        return monsterInContext(MONSTERS[c.id], adjacentMonsters(this.cells, this.w, this.h, i), this.floor.power);
     }
 
     /** 这只怪带不带印记 */
@@ -598,7 +592,7 @@ export class Run {
         switch (c.kind) {
             case 'monster': {
                 const m = this.monsterAt(i);
-                const base = MONSTERS[c.id];
+                const base = powered(MONSTERS[c.id], this.floor.power);
                 const r = simulateCombat(this.hero, m);
                 const lines = [`生命 ${m.hp}　攻击 ${m.atk}　防御 ${m.def}`];
                 if (m.atk !== base.atk) lines.push(`（群居：身边有同类，攻击从 ${base.atk} 涨到 ${m.atk}）`);

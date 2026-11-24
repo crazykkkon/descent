@@ -149,7 +149,7 @@ function Run:fullReel(reel, cell)
     return nil
 end
 
--- 把等待中的图案刻到第 reel 个轮子上（刻满时要指定格子）；刻上就拿在手上
+-- 把等待中的图案刻到第 reel 个轮子上（刻满时要指定格子）；刻上不等于拿到，要转到才换成它
 function Run:engrave(id, reel, cell)
     local p = self.engraveQueue[1]
     if not self.arm or not p or not contains(p.choices, id) then return { ok = false, msg = '' } end
@@ -158,12 +158,7 @@ function Run:engrave(id, reel, cell)
     local k = armMod.engraveCell(self.arm, reel, id, cell)
     if not k then return { ok = false, msg = '' } end
     table.remove(self.engraveQueue, 1)
-    if id == armMod.WILD then
-        self:checkHold()
-        return { ok = true, msg = '把赖子刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格' }
-    end
-    self:hold(id)
-    return { ok = true, msg = '把' .. config.WEAPONS[id].name .. '刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格，先拿在手上' }
+    return { ok = true, msg = '把' .. symName(id) .. '刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格，转到它才拿得到' }
 end
 
 function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
@@ -363,7 +358,6 @@ function Run:pawnRedeem(i, j, cell)
     if unpaid then return unpaid end
     armMod.engraveCell(self.arm, p.reel, p.weapon, cell)
     table.remove(self.pawned, j)
-    if p.weapon ~= armMod.WILD then self:hold(p.weapon) end
     return { ok = true, msg = '赎回了' .. symName(p.weapon) }
 end
 
@@ -381,7 +375,6 @@ function Run:pawnBuy(i, k, reel, cell)
     if unpaid then return unpaid end
     armMod.engraveCell(self.arm, reel, w, cell)
     self:markSold(i, k)
-    if w ~= armMod.WILD then self:hold(w) end
     return { ok = true, msg = '花 ' .. price .. ' 金币刻上了' .. symName(w) }
 end
 
@@ -573,7 +566,7 @@ end
 function Run:monsterAt(i)
     local c = self.cells[i]
     assert(c.kind == 'monster', '不是怪物')
-    return config.monsterInContext(config.MONSTERS[c.id], floorMod.adjacentMonsters(self.cells, self.w, self.h, i))
+    return config.monsterInContext(config.MONSTERS[c.id], floorMod.adjacentMonsters(self.cells, self.w, self.h, i), self:floor().power)
 end
 
 function Run:marked(i)

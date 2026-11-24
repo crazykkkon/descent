@@ -49,6 +49,8 @@ export interface FloorDef {
     marks?: number[];
     /** 当铺卖的图案（武器或赖子 'wild'） */
     shop?: (WeaponId | 'wild')[];
+    /** 井越深怪越凶：这一层的怪按 power 加强（见 config.powered；不写就是 0） */
+    power?: number;
     /** 离开这一层时要交的井租（金币） */
     rent?: number;
     /** 打败本层精英后三选一拿武器 */
@@ -64,6 +66,7 @@ export interface FloorDef {
  *   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
  *   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
  *   w  井鼠      u  盐蚀蛞蝓  p  骸骨祭司  K  守门人（精英）  E  井底之眼（Boss 占位）
+ *   第 6 层起换上的更凶的同类：a 棘苔  i 刺鳗  j 铠蛙  l 铁甲虫  n 啸蝠  o 怨魂  q 碎岩蟹
  *   M  补给摊（货品写在楼层的 stall 里）   S  大转盘（井中轮）   N  当铺   A  骨坛（设施都站在旁边用）
  */
 const LEGEND: Record<string, Cell> = {
@@ -93,6 +96,13 @@ const LEGEND: Record<string, Cell> = {
     p: { kind: 'monster', id: 'priest' },
     K: { kind: 'monster', id: 'gatekeeper' },
     E: { kind: 'monster', id: 'eye' },
+    a: { kind: 'monster', id: 'thornMoss' },
+    i: { kind: 'monster', id: 'spikeEel' },
+    j: { kind: 'monster', id: 'armorFrog' },
+    l: { kind: 'monster', id: 'ironBeetle' },
+    n: { kind: 'monster', id: 'shriekBat' },
+    o: { kind: 'monster', id: 'grudgeWraith' },
+    q: { kind: 'monster', id: 'shardCrab' },
     M: { kind: 'stall' },
     S: { kind: 'wheel' },
     N: { kind: 'pawn' },

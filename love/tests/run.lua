@@ -290,7 +290,7 @@ local function floorStr(f, base)
     local stall = {}
     for k, o in ipairs(f.stall or {}) do stall[k] = o.id .. o.amount .. '/' .. o.price end
     return table.concat({ tostring(f.name), table.concat(f.map, '/'), tostring(f.kind), tostring(f.bloodCost), tostring(f.gem), tostring(f.smallPotion), tostring(f.bigPotion),
-        tostring(f.gold), tostring(f.rent), tostring(f.eliteReward), table.concat(marks, ','), table.concat(f.shop or {}, ','), table.concat(stall, ','), tostring(f.hint) }, ' | ')
+        tostring(f.gold), tostring(f.rent), tostring(f.power), tostring(f.eliteReward), table.concat(marks, ','), table.concat(f.shop or {}, ','), table.concat(stall, ','), tostring(f.hint) }, ' | ')
 end
 for _, r in ipairs(V.routes) do
     local plan = route.build(r.seed)

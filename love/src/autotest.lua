@@ -145,8 +145,11 @@ function M.start()
             local boss = find(function(c) return c.kind == 'monster' and c.id == 'eye' end)
             if boss then
                 go(boss)
-                if modalTitle() and modalTitle():find('^硬打') then button('硬打') end
-                settle(); sleep(0.2)
+                -- 走近井底之眼会进剧情，然后直接开打（不会弹"硬打会死"）
+                say('第 5 层走近井底之眼：' .. tostring(modalTitle()))
+                shot('01e-boss-scene')
+                button('迎上去')
+                settle(); sleep(0.4)
                 say('第 5 层硬打井底之眼：' .. tostring(modalTitle()))
                 break
             end
@@ -193,6 +196,7 @@ function M.start()
                 local mon = find(function(c) return c.kind == 'monster' end)
                 if mon then hoverCell(mon); sleep(0.3); once('03b-hover'); love.mouse.setPosition(1, 1) end
             end
+            if f == 12 then once('10-deep-floor') end
             if f == 3 then
                 -- 测试用：塞一个赖子进来，看界面
                 run.engraveQueue[#run.engraveQueue + 1] = { from = 'wheel', choices = { 'wild' } }

@@ -10,7 +10,7 @@ local M = {}
 -- mon：怪物算上周围格子（群居、庇护）以后的属性；不传就用怪物本身的数值
 function M.interact(cell, hero, floor, ch, allowFatal, mon)
     if cell.kind == 'monster' then
-        local m = mon or config.MONSTERS[cell.id]
+        local m = mon or config.powered(config.MONSTERS[cell.id], floor.power)
         local r = combat.simulate(hero, m)
         local reason
         if not r.canAttack then reason = '打不动' .. m.name .. '：攻击要高于它的防御 ' .. m.def

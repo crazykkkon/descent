@@ -45,10 +45,36 @@ M.MONSTERS = {
     gatekeeper = { id = 'gatekeeper', name = '守门人',   hp = 160, atk = 44, def = 24, gold = 80, traits = T('double'), elite = true },
     -- 第 20 层 Boss 的占位（站位战还没做）
     eye        = { id = 'eye',        name = '井底之眼', hp = 500, atk = 70, def = 34, gold = 0,  traits = T(), elite = true },
+    -- 第 6 层起换掉 7 种小怪的更凶的同类（数值是讨论项）
+    thornMoss    = { id = 'thornMoss',    name = '棘苔',   hp = 39,  atk = 25, def = 7,  gold = 5,  traits = T() },
+    spikeEel     = { id = 'spikeEel',     name = '刺鳗',   hp = 58,  atk = 30, def = 10, gold = 9,  traits = T() },
+    armorFrog    = { id = 'armorFrog',    name = '铠蛙',   hp = 78,  atk = 32, def = 13, gold = 15, traits = T() },
+    ironBeetle   = { id = 'ironBeetle',   name = '铁甲虫', hp = 52,  atk = 28, def = 19, gold = 14, traits = T() },
+    shriekBat    = { id = 'shriekBat',    name = '啸蝠',   hp = 45,  atk = 35, def = 11, gold = 14, traits = T('firstStrike') },
+    grudgeWraith = { id = 'grudgeWraith', name = '怨魂',   hp = 92,  atk = 34, def = 13, gold = 22, traits = T('lifesteal') },
+    shardCrab    = { id = 'shardCrab',    name = '碎岩蟹', hp = 82,  atk = 36, def = 15, gold = 22, traits = T('thorns') },
 }
 
+-- 井越深，怪越凶：第 7 层起每往下一层（power +1），怪物攻击 +3、防御 +1、生命 +4%；精英只加一半，井底之眼不加（和原型一致）
+M.DEPTH_ATK, M.DEPTH_DEF, M.DEPTH_HP = 3, 1, 4
+function M.powered(m, power)
+    power = power or 0
+    if m.elite then power = math.floor(power / 2) end
+    if power == 0 then return m end
+    local t = {}
+    for k, v in pairs(m) do t[k] = v end
+    t.hp = math.floor(m.hp * (100 + M.DEPTH_HP * power) / 100)
+    t.atk = m.atk + M.DEPTH_ATK * power
+    t.def = m.def + M.DEPTH_DEF * power
+    return t
+end
+
+-- 第 6 层起，地图上的 7 种小怪换成更凶的同类（地图字符 → 换成的字符）
+M.UPGRADE_CHARS = { m = 'a', e = 'i', f = 'j', c = 'l', v = 'n', g = 'o', x = 'q' }
+
 -- 按周围格子算出怪物这一刻的真实属性（群居、庇护）。adjacent：相邻格子上还活着的怪物 id 列表
-function M.monsterInContext(m, adjacent)
+function M.monsterInContext(m, adjacent, power)
+    m = M.powered(m, power)
     local atk, def = m.atk, m.def
     local sheltered = false
     for _, id in ipairs(adjacent) do
@@ -103,9 +129,10 @@ M.BOON_DESC = {
 M.BOON_ORDER = { 'lifesteal', 'firstStrike', 'thorns', 'corrode' }
 
 -- 印记怪：打败后可以把对应的武器刻到断臂转轮上
-M.MARK_WEAPON = { eel = 'harpoon', moss = 'mossBlade', frog = 'boneKnife', bat = 'bellStaff', wraith = 'saltDagger', crab = 'hammer', beetle = 'rustSword', rat = 'wellHook' }
+M.MARK_WEAPON = { eel = 'harpoon', moss = 'mossBlade', frog = 'boneKnife', bat = 'bellStaff', wraith = 'saltDagger', crab = 'hammer', beetle = 'rustSword', rat = 'wellHook',
+    thornMoss = 'mossBlade', spikeEel = 'harpoon', armorFrog = 'boneKnife', ironBeetle = 'rustSword', shriekBat = 'bellStaff', grudgeWraith = 'saltDagger', shardCrab = 'hammer' }
 -- 杀过这种怪，骨坛上就能移它的特性
-M.MONSTER_BOON = { wraith = 'lifesteal', bat = 'firstStrike', crab = 'thorns', slug = 'corrode' }
+M.MONSTER_BOON = { wraith = 'lifesteal', bat = 'firstStrike', crab = 'thorns', slug = 'corrode', grudgeWraith = 'lifesteal', shriekBat = 'firstStrike', shardCrab = 'thorns' }
 
 local function copyList(t)
     if not t then return nil end

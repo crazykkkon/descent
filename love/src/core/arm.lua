@@ -110,13 +110,21 @@ function M.firstBlank(arm, r)
     return nil
 end
 
--- 在第 r 个轮子上刻一把武器：cell 不给就刻在第一个空格；刻满了必须指定格子。刻好后这个轮子转到这一格
+-- 刻图案时默认刻在哪一格：从中间那格的下一格开始往后找空格，尽量不刻在中间那格（制作人：不能不转就拿到武器）
+function M.blankFor(arm, r)
+    for i = 1, M.SIZE do
+        local k = (arm.stops[r] - 1 + i) % M.SIZE + 1
+        if not arm.reels[r][k] then return k end
+    end
+    return nil
+end
+
+-- 在第 r 个轮子上刻一把武器：cell 不给就按 blankFor 找空格；刻满了必须指定格子。轮子不动，手上的武器也不变
 function M.engraveCell(arm, r, id, cell)
     if not r or r < 1 or r > M.REELS then return nil end
-    local k = cell or M.firstBlank(arm, r)
+    local k = cell or M.blankFor(arm, r)
     if not k or k < 1 or k > M.SIZE then return nil end
     arm.reels[r][k] = id
-    arm.stops[r] = k
     return k
 end
 

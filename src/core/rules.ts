@@ -1,5 +1,5 @@
 /** 和格子交互的规则。游戏和求解器共用这一份，保证两边结果一致。 */
-import { CharacterDef, Hero, MONSTERS, MonsterDef, WEAPONS } from './config';
+import { CharacterDef, Hero, MONSTERS, MonsterDef, powered, WEAPONS } from './config';
 import { simulateCombat } from './combat';
 import { Cell, FloorDef } from './floor';
 
@@ -14,7 +14,7 @@ export type Outcome = { ok: true; hero: Hero; fatal?: boolean; reason?: string }
 export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterDef, allowFatal = false, mon?: MonsterDef): Outcome {
     switch (cell.kind) {
         case 'monster': {
-            const m = mon ?? MONSTERS[cell.id];
+            const m = mon ?? powered(MONSTERS[cell.id], floor.power)
             const r = simulateCombat(hero, m);
             let reason = '';
             if (!r.canAttack) reason = `打不动${m.name}：攻击要高于它的防御 ${m.def}`;

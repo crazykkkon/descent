@@ -61,7 +61,7 @@ for (const id of Object.keys(MONSTERS) as MonsterId[]) {
 function floorParams(f: FloorDef) {
     return {
         name: f.name, map: f.map, bloodCost: f.bloodCost, gem: f.gem, smallPotion: f.smallPotion, bigPotion: f.bigPotion, gold: f.gold,
-        rent: f.rent, eliteReward: f.eliteReward, kind: f.kind, marks: f.marks, shop: f.shop, stall: f.stall, hint: f.hint,
+        rent: f.rent, power: f.power, eliteReward: f.eliteReward, kind: f.kind, marks: f.marks, shop: f.shop, stall: f.stall, hint: f.hint,
     };
 }
 

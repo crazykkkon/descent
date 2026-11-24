@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CHARACTERS, MONSTERS, MonsterDef, WeaponId } from '../src/core/config';
+import { CHARACTERS, MONSTERS, MonsterDef, powered, WeaponId } from '../src/core/config';
 import { simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
@@ -363,7 +363,7 @@ import { whisper } from '../src/core/whisper';
 import { buildRoute, buildTutorial, RENTS } from '../src/core/route';
 import { solveChain as chain2 } from '../src/core/solver';
 
-test('断臂转轮：开局是空的，打败印记怪可以刻武器，刻上就拿在手上', () => {
+test('断臂转轮：开局是空的，打败印记怪可以刻武器；刻上不落在中间一行，也不直接拿在手上', () => {
     const run = new Run([{ ...tiny(['@e.>']), marks: [1] }], 'digger', 1);
     assert.deepEqual(run.arm!.reels, reels([], [], []));
     assert.equal(run.armSpin('gold').ok, false, '没刻图案不能转');
@@ -371,9 +371,14 @@ test('断臂转轮：开局是空的，打败印记怪可以刻武器，刻上�
     run.move(1, 0);
     assert.deepEqual(run.pendingEngrave, { from: 'mark', choices: ['harpoon'] });
     assert.ok(run.engrave('harpoon', 1).ok, '刻在第 2 个轮子上');
-    assert.equal(run.hero.weapon, 'harpoon', '刻上就拿在手上');
-    assert.deepEqual(run.arm!.reels, reels([], ['harpoon'], []));
-    assert.equal(run.arm!.stops[1], 0, '刻的那个轮子转到这一格');
+    assert.equal(run.hero.weapon, undefined, '刻上不等于拿到，要转到才行');
+    assert.deepEqual(run.arm!.reels[1], [null, 'harpoon', null, null, null], '刻在中间那格的下一格');
+    assert.equal(run.arm!.stops[1], 0, '轮子不动');
+    // 三个轮子都刻同一把：不转也拿不到
+    run.engraveQueue = [{ from: 'mark', choices: ['harpoon'] }, { from: 'mark', choices: ['harpoon'] }];
+    run.engrave('harpoon', 0); run.engrave('harpoon', 2);
+    assert.equal(run.hero.weapon, undefined);
+    assert.deepEqual(run.arm!.stops.map((k, r) => run.arm!.reels[r][k]), [null, null, null], '中间一行还是空的');
     assert.equal(run.pendingEngrave, null);
 });
 
@@ -389,7 +394,7 @@ test('断臂转轮：三个轮子各 5 格；概率是三个轮子上各自占�
     engraveCell(arm, 0, 'boneKnife');
     assert.equal(armOdds(arm, 'boneKnife'), 2 / 125);
     assert.equal(armOdds(arm, null), (3 * 4 * 4) / 125, '三个都停在空格上');
-    arm.stops = [0, 0, 0];
+    arm.stops = [1, 1, 0];
     assert.deepEqual(armHoldOdds(arm, [true, true, false]).find(o => o.target === 'boneKnife')?.p, 1 / 5, '锁住两个，剩下那个轮子 1/5');
     assert.deepEqual(armOutcome(['hammer', 'hammer', 'hammer']), { kind: 'weapon', id: 'hammer' });
     assert.deepEqual(armOutcome([null, null, null]), { kind: 'empty' });
@@ -496,16 +501,17 @@ test('当铺：卖骨钥、当图案（赎回价每层涨 20%）、买图案、�
     assert.equal(run.hero.gold, 255);
     assert.equal(run.hero.weapon, undefined, '当掉手上这把就空手了');
     assert.ok(run.pawnBuy(3, 0, 2).ok);
-    assert.equal(run.arm!.reels[2][0], 'hammer');
+    assert.equal(run.arm!.reels[2][1], 'hammer', '刻在中间那格的下一格');
+    assert.equal(run.hero.weapon, undefined, '买来的图案也要转到才拿得到');
     assert.equal(run.pawnBuy(3, 0, 2).ok, false, '每样只卖一次');
-    assert.ok(run.pawnErase(3, 2, 0).ok);
+    assert.ok(run.pawnErase(3, 2, 1).ok);
     assert.deepEqual(run.arm!.reels, reels([], [], []));
     run.move(1, 0); run.move(1, 0);
     run.finishFloor(false);
     assert.equal(run.redeemPrice(0), 48, '过了一层：40 × 1.2');
     assert.ok(run.pawnRedeem(3, 0).ok);
-    assert.equal(run.arm!.reels[1][0], 'boneKnife', '赎回刻回原来那个轮子');
-    assert.equal(run.hero.weapon, 'boneKnife');
+    assert.equal(run.arm!.reels[1][1], 'boneKnife', '赎回刻回原来那个轮子');
+    assert.equal(run.hero.weapon, undefined);
 });
 
 test('诏令：第 3 层开头送来，可以拒绝；完成给刻图案；逾期攻击 −2 / −4', () => {
@@ -615,6 +621,23 @@ test('新手教程：前 4 层一层教一件事，怎么走都不会走进死�
     }
     assert.ok(Math.min(...heroes.map(h => h.hp)) > 100, '第 4 层出来至少还剩 100 多血');
     assert.ok(plan[3].kind === 'elite' && plan[4].kind === 'boss');
+});
+
+test('井越深怪越凶：第 6 层起小怪换成更凶的同类，第 7 层起每层加强一级、最多 6 级（精英一半，井底之眼不加）', () => {
+    const plan = buildRoute(3);
+    plan.forEach((opts, d) => {
+        for (const f of opts) {
+            const ids = parseFloor(f).cells.filter(c => c.kind === 'monster').map(c => (c as { id: string }).id);
+            if (d >= 5 && f.kind !== 'boss') assert.ok(!ids.some(id => ['moss', 'eel', 'frog', 'beetle', 'bat', 'wraith', 'crab'].includes(id)), `第 ${d + 1} 层还有没换的小怪`);
+            if (d < 5) assert.ok(!ids.some(id => ['thornMoss', 'spikeEel', 'armorFrog'].includes(id)));
+            assert.equal(f.power ?? 0, f.kind === 'boss' || d <= 5 ? 0 : Math.min(6, d - 5), `第 ${d + 1} 层的 power`);
+        }
+    });
+    assert.deepEqual(powered(MONSTERS.spikeEel, 4), { ...MONSTERS.spikeEel, hp: 67, atk: 42, def: 14 });
+    assert.equal(powered(MONSTERS.guardian, 5).atk, MONSTERS.guardian.atk + 2 * 3, '精英只加一半');
+    // 战斗预览按加强后的数值算
+    const run = new Run([{ ...tiny(['@i>']), power: 4 }], 'digger', 1);
+    assert.equal(run.monsterAt(1).atk, 42);
 });
 
 test('新手教程局：5 层、没有断臂转轮、没有诏令，第 5 层的井底之眼打不过', () => {

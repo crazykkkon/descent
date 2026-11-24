@@ -31,7 +31,8 @@ export const CORRODE_DEF = 1;
 /** 庇护：相邻其他怪物加的防御（不叠加：原案里守门人两边各一只祭司时防御 30） */
 export const SHELTER_DEF = 6;
 
-export type MonsterId = 'moss' | 'eel' | 'frog' | 'beetle' | 'bat' | 'wraith' | 'crab' | 'guardian' | 'rat' | 'slug' | 'priest' | 'gatekeeper' | 'eye';
+export type MonsterId = 'moss' | 'eel' | 'frog' | 'beetle' | 'bat' | 'wraith' | 'crab' | 'guardian' | 'rat' | 'slug' | 'priest' | 'gatekeeper' | 'eye'
+    | 'thornMoss' | 'spikeEel' | 'armorFrog' | 'ironBeetle' | 'shriekBat' | 'grudgeWraith' | 'shardCrab';
 
 export interface MonsterDef {
     id: MonsterId;
@@ -62,13 +63,38 @@ export const MONSTERS: Record<MonsterId, MonsterDef> = {
     gatekeeper: { id: 'gatekeeper', name: '守门人', hp: 160, atk: 44, def: 24, traits: ['double'], elite: true, gold: 80 },
     // 第 20 层 Boss 的占位：回合制站位战（召唤、落石、危区）还没做，先用一场确定的战斗代替
     eye: { id: 'eye', name: '井底之眼', hp: 500, atk: 70, def: 34, traits: [], elite: true, gold: 0 },
+    // 第 6 层起换掉 7 种小怪的更凶的同类（制作人：后面的小怪要换成更厉害的怪）。大约是原来的 攻 +10、防 +5、生命 ×1.3（本来就强的怨魂、碎岩蟹加得少一些）；数值是讨论项
+    thornMoss: { id: 'thornMoss', name: '棘苔', hp: 39, atk: 25, def: 7, traits: [], gold: 5 },
+    spikeEel: { id: 'spikeEel', name: '刺鳗', hp: 58, atk: 30, def: 10, traits: [], gold: 9 },
+    armorFrog: { id: 'armorFrog', name: '铠蛙', hp: 78, atk: 32, def: 13, traits: [], gold: 15 },
+    ironBeetle: { id: 'ironBeetle', name: '铁甲虫', hp: 52, atk: 28, def: 19, traits: [], gold: 14 },
+    shriekBat: { id: 'shriekBat', name: '啸蝠', hp: 45, atk: 35, def: 11, traits: ['firstStrike'], gold: 14 },
+    grudgeWraith: { id: 'grudgeWraith', name: '怨魂', hp: 92, atk: 34, def: 13, traits: ['lifesteal'], gold: 22 },
+    shardCrab: { id: 'shardCrab', name: '碎岩蟹', hp: 82, atk: 36, def: 15, traits: ['thorns'], gold: 22 },
 };
+
+/**
+ * 井越深，怪越凶：第 7 层起每往下一层（power +1），这一层的怪攻击 +DEPTH_ATK、防御 +DEPTH_DEF、生命 +DEPTH_HP%；
+ * 精英只加一半（向下取整），第 20 层的井底之眼不加。攻击涨得和主角防御差不多快，所以小怪一直有威胁。
+ * 数值是讨论项（制作人：后面几层的小怪太好打，都是 0 伤过）。
+ */
+export const DEPTH_ATK = 3;
+export const DEPTH_DEF = 1;
+export const DEPTH_HP = 4;
+
+/** 按这一层的 power 加强后的怪（power = 0 原样返回） */
+export function powered(m: MonsterDef, power = 0): MonsterDef {
+    if (m.elite) power = Math.floor(power / 2);
+    if (!power) return m;
+    return { ...m, hp: Math.floor((m.hp * (100 + DEPTH_HP * power)) / 100), atk: m.atk + DEPTH_ATK * power, def: m.def + DEPTH_DEF * power };
+}
 
 /**
  * 按周围格子算出怪物这一刻的真实属性（群居、庇护）。
  * @param adjacent 相邻格子上还活着的怪物
  */
-export function monsterInContext(m: MonsterDef, adjacent: MonsterId[]): MonsterDef {
+export function monsterInContext(m: MonsterDef, adjacent: MonsterId[], power = 0): MonsterDef {
+    m = powered(m, power);
     let atk = m.atk;
     let def = m.def;
     if (m.traits.includes('swarm')) atk += SWARM_ATK * adjacent.filter(id => id === m.id).length;
@@ -172,9 +198,15 @@ export const EXIT = {
 export const MARK_WEAPON: Partial<Record<MonsterId, WeaponId>> = {
     eel: 'harpoon', moss: 'mossBlade', frog: 'boneKnife', bat: 'bellStaff',
     wraith: 'saltDagger', crab: 'hammer', beetle: 'rustSword', rat: 'wellHook',
+    thornMoss: 'mossBlade', spikeEel: 'harpoon', armorFrog: 'boneKnife', ironBeetle: 'rustSword',
+    shriekBat: 'bellStaff', grudgeWraith: 'saltDagger', shardCrab: 'hammer',
 };
 
 /** 杀过这种怪，骨坛上就能移它的特性 */
 export const MONSTER_BOON: Partial<Record<MonsterId, Boon>> = {
     wraith: 'lifesteal', bat: 'firstStrike', crab: 'thorns', slug: 'corrode',
+    grudgeWraith: 'lifesteal', shriekBat: 'firstStrike', shardCrab: 'thorns',
 };
+
+/** 第 6 层起，地图上的 7 种小怪换成更凶的同类（地图字符 → 换成的字符） */
+export const UPGRADE_CHARS: Record<string, string> = { m: 'a', e: 'i', f: 'j', c: 'l', v: 'n', g: 'o', x: 'q' };

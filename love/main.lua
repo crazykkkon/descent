@@ -177,11 +177,38 @@ local function afterStop()
 end
 
 -- 走下一格；需要确认时停下来弹窗
+-- 新手教程第 5 层：走近井底之眼就进一段剧情，然后直接开打（制作人：不要弹"打了会死"，免得玩家不知道该不该打）
+local bossScene = false
+local function eyeCell()
+    for i, c in ipairs(run.cells) do if c.kind == 'monster' and c.id == 'eye' then return i end end
+end
+local function tutorialBossNear()
+    if not run.tutorial or bossScene or run.status ~= 'playing' then return false end
+    local e = eyeCell()
+    if not e then return false end
+    local ex, ey = (e - 1) % run.w, math.floor((e - 1) / run.w)
+    local hx, hy = (run.pos - 1) % run.w, math.floor((run.pos - 1) / run.w)
+    return math.abs(ex - hx) + math.abs(ey - hy) <= 2
+end
+local function openBossScene()
+    bossScene = true
+    walking = nil
+    openModal('井底', {
+        '出口前那团黑影动了一下。',
+        '一只比整口井还大的眼睛睁开了，直直地盯着你。',
+        '没有路可以绕过去。',
+    }, { { label = '迎上去', primary = true, fn = function()
+        closeModal()
+        local path = run:findPath(eyeCell())
+        if path then startWalk(path); walking.bossFight = true end
+    end } })
+end
+
 local function walkStep()
     local cell = walking.path[walking.i]
     local c = run.cells[cell]
-    -- 硬打会死的怪：先确认
-    if c.kind == 'monster' and not walking.confirmedFatal then
+    -- 硬打会死的怪：先确认（教程第 5 层的井底之眼不问，剧情里直接开打）
+    if c.kind == 'monster' and not walking.confirmedFatal and not walking.bossFight then
         local p = preview(cell)
         if p and p.fatal then
             local path, rest = walking.path, walking.i
@@ -227,6 +254,11 @@ local function walkStep()
     elseif run.hero.def > before.def then float(cell, '防+' .. (run.hero.def - before.def), C.def) end
     walking.i = walking.i + 1
     walking.confirmedFatal = false
+    if not walking.bossFight and tutorialBossNear() then
+        saveGame()
+        openBossScene()
+        return
+    end
     if walking.i > #walking.path or run.status ~= 'playing' then
         local cb = walking.onArrive
         walking = nil
@@ -474,12 +506,14 @@ end
 local function nextFloor(sell)
     if run:rentDue() > 0 then openRent(function() nextFloor(sell) end); return end
     closeModal()
+    local spun = run.arm and run.arm.spins > 0
     run:finishFloor(sell)
     armHeld = { false, false, false }
     floats, walking, heroAnim = {}, nil, nil
     saveGame()
     if run.status == 'finished' then openVictory(); return end
-    setMsg('')
+    -- 每层转轮价格重新算（上一层转过才提一句）
+    setMsg(spun and ('新的一层：断臂转轮的价格回到 ' .. run:armPrice().gold .. ' 金。') or '')
     continueFlow()
 end
 
@@ -678,6 +712,7 @@ function newGame(seed)
     run = Run.new(planFor(seed, tutorial), 'digger', seed, { tutorial = tutorial })
     facing = 'down'
     floats, walking, heroAnim = {}, nil, nil
+    bossScene = false
     armHeld = { false, false, false }
     saveGame()
     if tutorial then
@@ -694,6 +729,7 @@ end
 function loadGame(data)
     facing = miner.restoreFacing(data.facing)
     run = Run.load(planFor(data.run.seed, data.run.tutorial), data.run)
+    bossScene = false
     setMsg('继续上一局。')
     if run.status == 'floorDone' then openSummary() else continueFlow() end
 end
@@ -923,7 +959,7 @@ local function drawPixel()
 end
 
 -- ---------- 绘制：UI 层 ----------
-local SHORT = { moss = '苔', eel = '鳗', frog = '蛙', beetle = '甲', bat = '蝠', wraith = '魂', crab = '蟹', guardian = '守', rat = '鼠', slug = '蝓', priest = '祭', gatekeeper = '门', eye = '眼' }
+local SHORT = { thornMoss = '棘', spikeEel = '刺', armorFrog = '铠', ironBeetle = '铁', shriekBat = '啸', grudgeWraith = '怨', shardCrab = '碎', moss = '苔', eel = '鳗', frog = '蛙', beetle = '甲', bat = '蝠', wraith = '魂', crab = '蟹', guardian = '守', rat = '鼠', slug = '蝓', priest = '祭', gatekeeper = '门', eye = '眼' }
 
 local FACILITY_GLYPH = {
     stall = { '摊', '补给', '补给摊', '火边的补给摊，花金币买生命、攻击或防御。' },
@@ -953,7 +989,8 @@ local function hoverLines(i)
     if c.kind == 'monster' then
         local m = run:monsterAt(i)
         local p = preview(i)
-        local base = config.MONSTERS[c.id]
+        local base = config.powered(config.MONSTERS[c.id], run:floor().power)
+        if run.tutorial and c.id == 'eye' then return { { m.name, 10, C.text }, { '它在看着你。', 7.5, C.dim } } end
         local L = { { m.name, 10, C.text }, { '生命 ' .. m.hp .. '  攻 ' .. m.atk .. '  防 ' .. m.def, 7, C.dim } }
         if m.atk ~= base.atk then L[#L + 1] = { '群居：攻击 ' .. base.atk .. ' → ' .. m.atk, 7, C.warn } end
         if m.def ~= base.def then L[#L + 1] = { '被庇护：防御 ' .. base.def .. ' → ' .. m.def, 7, C.warn } end
@@ -1084,6 +1121,7 @@ local function drawUI()
                 local p = preview(i)
                 text(SHORT[c.id], x, y + 5, 10, { 1, 0.86, 0.88 }, 'center', TILE)
                 local tag = p.fatal and (p.text == '会死' and '会死' or p.text) or ('−' .. p.lose)
+                if run.tutorial and c.id == 'eye' then tag = '？？？' end
                 local tw = math.max(16, #tag * 2.1 + 6)
                 rect(p.fatal and { 0.75, 0.2, 0.25 } or { 0.94, 0.77, 0.42 }, x + (TILE - tw) / 2, y - 5, tw, 8, 1, 4)
                 text(tag, x - 4, y - 5, 5.5, p.fatal and { 1, 0.95, 0.95 } or { 0.12, 0.08, 0.02 }, 'center', TILE + 8)

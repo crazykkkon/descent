@@ -49,12 +49,28 @@ local function markFor(seed, d, slot, map)
     return { cand[rng.pick(seed, 8100 + d * 10 + slot, 1, #cand) + 1] }
 end
 
+-- 第 6 层起（d ≥ 5）小怪换成更凶的同类；第 7 层起每往下一层怪物加强一级（井底之眼不加）。和原型 deepen / powerFor 一致
+M.UPGRADE_FROM, M.POWER_FROM, M.POWER_MAX = 5, 5, 6
+local function deepen(map, d)
+    if d < M.UPGRADE_FROM then return map end
+    local out = {}
+    for i, r in ipairs(map) do out[i] = (r:gsub('[mefcvgx]', config.UPGRADE_CHARS)) end
+    return out
+end
+function M.powerFor(d, kind)
+    if kind == 'boss' or d <= M.POWER_FROM then return 0 end
+    return math.min(M.POWER_MAX, d - M.POWER_FROM)
+end
+
 local function toFloor(seed, d, slot, e)
     local f = copy(band(d))
     f.name = '第 ' .. (d + 1) .. ' 层 · ' .. e.name
-    f.hint, f.map, f.kind = e.hint, e.map, e.kind
+    f.hint, f.kind = e.hint, e.kind
+    f.map = e.kind == 'boss' and e.map or deepen(e.map, d)
+    local power = M.powerFor(d, e.kind)
+    if power > 0 then f.power = power end
     if e.kind == 'elite' or e.kind == 'boss' then f.eliteReward = (e.kind == 'elite') end
-    if e.kind == 'normal' then f.marks = markFor(seed, d, slot, e.map) end
+    if e.kind == 'normal' then f.marks = markFor(seed, d, slot, f.map) end
     if e.kind == 'camp' then f.stall = d >= 10 and STALL_DEEP or STALL_SHALLOW end
     if e.kind == 'pawn' then
         local all = config.WEAPON_ORDER

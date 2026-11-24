@@ -8,7 +8,7 @@
  *
  * 地图、数值、类型的出现比例全部是讨论项。整条路线由本局种子决定（Lua 版用同样的算法逐位复现）。
  */
-import { MARK_WEAPON, MONSTERS, WeaponId, WEAPONS } from './config';
+import { MARK_WEAPON, MONSTERS, UPGRADE_CHARS, WeaponId, WEAPONS } from './config';
 import { FloorDef, FloorKind, StallOffer, parseFloor } from './floor';
 import { DEMO_POOLS, F2_CLASSIC, F2_CONTRACT, F5_ELITE, F4_GAMBLE, FloorPool, buildFloor } from './levels';
 import { draw, pick } from './rng';
@@ -276,11 +276,30 @@ function markFor(seed: number, d: number, slot: number, map: string[]): number[]
     return [cand[pick(seed, 8100 + d * 10 + slot, 1, cand.length)]];
 }
 
+/** 第 6 层起（d ≥ UPGRADE_FROM）小怪换成更凶的同类 */
+export const UPGRADE_FROM = 5;
+/** 第 7 层起（d > POWER_FROM）每往下一层，怪物加强一级（井底之眼不加），最多 POWER_MAX 级 */
+export const POWER_FROM = 5;
+/** 最多加强几级（第 12 层以后不再变强，免得最后几层的精英和 Boss 前攒不下血） */
+export const POWER_MAX = 6;
+
+/** 这一层的怪按深度换成更凶的同类、加强几级（制作人：后面的小怪太好打） */
+export function deepen(map: string[], d: number): string[] {
+    if (d < UPGRADE_FROM) return map;
+    return map.map(r => r.replace(/[mefcvgx]/g, ch => UPGRADE_CHARS[ch]));
+}
+export function powerFor(d: number, kind?: FloorKind): number {
+    return kind === 'boss' || d <= POWER_FROM ? 0 : Math.min(POWER_MAX, d - POWER_FROM);
+}
+
 function toFloor(seed: number, d: number, slot: number, e: MapEntry): FloorDef {
     const p = band(d);
-    const f: FloorDef = { ...p, name: `第 ${d + 1} 层 · ${e.name}`, hint: e.hint, map: e.map, kind: e.kind };
+    const map = e.kind === 'boss' ? e.map : deepen(e.map, d);
+    const f: FloorDef = { ...p, name: `第 ${d + 1} 层 · ${e.name}`, hint: e.hint, map, kind: e.kind };
+    const power = powerFor(d, e.kind);
+    if (power) f.power = power;
     if (e.kind === 'elite' || e.kind === 'boss') f.eliteReward = e.kind === 'elite';
-    if (e.kind === 'normal') { const m = markFor(seed, d, slot, e.map); if (m) f.marks = m; }
+    if (e.kind === 'normal') { const m = markFor(seed, d, slot, map); if (m) f.marks = m; }
     if (e.kind === 'camp') f.stall = d >= 10 ? STALL_DEEP : STALL_SHALLOW;
     if (e.kind === 'pawn') {
         const all = Object.keys(WEAPONS) as WeaponId[];
