@@ -17,7 +17,8 @@ local LEGEND = {
     ['#'] = { kind = 'wall' },
     ['.'] = { kind = 'floor' },
     ['@'] = { kind = 'floor' },
-    ['>'] = { kind = 'exit' },
+    ['>'] = { kind = 'exit', to = 0 },   -- 通向下一层第一个候选
+    ['<'] = { kind = 'exit', to = 1 },   -- 第二个出口：通向第二个候选
     D = { kind = 'door', door = 'bone' },
     B = { kind = 'door', door = 'blood' },
     k = { kind = 'item', id = 'key' },
@@ -57,7 +58,7 @@ function M.parse(def)
     local h = #def.map
     local w = #def.map[1]
     local cells = {}
-    local start, exits = nil, 0
+    local start, n0, n1 = nil, 0, 0
     for y = 1, h do
         local row = def.map[y]
         assert(#row == w, def.name .. ': 第 ' .. y .. ' 行长度不对')
@@ -66,12 +67,12 @@ function M.parse(def)
             local cell = LEGEND[ch]
             assert(cell, def.name .. ': 未知字符 ' .. ch)
             if ch == '@' then start = (y - 1) * w + x end
-            if cell.kind == 'exit' then exits = exits + 1 end
+            if ch == '>' then n0 = n0 + 1 elseif ch == '<' then n1 = n1 + 1 end
             cells[#cells + 1] = copyCell(cell)
         end
     end
     assert(start, def.name .. ': 没有入口 @')
-    assert(exits == 1, def.name .. ': 出口必须正好 1 个')
+    assert(n0 == 1 and n1 <= 1, def.name .. ": 出口必须是一个 '>'，或者 '>' 和 '<' 各一个")
     return { w = w, h = h, cells = cells, start = start }
 end
 

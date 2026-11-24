@@ -4,7 +4,8 @@ import { ItemId, MonsterId, WeaponId } from './config';
 export type Cell =
     | { kind: 'wall' }
     | { kind: 'floor' }
-    | { kind: 'exit' }
+    /** 出口：to = 0 是 '>'，to = 1 是 '<'（有两个出口的层，各通向下一层的一个候选） */
+    | { kind: 'exit'; to: number }
     | { kind: 'monster'; id: MonsterId }
     | { kind: 'item'; id: ItemId }
     | { kind: 'door'; door: 'bone' | 'blood' }
@@ -58,7 +59,7 @@ export interface FloorDef {
 
 /**
  * 地图字符：
- *   #  墙        .  空地      @  入口（主角起点）   >  出口
+ *   #  墙        .  空地      @  入口（主角起点）   >  出口（通向第一个候选）   <  第二个出口（通向第二个候选）
  *   D  骨门      B  血门
  *   k  骨钥      h  小血瓶    H  大血瓶   r  赤晶   b  青晶   $  金币袋
  *   m  井苔      e  盲鳗      f  骨蛙     c  锈甲虫  v  回声蝠  g  溺魂  x  裂岩蟹  G  石鳞守卫
@@ -69,7 +70,8 @@ const LEGEND: Record<string, Cell> = {
     '#': { kind: 'wall' },
     '.': { kind: 'floor' },
     '@': { kind: 'floor' },
-    '>': { kind: 'exit' },
+    '>': { kind: 'exit', to: 0 },
+    '<': { kind: 'exit', to: 1 },
     D: { kind: 'door', door: 'bone' },
     B: { kind: 'door', door: 'blood' },
     k: { kind: 'item', id: 'key' },
@@ -117,12 +119,14 @@ export function parseFloor(def: FloorDef): ParsedFloor {
             const cell = LEGEND[ch];
             if (!cell) throw new Error(`${def.name}: 未知字符 "${ch}"`);
             if (ch === '@') start = y * w + x;
-            if (cell.kind === 'exit') exits++;
+            if (cell.kind === 'exit') exits |= 1 << cell.to;
             cells.push({ ...cell } as Cell);
         }
     });
     if (start < 0) throw new Error(`${def.name}: 没有入口 @`);
-    if (exits !== 1) throw new Error(`${def.name}: 出口必须正好 1 个`);
+    // 出口：只有 '>'，或者 '>' 和 '<' 各一个
+    if (exits !== 1 && exits !== 3) throw new Error(`${def.name}: 出口必须是一个 '>'，或者 '>' 和 '<' 各一个`);
+    if (def.map.join('').split('>').length !== 2 || def.map.join('').split('<').length > 2) throw new Error(`${def.name}: 每种出口只能有一个`);
     return { w, h, cells, start };
 }
 

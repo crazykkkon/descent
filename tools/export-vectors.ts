@@ -65,12 +65,12 @@ function floorParams(f: FloorDef) {
     };
 }
 
-function scenario(name: string, f: FloorDef, entry: Hero) {
+function scenario(name: string, f: FloorDef, entry: Hero, exit = 0) {
     const run = new Run([f]);
     run.hero = { ...entry };
-    const plan = solveFromStart(f, { ...entry }).best;
+    const plan = solveFromStart(f, { ...entry }, undefined, exit).best;
     if (!plan) return null;
-    const targets = [...plan.plan, run.cells.findIndex(x => x.kind === 'exit')];
+    const targets = [...plan.plan, run.cells.findIndex(x => x.kind === 'exit' && x.to === exit)];
     const steps: unknown[] = [];
     for (const t of targets) {
         const path = run.findPath(t);
@@ -83,10 +83,11 @@ function scenario(name: string, f: FloorDef, entry: Hero) {
         }
     }
     const s = run.exitSummary();
+    const exitTaken = run.exitTaken;
     const rentMethod = run.rentDue() ? (run.hero.gold >= run.rentDue() ? 'gold' : 'atk') : undefined;
     if (rentMethod) run.payRent(rentMethod);
     run.finishFloor(false);
-    return { name, floor: floorParams(f), entry, steps, rentMethod, exit: { leftoverPotions: s.leftoverPotions, potionGold: s.potionGold }, final: { ...heroOf(run.hero), status: run.status } };
+    return { name, floor: floorParams(f), entry, steps, rentMethod, exit: { leftoverPotions: s.leftoverPotions, potionGold: s.potionGold }, final: { ...heroOf(run.hero), status: run.status }, exitTaken };
 }
 
 const scenarios: unknown[] = [];
@@ -121,11 +122,14 @@ const routeWalks: unknown[] = [];
 {
     const plan = R.buildRoute(1);
     for (const k of [0, 1]) {
-        const floors = plan.map(o => o[Math.min(k, o.length - 1)]);
-        const chain = solveChain(floors);
+        const picks = plan.map(o => Math.min(k, o.length - 1));
+        const floors = plan.map((o, d) => o[picks[d]]);
+        // 第 d 层走的出口 = 第 d+1 层选的候选
+        const exits = plan.map((_, d) => (plan[d + 1]?.length === 2 ? picks[d + 1] : 0));
+        const chain = solveChain(floors, undefined, 40, exits);
         floors.forEach((f, d) => {
             if (d === 0) return;
-            const sc = scenario(`路线 选法${k} 第${d + 1}层`, f, chain[d - 1].best!);
+            const sc = scenario(`路线 选法${k} 第${d + 1}层`, f, chain[d - 1].best!, exits[d]);
             if (!sc) throw new Error(`路线第 ${d + 1} 层走不通`);
             routeWalks.push(sc);
         });
@@ -337,14 +341,16 @@ mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
 
 // ---------- Lua 版的地图池 ----------
+// 导出地图池时不带小图原稿（Lua 只用放大后的图）
+const ent = (list: R.MapEntry[]) => list.map(({ small: _small, ...e }) => e);
 const pools = {
     SHALLOW: R.SHALLOW, DEEP: R.DEEP, BOTTOM: R.BOTTOM, RENTS: Object.entries(R.RENTS).map(([d, v]) => ({ floor: +d, rent: v })),
-    F1: { params: DEMO_POOLS[0].params, maps: DEMO_POOLS[0].layouts.flatMap((l, li) => l.variants.map((_, vi) => buildFloor(DEMO_POOLS[0], { layout: li, variant: vi }).map)) },
-    F2: { params: F2_CONTRACT.params, maps: F2_CONTRACT.layouts.flatMap((l, li) => l.variants.map((_, vi) => buildFloor(F2_CONTRACT, { layout: li, variant: vi }).map)) },
-    NORMAL_SHALLOW: R.NORMAL_SHALLOW, NORMAL_DEEP: R.NORMAL_DEEP, ELITE_SHALLOW: R.ELITE_SHALLOW, ELITE_DEEP: R.ELITE_DEEP,
-    WHEEL_MAPS: R.WHEEL_MAPS, PAWN_MAPS: R.PAWN_MAPS, ALTAR_MAPS: R.ALTAR_MAPS, CAMP_MAPS: R.CAMP_MAPS,
-    MID_ELITE: R.MID_ELITE, GATE: R.GATE, BOSS: R.BOSS, TUTORIAL_BOSS: R.TUTORIAL_BOSS,
-    TUTORIAL_F3: DEMO_POOLS[2].layouts.flatMap((l, li) => l.variants.map((_, vi) => buildFloor(DEMO_POOLS[2], { layout: li, variant: vi }).map)),
+    F1: { params: DEMO_POOLS[0].params, maps: R.F1_MAPS.map(e => e.map) },
+    F2: { params: F2_CONTRACT.params, maps: R.F2_MAPS.map(e => e.map) },
+    NORMAL_SHALLOW: ent(R.NORMAL_SHALLOW), NORMAL_DEEP: ent(R.NORMAL_DEEP), ELITE_SHALLOW: ent(R.ELITE_SHALLOW), ELITE_DEEP: ent(R.ELITE_DEEP),
+    WHEEL_MAPS: ent(R.WHEEL_MAPS), PAWN_MAPS: ent(R.PAWN_MAPS), ALTAR_MAPS: ent(R.ALTAR_MAPS), CAMP_MAPS: ent(R.CAMP_MAPS),
+    MID_ELITE: ent([R.MID_ELITE])[0], GATE: ent([R.GATE])[0], BOSS: ent([R.BOSS])[0], TUTORIAL_BOSS: ent([R.TUTORIAL_BOSS])[0],
+    TUTORIAL_F3: R.TUTORIAL_F3_MAPS.map(e => e.map),
 };
 mkdirSync('love/src/data', { recursive: true });
 writeFileSync('love/src/data/pools.lua', `-- 由 tools/export-vectors.ts 从 src/core/route.ts 自动生成，不要手改。

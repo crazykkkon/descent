@@ -12,6 +12,20 @@ import { MARK_WEAPON, MONSTERS, WeaponId, WEAPONS } from './config';
 import { FloorDef, FloorKind, StallOffer, parseFloor } from './floor';
 import { DEMO_POOLS, F2_CLASSIC, F2_CONTRACT, F5_ELITE, F4_GAMBLE, FloorPool, buildFloor } from './levels';
 import { draw, pick } from './rng';
+import { BIG_MAPS } from './bigmaps';
+
+/**
+ * 地图尺寸：16×11（制作人定）。route.ts / levels.ts 里写的是小图（逻辑原稿，11×7 或 9×7），
+ * tools/expand.ts 把它们放大成 16×11（加外墙、拉长走廊，打法和原稿完全一样，求解器核对过），
+ * 并给要分岔的图加第二个出口 '<'，结果存在 bigmaps.ts。改了小图要重新跑 npm run expand。
+ */
+export const MAP_W = 16;
+export const MAP_H = 11;
+export function mapKey(small: string[]): string { return small.join('/'); }
+/** 小图 → 16×11 大图（还没生成时先用小图，测试会检查） */
+export function big(small: string[]): string[] { return BIG_MAPS[mapKey(small)] ?? small; }
+/** 这一层只有一个出口：把第二个出口 '<' 堵成墙（出口是终点，堵掉不影响别处） */
+export function oneExit(map: string[]): string[] { return map.map(r => r.replace('<', '#')); }
 
 /** 各段的数值 */
 export const SHALLOW = { gem: 2, smallPotion: 50, bigPotion: 150, gold: 25, bloodCost: 80 };
@@ -22,8 +36,6 @@ export const BOTTOM = { gem: 2, smallPotion: 60, bigPotion: 150, gold: 40, blood
 export const RENTS: Record<number, number> = { 8: 120, 16: 250 };
 
 export const ROUTE_LENGTH = 20;
-/** 固定不给选的层（从 0 开始）：第 1、2、10、19、20 层 */
-export const FIXED_FLOORS = [0, 1, 9, 18, 19];
 
 const STALL_SHALLOW: StallOffer[] = [{ id: 'hp', amount: 80, price: 25 }, { id: 'atk', amount: 2, price: 40 }, { id: 'def', amount: 2, price: 40 }];
 const STALL_DEEP: StallOffer[] = [{ id: 'hp', amount: 150, price: 40 }, { id: 'atk', amount: 3, price: 70 }, { id: 'def', amount: 3, price: 70 }];
@@ -33,6 +45,8 @@ export interface MapEntry {
     hint: string;
     kind: FloorKind;
     map: string[];
+    /** 小图原稿（放大前） */
+    small: string[];
     /** 最早出现在第几层（从 0 开始），用来让新怪晚一点出现 */
     from?: number;
 }
@@ -41,12 +55,17 @@ function poolMaps(pool: FloorPool, kind: FloorKind, hint: string, from?: number)
     const out: MapEntry[] = [];
     pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
         const f = buildFloor(pool, { layout: li, variant: vi });
-        out.push({ name: `${l.name}${l.variants.length > 1 ? vi + 1 : ''}`, hint, kind, map: f.map, from });
+        out.push({ name: `${l.name}${l.variants.length > 1 ? vi + 1 : ''}`, hint, kind, map: big(f.map), small: f.map, from });
     }));
     return out;
 }
 
-const E = (name: string, hint: string, kind: FloorKind, map: string[], from?: number): MapEntry => ({ name, hint, kind, map, from });
+const E = (name: string, hint: string, kind: FloorKind, map: string[], from?: number): MapEntry => ({ name, hint, kind, map: big(map), small: map, from });
+
+/** 第 1、2 层和教程第 3 层的图（只有一个出口） */
+export const F1_MAPS: MapEntry[] = poolMaps(DEMO_POOLS[0], 'normal', DEMO_POOLS[0].params.hint);
+export const F2_MAPS: MapEntry[] = poolMaps(F2_CONTRACT, 'normal', F2_CONTRACT.params.hint);
+export const TUTORIAL_F3_MAPS: MapEntry[] = poolMaps(DEMO_POOLS[2], 'normal', DEMO_POOLS[2].params.hint);
 
 /** 普通层：前段（第 3～9 层） */
 export const NORMAL_SHALLOW: MapEntry[] = [
@@ -302,25 +321,33 @@ function poolOf(kind: FloorKind, d: number): MapEntry[] {
     }
 }
 
-/** 一局的完整路线：每层 1 个或 2 个候选 */
+/** 只有一个候选的层（从 0 开始）：第 1、2、3、10、11、19、20 层。第 3、11 层只有一条路，是因为第 2、10 层只有一个出口 */
+export const FIXED_FLOORS = [0, 1, 2, 9, 10, 18, 19];
+
+/**
+ * 一局的完整路线：每层 1 个或 2 个候选。
+ * 下一层有两个候选的层，地图上有两个出口：'>' 通向第一个候选，'<' 通向第二个；其余层只有 '>'。
+ */
 export function buildRoute(seed: number): FloorDef[][] {
     const used = new Set<string>();
     const plan: FloorDef[][] = [];
     for (let d = 0; d < ROUTE_LENGTH; d++) {
         let entries: MapEntry[];
         if (d === 0 || d === 1) {
-            const pool = d === 0 ? DEMO_POOLS[0] : F2_CONTRACT;
-            const all = poolMaps(pool, 'normal', pool.params.hint);
+            const all = d === 0 ? F1_MAPS : F2_MAPS;
             entries = [all[pick(seed, 8000 + d, 0, all.length)]];
         } else if (d === 9) entries = [MID_ELITE];
         else if (d === 18) entries = [GATE];
         else if (d === 19) entries = [BOSS];
         else {
             const fightKind: FloorKind = d >= 4 && draw(seed, 8200 + d, 0) < 0.3 ? 'elite' : 'normal';
-            const otherKind = OTHER_KINDS[pick(seed, 8200 + d, 1, OTHER_KINDS.length)];
             const a = choose(seed, 8300 + d * 10, poolOf(fightKind, d), d, used);
-            const b = choose(seed, 8300 + d * 10 + 1, poolOf(otherKind, d), d, used);
-            entries = draw(seed, 8200 + d, 2) < 0.5 ? [a, b] : [b, a];
+            if (FIXED_FLOORS.includes(d)) entries = [a];
+            else {
+                const otherKind = OTHER_KINDS[pick(seed, 8200 + d, 1, OTHER_KINDS.length)];
+                const b = choose(seed, 8300 + d * 10 + 1, poolOf(otherKind, d), d, used);
+                entries = draw(seed, 8200 + d, 2) < 0.5 ? [a, b] : [b, a];
+            }
         }
         plan.push(entries.map((e, slot) => {
             if (d === 0 || d === 1) {
@@ -333,20 +360,21 @@ export function buildRoute(seed: number): FloorDef[][] {
             return toFloor(seed, d, slot, e);
         }));
     }
+    // 下一层只有一个候选的层：只留一个出口
+    plan.forEach((opts, d) => {
+        if ((plan[d + 1]?.length ?? 0) !== 2) for (const f of opts) f.map = oneExit(f.map);
+    });
     return plan;
 }
 
-/** 新手教程局：第 1～5 层，第 5 层遇到打不过的井底之眼 */
+/** 新手教程局：第 1～5 层，第 5 层遇到打不过的井底之眼（每层只有一个出口） */
 export function buildTutorial(seed: number): FloorDef[][] {
-    const f1 = poolMaps(DEMO_POOLS[0], 'normal', DEMO_POOLS[0].params.hint);
-    const f2 = poolMaps(F2_CONTRACT, 'normal', F2_CONTRACT.params.hint);
-    const f3 = poolMaps(DEMO_POOLS[2], 'normal', NORMAL_SHALLOW[0].hint);
     const floors: FloorDef[] = [
-        { ...DEMO_POOLS[0].params, map: f1[pick(seed, 8000, 0, f1.length)].map, kind: 'normal' },
-        { ...F2_CONTRACT.params, map: f2[pick(seed, 8001, 0, f2.length)].map, kind: 'normal' },
-        { ...SHALLOW, name: '第 3 层 · 回声', hint: f3[0].hint, map: f3[pick(seed, 8002, 0, f3.length)].map, kind: 'normal' },
+        { ...DEMO_POOLS[0].params, map: F1_MAPS[pick(seed, 8000, 0, F1_MAPS.length)].map, kind: 'normal' },
+        { ...F2_CONTRACT.params, map: F2_MAPS[pick(seed, 8001, 0, F2_MAPS.length)].map, kind: 'normal' },
+        { ...SHALLOW, name: '第 3 层 · 回声', hint: NORMAL_SHALLOW[0].hint, map: TUTORIAL_F3_MAPS[pick(seed, 8002, 0, TUTORIAL_F3_MAPS.length)].map, kind: 'normal' },
         { ...SHALLOW, name: '第 4 层 · 鳞厅', hint: '石鳞守卫封住了出口。先拿宝石，再去打它。', map: ELITE_SHALLOW[0].map, kind: 'elite' },
         { ...SHALLOW, name: '第 5 层 · 井底', hint: TUTORIAL_BOSS.hint, map: TUTORIAL_BOSS.map, kind: 'boss' },
     ];
-    return floors.map(f => [f]);
+    return floors.map(f => [{ ...f, map: oneExit(f.map) }]);
 }

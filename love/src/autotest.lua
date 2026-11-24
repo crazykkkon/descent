@@ -80,6 +80,8 @@ function M.start()
             sleep(0.05)
         end
     end
+    -- 走上出口前的确认弹窗
+    local function isExit(t) return t ~= nil and (t == '出口' or t:find('的出口$') ~= nil) end
     local function go(target)
         for _, cell in ipairs(route(target)) do
             local run = game.getRun()
@@ -88,7 +90,7 @@ function M.start()
             settle()
             handlePopups()
             local t = modalTitle()
-            if game.inStairs() or t == '你倒下了' or t == '……' then return end
+            if isExit(t) or t == '你倒下了' or t == '……' then return end
         end
     end
     local function near(i)
@@ -134,8 +136,8 @@ function M.start()
             local elite = find(function(c) return c.kind == 'monster' and config.MONSTERS[c.id].elite end)
             if elite then go(elite) end
             go(find(function(c) return c.kind == 'exit' end))
-            if f == 1 then shot('01b-stairs-single') end
-            game.chooseStairs(1); settle(); sleep(0.1)
+            if f == 1 then shot('01b-exit-confirm') end
+            button('往下走'); settle(); sleep(0.1)
             button('下楼'); sleep(0.1)
         end
         shot('02-arm-story')
@@ -214,21 +216,24 @@ function M.start()
                 handlePopups()
                 say(string.format('第 %d 层精英倒下，手上 %s', f, tostring(run.hero.weapon)))
             end
-            go(find(function(c) return c.kind == 'exit' end))
-            if not game.inStairs() then say('第 ' .. f .. ' 层没走到楼梯口：' .. tostring(modalTitle())); break end
-            -- 楼梯二选一：优先去还没去过的设施层
+            -- 两个出口：优先走通向还没去过的设施层的那个
             local opts = run:nextOptions()
+            local pick = 0
             if #opts == 2 then
-                once('08-stairs')
-                local pickRight = false
                 for k = 1, 2 do
                     local kind = opts[k].kind
-                    if kind ~= 'normal' and kind ~= 'elite' and not visited[kind] then pickRight = (k == 2); break end
+                    if kind ~= 'normal' and kind ~= 'elite' and not visited[kind] then pick = k - 1; break end
                 end
-                game.chooseStairs(pickRight and 2 or 1)
-            else
-                game.chooseStairs(1)
+                if not shots['08-exit-hover'] then
+                    game.setHover(game.exitTo(1)); sleep(0.1); once('08-exit-hover'); game.setHover(nil)
+                end
             end
+            local exitCell = game.exitTo(pick)
+            go(exitCell)
+            if not isExit(modalTitle()) then say('第 ' .. f .. ' 层没走到出口：' .. tostring(modalTitle())); break end
+            if #opts == 2 then once('08b-exit-confirm') end
+            say(string.format('第 %d 层走出口 %d（%s）', f, pick, tostring(modalTitle())))
+            button('往下走')
             settle(); sleep(0.2)
             if modalTitle() ~= run:floor().name .. ' 完成' then say('第 ' .. f .. ' 层没出结算：' .. tostring(modalTitle())); break end
             button('下楼')

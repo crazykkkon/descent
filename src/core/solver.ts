@@ -38,14 +38,14 @@ const MAX_ENTITIES = 30;
 
 interface Node { hp: number; parent: number; via: number[] }
 
-export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: CharacterDef): SolveResult {
+/** exit：只算走到这个出口（0 = '>'，1 = '<'）；不给就是哪个出口都行 */
+export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: CharacterDef, exit?: number): SolveResult {
     const { w, h, cells, pos } = state;
     const entities: number[] = [];
     cells.forEach((c, i) => { if (isEntity(c)) entities.push(i); });
     if (entities.length > MAX_ENTITIES) throw new Error(`可交互格子太多（${entities.length}），求解器上限 ${MAX_ENTITIES}`);
     const bit = new Map<number, number>();
     entities.forEach((cell, k) => bit.set(cell, k));
-    const exit = cells.findIndex(c => c.kind === 'exit');
     const eliteMask = entities.reduce((m, cell, k) => (isElite(cells[cell]) ? m | (1 << k) : m), 0);
 
     // 已处理集合下的属性（生命除外）：攻防、钥匙、金币都只由"处理了哪些格子"决定
@@ -78,7 +78,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
                 seen[n] = 1;
                 const c = cells[n];
                 if (c.kind === 'wall' || isFacility(c)) continue;
-                if (c.kind === 'exit') { atExit = true; continue; }
+                if (c.kind === 'exit') { if (exit === undefined || c.to === exit) atExit = true; continue; }
                 if (c.kind === 'floor') { stack.push(n); continue; }
                 const k = bit.get(n)!;
                 if (mask & (1 << k)) stack.push(n);
@@ -170,9 +170,9 @@ export function paretoFilter(list: Hero[]): Hero[] {
     return uniq.filter(a => !uniq.some(b => dominated(a, b)));
 }
 
-export function solveFromStart(floor: FloorDef, hero: Hero, ch: CharacterDef = CHARACTERS.digger): SolveResult {
+export function solveFromStart(floor: FloorDef, hero: Hero, ch: CharacterDef = CHARACTERS.digger, exit?: number): SolveResult {
     const p = parseFloor(floor);
-    return solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, floor, ch);
+    return solveFloor({ w: p.w, h: p.h, cells: p.cells, pos: p.start }, hero, floor, ch, exit);
 }
 
 /** 连续多层求解：每层把所有不被压制的结果带到下一层，返回最后一层的最高剩余生命 */
@@ -268,13 +268,15 @@ export interface ChainFloor {
  * - 不算补给摊、井中轮和武器（它们只会让结果更好，所以这里得到的是保守的下限）；
  * - 每层最多带 cap 个结果（按生命从高到低），避免 20 层下来结果数爆炸。
  */
-export function solveChain(floors: FloorDef[], ch: CharacterDef = CHARACTERS.digger, cap = 40): ChainFloor[] {
+/** exits[d]：第 d 层要从哪个出口走（不给就是哪个都行） */
+export function solveChain(floors: FloorDef[], ch: CharacterDef = CHARACTERS.digger, cap = 40, exits?: (number | undefined)[]): ChainFloor[] {
     let heroes: Hero[] = [{ ...ch.base }];
     const out: ChainFloor[] = [];
-    for (const f of floors) {
+    for (let d = 0; d < floors.length; d++) {
+        const f = floors[d];
         let outs: Hero[] = [];
         for (const hh of heroes) {
-            outs.push(...solveFromStart(f, hh, ch).pareto.map(o => o.hero));
+            outs.push(...solveFromStart(f, hh, ch, exits?.[d]).pareto.map(o => o.hero));
         }
         if (f.rent) {
             const rent = f.rent;

@@ -20,8 +20,11 @@ for (let seed = 1; seed <= seeds; seed++) {
     const plan = buildRoute(seed);
     const row: string[] = [];
     for (const [name, way] of ways) {
-        const floors = plan.map((opts, d) => opts[way(opts, d)]);
-        const chain = solveChain(floors);
+        const picks = plan.map((opts, d) => way(opts, d));
+        const floors = plan.map((opts, d) => opts[picks[d]]);
+        // 第 d 层走哪个出口，决定第 d+1 层是哪个候选
+        const exits = plan.map((_, d) => (plan[d + 1]?.length === 2 ? picks[d + 1] : 0));
+        const chain = solveChain(floors, undefined, 40, exits);
         const last = chain[chain.length - 1];
         const ok = chain.length === floors.length && last.best;
         if (!ok) fails++;

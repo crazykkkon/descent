@@ -9,6 +9,16 @@ local P = require('data.pools')
 
 local M = {}
 M.LENGTH = 20
+-- 只有一个候选的层（从 0 开始）：第 1、2、3、10、11、19、20 层
+M.FIXED = { [0] = true, [1] = true, [2] = true, [9] = true, [10] = true, [18] = true, [19] = true }
+
+-- 这一层只有一个出口：把第二个出口 '<' 堵成墙
+local function oneExit(map)
+    local out = {}
+    for i, r in ipairs(map) do out[i] = (r:gsub('<', '#', 1)) end
+    return out
+end
+M.oneExit = oneExit
 
 local function copy(t)
     local o = {}
@@ -99,13 +109,22 @@ function M.build(seed)
         elseif d == 19 then opts[1] = toFloor(seed, d, 0, P.BOSS)
         else
             local fightKind = (d >= 4 and rng.draw(seed, 8200 + d, 0) < 0.3) and 'elite' or 'normal'
-            local otherKind = OTHER_KINDS[rng.pick(seed, 8200 + d, 1, #OTHER_KINDS) + 1]
             local a = choose(seed, 8300 + d * 10, poolOf(fightKind, d), d, used)
-            local b = choose(seed, 8300 + d * 10 + 1, poolOf(otherKind, d), d, used)
-            local entries = rng.draw(seed, 8200 + d, 2) < 0.5 and { a, b } or { b, a }
-            for slot = 0, 1 do opts[slot + 1] = toFloor(seed, d, slot, entries[slot + 1]) end
+            if M.FIXED[d] then opts[1] = toFloor(seed, d, 0, a)
+            else
+                local otherKind = OTHER_KINDS[rng.pick(seed, 8200 + d, 1, #OTHER_KINDS) + 1]
+                local b = choose(seed, 8300 + d * 10 + 1, poolOf(otherKind, d), d, used)
+                local entries = rng.draw(seed, 8200 + d, 2) < 0.5 and { a, b } or { b, a }
+                for slot = 0, 1 do opts[slot + 1] = toFloor(seed, d, slot, entries[slot + 1]) end
+            end
         end
         plan[d + 1] = opts
+    end
+    -- 下一层只有一个候选的层：只留一个出口
+    for d = 1, M.LENGTH do
+        if not plan[d + 1] or #plan[d + 1] ~= 2 then
+            for _, f in ipairs(plan[d]) do f.map = oneExit(f.map) end
+        end
     end
     return plan
 end
@@ -123,7 +142,9 @@ function M.tutorial(seed)
     f4.name, f4.hint, f4.map, f4.kind = '第 4 层 · 鳞厅', '石鳞守卫封住了出口。先拿宝石，再去打它。', P.ELITE_SHALLOW[1].map, 'elite'
     local f5 = copy(P.SHALLOW)
     f5.name, f5.hint, f5.map, f5.kind = '第 5 层 · 井底', P.TUTORIAL_BOSS.hint, P.TUTORIAL_BOSS.map, 'boss'
-    return { { f1 }, { f2 }, { f3 }, { f4 }, { f5 } }
+    local out = {}
+    for i, f in ipairs({ f1, f2, f3, f4, f5 }) do f.map = oneExit(f.map); out[i] = { f } end
+    return out
 end
 
 return M

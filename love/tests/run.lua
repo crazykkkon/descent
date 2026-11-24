@@ -107,6 +107,7 @@ local function runScenario(sc)
     end
     local s = run:exitSummary()
     check(s.leftoverPotions == sc.exit.leftoverPotions and s.potionGold == sc.exit.potionGold, sc.name .. '：出口结算')
+    check(run.exitTaken == (sc.exitTaken or 0), sc.name .. '：走的出口 期望 ' .. tostring(sc.exitTaken) .. '，实际 ' .. tostring(run.exitTaken))
     if sc.rentMethod then run:payRent(sc.rentMethod) end
     run:finishFloor(false)
     check(heroEq(run.hero, sc.final) and run.status == sc.final.status, sc.name .. '：结算后 期望 ' .. heroStr(sc.final) .. '，实际 ' .. heroStr(run.hero))

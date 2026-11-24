@@ -543,11 +543,11 @@ test('楼梯口的一句话：只说大概有多凶，设施层没有专门的�
     for (const s of [...WHISPERS.loud, ...WHISPERS.quiet, ...WHISPERS.mid]) assert.doesNotMatch(s, /转盘|当铺|骨坛|营火|精英|\d/);
 });
 
-test('路线：由种子决定；第 3 层起每层两条楼梯（第 10、19、20 层固定）；第 9、17 层交井租', () => {
+test('路线：由种子决定；第 4 层起每层两个候选（第 1、2、3、10、11、19、20 层只有一个）；第 9、17 层交井租', () => {
     const a = buildRoute(42);
     assert.deepEqual(a.map(o => o.map(f => f.map.join(''))), buildRoute(42).map(o => o.map(f => f.map.join(''))));
     assert.equal(a.length, 20);
-    a.forEach((opts, d) => assert.equal(opts.length, [0, 1, 9, 18, 19].includes(d) ? 1 : 2, `第 ${d + 1} 层`));
+    a.forEach((opts, d) => assert.equal(opts.length, [0, 1, 2, 9, 10, 18, 19].includes(d) ? 1 : 2, `第 ${d + 1} 层`));
     for (const [d, rent] of Object.entries(RENTS)) for (const f of a[+d]) assert.equal(f.rent, rent);
     assert.ok(a[0][0].marks?.length, '第 1 层一定有印记怪，帮玩家拿到第一把武器');
     for (const opts of a) for (const f of opts) parseFloor(f);
@@ -557,11 +557,48 @@ test('路线：几种选法都能一路求解到井底（保守下限）', () =>
     for (const seed of [1, 2, 3]) {
         const plan = buildRoute(seed);
         for (const k of [0, 1]) {
-            const c = chain2(plan.map(o => o[Math.min(k, o.length - 1)]));
+            const picks = plan.map(o => Math.min(k, o.length - 1));
+            const c = chain2(plan.map((o, d) => o[picks[d]]), undefined, 40, plan.map((_, d) => (plan[d + 1]?.length === 2 ? picks[d + 1] : 0)));
             assert.equal(c.length, 20, `种子 ${seed} 选法 ${k}`);
             assert.ok(c[19].best && c[19].best.hp > 0);
         }
     }
+});
+
+test('地图 16×11；下一层有两个候选的层有两个出口（\'>\' 通向第一个，\'<\' 通向第二个），其余层只有一个', () => {
+    for (const seed of [1, 7, 42]) {
+        const plan = buildRoute(seed);
+        plan.forEach((opts, d) => {
+            for (const f of opts) {
+                assert.equal(f.map.length, 11, f.name);
+                assert.ok(f.map.every(r => r.length === 16), f.name);
+                const two = f.map.join('').includes('<');
+                assert.equal(two, plan[d + 1]?.length === 2, `第 ${d + 1} 层 ${f.name}`);
+            }
+        });
+    }
+    for (const opts of buildTutorial(3)) for (const f of opts) assert.ok(!f.map.join('').includes('<'), '教程每层只有一个出口');
+});
+
+test('两个出口：走哪个出口就进哪个候选；求解器可以指定出口', () => {
+    const plan = buildRoute(5);
+    const d = plan.findIndex((_, i) => plan[i + 1]?.length === 2);
+    for (const exit of [0, 1]) {
+        const run = new Run(plan, 'digger', 5);
+        (run as unknown as { loadFloor(i: number): void }).loadFloor(d);
+        const at = run.cells.findIndex(c => c.kind === 'exit' && c.to === exit);
+        assert.ok(at >= 0);
+        run.pos = [at - 1, at + 1, at - 16, at + 16].find(i => i >= 0 && i < run.cells.length && Math.abs((i % 16) - (at % 16)) <= 1 && run.cells[i].kind !== 'wall')!;
+        run.hero = { hp: 9999, atk: 99, def: 99, keys: 9, gold: 999 };
+        run.tapCell(at);
+        assert.equal(run.status, 'floorDone');
+        assert.equal(run.exitTaken, exit);
+        run.finishFloor(false);
+        assert.equal(run.floor.map.join(''), plan[d + 1][exit].map.join(''), `出口 ${exit}`);
+    }
+    const f = plan[d][0];
+    const hero = { hp: 9999, atk: 99, def: 99, keys: 9, gold: 999 };
+    assert.ok(solveFromStart(f, hero, undefined, 0).solvable && solveFromStart(f, hero, undefined, 1).solvable);
 });
 
 test('新手教程局：5 层、没有断臂转轮、没有诏令，第 5 层的井底之眼打不过', () => {

@@ -83,6 +83,7 @@ export interface RunSave {
     decreeOffer: DecreeDef | null;
     engraveQueue: PendingEngrave[];
     drank: boolean;
+    exitTaken?: number;
 }
 
 /** 交井租的方式 */
@@ -153,6 +154,8 @@ export class Run {
     engraveQueue: PendingEngrave[] = [];
     /** 本层喝过血瓶没有（诏令用） */
     drank = false;
+    /** 从哪个出口走的（0 = '>'，1 = '<'），决定下一层是哪个候选 */
+    exitTaken = 0;
     /** 上一次结算时诏令的消息（界面显示后清掉） */
     notes: string[] = [];
     private floorStart!: Snapshot;
@@ -187,6 +190,7 @@ export class Run {
         this.status = 'playing';
         this.rentPaid = false;
         this.drank = false;
+        this.exitTaken = 0;
         if (this.arm) this.arm.spins = 0;
         this.decreeOffer = !this.tutorial && !this.decree ? decreeFor(this.seed, i) : null;
         this.floorStart = this.snapshot();
@@ -671,7 +675,7 @@ export class Run {
         if (c.kind === 'floor' || c.kind === 'exit') {
             this.pos = i;
             this.steps++;
-            if (c.kind === 'exit') this.status = 'floorDone';
+            if (c.kind === 'exit') { this.status = 'floorDone'; this.exitTaken = c.to; }
             return { ok: true, msg: '' };
         }
 
@@ -746,9 +750,10 @@ export class Run {
 
     /**
      * 出口结算后进入下一层；只能往下，不能回到上一层。
-     * @param choice 楼梯二选一时选第几条（从 0 开始）
+     * 下一层有两个候选时，走的是哪个出口就去哪个候选（'>' 第一个，'<' 第二个）。
      */
-    finishFloor(sellKeys: boolean, choice = 0) {
+    finishFloor(sellKeys: boolean) {
+        const choice = this.exitTaken;
         if (this.status !== 'floorDone') return;
         if (this.rentDue()) return; // 先交井租才能下楼
         const s = this.exitSummary();
@@ -774,6 +779,7 @@ export class Run {
             arm: this.arm, wheels: this.wheels, pawned: this.pawned, bought: this.bought,
             altarUsed: this.altarUsed, boonsSeen: this.boonsSeen, decree: this.decree,
             decreeOffer: this.decreeOffer, engraveQueue: this.engraveQueue, drank: this.drank,
+            exitTaken: this.exitTaken,
         }));
     }
 
@@ -796,6 +802,7 @@ export class Run {
         run.decreeOffer = s.decreeOffer;
         run.engraveQueue = s.engraveQueue ?? [];
         run.drank = s.drank;
+        run.exitTaken = s.exitTaken ?? 0;
         return run;
     }
 }

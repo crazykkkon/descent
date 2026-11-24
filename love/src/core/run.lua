@@ -76,6 +76,7 @@ function Run:loadFloor(i)
     self.status = 'playing'
     self.rentPaid = false
     self.drank = false
+    self.exitTaken = 0   -- 从哪个出口走的（0 = '>'，1 = '<'），决定下一层是哪个候选
     if self.arm then self.arm.spins = 0 end
     self.decreeOffer = (not self.tutorial and not self.decree) and decreeMod.decreeFor(self.seed, i) or nil
     self.floorStart = self:snapshot()
@@ -474,7 +475,7 @@ function Run:step(i)
     if c.kind == 'floor' or c.kind == 'exit' then
         self.pos = i
         self.steps = self.steps + 1
-        if c.kind == 'exit' then self.status = 'floorDone' end
+        if c.kind == 'exit' then self.status = 'floorDone'; self.exitTaken = c.to end
         return { ok = true, msg = '' }
     end
 
@@ -617,8 +618,9 @@ function Run:payRent(method)
     return { ok = true, msg = '' }
 end
 
--- 结算后进入下一层；choice：楼梯二选一时选第几条（从 1 开始）
-function Run:finishFloor(sellKeys, choice)
+-- 结算后进入下一层；下一层有两个候选时，走的是哪个出口就去哪个（'>' 第一个，'<' 第二个）
+function Run:finishFloor(sellKeys)
+    local choice = (self.exitTaken or 0) + 1
     if self.status ~= 'floorDone' then return end
     if self:rentDue() > 0 then return end
     local s = self:exitSummary()
@@ -631,7 +633,7 @@ function Run:finishFloor(sellKeys, choice)
     self.totalSteps = self.totalSteps + self.steps
     if self.floorIndex >= #self.plan then self.status = 'finished'; return end
     local opts = self.plan[self.floorIndex + 1]
-    self.picks[self.floorIndex + 1] = math.max(1, math.min(#opts, choice or 1))
+    self.picks[self.floorIndex + 1] = math.max(1, math.min(#opts, choice))
     self:loadFloor(self.floorIndex + 1)
 end
 
@@ -645,6 +647,7 @@ function Run:save()
         arm = self.arm, wheels = self.wheels, pawned = self.pawned, bought = self.bought,
         altarUsed = self.altarUsed, boonsSeen = self.boonsSeen, decree = self.decree,
         decreeOffer = self.decreeOffer, engraveQueue = self.engraveQueue, drank = self.drank,
+        exitTaken = self.exitTaken,
     }
 end
 
@@ -668,6 +671,7 @@ function Run.load(plan, s)
     run.decreeOffer = s.decreeOffer
     run.engraveQueue = s.engraveQueue or {}
     run.drank = s.drank or false
+    run.exitTaken = s.exitTaken or 0
     return run
 end
 
