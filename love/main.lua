@@ -1,5 +1,6 @@
--- 《坠井者》LÖVE 白盒：20 层主线（关卡数据由原型导出到 src/data/mainline.lua）。
--- 流程：楼梯口（情报、契约、井租）→ 出口结算 → 下一层；精英倒下三选一武器；井中轮、补给摊；第 20 层通关结算。
+-- 《坠井者》LÖVE 白盒：断臂转轮版（设计方案第二十五章）。
+-- 第一次打开是新手教程（第 5 层遇到井底之眼，必死）；之后每局带着断臂转轮，从第 1 层往下走 20 层。
+-- 流程：楼梯口（两条楼梯二选一、井租）→ 出口结算 → 下一层；刻图案、转断臂转轮；大转盘、当铺、骨坛、营火；诏令；通关结算。
 -- 画面分两层：像素层画在 640×360 的逻辑画布上，按整数倍放大（最近邻，不糊）；
 -- 中文和数字画在单独的 UI 层，按屏幕分辨率直接绘制，保证清晰。
 
@@ -9,13 +10,13 @@ local config = require('core.config')
 local combat = require('core.combat')
 local Run = require('core.run')
 local rules = require('core.rules')
-local contractMod = require('core.contract')
 local serialize = require('core.serialize')
-local intelMod = require('core.intel')
-local slotMod = require('core.slot')
-local levels = require('core.levels')
-local mainline = require('data.mainline')
 local floorMod = require('core.floor')
+local armMod = require('core.arm')
+local wheelMod = require('core.wheel')
+local decreeMod = require('core.decree')
+local whisperMod = require('core.whisper')
+local route = require('core.route')
 local miner = require('view.miner')
 
 -- ---------- 尺寸 ----------
@@ -28,7 +29,7 @@ local canvas
 local fonts = {}
 local FONT_FILE = 'assets/fonts/NotoSansSC-Regular-subset.ttf'
 local SAVE_FILE = 'save.lua'
-local LAST_FILE = 'last-choices.lua' -- 上一局的选图（新开一局时尽量换图）
+local META_FILE = 'meta.lua' -- 跨局保存的东西：新手教程打过没有
 local STEP_TIME = 0.12
 
 -- ---------- 颜色 ----------
@@ -50,9 +51,8 @@ local walking = nil        -- { path, i, t, from, confirmedFatal, confirmedBreak
 local facing = 'down'
 local heroAnim = nil       -- { from, to, t }
 local floats = {}          -- 飘字 { text, x, y, t, color }
-local pendingSign = false
-local choices              -- 本局每层的选图
-local slotHeld = { false, false, false }
+local meta = { tutorialDone = false }
+local facilityOpener
 
 local function font(px)
     px = math.max(8, math.floor(px + 0.5))
@@ -86,12 +86,10 @@ local function saveGame()
         love.filesystem.remove(SAVE_FILE)
         return
     end
-    love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), choices = choices, facing = facing }))
+    love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), facing = facing }))
 end
 
-local function floorsFor(c) return levels.buildFloors(mainline.pools, c) end
-
-local openStairs, openSummary, openDeath, openVictory, openWeapons, openSlot, openStall, newGame
+local openStairs, openSummary, openDeath, openVictory, openEngrave, openDecree, openArm, openWheel, openPawn, openAltar, openStall, newGame, loadGame, continueFlow
 
 local function setMsg(s, err) msg, msgErr = s or '', err or false end
 
@@ -163,7 +161,7 @@ local function afterStop()
     saveGame()
     if run.status == 'dead' then openDeath()
     elseif run.status == 'floorDone' then openSummary()
-    elseif run.pendingWeapons then openWeapons() end
+    else continueFlow() end
 end
 
 -- 走下一格；需要确认时停下来弹窗
@@ -190,27 +188,10 @@ local function walkStep()
             return
         end
     end
-    -- 走上楼梯之前：楼梯口（情报、契约、井租），可以"再想想"
+    -- 走上楼梯之前：楼梯口（两条楼梯二选一、井租），可以"再想想"
     if c.kind == 'exit' and not walking.confirmedStairs and not run:eliteAlive() then
         walking = nil
         openStairs()
-        return
-    end
-    -- 签了"不喝血瓶"：喝之前确认
-    if rules.isPotion(c) and run:contractActive() and not walking.confirmedBreak then
-        local path, rest = walking.path, walking.i
-        walking = nil
-        local d = run.contract.def
-        openModal('喝下这瓶血瓶？', { '你和井签了契约：本层一瓶血瓶都不喝。', '喝下去就毁约：押下的 ' .. d.deposit .. ' 生命不退，攻击 +' .. d.atk .. ' 照样留着。', '守约走到出口，能拿回 ' .. d.refund .. ' 生命和 ' .. d.gold .. ' 金币。' }, {
-            { label = '不喝，守约', primary = true, fn = function() closeModal(); setMsg('没有喝。') end },
-            { label = '喝（毁约）', danger = true, fn = function()
-                closeModal()
-                local remain = {}
-                for k = rest, #path do remain[#remain + 1] = path[k] end
-                startWalk(remain)
-                walking.confirmedBreak = true
-            end },
-        })
         return
     end
     local before = config.copyHero(run.hero)
@@ -232,7 +213,6 @@ local function walkStep()
     elseif run.hero.def > before.def then float(cell, '防+' .. (run.hero.def - before.def), C.def) end
     walking.i = walking.i + 1
     walking.confirmedFatal = false
-    walking.confirmedBreak = false
     if walking.i > #walking.path or run.status ~= 'playing' then
         local cb = walking.onArrive
         walking = nil
@@ -245,9 +225,9 @@ local function act(i)
     if walking or modal or run.status ~= 'playing' then return end
     local c = run.cells[i]
     if c.kind == 'wall' or i == run.pos then return end
-    -- 井中轮、补给摊：走到旁边再打开
-    if c.kind == 'slot' or c.kind == 'stall' then
-        local function open() if c.kind == 'slot' then openSlot(i) else openStall(i) end end
+    -- 设施（补给摊、大转盘、当铺、骨坛）：走到旁边再打开
+    if floorMod.isFacility(c) then
+        local function open() facilityOpener(i) end
         for _, n in ipairs(floorMod.neighbors(run.pos, run.w, run.h)) do
             if n == i then open(); return end
         end
@@ -263,15 +243,144 @@ local function act(i)
 end
 
 -- ---------- 场景 ----------
-local function intelLines()
-    local nf = run.floors[run.floorIndex + 1]
-    if not nf then return {} end
-    if nf.intel then return { '【下一层情报】' .. nf.intel } end
-    local it = intelMod.stairIntel(nf, run.hero, run.ch, { floor = run:floor(), cells = run.cells })
-    if not it then return { '【下一层情报】井底很安静。' } end
-    local out = { '【下一层情报】' .. it.headline }
-    for _, l in ipairs(it.lines) do out[#out + 1] = '　' .. l end
-    return out
+local W = function(id) return config.WEAPONS[id].name end
+local SHORTW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩' }
+
+local function weaponLine(id)
+    local b = run.arm and run.arm.boons[id]
+    local extra = ''
+    if b and #b > 0 then
+        local names = {}
+        for k, x in ipairs(b) do names[k] = config.BOON_NAMES[x] end
+        extra = '（骨坛：' .. table.concat(names, '、') .. '）'
+    end
+    return W(id) .. '：' .. config.WEAPONS[id].desc .. extra
+end
+
+local function armRowsText()
+    local t = {}
+    for k = 1, armMod.ROWS do
+        local r = run.arm.rows[k]
+        t[k] = '第 ' .. k .. ' 行：' .. (r and W(r) or '空')
+    end
+    return t
+end
+
+-- 依次处理：要刻的图案 → 诏令 → 诏令的消息
+function continueFlow()
+    if modal or run.status ~= 'playing' then return end
+    if #run.notes > 0 then
+        local notes = run.notes
+        run.notes = {}
+        openModal('井神的诏令', notes, { { label = '知道了', primary = true, fn = function() closeModal(); continueFlow() end } })
+        return
+    end
+    if run:pendingEngrave() then openEngrave(); return end
+    if run.decreeOffer then openDecree(); return end
+end
+
+-- 刻满了：选一行覆盖
+local function chooseRow(title, onRow)
+    local lines = armRowsText()
+    lines[#lines + 1] = '转轮刻满了。选一行覆盖掉（原来的图案就没了）。'
+    local buttons = {}
+    for k = 1, armMod.ROWS do buttons[#buttons + 1] = { label = '覆盖第 ' .. k .. ' 行', fn = function() closeModal(); onRow(k) end } end
+    buttons[#buttons + 1] = { label = '算了', fn = function() closeModal(); continueFlow() end }
+    openModal(title, lines, buttons)
+end
+
+function openEngrave()
+    local p = run:pendingEngrave()
+    if not p then return end
+    local from = ({ elite = '精英倒下了，它身上压着几件东西的印子', mark = '这只怪身上的印记亮了起来', decree = '井神兑现了诏令', wheel = '大转盘吐出一个图案' })[p.from]
+    local lines = { from .. '。刻到断臂转轮上，转轮就会停在它上面（立刻拿在手上）：' }
+    for _, w in ipairs(p.choices) do lines[#lines + 1] = weaponLine(w) end
+    for _, l in ipairs(armRowsText()) do lines[#lines + 1] = l end
+    local buttons = {}
+    for _, w in ipairs(p.choices) do
+        buttons[#buttons + 1] = { label = '刻' .. W(w), primary = #p.choices == 1, fn = function()
+            closeModal()
+            local function done(row)
+                local r = run:engrave(w, row)
+                setMsg(r.msg, not r.ok)
+                saveGame()
+                continueFlow()
+            end
+            if armMod.firstBlank(run.arm) then done(nil) else chooseRow('刻' .. W(w), done) end
+        end }
+    end
+    buttons[#buttons + 1] = { label = '不刻', fn = function() closeModal(); run:skipEngrave(); saveGame(); continueFlow() end }
+    openModal('刻图案', lines, buttons)
+end
+
+function openDecree()
+    local d = run.decreeOffer
+    if not d then return end
+    openModal('井神的诏令·' .. decreeMod.TIER_NAMES[d.tier], {
+        '井壁上浮出一行字：',
+        '「' .. d.text .. '」',
+        '期限：从这一层起，' .. decreeMod.SPAN .. ' 层之内。',
+        '完成：从三把武器里选一把刻上去' .. (d.tier == 'silver' and '，再加生命 +' .. decreeMod.SILVER_BONUS_HP or '') .. '。',
+        '做不到：攻击 −' .. decreeMod.PENALTY[d.tier] .. '。也可以不接。',
+    }, {
+        { label = '不接', fn = function() closeModal(); run:refuseDecree(); saveGame(); continueFlow() end },
+        { label = '接下', primary = true, fn = function() closeModal(); setMsg(run:acceptDecree().msg); saveGame(); continueFlow() end },
+    })
+end
+
+-- 断臂转轮
+local armHeld = { false, false, false }
+function openArm()
+    if not run.arm then return end
+    local arm = run.arm
+    local lines = {}
+    for _, l in ipairs(armRowsText()) do lines[#lines + 1] = l end
+    local seen, odds = {}, {}
+    for k = 1, armMod.ROWS do
+        local r = arm.rows[k] or false
+        if not seen[r] then
+            seen[r] = true
+            odds[#odds + 1] = (r and W(r) or '空手') .. ' ' .. math.floor(armMod.odds(arm, r) * 1000 + 0.5) / 10 .. '%'
+        end
+    end
+    lines[#lines + 1] = '三个轮子连成一线的机会：' .. table.concat(odds, '，') .. '。其他情况手上的武器不变。'
+    local faces = armMod.faces(arm)
+    local anyHeld = faces and (armHeld[1] or armHeld[2] or armHeld[3])
+    if faces then
+        local t = {}
+        for k = 1, 3 do
+            local f = faces[k] and SHORTW[faces[k]] or '空'
+            t[k] = armHeld[k] and ('[' .. f .. ']') or f
+        end
+        lines[#lines + 1] = '现在停在：' .. table.concat(t, ' ')
+        if anyHeld then
+            local target, p = armMod.holdOdds(arm, armHeld)
+            lines[#lines + 1] = target ~= nil and ('锁住后重转，连成「' .. (target and W(target) or '空手') .. '」的机会 ' .. math.floor(p * 1000 + 0.5) / 10 .. '%')
+                or '锁住的图案不一样，重转连不成一线。'
+        end
+    end
+    lines[#lines + 1] = '手上：' .. (run.hero.weapon and weaponLine(run.hero.weapon) or '空手')
+    local price = run:armPrice(anyHeld)
+    lines[#lines + 1] = (anyHeld and '锁轴重转' or '转一次') .. '：' .. price.gold .. ' 金币，或 ' .. price.blood .. ' 生命（每层第一次 10 金，之后每次 ×1.5）'
+    local function spin(pay)
+        local r = run:armSpin(pay, anyHeld and { armHeld[1], armHeld[2], armHeld[3] } or nil)
+        if not r.ok then setMsg(r.msg, true); return end
+        armHeld = { false, false, false }
+        setMsg(r.msg)
+        saveGame()
+        openArm()
+    end
+    local buttons = {
+        { label = '金币 ' .. price.gold, primary = true, fn = function() spin('gold') end },
+        { label = '生命 ' .. price.blood, danger = true, fn = function() spin('blood') end },
+    }
+    if faces then
+        for k = 1, 3 do
+            buttons[#buttons + 1] = { label = (armHeld[k] and '解锁 ' or '锁 ') .. k, fn = function() armHeld[k] = not armHeld[k]; openArm() end }
+        end
+    end
+    buttons[#buttons + 1] = { label = '收起', fn = function() armHeld = { false, false, false }; closeModal() end }
+    openModal('断臂转轮', lines, buttons)
 end
 
 -- 走上楼梯（已经在楼梯口确认过）
@@ -284,38 +393,27 @@ local function stepOntoExit()
     walking.confirmedStairs = true
 end
 
+local pendingChoice = 1
 function openStairs()
-    local c = run:offeredContract()
-    local lines = { '下楼之后就回不来了。下楼前，你听到井底传来的回声：' }
-    for _, l in ipairs(intelLines()) do lines[#lines + 1] = l end
+    local opts = run:nextOptions()
+    local lines = { '下楼之后就回不来了。' }
     local due = run:rentDue()
     if due > 0 then lines[#lines + 1] = '楼梯口坐着收租的井神：下楼前要交 ' .. due .. ' 金币（你有 ' .. run.hero.gold .. '）。' end
     local back = { label = '再想想', fn = function() closeModal(); setMsg('留在本层。想好了再走到楼梯口。') end }
-    local function down(sign) closeModal(); pendingSign = sign; stepOntoExit() end
+    local function down(k) closeModal(); pendingChoice = k; stepOntoExit() end
     local buttons = { back }
-    if c then
-        local t = contractMod.text(c)
-        local dep = contractMod.depositFor(c, run.hero)
-        lines[#lines + 1] = ''
-        lines[#lines + 1] = '楼梯边垂下一枚铁钩，钩上挂着一纸契约：'
-        lines[#lines + 1] = '押　' .. dep .. ' 生命（现在就扣，签后剩 ' .. (run.hero.hp - dep) .. '）'
-        lines[#lines + 1] = '得　' .. t.get
-        lines[#lines + 1] = '约　' .. t.cond
-        lines[#lines + 1] = '还　' .. t.reward
-        local rows = contractMod.preview(run.floors[run.floorIndex + 1], run.hero, c)
-        if #rows == 0 then
-            lines[#lines + 1] = '签了以后，下一层的怪打起来没有区别。'
-        else
-            local parts = {}
-            for _, r in ipairs(rows) do parts[#parts + 1] = r.name .. ' ' .. r.before .. ' → ' .. r.after end
-            lines[#lines + 1] = '签了以后，下一层这些怪：' .. table.concat(parts, '；')
-        end
-        buttons[#buttons + 1] = { label = '不签，下楼', fn = function() down(false) end }
-        if run.hero.hp > dep then
-            buttons[#buttons + 1] = { label = '签约（押 ' .. dep .. ' 血）', primary = true, fn = function() down(true) end }
-        end
+    if #opts == 2 then
+        lines[#lines + 1] = '这里有两条往下的楼梯。'
+        lines[#lines + 1] = '左边的楼梯：' .. whisperMod.whisper(opts[1])
+        lines[#lines + 1] = '右边的楼梯：' .. whisperMod.whisper(opts[2])
+        buttons[#buttons + 1] = { label = '走左边', fn = function() down(1) end }
+        buttons[#buttons + 1] = { label = '走右边', fn = function() down(2) end }
+    elseif #opts == 1 then
+        lines[#lines + 1] = whisperMod.whisper(opts[1])
+        buttons[#buttons + 1] = { label = '下楼', primary = true, fn = function() down(1) end }
     else
-        buttons[#buttons + 1] = { label = '下楼', primary = true, fn = function() down(false) end }
+        lines[#lines + 1] = '这是最后一层的出口。'
+        buttons[#buttons + 1] = { label = '出去', primary = true, fn = function() down(1) end }
     end
     openModal('楼梯口', lines, buttons)
 end
@@ -343,31 +441,29 @@ end
 local function nextFloor(sell)
     if run:rentDue() > 0 then openRent(function() nextFloor(sell) end); return end
     closeModal()
-    run:finishFloor(sell, pendingSign)
-    pendingSign = false
-    slotHeld = { false, false, false }
+    run:finishFloor(sell, pendingChoice)
+    pendingChoice = 1
+    armHeld = { false, false, false }
     floats, walking, heroAnim = {}, nil, nil
     saveGame()
-    if run.status == 'finished' then openVictory()
-    else setMsg(run:floor().hint or '') end
+    if run.status == 'finished' then openVictory(); return end
+    setMsg(run:floor().hint or '')
+    continueFlow()
 end
 
 function openSummary()
     local s = run:exitSummary()
     local start = run:floorStartHero()
     local lines = {}
-    if s.contract then
-        lines[#lines + 1] = s.contract.kept and ('契约守住了：+' .. s.contract.def.refund .. ' 生命，+' .. s.contract.def.gold .. ' 金币')
-            or ('契约已毁：押下的 ' .. s.contract.def.deposit .. ' 生命归井')
-    end
     local d = run.hero.hp - start.hp
-    lines[#lines + 1] = '本层生命变化（不含退还）：' .. (d >= 0 and '+' or '') .. d
+    lines[#lines + 1] = '本层生命变化：' .. (d >= 0 and '+' or '') .. d
     local gains = {}
     for _, g in ipairs({ { '攻击', run.hero.atk - start.atk }, { '防御', run.hero.def - start.def }, { '金币', run.hero.gold - start.gold } }) do
         if g[2] ~= 0 then gains[#gains + 1] = g[1] .. ' ' .. (g[2] > 0 and '+' or '') .. g[2] end
     end
     lines[#lines + 1] = '本层换到：' .. (#gains > 0 and table.concat(gains, '，') or '没有')
     if s.leftoverPotions > 0 then lines[#lines + 1] = '地图上剩下的血瓶 ×' .. s.leftoverPotions .. '：+' .. s.potionGold .. ' 金币' end
+    if run.decree then lines[#lines + 1] = '诏令：' .. run.decree.def.text .. '（第 ' .. run.decree['until'] .. ' 层前）' end
     local buttons = { { label = '下楼', primary = true, fn = function() nextFloor(false) end } }
     if s.keys > 0 then
         table.insert(buttons, 1, { label = '卖掉 ' .. s.keys .. ' 把骨钥（+' .. s.keyGold .. '）', fn = function() nextFloor(true) end })
@@ -375,78 +471,115 @@ function openSummary()
     openModal(run:floor().name .. ' 完成', lines, buttons)
 end
 
-function openWeapons()
-    local list = run.pendingWeapons
-    if not list then return end
-    local lines = { '它倒下的地方压着三件东西，你只能拿走一件：' }
-    for _, w in ipairs(list) do lines[#lines + 1] = config.WEAPONS[w].name .. '：' .. config.WEAPONS[w].desc end
-    local cur = run.hero.weapon
-    lines[#lines + 1] = cur and ('你现在拿着' .. config.WEAPONS[cur].name .. '，换掉会当场卖 ' .. config.WEAPONS[cur].sell .. ' 金币。') or '你还没有武器。'
-    local buttons = {}
-    for _, w in ipairs(list) do
-        buttons[#buttons + 1] = { label = config.WEAPONS[w].name, fn = function() closeModal(); setMsg(run:chooseWeapon(w)); saveGame() end }
+-- 大转盘
+function openWheel(i)
+    local lines = { '盘面八格，每格机会一样（各 12.5%）：' }
+    local t = {}
+    for k, s in ipairs(wheelMod.SECTORS) do t[k] = s.text end
+    lines[#lines + 1] = table.concat(t, '、')
+    local price = run:wheelPrice(i)
+    lines[#lines + 1] = '转一次：' .. price.gold .. ' 金币，或 ' .. price.blood .. ' 生命（每转一次 ×1.5）'
+    lines[#lines + 1] = '你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.hp .. ' 生命。'
+    local function spin(pay)
+        local r = run:wheelSpin(i, pay)
+        if not r.ok then setMsg(r.msg, true); return end
+        setMsg(r.msg, run.status == 'dead')
+        saveGame()
+        closeModal()
+        if run.status == 'dead' then openDeath(); return end
+        if run:pendingEngrave() then continueFlow() else openWheel(i) end
     end
-    openModal('精英倒下了', lines, buttons)
+    openModal('大转盘', lines, {
+        { label = '金币 ' .. price.gold, primary = true, fn = function() spin('gold') end },
+        { label = '生命 ' .. price.blood, danger = true, fn = function() spin('blood') end },
+        { label = '离开', fn = function() closeModal() end },
+    })
 end
 
-local SYM = { blade = '刀', hammer = '锤', harpoon = '叉', potion = '瓶', coin = '金', leech = '蛭' }
-
-function openSlot(i)
-    local c = run.cells[i]
-    local def = slotMod.SLOTS[c.id]
-    local st = run:slotState(i)
-    local lines = { def.desc }
-    for k, reel in ipairs(def.reels) do
-        local t = {}
-        for _, x in ipairs(reel) do t[#t + 1] = SYM[x] end
-        lines[#lines + 1] = '转轮 ' .. k .. '：' .. table.concat(t, ' ')
-    end
-    local odds = slotMod.machineOdds(def)
-    lines[#lines + 1] = string.format('三连武器 %.1f%%，至少一只井蛭 %.1f%%（每只当场咬 15 血）', odds.weapon * 100, odds.anyLeech * 100)
-    local anyHeld = st.pending ~= nil and (slotHeld[1] or slotHeld[2] or slotHeld[3])
-    if st.pending then
-        local t = {}
-        for k, x in ipairs(st.pending) do t[#t + 1] = (slotHeld[k] and '[' .. SYM[x] .. ']' or SYM[x]) end
-        lines[#lines + 1] = '机器上停着：' .. table.concat(t, ' ') .. '　→ ' .. table.concat(slotMod.payout(st.pending).lines, '；')
-        if anyHeld then lines[#lines + 1] = slotMod.holdHint(def, st.pending, slotHeld) end
-    end
-    local price = run:slotPrice(i, anyHeld)
-    lines[#lines + 1] = (anyHeld and '锁轴重转（放弃当前结果）' or (st.pending and '再转一次（先收下当前结果）' or '转一次')) .. '：' .. price.gold .. ' 金币，或血注 ' .. price.blood .. ' 生命'
-    local function spin(pay)
-        local held = anyHeld and { slotHeld[1], slotHeld[2], slotHeld[3] } or nil
-        local r = run:slotSpin(i, pay, held)
-        if not r.ok then setMsg(r.msg, true); return end
-        slotHeld = { false, false, false }
-        setMsg(r.msg ~= '' and r.msg or '转出来了。', (r.bite or 0) > 0)
+-- 当铺
+function openPawn(i)
+    local f = run:floor()
+    local lines = { '当铺不收攻击和防御。你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.keys .. ' 把骨钥。' }
+    for _, l in ipairs(armRowsText()) do lines[#lines + 1] = l end
+    for j, p in ipairs(run.pawned) do lines[#lines + 1] = '当着的：' .. W(p.weapon) .. '，赎回 ' .. run:redeemPrice(j) .. ' 金（每过一层涨 20%）' end
+    for k, w in ipairs(f.shop or {}) do lines[#lines + 1] = '卖：' .. weaponLine(w) .. '　' .. Run.PAWN.buyPrice .. ' 金' .. (run:sold(i, k) and '（已卖出）' or '') end
+    local function after(r)
+        setMsg(r.msg, not r.ok)
         saveGame()
-        if run.status == 'dead' then closeModal(); openDeath() else openSlot(i) end
+        openPawn(i)
     end
-    local buttons = {
-        { label = '金币 ' .. price.gold, primary = true, fn = function() spin('gold') end },
-        { label = '血注 ' .. price.blood, danger = true, fn = function() spin('blood') end },
-    }
-    if st.pending then
-        for k = 1, 3 do
-            buttons[#buttons + 1] = { label = (slotHeld[k] and '解锁 ' or '锁 ') .. k, fn = function() slotHeld[k] = not slotHeld[k]; openSlot(i) end }
+    local buttons = {}
+    if run.hero.keys > 0 then buttons[#buttons + 1] = { label = '卖骨钥 +' .. Run.PAWN.keyPrice, fn = function() after(run:pawnSellKey(i)) end } end
+    for k = 1, armMod.ROWS do
+        local w = run.arm.rows[k]
+        if w then
+            buttons[#buttons + 1] = { label = '当' .. W(w) .. ' +' .. Run.PAWN.pawnGold, fn = function() after(run:pawnRow(i, k)) end }
+            buttons[#buttons + 1] = { label = '擦第 ' .. k .. ' 行 −' .. Run.PAWN.erasePrice, fn = function() after(run:pawnErase(i, k)) end }
         end
-        buttons[#buttons + 1] = { label = '收下', fn = function()
-            local got = run:slotCollect(i)
-            slotHeld = { false, false, false }
-            closeModal(); setMsg(table.concat(got, '；')); saveGame()
-            if run.pendingWeapons then openWeapons() end
-        end }
-    else
-        buttons[#buttons + 1] = { label = '离开', fn = function() closeModal() end }
     end
-    openModal('井中轮·' .. def.name, lines, buttons)
+    for j, p in ipairs(run.pawned) do
+        buttons[#buttons + 1] = { label = '赎' .. W(p.weapon) .. ' −' .. run:redeemPrice(j), fn = function()
+            if armMod.firstBlank(run.arm) then after(run:pawnRedeem(i, j)) else chooseRow('赎回' .. W(p.weapon), function(row) after(run:pawnRedeem(i, j, row)) end) end
+        end }
+    end
+    for k, w in ipairs(f.shop or {}) do
+        if not run:sold(i, k) then
+            buttons[#buttons + 1] = { label = '买' .. W(w) .. ' −' .. Run.PAWN.buyPrice, fn = function()
+                if armMod.firstBlank(run.arm) then after(run:pawnBuy(i, k)) else chooseRow('买' .. W(w), function(row) after(run:pawnBuy(i, k, row)) end) end
+            end }
+        end
+    end
+    buttons[#buttons + 1] = { label = '离开', primary = true, fn = function() closeModal() end }
+    openModal('当铺', lines, buttons)
+end
+
+-- 骨坛：先选特性，再选武器，最后选献什么
+function openAltar(i, boon, weapon)
+    local used = Run.contains(run.altarUsed, run.floorIndex .. ':' .. i)
+    if used then
+        openModal('骨坛', { '这座骨坛已经用过了。' }, { { label = '离开', primary = true, fn = function() closeModal() end } })
+        return
+    end
+    local lines = { '献 3 点攻击或 1 把骨钥，把你这一局杀过的怪的本事移到转轮上的一把武器上。' }
+    local buttons = {}
+    if not boon then
+        if #run.boonsSeen == 0 then lines[#lines + 1] = '你这一局还没杀过带特性的怪（溺魂、回声蝠、裂岩蟹、盐蚀蛞蝓）。' end
+        for _, b in ipairs(run.boonsSeen) do
+            lines[#lines + 1] = config.BOON_NAMES[b] .. '：' .. config.BOON_DESC[b]
+            buttons[#buttons + 1] = { label = config.BOON_NAMES[b], fn = function() openAltar(i, b) end }
+        end
+    elseif not weapon then
+        lines[#lines + 1] = '移「' .. config.BOON_NAMES[boon] .. '」到哪一把上？'
+        local seen = {}
+        for k = 1, armMod.ROWS do
+            local w = run.arm.rows[k]
+            if w and not seen[w] then
+                seen[w] = true
+                buttons[#buttons + 1] = { label = W(w), fn = function() openAltar(i, boon, w) end }
+            end
+        end
+        if not next(seen) then lines[#lines + 1] = '转轮上还没有武器图案。' end
+    else
+        lines[#lines + 1] = '把「' .. config.BOON_NAMES[boon] .. '」移到' .. W(weapon) .. '上。献什么？'
+        local function offer(pay)
+            local r = run:altarOffer(i, pay, boon, weapon)
+            setMsg(r.msg, not r.ok)
+            saveGame()
+            closeModal()
+        end
+        buttons[#buttons + 1] = { label = '献 3 点攻击', fn = function() offer('atk') end }
+        if run.hero.keys > 0 then buttons[#buttons + 1] = { label = '献 1 把骨钥', primary = true, fn = function() offer('key') end } end
+    end
+    buttons[#buttons + 1] = { label = '离开', fn = function() closeModal() end }
+    openModal('骨坛', lines, buttons)
 end
 
 function openStall(i)
     local offers = run:floor().stall or {}
-    local lines = { '摊主不说话，只指了指木板上的价签。每样只卖一次。', '你有 ' .. run.hero.gold .. ' 金币。' }
+    local lines = { '火边的摊主不说话，只指了指木板上的价签。每样只卖一次。', '你有 ' .. run.hero.gold .. ' 金币。' }
     local buttons = {}
     for k, o in ipairs(offers) do
-        local sold = run:stallSold(k)
+        local sold = run:sold(i, k)
         lines[#lines + 1] = Run.stallText(o) .. '：' .. o.price .. ' 金' .. (sold and '（已买）' or '')
         if not sold then
             buttons[#buttons + 1] = { label = Run.stallText(o) .. '（' .. o.price .. '）', fn = function()
@@ -461,35 +594,75 @@ function openStall(i)
     openModal('补给摊', lines, buttons)
 end
 
+local function openFacility(i)
+    local k = run.cells[i].kind
+    if k == 'wheel' then openWheel(i)
+    elseif k == 'pawn' then openPawn(i)
+    elseif k == 'altar' then openAltar(i)
+    else openStall(i) end
+end
+facilityOpener = openFacility
+
 function openVictory()
     love.filesystem.remove(SAVE_FILE)
     local h = run.hero
     openModal('你走到了井底', {
         '二十层，一层不落。',
-        '剩余生命 ' .. h.hp .. '，攻 ' .. h.atk .. ' / 防 ' .. h.def .. '，金币 ' .. h.gold .. (h.weapon and ('，武器 ' .. config.WEAPONS[h.weapon].name) or '') .. '。',
+        '剩余生命 ' .. h.hp .. '，攻 ' .. h.atk .. ' / 防 ' .. h.def .. '，金币 ' .. h.gold .. (h.weapon and ('，手上是' .. W(h.weapon)) or '') .. '。',
         '总步数 ' .. run.totalSteps .. '。',
-        '（第 15 层落石和第 20 层 Boss 站位战还是占位，正式版会换掉。）',
+        '（第 20 层 Boss 站位战还是占位，正式版会换掉。）',
     }, { { label = '再来一局', primary = true, fn = function() closeModal(); newGame() end } })
 end
 
+local function saveMeta() love.filesystem.write(META_FILE, serialize.dump(meta)) end
+
 function openDeath()
     love.filesystem.remove(SAVE_FILE)
-    openModal('你倒下了', { '你倒在了' .. run:floor().name .. '。', '这一局结束了。重新开始要从第 1 层走起，地图会换。' }, {
+    if run.tutorial then
+        meta.tutorialDone = true
+        saveMeta()
+        openModal('……', {
+            '那东西只睁了一下眼，你就被甩回了黑暗里。',
+            '你在井口醒来。右臂没了，断口处长出一个空空的转轮。',
+            '转轮上什么都没有。打败带印记的怪、打败精英，就能往上面刻武器的图案。',
+            '这一次，从第 1 层重新往下走。',
+        }, { { label = '再下井', primary = true, fn = function() closeModal(); newGame() end } })
+        return
+    end
+    openModal('你倒下了', { '你倒在了' .. run:floor().name .. '。', '这一局结束了。重新开始要从第 1 层走起，地图会换，转轮上的图案也会清空。' }, {
         { label = '从第 1 层重新开始', primary = true, fn = function() closeModal(); newGame() end },
     })
 end
 
+local function planFor(seed, tutorial)
+    return tutorial and route.tutorial(seed) or route.build(seed)
+end
+
 function newGame(seed)
     seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or os.time()
-    local last = love.filesystem.getInfo(LAST_FILE) and serialize.load(love.filesystem.read(LAST_FILE))
-    choices = levels.pickChoices(seed, mainline.pools, last and last.choices)
-    love.filesystem.write(LAST_FILE, serialize.dump({ choices = choices }))
-    run = Run.new(floorsFor(choices), 'digger', seed)
+    local tutorial = not meta.tutorialDone
+    run = Run.new(planFor(seed, tutorial), 'digger', seed, { tutorial = tutorial })
     facing = 'down'
-    floats, walking, heroAnim, pendingSign = {}, nil, nil, false
-    slotHeld = { false, false, false }
-    setMsg(run:floor().hint or '')
+    floats, walking, heroAnim, pendingChoice = {}, nil, nil, 1
+    armHeld = { false, false, false }
     saveGame()
+    if tutorial then
+        openModal('坠井', {
+            '你失足掉进了一口很深的井。',
+            '怪物格子上的数字是打它要掉的血。奖励都在怪物身后，值不值得打，自己算。',
+            '走过不能撤回。死了就从第 1 层重来。',
+        }, { { label = '往下走', primary = true, fn = function() closeModal(); setMsg(run:floor().hint or '') end } })
+    else
+        setMsg(run:floor().hint or '')
+        continueFlow()
+    end
+end
+
+function loadGame(data)
+    facing = miner.restoreFacing(data.facing)
+    run = Run.load(planFor(data.run.seed, data.run.tutorial), data.run)
+    setMsg('继续上一局。')
+    if run.status == 'floorDone' then openSummary() else continueFlow() end
 end
 
 -- ---------- LÖVE 回调 ----------
@@ -498,13 +671,11 @@ function love.load()
     miner.load()
     canvas = love.graphics.newCanvas(LW, LH)
     relayout()
+    local m = love.filesystem.getInfo(META_FILE) and serialize.load(love.filesystem.read(META_FILE))
+    if m then meta = m end
     local data = love.filesystem.getInfo(SAVE_FILE) and serialize.load(love.filesystem.read(SAVE_FILE))
-    if data and data.run and data.choices then
-        facing = miner.restoreFacing(data.facing)
-        choices = data.choices
-        run = Run.load(floorsFor(choices), data.run)
-        setMsg('继续上一局。')
-        if run.status == 'floorDone' then openSummary() elseif run.pendingWeapons then openWeapons() end
+    if data and data.run and data.run.picks then
+        loadGame(data)
     else
         newGame()
     end
@@ -546,7 +717,7 @@ local function drawTile(i)
     elseif c.kind == 'item' then base = C.item
     elseif c.kind == 'door' then base = c.door == 'blood' and C.blood or C.door
     elseif c.kind == 'exit' then base = C.exit
-    elseif c.kind == 'slot' or c.kind == 'stall' then base = C.door end
+    elseif floorMod.isFacility(c) then base = C.door end
     setColor(base); g.rectangle('fill', x + 1, y + 1, TILE - 2, TILE - 2)
     if c.kind == 'item' then
         if c.id == 'smallPotion' or c.id == 'bigPotion' then
@@ -593,6 +764,37 @@ end
 -- ---------- 绘制：UI 层 ----------
 local SHORT = { moss = '苔', eel = '鳗', frog = '蛙', beetle = '甲', bat = '蝠', wraith = '魂', crab = '蟹', guardian = '守', rat = '鼠', slug = '蝓', priest = '祭', gatekeeper = '门', eye = '眼' }
 
+local FACILITY_GLYPH = {
+    stall = { '摊', '补给', '补给摊', '火边的补给摊，花金币买生命、攻击或防御。' },
+    wheel = { '盘', '转盘', '大转盘', '盘面八格全部公开：金币、生命、攻防、新图案，也有井蛭和擦掉图案。' },
+    pawn = { '当', '当铺', '当铺', '卖骨钥、当掉或赎回武器图案、买图案、擦图案。不收攻防。' },
+    altar = { '坛', '骨坛', '骨坛', '献 3 点攻击或 1 把骨钥，把杀过的怪的本事移到一把武器上。' },
+}
+
+-- 右侧的断臂转轮：3×3 格子，亮的是现在停的位置
+ARM_BTN = { x = PANEL_X + 150, y = 230, w = 80, h = 18 }
+local ARM_SHORT = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩' }
+function drawArmPanel()
+    if not run.arm then return end
+    local x0, y0 = PANEL_X + 6, 214
+    text('断臂转轮', x0, y0 - 2, 8, C.accent)
+    local stops = run.arm.stops
+    for reel = 1, 3 do
+        for row = 1, 3 do
+            local x, y = x0 + (reel - 1) * 34, y0 + 12 + (row - 1) * 16
+            local lit = stops and stops[reel] == row
+            setColor(lit and { 0.20, 0.32, 0.28 } or { 0.10, 0.14, 0.16 })
+            love.graphics.rectangle('fill', OX + x * S, OY + y * S, 32 * S, 14 * S)
+            local w = run.arm.rows[row]
+            text(w and ARM_SHORT[w] or '·', x, y + 2, 7.5, w and C.text or C.dim, 'center', 32)
+        end
+    end
+    setColor({ 0.12, 0.35, 0.3 })
+    love.graphics.rectangle('fill', OX + ARM_BTN.x * S, OY + ARM_BTN.y * S, ARM_BTN.w * S, ARM_BTN.h * S)
+    text('转动（R）', ARM_BTN.x, ARM_BTN.y + 4, 7.5, C.text, 'center', ARM_BTN.w)
+    text(run:armPrice(false).gold .. ' 金 / ' .. run:armPrice(false).blood .. ' 血', ARM_BTN.x, ARM_BTN.y + 22, 6.5, C.dim, 'center', ARM_BTN.w)
+end
+
 local function drawUI()
     local h = run.hero
     local atk, def = combat.effectiveStats(h)
@@ -603,11 +805,14 @@ local function drawUI()
     text('钥 ' .. h.keys, 350, 10, 10, { 0.85, 0.76, 0.48 })
     text('金 ' .. h.gold, 400, 10, 10, C.gold)
     text('步 ' .. run.steps, 460, 10, 10, C.dim)
-    if h.weapon then text('⚔ ' .. config.WEAPONS[h.weapon].name, 510, 22, 7, C.atk) end
-    if run:contractActive() then
-        text('契约生效中：本层不喝血瓶', 510, 11, 7, C.accent)
-    elseif run.contract and run.contract.floorIndex == run.floorIndex then
-        text('契约已毁', 510, 11, 7, C.warn)
+    text(h.weapon and ('⚔ ' .. config.WEAPONS[h.weapon].name) or (run.arm and '空手' or ''), 510, 9, 7.5, h.weapon and C.atk or C.dim)
+    if h.boons then
+        local names = {}
+        for k, b in ipairs(h.boons) do names[k] = config.BOON_NAMES[b] end
+        text(table.concat(names, '·'), 510, 21, 6.5, C.accent)
+    end
+    if run.decree then
+        text('诏令：' .. run.decree.def.text .. (run.decree.def.kind == 'killTrait' and ('（' .. run.decree.progress .. '/' .. run.decree.def.n .. '）') or '') .. '，第 ' .. run.decree['until'] .. ' 层前', 16, 26, 6.5, C.ok)
     end
 
     -- 格子上的字：怪物名和战损、门、钥匙、金币
@@ -616,6 +821,7 @@ local function drawUI()
         if c.kind == 'monster' then
             local p = preview(i)
             text(SHORT[c.id], x, y + 3, 10, { 1, 0.84, 0.86 }, 'center', TILE)
+            if run:marked(i) then text('印', x + 22, y, 7, C.ok) end
             text(p.fatal and (p.text == '会死' and ('-' .. p.lose) or p.text) or ('-' .. p.lose), x, y + 19, 6.5, p.fatal and C.warn or C.ok, 'center', TILE)
         elseif c.kind == 'door' then
             text(c.door == 'bone' and '门' or '血门', x, y + 5, 9, { 0.95, 0.84, 0.6 }, 'center', TILE)
@@ -624,12 +830,10 @@ local function drawUI()
             text(c.id == 'key' and '钥' or '金', x, y + 8, 11, C.gold, 'center', TILE)
         elseif c.kind == 'exit' then
             text('出口', x, y + 21, 6, C.accent, 'center', TILE)
-        elseif c.kind == 'slot' then
-            text('轮', x, y + 4, 11, C.gold, 'center', TILE)
-            text(slotMod.SLOTS[c.id].name, x, y + 20, 6, C.dim, 'center', TILE)
-        elseif c.kind == 'stall' then
-            text('摊', x, y + 4, 11, C.accent, 'center', TILE)
-            text('补给', x, y + 20, 6, C.dim, 'center', TILE)
+        elseif floorMod.isFacility(c) then
+            local g = FACILITY_GLYPH[c.kind]
+            text(g[1], x, y + 4, 11, C.gold, 'center', TILE)
+            text(g[2], x, y + 20, 6, C.dim, 'center', TILE)
         end
     end
     for _, f in ipairs(floats) do
@@ -663,38 +867,30 @@ local function drawUI()
                 text(tostring(p.left), px + 110, ty + 14, 16, C.accent)
             end
             text('掉落 ' .. p.gold .. ' 金币', px, ty + 38, 7.5, C.gold)
+            if run:marked(i) then text('印记：打败后可以把' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name .. '刻到转轮上', px, ty + 52, 7, C.ok, 'left', PANEL_W - 12) end
         elseif c.kind == 'item' then
             text(config.ITEM_NAMES[c.id], px, py, 11, C.text)
             local f = run:floor()
             local gem = f.gem + run.ch.gemBonus
             local eff = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
             text(eff, px, py + 18, 8, C.text)
-            if rules.isPotion(c) and run:contractActive() then
-                text('喝下会毁约：押下的 ' .. run.contract.def.deposit .. ' 生命不退', px, py + 34, 8, C.warn, 'left', PANEL_W - 12)
-            end
         elseif c.kind == 'door' then
             text(c.door == 'bone' and '骨门' or '血门', px, py, 11, C.text)
             text(c.door == 'bone' and '消耗 1 把骨钥打开' or ('通过时扣 ' .. run:floor().bloodCost .. ' 生命'), px, py + 18, 8, C.text)
         elseif c.kind == 'exit' then
             text('出口', px, py, 11, C.text)
             text(run:eliteAlive() and '精英还活着，出口被封住了' or '走到这里结束本层', px, py + 18, 8, C.text)
-        elseif c.kind == 'slot' then
-            local d = slotMod.SLOTS[c.id]
-            text('井中轮·' .. d.name, px, py, 11, C.text)
-            text(d.desc, px, py + 18, 7.5, C.text, 'left', PANEL_W - 12)
-            text('点它走到旁边，花金币或生命转一次', px, py + 44, 7, C.dim, 'left', PANEL_W - 12)
-        elseif c.kind == 'stall' then
-            text('补给摊', px, py, 11, C.text)
-            local ty = py + 18
-            for k, o in ipairs(run:floor().stall or {}) do
-                text(Run.stallText(o) .. '：' .. o.price .. ' 金' .. (run:stallSold(k) and '（已买）' or ''), px, ty, 8, C.text)
-                ty = ty + 13
-            end
+        elseif floorMod.isFacility(c) then
+            local g = FACILITY_GLYPH[c.kind]
+            text(g[3], px, py, 11, C.text)
+            text(g[4], px, py + 18, 7.5, C.text, 'left', PANEL_W - 12)
+            text('点它走到旁边使用', px, py + 44, 7, C.dim, 'left', PANEL_W - 12)
         end
     else
         text(run:floor().name, px, py, 11, C.text)
         text('鼠标移到格子上看详情，点击行动；点空地直接走过去。方向键 / WASD 也能走。', px, py + 18, 7.5, C.dim, 'left', PANEL_W - 12)
     end
+    drawArmPanel()
     text(msg, px, LH - 60, 7.5, msgErr and C.warn or C.text, 'left', PANEL_W - 12)
     text('走过不能撤回 · 死了从第 1 层重来', px, LH - 20, 6.5, C.dim, 'left', PANEL_W - 12)
 
@@ -735,6 +931,10 @@ function love.mousepressed(mx, my, button)
         end
         return
     end
+    if run.arm and run.status == 'playing' and not walking and lx >= ARM_BTN.x and lx <= ARM_BTN.x + ARM_BTN.w and ly >= ARM_BTN.y and ly <= ARM_BTN.y + ARM_BTN.h then
+        openArm()
+        return
+    end
     local i = tileAt(lx, ly)
     if i then act(i) end
 end
@@ -750,6 +950,7 @@ function love.keypressed(key)
         if n and modal.buttons[n] then modal.buttons[n].fn() end
         return
     end
+    if key == 'r' and run.arm and run.status == 'playing' and not walking then openArm(); return end
     local d = DIRS[key]
     if d and not walking and run.status == 'playing' then
         local x = (run.pos - 1) % run.w + d[1]
@@ -767,6 +968,12 @@ return {
     getModal = function() return modal end,
     busy = function() return walking ~= nil end,
     act = act,
-    newGame = function(seed) closeModal(); newGame(seed) end,
+    newGame = function(seed, tutorial)
+        closeModal()
+        meta.tutorialDone = not tutorial
+        newGame(seed)
+    end,
+    openArm = function() openArm() end,
+    getMeta = function() return meta end,
     setHover = function(i) hovered = i end,
 }

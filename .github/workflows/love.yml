@@ -28,7 +28,7 @@ jobs:
       - name: 标准算例是不是最新的
         run: |
           npx tsx tools/export-vectors.ts
-          git diff --exit-code love/tests/vectors.lua love/src/data/mainline.lua || (echo "::error::love/tests/vectors.lua 或 love/src/data/mainline.lua 和原型不一致，请运行 npx tsx tools/export-vectors.ts 后提交" && exit 1)
+          git diff --exit-code love/tests/vectors.lua love/src/data/pools.lua || (echo "::error::love/tests/vectors.lua 或 love/src/data/pools.lua 和原型不一致，请运行 npx tsx tools/export-vectors.ts 后提交" && exit 1)
       - name: Lua 对账
         run: |
           sudo apt-get install -y -qq luajit

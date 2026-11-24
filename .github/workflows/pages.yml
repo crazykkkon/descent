@@ -3,9 +3,9 @@
 # 第一次使用前：仓库 Settings → Pages → Source 选 "GitHub Actions"。
 name: 发布试玩版
 
+# 断臂转轮版起网页原型不再更新（只做 LÖVE 版），网页上保留最后一次发布的井的契约版。
+# 只能手动触发；需要先把 web/ 改到新规则上才能打包成功。
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

@@ -1,5 +1,7 @@
--- 自动测试：设置环境变量 DESCENT_AUTOTEST=1 启动时，用一个很强的主角按界面操作走完 20 层，
--- 经过楼梯口、契约、井租、出口结算、武器三选一、补给摊、井中轮和通关结算，沿途截图（存到存档目录）。
+-- 自动测试：设置环境变量 DESCENT_AUTOTEST=1 启动时按界面操作并截图（截图存到存档目录）：
+-- 1. 新手教程局：走到第 5 层被井底之眼打死，看到断臂剧情；
+-- 2. 断臂转轮局：用很强的主角走完 20 层，沿途刻图案、转断臂转轮、接诏令、楼梯二选一，
+--    尽量走进大转盘、当铺、骨坛、营火各一次，最后看到通关结算。
 -- 只用于开发检查，正常游戏不会加载（打包时也不打进去）。
 
 local M = {}
@@ -7,6 +9,7 @@ local M = {}
 function M.start()
     local game = require('main')
     local floorMod = require('core.floor')
+    local config = require('core.config')
     local co
     local wait = 0
     local log = {}
@@ -22,19 +25,10 @@ function M.start()
         end
         return false
     end
-    local function hoverCell(i)
-        local run = game.getRun()
-        local x = (i - 1) % run.w
-        local y = math.floor((i - 1) / run.w)
-        local w, h = love.graphics.getDimensions()
-        local S = math.max(1, math.min(math.floor(w / 640), math.floor(h / 360)))
-        local OX, OY = math.floor((w - 640 * S) / 2), math.floor((h - 360 * S) / 2)
-        love.mouse.setPosition(OX + (16 + x * 32 + 16) * S, OY + (44 + y * 32 + 16) * S)
-    end
     local function find(pred)
-        for i, c in ipairs(game.getRun().cells) do if pred(c) then return i end end
+        for i, c in ipairs(game.getRun().cells) do if pred(c, i) then return i end end
     end
-    -- 穿过怪物、道具、门的最短路线（不穿墙、井中轮、补给摊）
+    -- 穿过怪物、道具、门的最短路线（不穿墙和设施）
     local function route(target)
         local run = game.getRun()
         local prev = { [run.pos] = -1 }
@@ -43,8 +37,8 @@ function M.start()
             local cur = q[head]; head = head + 1
             if cur == target then break end
             for _, n in ipairs(floorMod.neighbors(cur, run.w, run.h)) do
-                local k = run.cells[n].kind
-                if prev[n] == nil and k ~= 'wall' and k ~= 'slot' and k ~= 'stall' and (k ~= 'exit' or n == target) then
+                local c = run.cells[n]
+                if prev[n] == nil and c.kind ~= 'wall' and not floorMod.isFacility(c) and (c.kind ~= 'exit' or n == target) then
                     prev[n] = cur; q[#q + 1] = n
                 end
             end
@@ -59,18 +53,36 @@ function M.start()
             sleep(0.05)
         end
     end
-    -- 一步一步走过去；路上的弹窗按"最省事"处理
+    -- 处理路上弹出来的东西：刻图案（刻第一个，刻满了覆盖第 1 行）、诏令（接下）、消息
+    local function handlePopups()
+        for _ = 1, 10 do
+            local t = modalTitle()
+            if t == '刻图案' then
+                local m = game.getModal()
+                m.buttons[1].fn()
+                if modalTitle() and modalTitle():sub(1, 3) == '刻' then button('覆盖第 1 行') end
+            elseif t and t:find('诏令') and game.getModal().buttons[2] and game.getModal().buttons[2].label == '接下' then button('接下')
+            elseif t == '井神的诏令' then button('知道了')
+            else return end
+            sleep(0.05)
+        end
+    end
     local function go(target)
         for _, cell in ipairs(route(target)) do
             local run = game.getRun()
             if run.status ~= 'playing' then return end
-            if run.cells[cell].kind == 'floor' or run.pos ~= cell then
-                game.act(cell)
-                settle()
-            end
-            if modalTitle() == '喝下这瓶血瓶？' then button('喝'); settle() end
-            if modalTitle() == '精英倒下了' then return end
-            if modalTitle() == '楼梯口' then return end
+            game.act(cell)
+            settle()
+            handlePopups()
+            local t = modalTitle()
+            if t == '楼梯口' or t == '你倒下了' or t == '……' then return end
+        end
+    end
+    local function near(i)
+        local run = game.getRun()
+        for _, n in ipairs(floorMod.neighbors(i, run.w, run.h)) do
+            local k = run.cells[n].kind
+            if k ~= 'wall' and k ~= 'exit' and not floorMod.isFacility(run.cells[n]) then go(n); return end
         end
     end
     local function strong()
@@ -78,73 +90,123 @@ function M.start()
         h.hp, h.atk, h.def, h.keys = math.max(h.hp, 99999), math.max(h.atk, 300), math.max(h.def, 300), 9
         h.gold = math.max(h.gold, 3000)
     end
+    local shots = {}
+    local function once(name) if not shots[name] then shots[name] = true; shot(name) end end
 
     co = coroutine.create(function()
         love.filesystem.remove('save.lua')
-        love.filesystem.remove('last-choices.lua')
-        game.newGame(1)
-        sleep(0.5)
-        shot('01-floor1')
+        love.filesystem.remove('meta.lua')
+        -- 1. 新手教程
+        game.newGame(1, true)
+        sleep(0.3)
+        say('教程开场：' .. tostring(modalTitle()))
+        shot('01-tutorial')
+        button('往下走')
+        for f = 1, 5 do
+            local run = game.getRun()
+            if f < 5 then
+                strong()
+                local h = run.hero
+                h.atk, h.def = 25, 22 -- 不能太强，第 5 层要打不过
+            end
+            local boss = find(function(c) return c.kind == 'monster' and c.id == 'eye' end)
+            if boss then
+                go(boss)
+                if modalTitle() and modalTitle():find('^硬打') then button('硬打') end
+                settle(); sleep(0.2)
+                say('第 5 层硬打井底之眼：' .. tostring(modalTitle()))
+                break
+            end
+            local elite = find(function(c) return c.kind == 'monster' and config.MONSTERS[c.id].elite end)
+            if elite then go(elite) end
+            go(find(function(c) return c.kind == 'exit' end))
+            button('下楼'); settle(); sleep(0.1)
+            button('下楼'); sleep(0.1)
+        end
+        shot('02-arm-story')
+        say('断臂剧情：' .. tostring(modalTitle()) .. '，教程完成 ' .. tostring(game.getMeta().tutorialDone))
+        button('再下井')
+        sleep(0.3)
+
+        -- 2. 断臂转轮局
+        local visited = {}
         for f = 1, 20 do
             local run = game.getRun()
             strong()
-            if f == 5 then
-                local rat = find(function(c) return c.kind == 'monster' and c.id == 'rat' end)
-                hoverCell(rat); sleep(0.3); shot('05-swarm'); love.mouse.setPosition(1, 1)
+            handlePopups()
+            if f == 1 then once('03-floor1') end
+            -- 印记怪：先打它，拿第一把武器
+            local mark = find(function(c, i) return run:marked(i) end)
+            if mark then
+                go(mark); sleep(0.2)
+                once('04-engrave')
+                handlePopups()
+                say(string.format('第 %d 层印记怪：转轮 %s，手上 %s', f, tostring(run.arm.rows[1]), tostring(run.hero.weapon)))
             end
-            local function near(i)
-                local run = game.getRun()
-                for _, n in ipairs(floorMod.neighbors(i, run.w, run.h)) do
-                    if run.cells[n].kind ~= 'wall' and run.cells[n].kind ~= 'exit' then go(n); return end
-                end
+            -- 设施
+            local fac = find(function(c) return floorMod.isFacility(c) end)
+            if fac then
+                local kind = run.cells[fac].kind
+                near(fac)
+                game.act(fac); settle(); sleep(0.2)
+                say(string.format('第 %d 层设施 %s：%s', f, kind, tostring(modalTitle())))
+                once('05-' .. kind)
+                if kind == 'wheel' then button('金币'); sleep(0.1); handlePopups(); if modalTitle() == '大转盘' then button('离开') end
+                elseif kind == 'pawn' then
+                    if not button('买') then button('卖骨钥') end
+                    handlePopups(); if modalTitle() == '当铺' then button('离开') end
+                elseif kind == 'altar' then
+                    local m = game.getModal()
+                    if m and #m.buttons > 1 then m.buttons[1].fn(); local m2 = game.getModal(); if m2 and #m2.buttons > 1 then m2.buttons[1].fn(); button('献 1 把骨钥') end end
+                    if modalTitle() == '骨坛' then button('离开') end
+                else button('攻击'); if modalTitle() == '补给摊' then button('离开') end end
+                visited[kind] = true
+                handlePopups()
             end
-            local stall = find(function(c) return c.kind == 'stall' end)
-            if stall then
-                near(stall)
-                game.act(stall); settle(); sleep(0.2)
-                say(string.format('第 %d 层补给摊：%s', f, tostring(modalTitle())))
-                if f == 3 then shot('03-stall') end
-                local before = game.getRun().hero.atk
-                button('攻击'); say('买攻击：' .. before .. ' → ' .. game.getRun().hero.atk)
-                button('离开')
+            -- 断臂转轮：有图案就转两次（第二次锁住第 1 个轮子）
+            if run.arm.rows[1] or run.arm.rows[2] or run.arm.rows[3] then
+                game.openArm(); sleep(0.1)
+                button('金币'); button('锁 1')
+                if f == 4 or not shots['06-arm'] then once('06-arm') end
+                button('金币'); button('收起')
             end
-            local slot = find(function(c) return c.kind == 'slot' end)
-            if slot then
-                near(slot)
-                game.act(slot); settle(); sleep(0.2)
-                button('金币'); button('锁 1'); sleep(0.1)
-                shot('11-slot')
-                button('金币'); button('收下')
-                if modalTitle() == '精英倒下了' then button(game.getModal().buttons[1].label) end
-                say(string.format('第 %d 层井中轮转了两次，现在 %s', f, tostring(game.getRun().hero.weapon)))
-            end
-            local elite = find(function(c) return c.kind == 'monster' and require('core.config').MONSTERS[c.id].elite end)
+            local elite = find(function(c) return c.kind == 'monster' and config.MONSTERS[c.id].elite end)
             if elite then
                 go(elite); sleep(0.2)
-                say(string.format('第 %d 层精英：%s', f, tostring(modalTitle())))
-                if modalTitle() == '精英倒下了' then
-                    if f == 4 then shot('04-weapons') end
-                    button(game.getModal().buttons[1].label)
-                    say('拿到武器 ' .. tostring(game.getRun().hero.weapon))
-                end
+                if modalTitle() == '刻图案' then once('07-elite-engrave') end
+                handlePopups()
+                say(string.format('第 %d 层精英倒下，转轮：%s / %s / %s', f, tostring(run.arm.rows[1]), tostring(run.arm.rows[2]), tostring(run.arm.rows[3])))
             end
             go(find(function(c) return c.kind == 'exit' end))
             if modalTitle() ~= '楼梯口' then say('第 ' .. f .. ' 层没走到楼梯口：' .. tostring(modalTitle())); break end
-            if f == 1 or f == 12 then shot(string.format('%02d-stairs', f)) end
-            local _ = button('签约') or button('下楼')
+            -- 楼梯二选一：优先去还没去过的设施层
+            local opts = run:nextOptions()
+            if #opts == 2 then
+                once('08-stairs')
+                local pickRight = false
+                for k = 1, 2 do
+                    local kind = opts[k].kind
+                    if kind ~= 'normal' and kind ~= 'elite' and not visited[kind] then pickRight = (k == 2); break end
+                end
+                if not button(pickRight and '走右边' or '走左边') then break end
+            else
+                if not (button('下楼') or button('出去')) then break end
+            end
             settle(); sleep(0.2)
             if modalTitle() ~= run:floor().name .. ' 完成' then say('第 ' .. f .. ' 层没出结算：' .. tostring(modalTitle())); break end
             button('下楼')
-            if modalTitle() == '井租' then
-                say('第 ' .. f .. ' 层交井租：' .. tostring(button('交')))
-            end
+            if modalTitle() == '井租' then say('第 ' .. f .. ' 层交井租：' .. tostring(button('交'))) end
             sleep(0.2)
             run = game.getRun()
-            say(string.format('第 %d 层完成 → 现在%s，状态 %s', f, run.status == 'finished' and '通关' or run:floor().name, run.status))
-            if run.status == 'finished' then break end
+            if run.status == 'finished' then say('通关'); break end
+            say(string.format('第 %d 层完成 → %s（%s）', f, run:floor().name, tostring(run:floor().kind)))
         end
+        local v = {}
+        for k in pairs(visited) do v[#v + 1] = k end
+        table.sort(v)
+        say('去过的设施：' .. table.concat(v, '、'))
         say('结束弹窗：' .. tostring(modalTitle()))
-        shot('20-victory')
+        shot('09-victory')
         love.filesystem.write('autotest.log', table.concat(log, '\n'))
         love.event.quit(0)
     end)
