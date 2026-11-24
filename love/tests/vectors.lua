@@ -16342,18 +16342,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 146,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 3,
           pos = 48,
           status = "playing",
           contractActive = false
@@ -16450,18 +16438,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 26,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 98,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 12,
           pos = 26,
           status = "playing",
           contractActive = false
@@ -16594,18 +16570,6 @@ return {
           def = 13,
           keys = 0,
           gold = 21,
-          pos = 24,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 23,
-          ok = true,
-          hp = 100,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 21,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -16702,18 +16666,6 @@ return {
           def = 13,
           keys = 0,
           gold = 21,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 87,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 31,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -16920,18 +16872,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 96,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 3,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -17064,18 +17004,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 5,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 51,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 13,
           pos = 5,
           status = "playing",
           contractActive = true
@@ -17283,18 +17211,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 96,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 3,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -17391,18 +17307,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 26,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 60,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 12,
           pos = 26,
           status = "playing",
           contractActive = true
@@ -17535,18 +17439,6 @@ return {
           def = 13,
           keys = 0,
           gold = 21,
-          pos = 24,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 23,
-          ok = true,
-          hp = 74,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 21,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -17643,18 +17535,6 @@ return {
           def = 13,
           keys = 0,
           gold = 21,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 79,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 31,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -17862,18 +17742,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 194,
-          atk = 10,
-          def = 13,
-          keys = 0,
-          gold = 8,
           pos = 48,
           status = "playing",
           contractActive = false
@@ -18006,18 +17874,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 95,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 18,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -18224,18 +18080,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 146,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 8,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -18368,18 +18212,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 5,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 83,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 18,
           pos = 5,
           status = "playing",
           contractActive = true
@@ -18587,18 +18419,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 146,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 8,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -18695,18 +18515,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 26,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 98,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 17,
           pos = 26,
           status = "playing",
           contractActive = true
@@ -18839,18 +18647,6 @@ return {
           def = 13,
           keys = 0,
           gold = 26,
-          pos = 24,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 23,
-          ok = true,
-          hp = 100,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 26,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -18947,18 +18743,6 @@ return {
           def = 13,
           keys = 0,
           gold = 26,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 87,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 36,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -19166,18 +18950,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 165,
-          atk = 13,
-          def = 10,
-          keys = 1,
-          gold = 15,
           pos = 48,
           status = "playing",
           contractActive = false
@@ -19310,18 +19082,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 81,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 25,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -19528,18 +19288,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 115,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 15,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -19672,18 +19420,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 5,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 55,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 25,
           pos = 5,
           status = "playing",
           contractActive = true
@@ -19891,18 +19627,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 115,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 15,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -19999,18 +19723,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 26,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 70,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 24,
           pos = 26,
           status = "playing",
           contractActive = true
@@ -20143,18 +19855,6 @@ return {
           def = 10,
           keys = 1,
           gold = 33,
-          pos = 24,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 23,
-          ok = true,
-          hp = 75,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 33,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -20251,18 +19951,6 @@ return {
           def = 10,
           keys = 1,
           gold = 33,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 65,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 43,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -20422,18 +20110,6 @@ return {
           def = 13,
           keys = 0,
           gold = 10,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 101,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 10,
           pos = 4,
           status = "playing",
           contractActive = false
@@ -20470,18 +20146,6 @@ return {
           def = 13,
           keys = 0,
           gold = 10,
-          pos = 7,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 8,
-          ok = true,
-          hp = 191,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 19,
           pos = 7,
           status = "playing",
           contractActive = false
@@ -20616,18 +20280,6 @@ return {
           def = 13,
           keys = 0,
           gold = 10,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 87,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 10,
           pos = 4,
           status = "playing",
           contractActive = false
@@ -20664,18 +20316,6 @@ return {
           def = 13,
           keys = 0,
           gold = 10,
-          pos = 7,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 8,
-          ok = true,
-          hp = 189,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 19,
           pos = 7,
           status = "playing",
           contractActive = false
@@ -20811,18 +20451,6 @@ return {
           def = 13,
           keys = 0,
           gold = 15,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 101,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 15,
           pos = 4,
           status = "playing",
           contractActive = false
@@ -20859,18 +20487,6 @@ return {
           def = 13,
           keys = 0,
           gold = 15,
-          pos = 7,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 8,
-          ok = true,
-          hp = 191,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 24,
           pos = 7,
           status = "playing",
           contractActive = false
@@ -21006,18 +20622,6 @@ return {
           def = 10,
           keys = 1,
           gold = 22,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 93,
-          atk = 13,
-          def = 10,
-          keys = 1,
-          gold = 22,
           pos = 4,
           status = "playing",
           contractActive = false
@@ -21054,18 +20658,6 @@ return {
           def = 10,
           keys = 1,
           gold = 22,
-          pos = 7,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 8,
-          ok = true,
-          hp = 168,
-          atk = 13,
-          def = 10,
-          keys = 1,
-          gold = 31,
           pos = 7,
           status = "playing",
           contractActive = false
@@ -21200,18 +20792,6 @@ return {
           def = 10,
           keys = 1,
           gold = 22,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 91,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 22,
           pos = 4,
           status = "playing",
           contractActive = false
@@ -21248,18 +20828,6 @@ return {
           def = 10,
           keys = 1,
           gold = 22,
-          pos = 7,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 8,
-          ok = true,
-          hp = 181,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 31,
           pos = 7,
           status = "playing",
           contractActive = false
@@ -21395,18 +20963,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 23,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 146,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 3,
           pos = 34,
           status = "playing",
           contractActive = false
@@ -21503,18 +21059,6 @@ return {
           def = 13,
           keys = 0,
           gold = 9,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 118,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 9,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -21551,18 +21095,6 @@ return {
           def = 13,
           keys = 0,
           gold = 9,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 140,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 15,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -21721,18 +21253,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 23,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 96,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 3,
           pos = 34,
           status = "playing",
           contractActive = true
@@ -21817,18 +21337,6 @@ return {
           def = 13,
           keys = 0,
           gold = 9,
-          pos = 26,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 75,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 9,
           pos = 27,
           status = "playing",
           contractActive = true
@@ -21865,18 +21373,6 @@ return {
           def = 13,
           keys = 0,
           gold = 9,
-          pos = 30,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 31,
-          ok = true,
-          hp = 30,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 19,
           pos = 30,
           status = "playing",
           contractActive = true
@@ -22024,18 +21520,6 @@ return {
           def = 13,
           keys = 0,
           gold = 3,
-          pos = 23,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 96,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 3,
           pos = 34,
           status = "playing",
           contractActive = true
@@ -22132,18 +21616,6 @@ return {
           def = 13,
           keys = 0,
           gold = 9,
-          pos = 1,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 75,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 9,
           pos = 2,
           status = "playing",
           contractActive = true
@@ -22180,18 +21652,6 @@ return {
           def = 13,
           keys = 0,
           gold = 9,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 104,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 15,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -22351,18 +21811,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 23,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 194,
-          atk = 10,
-          def = 13,
-          keys = 0,
-          gold = 8,
           pos = 34,
           status = "playing",
           contractActive = false
@@ -22459,18 +21907,6 @@ return {
           def = 13,
           keys = 0,
           gold = 14,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 159,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 14,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -22507,18 +21943,6 @@ return {
           def = 13,
           keys = 0,
           gold = 14,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 174,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 20,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -22677,18 +22101,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 23,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 146,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 8,
           pos = 34,
           status = "playing",
           contractActive = true
@@ -22773,18 +22185,6 @@ return {
           def = 13,
           keys = 0,
           gold = 14,
-          pos = 26,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 118,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 14,
           pos = 27,
           status = "playing",
           contractActive = true
@@ -22821,18 +22221,6 @@ return {
           def = 13,
           keys = 0,
           gold = 14,
-          pos = 30,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 31,
-          ok = true,
-          hp = 55,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 24,
           pos = 30,
           status = "playing",
           contractActive = true
@@ -22980,18 +22368,6 @@ return {
           def = 13,
           keys = 0,
           gold = 8,
-          pos = 23,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 146,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 8,
           pos = 34,
           status = "playing",
           contractActive = true
@@ -23088,18 +22464,6 @@ return {
           def = 13,
           keys = 0,
           gold = 14,
-          pos = 1,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 118,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 14,
           pos = 2,
           status = "playing",
           contractActive = true
@@ -23136,18 +22500,6 @@ return {
           def = 13,
           keys = 0,
           gold = 14,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 140,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 20,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -23307,18 +22659,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 23,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 165,
-          atk = 13,
-          def = 10,
-          keys = 1,
-          gold = 15,
           pos = 34,
           status = "playing",
           contractActive = false
@@ -23415,18 +22755,6 @@ return {
           def = 10,
           keys = 1,
           gold = 21,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 125,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 21,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -23463,18 +22791,6 @@ return {
           def = 10,
           keys = 1,
           gold = 21,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 135,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 27,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -23633,18 +22949,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 23,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 115,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 15,
           pos = 34,
           status = "playing",
           contractActive = true
@@ -23729,18 +23033,6 @@ return {
           def = 10,
           keys = 1,
           gold = 21,
-          pos = 26,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 85,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 21,
           pos = 27,
           status = "playing",
           contractActive = true
@@ -23777,18 +23069,6 @@ return {
           def = 10,
           keys = 1,
           gold = 21,
-          pos = 30,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 31,
-          ok = true,
-          hp = 25,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 31,
           pos = 30,
           status = "playing",
           contractActive = true
@@ -23936,18 +23216,6 @@ return {
           def = 10,
           keys = 1,
           gold = 15,
-          pos = 23,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 34,
-          ok = true,
-          hp = 115,
-          atk = 16,
-          def = 10,
-          keys = 1,
-          gold = 15,
           pos = 34,
           status = "playing",
           contractActive = true
@@ -24044,18 +23312,6 @@ return {
           def = 10,
           keys = 1,
           gold = 21,
-          pos = 1,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 85,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 21,
           pos = 2,
           status = "playing",
           contractActive = true
@@ -24092,18 +23348,6 @@ return {
           def = 10,
           keys = 1,
           gold = 21,
-          pos = 5,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 105,
-          atk = 19,
-          def = 10,
-          keys = 1,
-          gold = 27,
           pos = 5,
           status = "playing",
           contractActive = false
@@ -24291,18 +23535,6 @@ return {
           def = 10,
           keys = 0,
           gold = 0,
-          pos = 57,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 58,
-          ok = true,
-          hp = 185,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 3,
           pos = 57,
           status = "playing",
           contractActive = false
@@ -24549,18 +23781,6 @@ return {
           def = 10,
           keys = 0,
           gold = 3,
-          pos = 57,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 58,
-          ok = true,
-          hp = 185,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 3,
           pos = 58,
           status = "playing",
           contractActive = false
@@ -24759,18 +23979,6 @@ return {
           def = 10,
           keys = 0,
           gold = 0,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 38,
-          ok = true,
-          hp = 185,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 3,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -25035,18 +24243,6 @@ return {
           def = 13,
           keys = 0,
           gold = 6,
-          pos = 56,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 57,
-          ok = true,
-          hp = 181,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 6,
           pos = 57,
           status = "playing",
           contractActive = false
@@ -25083,18 +24279,6 @@ return {
           def = 13,
           keys = 0,
           gold = 6,
-          pos = 60,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 61,
-          ok = true,
-          hp = 196,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 12,
           pos = 60,
           status = "playing",
           contractActive = false
@@ -25197,18 +24381,6 @@ return {
           def = 10,
           keys = 0,
           gold = 0,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 185,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 3,
           pos = 3,
           status = "playing",
           contractActive = false
@@ -25425,18 +24597,6 @@ return {
           def = 13,
           keys = 0,
           gold = 26,
-          pos = 44,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 53,
-          ok = true,
-          hp = 179,
-          atk = 10,
-          def = 13,
-          keys = 0,
-          gold = 26,
           pos = 53,
           status = "playing",
           contractActive = false
@@ -25515,18 +24675,6 @@ return {
           def = 10,
           keys = 0,
           gold = 0,
-          pos = 19,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 10,
-          ok = true,
-          hp = 185,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 3,
           pos = 19,
           status = "playing",
           contractActive = false
@@ -25647,6 +24795,18 @@ return {
           def = 10,
           keys = 0,
           gold = 9,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 135,
+          atk = 13,
+          def = 10,
+          keys = 0,
+          gold = 9,
           pos = 32,
           status = "playing",
           contractActive = false
@@ -25659,18 +24819,6 @@ return {
           def = 10,
           keys = 0,
           gold = 9,
-          pos = 41,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 50,
-          ok = true,
-          hp = 125,
-          atk = 13,
-          def = 10,
-          keys = 0,
-          gold = 12,
           pos = 41,
           status = "playing",
           contractActive = false
@@ -25791,18 +24939,6 @@ return {
           def = 10,
           keys = 0,
           gold = 12,
-          pos = 23,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 14,
-          ok = true,
-          hp = 125,
-          atk = 13,
-          def = 10,
-          keys = 0,
-          gold = 18,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -25971,18 +25107,6 @@ return {
           def = 10,
           keys = 0,
           gold = 18,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 46,
-          ok = true,
-          hp = 125,
-          atk = 13,
-          def = 10,
-          keys = 0,
-          gold = 24,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -26313,6 +25437,18 @@ return {
           def = 10,
           keys = 0,
           gold = 6,
+          pos = 33,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 32,
+          ok = true,
+          hp = 120,
+          atk = 10,
+          def = 10,
+          keys = 0,
+          gold = 6,
           pos = 32,
           status = "playing",
           contractActive = false
@@ -26325,18 +25461,6 @@ return {
           def = 10,
           keys = 0,
           gold = 6,
-          pos = 41,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 50,
-          ok = true,
-          hp = 105,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 9,
           pos = 41,
           status = "playing",
           contractActive = false
@@ -26505,18 +25629,6 @@ return {
           def = 10,
           keys = 0,
           gold = 9,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 46,
-          ok = true,
-          hp = 140,
-          atk = 10,
-          def = 10,
-          keys = 0,
-          gold = 12,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -26860,18 +25972,6 @@ return {
           def = 16,
           keys = 1,
           gold = 20,
-          pos = 35,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 24,
-          ok = true,
-          hp = 134,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 29,
           pos = 35,
           status = "playing",
           contractActive = false
@@ -27256,6 +26356,18 @@ return {
           def = 22,
           keys = 1,
           gold = 39,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 4,
+          ok = true,
+          hp = 134,
+          atk = 19,
+          def = 22,
+          keys = 1,
+          gold = 39,
           pos = 4,
           status = "playing",
           contractActive = false
@@ -27376,18 +26488,6 @@ return {
           def = 22,
           keys = 1,
           gold = 39,
-          pos = 70,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 69,
-          ok = true,
-          hp = 134,
-          atk = 19,
-          def = 22,
-          keys = 1,
-          gold = 49,
           pos = 70,
           status = "playing",
           contractActive = false
@@ -27804,18 +26904,6 @@ return {
           def = 16,
           keys = 1,
           gold = 29,
-          pos = 68,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 69,
-          ok = true,
-          hp = 104,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 29,
           pos = 69,
           status = "playing",
           contractActive = false
@@ -28104,18 +27192,6 @@ return {
           def = 22,
           keys = 2,
           gold = 29,
-          pos = 17,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 104,
-          atk = 19,
-          def = 22,
-          keys = 2,
-          gold = 35,
           pos = 17,
           status = "playing",
           contractActive = false
@@ -28628,18 +27704,6 @@ return {
           def = 16,
           keys = 1,
           gold = 29,
-          pos = 69,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 70,
-          ok = true,
-          hp = 256,
-          atk = 19,
-          def = 16,
-          keys = 1,
-          gold = 29,
           pos = 70,
           status = "playing",
           contractActive = false
@@ -28790,6 +27854,18 @@ return {
         },
         {
           cell = 51,
+          ok = true,
+          hp = 176,
+          atk = 19,
+          def = 22,
+          keys = 1,
+          gold = 39,
+          pos = 51,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 62,
           ok = true,
           hp = 176,
           atk = 19,
@@ -28948,18 +28024,6 @@ return {
           def = 16,
           keys = 1,
           gold = 20,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 128,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 30,
           pos = 3,
           status = "playing",
           contractActive = false
@@ -29248,18 +28312,6 @@ return {
           def = 19,
           keys = 1,
           gold = 39,
-          pos = 50,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 51,
-          ok = true,
-          hp = 228,
-          atk = 19,
-          def = 19,
-          keys = 1,
-          gold = 39,
           pos = 51,
           status = "playing",
           contractActive = false
@@ -29482,6 +28534,18 @@ return {
         },
         {
           cell = 68,
+          ok = true,
+          hp = 148,
+          atk = 19,
+          def = 22,
+          keys = 2,
+          gold = 49,
+          pos = 68,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 69,
           ok = true,
           hp = 148,
           atk = 19,
@@ -29736,18 +28800,6 @@ return {
           def = 16,
           keys = 1,
           gold = 20,
-          pos = 37,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 38,
-          ok = true,
-          hp = 128,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 30,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -30120,18 +29172,6 @@ return {
           def = 22,
           keys = 1,
           gold = 40,
-          pos = 45,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 56,
-          ok = true,
-          hp = 48,
-          atk = 19,
-          def = 22,
-          keys = 1,
-          gold = 40,
           pos = 56,
           status = "playing",
           contractActive = false
@@ -30252,55 +29292,43 @@ return {
           def = 22,
           keys = 1,
           gold = 50,
-          pos = 3,
+          pos = 4,
           status = "playing",
           contractActive = false
         },
         {
-          cell = 14,
+          cell = 5,
           ok = true,
           hp = 98,
           atk = 19,
           def = 22,
           keys = 1,
           gold = 50,
-          pos = 14,
+          pos = 5,
           status = "playing",
           contractActive = false
         },
         {
-          cell = 25,
+          cell = 16,
           ok = true,
           hp = 98,
           atk = 19,
           def = 22,
           keys = 1,
           gold = 50,
-          pos = 25,
+          pos = 16,
           status = "playing",
           contractActive = false
         },
         {
-          cell = 36,
+          cell = 27,
           ok = true,
           hp = 98,
           atk = 19,
           def = 22,
           keys = 1,
           gold = 50,
-          pos = 36,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 37,
-          ok = true,
-          hp = 98,
-          atk = 19,
-          def = 22,
-          keys = 1,
-          gold = 50,
-          pos = 37,
+          pos = 27,
           status = "playing",
           contractActive = false
         },
@@ -30420,6 +29448,18 @@ return {
           def = 22,
           keys = 1,
           gold = 56,
+          pos = 7,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 18,
+          ok = true,
+          hp = 148,
+          atk = 19,
+          def = 22,
+          keys = 1,
+          gold = 56,
           pos = 18,
           status = "playing",
           contractActive = false
@@ -30528,18 +29568,6 @@ return {
           def = 22,
           keys = 1,
           gold = 56,
-          pos = 23,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 12,
-          ok = true,
-          hp = 148,
-          atk = 19,
-          def = 22,
-          keys = 1,
-          gold = 65,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -30932,18 +29960,6 @@ return {
           def = 22,
           keys = 1,
           gold = 26,
-          pos = 51,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 62,
-          ok = true,
-          hp = 90,
-          atk = 16,
-          def = 22,
-          keys = 1,
-          gold = 26,
           pos = 62,
           status = "playing",
           contractActive = false
@@ -31004,18 +30020,6 @@ return {
           def = 22,
           keys = 1,
           gold = 26,
-          pos = 41,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 42,
-          ok = true,
-          hp = 140,
-          atk = 16,
-          def = 22,
-          keys = 1,
-          gold = 32,
           pos = 41,
           status = "playing",
           contractActive = false
@@ -31168,18 +30172,6 @@ return {
           def = 16,
           keys = 1,
           gold = 20,
-          pos = 0,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 1,
-          ok = true,
-          hp = 134,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 29,
           pos = 0,
           status = "playing",
           contractActive = false
@@ -31452,18 +30444,6 @@ return {
           def = 16,
           keys = 1,
           gold = 29,
-          pos = 36,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 37,
-          ok = true,
-          hp = 134,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 29,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -31500,18 +30480,6 @@ return {
           def = 16,
           keys = 1,
           gold = 29,
-          pos = 40,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 51,
-          ok = true,
-          hp = 118,
-          atk = 16,
-          def = 16,
-          keys = 1,
-          gold = 35,
           pos = 40,
           status = "playing",
           contractActive = false
@@ -31656,18 +30624,6 @@ return {
           def = 19,
           keys = 1,
           gold = 44,
-          pos = 35,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 46,
-          ok = true,
-          hp = 168,
-          atk = 16,
-          def = 19,
-          keys = 1,
-          gold = 44,
           pos = 46,
           status = "playing",
           contractActive = false
@@ -31764,18 +30720,6 @@ return {
           def = 19,
           keys = 1,
           gold = 44,
-          pos = 0,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 1,
-          ok = true,
-          hp = 165,
-          atk = 19,
-          def = 19,
-          keys = 1,
-          gold = 50,
           pos = 0,
           status = "playing",
           contractActive = false
@@ -32023,18 +30967,6 @@ return {
           def = 30,
           keys = 0,
           gold = 8,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 1491,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 8,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -32047,30 +30979,6 @@ return {
           def = 30,
           keys = 0,
           gold = 16,
-          pos = 2,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 3,
-          ok = true,
-          hp = 1482,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 16,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 1478,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 24,
           pos = 3,
           status = "playing",
           contractActive = false
@@ -32199,18 +31107,6 @@ return {
           def = 26,
           keys = 0,
           gold = 8,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 2487,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 8,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -32223,30 +31119,6 @@ return {
           def = 26,
           keys = 0,
           gold = 16,
-          pos = 2,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 3,
-          ok = true,
-          hp = 2474,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 16,
-          pos = 3,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 4,
-          ok = true,
-          hp = 2466,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 24,
           pos = 3,
           status = "playing",
           contractActive = false
@@ -32385,6 +31257,18 @@ return {
           def = 30,
           keys = 0,
           gold = 16,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 1500,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 16,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -32421,19 +31305,7 @@ return {
           def = 30,
           keys = 0,
           gold = 32,
-          pos = 16,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 9,
-          ok = true,
-          hp = 1500,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 32,
-          pos = 9,
+          pos = 17,
           status = "playing",
           contractActive = false
         },
@@ -32445,19 +31317,7 @@ return {
           def = 30,
           keys = 0,
           gold = 112,
-          pos = 9,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 1248,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 112,
-          pos = 2,
+          pos = 10,
           status = "playing",
           contractActive = false
         },
@@ -32609,6 +31469,18 @@ return {
           def = 26,
           keys = 0,
           gold = 16,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
+          ok = true,
+          hp = 2476,
+          atk = 33,
+          def = 26,
+          keys = 0,
+          gold = 16,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -32645,19 +31517,7 @@ return {
           def = 26,
           keys = 0,
           gold = 32,
-          pos = 16,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 9,
-          ok = true,
-          hp = 2452,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 32,
-          pos = 9,
+          pos = 17,
           status = "playing",
           contractActive = false
         },
@@ -32669,19 +31529,7 @@ return {
           def = 26,
           keys = 0,
           gold = 112,
-          pos = 9,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 2020,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 112,
-          pos = 2,
+          pos = 10,
           status = "playing",
           contractActive = false
         },
@@ -32819,24 +31667,24 @@ return {
           def = 30,
           keys = 0,
           gold = 8,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 1496,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 8,
           pos = 2,
           status = "playing",
           contractActive = false
         },
         {
           cell = 3,
+          ok = true,
+          hp = 1496,
+          atk = 40,
+          def = 30,
+          keys = 0,
+          gold = 24,
+          pos = 3,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 2,
           ok = true,
           hp = 1496,
           atk = 40,
@@ -32891,30 +31739,6 @@ return {
           def = 30,
           keys = 0,
           gold = 40,
-          pos = 17,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 18,
-          ok = true,
-          hp = 1496,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 40,
-          pos = 18,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 19,
-          ok = true,
-          hp = 1244,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 120,
           pos = 18,
           status = "playing",
           contractActive = false
@@ -33007,18 +31831,6 @@ return {
           def = 26,
           keys = 0,
           gold = 8,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 2484,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 8,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -33067,30 +31879,6 @@ return {
           def = 26,
           keys = 0,
           gold = 24,
-          pos = 17,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 18,
-          ok = true,
-          hp = 2460,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 24,
-          pos = 18,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 19,
-          ok = true,
-          hp = 2028,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 104,
           pos = 18,
           status = "playing",
           contractActive = false
@@ -33169,18 +31957,6 @@ return {
           def = 30,
           keys = 0,
           gold = 16,
-          pos = 0,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 1,
-          ok = true,
-          hp = 1500,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 16,
           pos = 1,
           status = "playing",
           contractActive = false
@@ -33193,30 +31969,6 @@ return {
           def = 30,
           keys = 0,
           gold = 32,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 1500,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 32,
-          pos = 2,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 3,
-          ok = true,
-          hp = 1500,
-          atk = 40,
-          def = 30,
-          keys = 0,
-          gold = 48,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -33369,18 +32121,6 @@ return {
           def = 26,
           keys = 0,
           gold = 8,
-          pos = 14,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 15,
-          ok = true,
-          hp = 2487,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 8,
           pos = 15,
           status = "playing",
           contractActive = false
@@ -33393,30 +32133,6 @@ return {
           def = 26,
           keys = 0,
           gold = 16,
-          pos = 15,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 16,
-          ok = true,
-          hp = 2469,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 16,
-          pos = 16,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 17,
-          ok = true,
-          hp = 2461,
-          atk = 33,
-          def = 26,
-          keys = 0,
-          gold = 24,
           pos = 16,
           status = "playing",
           contractActive = false
@@ -34893,18 +33609,6 @@ return {
           def = 13,
           keys = 0,
           gold = 29,
-          pos = 37,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 125,
-          atk = 13,
-          def = 13,
-          keys = 0,
-          gold = 29,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -35037,18 +33741,6 @@ return {
           def = 13,
           keys = 0,
           gold = 29,
-          pos = 5,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 62,
-          atk = 16,
-          def = 13,
-          keys = 0,
-          gold = 39,
           pos = 5,
           status = "playing",
           contractActive = true
@@ -35237,18 +33929,6 @@ return {
           def = 13,
           keys = 0,
           gold = 61,
-          pos = 46,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 57,
-          ok = true,
-          hp = 100,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 61,
           pos = 57,
           status = "playing",
           contractActive = false
@@ -35309,18 +33989,6 @@ return {
           def = 13,
           keys = 0,
           gold = 61,
-          pos = 68,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 69,
-          ok = true,
-          hp = 105,
-          atk = 19,
-          def = 13,
-          keys = 0,
-          gold = 71,
           pos = 68,
           status = "playing",
           contractActive = false
@@ -35802,18 +34470,6 @@ return {
           def = 19,
           keys = 1,
           gold = 74,
-          pos = 18,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 19,
-          ok = true,
-          hp = 105,
-          atk = 22,
-          def = 19,
-          keys = 1,
-          gold = 74,
           pos = 19,
           status = "playing",
           contractActive = false
@@ -35910,18 +34566,6 @@ return {
           def = 19,
           keys = 1,
           gold = 80,
-          pos = 36,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 37,
-          ok = true,
-          hp = 103,
-          atk = 25,
-          def = 19,
-          keys = 1,
-          gold = 80,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -35982,18 +34626,6 @@ return {
           def = 19,
           keys = 1,
           gold = 100,
-          pos = 42,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 43,
-          ok = true,
-          hp = 103,
-          atk = 25,
-          def = 19,
-          keys = 1,
-          gold = 109,
           pos = 42,
           status = "playing",
           contractActive = false
@@ -36078,18 +34710,6 @@ return {
           def = 19,
           keys = 1,
           gold = 129,
-          pos = 7,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 6,
-          ok = true,
-          hp = 101,
-          atk = 25,
-          def = 19,
-          keys = 1,
-          gold = 135,
           pos = 7,
           status = "playing",
           contractActive = false
@@ -36402,18 +35022,6 @@ return {
           def = 22,
           keys = 1,
           gold = 145,
-          pos = 22,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 23,
-          ok = true,
-          hp = 101,
-          atk = 25,
-          def = 22,
-          keys = 1,
-          gold = 145,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -36522,18 +35130,6 @@ return {
           def = 22,
           keys = 1,
           gold = 145,
-          pos = 40,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 49,
-          ok = true,
-          hp = 87,
-          atk = 25,
-          def = 22,
-          keys = 1,
-          gold = 195,
           pos = 40,
           status = "playing",
           contractActive = false
@@ -36782,6 +35378,18 @@ return {
           def = 22,
           keys = 1,
           gold = 205,
+          pos = 75,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 74,
+          ok = true,
+          hp = 87,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 205,
           pos = 74,
           status = "playing",
           contractActive = false
@@ -36932,6 +35540,18 @@ return {
         },
         {
           cell = 45,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 1,
+          gold = 211,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
           ok = true,
           hp = 127,
           atk = 25,
@@ -37245,18 +35865,6 @@ return {
           def = 22,
           keys = 2,
           gold = 217,
-          pos = 25,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 24,
-          ok = true,
-          hp = 127,
-          atk = 25,
-          def = 22,
-          keys = 2,
-          gold = 217,
           pos = 24,
           status = "playing",
           contractActive = false
@@ -37293,6 +35901,18 @@ return {
           def = 22,
           keys = 2,
           gold = 226,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
+          ok = true,
+          hp = 127,
+          atk = 25,
+          def = 22,
+          keys = 2,
+          gold = 226,
           pos = 46,
           status = "playing",
           contractActive = false
@@ -37317,18 +35937,6 @@ return {
           def = 22,
           keys = 2,
           gold = 226,
-          pos = 68,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 69,
-          ok = true,
-          hp = 127,
-          atk = 25,
-          def = 22,
-          keys = 2,
-          gold = 236,
           pos = 68,
           status = "playing",
           contractActive = false
@@ -37804,6 +36412,18 @@ return {
           def = 22,
           keys = 2,
           gold = 242,
+          pos = 4,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 3,
+          ok = true,
+          hp = 167,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 242,
           pos = 3,
           status = "playing",
           contractActive = false
@@ -37948,18 +36568,6 @@ return {
           def = 22,
           keys = 2,
           gold = 258,
-          pos = 48,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 49,
-          ok = true,
-          hp = 137,
-          atk = 28,
-          def = 22,
-          keys = 2,
-          gold = 258,
           pos = 49,
           status = "playing",
           contractActive = false
@@ -38002,6 +36610,18 @@ return {
         },
         {
           cell = 53,
+          ok = true,
+          hp = 137,
+          atk = 28,
+          def = 22,
+          keys = 2,
+          gold = 268,
+          pos = 53,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 52,
           ok = true,
           hp = 137,
           atk = 28,
@@ -38080,18 +36700,6 @@ return {
           def = 22,
           keys = 2,
           gold = 268,
-          pos = 70,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 69,
-          ok = true,
-          hp = 137,
-          atk = 28,
-          def = 22,
-          keys = 2,
-          gold = 271,
           pos = 70,
           status = "playing",
           contractActive = false
@@ -38375,18 +36983,6 @@ return {
           def = 22,
           keys = 2,
           gold = 277,
-          pos = 1,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 2,
-          ok = true,
-          hp = 177,
-          atk = 28,
-          def = 22,
-          keys = 2,
-          gold = 277,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -38623,18 +37219,6 @@ return {
           def = 22,
           keys = 2,
           gold = 302,
-          pos = 2,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 3,
-          ok = true,
-          hp = 217,
-          atk = 28,
-          def = 22,
-          keys = 2,
-          gold = 312,
           pos = 2,
           status = "playing",
           contractActive = false
@@ -39007,18 +37591,6 @@ return {
           def = 22,
           keys = 2,
           gold = 396,
-          pos = 50,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 51,
-          ok = true,
-          hp = 217,
-          atk = 28,
-          def = 22,
-          keys = 2,
-          gold = 396,
           pos = 51,
           status = "playing",
           contractActive = false
@@ -39208,18 +37780,6 @@ return {
           def = 25,
           keys = 2,
           gold = 282,
-          pos = 26,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 217,
-          atk = 28,
-          def = 25,
-          keys = 2,
-          gold = 282,
           pos = 27,
           status = "playing",
           contractActive = false
@@ -39310,6 +37870,18 @@ return {
         },
         {
           cell = 61,
+          ok = true,
+          hp = 195,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 332,
+          pos = 61,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 62,
           ok = true,
           hp = 195,
           atk = 28,
@@ -39562,6 +38134,18 @@ return {
         },
         {
           cell = 45,
+          ok = true,
+          hp = 295,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 341,
+          pos = 45,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 46,
           ok = true,
           hp = 295,
           atk = 28,
@@ -39936,6 +38520,18 @@ return {
           def = 25,
           keys = 2,
           gold = 377,
+          pos = 27,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 28,
+          ok = true,
+          hp = 345,
+          atk = 28,
+          def = 25,
+          keys = 2,
+          gold = 377,
           pos = 28,
           status = "playing",
           contractActive = false
@@ -40164,18 +38760,6 @@ return {
           def = 25,
           keys = 2,
           gold = 377,
-          pos = 44,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 45,
-          ok = true,
-          hp = 395,
-          atk = 28,
-          def = 25,
-          keys = 2,
-          gold = 386,
           pos = 44,
           status = "playing",
           contractActive = false
@@ -40683,18 +39267,6 @@ return {
           def = 28,
           keys = 3,
           gold = 389,
-          pos = 47,
-          status = "playing",
-          contractActive = true
-        },
-        {
-          cell = 48,
-          ok = true,
-          hp = 325,
-          atk = 36,
-          def = 28,
-          keys = 3,
-          gold = 389,
           pos = 48,
           status = "playing",
           contractActive = true
@@ -41111,18 +39683,6 @@ return {
           def = 28,
           keys = 4,
           gold = 467,
-          pos = 50,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 51,
-          ok = true,
-          hp = 647,
-          atk = 31,
-          def = 28,
-          keys = 4,
-          gold = 467,
           pos = 51,
           status = "playing",
           contractActive = false
@@ -41436,6 +39996,18 @@ return {
         },
         {
           cell = 8,
+          ok = true,
+          hp = 641,
+          atk = 34,
+          def = 28,
+          keys = 4,
+          gold = 505,
+          pos = 8,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 7,
           ok = true,
           hp = 641,
           atk = 34,
@@ -41917,18 +40489,6 @@ return {
           def = 28,
           keys = 5,
           gold = 521,
-          pos = 2,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 3,
-          ok = true,
-          hp = 701,
-          atk = 34,
-          def = 28,
-          keys = 5,
-          gold = 521,
           pos = 3,
           status = "playing",
           contractActive = false
@@ -42073,18 +40633,6 @@ return {
           def = 28,
           keys = 5,
           gold = 601,
-          pos = 43,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 54,
-          ok = true,
-          hp = 755,
-          atk = 34,
-          def = 28,
-          keys = 5,
-          gold = 609,
           pos = 43,
           status = "playing",
           contractActive = false
@@ -42837,6 +41385,18 @@ return {
           def = 28,
           keys = 5,
           gold = 745,
+          pos = 28,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 29,
+          ok = true,
+          hp = 815,
+          atk = 37,
+          def = 28,
+          keys = 5,
+          gold = 745,
           pos = 29,
           status = "playing",
           contractActive = false
@@ -43326,18 +41886,6 @@ return {
           def = 31,
           keys = 5,
           gold = 509,
-          pos = 32,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 31,
-          ok = true,
-          hp = 1051,
-          atk = 40,
-          def = 31,
-          keys = 5,
-          gold = 509,
           pos = 31,
           status = "playing",
           contractActive = false
@@ -43362,18 +41910,6 @@ return {
           def = 31,
           keys = 5,
           gold = 509,
-          pos = 29,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 28,
-          ok = true,
-          hp = 1048,
-          atk = 40,
-          def = 31,
-          keys = 5,
-          gold = 517,
           pos = 29,
           status = "playing",
           contractActive = false
@@ -43434,6 +41970,18 @@ return {
           def = 31,
           keys = 5,
           gold = 533,
+          pos = 48,
+          status = "playing",
+          contractActive = false
+        },
+        {
+          cell = 37,
+          ok = true,
+          hp = 1048,
+          atk = 40,
+          def = 31,
+          keys = 5,
+          gold = 533,
           pos = 37,
           status = "playing",
           contractActive = false
@@ -43470,30 +42018,6 @@ return {
           def = 31,
           keys = 5,
           gold = 549,
-          pos = 39,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 50,
-          ok = true,
-          hp = 1048,
-          atk = 40,
-          def = 31,
-          keys = 5,
-          gold = 549,
-          pos = 50,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 49,
-          ok = true,
-          hp = 814,
-          atk = 40,
-          def = 31,
-          keys = 5,
-          gold = 629,
           pos = 50,
           status = "playing",
           contractActive = false
@@ -43718,18 +42242,6 @@ return {
           def = 37,
           keys = 5,
           gold = 661,
-          pos = 32,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 31,
-          ok = true,
-          hp = 997,
-          atk = 40,
-          def = 37,
-          keys = 5,
-          gold = 677,
           pos = 32,
           status = "playing",
           contractActive = false
@@ -43982,18 +42494,6 @@ return {
           def = 37,
           keys = 5,
           gold = 693,
-          pos = 22,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 23,
-          ok = true,
-          hp = 997,
-          atk = 43,
-          def = 37,
-          keys = 5,
-          gold = 693,
           pos = 23,
           status = "playing",
           contractActive = false
@@ -44026,18 +42526,6 @@ return {
           cell = 26,
           ok = true,
           hp = 997,
-          atk = 46,
-          def = 37,
-          keys = 5,
-          gold = 693,
-          pos = 26,
-          status = "playing",
-          contractActive = false
-        },
-        {
-          cell = 27,
-          ok = true,
-          hp = 422,
           atk = 46,
           def = 37,
           keys = 5,

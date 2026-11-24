@@ -5,7 +5,7 @@
   "scripts": {
     "test": "node --import tsx --test tests/*.test.ts",
     "solve": "tsx tools/solve.ts",
-    "preview:build": "esbuild web/main.ts --bundle --outfile=web/dist/main.js --format=iife --target=es2019",
+    "preview:build": "esbuild web/main.ts --bundle --loader:.png=dataurl --outfile=web/dist/main.js --format=iife --target=es2019",
     "preview": "npm run preview:build && npx --yes http-server web -p 8080 -c-1",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "check": "npm run typecheck && npm test",

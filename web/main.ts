@@ -16,6 +16,10 @@ import { contractText, depositFor, keepVersion } from '../src/core/contract';
 import { SLOTS, Sym, holdHint, machineOdds, payout } from '../src/core/slot';
 import { RENT_STAT_COST } from '../src/core/game';
 
+import minerFront from '../love/assets/art/miner/front.png';
+import minerSide from '../love/assets/art/miner/side.png';
+import minerBack from '../love/assets/art/miner/back.png';
+
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const stage = $('stage');
 const board = $('board');
@@ -26,7 +30,9 @@ const HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const SAVE_KEY = 'descent.demo.save.v1';
 const LAST_KEY = 'descent.demo.lastChoices.v1';
 
-interface SaveFile { choices: FloorChoice[]; run: RunSave }
+type Facing = 'down' | 'left' | 'up' | 'right';
+interface SaveFile { choices: FloorChoice[]; run: RunSave; facing?: Facing }
+let facing: Facing = 'down';
 
 let choices: FloorChoice[] = [];
 let run!: Run;
@@ -50,7 +56,7 @@ function clearSave() {
 }
 function saveRun() {
     if (run.status === 'finished') { clearSave(); return; }
-    store(SAVE_KEY, { choices, run: run.save() } satisfies SaveFile);
+    store(SAVE_KEY, { choices, run: run.save(), facing } satisfies SaveFile);
 }
 
 // ---------- 尺寸 ----------
@@ -131,7 +137,22 @@ function cellHtml(i: number): { cls: string; html: string } {
 /** 主角棋子：独立于格子，移动时用 CSS 过渡一格一格走 */
 const heroEl = document.createElement('div');
 heroEl.id = 'hero';
-heroEl.innerHTML = '<div class="heroToken">我</div>';
+const heroSprite = new Image();
+heroSprite.className = 'heroToken';
+heroSprite.alt = '掘井人';
+heroEl.appendChild(heroSprite);
+
+function face(dir: Facing) {
+    facing = dir;
+    heroEl.dataset.facing = dir;
+    heroSprite.src = dir === 'up' ? minerBack : dir === 'down' ? minerFront : minerSide;
+}
+
+function faceStep(from: number, to: number) {
+    if (from === to) return;
+    if (from % run.w === to % run.w) face(to > from ? 'down' : 'up');
+    else face(to > from ? 'right' : 'left');
+}
 
 function placeHero(animate: boolean) {
     const el = board.children[run.pos] as HTMLElement | undefined;
@@ -143,8 +164,8 @@ function placeHero(animate: boolean) {
 }
 
 /** 打怪、开门、捡东西时朝目标"撞"一下 */
-function bump(target: number) {
-    const from = board.children[run.pos] as HTMLElement;
+function bump(start: number, target: number) {
+    const from = board.children[start] as HTMLElement;
     const to = board.children[target] as HTMLElement;
     const dx = (to.offsetLeft - from.offsetLeft) * 0.35;
     const dy = (to.offsetTop - from.offsetTop) * 0.35;
@@ -153,7 +174,7 @@ function bump(target: number) {
 }
 
 function renderBoard() {
-    if (board.children.length !== run.cells.length) {
+    if (board.children.length !== run.cells.length + 1) {
         board.innerHTML = '';
         run.cells.forEach((_, i) => {
             const d = document.createElement('div');
@@ -469,6 +490,7 @@ async function walk(path: number[], confirmedExit = false, confirmedFatal = fals
     placeTip();
     try {
         for (const cell of path) {
+            const from = run.pos;
             const c = run.cells[cell];
             const before = { ...run.hero };
             // 下楼前先停在楼梯口，看一眼下一层的情报再决定
@@ -476,6 +498,7 @@ async function walk(path: number[], confirmedExit = false, confirmedFatal = fals
             if (c.kind === 'floor' || c.kind === 'exit') {
                 const r = run.step(cell);
                 if (!r.ok) { setMsg(r.msg || '走不过去', true); break; }
+                faceStep(from, run.pos);
                 placeHero(true);
                 renderHud();
                 await sleep(STEP_MS);
@@ -488,7 +511,8 @@ async function walk(path: number[], confirmedExit = false, confirmedFatal = fals
             // 交互：先撞一下，再结算
             const r0 = run.step(cell);
             if (!r0.ok) { setMsg(r0.msg, true); break; }
-            bump(cell);
+            faceStep(from, run.pos);
+            bump(from, cell);
             await sleep(STEP_MS / 2);
             setMsg(r0.msg, run.status === 'dead');
             if (run.status === 'dead') {
@@ -801,7 +825,8 @@ function startFloor() {
     setMsg(run.floor.hint ?? '');
 }
 
-function begin(c: FloorChoice[], save?: RunSave) {
+function begin(c: FloorChoice[], save?: RunSave, savedFacing?: Facing) {
+    face(savedFacing ?? 'down');
     choices = c;
     const floors = buildFloors(choices);
     run = save ? Run.load(floors, save) : new Run(floors, 'digger', Math.floor(Math.random() * 2 ** 31));
@@ -834,7 +859,7 @@ $('keysHint').textContent = HOVER
 fit();
 const saved = loadKey<SaveFile>(SAVE_KEY);
 if (saved?.choices?.length === DEMO_POOLS.length && saved.run) {
-    begin(saved.choices, saved.run);
+    begin(saved.choices, saved.run, saved.facing);
     modal(`<h2>坠井者 · 试玩版</h2><p>你有一局还没打完（${run.floor.name}）。</p>`, [
         { label: '新开一局', on: newRun },
         { label: '继续', primary: true, on: () => {} },
