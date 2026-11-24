@@ -71,6 +71,12 @@ function M.start()
     local function handlePopups()
         for _ = 1, 10 do
             local t = modalTitle()
+            if t == '第一道印子' then
+                shot('02c-first-mark-story')
+                say('第一次刻印的剧情：' .. t)
+                button('看看图案'); sleep(0.2)
+                t = modalTitle()
+            end
             if t == '刻图案' then
                 local run = game.getRun()
                 local blanks = 0
@@ -260,6 +266,9 @@ function M.start()
         end
         shot('02-arm-story')
         say('断臂剧情：' .. tostring(modalTitle()) .. '，教程完成 ' .. tostring(game.getMeta().tutorialDone) .. '，灵魂碎片 ' .. tostring(game.getMeta().shards))
+        button('低头看一眼'); sleep(0.2)
+        shot('02b-arm-story-2')
+        say('断臂剧情第 2 页：' .. tostring(modalTitle()) .. '，按钮 ' .. tostring(game.getModal() and #game.getModal().buttons))
         button('再下井')
         sleep(0.3)
 

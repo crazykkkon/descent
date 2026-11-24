@@ -30,8 +30,8 @@ end
 local RENT = {}
 for _, r in ipairs(P.RENTS) do RENT[r.floor] = r.rent end
 
-local STALL_SHALLOW = { { id = 'hp', amount = 80, price = 25 }, { id = 'atk', amount = 2, price = 40 }, { id = 'def', amount = 2, price = 40 } }
-local STALL_DEEP = { { id = 'hp', amount = 150, price = 40 }, { id = 'atk', amount = 3, price = 70 }, { id = 'def', amount = 3, price = 70 } }
+local STALL_SHALLOW = { { id = 'hp', amount = 80, price = 25 }, { id = 'atk', amount = 1, price = 40 }, { id = 'def', amount = 1, price = 40 } }
+local STALL_DEEP = { { id = 'hp', amount = 150, price = 40 }, { id = 'atk', amount = 2, price = 70 }, { id = 'def', amount = 2, price = 70 } }
 
 local function band(d)
     if d >= 18 then return P.BOTTOM elseif d >= 10 then return P.DEEP end
@@ -50,17 +50,50 @@ local function markFor(seed, d, slot, map)
     return { cand[rng.pick(seed, 8100 + d * 10 + slot, 1, #cand) + 1] }
 end
 
--- 第 6 层起（d ≥ 5）小怪换成更凶的同类；第 7 层起每往下一层怪物加强一级（井底之眼不加）。和原型 deepen / powerFor 一致
-M.UPGRADE_FROM, M.POWER_FROM, M.POWER_MAX = 5, 5, 6
+-- 第 6 层起（d ≥ 5）小怪换成更凶的同类；第 7 层起每往下一层怪物加强一级，一直加到第 20 层。和原型 deepen / powerFor 一致
+M.UPGRADE_FROM, M.POWER_FROM, M.POWER_MAX = 5, 5, 14
 local function deepen(map, d)
     if d < M.UPGRADE_FROM then return map end
     local out = {}
     for i, r in ipairs(map) do out[i] = (r:gsub('[mefcvgx]', config.UPGRADE_CHARS)) end
     return out
 end
-function M.powerFor(d, kind)
-    if kind == 'boss' or d <= M.POWER_FROM then return 0 end
+function M.powerFor(d)
+    if d <= M.POWER_FROM then return 0 end
     return math.min(M.POWER_MAX, d - M.POWER_FROM)
+end
+
+-- 大宝石（制作人定）：第 1～6 层只有小宝石；第 7～10 层一层最多一颗、概率很小；第 11 层起大小都有，越往下大的越多（和原型 bigGems 一致）
+M.BIG_GEM_FROM, M.BIG_GEM_MIX_FROM = 6, 10
+M.BIG_GEM_EARLY, M.BIG_GEM_P0, M.BIG_GEM_STEP, M.BIG_GEM_PMAX = 0.25, 0.3, 0.04, 0.7
+function M.bigGems(map, seed, d, slot)
+    if d < M.BIG_GEM_FROM then return map end
+    local gems = {}
+    for y, r in ipairs(map) do
+        for x = 1, #r do
+            local ch = r:sub(x, x)
+            if ch == 'r' or ch == 'b' then gems[#gems + 1] = { y, x } end
+        end
+    end
+    if #gems == 0 then return map end
+    local key = 8700 + d * 10 + slot
+    local set = {}
+    if d < M.BIG_GEM_MIX_FROM then
+        if rng.draw(seed, key, 0) < M.BIG_GEM_EARLY then set[#set + 1] = rng.pick(seed, key, 1, #gems) + 1 end
+    else
+        local p = math.min(M.BIG_GEM_PMAX, M.BIG_GEM_P0 + M.BIG_GEM_STEP * (d - M.BIG_GEM_MIX_FROM))
+        for k = 1, #gems do if rng.draw(seed, key, 2 + k - 1) < p then set[#set + 1] = k end end
+    end
+    if #set == 0 then return map end
+    local rows = {}
+    for y, r in ipairs(map) do rows[y] = r end
+    for _, k in ipairs(set) do
+        local y, x = gems[k][1], gems[k][2]
+        local r = rows[y]
+        local ch = r:sub(x, x) == 'r' and 'R' or 'C'
+        rows[y] = r:sub(1, x - 1) .. ch .. r:sub(x + 1)
+    end
+    return rows
 end
 
 -- opts：{ depth = 深度模式 0～3, unlocks = { 解锁的 id } }（和原型 RouteOptions 一致）
@@ -69,7 +102,7 @@ local function toFloor(seed, d, slot, e, opts)
     local f = copy(band(d))
     f.name = '第 ' .. (d + 1) .. ' 层 · ' .. e.name
     f.hint, f.kind = e.hint, e.kind
-    f.map = e.kind == 'boss' and e.map or deepen(e.map, d)
+    f.map = M.bigGems(e.kind == 'boss' and e.map or deepen(e.map, d), seed, d, slot)
     local power = M.powerFor(d, e.kind)
     if power > 0 then f.power = power end
     if e.kind == 'elite' or e.kind == 'boss' then f.eliteReward = (e.kind == 'elite') end
@@ -150,6 +183,8 @@ function M.build(seed, opts)
         end
         plan[d + 1] = cands
     end
+    -- 正式局的楼层：怪物用 RUN_STATS 的数值
+    for _, cs in ipairs(plan) do for _, f in ipairs(cs) do f.runStats = true end end
     -- 下一层只有一个候选的层：只留一个出口
     for d = 1, M.LENGTH do
         if not plan[d + 1] or #plan[d + 1] ~= 2 then
@@ -185,7 +220,10 @@ function M.tutorial(_seed)
     local out = {}
     for i, t in ipairs(P.TUTORIAL) do
         local f = copy(t)
-        f.map = oneExit(t.map)
+        -- 教程的宝石都是大宝石（+3，和原来 宝石 2 + 掘井人 1 一样，教程的数值不变）
+        local m = {}
+        for y, r in ipairs(oneExit(t.map)) do m[y] = (r:gsub('r', 'R'):gsub('b', 'C')) end
+        f.map = m
         out[i] = { f }
     end
     return out

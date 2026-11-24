@@ -299,7 +299,7 @@ local function floorStr(f, base)
     local stall = {}
     for k, o in ipairs(f.stall or {}) do stall[k] = o.id .. o.amount .. '/' .. o.price end
     return table.concat({ tostring(f.name), table.concat(f.map, '/'), tostring(f.kind), tostring(f.bloodCost), tostring(f.gem), tostring(f.smallPotion), tostring(f.bigPotion),
-        tostring(f.gold), tostring(f.rent), tostring(f.power), tostring(f.eliteReward), table.concat(marks, ','), table.concat(f.shop or {}, ','), table.concat(stall, ','), tostring(f.hint) }, ' | ')
+        tostring(f.gold), tostring(f.rent), tostring(f.power), tostring(f.runStats), tostring(f.eliteReward), table.concat(marks, ','), table.concat(f.shop or {}, ','), table.concat(stall, ','), tostring(f.hint) }, ' | ')
 end
 for _, r in ipairs(V.routes) do
     local plan = route.build(r.seed)
@@ -322,6 +322,13 @@ for _, t in ipairs(V.tutorials) do
     for d, opts in ipairs(t.plan) do
         check(floorStr(plan[d][1], 1) == floorStr(opts[1], 0), string.format('教程 种子%d 第%d层：期望 %s 实际 %s', t.seed, d, floorStr(opts[1], 0), floorStr(plan[d][1], 1)))
     end
+end
+
+-- 按层加强后的怪物数值
+for _, v in ipairs(V.poweredVec) do
+    local m = config.powered(config.MONSTERS[v.id], v.power, v.run)
+    check(m.hp == v.hp and m.atk == v.atk and m.def == v.def,
+        string.format('加强 %s power %d %s：期望 %d/%d/%d 实际 %d/%d/%d', v.id, v.power, v.run and '正式局' or '原始', v.hp, v.atk, v.def, m.hp, m.atk, m.def))
 end
 
 -- 打不动：硬打被耗死 / 谁也伤不到谁打不起来

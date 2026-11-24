@@ -123,7 +123,7 @@ export function solveFloor(state: FloorState, hero: Hero, floor: FloorDef, ch: C
                 const cell = cells[entities[k]];
                 // 群居、庇护：只算还活着的邻居
                 const mon = cell.kind === 'monster'
-                    ? monsterInContext(MONSTERS[cell.id], adjacentMonsters(cells, w, h, entities[k], j => !(mask & (1 << bit.get(j)!))), floor.power)
+                    ? monsterInContext(MONSTERS[cell.id], adjacentMonsters(cells, w, h, entities[k], j => !(mask & (1 << bit.get(j)!))), floor.power, floor.runStats)
                     : undefined;
                 const r = interact(cell, stats, floor, ch, false, mon);
                 if (!r.ok) continue;
@@ -218,7 +218,7 @@ export function greedyFloor(floor: FloorDef, hero: Hero, ch: CharacterDef = CHAR
         for (const i of reach.next) {
             if (mode === 'clear' && canLeave && cells[i].kind !== 'monster') continue;
             const c = cells[i];
-            const mon = c.kind === 'monster' ? monsterInContext(MONSTERS[c.id], adjacentMonsters(cells, p.w, p.h, i), floor.power) : undefined;
+            const mon = c.kind === 'monster' ? monsterInContext(MONSTERS[c.id], adjacentMonsters(cells, p.w, p.h, i), floor.power, floor.runStats) : undefined;
             const r = interact(c, hh, floor, ch, false, mon);
             if (r.ok && (!bestHero || r.hero.hp > bestHero.hp)) { bestI = i; bestHero = r.hero; }
         }
@@ -255,6 +255,9 @@ function popcount(n: number): number {
     return c;
 }
 
+/** 连续求解挑结果时，一点攻 / 防折算多少生命 */
+const CHAIN_STAT_HP = 10;
+
 export interface ChainFloor {
     name: string;
     /** 走完这一层（交完井租）以后还活着的不被压制的结果个数 */
@@ -278,15 +281,47 @@ export function solveChain(floors: FloorDef[], ch: CharacterDef = CHARACTERS.dig
         for (const hh of heroes) {
             outs.push(...solveFromStart(f, hh, ch, exits?.[d]).pareto.map(o => o.hero));
         }
+        // 补给摊（营火层）：每样东西每个摊子只能买一次，按买得起的各种组合分支（确定的，没有运气成分）
+        if (f.stall?.length) {
+            const stalls = parseFloor(f).cells.filter(c => c.kind === 'stall').length;
+            const offers = Array.from({ length: stalls }, () => f.stall!).flat();
+            outs = outs.flatMap(hh => {
+                const res: Hero[] = [];
+                for (let set = 0; set < 1 << offers.length; set++) {
+                    let x = { ...hh };
+                    for (let k = 0; k < offers.length; k++) {
+                        if (!(set & (1 << k))) continue;
+                        const o = offers[k];
+                        x.gold -= o.price;
+                        if (o.id === 'atk') x.atk += o.amount; else if (o.id === 'def') x.def += o.amount;
+                        else if (o.id === 'hp') x.hp += o.amount; else x.keys += o.amount;
+                    }
+                    if (x.gold >= 0) res.push(x);
+                }
+                return res;
+            });
+        }
+        // 精英奖励（三选一里的"加攻击"和"付一半金币回血"；刻图案不算，和武器一样只会更好）
+        if (f.eliteReward) {
+            // 和 game.ts 的 eliteReward 一样（层号从 0 开始）
+            const atk = 1 + Math.floor(d / 5);
+            const heal = 120 + 15 * d;
+            outs = outs.flatMap(hh => [{ ...hh, atk: hh.atk + atk }, { ...hh, hp: hh.hp + heal, gold: hh.gold - Math.ceil(hh.gold / 2) }]);
+        }
         if (f.rent) {
             const rent = f.rent;
             outs = outs.flatMap(hh => [
                 ...(hh.gold >= rent ? [{ ...hh, gold: hh.gold - rent }] : []),
-                { ...hh, atk: hh.atk - 3 },
-                { ...hh, def: hh.def - 3 },
+                { ...hh, atk: hh.atk - 2 },
+                { ...hh, def: hh.def - 2 },
             ]);
         }
-        heroes = paretoFilter(outs).sort((a, b) => b.hp - a.hp).slice(0, cap);
+        // 只带 cap 个结果往下走：一半按生命最多挑，一半按"生命 + 攻防折算"挑（只按生命挑会把攻防高的打法都扔掉）
+        const front = paretoFilter(outs);
+        const score = (x: Hero) => x.hp + CHAIN_STAT_HP * (x.atk + x.def);
+        const byHp = front.slice().sort((a, b) => b.hp - a.hp).slice(0, cap >> 1);
+        const byScore = front.slice().sort((a, b) => score(b) - score(a)).filter(x => !byHp.includes(x)).slice(0, cap - byHp.length);
+        heroes = [...byHp, ...byScore].sort((a, b) => b.hp - a.hp);
         out.push({ name: f.name, outcomes: heroes.length, best: heroes[0] ?? null });
         if (!heroes.length) break;
     }

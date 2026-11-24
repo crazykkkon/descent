@@ -44,7 +44,8 @@ export interface FloorChoice {
     variant: number;
 }
 
-const base = { gem: 2, smallPotion: 50, bigPotion: 150, gold: 20 };
+// 小宝石 +1（制作人定）；大宝石在路线里按层随机换上去（route.ts bigGems）
+const base = { gem: 1, smallPotion: 50, bigPotion: 150, gold: 20 };
 
 /**
  * 原来的第 2 层（岔路、环道、侧室、近路 × 2 套）。契约试玩期间先不用，验证完契约再放回来。

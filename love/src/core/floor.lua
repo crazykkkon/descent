@@ -26,6 +26,8 @@ local LEGEND = {
     H = { kind = 'item', id = 'bigPotion' },
     r = { kind = 'item', id = 'redGem' },
     b = { kind = 'item', id = 'blueGem' },
+    R = { kind = 'item', id = 'bigRedGem' },
+    C = { kind = 'item', id = 'bigBlueGem' },
     ['$'] = { kind = 'item', id = 'gold' },
     m = { kind = 'monster', id = 'moss' },
     e = { kind = 'monster', id = 'eel' },

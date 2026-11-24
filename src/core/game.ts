@@ -4,7 +4,7 @@
  *
  * 楼层之内完全确定；随机只发生在楼层之间和设施上（断臂转轮、大转盘、诏令、选路线），全部由本局种子决定。
  */
-import { BASE_WEAPONS, Boon, BOON_NAMES, CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MARK_WEAPON, MONSTER_BOON, MONSTERS, MonsterDef, monsterInContext, powered, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
+import { BASE_WEAPONS, BIG_GEM, Boon, BOON_NAMES, CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MARK_WEAPON, MONSTER_BOON, MONSTERS, MonsterDef, monsterInContext, powered, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
 import { CombatResult, simulateCombat } from './combat';
 import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
@@ -46,8 +46,8 @@ export function symName(id: EngraveSym): string {
 
 /** 当铺的价格 */
 export const PAWN = { keyPrice: 15, pawnGold: 40, redeemRate: 1.2, buyPrice: 60, erasePrice: 20 };
-/** 骨坛：献 3 点攻击或 1 把骨钥 */
-export const ALTAR_ATK_COST = 3;
+/** 骨坛：献 2 点攻击或 1 把骨钥（宝石变小以后从 3 改成 2） */
+export const ALTAR_ATK_COST = 2;
 
 /** 等着玩家决定要不要刻的图案 */
 export interface PendingEngrave {
@@ -106,15 +106,16 @@ export interface RewardOffer {
     choices: EngraveSym[];
 }
 export type RewardKind = 'atk' | 'engrave' | 'heal';
-/** 精英奖励的数值：攻击 3 + 层号/6，生命 120 + 15 × 层号（层号从 0 开始） */
+/** 精英奖励的数值：攻击 1 + 层号/5（宝石变小以后跟着缩小，原来是 3 + 层号/6），生命 120 + 15 × 层号（层号从 0 开始） */
+export const ELITE_ATK = 1;
 export function eliteReward(floorIndex: number, gold: number, choices: EngraveSym[]): RewardOffer {
-    return { atk: 3 + Math.floor(floorIndex / 6), heal: 120 + 15 * floorIndex, cost: Math.ceil(gold / 2), choices };
+    return { atk: ELITE_ATK + Math.floor(floorIndex / 5), heal: 120 + 15 * floorIndex, cost: Math.ceil(gold / 2), choices };
 }
 
 /** 交井租的方式 */
 export type RentMethod = 'gold' | 'atk' | 'def';
 /** 交不上井租时，用攻击或防御抵的点数 */
-export const RENT_STAT_COST = 3;
+export const RENT_STAT_COST = 2;
 
 export interface ActResult {
     ok: boolean;
@@ -561,7 +562,7 @@ export class Run {
         return { ok: true, msg: `擦掉了第 ${reel + 1} 个轮子第 ${cell + 1} 格的${symName(w)}` };
     }
 
-    /** 骨坛：献 3 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座骨坛用一次） */
+    /** 骨坛：献 ALTAR_ATK_COST 点攻击或 1 把骨钥，把一种特性移到转轮上的一把武器上（每座骨坛用一次） */
     altarOffer(i: number, pay: 'atk' | 'key', boon: Boon, weapon: WeaponId): ActResult {
         const bad = this.facility(i, 'altar', '骨坛');
         if (bad) return bad;
@@ -655,7 +656,7 @@ export class Run {
     monsterAt(i: number): MonsterDef {
         const c = this.cells[i];
         if (c.kind !== 'monster') throw new Error('不是怪物');
-        return monsterInContext(MONSTERS[c.id], adjacentMonsters(this.cells, this.w, this.h, i), this.floor.power);
+        return monsterInContext(MONSTERS[c.id], adjacentMonsters(this.cells, this.w, this.h, i), this.floor.power, this.floor.runStats);
     }
 
     /** 这只怪带不带印记 */
@@ -672,7 +673,7 @@ export class Run {
         switch (c.kind) {
             case 'monster': {
                 const m = this.monsterAt(i);
-                const base = powered(MONSTERS[c.id], this.floor.power);
+                const base = powered(MONSTERS[c.id], this.floor.power, this.floor.runStats);
                 const r = simulateCombat(this.hero, m);
                 const lines = [`生命 ${m.hp}　攻击 ${m.atk}　防御 ${m.def}`];
                 if (m.atk !== base.atk) lines.push(`（群居：身边有同类，攻击从 ${base.atk} 涨到 ${m.atk}）`);
@@ -692,6 +693,7 @@ export class Run {
                 const eff: Record<string, string> = {
                     smallPotion: `生命 +${f.smallPotion}`, bigPotion: `生命 +${f.bigPotion}`,
                     redGem: `攻击 +${gem}`, blueGem: `防御 +${gem}`, key: '骨钥 +1', gold: `金币 +${f.gold}`,
+                    bigRedGem: `攻击 +${BIG_GEM + this.ch.gemBonus}`, bigBlueGem: `防御 +${BIG_GEM + this.ch.gemBonus}`,
                 };
                 return { title: ITEM_NAMES[c.id], lines: [eff[c.id]] };
             }

@@ -38,7 +38,7 @@ export interface FloorDef {
     map: string[];
     /** 血门通过要扣的生命 */
     bloodCost: number;
-    /** 宝石基础加成（角色的 gemBonus 另算） */
+    /** 小宝石加多少（大宝石固定 BIG_GEM；角色的 gemBonus 另算） */
     gem: number;
     smallPotion: number;
     bigPotion: number;
@@ -51,6 +51,8 @@ export interface FloorDef {
     shop?: (WeaponId | 'wild')[];
     /** 井越深怪越凶：这一层的怪按 power 加强（见 config.powered；不写就是 0） */
     power?: number;
+    /** 正式局的楼层（buildRoute 生成）：怪物用 config.RUN_STATS 的数值；教程和测试小图不带 */
+    runStats?: boolean;
     /** 离开这一层时要交的井租（金币） */
     rent?: number;
     /** 打败本层精英后三选一拿武器 */
@@ -82,6 +84,8 @@ const LEGEND: Record<string, Cell> = {
     H: { kind: 'item', id: 'bigPotion' },
     r: { kind: 'item', id: 'redGem' },
     b: { kind: 'item', id: 'blueGem' },
+    R: { kind: 'item', id: 'bigRedGem' },
+    C: { kind: 'item', id: 'bigBlueGem' },
     $: { kind: 'item', id: 'gold' },
     m: { kind: 'monster', id: 'moss' },
     e: { kind: 'monster', id: 'eel' },

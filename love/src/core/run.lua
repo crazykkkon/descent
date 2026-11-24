@@ -20,9 +20,9 @@ local Run = {}
 Run.__index = Run
 
 Run.PAWN = { keyPrice = 15, pawnGold = 40, redeemRate = 1.2, buyPrice = 60, erasePrice = 20 }
-Run.ALTAR_ATK_COST = 3
+Run.ALTAR_ATK_COST = 2
 Run.symName = function(id) return id == 'wild' and '赖子' or config.WEAPONS[id].name end
-Run.RENT_STAT_COST = 3
+Run.RENT_STAT_COST = 2
 
 local function copyCells(cells)
     local t = {}
@@ -192,9 +192,9 @@ end
 
 function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
 
--- 打败精英后的三选一（和原型 eliteReward 一致）：攻击 3 + 层号/6，生命 120 + 15 × 层号（层号从 0 开始），付当时金币的一半（向上取整）
+-- 打败精英后的三选一（和原型 eliteReward 一致）：攻击 1 + 层号/5，生命 120 + 15 × 层号（层号从 0 开始），付当时金币的一半（向上取整）
 function Run.eliteReward(d, gold, choices)
-    return { atk = 3 + math.floor(d / 6), heal = 120 + 15 * d, cost = math.ceil(gold / 2), choices = choices }
+    return { atk = 1 + math.floor(d / 5), heal = 120 + 15 * d, cost = math.ceil(gold / 2), choices = choices }
 end
 
 -- 精英奖励三选一：'atk' 攻击强化 / 'engrave' 刻图案（接着从三把里挑）/ 'heal' 恢复生命付一半金币
@@ -628,7 +628,7 @@ end
 function Run:monsterAt(i)
     local c = self.cells[i]
     assert(c.kind == 'monster', '不是怪物')
-    return config.monsterInContext(config.MONSTERS[c.id], floorMod.adjacentMonsters(self.cells, self.w, self.h, i), self:floor().power)
+    return config.monsterInContext(config.MONSTERS[c.id], floorMod.adjacentMonsters(self.cells, self.w, self.h, i), self:floor().power, self:floor().runStats)
 end
 
 function Run:marked(i)

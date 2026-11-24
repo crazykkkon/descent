@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { Boon, CHARACTERS, MONSTERS, MonsterDef, powered, WeaponId } from '../src/core/config';
+import { Boon, CHARACTERS, MONSTERS, MonsterDef, powered, RUN_STATS, WeaponId } from '../src/core/config';
 import { CombatEvent, simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
@@ -92,10 +92,32 @@ test('骨门要钥匙，血门扣血', () => {
     assert.equal(r2.hero.hp, 160);
 });
 
-test('宝石：掘井人额外 +1', () => {
-    const run = new Run([tiny(['@r>'])]);
+test('宝石：小宝石按楼层的 gem 加，大宝石 +3（制作人定：小 +1、大 +3；掘井人不再额外加）', () => {
+    const run = new Run([tiny(['@rRbC>'], { gem: 1 })]);
     run.move(1, 0);
-    assert.equal(run.hero.atk, 13);
+    assert.equal(run.hero.atk, 11);
+    run.move(1, 0);
+    assert.equal(run.hero.atk, 14);
+    run.move(1, 0); run.move(1, 0);
+    assert.equal(run.hero.def, 14);
+});
+
+test('大宝石：第 1～6 层没有；第 7～10 层一层最多一颗；第 11 层起大小都有，越往下大的越多；教程全是大宝石', () => {
+    let early = 0, late = 0, lateAll = 0;
+    for (let seed = 1; seed <= 40; seed++) {
+        buildRoute(seed).forEach((opts, d) => {
+            for (const f of opts) {
+                const big = f.map.join('').replace(/[^RC]/g, '').length;
+                const small = f.map.join('').replace(/[^rb]/g, '').length;
+                if (d < 6) assert.equal(big, 0, `第 ${d + 1} 层不该有大宝石`);
+                else if (d < 10) { assert.ok(big <= 1, `第 ${d + 1} 层最多一颗大宝石`); early += big; }
+                else { late += big; lateAll += big + small; }
+            }
+        });
+    }
+    assert.ok(early > 0, '第 7～10 层偶尔有大宝石');
+    assert.ok(late / lateAll > 0.3 && late / lateAll < 0.7, `第 11 层起大宝石的比例 ${late / lateAll}`);
+    for (const opts of buildTutorial(1)) assert.ok(!/[rb]/.test(opts[0].map.join('')), '教程里都是大宝石');
 });
 
 test('走到出口进入结算，不需要清怪；只能往下走', () => {
@@ -172,7 +194,7 @@ test('第 1 层难度低：每张图都能不死地拿到所有加成，见怪�
     const base = CHARACTERS.digger.base;
     const pool = DEMO_POOLS[0];
     pool.layouts.forEach((l, li) => l.variants.forEach((_, vi) => {
-        const f = buildFloor(pool, { layout: li, variant: vi });
+        const f = { ...buildFloor(pool, { layout: li, variant: vi }), runStats: true };
         const r = solveFromStart(f, base);
         assert.ok(r.bestAll && r.bestAll.hero.hp >= 150, `${l.name}${vi + 1}`);
         assert.ok(greedyFloor(f, base, undefined, 'clear'), `${l.name}${vi + 1}：见怪就打会死`);
@@ -233,10 +255,10 @@ test('按求解器的路线实际玩，结果和求解器一致', () => {
     // 挑一组不签契约也走得通的选图
     const choices = allChoices().find(c => {
         let h = { ...CHARACTERS.digger.base };
-        for (const f of buildFloors(c)) { const r = solveFromStart(f, h); if (!r.best) return false; h = r.best.hero; }
+        for (const f of buildFloors(c)) { const r = solveFromStart({ ...f, runStats: true }, h); if (!r.best) return false; h = r.best.hero; }
         return true;
     })!;
-    const floors = buildFloors(choices);
+    const floors = buildFloors(choices).map(f => ({ ...f, runStats: true }));
     const run = new Run(floors);
     for (let i = 0; i < floors.length; i++) {
         const r = solveFromStart(floors[i], { ...run.hero });
@@ -282,7 +304,7 @@ test('井租：不交不能下楼；可以用金币、攻击或防御交', () =>
     assert.equal(a.floorIndex, 0, '没交井租不能下楼');
     assert.equal(a.payRent('gold').ok, false, '金币不够');
     assert.ok(a.payRent('atk').ok);
-    assert.equal(a.hero.atk, 7);
+    assert.equal(a.hero.atk, 8, '用 2 点攻击抵');
     a.finishFloor(false);
     assert.equal(a.floorIndex, 1);
     const b = mk();
@@ -526,7 +548,7 @@ test('当铺：卖骨钥、当图案（赎回价每层涨 20%）、买图案、�
     assert.equal(run.hero.weapon, undefined);
 });
 
-test('诏令：第 3 层开头送来，可以拒绝；完成给刻图案；逾期攻击 −2 / −4', () => {
+test('诏令：第 3 层开头送来，可以拒绝；完成给刻图案；逾期攻击 −1 / −2', () => {
     const plan = Array.from({ length: 6 }, () => tiny(['@.>', 'm..']));
     const offered = decreeFor(1, 2);
     assert.ok(offered && DECREES.includes(offered));
@@ -540,7 +562,7 @@ test('诏令：第 3 层开头送来，可以拒绝；完成给刻图案；逾�
     assert.ok(run.acceptDecree().ok);
     const atk = run.hero.atk;
     next(); next(); next();
-    assert.equal(run.hero.atk, atk - 4, '三层没完成，银诏令攻击 −4');
+    assert.equal(run.hero.atk, atk - 2, '三层没完成，银诏令攻击 −2');
     assert.equal(run.decree, null);
     // 完成：不喝药的那一层
     const r2 = new Run(plan, 'digger', 1);
@@ -571,12 +593,15 @@ test('路线：由种子决定；第 4 层起每层两个候选（第 1、2、3�
     for (const opts of a) for (const f of opts) parseFloor(f);
 });
 
-test('路线：几种选法都能一路求解到井底（保守下限）', () => {
+test('路线：碎片强化买满以后，几种选法都能一路求解到井底（保守下限；制作人定：第一次大约 10% 通关、强化买满大约一半）', () => {
+    const top = (id: string) => perkValue(id, PERKS.find(p => p.id === id)!.costs.length);
+    const b = CHARACTERS.digger.base;
+    const perked = { ...CHARACTERS.digger, base: { hp: b.hp + top('hp'), atk: b.atk + top('atk'), def: b.def + top('def'), keys: b.keys + top('keys'), gold: b.gold + top('gold') } };
     for (const seed of [1, 2, 3]) {
         const plan = buildRoute(seed);
         for (const k of [0, 1]) {
             const picks = plan.map(o => Math.min(k, o.length - 1));
-            const c = chain2(plan.map((o, d) => o[picks[d]]), undefined, 40, plan.map((_, d) => (plan[d + 1]?.length === 2 ? picks[d + 1] : 0)));
+            const c = chain2(plan.map((o, d) => o[picks[d]]), perked, 40, plan.map((_, d) => (plan[d + 1]?.length === 2 ? picks[d + 1] : 0)));
             assert.equal(c.length, 20, `种子 ${seed} 选法 ${k}`);
             assert.ok(c[19].best && c[19].best.hp > 0);
         }
@@ -635,21 +660,31 @@ test('新手教程：前 4 层一层教一件事，怎么走都不会走进死�
     assert.ok(plan[3].kind === 'elite' && plan[4].kind === 'boss');
 });
 
-test('井越深怪越凶：第 6 层起小怪换成更凶的同类，第 7 层起每层加强一级、最多 6 级（精英一半，井底之眼不加）', () => {
+test('井越深怪越凶：第 6 层起小怪换成更凶的同类，第 7 层起每层加强一级、一直加到第 20 层（深处的怪先扣 basePower，精英再减半）', () => {
     const plan = buildRoute(3);
     plan.forEach((opts, d) => {
         for (const f of opts) {
             const ids = parseFloor(f).cells.filter(c => c.kind === 'monster').map(c => (c as { id: string }).id);
             if (d >= 5 && f.kind !== 'boss') assert.ok(!ids.some(id => ['moss', 'eel', 'frog', 'beetle', 'bat', 'wraith', 'crab'].includes(id)), `第 ${d + 1} 层还有没换的小怪`);
             if (d < 5) assert.ok(!ids.some(id => ['thornMoss', 'spikeEel', 'armorFrog'].includes(id)));
-            assert.equal(f.power ?? 0, f.kind === 'boss' || d <= 5 ? 0 : Math.min(6, d - 5), `第 ${d + 1} 层的 power`);
+            assert.equal(f.power ?? 0, d <= 5 ? 0 : d - 5, `第 ${d + 1} 层的 power`);
         }
     });
-    assert.deepEqual(powered(MONSTERS.spikeEel, 4), { ...MONSTERS.spikeEel, hp: 67, atk: 42, def: 14 });
-    assert.equal(powered(MONSTERS.guardian, 5).atk, MONSTERS.guardian.atk + 2 * 3, '精英只加一半');
+    // 每级 攻 +2.8、防 +0.5（向下取整）、生命 +12%
+    assert.deepEqual(powered(MONSTERS.spikeEel, 4), { ...MONSTERS.spikeEel, hp: 85, atk: 41, def: 12 });
+    assert.equal(powered(MONSTERS.guardian, 5).atk, MONSTERS.guardian.atk + 5, '精英只加一半（2 级）');
+    assert.equal(powered(MONSTERS.rat, 5).atk, MONSTERS.rat.atk + 5, '井鼠本来就是深处的怪：先扣掉 3 级');
+    assert.equal(powered(MONSTERS.rat, 2), MONSTERS.rat, '没比它的老家深，就不加');
+    assert.equal(powered(MONSTERS.eye, 14).atk, MONSTERS.eye.atk + 2, '第 20 层的井底之眼：扣掉 12 级再减半，只加 1 级');
+    assert.equal(powered(MONSTERS.eye, 0), MONSTERS.eye, '教程里的井底之眼不加');
+    // 正式局用 RUN_STATS 的数值（教程和小图还用原始数值）
+    assert.deepEqual(powered(MONSTERS.moss, 0, true), { ...MONSTERS.moss, ...RUN_STATS.moss });
+    assert.equal(powered(MONSTERS.spikeEel, 4, true).atk, RUN_STATS.spikeEel!.atk + 11);
+    assert.ok(buildRoute(3).every(opts => opts.every(f => f.runStats)), '路线里每一层都用正式局的数值');
+    assert.ok(buildTutorial(3).every(opts => opts.every(f => !f.runStats)), '教程不用');
     // 战斗预览按加强后的数值算
     const run = new Run([{ ...tiny(['@i>']), power: 4 }], 'digger', 1);
-    assert.equal(run.monsterAt(1).atk, 42);
+    assert.equal(run.monsterAt(1).atk, 41);
 });
 
 test('新手教程局：5 层、没有断臂转轮、没有诏令，第 5 层的井底之眼打不过', () => {
@@ -809,12 +844,12 @@ test('精英奖励三选一：攻击强化 / 刻图案 / 恢复生命付一半�
     };
     const a = mk();
     const o = a.rewardOffer!;
-    assert.deepEqual([o.atk, o.heal, o.cost], [3, 120, Math.ceil((71 + 50) / 2)], '金币按打完精英以后算');
+    assert.deepEqual([o.atk, o.heal, o.cost], [1, 120, Math.ceil((71 + 50) / 2)], '攻击 1 + 层号/5；金币按打完精英以后算');
     assert.equal(o.choices.length, 3);
     const back = Run.load([{ ...tiny(['@G.>']), eliteReward: true }], JSON.parse(JSON.stringify(a.save())));
     assert.deepEqual(back.rewardOffer, o);
     a.chooseReward('atk');
-    assert.equal(a.hero.atk, 63);
+    assert.equal(a.hero.atk, 61);
     assert.equal(a.rewardOffer, null);
     assert.equal(a.pendingEngrave, null);
     const b = mk();

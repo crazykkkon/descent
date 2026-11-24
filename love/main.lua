@@ -581,6 +581,17 @@ end
 function openEngrave()
     local p = run:pendingEngrave()
     if not p then return end
+    -- 剧情二「第一道印子」（Codex 写，跨局只出一次）：正式局第一次打完架能刻图案时，先于刻图案窗口
+    if not run.tutorial and not meta.storyMarkSeen and (p.from == 'mark' or p.from == 'elite') then
+        meta.storyMarkSeen = true
+        KF.saveMeta()
+        openModal('第一道印子', {
+            '矿灯照过怪物倒下的地方，一道印子还在发亮。你把断臂凑近，一格空白的铜面暖了起来。',
+            '你挪开手，那道印子也跟着挪了半寸。',
+            '「原来带得走的是图案。要拿到手，还得把它转出来。」',
+        }, { { label = '看看图案', primary = true, fn = function() closeModal(); openEngrave() end } })
+        return
+    end
     local from = ({ elite = '精英倒下了，它身上压着几件东西的印子', mark = '这只怪身上的印记亮了起来', decree = '井神兑现了诏令', wheel = '大转盘吐出一个图案' })[p.from]
     local lines = { from .. '。选一个刻到断臂转轮上（刻上以后要转到才拿得到）：' }
     for _, w in ipairs(p.choices) do lines[#lines + 1] = weaponLine(w) end
@@ -704,14 +715,14 @@ local function openRent(thenFn)
         thenFn()
     end
     local buttons = {
-        { label = '用 3 点攻击抵', fn = function() pay('atk') end },
-        { label = '用 3 点防御抵', fn = function() pay('def') end },
+        { label = '用 ' .. Run.RENT_STAT_COST .. ' 点攻击抵', fn = function() pay('atk') end },
+        { label = '用 ' .. Run.RENT_STAT_COST .. ' 点防御抵', fn = function() pay('def') end },
     }
     if run.hero.gold >= due then buttons[#buttons + 1] = { label = '交 ' .. due .. ' 金币', primary = true, fn = function() pay('gold') end } end
     openModal('井租', {
         '收租的井神伸出手：要下楼，先交 ' .. due .. ' 金币的井租。',
         '你有 ' .. run.hero.gold .. ' 金币。' .. (run.hero.gold >= due and '' or '金币不够，只能用属性抵。'),
-        '交不上可以用 3 点攻击或防御抵（永久减少）。',
+        '交不上可以用 ' .. Run.RENT_STAT_COST .. ' 点攻击或防御抵（永久减少）。',
     }, buttons)
 end
 
@@ -830,7 +841,7 @@ function openAltar(i, boon, weapon)
         openModal('骨坛', { '这座骨坛已经用过了。' }, { { label = '离开', primary = true, fn = function() closeModal() end } })
         return
     end
-    local lines = { '献 3 点攻击或 1 把骨钥，把你这一局杀过的怪的本事移到转轮上的一把武器上。' }
+    local lines = { '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击或 1 把骨钥，把你这一局杀过的怪的本事移到转轮上的一把武器上。' }
     local buttons = {}
     if not boon then
         if #run.boonsSeen == 0 then lines[#lines + 1] = '你这一局还没杀过带特性的怪（溺魂、回声蝠、裂岩蟹、盐蚀蛞蝓）。' end
@@ -857,7 +868,7 @@ function openAltar(i, boon, weapon)
             saveGame()
             closeModal()
         end
-        buttons[#buttons + 1] = { label = '献 3 点攻击', fn = function() offer('atk') end }
+        buttons[#buttons + 1] = { label = '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击', fn = function() offer('atk') end }
         if run.hero.keys > 0 then buttons[#buttons + 1] = { label = '献 1 把骨钥', primary = true, fn = function() offer('key') end } end
     end
     buttons[#buttons + 1] = { label = '离开', fn = function() closeModal() end }
@@ -894,6 +905,7 @@ end
 facilityOpener = openFacility
 
 local function saveMeta() love.filesystem.write(META_FILE, serialize.dump(meta)) end
+KF.saveMeta = saveMeta   -- 给前面定义的函数用（openEngrave 在 saveMeta 之前）
 
 -- 一局结束：按走到第几层折算灵魂碎片（越深越值钱），记进跨局存档
 local function awardShards(won)
@@ -942,16 +954,32 @@ function openDeath()
     if run.tutorial then
         meta.tutorialDone = true
         local n = awardShards(false)
-        openModal('……', {
-            '那东西只睁了一下眼，你就被甩回了黑暗里。',
-            '你在井口醒来。右臂没了，断口处长出一个空空的转轮。',
-            '转轮上什么都没有。打败带印记的怪、打败精英，就能往上面刻武器的图案。',
-            '你身上还沾着一点发光的东西——' .. n .. ' 块灵魂碎片。越往深处倒下，带回来的越多。',
-            '这一次，从第 1 层重新往下走。',
-        }, {
+        local after = {
             { label = '去碎片商店', fn = function() closeModal(); backToTitle(); openShop() end },
             { label = '再下井', primary = true, fn = function() closeModal(); beginRun() end },
-        })
+        }
+        local shardText = '你身上还沾着一点发光的东西——' .. n .. ' 块灵魂碎片。越往深处倒下，带回来的越多。'
+        if meta.storyArmSeen then
+            -- 重走教程：剧情只演一次，这里只给结算
+            openModal('……', { '你又在井口醒来。断口上的三只铜轮还在。', shardText }, after)
+            return
+        end
+        meta.storyArmSeen = true
+        saveMeta()
+        -- 剧情一「袖子里的响声」（Codex 写，跨局只出一次）：两页，第二页带碎片结算和原来的两个按钮
+        openModal('袖子里的响声', {
+            '你在井口醒来。矿灯歪了。你抬右手去扶，碰到盔沿的却是一截冰凉的拉杆。',
+            '右臂没了。断口上并排长着三只铜轮。',
+            '「……井底下，谁给我装了台老虎机？」',
+        }, { { label = '低头看一眼', primary = true, fn = function()
+            closeModal()
+            openModal('袖子里的响声', {
+                '三只轮子正中，横着一道刻线。拉杆带它们转，扣上哪只的锁，哪只就停在原位。',
+                '铜壳上刻着三个一样的刀印。旁边是一只握刀的手。',
+                '「懂了。中间凑齐同一把武器，它才肯给我。」',
+                shardText,
+            }, after)
+        end } })
         return
     end
     local n = awardShards(false)
@@ -1153,10 +1181,17 @@ local function drawTile(i)
             setColor({ 0.62, 0.7, 0.73 }); g.rectangle('fill', cx - 2 * s, cy - 10 * s, 4 * s, 3 * s)
             setColor(C.hp); g.rectangle('fill', cx - 6 * s, cy - 7 * s, 12 * s, 15 * s, 2, 2)
             setColor({ 1, 0.7, 0.75 }); g.rectangle('fill', cx - 4 * s, cy - 5 * s, 2, 6 * s)
-        elseif c.id == 'redGem' or c.id == 'blueGem' then
-            local s = K
+        elseif c.id == 'redGem' or c.id == 'blueGem' or c.id == 'bigRedGem' or c.id == 'bigBlueGem' then
+            -- 小宝石（+1）小一圈、颜色淡一点；大宝石（+3）大、亮、多一圈光（正式美术由 Codex 换）
+            local big = c.id == 'bigRedGem' or c.id == 'bigBlueGem'
+            local red = c.id == 'redGem' or c.id == 'bigRedGem'
+            local s = (big and 1.15 or 0.72) * K
             setColor({ 0, 0, 0 }, 0.3); g.ellipse('fill', cx, cy + 10 * s, 8 * s, 2)
-            setColor(c.id == 'redGem' and { 0.89, 0.33, 0.23 } or { 0.18, 0.5, 0.84 })
+            if big then
+                setColor(red and { 1, 0.45, 0.3 } or { 0.35, 0.65, 1 }, 0.25 + 0.1 * math.sin(clock * 3))
+                g.circle('fill', cx, cy, 14 * s)
+            end
+            setColor(red and (big and { 0.95, 0.3, 0.2 } or { 0.8, 0.38, 0.3 }) or (big and { 0.15, 0.5, 0.95 } or { 0.27, 0.5, 0.75 }))
             g.polygon('fill', cx, cy - 10 * s, cx + 10 * s, cy, cx, cy + 10 * s, cx - 10 * s, cy)
             setColor({ 1, 1, 1 }, 0.45); g.polygon('fill', cx, cy - 10 * s, cx + 4 * s, cy - 4 * s, cx, cy, cx - 4 * s, cy - 4 * s)
         end
@@ -1270,7 +1305,7 @@ local FACILITY_GLYPH = {
     stall = { '摊', '补给', '补给摊', '火边的补给摊，花金币买生命、攻击或防御。' },
     wheel = { '盘', '转盘', '大转盘', '盘面八格全部公开：金币、生命、攻防、新图案，也有井蛭和擦掉图案。' },
     pawn = { '当', '当铺', '当铺', '卖骨钥、当掉或赎回武器图案、买图案、擦图案。不收攻防。' },
-    altar = { '坛', '骨坛', '骨坛', '献 3 点攻击或 1 把骨钥，把杀过的怪的本事移到一把武器上。' },
+    altar = { '坛', '骨坛', '骨坛', '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击或 1 把骨钥，把杀过的怪的本事移到一把武器上。' },
 }
 
 local function inRect(lx, ly, x, y, w, h) return lx >= x and lx <= x + w and ly >= y and ly <= y + h end
@@ -1307,7 +1342,9 @@ local function cellDetails(i)
     elseif c.kind == 'item' then
         local f = run:floor()
         local gem = f.gem + run.ch.gemBonus
-        local effect = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
+        local big = config.BIG_GEM + run.ch.gemBonus
+        local effect = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem,
+            bigRedGem = '攻击 +' .. big, bigBlueGem = '防御 +' .. big, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
         return config.ITEM_NAMES[c.id], effect
     elseif c.kind == 'door' then
         if c.door == 'bone' then

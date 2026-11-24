@@ -1,5 +1,5 @@
 /** 和格子交互的规则。游戏和求解器共用这一份，保证两边结果一致。 */
-import { CharacterDef, Hero, MONSTERS, MonsterDef, powered, WEAPONS } from './config';
+import { CharacterDef, Hero, MONSTERS, MonsterDef, powered, WEAPONS, BIG_GEM } from './config';
 import { effectiveStats, simulateCombat } from './combat';
 import { Cell, FloorDef } from './floor';
 
@@ -14,7 +14,7 @@ export type Outcome = { ok: true; hero: Hero; fatal?: boolean; reason?: string }
 export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterDef, allowFatal = false, mon?: MonsterDef): Outcome {
     switch (cell.kind) {
         case 'monster': {
-            const m = mon ?? powered(MONSTERS[cell.id], floor.power)
+            const m = mon ?? powered(MONSTERS[cell.id], floor.power, floor.runStats)
             const r = simulateCombat(hero, m);
             // 打不动、它也伤不到你（没有反伤）：两边谁也伤不到谁，打不起来（制作人 2026-11-24：打不动也能硬打，被一点点耗死）
             if (!r.canAttack && Math.max(m.atk - effectiveStats(hero).def, 0) === 0 && !m.traits.includes('thorns')) {
@@ -36,6 +36,8 @@ export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterD
                 case 'bigPotion': h.hp += floor.bigPotion; break;
                 case 'redGem': h.atk += gem; break;
                 case 'blueGem': h.def += gem; break;
+                case 'bigRedGem': h.atk += BIG_GEM + ch.gemBonus; break;
+                case 'bigBlueGem': h.def += BIG_GEM + ch.gemBonus; break;
                 case 'key': h.keys += 1; break;
                 case 'gold': h.gold += floor.gold; break;
             }

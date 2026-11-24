@@ -3,7 +3,7 @@ local rng = require('core.rng')
 local M = {}
 
 M.TIER_NAMES = { bronze = '铜', silver = '银' }
-M.PENALTY = { bronze = 2, silver = 4 }
+M.PENALTY = { bronze = 1, silver = 2 }
 M.SILVER_BONUS_HP = 100
 M.FLOORS = { [3] = true, [8] = true, [13] = true } -- Lua 的层号（从 1 开始）
 M.SPAN = 3

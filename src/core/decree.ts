@@ -17,7 +17,7 @@ export interface DecreeDef {
 }
 
 export const TIER_NAMES: Record<DecreeTier, string> = { bronze: '铜', silver: '银' };
-export const DECREE_PENALTY: Record<DecreeTier, number> = { bronze: 2, silver: 4 };
+export const DECREE_PENALTY: Record<DecreeTier, number> = { bronze: 1, silver: 2 };
 /** 银诏令完成时额外给的生命 */
 export const SILVER_BONUS_HP = 100;
 /** 诏令来的层（从 0 开始数：第 3、8、13 层） */
