@@ -746,8 +746,11 @@ local function dripSpots()
     return spots
 end
 
+local updateHold -- 长按方向键连续走（定义在输入部分）
+
 function love.update(dt)
     clock = clock + dt
+    updateHold(dt)
     fx.update(dt)
     armView.update(dt)
     if walking and not modal then
@@ -1145,6 +1148,35 @@ function love.mousereleased() armDrag = nil end
 
 local DIRS = { up = { 0, -1 }, down = { 0, 1 }, left = { -1, 0 }, right = { 1, 0 }, w = { 0, -1 }, s = { 0, 1 }, a = { -1, 0 }, d = { 1, 0 } }
 
+-- 长按方向键连续走：按下先走一格，按住 HOLD_DELAY 秒后每走完一格接着走下一格。
+-- 只穿过空地和道具；前面是怪物、门、出口或设施时停下，要再按一次才会打 / 开 / 走上去，免得一路冲进战斗。
+local HOLD_DELAY = 0.2
+local hold = nil            -- { key, d, t }
+local fakeDown = {}         -- 自动测试用：假装按住的键
+local function keyDown(k) return fakeDown[k] or love.keyboard.isDown(k) end
+
+local function dirTarget(d)
+    local x = (run.pos - 1) % run.w + d[1]
+    local y = math.floor((run.pos - 1) / run.w) + d[2]
+    if x < 0 or y < 0 or x >= run.w or y >= run.h then return nil end
+    return y * run.w + x + 1
+end
+
+function updateHold(dt)
+    if not hold then return end
+    if not keyDown(hold.key) or modal or run.status ~= 'playing' then hold = nil; return end
+    hold.t = hold.t + dt
+    if hold.t < HOLD_DELAY or walking or heroAnim or armView.busy() then return end
+    local t = dirTarget(hold.d)
+    local c = t and run.cells[t]
+    if not c or c.kind == 'wall' then return end
+    if c.kind == 'floor' or c.kind == 'item' then act(t) else hold = nil end
+end
+
+function love.keyreleased(key)
+    if hold and hold.key == key then hold = nil end
+end
+
 function love.keypressed(key)
     if key == 'f2' then
         meta.crt = not meta.crt
@@ -1161,12 +1193,11 @@ function love.keypressed(key)
     end
     if key == 'r' and run.arm and run.status == 'playing' and not walking then spinArm('gold'); return end
     local d = DIRS[key]
-    if d and not walking and run.status == 'playing' then
-        local x = (run.pos - 1) % run.w + d[1]
-        local y = math.floor((run.pos - 1) / run.w) + d[2]
-        if x >= 0 and y >= 0 and x < run.w and y < run.h then
-            local t = y * run.w + x + 1
-            if run.cells[t].kind ~= 'wall' then act(t) end
+    if d and run.status == 'playing' then
+        hold = { key = key, d = d, t = 0 }
+        if not walking then
+            local t = dirTarget(d)
+            if t and run.cells[t].kind ~= 'wall' then act(t) end
         end
     end
 end
@@ -1192,4 +1223,9 @@ return {
         for i, c in ipairs(run.cells) do if c.kind == 'exit' and c.to == k then return i end end
     end,
     setCRT = function(on) meta.crt = on end,
+    -- 自动测试：按下 / 松开一个键（down = true 按下，false 松开）
+    pressKey = function(key, down)
+        fakeDown[key] = down or nil
+        if down then love.keypressed(key) else love.keyreleased(key) end
+    end,
 }

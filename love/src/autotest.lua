@@ -152,6 +152,25 @@ function M.start()
             strong()
             handlePopups()
             if f == 1 then
+                -- 长按方向键：一直走到空地和道具走完为止，前面是怪物、门、出口时停下
+                for _, dir in ipairs({ { 'right', 1, 0 }, { 'down', 0, 1 } }) do
+                    local x0, y0 = (run.pos - 1) % run.w, math.floor((run.pos - 1) / run.w)
+                    local n = 0
+                    while true do
+                        local x, y = x0 + dir[2] * (n + 1), y0 + dir[3] * (n + 1)
+                        if x >= run.w or y >= run.h then break end
+                        local k = run.cells[y * run.w + x + 1].kind
+                        if k ~= 'floor' and k ~= 'item' then break end
+                        n = n + 1
+                    end
+                    if n >= 2 then
+                        local start = run.pos
+                        game.pressKey(dir[1], true); sleep(0.4 + n * 0.2); game.pressKey(dir[1], false); settle()
+                        local moved = math.abs((run.pos - start) / (dir[2] + dir[3] * run.w))
+                        say(string.format('长按%s：应走 %d 格，走了 %d 格', dir[1], n, moved))
+                        break
+                    end
+                end
                 once('03-floor1')
                 local mon = find(function(c) return c.kind == 'monster' end)
                 if mon then hoverCell(mon); sleep(0.3); once('03b-hover'); love.mouse.setPosition(1, 1) end
