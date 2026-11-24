@@ -88,6 +88,27 @@ export interface RunSave {
     pool?: WeaponId[];
     perks?: Record<string, number>;
     revived?: boolean;
+    rewardOffer?: RewardOffer | null;
+}
+
+/**
+ * 打败精英后的三选一（制作人 2026-11-24：让每场战斗都成为构筑的一部分）：
+ * 攻击强化、刻一个武器图案（再从三把里挑）、恢复生命但付一半金币。数值是讨论项。
+ */
+export interface RewardOffer {
+    /** 选"攻击强化"加多少攻击 */
+    atk: number;
+    /** 选"恢复生命"回多少血 */
+    heal: number;
+    /** 选"恢复生命"要付多少金币（当时金币的一半，向上取整） */
+    cost: number;
+    /** 选"刻图案"时的三把武器 */
+    choices: EngraveSym[];
+}
+export type RewardKind = 'atk' | 'engrave' | 'heal';
+/** 精英奖励的数值：攻击 3 + 层号/6，生命 120 + 15 × 层号（层号从 0 开始） */
+export function eliteReward(floorIndex: number, gold: number, choices: EngraveSym[]): RewardOffer {
+    return { atk: 3 + Math.floor(floorIndex / 6), heal: 120 + 15 * floorIndex, cost: Math.ceil(gold / 2), choices };
 }
 
 /** 交井租的方式 */
@@ -170,6 +191,8 @@ export class Run {
     perks: Record<string, number> = {};
     /** 溺者已经复活过 */
     revived = false;
+    /** 打败精英后还没选的三选一奖励 */
+    rewardOffer: RewardOffer | null = null;
     /** 上一次结算时诏令的消息（界面显示后清掉） */
     notes: string[] = [];
     private floorStart!: Snapshot;
@@ -308,6 +331,21 @@ export class Run {
 
     /** 不刻 */
     skipEngrave(): void { this.engraveQueue.shift(); }
+
+    /** 精英奖励三选一：攻击强化 / 刻图案（接着从三把里挑）/ 恢复生命付一半金币 */
+    chooseReward(kind: RewardKind): ActResult {
+        const o = this.rewardOffer;
+        if (!o) return { ok: false, msg: '' };
+        this.rewardOffer = null;
+        if (kind === 'atk') { this.hero.atk += o.atk; return { ok: true, msg: `攻击 +${o.atk}` }; }
+        if (kind === 'heal') {
+            this.hero.hp += o.heal;
+            this.hero.gold -= o.cost;
+            return { ok: true, msg: `生命 +${o.heal}，付了 ${o.cost} 金币` };
+        }
+        this.engraveQueue.push({ from: 'elite', choices: o.choices });
+        return { ok: true, msg: '' };
+    }
 
     /** 断臂转轮下一次转的价格；held 里锁住的轮子越多越贵（锁一个 ×2，锁两个 ×3） */
     armPrice(held?: boolean[]): { gold: number; blood: number } {
@@ -744,7 +782,7 @@ export class Run {
             if (boon && !this.boonsSeen.includes(boon)) this.boonsSeen.push(boon);
             if (this.arm) {
                 // 精英：三选一刻图案；印记怪：刻它对应的武器
-                if (m.elite && this.floor.eliteReward) this.engraveQueue.push({ from: 'elite', choices: this.rollWeaponChoices() });
+                if (m.elite && this.floor.eliteReward) this.rewardOffer = eliteReward(this.floorIndex, this.hero.gold, this.rollWeaponChoices());
                 if (this.floor.marks?.includes(i) && MARK_WEAPON[c.id]) this.engraveQueue.push({ from: 'mark', choices: [MARK_WEAPON[c.id]!] });
             }
             if (this.decree && killCounts(this.decree.def, m)) {
@@ -822,7 +860,7 @@ export class Run {
             arm: this.arm, wheels: this.wheels, pawned: this.pawned, bought: this.bought,
             altarUsed: this.altarUsed, boonsSeen: this.boonsSeen, decree: this.decree,
             decreeOffer: this.decreeOffer, engraveQueue: this.engraveQueue, drank: this.drank,
-            exitTaken: this.exitTaken, pool: this.pool, perks: this.perks, revived: this.revived,
+            exitTaken: this.exitTaken, pool: this.pool, perks: this.perks, revived: this.revived, rewardOffer: this.rewardOffer,
         }));
     }
 
@@ -849,6 +887,7 @@ export class Run {
         if (s.pool) run.pool = [...s.pool];
         run.perks = s.perks ?? {};
         run.revived = !!s.revived;
+        run.rewardOffer = s.rewardOffer ?? null;
         return run;
     }
 }

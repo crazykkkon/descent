@@ -192,6 +192,28 @@ end
 
 function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
 
+-- 打败精英后的三选一（和原型 eliteReward 一致）：攻击 3 + 层号/6，生命 120 + 15 × 层号（层号从 0 开始），付当时金币的一半（向上取整）
+function Run.eliteReward(d, gold, choices)
+    return { atk = 3 + math.floor(d / 6), heal = 120 + 15 * d, cost = math.ceil(gold / 2), choices = choices }
+end
+
+-- 精英奖励三选一：'atk' 攻击强化 / 'engrave' 刻图案（接着从三把里挑）/ 'heal' 恢复生命付一半金币
+function Run:chooseReward(kind)
+    local o = self.rewardOffer
+    if not o then return { ok = false, msg = '' } end
+    self.rewardOffer = nil
+    if kind == 'atk' then
+        self.hero.atk = self.hero.atk + o.atk
+        return { ok = true, msg = '攻击 +' .. o.atk }
+    elseif kind == 'heal' then
+        self.hero.hp = self.hero.hp + o.heal
+        self.hero.gold = self.hero.gold - o.cost
+        return { ok = true, msg = '生命 +' .. o.heal .. '，付了 ' .. o.cost .. ' 金币' }
+    end
+    self.engraveQueue[#self.engraveQueue + 1] = { from = 'elite', choices = o.choices }
+    return { ok = true, msg = '' }
+end
+
 -- held 里锁住的轮子越多越贵（锁一个 ×2，锁两个 ×3）
 function Run:armPrice(held)
     local base = rng.risingPrice(armMod.BASE_PRICE, self.arm and self.arm.spins or 0)
@@ -533,7 +555,7 @@ function Run:step(i)
         if boon and not contains(self.boonsSeen, boon) then self.boonsSeen[#self.boonsSeen + 1] = boon end
         if self.arm then
             if m.elite and self:floor().eliteReward then
-                self.engraveQueue[#self.engraveQueue + 1] = { from = 'elite', choices = self:rollWeaponChoices() }
+                self.rewardOffer = Run.eliteReward(self.floorIndex - 1, self.hero.gold, self:rollWeaponChoices())
             end
             if contains(self:floor().marks, i) and config.MARK_WEAPON[c.id] then
                 self.engraveQueue[#self.engraveQueue + 1] = { from = 'mark', choices = { config.MARK_WEAPON[c.id] } }
@@ -680,7 +702,7 @@ function Run:save()
         arm = self.arm, wheels = self.wheels, pawned = self.pawned, bought = self.bought,
         altarUsed = self.altarUsed, boonsSeen = self.boonsSeen, decree = self.decree,
         decreeOffer = self.decreeOffer, engraveQueue = self.engraveQueue, drank = self.drank,
-        exitTaken = self.exitTaken, pool = self.pool, perks = self.perks, revived = self.revived,
+        exitTaken = self.exitTaken, pool = self.pool, perks = self.perks, revived = self.revived, rewardOffer = self.rewardOffer,
     }
 end
 
@@ -708,6 +730,7 @@ function Run.load(plan, s)
     if s.pool then run.pool = {}; for i, w in ipairs(s.pool) do run.pool[i] = w end end
     run.perks = s.perks or {}
     run.revived = s.revived or false
+    run.rewardOffer = s.rewardOffer
     return run
 end
 

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CHARACTERS, MONSTERS, MonsterDef, powered, WeaponId } from '../src/core/config';
-import { simulateCombat } from '../src/core/combat';
+import { Boon, CHARACTERS, MONSTERS, MonsterDef, powered, WeaponId } from '../src/core/config';
+import { CombatEvent, simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, F2_CLASSIC, allChoices, buildFloor, buildFloors, pickChoices } from '../src/core/levels';
@@ -446,6 +446,8 @@ test('断臂转轮：一个轮子刻满 5 格后就刻不上了，要先去当�
     run.arm!.reels = reels(['boneKnife', 'hammer', 'harpoon', 'boneKnife', 'hammer'], [], []);
     run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
     run.move(1, 0);
+    assert.ok(run.rewardOffer, '精英倒下先三选一奖励');
+    run.chooseReward('engrave');
     const p = run.pendingEngrave!;
     assert.equal(p.from, 'elite');
     assert.equal(p.choices.length, 3);
@@ -705,7 +707,7 @@ test('赖子很难拿到：精英三选一、大转盘新图案、当铺大约�
         const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', seed);
         run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
         run.move(1, 0);
-        if (run.pendingEngrave!.choices.includes('wild')) elite++;
+        if (run.rewardOffer!.choices.includes('wild')) elite++;
     }
     assert.ok(elite > 15 && elite < 70, `精英三选一里出现赖子 ${elite} / 400`);
     let shops = 0;
@@ -773,7 +775,7 @@ test('解锁：新武器进图案池；当铺多摆一件、营火多卖骨钥�
     const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 1, { pool: ['lamp', 'twinHook', 'boneKnife'] });
     run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
     run.move(1, 0);
-    assert.ok(run.pendingEngrave!.choices.every(c => ['lamp', 'twinHook', 'boneKnife', 'wild'].includes(c)));
+    assert.ok(run.rewardOffer!.choices.every(c => ['lamp', 'twinHook', 'boneKnife', 'wild'].includes(c)));
 });
 
 test('新角色：拾荒者开骨门扣 10 生命不用钥匙；溺者倒下复活一次，之后每进一层扣 20', () => {
@@ -796,4 +798,43 @@ test('新角色：拾荒者开骨门扣 10 生命不用钥匙；溺者倒下复�
     assert.equal(d.hero.hp, 10);
     const back = Run.load([tiny(['@G>']), tiny(['@.>']), tiny(['@.>'])], JSON.parse(JSON.stringify(d.save())));
     assert.equal(back.revived, true);
+});
+
+test('精英奖励三选一：攻击强化 / 刻图案 / 恢复生命付一半金币；读档后还在', () => {
+    const mk = () => {
+        const run = new Run([{ ...tiny(['@G.>']), eliteReward: true }], 'digger', 2);
+        run.hero = { hp: 500, atk: 60, def: 60, keys: 0, gold: 71 };
+        run.move(1, 0);
+        return run;
+    };
+    const a = mk();
+    const o = a.rewardOffer!;
+    assert.deepEqual([o.atk, o.heal, o.cost], [3, 120, Math.ceil((71 + 50) / 2)], '金币按打完精英以后算');
+    assert.equal(o.choices.length, 3);
+    const back = Run.load([{ ...tiny(['@G.>']), eliteReward: true }], JSON.parse(JSON.stringify(a.save())));
+    assert.deepEqual(back.rewardOffer, o);
+    a.chooseReward('atk');
+    assert.equal(a.hero.atk, 63);
+    assert.equal(a.rewardOffer, null);
+    assert.equal(a.pendingEngrave, null);
+    const b = mk();
+    b.chooseReward('heal');
+    assert.deepEqual([b.hero.hp, b.hero.gold], [500 + 120, 121 - 61]);
+    const c = mk();
+    c.chooseReward('engrave');
+    assert.deepEqual(c.pendingEngrave, { from: 'elite', choices: o.choices });
+});
+
+test('战斗记录：每一下加起来和结算一样（画面回放用）', () => {
+    for (const id of Object.keys(MONSTERS) as (keyof typeof MONSTERS)[]) {
+        for (const hero of [{ atk: 40, def: 20 }, { atk: 30, def: 10, weapon: 'hammer' as WeaponId, boons: ['lifesteal', 'thorns'] as Boon[] }, { atk: 50, def: 30, weapon: 'harpoon' as WeaponId }]) {
+            const log: CombatEvent[] = [];
+            const r = simulateCombat(hero, MONSTERS[id], log);
+            if (!r.canWin) continue;
+            const net = log.reduce((s, e) => s + e.loss, 0);
+            assert.equal(Math.max(net, 0), r.damage, id);
+            assert.equal(log.filter(e => e.who === 'hero').length, r.hits);
+            assert.ok(log[log.length - 1].tags.includes('kill'));
+        }
+    }
 });

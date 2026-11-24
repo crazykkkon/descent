@@ -67,17 +67,34 @@ function M.start()
     local shots = {}
     local function once(name) if not shots[name] then shots[name] = true; shot(name) end end
     local pickCell
+    local rewardTurn = 0
     local function handlePopups()
         for _ = 1, 10 do
             local t = modalTitle()
             if t == '刻图案' then
-                local m = game.getModal()
-                m.buttons[1].fn()
-                -- 刻图案的场景：手臂移到中间，点一格刻上去。轮流刻在 1、2、3 号轮子上；刻满了覆盖第 1 格
-                engraveTurn = engraveTurn % 3 + 1
-                pickCell(engraveTurn)
+                local run = game.getRun()
+                local blanks = 0
+                for r = 1, 3 do for k = 1, 5 do if not run.arm.reels[r][k] then blanks = blanks + 1 end end end
+                if blanks == 0 then
+                    -- 三个轮子都刻满了：刻不上（不能覆盖），只能不刻
+                    say('转轮刻满了，不刻')
+                    button('不刻')
+                else
+                    local m = game.getModal()
+                    m.buttons[1].fn()
+                    -- 刻图案的场景：手臂移到中间，点一格刻上去。轮流刻在 1、2、3 号轮子上；这个轮子满了就换一个
+                    engraveTurn = engraveTurn % 3 + 1
+                    pickCell(engraveTurn)
+                end
             elseif t and t:find('诏令') and game.getModal().buttons[2] and game.getModal().buttons[2].label == '接下' then button('接下')
             elseif t == '井神的诏令' then button('知道了')
+            elseif t == '精英的战利品' then
+                -- 精英奖励三选一：轮流选（刻图案、攻击、生命），刻图案最多
+                rewardTurn = (rewardTurn or 0) + 1
+                if not shots['07d-elite-reward'] then shots['07d-elite-reward'] = true; shot('07d-elite-reward') end
+                local pickName = ({ '刻图案', '攻击', '刻图案', '生命' })[(rewardTurn - 1) % 4 + 1]
+                say('精英奖励选：' .. pickName)
+                button(pickName)
             else return end
             sleep(0.05)
         end
@@ -174,6 +191,10 @@ function M.start()
                 -- 第 1 层：先往右走几步打第一只井苔，看教学提示换没换
                 game.pressKey('right', true); sleep(1.2); game.pressKey('right', false); settle()
                 local mon = find(function(c) return c.kind == 'monster' end)
+                -- 打第一只井苔：截一张打到一半的图
+                game.act(mon); sleep(0.32)
+                say('战斗中：' .. tostring(game.busy()))
+                shot('01f-battle')
                 go(mon); settle(); sleep(0.2)
                 shot('01d-coach-after-kill')
             end
@@ -237,6 +258,15 @@ function M.start()
                 if mon then hoverCell(mon); sleep(0.3); once('03b-hover'); love.mouse.setPosition(1, 1) end
             end
             if f == 12 then once('10-deep-floor') end
+            if f == 2 or f == 6 then
+                -- 连着打两只怪：看击杀碎裂、连杀大字
+                for k = 1, 2 do
+                    local mon = find(function(c) return c.kind == 'monster' and not config.MONSTERS[c.id].elite end)
+                    if mon then go(mon); handlePopups() end
+                end
+                sleep(0.05)
+                once('10b-kill-f' .. f)
+            end
             if f == 3 then
                 -- 测试用：塞一个赖子进来，看界面
                 run.engraveQueue[#run.engraveQueue + 1] = { from = 'wheel', choices = { 'wild' } }

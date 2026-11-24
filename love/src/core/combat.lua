@@ -14,7 +14,9 @@ function M.effectiveStats(hero)
 end
 
 -- 返回 { canAttack, canWin, damage, hits }。hero.boons：骨坛移到武器上的特性（列表）
-function M.simulate(hero, m)
+-- log：传一个空表进来，就把每一下记进去（画面回放用，和原型 CombatEvent 一致）：
+--   { who = 'hero' / 'mon', hit, mhp, loss, tags = { 'first', 'double', 'pierce', 'anti', 'thorns', 'drain', 'lifesteal', 'corrode', 'spikes', 'kill' 里的几个 } }
+function M.simulate(hero, m, log)
     local w = hero.weapon and config.WEAPONS[hero.weapon]
     local boons = {}
     for _, b in ipairs(hero.boons or {}) do boons[b] = true end
@@ -39,35 +41,47 @@ function M.simulate(hero, m)
     local damage, heal, hits = 0, 0, 0
     local function done() return { canAttack = true, canWin = true, damage = math.max(damage - heal, 0), hits = hits } end
 
-    local function heroAttack()
+    local function heroAttack(first)
+        local tags = {}
+        if first then tags[#tags + 1] = 'first' end
+        if pierce > 0 and mdef > 0 then tags[#tags + 1] = 'pierce' end
+        if w and w.antiLifesteal and lifestealMon then tags[#tags + 1] = 'anti' end
         local hit = heroHitNow()
         mhp = mhp - hit
         hits = hits + 1
-        if thorns then damage = damage + config.THORNS_DAMAGE end
-        if boons.lifesteal then heal = heal + math.floor(hit / 4) end
-        if boons.corrode then mdef = mdef - 1 end
+        local loss = 0
+        if thorns then damage = damage + config.THORNS_DAMAGE; loss = loss + config.THORNS_DAMAGE; tags[#tags + 1] = 'thorns' end
+        if boons.lifesteal and math.floor(hit / 4) > 0 then heal = heal + math.floor(hit / 4); loss = loss - math.floor(hit / 4); tags[#tags + 1] = 'drain' end
+        if boons.corrode then mdef = mdef - 1; tags[#tags + 1] = 'corrode' end
+        if mhp <= 0 then tags[#tags + 1] = 'kill' end
+        if log then log[#log + 1] = { who = 'hero', hit = hit, mhp = mhp, loss = loss, tags = tags } end
         return mhp <= 0
     end
-    local function monsterAttack()
+    local function monsterAttack(tag)
+        local tags = {}
+        if tag then tags[1] = tag end
         local monsterHit = math.max(m.atk - curDef, 0)
         damage = damage + monsterHit
+        if lifestealMon and math.floor(monsterHit / 2) > 0 and mhp < m.hp then tags[#tags + 1] = 'lifesteal' end
         if lifestealMon then mhp = math.min(m.hp, mhp + math.floor(monsterHit / 2)) end
-        if corrode then curDef = curDef - config.CORRODE_DEF end
-        if boons.thorns then mhp = mhp - config.THORNS_DAMAGE end
+        if corrode then curDef = curDef - config.CORRODE_DEF; tags[#tags + 1] = 'corrode' end
+        if boons.thorns then mhp = mhp - config.THORNS_DAMAGE; tags[#tags + 1] = 'spikes' end
+        if mhp <= 0 then tags[#tags + 1] = 'kill' end
+        if log then log[#log + 1] = { who = 'mon', hit = monsterHit, mhp = mhp, loss = monsterHit, tags = tags } end
         return mhp <= 0
     end
 
     -- 开打前先刺：鱼叉一下、骨坛的先攻一下（可以叠加）
     local opening = (w and w.firstHit and 1 or 0) + (boons.firstStrike and 1 or 0)
-    for _ = 1, opening do if heroAttack() then return done() end end
+    for _ = 1, opening do if heroAttack(true) then return done() end end
     if m.traits.firstStrike and not (w and w.noFirstStrike) then
-        if monsterAttack() then return done() end
+        if monsterAttack('first') then return done() end
     end
 
     for _ = 1, MAX_ROUNDS do
         if heroAttack() then return done() end
-        for _ = 1, hitsPerRound do
-            if monsterAttack() then return done() end
+        for i = 1, hitsPerRound do
+            if monsterAttack(i > 1 and 'double' or nil) then return done() end
         end
     end
     return { canAttack = true, canWin = false, damage = damage, hits = hits }

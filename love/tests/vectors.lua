@@ -22,7 +22,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 15,
-      hits = 4
+      hits = 4,
+      log = "hero:8:22:0: mon:5:22:5: hero:8:14:0: mon:5:14:5: hero:8:6:0: mon:5:6:5: hero:8:-2:0:kill"
     },
     {
       monster = "moss",
@@ -72,7 +73,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:8:22:-2:first+drain+corrode hero:9:13:-2:drain+corrode mon:5:10:5:spikes hero:10:0:-2:drain+corrode+kill"
     },
     {
       monster = "moss",
@@ -125,7 +127,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:8:22:0:first hero:8:14:0: mon:5:11:5:spikes hero:8:3:0: mon:5:0:5:spikes+kill"
     },
     {
       monster = "moss",
@@ -177,7 +180,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 15,
-      hits = 4
+      hits = 4,
+      log = "hero:9:21:0: mon:5:21:5: hero:9:12:0: mon:5:12:5: hero:9:3:0: mon:5:3:5: hero:9:-6:0:kill"
     },
     {
       monster = "moss",
@@ -227,7 +231,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:10:20:0: mon:5:20:5: hero:10:10:0: mon:5:10:5: hero:10:0:0:kill"
     },
     {
       monster = "moss",
@@ -276,7 +281,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:11:19:0:corrode mon:5:19:5: hero:12:7:0:corrode mon:5:7:5: hero:13:-6:0:corrode+kill"
     },
     {
       monster = "moss",
@@ -328,7 +334,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:11:19:0:first hero:11:8:0:first hero:11:-3:0:kill"
     },
     {
       monster = "moss",
@@ -381,7 +388,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:11:19:0: mon:5:19:5: hero:11:8:0: mon:5:8:5: hero:11:-3:0:kill"
     },
     {
       monster = "moss",
@@ -431,7 +439,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:11:19:0: mon:1:19:1: hero:11:8:0: mon:1:8:1: hero:11:-3:0:kill"
     },
     {
       monster = "moss",
@@ -480,7 +489,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 4,
-      hits = 3
+      hits = 3,
+      log = "hero:11:19:0: mon:2:16:2:spikes hero:11:5:0: mon:2:2:2:spikes hero:11:-9:0:kill"
     },
     {
       monster = "moss",
@@ -531,7 +541,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:11:19:-2:first+drain hero:11:8:-2:drain mon:2:8:2: hero:11:-3:-2:drain+kill"
     },
     {
       monster = "moss",
@@ -585,7 +596,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 4,
-      hits = 3
+      hits = 3,
+      log = "hero:13:17:0:pierce mon:2:17:2: hero:13:4:0:pierce mon:2:4:2: hero:13:-9:0:pierce+kill"
     },
     {
       monster = "moss",
@@ -620,220 +632,6 @@ return {
     {
       monster = "moss",
       atk = 13,
-      def = 13,
-      weapon = "rustSword",
-      canAttack = true,
-      canWin = true,
-      damage = 7,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 13,
-      def = 13,
-      weapon = "wellHook",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 13,
-      def = 13,
-      weapon = "lamp",
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 13,
-      def = 13,
-      weapon = "twinHook",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "lifesteal" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "thorns" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "corrode" },
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "boneKnife",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "lifesteal" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "thorns" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "corrode" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "hammer",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "mossBlade",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "bellStaff",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "saltDagger",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
       def = 13,
       weapon = "rustSword",
       canAttack = true,
@@ -843,6 +641,225 @@ return {
     },
     {
       monster = "moss",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3,
+      log = "hero:11:19:0: mon:2:19:2: hero:11:8:0: mon:2:8:2: hero:11:-3:0:kill"
+    },
+    {
+      monster = "moss",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "lifesteal" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3,
+      log = "hero:14:16:0:first hero:14:2:0: mon:2:2:2: hero:14:-12:0:kill"
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "thorns" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "corrode" },
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3,
+      log = "hero:14:16:0:first hero:14:2:0: mon:2:2:2: hero:14:-12:0:kill"
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "lifesteal" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "thorns" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "corrode" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3,
+      log = "hero:14:16:-3:first+drain+corrode hero:15:1:-3:first+drain+corrode hero:16:-15:-4:drain+corrode+kill"
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 7,
+      hits = 2,
+      log = "hero:23:7:0: mon:7:7:7: hero:23:-16:0:kill"
+    },
+    {
+      monster = "moss",
       atk = 16,
       def = 13,
       weapon = "wellHook",
@@ -888,7 +905,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:14:16:-3:drain mon:0:16:0: hero:14:2:-3:drain mon:0:2:0: hero:14:-12:-3:drain+kill"
     },
     {
       monster = "moss",
@@ -938,7 +956,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:18:12:0: mon:0:12:0: hero:18:-6:0:kill"
     },
     {
       monster = "moss",
@@ -992,7 +1011,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:14:16:0:first+corrode hero:15:1:0:corrode mon:0:1:0: hero:16:-15:0:corrode+kill"
     },
     {
       monster = "moss",
@@ -1043,7 +1063,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:14:16:0: mon:0:16:0: hero:14:2:0: mon:0:2:0: hero:14:-12:0:kill"
     },
     {
       monster = "moss",
@@ -1092,7 +1113,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:17:13:0: mon:0:13:0: hero:17:-4:0:kill"
     },
     {
       monster = "moss",
@@ -1142,7 +1164,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:17:13:-4:first+drain+corrode hero:18:-5:-4:drain+corrode+kill"
     },
     {
       monster = "moss",
@@ -1195,7 +1218,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:17:13:0:first hero:17:-4:0:kill"
     },
     {
       monster = "moss",
@@ -1247,7 +1271,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:18:12:0: mon:0:12:0: hero:18:-6:0:kill"
     },
     {
       monster = "moss",
@@ -1297,7 +1322,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:19:11:0: mon:0:11:0: hero:19:-8:0:kill"
     },
     {
       monster = "moss",
@@ -1346,7 +1372,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:20:10:0:corrode mon:0:10:0: hero:21:-11:0:corrode+kill"
     },
     {
       monster = "moss",
@@ -1398,7 +1425,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:20:10:0:first hero:20:-10:0:first+kill"
     },
     {
       monster = "moss",
@@ -1451,7 +1479,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:20:10:0: mon:0:10:0: hero:20:-10:0:kill"
     },
     {
       monster = "moss",
@@ -1501,7 +1530,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:20:10:0: mon:0:10:0: hero:20:-10:0:kill"
     },
     {
       monster = "moss",
@@ -1550,7 +1580,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:7:0: mon:0:4:0:spikes hero:23:-19:0:kill"
     },
     {
       monster = "moss",
@@ -1601,7 +1632,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:7:-5:first+drain hero:23:-16:-5:drain+kill"
     },
     {
       monster = "moss",
@@ -1655,7 +1687,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:25:5:0:pierce mon:0:5:0: hero:25:-20:0:pierce+kill"
     },
     {
       monster = "moss",
@@ -1705,7 +1738,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:7:0: mon:0:7:0: hero:23:-16:0:kill"
     },
     {
       monster = "moss",
@@ -1754,7 +1788,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:28:2:0:first hero:28:-26:0:kill"
     },
     {
       monster = "moss",
@@ -1804,7 +1839,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:28:2:0:first hero:28:-26:0:kill"
     },
     {
       monster = "moss",
@@ -1859,7 +1895,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:28:2:-7:first+drain+corrode hero:29:-27:-7:first+drain+corrode+kill"
     },
     {
       monster = "moss",
@@ -1909,7 +1946,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:37:-7:0:kill"
     },
     {
       monster = "moss",
@@ -1958,7 +1996,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:34:-4:-8:drain+kill"
     },
     {
       monster = "moss",
@@ -2008,7 +2047,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:38:-8:0:kill"
     },
     {
       monster = "moss",
@@ -2062,7 +2102,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:34:-4:0:first+corrode+kill"
     },
     {
       monster = "moss",
@@ -2113,7 +2154,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:34:-4:0:kill"
     },
     {
       monster = "moss",
@@ -2162,7 +2204,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:42:-12:0:kill"
     },
     {
       monster = "moss",
@@ -2212,7 +2255,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:42:-12:-10:first+drain+corrode+kill"
     },
     {
       monster = "moss",
@@ -2265,7 +2309,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:42:-12:0:first+kill"
     },
     {
       monster = "moss",
@@ -2317,7 +2362,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:43:-13:0:kill"
     },
     {
       monster = "moss",
@@ -2367,7 +2413,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:44:-14:0:kill"
     },
     {
       monster = "eel",
@@ -2416,7 +2463,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 6
+      hits = 6,
+      log = "hero:5:40:0:corrode mon:10:40:10: hero:6:34:0:corrode mon:10:34:10: hero:7:27:0:corrode mon:10:27:10: hero:8:19:0:corrode mon:10:19:10: hero:9:10:0:corrode mon:10:10:10: hero:10:0:0:corrode+kill"
     },
     {
       monster = "eel",
@@ -2468,7 +2516,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 9
+      hits = 9,
+      log = "hero:5:40:0:first hero:5:35:0:first hero:5:30:0: mon:10:30:10: hero:5:25:0: mon:10:25:10: hero:5:20:0: mon:10:20:10: hero:5:15:0: mon:10:15:10: hero:5:10:0: mon:10:10:10: hero:5:5:0: mon:10:5:10: hero:5:0:0:kill"
     },
     {
       monster = "eel",
@@ -2521,7 +2570,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 80,
-      hits = 9
+      hits = 9,
+      log = "hero:5:40:0: mon:10:40:10: hero:5:35:0: mon:10:35:10: hero:5:30:0: mon:10:30:10: hero:5:25:0: mon:10:25:10: hero:5:20:0: mon:10:20:10: hero:5:15:0: mon:10:15:10: hero:5:10:0: mon:10:10:10: hero:5:5:0: mon:10:5:10: hero:5:0:0:kill"
     },
     {
       monster = "eel",
@@ -2571,7 +2621,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 48,
-      hits = 9
+      hits = 9,
+      log = "hero:5:40:0: mon:6:40:6: hero:5:35:0: mon:6:35:6: hero:5:30:0: mon:6:30:6: hero:5:25:0: mon:6:25:6: hero:5:20:0: mon:6:20:6: hero:5:15:0: mon:6:15:6: hero:5:10:0: mon:6:10:6: hero:5:5:0: mon:6:5:6: hero:5:0:0:kill"
     },
     {
       monster = "eel",
@@ -2620,7 +2671,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 40,
-      hits = 5
+      hits = 5,
+      log = "hero:8:37:0: mon:10:34:10:spikes hero:8:26:0: mon:10:23:10:spikes hero:8:15:0: mon:10:12:10:spikes hero:8:4:0: mon:10:1:10:spikes hero:8:-7:0:kill"
     },
     {
       monster = "eel",
@@ -2671,7 +2723,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 6
+      hits = 6,
+      log = "hero:8:37:-2:first+drain hero:8:29:-2:drain mon:10:29:10: hero:8:21:-2:drain mon:10:21:10: hero:8:13:-2:drain mon:10:13:10: hero:8:5:-2:drain mon:10:5:10: hero:8:-3:-2:drain+kill"
     },
     {
       monster = "eel",
@@ -2725,7 +2778,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 4
+      hits = 4,
+      log = "hero:12:33:0:pierce mon:10:33:10: hero:12:21:0:pierce mon:10:21:10: hero:12:9:0:pierce mon:10:9:10: hero:12:-3:0:pierce+kill"
     },
     {
       monster = "eel",
@@ -2775,7 +2829,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 6
+      hits = 6,
+      log = "hero:8:37:0: mon:10:37:10: hero:8:29:0: mon:10:29:10: hero:8:21:0: mon:10:21:10: hero:8:13:0: mon:10:13:10: hero:8:5:0: mon:10:5:10: hero:8:-3:0:kill"
     },
     {
       monster = "eel",
@@ -2824,7 +2879,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 6
+      hits = 6,
+      log = "hero:8:37:0:first hero:8:29:0: mon:7:29:7: hero:8:21:0: mon:7:21:7: hero:8:13:0: mon:7:13:7: hero:8:5:0: mon:7:5:7: hero:8:-3:0:kill"
     },
     {
       monster = "eel",
@@ -2874,7 +2930,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 6
+      hits = 6,
+      log = "hero:8:37:0:first hero:8:29:0: mon:7:29:7: hero:8:21:0: mon:7:21:7: hero:8:13:0: mon:7:13:7: hero:8:5:0: mon:7:5:7: hero:8:-3:0:kill"
     },
     {
       monster = "eel",
@@ -2929,7 +2986,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 3,
-      hits = 5
+      hits = 5,
+      log = "hero:8:37:-2:first+drain+corrode hero:9:28:-2:first+drain+corrode hero:10:18:-2:drain+corrode mon:7:15:7:spikes hero:11:4:-2:drain+corrode mon:7:1:7:spikes hero:12:-11:-3:drain+corrode+kill"
     },
     {
       monster = "eel",
@@ -2979,7 +3037,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 3
+      hits = 3,
+      log = "hero:17:28:0: mon:12:28:12: hero:17:11:0: mon:12:11:12: hero:17:-6:0:kill"
     },
     {
       monster = "eel",
@@ -3028,7 +3087,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 5
+      hits = 5,
+      log = "hero:11:34:-2:drain mon:7:34:7: hero:11:23:-2:drain mon:7:23:7: hero:11:12:-2:drain mon:7:12:7: hero:11:1:-2:drain mon:7:1:7: hero:11:-10:-2:drain+kill"
     },
     {
       monster = "eel",
@@ -3078,7 +3138,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 3
+      hits = 3,
+      log = "hero:15:30:0: mon:7:30:7: hero:15:15:0: mon:7:15:7: hero:15:0:0:kill"
     },
     {
       monster = "eel",
@@ -3132,7 +3193,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 4
+      hits = 4,
+      log = "hero:11:34:0:first+corrode hero:12:22:0:corrode mon:7:22:7: hero:13:9:0:corrode mon:7:9:7: hero:14:-5:0:corrode+kill"
     },
     {
       monster = "eel",
@@ -3183,7 +3245,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 5
+      hits = 5,
+      log = "hero:11:34:0: mon:7:34:7: hero:11:23:0: mon:7:23:7: hero:11:12:0: mon:7:12:7: hero:11:1:0: mon:7:1:7: hero:11:-10:0:kill"
     },
     {
       monster = "eel",
@@ -3232,7 +3295,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 16,
-      hits = 5
+      hits = 5,
+      log = "hero:11:34:0: mon:4:34:4: hero:11:23:0: mon:4:23:4: hero:11:12:0: mon:4:12:4: hero:11:1:0: mon:4:1:4: hero:11:-10:0:kill"
     },
     {
       monster = "eel",
@@ -3282,7 +3346,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:11:34:-2:first+drain+corrode hero:12:22:-3:drain+corrode mon:4:19:4:spikes hero:13:6:-3:drain+corrode mon:4:3:4:spikes hero:14:-11:-3:drain+corrode+kill"
     },
     {
       monster = "eel",
@@ -3335,7 +3400,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 4
+      hits = 4,
+      log = "hero:11:34:0:first hero:11:23:0: mon:4:20:4:spikes hero:11:9:0: mon:4:6:4:spikes hero:11:-5:0:kill"
     },
     {
       monster = "eel",
@@ -3387,7 +3453,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 4
+      hits = 4,
+      log = "hero:12:33:0: mon:4:33:4: hero:12:21:0: mon:4:21:4: hero:12:9:0: mon:4:9:4: hero:12:-3:0:kill"
     },
     {
       monster = "eel",
@@ -3437,7 +3504,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 4
+      hits = 4,
+      log = "hero:13:32:0: mon:4:32:4: hero:13:19:0: mon:4:19:4: hero:13:6:0: mon:4:6:4: hero:13:-7:0:kill"
     },
     {
       monster = "eel",
@@ -3486,7 +3554,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 3
+      hits = 3,
+      log = "hero:14:31:0:corrode mon:4:31:4: hero:15:16:0:corrode mon:4:16:4: hero:16:0:0:corrode+kill"
     },
     {
       monster = "eel",
@@ -3538,7 +3607,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 4,
-      hits = 4
+      hits = 4,
+      log = "hero:14:31:0:first hero:14:17:0:first hero:14:3:0: mon:4:3:4: hero:14:-11:0:kill"
     },
     {
       monster = "eel",
@@ -3591,7 +3661,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 4
+      hits = 4,
+      log = "hero:14:31:0: mon:4:31:4: hero:14:17:0: mon:4:17:4: hero:14:3:0: mon:4:3:4: hero:14:-11:0:kill"
     },
     {
       monster = "eel",
@@ -3641,7 +3712,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:14:31:0: mon:0:31:0: hero:14:17:0: mon:0:17:0: hero:14:3:0: mon:0:3:0: hero:14:-11:0:kill"
     },
     {
       monster = "eel",
@@ -3690,7 +3762,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:17:28:0: mon:1:25:1:spikes hero:17:8:0: mon:1:5:1:spikes hero:17:-12:0:kill"
     },
     {
       monster = "eel",
@@ -3741,7 +3814,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:17:28:-4:first+drain hero:17:11:-4:drain mon:1:11:1: hero:17:-6:-4:drain+kill"
     },
     {
       monster = "eel",
@@ -3795,7 +3869,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:21:24:0:pierce mon:1:24:1: hero:21:3:0:pierce mon:1:3:1: hero:21:-18:0:pierce+kill"
     },
     {
       monster = "eel",
@@ -3845,7 +3920,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:17:28:0: mon:1:28:1: hero:17:11:0: mon:1:11:1: hero:17:-6:0:kill"
     },
     {
       monster = "eel",
@@ -3894,7 +3970,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:20:25:0:first hero:20:5:0: mon:0:5:0: hero:20:-15:0:kill"
     },
     {
       monster = "eel",
@@ -3944,7 +4021,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:20:25:0:first hero:20:5:0: mon:0:5:0: hero:20:-15:0:kill"
     },
     {
       monster = "eel",
@@ -3999,7 +4077,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:20:25:-5:first+drain+corrode hero:21:4:-5:first+drain+corrode hero:22:-18:-5:drain+corrode+kill"
     },
     {
       monster = "eel",
@@ -4049,7 +4128,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 3,
-      hits = 2
+      hits = 2,
+      log = "hero:29:16:0: mon:3:16:3: hero:29:-13:0:kill"
     },
     {
       monster = "eel",
@@ -4098,7 +4178,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:25:20:-6:drain mon:0:20:0: hero:25:-5:-6:drain+kill"
     },
     {
       monster = "eel",
@@ -4148,7 +4229,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:29:16:0: mon:0:16:0: hero:29:-13:0:kill"
     },
     {
       monster = "eel",
@@ -4202,7 +4284,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:25:20:0:first+corrode hero:26:-6:0:corrode+kill"
     },
     {
       monster = "eel",
@@ -4253,7 +4336,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:25:20:0: mon:0:20:0: hero:25:-5:0:kill"
     },
     {
       monster = "eel",
@@ -4302,7 +4386,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:31:14:0: mon:0:14:0: hero:31:-17:0:kill"
     },
     {
       monster = "eel",
@@ -4352,7 +4437,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:31:14:-7:first+drain+corrode hero:32:-18:-8:drain+corrode+kill"
     },
     {
       monster = "eel",
@@ -4405,7 +4491,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:31:14:0:first hero:31:-17:0:kill"
     },
     {
       monster = "eel",
@@ -4457,7 +4544,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:32:13:0: mon:0:13:0: hero:32:-19:0:kill"
     },
     {
       monster = "eel",
@@ -4507,7 +4595,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:33:12:0: mon:0:12:0: hero:33:-21:0:kill"
     },
     {
       monster = "eel",
@@ -4556,7 +4645,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:39:6:0:corrode mon:0:6:0: hero:40:-34:0:corrode+kill"
     },
     {
       monster = "eel",
@@ -4608,7 +4698,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:39:6:0:first hero:39:-33:0:first+kill"
     },
     {
       monster = "eel",
@@ -4661,7 +4752,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:39:6:0: mon:0:6:0: hero:39:-33:0:kill"
     },
     {
       monster = "eel",
@@ -4711,7 +4803,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:39:6:0: mon:0:6:0: hero:39:-33:0:kill"
     },
     {
       monster = "eel",
@@ -4760,7 +4853,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 12
+      hits = 12,
+      log = "hero:2:58:0: mon:12:55:12:spikes hero:2:53:0: mon:12:50:12:spikes hero:2:48:0: mon:12:45:12:spikes hero:2:43:0: mon:12:40:12:spikes hero:2:38:0: mon:12:35:12:spikes hero:2:33:0: mon:12:30:12:spikes hero:2:28:0: mon:12:25:12:spikes hero:2:23:0: mon:12:20:12:spikes hero:2:18:0: mon:12:15:12:spikes hero:2:13:0: mon:12:10:12:spikes hero:2:8:0: mon:12:5:12:spikes hero:2:3:0: mon:12:0:12:spikes+kill"
     },
     {
       monster = "frog",
@@ -4811,7 +4905,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 336,
-      hits = 30
+      hits = 30,
+      log = "hero:2:58:0:first hero:2:56:0: mon:12:56:12: hero:2:54:0: mon:12:54:12: hero:2:52:0: mon:12:52:12: hero:2:50:0: mon:12:50:12: hero:2:48:0: mon:12:48:12: hero:2:46:0: mon:12:46:12: hero:2:44:0: mon:12:44:12: hero:2:42:0: mon:12:42:12: hero:2:40:0: mon:12:40:12: hero:2:38:0: mon:12:38:12: hero:2:36:0: mon:12:36:12: hero:2:34:0: mon:12:34:12: hero:2:32:0: mon:12:32:12: hero:2:30:0: mon:12:30:12: hero:2:28:0: mon:12:28:12: hero:2:26:0: mon:12:26:12: hero:2:24:0: mon:12:24:12: hero:2:22:0: mon:12:22:12: hero:2:20:0: mon:12:20:12: hero:2:18:0: mon:12:18:12: hero:2:16:0: mon:12:16:12: hero:2:14:0: mon:12:14:12: hero:2:12:0: mon:12:12:12: hero:2:10:0: mon:12:10:12: hero:2:8:0: mon:12:8:12: hero:2:6:0: mon:12:6:12: hero:2:4:0: mon:12:4:12: hero:2:2:0: mon:12:2:12: hero:2:0:0:kill"
     },
     {
       monster = "frog",
@@ -4865,7 +4960,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 108,
-      hits = 10
+      hits = 10,
+      log = "hero:6:54:0:pierce mon:12:54:12: hero:6:48:0:pierce mon:12:48:12: hero:6:42:0:pierce mon:12:42:12: hero:6:36:0:pierce mon:12:36:12: hero:6:30:0:pierce mon:12:30:12: hero:6:24:0:pierce mon:12:24:12: hero:6:18:0:pierce mon:12:18:12: hero:6:12:0:pierce mon:12:12:12: hero:6:6:0:pierce mon:12:6:12: hero:6:0:0:pierce+kill"
     },
     {
       monster = "frog",
@@ -4915,7 +5011,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 348,
-      hits = 30
+      hits = 30,
+      log = "hero:2:58:0: mon:12:58:12: hero:2:56:0: mon:12:56:12: hero:2:54:0: mon:12:54:12: hero:2:52:0: mon:12:52:12: hero:2:50:0: mon:12:50:12: hero:2:48:0: mon:12:48:12: hero:2:46:0: mon:12:46:12: hero:2:44:0: mon:12:44:12: hero:2:42:0: mon:12:42:12: hero:2:40:0: mon:12:40:12: hero:2:38:0: mon:12:38:12: hero:2:36:0: mon:12:36:12: hero:2:34:0: mon:12:34:12: hero:2:32:0: mon:12:32:12: hero:2:30:0: mon:12:30:12: hero:2:28:0: mon:12:28:12: hero:2:26:0: mon:12:26:12: hero:2:24:0: mon:12:24:12: hero:2:22:0: mon:12:22:12: hero:2:20:0: mon:12:20:12: hero:2:18:0: mon:12:18:12: hero:2:16:0: mon:12:16:12: hero:2:14:0: mon:12:14:12: hero:2:12:0: mon:12:12:12: hero:2:10:0: mon:12:10:12: hero:2:8:0: mon:12:8:12: hero:2:6:0: mon:12:6:12: hero:2:4:0: mon:12:4:12: hero:2:2:0: mon:12:2:12: hero:2:0:0:kill"
     },
     {
       monster = "frog",
@@ -4964,7 +5061,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 120,
-      hits = 12
+      hits = 12,
+      log = "hero:5:55:0:first hero:5:50:0: mon:12:50:12: hero:5:45:0: mon:12:45:12: hero:5:40:0: mon:12:40:12: hero:5:35:0: mon:12:35:12: hero:5:30:0: mon:12:30:12: hero:5:25:0: mon:12:25:12: hero:5:20:0: mon:12:20:12: hero:5:15:0: mon:12:15:12: hero:5:10:0: mon:12:10:12: hero:5:5:0: mon:12:5:12: hero:5:0:0:kill"
     },
     {
       monster = "frog",
@@ -5014,7 +5112,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 120,
-      hits = 12
+      hits = 12,
+      log = "hero:5:55:0:first hero:5:50:0: mon:12:50:12: hero:5:45:0: mon:12:45:12: hero:5:40:0: mon:12:40:12: hero:5:35:0: mon:12:35:12: hero:5:30:0: mon:12:30:12: hero:5:25:0: mon:12:25:12: hero:5:20:0: mon:12:20:12: hero:5:15:0: mon:12:15:12: hero:5:10:0: mon:12:10:12: hero:5:5:0: mon:12:5:12: hero:5:0:0:kill"
     },
     {
       monster = "frog",
@@ -5069,7 +5168,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 37,
-      hits = 7
+      hits = 7,
+      log = "hero:5:55:-1:first+drain+corrode hero:6:49:-1:first+drain+corrode hero:7:42:-1:drain+corrode mon:12:39:12:spikes hero:8:31:-2:drain+corrode mon:12:28:12:spikes hero:9:19:-2:drain+corrode mon:12:16:12:spikes hero:10:6:-2:drain+corrode mon:12:3:12:spikes hero:11:-8:-2:drain+corrode+kill"
     },
     {
       monster = "frog",
@@ -5119,7 +5219,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 68,
-      hits = 5
+      hits = 5,
+      log = "hero:14:46:0: mon:17:46:17: hero:14:32:0: mon:17:32:17: hero:14:18:0: mon:17:18:17: hero:14:4:0: mon:17:4:17: hero:14:-10:0:kill"
     },
     {
       monster = "frog",
@@ -5168,7 +5269,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 87,
-      hits = 12
+      hits = 12,
+      log = "hero:5:55:-1:drain mon:9:55:9: hero:5:50:-1:drain mon:9:50:9: hero:5:45:-1:drain mon:9:45:9: hero:5:40:-1:drain mon:9:40:9: hero:5:35:-1:drain mon:9:35:9: hero:5:30:-1:drain mon:9:30:9: hero:5:25:-1:drain mon:9:25:9: hero:5:20:-1:drain mon:9:20:9: hero:5:15:-1:drain mon:9:15:9: hero:5:10:-1:drain mon:9:10:9: hero:5:5:-1:drain mon:9:5:9: hero:5:0:-1:drain+kill"
     },
     {
       monster = "frog",
@@ -5218,7 +5320,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 54,
-      hits = 7
+      hits = 7,
+      log = "hero:9:51:0: mon:9:51:9: hero:9:42:0: mon:9:42:9: hero:9:33:0: mon:9:33:9: hero:9:24:0: mon:9:24:9: hero:9:15:0: mon:9:15:9: hero:9:6:0: mon:9:6:9: hero:9:-3:0:kill"
     },
     {
       monster = "frog",
@@ -5272,7 +5375,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 54,
-      hits = 8
+      hits = 8,
+      log = "hero:5:55:0:first+corrode hero:6:49:0:corrode mon:9:49:9: hero:7:42:0:corrode mon:9:42:9: hero:8:34:0:corrode mon:9:34:9: hero:9:25:0:corrode mon:9:25:9: hero:10:15:0:corrode mon:9:15:9: hero:11:4:0:corrode mon:9:4:9: hero:12:-8:0:corrode+kill"
     },
     {
       monster = "frog",
@@ -5323,7 +5427,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 99,
-      hits = 12
+      hits = 12,
+      log = "hero:5:55:0: mon:9:55:9: hero:5:50:0: mon:9:50:9: hero:5:45:0: mon:9:45:9: hero:5:40:0: mon:9:40:9: hero:5:35:0: mon:9:35:9: hero:5:30:0: mon:9:30:9: hero:5:25:0: mon:9:25:9: hero:5:20:0: mon:9:20:9: hero:5:15:0: mon:9:15:9: hero:5:10:0: mon:9:10:9: hero:5:5:0: mon:9:5:9: hero:5:0:0:kill"
     },
     {
       monster = "frog",
@@ -5372,7 +5477,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 63,
-      hits = 8
+      hits = 8,
+      log = "hero:8:52:0: mon:9:52:9: hero:8:44:0: mon:9:44:9: hero:8:36:0: mon:9:36:9: hero:8:28:0: mon:9:28:9: hero:8:20:0: mon:9:20:9: hero:8:12:0: mon:9:12:9: hero:8:4:0: mon:9:4:9: hero:8:-4:0:kill"
     },
     {
       monster = "frog",
@@ -5422,7 +5528,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 25,
-      hits = 5
+      hits = 5,
+      log = "hero:8:52:-2:first+drain+corrode hero:9:43:-2:drain+corrode mon:9:40:9:spikes hero:10:30:-2:drain+corrode mon:9:27:9:spikes hero:11:16:-2:drain+corrode mon:9:13:9:spikes hero:12:1:-3:drain+corrode mon:9:-2:9:spikes+kill"
     },
     {
       monster = "frog",
@@ -5475,7 +5582,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 6
+      hits = 6,
+      log = "hero:8:52:0:first hero:8:44:0: mon:9:41:9:spikes hero:8:33:0: mon:9:30:9:spikes hero:8:22:0: mon:9:19:9:spikes hero:8:11:0: mon:9:8:9:spikes hero:8:0:0:kill"
     },
     {
       monster = "frog",
@@ -5527,7 +5635,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 54,
-      hits = 7
+      hits = 7,
+      log = "hero:9:51:0: mon:9:51:9: hero:9:42:0: mon:9:42:9: hero:9:33:0: mon:9:33:9: hero:9:24:0: mon:9:24:9: hero:9:15:0: mon:9:15:9: hero:9:6:0: mon:9:6:9: hero:9:-3:0:kill"
     },
     {
       monster = "frog",
@@ -5577,7 +5686,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 6
+      hits = 6,
+      log = "hero:10:50:0: mon:9:50:9: hero:10:40:0: mon:9:40:9: hero:10:30:0: mon:9:30:9: hero:10:20:0: mon:9:20:9: hero:10:10:0: mon:9:10:9: hero:10:0:0:kill"
     },
     {
       monster = "frog",
@@ -5626,7 +5736,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 6
+      hits = 6,
+      log = "hero:8:52:0:corrode mon:6:52:6: hero:9:43:0:corrode mon:6:43:6: hero:10:33:0:corrode mon:6:33:6: hero:11:22:0:corrode mon:6:22:6: hero:12:10:0:corrode mon:6:10:6: hero:13:-3:0:corrode+kill"
     },
     {
       monster = "frog",
@@ -5678,7 +5789,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 8
+      hits = 8,
+      log = "hero:8:52:0:first hero:8:44:0:first hero:8:36:0: mon:6:36:6: hero:8:28:0: mon:6:28:6: hero:8:20:0: mon:6:20:6: hero:8:12:0: mon:6:12:6: hero:8:4:0: mon:6:4:6: hero:8:-4:0:kill"
     },
     {
       monster = "frog",
@@ -5731,7 +5843,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 42,
-      hits = 8
+      hits = 8,
+      log = "hero:8:52:0: mon:6:52:6: hero:8:44:0: mon:6:44:6: hero:8:36:0: mon:6:36:6: hero:8:28:0: mon:6:28:6: hero:8:20:0: mon:6:20:6: hero:8:12:0: mon:6:12:6: hero:8:4:0: mon:6:4:6: hero:8:-4:0:kill"
     },
     {
       monster = "frog",
@@ -5781,7 +5894,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 8
+      hits = 8,
+      log = "hero:8:52:0: mon:2:52:2: hero:8:44:0: mon:2:44:2: hero:8:36:0: mon:2:36:2: hero:8:28:0: mon:2:28:2: hero:8:20:0: mon:2:20:2: hero:8:12:0: mon:2:12:2: hero:8:4:0: mon:2:4:2: hero:8:-4:0:kill"
     },
     {
       monster = "frog",
@@ -5830,7 +5944,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 5
+      hits = 5,
+      log = "hero:11:49:0: mon:6:46:6:spikes hero:11:35:0: mon:6:32:6:spikes hero:11:21:0: mon:6:18:6:spikes hero:11:7:0: mon:6:4:6:spikes hero:11:-7:0:kill"
     },
     {
       monster = "frog",
@@ -5881,7 +5996,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 6
+      hits = 6,
+      log = "hero:11:49:-2:first+drain hero:11:38:-2:drain mon:6:38:6: hero:11:27:-2:drain mon:6:27:6: hero:11:16:-2:drain mon:6:16:6: hero:11:5:-2:drain mon:6:5:6: hero:11:-6:-2:drain+kill"
     },
     {
       monster = "frog",
@@ -5935,7 +6051,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 4
+      hits = 4,
+      log = "hero:15:45:0:pierce mon:6:45:6: hero:15:30:0:pierce mon:6:30:6: hero:15:15:0:pierce mon:6:15:6: hero:15:0:0:pierce+kill"
     },
     {
       monster = "frog",
@@ -5985,7 +6102,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 6
+      hits = 6,
+      log = "hero:11:49:0: mon:6:49:6: hero:11:38:0: mon:6:38:6: hero:11:27:0: mon:6:27:6: hero:11:16:0: mon:6:16:6: hero:11:5:0: mon:6:5:6: hero:11:-6:0:kill"
     },
     {
       monster = "frog",
@@ -6034,7 +6152,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 5
+      hits = 5,
+      log = "hero:14:46:0:first hero:14:32:0: mon:3:32:3: hero:14:18:0: mon:3:18:3: hero:14:4:0: mon:3:4:3: hero:14:-10:0:kill"
     },
     {
       monster = "frog",
@@ -6084,7 +6203,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 5
+      hits = 5,
+      log = "hero:14:46:0:first hero:14:32:0: mon:3:32:3: hero:14:18:0: mon:3:18:3: hero:14:4:0: mon:3:4:3: hero:14:-10:0:kill"
     },
     {
       monster = "frog",
@@ -6139,7 +6259,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:14:46:-3:first+drain+corrode hero:15:31:-3:first+drain+corrode hero:16:15:-4:drain+corrode mon:3:12:3:spikes hero:17:-5:-4:drain+corrode+kill"
     },
     {
       monster = "frog",
@@ -6189,7 +6310,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 16,
-      hits = 3
+      hits = 3,
+      log = "hero:23:37:0: mon:8:37:8: hero:23:14:0: mon:8:14:8: hero:23:-9:0:kill"
     },
     {
       monster = "frog",
@@ -6238,7 +6360,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:17:43:-4:drain mon:0:43:0: hero:17:26:-4:drain mon:0:26:0: hero:17:9:-4:drain mon:0:9:0: hero:17:-8:-4:drain+kill"
     },
     {
       monster = "frog",
@@ -6288,7 +6411,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:21:39:0: mon:0:39:0: hero:21:18:0: mon:0:18:0: hero:21:-3:0:kill"
     },
     {
       monster = "frog",
@@ -6342,7 +6466,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:17:43:0:first+corrode hero:18:25:0:corrode mon:0:25:0: hero:19:6:0:corrode mon:0:6:0: hero:20:-14:0:corrode+kill"
     },
     {
       monster = "frog",
@@ -6393,7 +6518,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:17:43:0: mon:0:43:0: hero:17:26:0: mon:0:26:0: hero:17:9:0: mon:0:9:0: hero:17:-8:0:kill"
     },
     {
       monster = "frog",
@@ -6442,7 +6568,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:22:38:0: mon:0:38:0: hero:22:16:0: mon:0:16:0: hero:22:-6:0:kill"
     },
     {
       monster = "frog",
@@ -6492,7 +6619,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:22:38:-5:first+drain+corrode hero:23:15:-5:drain+corrode mon:0:12:0:spikes hero:24:-12:-6:drain+corrode+kill"
     },
     {
       monster = "frog",
@@ -6545,7 +6673,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:22:38:0:first hero:22:16:0: mon:0:13:0:spikes hero:22:-9:0:kill"
     },
     {
       monster = "frog",
@@ -6597,7 +6726,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:23:37:0: mon:0:37:0: hero:23:14:0: mon:0:14:0: hero:23:-9:0:kill"
     },
     {
       monster = "frog",
@@ -6647,7 +6777,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:24:36:0: mon:0:36:0: hero:24:12:0: mon:0:12:0: hero:24:-12:0:kill"
     },
     {
       monster = "frog",
@@ -6696,7 +6827,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:28:32:0:corrode mon:0:32:0: hero:29:3:0:corrode mon:0:3:0: hero:30:-27:0:corrode+kill"
     },
     {
       monster = "frog",
@@ -6748,7 +6880,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:28:32:0:first hero:28:4:0:first hero:28:-24:0:kill"
     },
     {
       monster = "frog",
@@ -6801,7 +6934,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:28:32:0: mon:0:32:0: hero:28:4:0: mon:0:4:0: hero:28:-24:0:kill"
     },
     {
       monster = "frog",
@@ -6851,7 +6985,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:28:32:0: mon:0:32:0: hero:28:4:0: mon:0:4:0: hero:28:-24:0:kill"
     },
     {
       monster = "frog",
@@ -6900,7 +7035,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:36:24:0: mon:0:21:0:spikes hero:36:-15:0:kill"
     },
     {
       monster = "frog",
@@ -6951,7 +7087,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:36:24:-9:first+drain hero:36:-12:-9:drain+kill"
     },
     {
       monster = "frog",
@@ -7005,7 +7142,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:40:20:0:pierce mon:0:20:0: hero:40:-20:0:pierce+kill"
     },
     {
       monster = "frog",
@@ -7055,7 +7193,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:36:24:0: mon:0:24:0: hero:36:-12:0:kill"
     },
     {
       monster = "frog",
@@ -7104,7 +7243,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7154,7 +7294,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7209,7 +7350,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7259,7 +7401,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 91,
-      hits = 8
+      hits = 8,
+      log = "hero:5:35:0: mon:13:35:13: hero:5:30:0: mon:13:30:13: hero:5:25:0: mon:13:25:13: hero:5:20:0: mon:13:20:13: hero:5:15:0: mon:13:15:13: hero:5:10:0: mon:13:10:13: hero:5:5:0: mon:13:5:13: hero:5:0:0:kill"
     },
     {
       monster = "beetle",
@@ -7308,7 +7451,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7358,7 +7502,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 104,
-      hits = 14
+      hits = 14,
+      log = "hero:3:37:0: mon:8:37:8: hero:3:34:0: mon:8:34:8: hero:3:31:0: mon:8:31:8: hero:3:28:0: mon:8:28:8: hero:3:25:0: mon:8:25:8: hero:3:22:0: mon:8:22:8: hero:3:19:0: mon:8:19:8: hero:3:16:0: mon:8:16:8: hero:3:13:0: mon:8:13:8: hero:3:10:0: mon:8:10:8: hero:3:7:0: mon:8:7:8: hero:3:4:0: mon:8:4:8: hero:3:1:0: mon:8:1:8: hero:3:-2:0:kill"
     },
     {
       monster = "beetle",
@@ -7412,7 +7557,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7463,7 +7609,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7512,7 +7659,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7562,7 +7710,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7615,7 +7764,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7667,7 +7817,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "beetle",
@@ -7766,7 +7917,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 35,
-      hits = 8
+      hits = 8,
+      log = "hero:2:38:0:corrode mon:5:38:5: hero:3:35:0:corrode mon:5:35:5: hero:4:31:0:corrode mon:5:31:5: hero:5:26:0:corrode mon:5:26:5: hero:6:20:0:corrode mon:5:20:5: hero:7:13:0:corrode mon:5:13:5: hero:8:5:0:corrode mon:5:5:5: hero:9:-4:0:corrode+kill"
     },
     {
       monster = "beetle",
@@ -7818,7 +7970,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 85,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0:first hero:2:36:0:first hero:2:34:0: mon:5:34:5: hero:2:32:0: mon:5:32:5: hero:2:30:0: mon:5:30:5: hero:2:28:0: mon:5:28:5: hero:2:26:0: mon:5:26:5: hero:2:24:0: mon:5:24:5: hero:2:22:0: mon:5:22:5: hero:2:20:0: mon:5:20:5: hero:2:18:0: mon:5:18:5: hero:2:16:0: mon:5:16:5: hero:2:14:0: mon:5:14:5: hero:2:12:0: mon:5:12:5: hero:2:10:0: mon:5:10:5: hero:2:8:0: mon:5:8:5: hero:2:6:0: mon:5:6:5: hero:2:4:0: mon:5:4:5: hero:2:2:0: mon:5:2:5: hero:2:0:0:kill"
     },
     {
       monster = "beetle",
@@ -7871,7 +8024,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 95,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0: mon:5:38:5: hero:2:36:0: mon:5:36:5: hero:2:34:0: mon:5:34:5: hero:2:32:0: mon:5:32:5: hero:2:30:0: mon:5:30:5: hero:2:28:0: mon:5:28:5: hero:2:26:0: mon:5:26:5: hero:2:24:0: mon:5:24:5: hero:2:22:0: mon:5:22:5: hero:2:20:0: mon:5:20:5: hero:2:18:0: mon:5:18:5: hero:2:16:0: mon:5:16:5: hero:2:14:0: mon:5:14:5: hero:2:12:0: mon:5:12:5: hero:2:10:0: mon:5:10:5: hero:2:8:0: mon:5:8:5: hero:2:6:0: mon:5:6:5: hero:2:4:0: mon:5:4:5: hero:2:2:0: mon:5:2:5: hero:2:0:0:kill"
     },
     {
       monster = "beetle",
@@ -7921,7 +8075,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 19,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0: mon:1:38:1: hero:2:36:0: mon:1:36:1: hero:2:34:0: mon:1:34:1: hero:2:32:0: mon:1:32:1: hero:2:30:0: mon:1:30:1: hero:2:28:0: mon:1:28:1: hero:2:26:0: mon:1:26:1: hero:2:24:0: mon:1:24:1: hero:2:22:0: mon:1:22:1: hero:2:20:0: mon:1:20:1: hero:2:18:0: mon:1:18:1: hero:2:16:0: mon:1:16:1: hero:2:14:0: mon:1:14:1: hero:2:12:0: mon:1:12:1: hero:2:10:0: mon:1:10:1: hero:2:8:0: mon:1:8:1: hero:2:6:0: mon:1:6:1: hero:2:4:0: mon:1:4:1: hero:2:2:0: mon:1:2:1: hero:2:0:0:kill"
     },
     {
       monster = "beetle",
@@ -7970,7 +8125,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 16,
-      hits = 8
+      hits = 8,
+      log = "hero:2:38:0: mon:2:35:2:spikes hero:2:33:0: mon:2:30:2:spikes hero:2:28:0: mon:2:25:2:spikes hero:2:23:0: mon:2:20:2:spikes hero:2:18:0: mon:2:15:2:spikes hero:2:13:0: mon:2:10:2:spikes hero:2:8:0: mon:2:5:2:spikes hero:2:3:0: mon:2:0:2:spikes+kill"
     },
     {
       monster = "beetle",
@@ -8021,7 +8177,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0:first hero:2:36:0: mon:2:36:2: hero:2:34:0: mon:2:34:2: hero:2:32:0: mon:2:32:2: hero:2:30:0: mon:2:30:2: hero:2:28:0: mon:2:28:2: hero:2:26:0: mon:2:26:2: hero:2:24:0: mon:2:24:2: hero:2:22:0: mon:2:22:2: hero:2:20:0: mon:2:20:2: hero:2:18:0: mon:2:18:2: hero:2:16:0: mon:2:16:2: hero:2:14:0: mon:2:14:2: hero:2:12:0: mon:2:12:2: hero:2:10:0: mon:2:10:2: hero:2:8:0: mon:2:8:2: hero:2:6:0: mon:2:6:2: hero:2:4:0: mon:2:4:2: hero:2:2:0: mon:2:2:2: hero:2:0:0:kill"
     },
     {
       monster = "beetle",
@@ -8075,7 +8232,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 7
+      hits = 7,
+      log = "hero:6:34:0:pierce mon:2:34:2: hero:6:28:0:pierce mon:2:28:2: hero:6:22:0:pierce mon:2:22:2: hero:6:16:0:pierce mon:2:16:2: hero:6:10:0:pierce mon:2:10:2: hero:6:4:0:pierce mon:2:4:2: hero:6:-2:0:pierce+kill"
     },
     {
       monster = "beetle",
@@ -8125,7 +8283,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 38,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0: mon:2:38:2: hero:2:36:0: mon:2:36:2: hero:2:34:0: mon:2:34:2: hero:2:32:0: mon:2:32:2: hero:2:30:0: mon:2:30:2: hero:2:28:0: mon:2:28:2: hero:2:26:0: mon:2:26:2: hero:2:24:0: mon:2:24:2: hero:2:22:0: mon:2:22:2: hero:2:20:0: mon:2:20:2: hero:2:18:0: mon:2:18:2: hero:2:16:0: mon:2:16:2: hero:2:14:0: mon:2:14:2: hero:2:12:0: mon:2:12:2: hero:2:10:0: mon:2:10:2: hero:2:8:0: mon:2:8:2: hero:2:6:0: mon:2:6:2: hero:2:4:0: mon:2:4:2: hero:2:2:0: mon:2:2:2: hero:2:0:0:kill"
     },
     {
       monster = "beetle",
@@ -8174,7 +8333,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 8
+      hits = 8,
+      log = "hero:5:35:0:first hero:5:30:0: mon:2:30:2: hero:5:25:0: mon:2:25:2: hero:5:20:0: mon:2:20:2: hero:5:15:0: mon:2:15:2: hero:5:10:0: mon:2:10:2: hero:5:5:0: mon:2:5:2: hero:5:0:0:kill"
     },
     {
       monster = "beetle",
@@ -8224,7 +8384,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 8
+      hits = 8,
+      log = "hero:5:35:0:first hero:5:30:0: mon:2:30:2: hero:5:25:0: mon:2:25:2: hero:5:20:0: mon:2:20:2: hero:5:15:0: mon:2:15:2: hero:5:10:0: mon:2:10:2: hero:5:5:0: mon:2:5:2: hero:5:0:0:kill"
     },
     {
       monster = "beetle",
@@ -8279,7 +8440,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:5:35:-1:first+drain+corrode hero:6:29:-1:first+drain+corrode hero:7:22:-1:drain+corrode mon:2:19:2:spikes hero:8:11:-2:drain+corrode mon:2:8:2:spikes hero:9:-1:-2:drain+corrode+kill"
     },
     {
       monster = "beetle",
@@ -8329,7 +8491,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 3
+      hits = 3,
+      log = "hero:14:26:0: mon:7:26:7: hero:14:12:0: mon:7:12:7: hero:14:-2:0:kill"
     },
     {
       monster = "beetle",
@@ -8378,7 +8541,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:8:32:-2:drain mon:0:32:0: hero:8:24:-2:drain mon:0:24:0: hero:8:16:-2:drain mon:0:16:0: hero:8:8:-2:drain mon:0:8:0: hero:8:0:-2:drain+kill"
     },
     {
       monster = "beetle",
@@ -8428,7 +8592,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:12:28:0: mon:0:28:0: hero:12:16:0: mon:0:16:0: hero:12:4:0: mon:0:4:0: hero:12:-8:0:kill"
     },
     {
       monster = "beetle",
@@ -8482,7 +8647,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:8:32:0:first+corrode hero:9:23:0:corrode mon:0:23:0: hero:10:13:0:corrode mon:0:13:0: hero:11:2:0:corrode mon:0:2:0: hero:12:-10:0:corrode+kill"
     },
     {
       monster = "beetle",
@@ -8533,7 +8699,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:8:32:0: mon:0:32:0: hero:8:24:0: mon:0:24:0: hero:8:16:0: mon:0:16:0: hero:8:8:0: mon:0:8:0: hero:8:0:0:kill"
     },
     {
       monster = "beetle",
@@ -8582,7 +8749,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:11:29:0: mon:0:29:0: hero:11:18:0: mon:0:18:0: hero:11:7:0: mon:0:7:0: hero:11:-4:0:kill"
     },
     {
       monster = "beetle",
@@ -8632,7 +8800,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:11:29:-2:first+drain+corrode hero:12:17:-3:drain+corrode mon:0:14:0:spikes hero:13:1:-3:drain+corrode mon:0:-2:0:spikes+kill"
     },
     {
       monster = "beetle",
@@ -8685,7 +8854,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:11:29:0:first hero:11:18:0: mon:0:15:0:spikes hero:11:4:0: mon:0:1:0:spikes hero:11:-10:0:kill"
     },
     {
       monster = "beetle",
@@ -8737,7 +8907,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:12:28:0: mon:0:28:0: hero:12:16:0: mon:0:16:0: hero:12:4:0: mon:0:4:0: hero:12:-8:0:kill"
     },
     {
       monster = "beetle",
@@ -8787,7 +8958,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:13:27:0: mon:0:27:0: hero:13:14:0: mon:0:14:0: hero:13:1:0: mon:0:1:0: hero:13:-12:0:kill"
     },
     {
       monster = "beetle",
@@ -8836,7 +9008,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0:corrode mon:0:24:0: hero:17:7:0:corrode mon:0:7:0: hero:18:-11:0:corrode+kill"
     },
     {
       monster = "beetle",
@@ -8888,7 +9061,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0:first hero:16:8:0:first hero:16:-8:0:kill"
     },
     {
       monster = "beetle",
@@ -8941,7 +9115,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0: mon:0:24:0: hero:16:8:0: mon:0:8:0: hero:16:-8:0:kill"
     },
     {
       monster = "beetle",
@@ -8991,7 +9166,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0: mon:0:24:0: hero:16:8:0: mon:0:8:0: hero:16:-8:0:kill"
     },
     {
       monster = "beetle",
@@ -9040,7 +9216,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:22:18:0: mon:0:15:0:spikes hero:22:-7:0:kill"
     },
     {
       monster = "beetle",
@@ -9091,7 +9268,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:22:18:-5:first+drain hero:22:-4:-5:drain+kill"
     },
     {
       monster = "beetle",
@@ -9145,7 +9323,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:26:14:0:pierce mon:0:14:0: hero:26:-12:0:pierce+kill"
     },
     {
       monster = "beetle",
@@ -9195,7 +9374,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:22:18:0: mon:0:18:0: hero:22:-4:0:kill"
     },
     {
       monster = "beetle",
@@ -9244,7 +9424,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:10:0:first hero:30:-20:0:kill"
     },
     {
       monster = "beetle",
@@ -9294,7 +9475,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:10:0:first hero:30:-20:0:kill"
     },
     {
       monster = "beetle",
@@ -9349,7 +9531,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:10:-7:first+drain+corrode hero:31:-21:-7:first+drain+corrode+kill"
     },
     {
       monster = "beetle",
@@ -9399,7 +9582,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:39:1:0: mon:0:1:0: hero:39:-38:0:kill"
     },
     {
       monster = "beetle",
@@ -9448,7 +9632,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 126,
-      hits = 9
+      hits = 9,
+      log = "mon:15:35:15:first hero:4:31:-1:drain mon:15:31:15: hero:4:27:-1:drain mon:15:27:15: hero:4:23:-1:drain mon:15:23:15: hero:4:19:-1:drain mon:15:19:15: hero:4:15:-1:drain mon:15:15:15: hero:4:11:-1:drain mon:15:11:15: hero:4:7:-1:drain mon:15:7:15: hero:4:3:-1:drain mon:15:3:15: hero:4:-1:-1:drain+kill"
     },
     {
       monster = "bat",
@@ -9498,7 +9683,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 75,
-      hits = 5
+      hits = 5,
+      log = "mon:15:35:15:first hero:8:27:0: mon:15:27:15: hero:8:19:0: mon:15:19:15: hero:8:11:0: mon:15:11:15: hero:8:3:0: mon:15:3:15: hero:8:-5:0:kill"
     },
     {
       monster = "bat",
@@ -9552,7 +9738,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 75,
-      hits = 6
+      hits = 6,
+      log = "hero:4:31:0:first+corrode mon:15:31:15:first hero:5:26:0:corrode mon:15:26:15: hero:6:20:0:corrode mon:15:20:15: hero:7:13:0:corrode mon:15:13:15: hero:8:5:0:corrode mon:15:5:15: hero:9:-4:0:corrode+kill"
     },
     {
       monster = "bat",
@@ -9603,7 +9790,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 135,
-      hits = 9
+      hits = 9,
+      log = "mon:15:35:15:first hero:4:31:0: mon:15:31:15: hero:4:27:0: mon:15:27:15: hero:4:23:0: mon:15:23:15: hero:4:19:0: mon:15:19:15: hero:4:15:0: mon:15:15:15: hero:4:11:0: mon:15:11:15: hero:4:7:0: mon:15:7:15: hero:4:3:0: mon:15:3:15: hero:4:-1:0:kill"
     },
     {
       monster = "bat",
@@ -9652,7 +9840,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 75,
-      hits = 5
+      hits = 5,
+      log = "mon:15:35:15:first hero:7:28:0: mon:15:28:15: hero:7:21:0: mon:15:21:15: hero:7:14:0: mon:15:14:15: hero:7:7:0: mon:15:7:15: hero:7:0:0:kill"
     },
     {
       monster = "bat",
@@ -9702,7 +9891,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 38,
-      hits = 4
+      hits = 4,
+      log = "hero:7:28:-1:first+drain+corrode mon:15:25:15:first+spikes hero:8:17:-2:drain+corrode mon:15:14:15:spikes hero:9:5:-2:drain+corrode mon:15:2:15:spikes hero:10:-8:-2:drain+corrode+kill"
     },
     {
       monster = "bat",
@@ -9755,7 +9945,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 4
+      hits = 4,
+      log = "hero:7:28:0:first mon:15:25:15:first+spikes hero:7:18:0: mon:15:15:15:spikes hero:7:8:0: mon:15:5:15:spikes hero:7:-2:0:kill"
     },
     {
       monster = "bat",
@@ -9807,7 +9998,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 5
+      hits = 5,
+      log = "hero:8:27:0: mon:15:27:15: hero:8:19:0: mon:15:19:15: hero:8:11:0: mon:15:11:15: hero:8:3:0: mon:15:3:15: hero:8:-5:0:kill"
     },
     {
       monster = "bat",
@@ -9857,7 +10049,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 4
+      hits = 4,
+      log = "mon:15:35:15:first hero:9:26:0: mon:15:26:15: hero:9:17:0: mon:15:17:15: hero:9:8:0: mon:15:8:15: hero:9:-1:0:kill"
     },
     {
       monster = "bat",
@@ -9906,7 +10099,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 5
+      hits = 5,
+      log = "mon:12:35:12:first hero:7:28:0:corrode mon:12:28:12: hero:8:20:0:corrode mon:12:20:12: hero:9:11:0:corrode mon:12:11:12: hero:10:1:0:corrode mon:12:1:12: hero:11:-10:0:corrode+kill"
     },
     {
       monster = "bat",
@@ -9958,7 +10152,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 5
+      hits = 5,
+      log = "hero:7:28:0:first hero:7:21:0:first mon:12:21:12:first hero:7:14:0: mon:12:14:12: hero:7:7:0: mon:12:7:12: hero:7:0:0:kill"
     },
     {
       monster = "bat",
@@ -10011,7 +10206,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 5
+      hits = 5,
+      log = "mon:12:35:12:first hero:7:28:0: mon:12:28:12: hero:7:21:0: mon:12:21:12: hero:7:14:0: mon:12:14:12: hero:7:7:0: mon:12:7:12: hero:7:0:0:kill"
     },
     {
       monster = "bat",
@@ -10061,7 +10257,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 40,
-      hits = 5
+      hits = 5,
+      log = "mon:8:35:8:first hero:7:28:0: mon:8:28:8: hero:7:21:0: mon:8:21:8: hero:7:14:0: mon:8:14:8: hero:7:7:0: mon:8:7:8: hero:7:0:0:kill"
     },
     {
       monster = "bat",
@@ -10110,7 +10307,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 3
+      hits = 3,
+      log = "mon:12:32:12:first+spikes hero:10:22:0: mon:12:19:12:spikes hero:10:9:0: mon:12:6:12:spikes hero:10:-4:0:kill"
     },
     {
       monster = "bat",
@@ -10161,7 +10359,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 4
+      hits = 4,
+      log = "hero:10:25:-2:first+drain mon:12:25:12:first hero:10:15:-2:drain mon:12:15:12: hero:10:5:-2:drain mon:12:5:12: hero:10:-5:-2:drain+kill"
     },
     {
       monster = "bat",
@@ -10215,7 +10414,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 3
+      hits = 3,
+      log = "mon:12:35:12:first hero:14:21:0:pierce mon:12:21:12: hero:14:7:0:pierce mon:12:7:12: hero:14:-7:0:pierce+kill"
     },
     {
       monster = "bat",
@@ -10265,7 +10465,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 48,
-      hits = 4
+      hits = 4,
+      log = "mon:12:35:12:first hero:10:25:0: mon:12:25:12: hero:10:15:0: mon:12:15:12: hero:10:5:0: mon:12:5:12: hero:10:-5:0:kill"
     },
     {
       monster = "bat",
@@ -10314,7 +10515,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 4
+      hits = 4,
+      log = "hero:10:25:0:first mon:9:25:9:first hero:10:15:0: mon:9:15:9: hero:10:5:0: mon:9:5:9: hero:10:-5:0:kill"
     },
     {
       monster = "bat",
@@ -10364,7 +10566,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 4
+      hits = 4,
+      log = "hero:10:25:0:first mon:9:25:9:first hero:10:15:0: mon:9:15:9: hero:10:5:0: mon:9:5:9: hero:10:-5:0:kill"
     },
     {
       monster = "bat",
@@ -10419,7 +10622,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:10:25:-2:first+drain+corrode hero:11:14:-2:first+drain+corrode mon:9:11:9:first+spikes hero:12:-1:-3:drain+corrode+kill"
     },
     {
       monster = "bat",
@@ -10469,7 +10673,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 2
+      hits = 2,
+      log = "mon:14:35:14:first hero:19:16:0: mon:14:16:14: hero:19:-3:0:kill"
     },
     {
       monster = "bat",
@@ -10518,7 +10723,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 3
+      hits = 3,
+      log = "mon:9:35:9:first hero:13:22:-3:drain mon:9:22:9: hero:13:9:-3:drain mon:9:9:9: hero:13:-4:-3:drain+kill"
     },
     {
       monster = "bat",
@@ -10568,7 +10774,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 3
+      hits = 3,
+      log = "mon:9:35:9:first hero:17:18:0: mon:9:18:9: hero:17:1:0: mon:9:1:9: hero:17:-16:0:kill"
     },
     {
       monster = "bat",
@@ -10622,7 +10829,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 3
+      hits = 3,
+      log = "hero:13:22:0:first+corrode mon:9:22:9:first hero:14:8:0:corrode mon:9:8:9: hero:15:-7:0:corrode+kill"
     },
     {
       monster = "bat",
@@ -10673,7 +10881,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 3
+      hits = 3,
+      log = "mon:9:35:9:first hero:13:22:0: mon:9:22:9: hero:13:9:0: mon:9:9:9: hero:13:-4:0:kill"
     },
     {
       monster = "bat",
@@ -10722,7 +10931,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 3
+      hits = 3,
+      log = "mon:6:35:6:first hero:16:19:0: mon:6:19:6: hero:16:3:0: mon:6:3:6: hero:16:-13:0:kill"
     },
     {
       monster = "bat",
@@ -10772,7 +10982,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:16:19:-4:first+drain+corrode mon:6:16:6:first+spikes hero:17:-1:-4:drain+corrode+kill"
     },
     {
       monster = "bat",
@@ -10825,7 +11036,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "hero:16:19:0:first mon:6:16:6:first+spikes hero:16:0:0:kill"
     },
     {
       monster = "bat",
@@ -10877,7 +11089,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 3
+      hits = 3,
+      log = "hero:17:18:0: mon:6:18:6: hero:17:1:0: mon:6:1:6: hero:17:-16:0:kill"
     },
     {
       monster = "bat",
@@ -10927,7 +11140,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 2
+      hits = 2,
+      log = "mon:6:35:6:first hero:18:17:0: mon:6:17:6: hero:18:-1:0:kill"
     },
     {
       monster = "bat",
@@ -10976,7 +11190,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "mon:3:35:3:first hero:19:16:0:corrode mon:3:16:3: hero:20:-4:0:corrode+kill"
     },
     {
       monster = "bat",
@@ -11028,7 +11243,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:19:16:0:first hero:19:-3:0:first+kill"
     },
     {
       monster = "bat",
@@ -11081,7 +11297,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "mon:3:35:3:first hero:19:16:0: mon:3:16:3: hero:19:-3:0:kill"
     },
     {
       monster = "bat",
@@ -11131,7 +11348,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "mon:0:35:0:first hero:19:16:0: mon:0:16:0: hero:19:-3:0:kill"
     },
     {
       monster = "bat",
@@ -11180,7 +11398,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "mon:0:32:0:first+spikes hero:24:8:0: mon:0:5:0:spikes hero:24:-19:0:kill"
     },
     {
       monster = "bat",
@@ -11231,7 +11450,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:24:11:-6:first+drain mon:0:11:0:first hero:24:-13:-6:drain+kill"
     },
     {
       monster = "bat",
@@ -11285,7 +11505,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "mon:0:35:0:first hero:28:7:0:pierce mon:0:7:0: hero:28:-21:0:pierce+kill"
     },
     {
       monster = "bat",
@@ -11335,7 +11556,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "mon:0:35:0:first hero:24:11:0: mon:0:11:0: hero:24:-13:0:kill"
     },
     {
       monster = "bat",
@@ -11384,7 +11606,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:5:0:first mon:0:5:0:first hero:30:-25:0:kill"
     },
     {
       monster = "bat",
@@ -11434,7 +11657,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:5:0:first mon:0:5:0:first hero:30:-25:0:kill"
     },
     {
       monster = "bat",
@@ -11489,7 +11713,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:5:-7:first+drain+corrode hero:31:-26:-7:first+drain+corrode+kill"
     },
     {
       monster = "bat",
@@ -11539,7 +11764,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 1
+      hits = 1,
+      log = "mon:2:35:2:first hero:39:-4:0:kill"
     },
     {
       monster = "bat",
@@ -11588,7 +11814,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "mon:0:35:0:first hero:38:-3:-9:drain+kill"
     },
     {
       monster = "bat",
@@ -11638,7 +11865,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "mon:0:35:0:first hero:42:-7:0:kill"
     },
     {
       monster = "bat",
@@ -11692,7 +11920,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:38:-3:0:first+corrode+kill"
     },
     {
       monster = "bat",
@@ -11743,7 +11972,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "mon:0:35:0:first hero:38:-3:0:kill"
     },
     {
       monster = "bat",
@@ -11792,7 +12022,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "wraith",
@@ -11842,7 +12073,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "wraith",
@@ -11895,7 +12127,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "wraith",
@@ -12046,7 +12279,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 468,
-      hits = 27
+      hits = 27,
+      log = "hero:3:77:0:corrode mon:18:80:18:lifesteal hero:4:76:0:corrode mon:18:80:18:lifesteal hero:5:75:0:corrode mon:18:80:18:lifesteal hero:6:74:0:corrode mon:18:80:18:lifesteal hero:7:73:0:corrode mon:18:80:18:lifesteal hero:8:72:0:corrode mon:18:80:18:lifesteal hero:9:71:0:corrode mon:18:80:18:lifesteal hero:10:70:0:corrode mon:18:79:18:lifesteal hero:11:68:0:corrode mon:18:77:18:lifesteal hero:12:65:0:corrode mon:18:74:18:lifesteal hero:13:61:0:corrode mon:18:70:18:lifesteal hero:13:57:0:corrode mon:18:66:18:lifesteal hero:13:53:0:corrode mon:18:62:18:lifesteal hero:13:49:0:corrode mon:18:58:18:lifesteal hero:13:45:0:corrode mon:18:54:18:lifesteal hero:13:41:0:corrode mon:18:50:18:lifesteal hero:13:37:0:corrode mon:18:46:18:lifesteal hero:13:33:0:corrode mon:18:42:18:lifesteal hero:13:29:0:corrode mon:18:38:18:lifesteal hero:13:25:0:corrode mon:18:34:18:lifesteal hero:13:21:0:corrode mon:18:30:18:lifesteal hero:13:17:0:corrode mon:18:26:18:lifesteal hero:13:13:0:corrode mon:18:22:18:lifesteal hero:13:9:0:corrode mon:18:18:18:lifesteal hero:13:5:0:corrode mon:18:14:18:lifesteal hero:13:1:0:corrode mon:18:10:18:lifesteal hero:13:-3:0:corrode+kill"
     },
     {
       monster = "wraith",
@@ -12559,7 +12793,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 94,
-      hits = 11
+      hits = 11,
+      log = "hero:6:74:-1:first+drain+corrode hero:7:67:-1:first+drain+corrode hero:8:59:-2:drain+corrode mon:15:63:15:lifesteal+spikes hero:9:54:-2:drain+corrode mon:15:58:15:lifesteal+spikes hero:10:48:-2:drain+corrode mon:15:52:15:lifesteal+spikes hero:11:41:-2:drain+corrode mon:15:45:15:lifesteal+spikes hero:12:33:-3:drain+corrode mon:15:37:15:lifesteal+spikes hero:13:24:-3:drain+corrode mon:15:28:15:lifesteal+spikes hero:14:14:-3:drain+corrode mon:15:18:15:lifesteal+spikes hero:15:3:-3:drain+corrode mon:15:7:15:lifesteal+spikes hero:16:-9:-4:drain+corrode+kill"
     },
     {
       monster = "wraith",
@@ -12609,7 +12844,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 260,
-      hits = 14
+      hits = 14,
+      log = "hero:15:65:0: mon:20:75:20:lifesteal hero:15:60:0: mon:20:70:20:lifesteal hero:15:55:0: mon:20:65:20:lifesteal hero:15:50:0: mon:20:60:20:lifesteal hero:15:45:0: mon:20:55:20:lifesteal hero:15:40:0: mon:20:50:20:lifesteal hero:15:35:0: mon:20:45:20:lifesteal hero:15:30:0: mon:20:40:20:lifesteal hero:15:25:0: mon:20:35:20:lifesteal hero:15:20:0: mon:20:30:20:lifesteal hero:15:15:0: mon:20:25:20:lifesteal hero:15:10:0: mon:20:20:20:lifesteal hero:15:5:0: mon:20:15:20:lifesteal hero:15:0:0:kill"
     },
     {
       monster = "wraith",
@@ -12708,7 +12944,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 216,
-      hits = 19
+      hits = 19,
+      log = "hero:10:70:0: mon:12:76:12:lifesteal hero:10:66:0: mon:12:72:12:lifesteal hero:10:62:0: mon:12:68:12:lifesteal hero:10:58:0: mon:12:64:12:lifesteal hero:10:54:0: mon:12:60:12:lifesteal hero:10:50:0: mon:12:56:12:lifesteal hero:10:46:0: mon:12:52:12:lifesteal hero:10:42:0: mon:12:48:12:lifesteal hero:10:38:0: mon:12:44:12:lifesteal hero:10:34:0: mon:12:40:12:lifesteal hero:10:30:0: mon:12:36:12:lifesteal hero:10:26:0: mon:12:32:12:lifesteal hero:10:22:0: mon:12:28:12:lifesteal hero:10:18:0: mon:12:24:12:lifesteal hero:10:14:0: mon:12:20:12:lifesteal hero:10:10:0: mon:12:16:12:lifesteal hero:10:6:0: mon:12:12:12:lifesteal hero:10:2:0: mon:12:8:12:lifesteal hero:10:-2:0:kill"
     },
     {
       monster = "wraith",
@@ -12762,7 +12999,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 132,
-      hits = 13
+      hits = 13,
+      log = "hero:6:74:0:first+corrode hero:7:67:0:corrode mon:12:73:12:lifesteal hero:8:65:0:corrode mon:12:71:12:lifesteal hero:9:62:0:corrode mon:12:68:12:lifesteal hero:10:58:0:corrode mon:12:64:12:lifesteal hero:11:53:0:corrode mon:12:59:12:lifesteal hero:12:47:0:corrode mon:12:53:12:lifesteal hero:13:40:0:corrode mon:12:46:12:lifesteal hero:14:32:0:corrode mon:12:38:12:lifesteal hero:15:23:0:corrode mon:12:29:12:lifesteal hero:16:13:0:corrode mon:12:19:12:lifesteal hero:16:3:0:corrode mon:12:9:12:lifesteal hero:16:-7:0:corrode+kill"
     },
     {
       monster = "wraith",
@@ -12813,7 +13051,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 13
+      hits = 13,
+      log = "hero:12:68:0:anti mon:12:74:12:lifesteal hero:12:62:0:anti mon:12:68:12:lifesteal hero:12:56:0:anti mon:12:62:12:lifesteal hero:12:50:0:anti mon:12:56:12:lifesteal hero:12:44:0:anti mon:12:50:12:lifesteal hero:12:38:0:anti mon:12:44:12:lifesteal hero:12:32:0:anti mon:12:38:12:lifesteal hero:12:26:0:anti mon:12:32:12:lifesteal hero:12:20:0:anti mon:12:26:12:lifesteal hero:12:14:0:anti mon:12:20:12:lifesteal hero:12:8:0:anti mon:12:14:12:lifesteal hero:12:2:0:anti mon:12:8:12:lifesteal hero:12:-4:0:anti+kill"
     },
     {
       monster = "wraith",
@@ -12862,7 +13101,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 288,
-      hits = 25
+      hits = 25,
+      log = "hero:9:71:0: mon:12:77:12:lifesteal hero:9:68:0: mon:12:74:12:lifesteal hero:9:65:0: mon:12:71:12:lifesteal hero:9:62:0: mon:12:68:12:lifesteal hero:9:59:0: mon:12:65:12:lifesteal hero:9:56:0: mon:12:62:12:lifesteal hero:9:53:0: mon:12:59:12:lifesteal hero:9:50:0: mon:12:56:12:lifesteal hero:9:47:0: mon:12:53:12:lifesteal hero:9:44:0: mon:12:50:12:lifesteal hero:9:41:0: mon:12:47:12:lifesteal hero:9:38:0: mon:12:44:12:lifesteal hero:9:35:0: mon:12:41:12:lifesteal hero:9:32:0: mon:12:38:12:lifesteal hero:9:29:0: mon:12:35:12:lifesteal hero:9:26:0: mon:12:32:12:lifesteal hero:9:23:0: mon:12:29:12:lifesteal hero:9:20:0: mon:12:26:12:lifesteal hero:9:17:0: mon:12:23:12:lifesteal hero:9:14:0: mon:12:20:12:lifesteal hero:9:11:0: mon:12:17:12:lifesteal hero:9:8:0: mon:12:14:12:lifesteal hero:9:5:0: mon:12:11:12:lifesteal hero:9:2:0: mon:12:8:12:lifesteal hero:9:-1:0:kill"
     },
     {
       monster = "wraith",
@@ -12912,7 +13152,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 8
+      hits = 8,
+      log = "hero:9:71:-2:first+drain+corrode hero:10:61:-2:drain+corrode mon:12:64:12:lifesteal+spikes hero:11:53:-2:drain+corrode mon:12:56:12:lifesteal+spikes hero:12:44:-3:drain+corrode mon:12:47:12:lifesteal+spikes hero:13:34:-3:drain+corrode mon:12:37:12:lifesteal+spikes hero:14:23:-3:drain+corrode mon:12:26:12:lifesteal+spikes hero:15:11:-3:drain+corrode mon:12:14:12:lifesteal+spikes hero:16:-2:-4:drain+corrode+kill"
     },
     {
       monster = "wraith",
@@ -12965,7 +13206,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 132,
-      hits = 13
+      hits = 13,
+      log = "hero:9:71:0:first hero:9:62:0: mon:12:65:12:lifesteal+spikes hero:9:56:0: mon:12:59:12:lifesteal+spikes hero:9:50:0: mon:12:53:12:lifesteal+spikes hero:9:44:0: mon:12:47:12:lifesteal+spikes hero:9:38:0: mon:12:41:12:lifesteal+spikes hero:9:32:0: mon:12:35:12:lifesteal+spikes hero:9:26:0: mon:12:29:12:lifesteal+spikes hero:9:20:0: mon:12:23:12:lifesteal+spikes hero:9:14:0: mon:12:17:12:lifesteal+spikes hero:9:8:0: mon:12:11:12:lifesteal+spikes hero:9:2:0: mon:12:5:12:lifesteal+spikes hero:9:-4:0:kill"
     },
     {
       monster = "wraith",
@@ -13017,7 +13259,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 216,
-      hits = 19
+      hits = 19,
+      log = "hero:10:70:0: mon:12:76:12:lifesteal hero:10:66:0: mon:12:72:12:lifesteal hero:10:62:0: mon:12:68:12:lifesteal hero:10:58:0: mon:12:64:12:lifesteal hero:10:54:0: mon:12:60:12:lifesteal hero:10:50:0: mon:12:56:12:lifesteal hero:10:46:0: mon:12:52:12:lifesteal hero:10:42:0: mon:12:48:12:lifesteal hero:10:38:0: mon:12:44:12:lifesteal hero:10:34:0: mon:12:40:12:lifesteal hero:10:30:0: mon:12:36:12:lifesteal hero:10:26:0: mon:12:32:12:lifesteal hero:10:22:0: mon:12:28:12:lifesteal hero:10:18:0: mon:12:24:12:lifesteal hero:10:14:0: mon:12:20:12:lifesteal hero:10:10:0: mon:12:16:12:lifesteal hero:10:6:0: mon:12:12:12:lifesteal hero:10:2:0: mon:12:8:12:lifesteal hero:10:-2:0:kill"
     },
     {
       monster = "wraith",
@@ -13067,7 +13310,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 168,
-      hits = 15
+      hits = 15,
+      log = "hero:11:69:0: mon:12:75:12:lifesteal hero:11:64:0: mon:12:70:12:lifesteal hero:11:59:0: mon:12:65:12:lifesteal hero:11:54:0: mon:12:60:12:lifesteal hero:11:49:0: mon:12:55:12:lifesteal hero:11:44:0: mon:12:50:12:lifesteal hero:11:39:0: mon:12:45:12:lifesteal hero:11:34:0: mon:12:40:12:lifesteal hero:11:29:0: mon:12:35:12:lifesteal hero:11:24:0: mon:12:30:12:lifesteal hero:11:19:0: mon:12:25:12:lifesteal hero:11:14:0: mon:12:20:12:lifesteal hero:11:9:0: mon:12:15:12:lifesteal hero:11:4:0: mon:12:10:12:lifesteal hero:11:-1:0:kill"
     },
     {
       monster = "wraith",
@@ -13116,7 +13360,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 54,
-      hits = 7
+      hits = 7,
+      log = "hero:12:68:0:corrode mon:9:72:9:lifesteal hero:13:59:0:corrode mon:9:63:9:lifesteal hero:14:49:0:corrode mon:9:53:9:lifesteal hero:15:38:0:corrode mon:9:42:9:lifesteal hero:16:26:0:corrode mon:9:30:9:lifesteal hero:17:13:0:corrode mon:9:17:9:lifesteal hero:18:-1:0:corrode+kill"
     },
     {
       monster = "wraith",
@@ -13168,7 +13413,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 54,
-      hits = 9
+      hits = 9,
+      log = "hero:12:68:0:first hero:12:56:0:first hero:12:44:0: mon:9:48:9:lifesteal hero:12:36:0: mon:9:40:9:lifesteal hero:12:28:0: mon:9:32:9:lifesteal hero:12:20:0: mon:9:24:9:lifesteal hero:12:12:0: mon:9:16:9:lifesteal hero:12:4:0: mon:9:8:9:lifesteal hero:12:-4:0:kill"
     },
     {
       monster = "wraith",
@@ -13221,7 +13467,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 81,
-      hits = 10
+      hits = 10,
+      log = "hero:12:68:0: mon:9:72:9:lifesteal hero:12:60:0: mon:9:64:9:lifesteal hero:12:52:0: mon:9:56:9:lifesteal hero:12:44:0: mon:9:48:9:lifesteal hero:12:36:0: mon:9:40:9:lifesteal hero:12:28:0: mon:9:32:9:lifesteal hero:12:20:0: mon:9:24:9:lifesteal hero:12:12:0: mon:9:16:9:lifesteal hero:12:4:0: mon:9:8:9:lifesteal hero:12:-4:0:kill"
     },
     {
       monster = "wraith",
@@ -13271,7 +13518,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 35,
-      hits = 8
+      hits = 8,
+      log = "hero:12:68:0: mon:5:70:5:lifesteal hero:12:58:0: mon:5:60:5:lifesteal hero:12:48:0: mon:5:50:5:lifesteal hero:12:38:0: mon:5:40:5:lifesteal hero:12:28:0: mon:5:30:5:lifesteal hero:12:18:0: mon:5:20:5:lifesteal hero:12:8:0: mon:5:10:5:lifesteal hero:12:-2:0:kill"
     },
     {
       monster = "wraith",
@@ -13320,7 +13568,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 6
+      hits = 6,
+      log = "hero:15:65:0: mon:6:65:6:lifesteal+spikes hero:15:50:0: mon:6:50:6:lifesteal+spikes hero:15:35:0: mon:6:35:6:lifesteal+spikes hero:15:20:0: mon:6:20:6:lifesteal+spikes hero:15:5:0: mon:6:5:6:lifesteal+spikes hero:15:-10:0:kill"
     },
     {
       monster = "wraith",
@@ -13371,7 +13620,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 7
+      hits = 7,
+      log = "hero:15:65:-3:first+drain hero:15:50:-3:drain mon:6:53:6:lifesteal hero:15:38:-3:drain mon:6:41:6:lifesteal hero:15:26:-3:drain mon:6:29:6:lifesteal hero:15:14:-3:drain mon:6:17:6:lifesteal hero:15:2:-3:drain mon:6:5:6:lifesteal hero:15:-10:-3:drain+kill"
     },
     {
       monster = "wraith",
@@ -13425,7 +13675,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 5
+      hits = 5,
+      log = "hero:19:61:0:pierce mon:6:64:6:lifesteal hero:19:45:0:pierce mon:6:48:6:lifesteal hero:19:29:0:pierce mon:6:32:6:lifesteal hero:19:13:0:pierce mon:6:16:6:lifesteal hero:19:-3:0:pierce+kill"
     },
     {
       monster = "wraith",
@@ -13475,7 +13726,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 7
+      hits = 7,
+      log = "hero:15:65:0: mon:6:68:6:lifesteal hero:15:53:0: mon:6:56:6:lifesteal hero:15:41:0: mon:6:44:6:lifesteal hero:15:29:0: mon:6:32:6:lifesteal hero:15:17:0: mon:6:20:6:lifesteal hero:15:5:0: mon:6:8:6:lifesteal hero:15:-7:0:kill"
     },
     {
       monster = "wraith",
@@ -13524,7 +13776,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 5
+      hits = 5,
+      log = "hero:20:60:0:first hero:20:40:0: mon:3:41:3:lifesteal hero:20:21:0: mon:3:22:3:lifesteal hero:20:2:0: mon:3:3:3:lifesteal hero:20:-17:0:kill"
     },
     {
       monster = "wraith",
@@ -13574,7 +13827,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 5
+      hits = 5,
+      log = "hero:20:60:0:first hero:20:40:0: mon:3:41:3:lifesteal hero:20:21:0: mon:3:22:3:lifesteal hero:20:2:0: mon:3:3:3:lifesteal hero:20:-17:0:kill"
     },
     {
       monster = "wraith",
@@ -13629,7 +13883,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:20:60:-5:first+drain+corrode hero:21:39:-5:first+drain+corrode hero:22:17:-5:drain+corrode mon:3:15:3:lifesteal+spikes hero:23:-8:-5:drain+corrode+kill"
     },
     {
       monster = "wraith",
@@ -13679,7 +13934,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 4
+      hits = 4,
+      log = "hero:29:51:0: mon:8:55:8:lifesteal hero:29:26:0: mon:8:30:8:lifesteal hero:29:1:0: mon:8:5:8:lifesteal hero:29:-24:0:kill"
     },
     {
       monster = "wraith",
@@ -13728,7 +13984,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:26:54:-6:drain mon:0:54:0: hero:26:28:-6:drain mon:0:28:0: hero:26:2:-6:drain mon:0:2:0: hero:26:-24:-6:drain+kill"
     },
     {
       monster = "wraith",
@@ -13778,7 +14035,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:30:50:0: mon:0:50:0: hero:30:20:0: mon:0:20:0: hero:30:-10:0:kill"
     },
     {
       monster = "wraith",
@@ -13832,7 +14090,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:26:54:0:first+corrode hero:27:27:0:corrode mon:0:27:0: hero:28:-1:0:corrode+kill"
     },
     {
       monster = "wraith",
@@ -13883,7 +14142,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:52:28:0:anti mon:0:28:0: hero:52:-24:0:anti+kill"
     },
     {
       monster = "wraith",
@@ -13932,7 +14192,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:34:46:0: mon:0:46:0: hero:34:12:0: mon:0:12:0: hero:34:-22:0:kill"
     },
     {
       monster = "wraith",
@@ -13982,7 +14243,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:34:46:-8:first+drain+corrode hero:35:11:-8:drain+corrode mon:0:8:0:spikes hero:36:-28:-9:drain+corrode+kill"
     },
     {
       monster = "wraith",
@@ -14035,7 +14297,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:34:46:0:first hero:34:12:0: mon:0:9:0:spikes hero:34:-25:0:kill"
     },
     {
       monster = "wraith",
@@ -14087,7 +14350,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:35:45:0: mon:0:45:0: hero:35:10:0: mon:0:10:0: hero:35:-25:0:kill"
     },
     {
       monster = "wraith",
@@ -14137,7 +14401,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:36:44:0: mon:0:44:0: hero:36:8:0: mon:0:8:0: hero:36:-28:0:kill"
     },
     {
       monster = "crab",
@@ -14186,7 +14451,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "crab",
@@ -14238,7 +14504,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "crab",
@@ -14291,7 +14558,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "crab",
@@ -14341,7 +14609,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "crab",
@@ -14390,7 +14659,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 414,
-      hits = 18
+      hits = 18,
+      log = "hero:1:69:3:thorns mon:20:66:20:spikes hero:1:65:3:thorns mon:20:62:20:spikes hero:1:61:3:thorns mon:20:58:20:spikes hero:1:57:3:thorns mon:20:54:20:spikes hero:1:53:3:thorns mon:20:50:20:spikes hero:1:49:3:thorns mon:20:46:20:spikes hero:1:45:3:thorns mon:20:42:20:spikes hero:1:41:3:thorns mon:20:38:20:spikes hero:1:37:3:thorns mon:20:34:20:spikes hero:1:33:3:thorns mon:20:30:20:spikes hero:1:29:3:thorns mon:20:26:20:spikes hero:1:25:3:thorns mon:20:22:20:spikes hero:1:21:3:thorns mon:20:18:20:spikes hero:1:17:3:thorns mon:20:14:20:spikes hero:1:13:3:thorns mon:20:10:20:spikes hero:1:9:3:thorns mon:20:6:20:spikes hero:1:5:3:thorns mon:20:2:20:spikes hero:1:1:3:thorns mon:20:-2:20:spikes+kill"
     },
     {
       monster = "crab",
@@ -14495,7 +14765,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 302,
-      hits = 14
+      hits = 14,
+      log = "hero:5:65:3:pierce+thorns mon:20:65:20: hero:5:60:3:pierce+thorns mon:20:60:20: hero:5:55:3:pierce+thorns mon:20:55:20: hero:5:50:3:pierce+thorns mon:20:50:20: hero:5:45:3:pierce+thorns mon:20:45:20: hero:5:40:3:pierce+thorns mon:20:40:20: hero:5:35:3:pierce+thorns mon:20:35:20: hero:5:30:3:pierce+thorns mon:20:30:20: hero:5:25:3:pierce+thorns mon:20:25:20: hero:5:20:3:pierce+thorns mon:20:20:20: hero:5:15:3:pierce+thorns mon:20:15:20: hero:5:10:3:pierce+thorns mon:20:10:20: hero:5:5:3:pierce+thorns mon:20:5:20: hero:5:0:3:pierce+thorns+kill"
     },
     {
       monster = "crab",
@@ -14699,7 +14970,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 139,
-      hits = 10
+      hits = 10,
+      log = "hero:1:69:3:first+thorns+corrode hero:2:67:3:first+thorns+corrode hero:3:64:3:thorns+corrode mon:17:61:17:spikes hero:4:57:2:thorns+drain+corrode mon:17:54:17:spikes hero:5:49:2:thorns+drain+corrode mon:17:46:17:spikes hero:6:40:2:thorns+drain+corrode mon:17:37:17:spikes hero:7:30:2:thorns+drain+corrode mon:17:27:17:spikes hero:8:19:1:thorns+drain+corrode mon:17:16:17:spikes hero:9:7:1:thorns+drain+corrode mon:17:4:17:spikes hero:10:-6:1:thorns+drain+corrode+kill"
     },
     {
       monster = "crab",
@@ -14749,7 +15021,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 153,
-      hits = 7
+      hits = 7,
+      log = "hero:10:60:3:thorns mon:22:60:22: hero:10:50:3:thorns mon:22:50:22: hero:10:40:3:thorns mon:22:40:22: hero:10:30:3:thorns mon:22:30:22: hero:10:20:3:thorns mon:22:20:22: hero:10:10:3:thorns mon:22:10:22: hero:10:0:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -14798,7 +15071,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 325,
-      hits = 18
+      hits = 18,
+      log = "hero:4:66:2:thorns+drain mon:17:66:17: hero:4:62:2:thorns+drain mon:17:62:17: hero:4:58:2:thorns+drain mon:17:58:17: hero:4:54:2:thorns+drain mon:17:54:17: hero:4:50:2:thorns+drain mon:17:50:17: hero:4:46:2:thorns+drain mon:17:46:17: hero:4:42:2:thorns+drain mon:17:42:17: hero:4:38:2:thorns+drain mon:17:38:17: hero:4:34:2:thorns+drain mon:17:34:17: hero:4:30:2:thorns+drain mon:17:30:17: hero:4:26:2:thorns+drain mon:17:26:17: hero:4:22:2:thorns+drain mon:17:22:17: hero:4:18:2:thorns+drain mon:17:18:17: hero:4:14:2:thorns+drain mon:17:14:17: hero:4:10:2:thorns+drain mon:17:10:17: hero:4:6:2:thorns+drain mon:17:6:17: hero:4:2:2:thorns+drain mon:17:2:17: hero:4:-2:2:thorns+drain+kill"
     },
     {
       monster = "crab",
@@ -14848,7 +15122,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 163,
-      hits = 9
+      hits = 9,
+      log = "hero:8:62:3:thorns mon:17:62:17: hero:8:54:3:thorns mon:17:54:17: hero:8:46:3:thorns mon:17:46:17: hero:8:38:3:thorns mon:17:38:17: hero:8:30:3:thorns mon:17:30:17: hero:8:22:3:thorns mon:17:22:17: hero:8:14:3:thorns mon:17:14:17: hero:8:6:3:thorns mon:17:6:17: hero:8:-2:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -14902,7 +15177,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 146,
-      hits = 9
+      hits = 9,
+      log = "hero:4:66:3:first+thorns+corrode hero:5:61:3:thorns+corrode mon:17:61:17: hero:6:55:3:thorns+corrode mon:17:55:17: hero:7:48:3:thorns+corrode mon:17:48:17: hero:8:40:3:thorns+corrode mon:17:40:17: hero:9:31:3:thorns+corrode mon:17:31:17: hero:10:21:3:thorns+corrode mon:17:21:17: hero:11:10:3:thorns+corrode mon:17:10:17: hero:12:-2:3:thorns+corrode+kill"
     },
     {
       monster = "crab",
@@ -14953,7 +15229,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 343,
-      hits = 18
+      hits = 18,
+      log = "hero:4:66:3:thorns mon:17:66:17: hero:4:62:3:thorns mon:17:62:17: hero:4:58:3:thorns mon:17:58:17: hero:4:54:3:thorns mon:17:54:17: hero:4:50:3:thorns mon:17:50:17: hero:4:46:3:thorns mon:17:46:17: hero:4:42:3:thorns mon:17:42:17: hero:4:38:3:thorns mon:17:38:17: hero:4:34:3:thorns mon:17:34:17: hero:4:30:3:thorns mon:17:30:17: hero:4:26:3:thorns mon:17:26:17: hero:4:22:3:thorns mon:17:22:17: hero:4:18:3:thorns mon:17:18:17: hero:4:14:3:thorns mon:17:14:17: hero:4:10:3:thorns mon:17:10:17: hero:4:6:3:thorns mon:17:6:17: hero:4:2:3:thorns mon:17:2:17: hero:4:-2:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15002,7 +15279,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 292,
-      hits = 18
+      hits = 18,
+      log = "hero:4:66:3:thorns mon:14:66:14: hero:4:62:3:thorns mon:14:62:14: hero:4:58:3:thorns mon:14:58:14: hero:4:54:3:thorns mon:14:54:14: hero:4:50:3:thorns mon:14:50:14: hero:4:46:3:thorns mon:14:46:14: hero:4:42:3:thorns mon:14:42:14: hero:4:38:3:thorns mon:14:38:14: hero:4:34:3:thorns mon:14:34:14: hero:4:30:3:thorns mon:14:30:14: hero:4:26:3:thorns mon:14:26:14: hero:4:22:3:thorns mon:14:22:14: hero:4:18:3:thorns mon:14:18:14: hero:4:14:3:thorns mon:14:14:14: hero:4:10:3:thorns mon:14:10:14: hero:4:6:3:thorns mon:14:6:14: hero:4:2:3:thorns mon:14:2:14: hero:4:-2:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15052,7 +15330,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 96,
-      hits = 8
+      hits = 8,
+      log = "hero:4:66:2:first+thorns+drain+corrode hero:5:61:2:thorns+drain+corrode mon:14:58:14:spikes hero:6:52:2:thorns+drain+corrode mon:14:49:14:spikes hero:7:42:2:thorns+drain+corrode mon:14:39:14:spikes hero:8:31:1:thorns+drain+corrode mon:14:28:14:spikes hero:9:19:1:thorns+drain+corrode mon:14:16:14:spikes hero:10:6:1:thorns+drain+corrode mon:14:3:14:spikes hero:11:-8:1:thorns+drain+corrode+kill"
     },
     {
       monster = "crab",
@@ -15105,7 +15384,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 159,
-      hits = 11
+      hits = 11,
+      log = "hero:4:66:3:first+thorns hero:4:62:3:thorns mon:14:59:14:spikes hero:4:55:3:thorns mon:14:52:14:spikes hero:4:48:3:thorns mon:14:45:14:spikes hero:4:41:3:thorns mon:14:38:14:spikes hero:4:34:3:thorns mon:14:31:14:spikes hero:4:27:3:thorns mon:14:24:14:spikes hero:4:20:3:thorns mon:14:17:14:spikes hero:4:13:3:thorns mon:14:10:14:spikes hero:4:6:3:thorns mon:14:3:14:spikes hero:4:-1:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15157,7 +15437,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 224,
-      hits = 14
+      hits = 14,
+      log = "hero:5:65:3:thorns mon:14:65:14: hero:5:60:3:thorns mon:14:60:14: hero:5:55:3:thorns mon:14:55:14: hero:5:50:3:thorns mon:14:50:14: hero:5:45:3:thorns mon:14:45:14: hero:5:40:3:thorns mon:14:40:14: hero:5:35:3:thorns mon:14:35:14: hero:5:30:3:thorns mon:14:30:14: hero:5:25:3:thorns mon:14:25:14: hero:5:20:3:thorns mon:14:20:14: hero:5:15:3:thorns mon:14:15:14: hero:5:10:3:thorns mon:14:10:14: hero:5:5:3:thorns mon:14:5:14: hero:5:0:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15207,7 +15488,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 190,
-      hits = 12
+      hits = 12,
+      log = "hero:6:64:3:thorns mon:14:64:14: hero:6:58:3:thorns mon:14:58:14: hero:6:52:3:thorns mon:14:52:14: hero:6:46:3:thorns mon:14:46:14: hero:6:40:3:thorns mon:14:40:14: hero:6:34:3:thorns mon:14:34:14: hero:6:28:3:thorns mon:14:28:14: hero:6:22:3:thorns mon:14:22:14: hero:6:16:3:thorns mon:14:16:14: hero:6:10:3:thorns mon:14:10:14: hero:6:4:3:thorns mon:14:4:14: hero:6:-2:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15256,7 +15538,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 105,
-      hits = 7
+      hits = 7,
+      log = "hero:7:63:3:thorns+corrode mon:14:63:14: hero:8:55:3:thorns+corrode mon:14:55:14: hero:9:46:3:thorns+corrode mon:14:46:14: hero:10:36:3:thorns+corrode mon:14:36:14: hero:11:25:3:thorns+corrode mon:14:25:14: hero:12:13:3:thorns+corrode mon:14:13:14: hero:13:0:3:thorns+corrode+kill"
     },
     {
       monster = "crab",
@@ -15308,7 +15591,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 128,
-      hits = 10
+      hits = 10,
+      log = "hero:7:63:3:first+thorns hero:7:56:3:first+thorns hero:7:49:3:thorns mon:14:49:14: hero:7:42:3:thorns mon:14:42:14: hero:7:35:3:thorns mon:14:35:14: hero:7:28:3:thorns mon:14:28:14: hero:7:21:3:thorns mon:14:21:14: hero:7:14:3:thorns mon:14:14:14: hero:7:7:3:thorns mon:14:7:14: hero:7:0:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15361,7 +15645,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 156,
-      hits = 10
+      hits = 10,
+      log = "hero:7:63:3:thorns mon:14:63:14: hero:7:56:3:thorns mon:14:56:14: hero:7:49:3:thorns mon:14:49:14: hero:7:42:3:thorns mon:14:42:14: hero:7:35:3:thorns mon:14:35:14: hero:7:28:3:thorns mon:14:28:14: hero:7:21:3:thorns mon:14:21:14: hero:7:14:3:thorns mon:14:14:14: hero:7:7:3:thorns mon:14:7:14: hero:7:0:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15411,7 +15696,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 120,
-      hits = 10
+      hits = 10,
+      log = "hero:7:63:3:thorns mon:10:63:10: hero:7:56:3:thorns mon:10:56:10: hero:7:49:3:thorns mon:10:49:10: hero:7:42:3:thorns mon:10:42:10: hero:7:35:3:thorns mon:10:35:10: hero:7:28:3:thorns mon:10:28:10: hero:7:21:3:thorns mon:10:21:10: hero:7:14:3:thorns mon:10:14:10: hero:7:7:3:thorns mon:10:7:10: hero:7:0:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15460,7 +15746,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 73,
-      hits = 6
+      hits = 6,
+      log = "hero:10:60:3:thorns mon:11:57:11:spikes hero:10:47:3:thorns mon:11:44:11:spikes hero:10:34:3:thorns mon:11:31:11:spikes hero:10:21:3:thorns mon:11:18:11:spikes hero:10:8:3:thorns mon:11:5:11:spikes hero:10:-5:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15511,7 +15798,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 62,
-      hits = 7
+      hits = 7,
+      log = "hero:10:60:1:first+thorns+drain hero:10:50:1:thorns+drain mon:11:50:11: hero:10:40:1:thorns+drain mon:11:40:11: hero:10:30:1:thorns+drain mon:11:30:11: hero:10:20:1:thorns+drain mon:11:20:11: hero:10:10:1:thorns+drain mon:11:10:11: hero:10:0:1:thorns+drain+kill"
     },
     {
       monster = "crab",
@@ -15565,7 +15853,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 59,
-      hits = 5
+      hits = 5,
+      log = "hero:14:56:3:pierce+thorns mon:11:56:11: hero:14:42:3:pierce+thorns mon:11:42:11: hero:14:28:3:pierce+thorns mon:11:28:11: hero:14:14:3:pierce+thorns mon:11:14:11: hero:14:0:3:pierce+thorns+kill"
     },
     {
       monster = "crab",
@@ -15615,7 +15904,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 87,
-      hits = 7
+      hits = 7,
+      log = "hero:10:60:3:thorns mon:11:60:11: hero:10:50:3:thorns mon:11:50:11: hero:10:40:3:thorns mon:11:40:11: hero:10:30:3:thorns mon:11:30:11: hero:10:20:3:thorns mon:11:20:11: hero:10:10:3:thorns mon:11:10:11: hero:10:0:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15664,7 +15954,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 6
+      hits = 6,
+      log = "hero:13:57:3:first+thorns hero:13:44:3:thorns mon:8:44:8: hero:13:31:3:thorns mon:8:31:8: hero:13:18:3:thorns mon:8:18:8: hero:13:5:3:thorns mon:8:5:8: hero:13:-8:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15714,7 +16005,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 6
+      hits = 6,
+      log = "hero:13:57:3:first+thorns hero:13:44:3:thorns mon:8:44:8: hero:13:31:3:thorns mon:8:31:8: hero:13:18:3:thorns mon:8:18:8: hero:13:5:3:thorns mon:8:5:8: hero:13:-8:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15769,7 +16061,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 5
+      hits = 5,
+      log = "hero:13:57:0:first+thorns+drain+corrode hero:14:43:0:first+thorns+drain+corrode hero:15:28:0:thorns+drain+corrode mon:8:25:8:spikes hero:16:9:-1:thorns+drain+corrode mon:8:6:8:spikes hero:17:-11:-1:thorns+drain+corrode+kill"
     },
     {
       monster = "crab",
@@ -15819,7 +16112,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 51,
-      hits = 4
+      hits = 4,
+      log = "hero:22:48:3:thorns mon:13:48:13: hero:22:26:3:thorns mon:13:26:13: hero:22:4:3:thorns mon:13:4:13: hero:22:-18:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15868,7 +16162,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 11,
-      hits = 4
+      hits = 4,
+      log = "hero:18:52:-1:thorns+drain mon:5:52:5: hero:18:34:-1:thorns+drain mon:5:34:5: hero:18:16:-1:thorns+drain mon:5:16:5: hero:18:-2:-1:thorns+drain+kill"
     },
     {
       monster = "crab",
@@ -15918,7 +16213,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 4
+      hits = 4,
+      log = "hero:22:48:3:thorns mon:5:48:5: hero:22:26:3:thorns mon:5:26:5: hero:22:4:3:thorns mon:5:4:5: hero:22:-18:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -15972,7 +16268,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 22,
-      hits = 4
+      hits = 4,
+      log = "hero:18:52:3:first+thorns+corrode hero:19:33:3:thorns+corrode mon:5:33:5: hero:20:13:3:thorns+corrode mon:5:13:5: hero:21:-8:3:thorns+corrode+kill"
     },
     {
       monster = "crab",
@@ -16023,7 +16320,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 4
+      hits = 4,
+      log = "hero:18:52:3:thorns mon:5:52:5: hero:18:34:3:thorns mon:5:34:5: hero:18:16:3:thorns mon:5:16:5: hero:18:-2:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16072,7 +16370,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 13,
-      hits = 3
+      hits = 3,
+      log = "hero:24:46:3:thorns mon:2:46:2: hero:24:22:3:thorns mon:2:22:2: hero:24:-2:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16122,7 +16421,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:24:46:-3:first+thorns+drain+corrode hero:25:21:-3:thorns+drain+corrode mon:2:18:2:spikes hero:26:-8:-3:thorns+drain+corrode+kill"
     },
     {
       monster = "crab",
@@ -16175,7 +16475,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 11,
-      hits = 3
+      hits = 3,
+      log = "hero:24:46:3:first+thorns hero:24:22:3:thorns mon:2:19:2:spikes hero:24:-5:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16227,7 +16528,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 13,
-      hits = 3
+      hits = 3,
+      log = "hero:25:45:3:thorns mon:2:45:2: hero:25:20:3:thorns mon:2:20:2: hero:25:-5:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16277,7 +16579,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 13,
-      hits = 3
+      hits = 3,
+      log = "hero:26:44:3:thorns mon:2:44:2: hero:26:18:3:thorns mon:2:18:2: hero:26:-8:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16326,7 +16629,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 3
+      hits = 3,
+      log = "hero:32:38:3:thorns+corrode mon:0:38:0: hero:33:5:3:thorns+corrode mon:0:5:0: hero:34:-29:3:thorns+corrode+kill"
     },
     {
       monster = "crab",
@@ -16378,7 +16682,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 3
+      hits = 3,
+      log = "hero:32:38:3:first+thorns hero:32:6:3:first+thorns hero:32:-26:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16431,7 +16736,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 3
+      hits = 3,
+      log = "hero:32:38:3:thorns mon:0:38:0: hero:32:6:3:thorns mon:0:6:0: hero:32:-26:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16481,7 +16787,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 3
+      hits = 3,
+      log = "hero:32:38:3:thorns mon:0:38:0: hero:32:6:3:thorns mon:0:6:0: hero:32:-26:3:thorns+kill"
     },
     {
       monster = "crab",
@@ -16530,7 +16837,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16581,7 +16889,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16635,7 +16944,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16685,7 +16995,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16734,7 +17045,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16784,7 +17096,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16839,7 +17152,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -16889,7 +17203,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 462,
-      hits = 12
+      hits = 12,
+      log = "hero:8:82:0: mon:21:82:21: mon:21:82:21:double hero:8:74:0: mon:21:74:21: mon:21:74:21:double hero:8:66:0: mon:21:66:21: mon:21:66:21:double hero:8:58:0: mon:21:58:21: mon:21:58:21:double hero:8:50:0: mon:21:50:21: mon:21:50:21:double hero:8:42:0: mon:21:42:21: mon:21:42:21:double hero:8:34:0: mon:21:34:21: mon:21:34:21:double hero:8:26:0: mon:21:26:21: mon:21:26:21:double hero:8:18:0: mon:21:18:21: mon:21:18:21:double hero:8:10:0: mon:21:10:21: mon:21:10:21:double hero:8:2:0: mon:21:2:21: mon:21:2:21:double hero:8:-6:0:kill"
     },
     {
       monster = "guardian",
@@ -16938,7 +17253,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -17042,7 +17358,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -17093,7 +17410,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "guardian",
@@ -17192,7 +17510,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 172,
-      hits = 9
+      hits = 9,
+      log = "hero:2:88:0:first+corrode hero:3:85:0:corrode mon:13:82:13:spikes mon:13:79:13:double+spikes hero:4:75:-1:drain+corrode mon:13:72:13:spikes mon:13:69:13:double+spikes hero:5:64:-1:drain+corrode mon:13:61:13:spikes mon:13:58:13:double+spikes hero:6:52:-1:drain+corrode mon:13:49:13:spikes mon:13:46:13:double+spikes hero:7:39:-1:drain+corrode mon:13:36:13:spikes mon:13:33:13:double+spikes hero:8:25:-2:drain+corrode mon:13:22:13:spikes mon:13:19:13:double+spikes hero:9:10:-2:drain+corrode mon:13:7:13:spikes mon:13:4:13:double+spikes hero:10:-6:-2:drain+corrode+kill"
     },
     {
       monster = "guardian",
@@ -17245,7 +17564,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 286,
-      hits = 12
+      hits = 12,
+      log = "hero:2:88:0:first hero:2:86:0: mon:13:83:13:spikes mon:13:80:13:double+spikes hero:2:78:0: mon:13:75:13:spikes mon:13:72:13:double+spikes hero:2:70:0: mon:13:67:13:spikes mon:13:64:13:double+spikes hero:2:62:0: mon:13:59:13:spikes mon:13:56:13:double+spikes hero:2:54:0: mon:13:51:13:spikes mon:13:48:13:double+spikes hero:2:46:0: mon:13:43:13:spikes mon:13:40:13:double+spikes hero:2:38:0: mon:13:35:13:spikes mon:13:32:13:double+spikes hero:2:30:0: mon:13:27:13:spikes mon:13:24:13:double+spikes hero:2:22:0: mon:13:19:13:spikes mon:13:16:13:double+spikes hero:2:14:0: mon:13:11:13:spikes mon:13:8:13:double+spikes hero:2:6:0: mon:13:3:13:spikes mon:13:0:13:double+spikes+kill"
     },
     {
       monster = "guardian",
@@ -17396,7 +17716,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 220,
-      hits = 12
+      hits = 12,
+      log = "hero:2:88:0:corrode mon:10:88:10: mon:10:88:10:double hero:3:85:0:corrode mon:10:85:10: mon:10:85:10:double hero:4:81:0:corrode mon:10:81:10: mon:10:81:10:double hero:5:76:0:corrode mon:10:76:10: mon:10:76:10:double hero:6:70:0:corrode mon:10:70:10: mon:10:70:10:double hero:7:63:0:corrode mon:10:63:10: mon:10:63:10:double hero:8:55:0:corrode mon:10:55:10: mon:10:55:10:double hero:9:46:0:corrode mon:10:46:10: mon:10:46:10:double hero:10:36:0:corrode mon:10:36:10: mon:10:36:10:double hero:11:25:0:corrode mon:10:25:10: mon:10:25:10:double hero:12:13:0:corrode mon:10:13:10: mon:10:13:10:double hero:13:0:0:corrode+kill"
     },
     {
       monster = "guardian",
@@ -17600,7 +17921,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 160,
-      hits = 9
+      hits = 9,
+      log = "hero:5:85:0: mon:10:82:10:spikes mon:10:79:10:double+spikes hero:5:74:0: mon:10:71:10:spikes mon:10:68:10:double+spikes hero:5:63:0: mon:10:60:10:spikes mon:10:57:10:double+spikes hero:5:52:0: mon:10:49:10:spikes mon:10:46:10:double+spikes hero:5:41:0: mon:10:38:10:spikes mon:10:35:10:double+spikes hero:5:30:0: mon:10:27:10:spikes mon:10:24:10:double+spikes hero:5:19:0: mon:10:16:10:spikes mon:10:13:10:double+spikes hero:5:8:0: mon:10:5:10:spikes mon:10:2:10:double+spikes hero:5:-3:0:kill"
     },
     {
       monster = "guardian",
@@ -17651,7 +17973,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 302,
-      hits = 18
+      hits = 18,
+      log = "hero:5:85:-1:first+drain hero:5:80:-1:drain mon:10:80:10: mon:10:80:10:double hero:5:75:-1:drain mon:10:75:10: mon:10:75:10:double hero:5:70:-1:drain mon:10:70:10: mon:10:70:10:double hero:5:65:-1:drain mon:10:65:10: mon:10:65:10:double hero:5:60:-1:drain mon:10:60:10: mon:10:60:10:double hero:5:55:-1:drain mon:10:55:10: mon:10:55:10:double hero:5:50:-1:drain mon:10:50:10: mon:10:50:10:double hero:5:45:-1:drain mon:10:45:10: mon:10:45:10:double hero:5:40:-1:drain mon:10:40:10: mon:10:40:10:double hero:5:35:-1:drain mon:10:35:10: mon:10:35:10:double hero:5:30:-1:drain mon:10:30:10: mon:10:30:10:double hero:5:25:-1:drain mon:10:25:10: mon:10:25:10:double hero:5:20:-1:drain mon:10:20:10: mon:10:20:10:double hero:5:15:-1:drain mon:10:15:10: mon:10:15:10:double hero:5:10:-1:drain mon:10:10:10: mon:10:10:10:double hero:5:5:-1:drain mon:10:5:10: mon:10:5:10:double hero:5:0:-1:drain+kill"
     },
     {
       monster = "guardian",
@@ -17705,7 +18028,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 180,
-      hits = 10
+      hits = 10,
+      log = "hero:9:81:0:pierce mon:10:81:10: mon:10:81:10:double hero:9:72:0:pierce mon:10:72:10: mon:10:72:10:double hero:9:63:0:pierce mon:10:63:10: mon:10:63:10:double hero:9:54:0:pierce mon:10:54:10: mon:10:54:10:double hero:9:45:0:pierce mon:10:45:10: mon:10:45:10:double hero:9:36:0:pierce mon:10:36:10: mon:10:36:10:double hero:9:27:0:pierce mon:10:27:10: mon:10:27:10:double hero:9:18:0:pierce mon:10:18:10: mon:10:18:10:double hero:9:9:0:pierce mon:10:9:10: mon:10:9:10:double hero:9:0:0:pierce+kill"
     },
     {
       monster = "guardian",
@@ -17755,7 +18079,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 340,
-      hits = 18
+      hits = 18,
+      log = "hero:5:85:0: mon:10:85:10: mon:10:85:10:double hero:5:80:0: mon:10:80:10: mon:10:80:10:double hero:5:75:0: mon:10:75:10: mon:10:75:10:double hero:5:70:0: mon:10:70:10: mon:10:70:10:double hero:5:65:0: mon:10:65:10: mon:10:65:10:double hero:5:60:0: mon:10:60:10: mon:10:60:10:double hero:5:55:0: mon:10:55:10: mon:10:55:10:double hero:5:50:0: mon:10:50:10: mon:10:50:10:double hero:5:45:0: mon:10:45:10: mon:10:45:10:double hero:5:40:0: mon:10:40:10: mon:10:40:10:double hero:5:35:0: mon:10:35:10: mon:10:35:10:double hero:5:30:0: mon:10:30:10: mon:10:30:10:double hero:5:25:0: mon:10:25:10: mon:10:25:10:double hero:5:20:0: mon:10:20:10: mon:10:20:10:double hero:5:15:0: mon:10:15:10: mon:10:15:10:double hero:5:10:0: mon:10:10:10: mon:10:10:10:double hero:5:5:0: mon:10:5:10: mon:10:5:10:double hero:5:0:0:kill"
     },
     {
       monster = "guardian",
@@ -17804,7 +18129,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 140,
-      hits = 12
+      hits = 12,
+      log = "hero:8:82:0:first hero:8:74:0: mon:7:74:7: mon:7:74:7:double hero:8:66:0: mon:7:66:7: mon:7:66:7:double hero:8:58:0: mon:7:58:7: mon:7:58:7:double hero:8:50:0: mon:7:50:7: mon:7:50:7:double hero:8:42:0: mon:7:42:7: mon:7:42:7:double hero:8:34:0: mon:7:34:7: mon:7:34:7:double hero:8:26:0: mon:7:26:7: mon:7:26:7:double hero:8:18:0: mon:7:18:7: mon:7:18:7:double hero:8:10:0: mon:7:10:7: mon:7:10:7:double hero:8:2:0: mon:7:2:7: mon:7:2:7:double hero:8:-6:0:kill"
     },
     {
       monster = "guardian",
@@ -17854,7 +18180,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 140,
-      hits = 12
+      hits = 12,
+      log = "hero:8:82:0:first hero:8:74:0: mon:7:74:7: mon:7:74:7:double hero:8:66:0: mon:7:66:7: mon:7:66:7:double hero:8:58:0: mon:7:58:7: mon:7:58:7:double hero:8:50:0: mon:7:50:7: mon:7:50:7:double hero:8:42:0: mon:7:42:7: mon:7:42:7:double hero:8:34:0: mon:7:34:7: mon:7:34:7:double hero:8:26:0: mon:7:26:7: mon:7:26:7:double hero:8:18:0: mon:7:18:7: mon:7:18:7:double hero:8:10:0: mon:7:10:7: mon:7:10:7:double hero:8:2:0: mon:7:2:7: mon:7:2:7:double hero:8:-6:0:kill"
     },
     {
       monster = "guardian",
@@ -17909,7 +18236,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 39,
-      hits = 7
+      hits = 7,
+      log = "hero:8:82:-2:first+drain+corrode hero:9:73:-2:first+drain+corrode hero:10:63:-2:drain+corrode mon:7:60:7:spikes mon:7:57:7:double+spikes hero:11:46:-2:drain+corrode mon:7:43:7:spikes mon:7:40:7:double+spikes hero:12:28:-3:drain+corrode mon:7:25:7:spikes mon:7:22:7:double+spikes hero:13:9:-3:drain+corrode mon:7:6:7:spikes mon:7:3:7:double+spikes hero:14:-11:-3:drain+corrode+kill"
     },
     {
       monster = "guardian",
@@ -17959,7 +18287,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 120,
-      hits = 6
+      hits = 6,
+      log = "hero:17:73:0: mon:12:73:12: mon:12:73:12:double hero:17:56:0: mon:12:56:12: mon:12:56:12:double hero:17:39:0: mon:12:39:12: mon:12:39:12:double hero:17:22:0: mon:12:22:12: mon:12:22:12:double hero:17:5:0: mon:12:5:12: mon:12:5:12:double hero:17:-12:0:kill"
     },
     {
       monster = "guardian",
@@ -18008,7 +18337,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 46,
-      hits = 9
+      hits = 9,
+      log = "hero:11:79:-2:drain mon:4:79:4: mon:4:79:4:double hero:11:68:-2:drain mon:4:68:4: mon:4:68:4:double hero:11:57:-2:drain mon:4:57:4: mon:4:57:4:double hero:11:46:-2:drain mon:4:46:4: mon:4:46:4:double hero:11:35:-2:drain mon:4:35:4: mon:4:35:4:double hero:11:24:-2:drain mon:4:24:4: mon:4:24:4:double hero:11:13:-2:drain mon:4:13:4: mon:4:13:4:double hero:11:2:-2:drain mon:4:2:4: mon:4:2:4:double hero:11:-9:-2:drain+kill"
     },
     {
       monster = "guardian",
@@ -18058,7 +18388,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 40,
-      hits = 6
+      hits = 6,
+      log = "hero:15:75:0: mon:4:75:4: mon:4:75:4:double hero:15:60:0: mon:4:60:4: mon:4:60:4:double hero:15:45:0: mon:4:45:4: mon:4:45:4:double hero:15:30:0: mon:4:30:4: mon:4:30:4:double hero:15:15:0: mon:4:15:4: mon:4:15:4:double hero:15:0:0:kill"
     },
     {
       monster = "guardian",
@@ -18112,7 +18443,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 40,
-      hits = 7
+      hits = 7,
+      log = "hero:11:79:0:first+corrode hero:12:67:0:corrode mon:4:67:4: mon:4:67:4:double hero:13:54:0:corrode mon:4:54:4: mon:4:54:4:double hero:14:40:0:corrode mon:4:40:4: mon:4:40:4:double hero:15:25:0:corrode mon:4:25:4: mon:4:25:4:double hero:16:9:0:corrode mon:4:9:4: mon:4:9:4:double hero:17:-8:0:corrode+kill"
     },
     {
       monster = "guardian",
@@ -18163,7 +18495,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 64,
-      hits = 9
+      hits = 9,
+      log = "hero:11:79:0: mon:4:79:4: mon:4:79:4:double hero:11:68:0: mon:4:68:4: mon:4:68:4:double hero:11:57:0: mon:4:57:4: mon:4:57:4:double hero:11:46:0: mon:4:46:4: mon:4:46:4:double hero:11:35:0: mon:4:35:4: mon:4:35:4:double hero:11:24:0: mon:4:24:4: mon:4:24:4:double hero:11:13:0: mon:4:13:4: mon:4:13:4:double hero:11:2:0: mon:4:2:4: mon:4:2:4:double hero:11:-9:0:kill"
     },
     {
       monster = "guardian",
@@ -18212,7 +18545,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 6
+      hits = 6,
+      log = "hero:16:74:0: mon:1:74:1: mon:1:74:1:double hero:16:58:0: mon:1:58:1: mon:1:58:1:double hero:16:42:0: mon:1:42:1: mon:1:42:1:double hero:16:26:0: mon:1:26:1: mon:1:26:1:double hero:16:10:0: mon:1:10:1: mon:1:10:1:double hero:16:-6:0:kill"
     },
     {
       monster = "guardian",
@@ -18262,7 +18596,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:16:74:-4:first+drain+corrode hero:17:57:-4:drain+corrode mon:1:54:1:spikes mon:1:51:1:double+spikes hero:18:33:-4:drain+corrode mon:1:30:1:spikes mon:1:27:1:double+spikes hero:19:8:-4:drain+corrode mon:1:5:1:spikes mon:1:2:1:double+spikes hero:20:-18:-5:drain+corrode+kill"
     },
     {
       monster = "guardian",
@@ -18315,7 +18650,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 5
+      hits = 5,
+      log = "hero:16:74:0:first hero:16:58:0: mon:1:55:1:spikes mon:1:52:1:double+spikes hero:16:36:0: mon:1:33:1:spikes mon:1:30:1:double+spikes hero:16:14:0: mon:1:11:1:spikes mon:1:8:1:double+spikes hero:16:-8:0:kill"
     },
     {
       monster = "guardian",
@@ -18367,7 +18703,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 6
+      hits = 6,
+      log = "hero:17:73:0: mon:1:73:1: mon:1:73:1:double hero:17:56:0: mon:1:56:1: mon:1:56:1:double hero:17:39:0: mon:1:39:1: mon:1:39:1:double hero:17:22:0: mon:1:22:1: mon:1:22:1:double hero:17:5:0: mon:1:5:1: mon:1:5:1:double hero:17:-12:0:kill"
     },
     {
       monster = "guardian",
@@ -18417,7 +18754,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 5
+      hits = 5,
+      log = "hero:18:72:0: mon:1:72:1: mon:1:72:1:double hero:18:54:0: mon:1:54:1: mon:1:54:1:double hero:18:36:0: mon:1:36:1: mon:1:36:1:double hero:18:18:0: mon:1:18:1: mon:1:18:1:double hero:18:0:0:kill"
     },
     {
       monster = "guardian",
@@ -18466,7 +18804,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:22:68:0:corrode mon:0:68:0: mon:0:68:0:double hero:23:45:0:corrode mon:0:45:0: mon:0:45:0:double hero:24:21:0:corrode mon:0:21:0: mon:0:21:0:double hero:25:-4:0:corrode+kill"
     },
     {
       monster = "guardian",
@@ -18518,7 +18857,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:22:68:0:first hero:22:46:0:first hero:22:24:0: mon:0:24:0: mon:0:24:0:double hero:22:2:0: mon:0:2:0: mon:0:2:0:double hero:22:-20:0:kill"
     },
     {
       monster = "guardian",
@@ -18571,7 +18911,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:22:68:0: mon:0:68:0: mon:0:68:0:double hero:22:46:0: mon:0:46:0: mon:0:46:0:double hero:22:24:0: mon:0:24:0: mon:0:24:0:double hero:22:2:0: mon:0:2:0: mon:0:2:0:double hero:22:-20:0:kill"
     },
     {
       monster = "guardian",
@@ -18621,7 +18962,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:22:68:0: mon:0:68:0: mon:0:68:0:double hero:22:46:0: mon:0:46:0: mon:0:46:0:double hero:22:24:0: mon:0:24:0: mon:0:24:0:double hero:22:2:0: mon:0:2:0: mon:0:2:0:double hero:22:-20:0:kill"
     },
     {
       monster = "guardian",
@@ -18670,7 +19012,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:30:60:0: mon:0:57:0:spikes mon:0:54:0:double+spikes hero:30:24:0: mon:0:21:0:spikes mon:0:18:0:double+spikes hero:30:-12:0:kill"
     },
     {
       monster = "guardian",
@@ -18721,7 +19064,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:30:60:-7:first+drain hero:30:30:-7:drain mon:0:30:0: mon:0:30:0:double hero:30:0:-7:drain+kill"
     },
     {
       monster = "guardian",
@@ -18775,7 +19119,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:34:56:0:pierce mon:0:56:0: mon:0:56:0:double hero:34:22:0:pierce mon:0:22:0: mon:0:22:0:double hero:34:-12:0:pierce+kill"
     },
     {
       monster = "guardian",
@@ -18825,7 +19170,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:30:60:0: mon:0:60:0: mon:0:60:0:double hero:30:30:0: mon:0:30:0: mon:0:30:0:double hero:30:0:0:kill"
     },
     {
       monster = "guardian",
@@ -18874,7 +19220,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -18924,7 +19271,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -18979,7 +19327,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19029,7 +19378,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 203,
-      hits = 8
+      hits = 8,
+      log = "hero:5:35:0: mon:29:35:29: hero:5:30:0: mon:29:30:29: hero:5:25:0: mon:29:25:29: hero:5:20:0: mon:29:20:29: hero:5:15:0: mon:29:15:29: hero:5:10:0: mon:29:10:29: hero:5:5:0: mon:29:5:29: hero:5:0:0:kill"
     },
     {
       monster = "rat",
@@ -19078,7 +19428,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19128,7 +19479,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 312,
-      hits = 14
+      hits = 14,
+      log = "hero:3:37:0: mon:24:37:24: hero:3:34:0: mon:24:34:24: hero:3:31:0: mon:24:31:24: hero:3:28:0: mon:24:28:24: hero:3:25:0: mon:24:25:24: hero:3:22:0: mon:24:22:24: hero:3:19:0: mon:24:19:24: hero:3:16:0: mon:24:16:24: hero:3:13:0: mon:24:13:24: hero:3:10:0: mon:24:10:24: hero:3:7:0: mon:24:7:24: hero:3:4:0: mon:24:4:24: hero:3:1:0: mon:24:1:24: hero:3:-2:0:kill"
     },
     {
       monster = "rat",
@@ -19182,7 +19534,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19233,7 +19586,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19282,7 +19636,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19332,7 +19687,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19385,7 +19741,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19437,7 +19794,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "rat",
@@ -19536,7 +19894,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 147,
-      hits = 8
+      hits = 8,
+      log = "hero:2:38:0:corrode mon:21:38:21: hero:3:35:0:corrode mon:21:35:21: hero:4:31:0:corrode mon:21:31:21: hero:5:26:0:corrode mon:21:26:21: hero:6:20:0:corrode mon:21:20:21: hero:7:13:0:corrode mon:21:13:21: hero:8:5:0:corrode mon:21:5:21: hero:9:-4:0:corrode+kill"
     },
     {
       monster = "rat",
@@ -19588,7 +19947,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 357,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0:first hero:2:36:0:first hero:2:34:0: mon:21:34:21: hero:2:32:0: mon:21:32:21: hero:2:30:0: mon:21:30:21: hero:2:28:0: mon:21:28:21: hero:2:26:0: mon:21:26:21: hero:2:24:0: mon:21:24:21: hero:2:22:0: mon:21:22:21: hero:2:20:0: mon:21:20:21: hero:2:18:0: mon:21:18:21: hero:2:16:0: mon:21:16:21: hero:2:14:0: mon:21:14:21: hero:2:12:0: mon:21:12:21: hero:2:10:0: mon:21:10:21: hero:2:8:0: mon:21:8:21: hero:2:6:0: mon:21:6:21: hero:2:4:0: mon:21:4:21: hero:2:2:0: mon:21:2:21: hero:2:0:0:kill"
     },
     {
       monster = "rat",
@@ -19641,7 +20001,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 399,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0: mon:21:38:21: hero:2:36:0: mon:21:36:21: hero:2:34:0: mon:21:34:21: hero:2:32:0: mon:21:32:21: hero:2:30:0: mon:21:30:21: hero:2:28:0: mon:21:28:21: hero:2:26:0: mon:21:26:21: hero:2:24:0: mon:21:24:21: hero:2:22:0: mon:21:22:21: hero:2:20:0: mon:21:20:21: hero:2:18:0: mon:21:18:21: hero:2:16:0: mon:21:16:21: hero:2:14:0: mon:21:14:21: hero:2:12:0: mon:21:12:21: hero:2:10:0: mon:21:10:21: hero:2:8:0: mon:21:8:21: hero:2:6:0: mon:21:6:21: hero:2:4:0: mon:21:4:21: hero:2:2:0: mon:21:2:21: hero:2:0:0:kill"
     },
     {
       monster = "rat",
@@ -19691,7 +20052,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 323,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0: mon:17:38:17: hero:2:36:0: mon:17:36:17: hero:2:34:0: mon:17:34:17: hero:2:32:0: mon:17:32:17: hero:2:30:0: mon:17:30:17: hero:2:28:0: mon:17:28:17: hero:2:26:0: mon:17:26:17: hero:2:24:0: mon:17:24:17: hero:2:22:0: mon:17:22:17: hero:2:20:0: mon:17:20:17: hero:2:18:0: mon:17:18:17: hero:2:16:0: mon:17:16:17: hero:2:14:0: mon:17:14:17: hero:2:12:0: mon:17:12:17: hero:2:10:0: mon:17:10:17: hero:2:8:0: mon:17:8:17: hero:2:6:0: mon:17:6:17: hero:2:4:0: mon:17:4:17: hero:2:2:0: mon:17:2:17: hero:2:0:0:kill"
     },
     {
       monster = "rat",
@@ -19740,7 +20102,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 8
+      hits = 8,
+      log = "hero:2:38:0: mon:18:35:18:spikes hero:2:33:0: mon:18:30:18:spikes hero:2:28:0: mon:18:25:18:spikes hero:2:23:0: mon:18:20:18:spikes hero:2:18:0: mon:18:15:18:spikes hero:2:13:0: mon:18:10:18:spikes hero:2:8:0: mon:18:5:18:spikes hero:2:3:0: mon:18:0:18:spikes+kill"
     },
     {
       monster = "rat",
@@ -19791,7 +20154,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 324,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0:first hero:2:36:0: mon:18:36:18: hero:2:34:0: mon:18:34:18: hero:2:32:0: mon:18:32:18: hero:2:30:0: mon:18:30:18: hero:2:28:0: mon:18:28:18: hero:2:26:0: mon:18:26:18: hero:2:24:0: mon:18:24:18: hero:2:22:0: mon:18:22:18: hero:2:20:0: mon:18:20:18: hero:2:18:0: mon:18:18:18: hero:2:16:0: mon:18:16:18: hero:2:14:0: mon:18:14:18: hero:2:12:0: mon:18:12:18: hero:2:10:0: mon:18:10:18: hero:2:8:0: mon:18:8:18: hero:2:6:0: mon:18:6:18: hero:2:4:0: mon:18:4:18: hero:2:2:0: mon:18:2:18: hero:2:0:0:kill"
     },
     {
       monster = "rat",
@@ -19845,7 +20209,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 108,
-      hits = 7
+      hits = 7,
+      log = "hero:6:34:0:pierce mon:18:34:18: hero:6:28:0:pierce mon:18:28:18: hero:6:22:0:pierce mon:18:22:18: hero:6:16:0:pierce mon:18:16:18: hero:6:10:0:pierce mon:18:10:18: hero:6:4:0:pierce mon:18:4:18: hero:6:-2:0:pierce+kill"
     },
     {
       monster = "rat",
@@ -19895,7 +20260,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 342,
-      hits = 20
+      hits = 20,
+      log = "hero:2:38:0: mon:18:38:18: hero:2:36:0: mon:18:36:18: hero:2:34:0: mon:18:34:18: hero:2:32:0: mon:18:32:18: hero:2:30:0: mon:18:30:18: hero:2:28:0: mon:18:28:18: hero:2:26:0: mon:18:26:18: hero:2:24:0: mon:18:24:18: hero:2:22:0: mon:18:22:18: hero:2:20:0: mon:18:20:18: hero:2:18:0: mon:18:18:18: hero:2:16:0: mon:18:16:18: hero:2:14:0: mon:18:14:18: hero:2:12:0: mon:18:12:18: hero:2:10:0: mon:18:10:18: hero:2:8:0: mon:18:8:18: hero:2:6:0: mon:18:6:18: hero:2:4:0: mon:18:4:18: hero:2:2:0: mon:18:2:18: hero:2:0:0:kill"
     },
     {
       monster = "rat",
@@ -19944,7 +20310,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 108,
-      hits = 8
+      hits = 8,
+      log = "hero:5:35:0:first hero:5:30:0: mon:18:30:18: hero:5:25:0: mon:18:25:18: hero:5:20:0: mon:18:20:18: hero:5:15:0: mon:18:15:18: hero:5:10:0: mon:18:10:18: hero:5:5:0: mon:18:5:18: hero:5:0:0:kill"
     },
     {
       monster = "rat",
@@ -19994,7 +20361,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 108,
-      hits = 8
+      hits = 8,
+      log = "hero:5:35:0:first hero:5:30:0: mon:18:30:18: hero:5:25:0: mon:18:25:18: hero:5:20:0: mon:18:20:18: hero:5:15:0: mon:18:15:18: hero:5:10:0: mon:18:10:18: hero:5:5:0: mon:18:5:18: hero:5:0:0:kill"
     },
     {
       monster = "rat",
@@ -20049,7 +20417,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 29,
-      hits = 5
+      hits = 5,
+      log = "hero:5:35:-1:first+drain+corrode hero:6:29:-1:first+drain+corrode hero:7:22:-1:drain+corrode mon:18:19:18:spikes hero:8:11:-2:drain+corrode mon:18:8:18:spikes hero:9:-1:-2:drain+corrode+kill"
     },
     {
       monster = "rat",
@@ -20099,7 +20468,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 46,
-      hits = 3
+      hits = 3,
+      log = "hero:14:26:0: mon:23:26:23: hero:14:12:0: mon:23:12:23: hero:14:-2:0:kill"
     },
     {
       monster = "rat",
@@ -20148,7 +20518,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 5
+      hits = 5,
+      log = "hero:8:32:-2:drain mon:15:32:15: hero:8:24:-2:drain mon:15:24:15: hero:8:16:-2:drain mon:15:16:15: hero:8:8:-2:drain mon:15:8:15: hero:8:0:-2:drain+kill"
     },
     {
       monster = "rat",
@@ -20198,7 +20569,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 4
+      hits = 4,
+      log = "hero:12:28:0: mon:15:28:15: hero:12:16:0: mon:15:16:15: hero:12:4:0: mon:15:4:15: hero:12:-8:0:kill"
     },
     {
       monster = "rat",
@@ -20252,7 +20624,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 5
+      hits = 5,
+      log = "hero:8:32:0:first+corrode hero:9:23:0:corrode mon:15:23:15: hero:10:13:0:corrode mon:15:13:15: hero:11:2:0:corrode mon:15:2:15: hero:12:-10:0:corrode+kill"
     },
     {
       monster = "rat",
@@ -20303,7 +20676,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 5
+      hits = 5,
+      log = "hero:8:32:0: mon:15:32:15: hero:8:24:0: mon:15:24:15: hero:8:16:0: mon:15:16:15: hero:8:8:0: mon:15:8:15: hero:8:0:0:kill"
     },
     {
       monster = "rat",
@@ -20352,7 +20726,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 4
+      hits = 4,
+      log = "hero:11:29:0: mon:12:29:12: hero:11:18:0: mon:12:18:12: hero:11:7:0: mon:12:7:12: hero:11:-4:0:kill"
     },
     {
       monster = "rat",
@@ -20402,7 +20777,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 16,
-      hits = 3
+      hits = 3,
+      log = "hero:11:29:-2:first+drain+corrode hero:12:17:-3:drain+corrode mon:12:14:12:spikes hero:13:1:-3:drain+corrode mon:12:-2:12:spikes+kill"
     },
     {
       monster = "rat",
@@ -20455,7 +20831,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 4
+      hits = 4,
+      log = "hero:11:29:0:first hero:11:18:0: mon:12:15:12:spikes hero:11:4:0: mon:12:1:12:spikes hero:11:-10:0:kill"
     },
     {
       monster = "rat",
@@ -20507,7 +20884,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 4
+      hits = 4,
+      log = "hero:12:28:0: mon:12:28:12: hero:12:16:0: mon:12:16:12: hero:12:4:0: mon:12:4:12: hero:12:-8:0:kill"
     },
     {
       monster = "rat",
@@ -20557,7 +20935,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 4
+      hits = 4,
+      log = "hero:13:27:0: mon:12:27:12: hero:13:14:0: mon:12:14:12: hero:13:1:0: mon:12:1:12: hero:13:-12:0:kill"
     },
     {
       monster = "rat",
@@ -20606,7 +20985,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0:corrode mon:9:24:9: hero:17:7:0:corrode mon:9:7:9: hero:18:-11:0:corrode+kill"
     },
     {
       monster = "rat",
@@ -20658,7 +21038,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0:first hero:16:8:0:first hero:16:-8:0:kill"
     },
     {
       monster = "rat",
@@ -20711,7 +21092,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0: mon:9:24:9: hero:16:8:0: mon:9:8:9: hero:16:-8:0:kill"
     },
     {
       monster = "rat",
@@ -20761,7 +21143,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:16:24:0: mon:5:24:5: hero:16:8:0: mon:5:8:5: hero:16:-8:0:kill"
     },
     {
       monster = "rat",
@@ -20810,7 +21193,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "hero:22:18:0: mon:6:15:6:spikes hero:22:-7:0:kill"
     },
     {
       monster = "rat",
@@ -20861,7 +21245,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:22:18:-5:first+drain hero:22:-4:-5:drain+kill"
     },
     {
       monster = "rat",
@@ -20915,7 +21300,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "hero:26:14:0:pierce mon:6:14:6: hero:26:-12:0:pierce+kill"
     },
     {
       monster = "rat",
@@ -20965,7 +21351,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "hero:22:18:0: mon:6:18:6: hero:22:-4:0:kill"
     },
     {
       monster = "rat",
@@ -21014,7 +21401,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:10:0:first hero:30:-20:0:kill"
     },
     {
       monster = "rat",
@@ -21064,7 +21452,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:10:0:first hero:30:-20:0:kill"
     },
     {
       monster = "rat",
@@ -21119,7 +21508,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:30:10:-7:first+drain+corrode hero:31:-21:-7:first+drain+corrode+kill"
     },
     {
       monster = "rat",
@@ -21169,7 +21559,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 5,
-      hits = 2
+      hits = 2,
+      log = "hero:39:1:0: mon:5:1:5: hero:39:-38:0:kill"
     },
     {
       monster = "rat",
@@ -21218,7 +21609,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21268,7 +21660,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21322,7 +21715,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21373,7 +21767,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21422,7 +21817,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21472,7 +21868,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21525,7 +21922,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21577,7 +21975,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21627,7 +22026,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21676,7 +22076,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21728,7 +22129,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21781,7 +22183,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21831,7 +22234,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21880,7 +22284,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -21931,7 +22336,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -22035,7 +22441,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -22084,7 +22491,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -22134,7 +22542,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -22189,7 +22598,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "slug",
@@ -22239,7 +22649,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 390,
-      hits = 13
+      hits = 13,
+      log = "hero:7:83:0: mon:27:83:27:corrode hero:7:76:0: mon:28:76:28:corrode hero:7:69:0: mon:29:69:29:corrode hero:7:62:0: mon:30:62:30:corrode hero:7:55:0: mon:31:55:31:corrode hero:7:48:0: mon:32:48:32:corrode hero:7:41:0: mon:33:41:33:corrode hero:7:34:0: mon:34:34:34:corrode hero:7:27:0: mon:35:27:35:corrode hero:7:20:0: mon:36:20:36:corrode hero:7:13:0: mon:37:13:37:corrode hero:7:6:0: mon:38:6:38:corrode hero:7:-1:0:kill"
     },
     {
       monster = "slug",
@@ -22338,7 +22749,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 510,
-      hits = 18
+      hits = 18,
+      log = "hero:5:85:0: mon:22:85:22:corrode hero:5:80:0: mon:23:80:23:corrode hero:5:75:0: mon:24:75:24:corrode hero:5:70:0: mon:25:70:25:corrode hero:5:65:0: mon:26:65:26:corrode hero:5:60:0: mon:27:60:27:corrode hero:5:55:0: mon:28:55:28:corrode hero:5:50:0: mon:29:50:29:corrode hero:5:45:0: mon:30:45:30:corrode hero:5:40:0: mon:31:40:31:corrode hero:5:35:0: mon:32:35:32:corrode hero:5:30:0: mon:33:30:33:corrode hero:5:25:0: mon:34:25:34:corrode hero:5:20:0: mon:35:20:35:corrode hero:5:15:0: mon:36:15:36:corrode hero:5:10:0: mon:37:10:37:corrode hero:5:5:0: mon:38:5:38:corrode hero:5:0:0:kill"
     },
     {
       monster = "slug",
@@ -22392,7 +22804,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 297,
-      hits = 13
+      hits = 13,
+      log = "hero:1:89:0:first+corrode hero:2:87:0:corrode mon:22:87:22:corrode hero:3:84:0:corrode mon:23:84:23:corrode hero:4:80:0:corrode mon:24:80:24:corrode hero:5:75:0:corrode mon:25:75:25:corrode hero:6:69:0:corrode mon:26:69:26:corrode hero:7:62:0:corrode mon:27:62:27:corrode hero:8:54:0:corrode mon:28:54:28:corrode hero:9:45:0:corrode mon:29:45:29:corrode hero:10:35:0:corrode mon:30:35:30:corrode hero:11:24:0:corrode mon:31:24:31:corrode hero:12:12:0:corrode mon:32:12:32:corrode hero:13:-1:0:corrode+kill"
     },
     {
       monster = "slug",
@@ -22492,7 +22905,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 649,
-      hits = 23
+      hits = 23,
+      log = "hero:4:86:0: mon:19:86:19:corrode hero:4:82:0: mon:20:82:20:corrode hero:4:78:0: mon:21:78:21:corrode hero:4:74:0: mon:22:74:22:corrode hero:4:70:0: mon:23:70:23:corrode hero:4:66:0: mon:24:66:24:corrode hero:4:62:0: mon:25:62:25:corrode hero:4:58:0: mon:26:58:26:corrode hero:4:54:0: mon:27:54:27:corrode hero:4:50:0: mon:28:50:28:corrode hero:4:46:0: mon:29:46:29:corrode hero:4:42:0: mon:30:42:30:corrode hero:4:38:0: mon:31:38:31:corrode hero:4:34:0: mon:32:34:32:corrode hero:4:30:0: mon:33:30:33:corrode hero:4:26:0: mon:34:26:34:corrode hero:4:22:0: mon:35:22:35:corrode hero:4:18:0: mon:36:18:36:corrode hero:4:14:0: mon:37:14:37:corrode hero:4:10:0: mon:38:10:38:corrode hero:4:6:0: mon:39:6:39:corrode hero:4:2:0: mon:40:2:40:corrode hero:4:-2:0:kill"
     },
     {
       monster = "slug",
@@ -22542,7 +22956,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 139,
-      hits = 9
+      hits = 9,
+      log = "hero:4:86:-1:first+drain+corrode hero:5:81:-1:drain+corrode mon:19:78:19:corrode+spikes hero:6:72:-1:drain+corrode mon:20:69:20:corrode+spikes hero:7:62:-1:drain+corrode mon:21:59:21:corrode+spikes hero:8:51:-2:drain+corrode mon:22:48:22:corrode+spikes hero:9:39:-2:drain+corrode mon:23:36:23:corrode+spikes hero:10:26:-2:drain+corrode mon:24:23:24:corrode+spikes hero:11:12:-2:drain+corrode mon:25:9:25:corrode+spikes hero:12:-3:-3:drain+corrode+kill"
     },
     {
       monster = "slug",
@@ -22595,7 +23010,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 294,
-      hits = 14
+      hits = 14,
+      log = "hero:4:86:0:first hero:4:82:0: mon:19:79:19:corrode+spikes hero:4:75:0: mon:20:72:20:corrode+spikes hero:4:68:0: mon:21:65:21:corrode+spikes hero:4:61:0: mon:22:58:22:corrode+spikes hero:4:54:0: mon:23:51:23:corrode+spikes hero:4:47:0: mon:24:44:24:corrode+spikes hero:4:40:0: mon:25:37:25:corrode+spikes hero:4:33:0: mon:26:30:26:corrode+spikes hero:4:26:0: mon:27:23:27:corrode+spikes hero:4:19:0: mon:28:16:28:corrode+spikes hero:4:12:0: mon:29:9:29:corrode+spikes hero:4:5:0: mon:30:2:30:corrode+spikes hero:4:-2:0:kill"
     },
     {
       monster = "slug",
@@ -22647,7 +23063,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 459,
-      hits = 18
+      hits = 18,
+      log = "hero:5:85:0: mon:19:85:19:corrode hero:5:80:0: mon:20:80:20:corrode hero:5:75:0: mon:21:75:21:corrode hero:5:70:0: mon:22:70:22:corrode hero:5:65:0: mon:23:65:23:corrode hero:5:60:0: mon:24:60:24:corrode hero:5:55:0: mon:25:55:25:corrode hero:5:50:0: mon:26:50:26:corrode hero:5:45:0: mon:27:45:27:corrode hero:5:40:0: mon:28:40:28:corrode hero:5:35:0: mon:29:35:29:corrode hero:5:30:0: mon:30:30:30:corrode hero:5:25:0: mon:31:25:31:corrode hero:5:20:0: mon:32:20:32:corrode hero:5:15:0: mon:33:15:33:corrode hero:5:10:0: mon:34:10:34:corrode hero:5:5:0: mon:35:5:35:corrode hero:5:0:0:kill"
     },
     {
       monster = "slug",
@@ -22697,7 +23114,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 357,
-      hits = 15
+      hits = 15,
+      log = "hero:6:84:0: mon:19:84:19:corrode hero:6:78:0: mon:20:78:20:corrode hero:6:72:0: mon:21:72:21:corrode hero:6:66:0: mon:22:66:22:corrode hero:6:60:0: mon:23:60:23:corrode hero:6:54:0: mon:24:54:24:corrode hero:6:48:0: mon:25:48:25:corrode hero:6:42:0: mon:26:42:26:corrode hero:6:36:0: mon:27:36:27:corrode hero:6:30:0: mon:28:30:28:corrode hero:6:24:0: mon:29:24:29:corrode hero:6:18:0: mon:30:18:30:corrode hero:6:12:0: mon:31:12:31:corrode hero:6:6:0: mon:32:6:32:corrode hero:6:0:0:kill"
     },
     {
       monster = "slug",
@@ -22746,7 +23164,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 156,
-      hits = 9
+      hits = 9,
+      log = "hero:7:83:0:corrode mon:16:83:16:corrode hero:8:75:0:corrode mon:17:75:17:corrode hero:9:66:0:corrode mon:18:66:18:corrode hero:10:56:0:corrode mon:19:56:19:corrode hero:11:45:0:corrode mon:20:45:20:corrode hero:12:33:0:corrode mon:21:33:21:corrode hero:13:20:0:corrode mon:22:20:22:corrode hero:14:6:0:corrode mon:23:6:23:corrode hero:15:-9:0:corrode+kill"
     },
     {
       monster = "slug",
@@ -22798,7 +23217,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 205,
-      hits = 13
+      hits = 13,
+      log = "hero:7:83:0:first hero:7:76:0:first hero:7:69:0: mon:16:69:16:corrode hero:7:62:0: mon:17:62:17:corrode hero:7:55:0: mon:18:55:18:corrode hero:7:48:0: mon:19:48:19:corrode hero:7:41:0: mon:20:41:20:corrode hero:7:34:0: mon:21:34:21:corrode hero:7:27:0: mon:22:27:22:corrode hero:7:20:0: mon:23:20:23:corrode hero:7:13:0: mon:24:13:24:corrode hero:7:6:0: mon:25:6:25:corrode hero:7:-1:0:kill"
     },
     {
       monster = "slug",
@@ -22851,7 +23271,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 258,
-      hits = 13
+      hits = 13,
+      log = "hero:7:83:0: mon:16:83:16:corrode hero:7:76:0: mon:17:76:17:corrode hero:7:69:0: mon:18:69:18:corrode hero:7:62:0: mon:19:62:19:corrode hero:7:55:0: mon:20:55:20:corrode hero:7:48:0: mon:21:48:21:corrode hero:7:41:0: mon:22:41:22:corrode hero:7:34:0: mon:23:34:23:corrode hero:7:27:0: mon:24:27:24:corrode hero:7:20:0: mon:25:20:25:corrode hero:7:13:0: mon:26:13:26:corrode hero:7:6:0: mon:27:6:27:corrode hero:7:-1:0:kill"
     },
     {
       monster = "slug",
@@ -22901,7 +23322,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 210,
-      hits = 13
+      hits = 13,
+      log = "hero:7:83:0: mon:12:83:12:corrode hero:7:76:0: mon:13:76:13:corrode hero:7:69:0: mon:14:69:14:corrode hero:7:62:0: mon:15:62:15:corrode hero:7:55:0: mon:16:55:16:corrode hero:7:48:0: mon:17:48:17:corrode hero:7:41:0: mon:18:41:18:corrode hero:7:34:0: mon:19:34:19:corrode hero:7:27:0: mon:20:27:20:corrode hero:7:20:0: mon:21:20:21:corrode hero:7:13:0: mon:22:13:22:corrode hero:7:6:0: mon:23:6:23:corrode hero:7:-1:0:kill"
     },
     {
       monster = "slug",
@@ -22950,7 +23372,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 93,
-      hits = 6
+      hits = 6,
+      log = "hero:12:78:0: mon:13:75:13:corrode+spikes hero:12:63:0: mon:14:60:14:corrode+spikes hero:12:48:0: mon:15:45:15:corrode+spikes hero:12:33:0: mon:16:30:16:corrode+spikes hero:12:18:0: mon:17:15:17:corrode+spikes hero:12:3:0: mon:18:0:18:corrode+spikes+kill"
     },
     {
       monster = "slug",
@@ -23001,7 +23424,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 69,
-      hits = 8
+      hits = 8,
+      log = "hero:12:78:-3:first+drain hero:12:66:-3:drain mon:13:66:13:corrode hero:12:54:-3:drain mon:14:54:14:corrode hero:12:42:-3:drain mon:15:42:15:corrode hero:12:30:-3:drain mon:16:30:16:corrode hero:12:18:-3:drain mon:17:18:17:corrode hero:12:6:-3:drain mon:18:6:18:corrode hero:12:-6:-3:drain+kill"
     },
     {
       monster = "slug",
@@ -23055,7 +23479,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 75,
-      hits = 6
+      hits = 6,
+      log = "hero:16:74:0:pierce mon:13:74:13:corrode hero:16:58:0:pierce mon:14:58:14:corrode hero:16:42:0:pierce mon:15:42:15:corrode hero:16:26:0:pierce mon:16:26:16:corrode hero:16:10:0:pierce mon:17:10:17:corrode hero:16:-6:0:pierce+kill"
     },
     {
       monster = "slug",
@@ -23105,7 +23530,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 112,
-      hits = 8
+      hits = 8,
+      log = "hero:12:78:0: mon:13:78:13:corrode hero:12:66:0: mon:14:66:14:corrode hero:12:54:0: mon:15:54:15:corrode hero:12:42:0: mon:16:42:16:corrode hero:12:30:0: mon:17:30:17:corrode hero:12:18:0: mon:18:18:18:corrode hero:12:6:0: mon:19:6:19:corrode hero:12:-6:0:kill"
     },
     {
       monster = "slug",
@@ -23154,7 +23580,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 33,
-      hits = 5
+      hits = 5,
+      log = "hero:18:72:0:first hero:18:54:0: mon:10:54:10:corrode hero:18:36:0: mon:11:36:11:corrode hero:18:18:0: mon:12:18:12:corrode hero:18:0:0:kill"
     },
     {
       monster = "slug",
@@ -23204,7 +23631,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 33,
-      hits = 5
+      hits = 5,
+      log = "hero:18:72:0:first hero:18:54:0: mon:10:54:10:corrode hero:18:36:0: mon:11:36:11:corrode hero:18:18:0: mon:12:18:12:corrode hero:18:0:0:kill"
     },
     {
       monster = "slug",
@@ -23259,7 +23687,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:18:72:-4:first+drain+corrode hero:19:53:-4:first+drain+corrode hero:20:33:-5:drain+corrode mon:10:30:10:corrode+spikes hero:21:9:-5:drain+corrode mon:11:6:11:corrode+spikes hero:22:-16:-5:drain+corrode+kill"
     },
     {
       monster = "slug",
@@ -23309,7 +23738,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 48,
-      hits = 4
+      hits = 4,
+      log = "hero:27:63:0: mon:15:63:15:corrode hero:27:36:0: mon:16:36:16:corrode hero:27:9:0: mon:17:9:17:corrode hero:27:-18:0:kill"
     },
     {
       monster = "slug",
@@ -23358,7 +23788,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:26:64:-6:drain mon:4:64:4:corrode hero:26:38:-6:drain mon:5:38:5:corrode hero:26:12:-6:drain mon:6:12:6:corrode hero:26:-14:-6:drain+kill"
     },
     {
       monster = "slug",
@@ -23408,7 +23839,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 3
+      hits = 3,
+      log = "hero:30:60:0: mon:4:60:4:corrode hero:30:30:0: mon:5:30:5:corrode hero:30:0:0:kill"
     },
     {
       monster = "slug",
@@ -23462,7 +23894,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 4
+      hits = 4,
+      log = "hero:26:64:0:first+corrode hero:27:37:0:corrode mon:4:37:4:corrode hero:28:9:0:corrode mon:5:9:5:corrode hero:29:-20:0:corrode+kill"
     },
     {
       monster = "slug",
@@ -23513,7 +23946,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 15,
-      hits = 4
+      hits = 4,
+      log = "hero:26:64:0: mon:4:64:4:corrode hero:26:38:0: mon:5:38:5:corrode hero:26:12:0: mon:6:12:6:corrode hero:26:-14:0:kill"
     },
     {
       monster = "slug",
@@ -23562,7 +23996,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23612,7 +24047,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23665,7 +24101,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23717,7 +24154,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23767,7 +24205,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23816,7 +24255,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23868,7 +24308,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23921,7 +24362,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -23971,7 +24413,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24020,7 +24463,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24071,7 +24515,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24125,7 +24570,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24175,7 +24621,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24224,7 +24671,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24274,7 +24722,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24329,7 +24778,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24428,7 +24878,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24478,7 +24929,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24532,7 +24984,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24583,7 +25036,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24632,7 +25086,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24682,7 +25137,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24735,7 +25191,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24787,7 +25244,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24837,7 +25295,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24886,7 +25345,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24938,7 +25398,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -24991,7 +25452,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -25041,7 +25503,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "priest",
@@ -25090,7 +25553,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 136,
-      hits = 17
+      hits = 17,
+      log = "hero:3:97:0: mon:8:94:8:spikes hero:3:91:0: mon:8:88:8:spikes hero:3:85:0: mon:8:82:8:spikes hero:3:79:0: mon:8:76:8:spikes hero:3:73:0: mon:8:70:8:spikes hero:3:67:0: mon:8:64:8:spikes hero:3:61:0: mon:8:58:8:spikes hero:3:55:0: mon:8:52:8:spikes hero:3:49:0: mon:8:46:8:spikes hero:3:43:0: mon:8:40:8:spikes hero:3:37:0: mon:8:34:8:spikes hero:3:31:0: mon:8:28:8:spikes hero:3:25:0: mon:8:22:8:spikes hero:3:19:0: mon:8:16:8:spikes hero:3:13:0: mon:8:10:8:spikes hero:3:7:0: mon:8:4:8:spikes hero:3:1:0: mon:8:-2:8:spikes+kill"
     },
     {
       monster = "priest",
@@ -25195,7 +25659,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 112,
-      hits = 15
+      hits = 15,
+      log = "hero:7:93:0:pierce mon:8:93:8: hero:7:86:0:pierce mon:8:86:8: hero:7:79:0:pierce mon:8:79:8: hero:7:72:0:pierce mon:8:72:8: hero:7:65:0:pierce mon:8:65:8: hero:7:58:0:pierce mon:8:58:8: hero:7:51:0:pierce mon:8:51:8: hero:7:44:0:pierce mon:8:44:8: hero:7:37:0:pierce mon:8:37:8: hero:7:30:0:pierce mon:8:30:8: hero:7:23:0:pierce mon:8:23:8: hero:7:16:0:pierce mon:8:16:8: hero:7:9:0:pierce mon:8:9:8: hero:7:2:0:pierce mon:8:2:8: hero:7:-5:0:pierce+kill"
     },
     {
       monster = "priest",
@@ -25294,7 +25759,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 55,
-      hits = 13
+      hits = 13,
+      log = "hero:8:92:0:first hero:8:84:0: mon:5:84:5: hero:8:76:0: mon:5:76:5: hero:8:68:0: mon:5:68:5: hero:8:60:0: mon:5:60:5: hero:8:52:0: mon:5:52:5: hero:8:44:0: mon:5:44:5: hero:8:36:0: mon:5:36:5: hero:8:28:0: mon:5:28:5: hero:8:20:0: mon:5:20:5: hero:8:12:0: mon:5:12:5: hero:8:4:0: mon:5:4:5: hero:8:-4:0:kill"
     },
     {
       monster = "priest",
@@ -25344,7 +25810,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 55,
-      hits = 13
+      hits = 13,
+      log = "hero:8:92:0:first hero:8:84:0: mon:5:84:5: hero:8:76:0: mon:5:76:5: hero:8:68:0: mon:5:68:5: hero:8:60:0: mon:5:60:5: hero:8:52:0: mon:5:52:5: hero:8:44:0: mon:5:44:5: hero:8:36:0: mon:5:36:5: hero:8:28:0: mon:5:28:5: hero:8:20:0: mon:5:20:5: hero:8:12:0: mon:5:12:5: hero:8:4:0: mon:5:4:5: hero:8:-4:0:kill"
     },
     {
       monster = "priest",
@@ -25399,7 +25866,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 5,
-      hits = 8
+      hits = 8,
+      log = "hero:8:92:-2:first+drain+corrode hero:9:83:-2:first+drain+corrode hero:10:73:-2:drain+corrode mon:5:70:5:spikes hero:11:59:-2:drain+corrode mon:5:56:5:spikes hero:12:44:-3:drain+corrode mon:5:41:5:spikes hero:13:28:-3:drain+corrode mon:5:25:5:spikes hero:14:11:-3:drain+corrode mon:5:8:5:spikes hero:15:-7:-3:drain+corrode+kill"
     },
     {
       monster = "priest",
@@ -25449,7 +25917,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 6
+      hits = 6,
+      log = "hero:17:83:0: mon:10:83:10: hero:17:66:0: mon:10:66:10: hero:17:49:0: mon:10:49:10: hero:17:32:0: mon:10:32:10: hero:17:15:0: mon:10:15:10: hero:17:-2:0:kill"
     },
     {
       monster = "priest",
@@ -25498,7 +25967,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 8
+      hits = 8,
+      log = "hero:14:86:-3:drain mon:2:86:2: hero:14:72:-3:drain mon:2:72:2: hero:14:58:-3:drain mon:2:58:2: hero:14:44:-3:drain mon:2:44:2: hero:14:30:-3:drain mon:2:30:2: hero:14:16:-3:drain mon:2:16:2: hero:14:2:-3:drain mon:2:2:2: hero:14:-12:-3:drain+kill"
     },
     {
       monster = "priest",
@@ -25548,7 +26018,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 6
+      hits = 6,
+      log = "hero:18:82:0: mon:2:82:2: hero:18:64:0: mon:2:64:2: hero:18:46:0: mon:2:46:2: hero:18:28:0: mon:2:28:2: hero:18:10:0: mon:2:10:2: hero:18:-8:0:kill"
     },
     {
       monster = "priest",
@@ -25602,7 +26073,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 7
+      hits = 7,
+      log = "hero:14:86:0:first+corrode hero:15:71:0:corrode mon:2:71:2: hero:16:55:0:corrode mon:2:55:2: hero:17:38:0:corrode mon:2:38:2: hero:18:20:0:corrode mon:2:20:2: hero:19:1:0:corrode mon:2:1:2: hero:20:-19:0:corrode+kill"
     },
     {
       monster = "priest",
@@ -25653,7 +26125,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 8
+      hits = 8,
+      log = "hero:14:86:0: mon:2:86:2: hero:14:72:0: mon:2:72:2: hero:14:58:0: mon:2:58:2: hero:14:44:0: mon:2:44:2: hero:14:30:0: mon:2:30:2: hero:14:16:0: mon:2:16:2: hero:14:2:0: mon:2:2:2: hero:14:-12:0:kill"
     },
     {
       monster = "priest",
@@ -25702,7 +26175,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:22:78:0: mon:0:78:0: hero:22:56:0: mon:0:56:0: hero:22:34:0: mon:0:34:0: hero:22:12:0: mon:0:12:0: hero:22:-10:0:kill"
     },
     {
       monster = "priest",
@@ -25752,7 +26226,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:22:78:-5:first+drain+corrode hero:23:55:-5:drain+corrode mon:0:52:0:spikes hero:24:28:-6:drain+corrode mon:0:25:0:spikes hero:25:0:-6:drain+corrode+kill"
     },
     {
       monster = "priest",
@@ -25805,7 +26280,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:22:78:0:first hero:22:56:0: mon:0:53:0:spikes hero:22:31:0: mon:0:28:0:spikes hero:22:6:0: mon:0:3:0:spikes hero:22:-19:0:kill"
     },
     {
       monster = "priest",
@@ -25857,7 +26333,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:23:77:0: mon:0:77:0: hero:23:54:0: mon:0:54:0: hero:23:31:0: mon:0:31:0: hero:23:8:0: mon:0:8:0: hero:23:-15:0:kill"
     },
     {
       monster = "priest",
@@ -25907,7 +26384,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:24:76:0: mon:0:76:0: hero:24:52:0: mon:0:52:0: hero:24:28:0: mon:0:28:0: hero:24:4:0: mon:0:4:0: hero:24:-20:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -25956,7 +26434,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26008,7 +26487,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26061,7 +26541,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26111,7 +26592,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26160,7 +26642,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26211,7 +26694,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26265,7 +26749,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26315,7 +26800,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26364,7 +26850,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26414,7 +26901,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26469,7 +26957,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26519,7 +27008,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26568,7 +27058,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26618,7 +27109,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26672,7 +27164,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26723,7 +27216,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26772,7 +27266,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26822,7 +27317,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26875,7 +27371,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26927,7 +27424,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -26977,7 +27475,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27026,7 +27525,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27078,7 +27578,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27131,7 +27632,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27181,7 +27683,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27230,7 +27733,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27281,7 +27785,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27385,7 +27890,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "gatekeeper",
@@ -27539,7 +28045,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 463,
-      hits = 14
+      hits = 14,
+      log = "hero:1:159:0:first+corrode hero:2:157:0:first+corrode hero:3:154:0:corrode mon:22:151:22:spikes mon:22:148:22:double+spikes hero:4:144:-1:drain+corrode mon:22:141:22:spikes mon:22:138:22:double+spikes hero:5:133:-1:drain+corrode mon:22:130:22:spikes mon:22:127:22:double+spikes hero:6:121:-1:drain+corrode mon:22:118:22:spikes mon:22:115:22:double+spikes hero:7:108:-1:drain+corrode mon:22:105:22:spikes mon:22:102:22:double+spikes hero:8:94:-2:drain+corrode mon:22:91:22:spikes mon:22:88:22:double+spikes hero:9:79:-2:drain+corrode mon:22:76:22:spikes mon:22:73:22:double+spikes hero:10:63:-2:drain+corrode mon:22:60:22:spikes mon:22:57:22:double+spikes hero:11:46:-2:drain+corrode mon:22:43:22:spikes mon:22:40:22:double+spikes hero:12:28:-3:drain+corrode mon:22:25:22:spikes mon:22:22:22:double+spikes hero:13:9:-3:drain+corrode mon:22:6:22:spikes mon:22:3:22:double+spikes hero:14:-11:-3:drain+corrode+kill"
     },
     {
       monster = "gatekeeper",
@@ -27589,7 +28096,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 810,
-      hits = 16
+      hits = 16,
+      log = "hero:10:150:0: mon:27:150:27: mon:27:150:27:double hero:10:140:0: mon:27:140:27: mon:27:140:27:double hero:10:130:0: mon:27:130:27: mon:27:130:27:double hero:10:120:0: mon:27:120:27: mon:27:120:27:double hero:10:110:0: mon:27:110:27: mon:27:110:27:double hero:10:100:0: mon:27:100:27: mon:27:100:27:double hero:10:90:0: mon:27:90:27: mon:27:90:27:double hero:10:80:0: mon:27:80:27: mon:27:80:27:double hero:10:70:0: mon:27:70:27: mon:27:70:27:double hero:10:60:0: mon:27:60:27: mon:27:60:27:double hero:10:50:0: mon:27:50:27: mon:27:50:27:double hero:10:40:0: mon:27:40:27: mon:27:40:27:double hero:10:30:0: mon:27:30:27: mon:27:30:27:double hero:10:20:0: mon:27:20:27: mon:27:20:27:double hero:10:10:0: mon:27:10:27: mon:27:10:27:double hero:10:0:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -27688,7 +28196,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 570,
-      hits = 16
+      hits = 16,
+      log = "hero:10:150:0: mon:19:150:19: mon:19:150:19:double hero:10:140:0: mon:19:140:19: mon:19:140:19:double hero:10:130:0: mon:19:130:19: mon:19:130:19:double hero:10:120:0: mon:19:120:19: mon:19:120:19:double hero:10:110:0: mon:19:110:19: mon:19:110:19:double hero:10:100:0: mon:19:100:19: mon:19:100:19:double hero:10:90:0: mon:19:90:19: mon:19:90:19:double hero:10:80:0: mon:19:80:19: mon:19:80:19:double hero:10:70:0: mon:19:70:19: mon:19:70:19:double hero:10:60:0: mon:19:60:19: mon:19:60:19:double hero:10:50:0: mon:19:50:19: mon:19:50:19:double hero:10:40:0: mon:19:40:19: mon:19:40:19:double hero:10:30:0: mon:19:30:19: mon:19:30:19:double hero:10:20:0: mon:19:20:19: mon:19:20:19:double hero:10:10:0: mon:19:10:19: mon:19:10:19:double hero:10:0:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -27742,7 +28251,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 456,
-      hits = 14
+      hits = 14,
+      log = "hero:6:154:0:first+corrode hero:7:147:0:corrode mon:19:147:19: mon:19:147:19:double hero:8:139:0:corrode mon:19:139:19: mon:19:139:19:double hero:9:130:0:corrode mon:19:130:19: mon:19:130:19:double hero:10:120:0:corrode mon:19:120:19: mon:19:120:19:double hero:11:109:0:corrode mon:19:109:19: mon:19:109:19:double hero:12:97:0:corrode mon:19:97:19: mon:19:97:19:double hero:13:84:0:corrode mon:19:84:19: mon:19:84:19:double hero:14:70:0:corrode mon:19:70:19: mon:19:70:19:double hero:15:55:0:corrode mon:19:55:19: mon:19:55:19:double hero:16:39:0:corrode mon:19:39:19: mon:19:39:19:double hero:17:22:0:corrode mon:19:22:19: mon:19:22:19:double hero:18:4:0:corrode mon:19:4:19: mon:19:4:19:double hero:19:-15:0:corrode+kill"
     },
     {
       monster = "gatekeeper",
@@ -27842,7 +28352,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 416,
-      hits = 14
+      hits = 14,
+      log = "hero:12:148:0: mon:16:148:16: mon:16:148:16:double hero:12:136:0: mon:16:136:16: mon:16:136:16:double hero:12:124:0: mon:16:124:16: mon:16:124:16:double hero:12:112:0: mon:16:112:16: mon:16:112:16:double hero:12:100:0: mon:16:100:16: mon:16:100:16:double hero:12:88:0: mon:16:88:16: mon:16:88:16:double hero:12:76:0: mon:16:76:16: mon:16:76:16:double hero:12:64:0: mon:16:64:16: mon:16:64:16:double hero:12:52:0: mon:16:52:16: mon:16:52:16:double hero:12:40:0: mon:16:40:16: mon:16:40:16:double hero:12:28:0: mon:16:28:16: mon:16:28:16:double hero:12:16:0: mon:16:16:16: mon:16:16:16:double hero:12:4:0: mon:16:4:16: mon:16:4:16:double hero:12:-8:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -27892,7 +28403,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 164,
-      hits = 8
+      hits = 8,
+      log = "hero:12:148:-3:first+drain+corrode hero:13:135:-3:drain+corrode mon:16:132:16:spikes mon:16:129:16:double+spikes hero:14:115:-3:drain+corrode mon:16:112:16:spikes mon:16:109:16:double+spikes hero:15:94:-3:drain+corrode mon:16:91:16:spikes mon:16:88:16:double+spikes hero:16:72:-4:drain+corrode mon:16:69:16:spikes mon:16:66:16:double+spikes hero:17:49:-4:drain+corrode mon:16:46:16:spikes mon:16:43:16:double+spikes hero:18:25:-4:drain+corrode mon:16:22:16:spikes mon:16:19:16:double+spikes hero:19:0:-4:drain+corrode+kill"
     },
     {
       monster = "gatekeeper",
@@ -27945,7 +28457,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 256,
-      hits = 10
+      hits = 10,
+      log = "hero:12:148:0:first hero:12:136:0: mon:16:133:16:spikes mon:16:130:16:double+spikes hero:12:118:0: mon:16:115:16:spikes mon:16:112:16:double+spikes hero:12:100:0: mon:16:97:16:spikes mon:16:94:16:double+spikes hero:12:82:0: mon:16:79:16:spikes mon:16:76:16:double+spikes hero:12:64:0: mon:16:61:16:spikes mon:16:58:16:double+spikes hero:12:46:0: mon:16:43:16:spikes mon:16:40:16:double+spikes hero:12:28:0: mon:16:25:16:spikes mon:16:22:16:double+spikes hero:12:10:0: mon:16:7:16:spikes mon:16:4:16:double+spikes hero:12:-8:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -27997,7 +28510,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 384,
-      hits = 13
+      hits = 13,
+      log = "hero:13:147:0: mon:16:147:16: mon:16:147:16:double hero:13:134:0: mon:16:134:16: mon:16:134:16:double hero:13:121:0: mon:16:121:16: mon:16:121:16:double hero:13:108:0: mon:16:108:16: mon:16:108:16:double hero:13:95:0: mon:16:95:16: mon:16:95:16:double hero:13:82:0: mon:16:82:16: mon:16:82:16:double hero:13:69:0: mon:16:69:16: mon:16:69:16:double hero:13:56:0: mon:16:56:16: mon:16:56:16:double hero:13:43:0: mon:16:43:16: mon:16:43:16:double hero:13:30:0: mon:16:30:16: mon:16:30:16:double hero:13:17:0: mon:16:17:16: mon:16:17:16:double hero:13:4:0: mon:16:4:16: mon:16:4:16:double hero:13:-9:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -28047,7 +28561,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 352,
-      hits = 12
+      hits = 12,
+      log = "hero:14:146:0: mon:16:146:16: mon:16:146:16:double hero:14:132:0: mon:16:132:16: mon:16:132:16:double hero:14:118:0: mon:16:118:16: mon:16:118:16:double hero:14:104:0: mon:16:104:16: mon:16:104:16:double hero:14:90:0: mon:16:90:16: mon:16:90:16:double hero:14:76:0: mon:16:76:16: mon:16:76:16:double hero:14:62:0: mon:16:62:16: mon:16:62:16:double hero:14:48:0: mon:16:48:16: mon:16:48:16:double hero:14:34:0: mon:16:34:16: mon:16:34:16:double hero:14:20:0: mon:16:20:16: mon:16:20:16:double hero:14:6:0: mon:16:6:16: mon:16:6:16:double hero:14:-8:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -28096,7 +28611,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 120,
-      hits = 7
+      hits = 7,
+      log = "hero:20:140:0:corrode mon:10:140:10: mon:10:140:10:double hero:21:119:0:corrode mon:10:119:10: mon:10:119:10:double hero:22:97:0:corrode mon:10:97:10: mon:10:97:10:double hero:23:74:0:corrode mon:10:74:10: mon:10:74:10:double hero:24:50:0:corrode mon:10:50:10: mon:10:50:10:double hero:25:25:0:corrode mon:10:25:10: mon:10:25:10:double hero:26:-1:0:corrode+kill"
     },
     {
       monster = "gatekeeper",
@@ -28148,7 +28664,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 100,
-      hits = 8
+      hits = 8,
+      log = "hero:20:140:0:first hero:20:120:0:first hero:20:100:0: mon:10:100:10: mon:10:100:10:double hero:20:80:0: mon:10:80:10: mon:10:80:10:double hero:20:60:0: mon:10:60:10: mon:10:60:10:double hero:20:40:0: mon:10:40:10: mon:10:40:10:double hero:20:20:0: mon:10:20:10: mon:10:20:10:double hero:20:0:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -28201,7 +28718,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 140,
-      hits = 8
+      hits = 8,
+      log = "hero:20:140:0: mon:10:140:10: mon:10:140:10:double hero:20:120:0: mon:10:120:10: mon:10:120:10:double hero:20:100:0: mon:10:100:10: mon:10:100:10:double hero:20:80:0: mon:10:80:10: mon:10:80:10:double hero:20:60:0: mon:10:60:10: mon:10:60:10:double hero:20:40:0: mon:10:40:10: mon:10:40:10:double hero:20:20:0: mon:10:20:10: mon:10:20:10:double hero:20:0:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -28251,7 +28769,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 84,
-      hits = 8
+      hits = 8,
+      log = "hero:20:140:0: mon:6:140:6: mon:6:140:6:double hero:20:120:0: mon:6:120:6: mon:6:120:6:double hero:20:100:0: mon:6:100:6: mon:6:100:6:double hero:20:80:0: mon:6:80:6: mon:6:80:6:double hero:20:60:0: mon:6:60:6: mon:6:60:6:double hero:20:40:0: mon:6:40:6: mon:6:40:6:double hero:20:20:0: mon:6:20:6: mon:6:20:6:double hero:20:0:0:kill"
     },
     {
       monster = "gatekeeper",
@@ -28300,7 +28819,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28351,7 +28871,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28405,7 +28926,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28455,7 +28977,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28504,7 +29027,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28554,7 +29078,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28609,7 +29134,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28659,7 +29185,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28708,7 +29235,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28758,7 +29286,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28812,7 +29341,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28863,7 +29393,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28912,7 +29443,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -28962,7 +29494,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29015,7 +29548,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29067,7 +29601,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29117,7 +29652,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29166,7 +29702,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29218,7 +29755,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29271,7 +29809,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29321,7 +29860,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29370,7 +29910,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29421,7 +29962,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29475,7 +30017,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29525,7 +30068,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29574,7 +30118,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29624,7 +30169,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29679,7 +30225,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29729,7 +30276,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29778,7 +30326,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29828,7 +30377,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29882,7 +30432,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29933,7 +30484,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -29982,7 +30534,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -30032,7 +30585,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -30085,7 +30639,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -30137,7 +30692,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -30187,7 +30743,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "eye",
@@ -30644,7 +31201,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 165,
-      hits = 13
+      hits = 13,
+      log = "hero:3:36:0:first hero:3:33:0: mon:15:33:15: hero:3:30:0: mon:15:30:15: hero:3:27:0: mon:15:27:15: hero:3:24:0: mon:15:24:15: hero:3:21:0: mon:15:21:15: hero:3:18:0: mon:15:18:15: hero:3:15:0: mon:15:15:15: hero:3:12:0: mon:15:12:15: hero:3:9:0: mon:15:9:15: hero:3:6:0: mon:15:6:15: hero:3:3:0: mon:15:3:15: hero:3:0:0:kill"
     },
     {
       monster = "thornMoss",
@@ -30694,7 +31252,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 165,
-      hits = 13
+      hits = 13,
+      log = "hero:3:36:0:first hero:3:33:0: mon:15:33:15: hero:3:30:0: mon:15:30:15: hero:3:27:0: mon:15:27:15: hero:3:24:0: mon:15:24:15: hero:3:21:0: mon:15:21:15: hero:3:18:0: mon:15:18:15: hero:3:15:0: mon:15:15:15: hero:3:12:0: mon:15:12:15: hero:3:9:0: mon:15:9:15: hero:3:6:0: mon:15:6:15: hero:3:3:0: mon:15:3:15: hero:3:0:0:kill"
     },
     {
       monster = "thornMoss",
@@ -30749,7 +31308,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 39,
-      hits = 6
+      hits = 6,
+      log = "hero:3:36:0:first+corrode hero:4:32:-1:first+drain+corrode hero:5:27:-1:drain+corrode mon:15:24:15:spikes hero:6:18:-1:drain+corrode mon:15:15:15:spikes hero:7:8:-1:drain+corrode mon:15:5:15:spikes hero:8:-3:-2:drain+corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -30799,7 +31359,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 4
+      hits = 4,
+      log = "hero:12:27:0: mon:20:27:20: hero:12:15:0: mon:20:15:20: hero:12:3:0: mon:20:3:20: hero:12:-9:0:kill"
     },
     {
       monster = "thornMoss",
@@ -30848,7 +31409,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 83,
-      hits = 7
+      hits = 7,
+      log = "hero:6:33:-1:drain mon:15:33:15: hero:6:27:-1:drain mon:15:27:15: hero:6:21:-1:drain mon:15:21:15: hero:6:15:-1:drain mon:15:15:15: hero:6:9:-1:drain mon:15:9:15: hero:6:3:-1:drain mon:15:3:15: hero:6:-3:-1:drain+kill"
     },
     {
       monster = "thornMoss",
@@ -30898,7 +31460,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 4
+      hits = 4,
+      log = "hero:10:29:0: mon:15:29:15: hero:10:19:0: mon:15:19:15: hero:10:9:0: mon:15:9:15: hero:10:-1:0:kill"
     },
     {
       monster = "thornMoss",
@@ -30952,7 +31515,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 5
+      hits = 5,
+      log = "hero:6:33:0:first+corrode hero:7:26:0:corrode mon:15:26:15: hero:8:18:0:corrode mon:15:18:15: hero:9:9:0:corrode mon:15:9:15: hero:10:-1:0:corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -31003,7 +31567,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 90,
-      hits = 7
+      hits = 7,
+      log = "hero:6:33:0: mon:15:33:15: hero:6:27:0: mon:15:27:15: hero:6:21:0: mon:15:21:15: hero:6:15:0: mon:15:15:15: hero:6:9:0: mon:15:9:15: hero:6:3:0: mon:15:3:15: hero:6:-3:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31052,7 +31617,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 72,
-      hits = 7
+      hits = 7,
+      log = "hero:6:33:0: mon:12:33:12: hero:6:27:0: mon:12:27:12: hero:6:21:0: mon:12:21:12: hero:6:15:0: mon:12:15:12: hero:6:9:0: mon:12:9:12: hero:6:3:0: mon:12:3:12: hero:6:-3:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31102,7 +31668,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 4
+      hits = 4,
+      log = "hero:6:33:-1:first+drain+corrode hero:7:26:-1:drain+corrode mon:12:23:12:spikes hero:8:15:-2:drain+corrode mon:12:12:12:spikes hero:9:3:-2:drain+corrode mon:12:0:12:spikes+kill"
     },
     {
       monster = "thornMoss",
@@ -31155,7 +31722,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 5
+      hits = 5,
+      log = "hero:6:33:0:first hero:6:27:0: mon:12:24:12:spikes hero:6:18:0: mon:12:15:12:spikes hero:6:9:0: mon:12:6:12:spikes hero:6:0:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31207,7 +31775,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 6
+      hits = 6,
+      log = "hero:7:32:0: mon:12:32:12: hero:7:25:0: mon:12:25:12: hero:7:18:0: mon:12:18:12: hero:7:11:0: mon:12:11:12: hero:7:4:0: mon:12:4:12: hero:7:-3:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31257,7 +31826,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 48,
-      hits = 5
+      hits = 5,
+      log = "hero:8:31:0: mon:12:31:12: hero:8:23:0: mon:12:23:12: hero:8:15:0: mon:12:15:12: hero:8:7:0: mon:12:7:12: hero:8:-1:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31306,7 +31876,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 4
+      hits = 4,
+      log = "hero:9:30:0:corrode mon:12:30:12: hero:10:20:0:corrode mon:12:20:12: hero:11:9:0:corrode mon:12:9:12: hero:12:-3:0:corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -31358,7 +31929,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 5
+      hits = 5,
+      log = "hero:9:30:0:first hero:9:21:0:first hero:9:12:0: mon:12:12:12: hero:9:3:0: mon:12:3:12: hero:9:-6:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31411,7 +31983,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 48,
-      hits = 5
+      hits = 5,
+      log = "hero:9:30:0: mon:12:30:12: hero:9:21:0: mon:12:21:12: hero:9:12:0: mon:12:12:12: hero:9:3:0: mon:12:3:12: hero:9:-6:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31461,7 +32034,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 32,
-      hits = 5
+      hits = 5,
+      log = "hero:9:30:0: mon:8:30:8: hero:9:21:0: mon:8:21:8: hero:9:12:0: mon:8:12:8: hero:9:3:0: mon:8:3:8: hero:9:-6:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31510,7 +32084,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 27,
-      hits = 4
+      hits = 4,
+      log = "hero:9:30:0: mon:9:27:9:spikes hero:9:18:0: mon:9:15:9:spikes hero:9:6:0: mon:9:3:9:spikes hero:9:-6:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31561,7 +32136,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 17,
-      hits = 5
+      hits = 5,
+      log = "hero:9:30:-2:first+drain hero:9:21:-2:drain mon:9:21:9: hero:9:12:-2:drain mon:9:12:9: hero:9:3:-2:drain mon:9:3:9: hero:9:-6:-2:drain+kill"
     },
     {
       monster = "thornMoss",
@@ -31615,7 +32191,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 3
+      hits = 3,
+      log = "hero:13:26:0:pierce mon:9:26:9: hero:13:13:0:pierce mon:9:13:9: hero:13:0:0:pierce+kill"
     },
     {
       monster = "thornMoss",
@@ -31665,7 +32242,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 5
+      hits = 5,
+      log = "hero:9:30:0: mon:9:30:9: hero:9:21:0: mon:9:21:9: hero:9:12:0: mon:9:12:9: hero:9:3:0: mon:9:3:9: hero:9:-6:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31714,7 +32292,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 4
+      hits = 4,
+      log = "hero:12:27:0:first hero:12:15:0: mon:9:15:9: hero:12:3:0: mon:9:3:9: hero:12:-9:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31764,7 +32343,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 4
+      hits = 4,
+      log = "hero:12:27:0:first hero:12:15:0: mon:9:15:9: hero:12:3:0: mon:9:3:9: hero:12:-9:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31819,7 +32399,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:12:27:-3:first+drain+corrode hero:13:14:-3:first+drain+corrode hero:14:0:-3:drain+corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -31869,7 +32450,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 2
+      hits = 2,
+      log = "hero:21:18:0: mon:14:18:14: hero:21:-3:0:kill"
     },
     {
       monster = "thornMoss",
@@ -31918,7 +32500,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 3,
-      hits = 3
+      hits = 3,
+      log = "hero:15:24:-3:drain mon:6:24:6: hero:15:9:-3:drain mon:6:9:6: hero:15:-6:-3:drain+kill"
     },
     {
       monster = "thornMoss",
@@ -31968,7 +32551,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 3
+      hits = 3,
+      log = "hero:19:20:0: mon:6:20:6: hero:19:1:0: mon:6:1:6: hero:19:-18:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32022,7 +32606,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 3
+      hits = 3,
+      log = "hero:15:24:0:first+corrode hero:16:8:0:corrode mon:6:8:6: hero:17:-9:0:corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -32073,7 +32658,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 3
+      hits = 3,
+      log = "hero:15:24:0: mon:6:24:6: hero:15:9:0: mon:6:9:6: hero:15:-6:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32122,7 +32708,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 3
+      hits = 3,
+      log = "hero:18:21:0: mon:3:21:3: hero:18:3:0: mon:3:3:3: hero:18:-15:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32172,7 +32759,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:18:21:-4:first+drain+corrode hero:19:2:-4:drain+corrode mon:3:-1:3:spikes+kill"
     },
     {
       monster = "thornMoss",
@@ -32225,7 +32813,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 3,
-      hits = 2
+      hits = 2,
+      log = "hero:18:21:0:first hero:18:3:0: mon:3:0:3:spikes+kill"
     },
     {
       monster = "thornMoss",
@@ -32277,7 +32866,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 3
+      hits = 3,
+      log = "hero:19:20:0: mon:3:20:3: hero:19:1:0: mon:3:1:3: hero:19:-18:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32327,7 +32917,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 3,
-      hits = 2
+      hits = 2,
+      log = "hero:20:19:0: mon:3:19:3: hero:20:-1:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32376,7 +32967,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:16:0:corrode mon:0:16:0: hero:24:-8:0:corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -32428,7 +33020,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:16:0:first hero:23:-7:0:first+kill"
     },
     {
       monster = "thornMoss",
@@ -32481,7 +33074,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:16:0: mon:0:16:0: hero:23:-7:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32531,7 +33125,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:23:16:0: mon:0:16:0: hero:23:-7:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32580,7 +33175,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:29:10:0: mon:0:7:0:spikes hero:29:-22:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32631,7 +33227,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:29:10:-7:first+drain hero:29:-19:-7:drain+kill"
     },
     {
       monster = "thornMoss",
@@ -32685,7 +33282,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:33:6:0:pierce mon:0:6:0: hero:33:-27:0:pierce+kill"
     },
     {
       monster = "thornMoss",
@@ -32735,7 +33333,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:29:10:0: mon:0:10:0: hero:29:-19:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32784,7 +33383,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:37:2:0:first hero:37:-35:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32834,7 +33434,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:37:2:0:first hero:37:-35:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32889,7 +33490,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:37:2:-9:first+drain+corrode hero:38:-36:-9:first+drain+corrode+kill"
     },
     {
       monster = "thornMoss",
@@ -32939,7 +33541,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 1
+      hits = 1,
+      log = "hero:46:-7:0:kill"
     },
     {
       monster = "thornMoss",
@@ -32988,7 +33591,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "spikeEel",
@@ -33038,7 +33642,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 280,
-      hits = 15
+      hits = 15,
+      log = "hero:4:54:0: mon:20:54:20: hero:4:50:0: mon:20:50:20: hero:4:46:0: mon:20:46:20: hero:4:42:0: mon:20:42:20: hero:4:38:0: mon:20:38:20: hero:4:34:0: mon:20:34:20: hero:4:30:0: mon:20:30:20: hero:4:26:0: mon:20:26:20: hero:4:22:0: mon:20:22:20: hero:4:18:0: mon:20:18:20: hero:4:14:0: mon:20:14:20: hero:4:10:0: mon:20:10:20: hero:4:6:0: mon:20:6:20: hero:4:2:0: mon:20:2:20: hero:4:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33092,7 +33697,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "spikeEel",
@@ -33143,7 +33749,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "spikeEel",
@@ -33192,7 +33799,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 380,
-      hits = 20
+      hits = 20,
+      log = "hero:3:55:0: mon:20:55:20: hero:3:52:0: mon:20:52:20: hero:3:49:0: mon:20:49:20: hero:3:46:0: mon:20:46:20: hero:3:43:0: mon:20:43:20: hero:3:40:0: mon:20:40:20: hero:3:37:0: mon:20:37:20: hero:3:34:0: mon:20:34:20: hero:3:31:0: mon:20:31:20: hero:3:28:0: mon:20:28:20: hero:3:25:0: mon:20:25:20: hero:3:22:0: mon:20:22:20: hero:3:19:0: mon:20:19:20: hero:3:16:0: mon:20:16:20: hero:3:13:0: mon:20:13:20: hero:3:10:0: mon:20:10:20: hero:3:7:0: mon:20:7:20: hero:3:4:0: mon:20:4:20: hero:3:1:0: mon:20:1:20: hero:3:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33242,7 +33850,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 112,
-      hits = 7
+      hits = 7,
+      log = "hero:3:55:0:first+corrode hero:4:51:-1:drain+corrode mon:20:48:20:spikes hero:5:43:-1:drain+corrode mon:20:40:20:spikes hero:6:34:-1:drain+corrode mon:20:31:20:spikes hero:7:24:-1:drain+corrode mon:20:21:20:spikes hero:8:13:-2:drain+corrode mon:20:10:20:spikes hero:9:1:-2:drain+corrode mon:20:-2:20:spikes+kill"
     },
     {
       monster = "spikeEel",
@@ -33295,7 +33904,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 180,
-      hits = 11
+      hits = 11,
+      log = "hero:3:55:0:first hero:3:52:0: mon:20:49:20:spikes hero:3:46:0: mon:20:43:20:spikes hero:3:40:0: mon:20:37:20:spikes hero:3:34:0: mon:20:31:20:spikes hero:3:28:0: mon:20:25:20:spikes hero:3:22:0: mon:20:19:20:spikes hero:3:16:0: mon:20:13:20:spikes hero:3:10:0: mon:20:7:20:spikes hero:3:4:0: mon:20:1:20:spikes hero:3:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33347,7 +33957,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 280,
-      hits = 15
+      hits = 15,
+      log = "hero:4:54:0: mon:20:54:20: hero:4:50:0: mon:20:50:20: hero:4:46:0: mon:20:46:20: hero:4:42:0: mon:20:42:20: hero:4:38:0: mon:20:38:20: hero:4:34:0: mon:20:34:20: hero:4:30:0: mon:20:30:20: hero:4:26:0: mon:20:26:20: hero:4:22:0: mon:20:22:20: hero:4:18:0: mon:20:18:20: hero:4:14:0: mon:20:14:20: hero:4:10:0: mon:20:10:20: hero:4:6:0: mon:20:6:20: hero:4:2:0: mon:20:2:20: hero:4:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33397,7 +34008,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 220,
-      hits = 12
+      hits = 12,
+      log = "hero:5:53:0: mon:20:53:20: hero:5:48:0: mon:20:48:20: hero:5:43:0: mon:20:43:20: hero:5:38:0: mon:20:38:20: hero:5:33:0: mon:20:33:20: hero:5:28:0: mon:20:28:20: hero:5:23:0: mon:20:23:20: hero:5:18:0: mon:20:18:20: hero:5:13:0: mon:20:13:20: hero:5:8:0: mon:20:8:20: hero:5:3:0: mon:20:3:20: hero:5:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33446,7 +34058,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 136,
-      hits = 9
+      hits = 9,
+      log = "hero:3:55:0:corrode mon:17:55:17: hero:4:51:0:corrode mon:17:51:17: hero:5:46:0:corrode mon:17:46:17: hero:6:40:0:corrode mon:17:40:17: hero:7:33:0:corrode mon:17:33:17: hero:8:25:0:corrode mon:17:25:17: hero:9:16:0:corrode mon:17:16:17: hero:10:6:0:corrode mon:17:6:17: hero:11:-5:0:corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -33498,7 +34111,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 289,
-      hits = 20
+      hits = 20,
+      log = "hero:3:55:0:first hero:3:52:0:first hero:3:49:0: mon:17:49:17: hero:3:46:0: mon:17:46:17: hero:3:43:0: mon:17:43:17: hero:3:40:0: mon:17:40:17: hero:3:37:0: mon:17:37:17: hero:3:34:0: mon:17:34:17: hero:3:31:0: mon:17:31:17: hero:3:28:0: mon:17:28:17: hero:3:25:0: mon:17:25:17: hero:3:22:0: mon:17:22:17: hero:3:19:0: mon:17:19:17: hero:3:16:0: mon:17:16:17: hero:3:13:0: mon:17:13:17: hero:3:10:0: mon:17:10:17: hero:3:7:0: mon:17:7:17: hero:3:4:0: mon:17:4:17: hero:3:1:0: mon:17:1:17: hero:3:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33551,7 +34165,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 323,
-      hits = 20
+      hits = 20,
+      log = "hero:3:55:0: mon:17:55:17: hero:3:52:0: mon:17:52:17: hero:3:49:0: mon:17:49:17: hero:3:46:0: mon:17:46:17: hero:3:43:0: mon:17:43:17: hero:3:40:0: mon:17:40:17: hero:3:37:0: mon:17:37:17: hero:3:34:0: mon:17:34:17: hero:3:31:0: mon:17:31:17: hero:3:28:0: mon:17:28:17: hero:3:25:0: mon:17:25:17: hero:3:22:0: mon:17:22:17: hero:3:19:0: mon:17:19:17: hero:3:16:0: mon:17:16:17: hero:3:13:0: mon:17:13:17: hero:3:10:0: mon:17:10:17: hero:3:7:0: mon:17:7:17: hero:3:4:0: mon:17:4:17: hero:3:1:0: mon:17:1:17: hero:3:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33601,7 +34216,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 247,
-      hits = 20
+      hits = 20,
+      log = "hero:3:55:0: mon:13:55:13: hero:3:52:0: mon:13:52:13: hero:3:49:0: mon:13:49:13: hero:3:46:0: mon:13:46:13: hero:3:43:0: mon:13:43:13: hero:3:40:0: mon:13:40:13: hero:3:37:0: mon:13:37:13: hero:3:34:0: mon:13:34:13: hero:3:31:0: mon:13:31:13: hero:3:28:0: mon:13:28:13: hero:3:25:0: mon:13:25:13: hero:3:22:0: mon:13:22:13: hero:3:19:0: mon:13:19:13: hero:3:16:0: mon:13:16:13: hero:3:13:0: mon:13:13:13: hero:3:10:0: mon:13:10:13: hero:3:7:0: mon:13:7:13: hero:3:4:0: mon:13:4:13: hero:3:1:0: mon:13:1:13: hero:3:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33650,7 +34266,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 102,
-      hits = 7
+      hits = 7,
+      log = "hero:6:52:0: mon:17:49:17:spikes hero:6:43:0: mon:17:40:17:spikes hero:6:34:0: mon:17:31:17:spikes hero:6:25:0: mon:17:22:17:spikes hero:6:16:0: mon:17:13:17:spikes hero:6:7:0: mon:17:4:17:spikes hero:6:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33701,7 +34318,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 126,
-      hits = 10
+      hits = 10,
+      log = "hero:6:52:-1:first+drain hero:6:46:-1:drain mon:17:46:17: hero:6:40:-1:drain mon:17:40:17: hero:6:34:-1:drain mon:17:34:17: hero:6:28:-1:drain mon:17:28:17: hero:6:22:-1:drain mon:17:22:17: hero:6:16:-1:drain mon:17:16:17: hero:6:10:-1:drain mon:17:10:17: hero:6:4:-1:drain mon:17:4:17: hero:6:-2:-1:drain+kill"
     },
     {
       monster = "spikeEel",
@@ -33755,7 +34373,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 85,
-      hits = 6
+      hits = 6,
+      log = "hero:10:48:0:pierce mon:17:48:17: hero:10:38:0:pierce mon:17:38:17: hero:10:28:0:pierce mon:17:28:17: hero:10:18:0:pierce mon:17:18:17: hero:10:8:0:pierce mon:17:8:17: hero:10:-2:0:pierce+kill"
     },
     {
       monster = "spikeEel",
@@ -33805,7 +34424,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 153,
-      hits = 10
+      hits = 10,
+      log = "hero:6:52:0: mon:17:52:17: hero:6:46:0: mon:17:46:17: hero:6:40:0: mon:17:40:17: hero:6:34:0: mon:17:34:17: hero:6:28:0: mon:17:28:17: hero:6:22:0: mon:17:22:17: hero:6:16:0: mon:17:16:17: hero:6:10:0: mon:17:10:17: hero:6:4:0: mon:17:4:17: hero:6:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33854,7 +34474,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 112,
-      hits = 10
+      hits = 10,
+      log = "hero:6:52:0:first hero:6:46:0: mon:14:46:14: hero:6:40:0: mon:14:40:14: hero:6:34:0: mon:14:34:14: hero:6:28:0: mon:14:28:14: hero:6:22:0: mon:14:22:14: hero:6:16:0: mon:14:16:14: hero:6:10:0: mon:14:10:14: hero:6:4:0: mon:14:4:14: hero:6:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33904,7 +34525,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 112,
-      hits = 10
+      hits = 10,
+      log = "hero:6:52:0:first hero:6:46:0: mon:14:46:14: hero:6:40:0: mon:14:40:14: hero:6:34:0: mon:14:34:14: hero:6:28:0: mon:14:28:14: hero:6:22:0: mon:14:22:14: hero:6:16:0: mon:14:16:14: hero:6:10:0: mon:14:10:14: hero:6:4:0: mon:14:4:14: hero:6:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -33959,7 +34581,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 32,
-      hits = 6
+      hits = 6,
+      log = "hero:6:52:-1:first+drain+corrode hero:7:45:-1:first+drain+corrode hero:8:37:-2:drain+corrode mon:14:34:14:spikes hero:9:25:-2:drain+corrode mon:14:22:14:spikes hero:10:12:-2:drain+corrode mon:14:9:14:spikes hero:11:-2:-2:drain+corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -34009,7 +34632,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 57,
-      hits = 4
+      hits = 4,
+      log = "hero:15:43:0: mon:19:43:19: hero:15:28:0: mon:19:28:19: hero:15:13:0: mon:19:13:19: hero:15:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34058,7 +34682,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 70,
-      hits = 7
+      hits = 7,
+      log = "hero:9:49:-2:drain mon:14:49:14: hero:9:40:-2:drain mon:14:40:14: hero:9:31:-2:drain mon:14:31:14: hero:9:22:-2:drain mon:14:22:14: hero:9:13:-2:drain mon:14:13:14: hero:9:4:-2:drain mon:14:4:14: hero:9:-5:-2:drain+kill"
     },
     {
       monster = "spikeEel",
@@ -34108,7 +34733,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 56,
-      hits = 5
+      hits = 5,
+      log = "hero:13:45:0: mon:14:45:14: hero:13:32:0: mon:14:32:14: hero:13:19:0: mon:14:19:14: hero:13:6:0: mon:14:6:14: hero:13:-7:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34162,7 +34788,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 56,
-      hits = 6
+      hits = 6,
+      log = "hero:9:49:0:first+corrode hero:10:39:0:corrode mon:14:39:14: hero:11:28:0:corrode mon:14:28:14: hero:12:16:0:corrode mon:14:16:14: hero:13:3:0:corrode mon:14:3:14: hero:14:-11:0:corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -34213,7 +34840,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 84,
-      hits = 7
+      hits = 7,
+      log = "hero:9:49:0: mon:14:49:14: hero:9:40:0: mon:14:40:14: hero:9:31:0: mon:14:31:14: hero:9:22:0: mon:14:22:14: hero:9:13:0: mon:14:13:14: hero:9:4:0: mon:14:4:14: hero:9:-5:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34262,7 +34890,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 44,
-      hits = 5
+      hits = 5,
+      log = "hero:12:46:0: mon:11:46:11: hero:12:34:0: mon:11:34:11: hero:12:22:0: mon:11:22:11: hero:12:10:0: mon:11:10:11: hero:12:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34312,7 +34941,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 4
+      hits = 4,
+      log = "hero:12:46:-3:first+drain+corrode hero:13:33:-3:drain+corrode mon:11:30:11:spikes hero:14:16:-3:drain+corrode mon:11:13:11:spikes hero:15:-2:-3:drain+corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -34365,7 +34995,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 33,
-      hits = 5
+      hits = 5,
+      log = "hero:12:46:0:first hero:12:34:0: mon:11:31:11:spikes hero:12:19:0: mon:11:16:11:spikes hero:12:4:0: mon:11:1:11:spikes hero:12:-11:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34417,7 +35048,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 44,
-      hits = 5
+      hits = 5,
+      log = "hero:13:45:0: mon:11:45:11: hero:13:32:0: mon:11:32:11: hero:13:19:0: mon:11:19:11: hero:13:6:0: mon:11:6:11: hero:13:-7:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34467,7 +35099,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 44,
-      hits = 5
+      hits = 5,
+      log = "hero:14:44:0: mon:11:44:11: hero:14:30:0: mon:11:30:11: hero:14:16:0: mon:11:16:11: hero:14:2:0: mon:11:2:11: hero:14:-12:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34516,7 +35149,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 4
+      hits = 4,
+      log = "hero:15:43:0:corrode mon:8:43:8: hero:16:27:0:corrode mon:8:27:8: hero:17:10:0:corrode mon:8:10:8: hero:18:-8:0:corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -34568,7 +35202,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 4
+      hits = 4,
+      log = "hero:15:43:0:first hero:15:28:0:first hero:15:13:0: mon:8:13:8: hero:15:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34621,7 +35256,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 4
+      hits = 4,
+      log = "hero:15:43:0: mon:8:43:8: hero:15:28:0: mon:8:28:8: hero:15:13:0: mon:8:13:8: hero:15:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34671,7 +35307,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 4
+      hits = 4,
+      log = "hero:15:43:0: mon:4:43:4: hero:15:28:0: mon:4:28:4: hero:15:13:0: mon:4:13:4: hero:15:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34720,7 +35357,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:20:38:0: mon:5:35:5:spikes hero:20:15:0: mon:5:12:5:spikes hero:20:-8:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34771,7 +35409,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:20:38:-5:first+drain hero:20:18:-5:drain mon:5:18:5: hero:20:-2:-5:drain+kill"
     },
     {
       monster = "spikeEel",
@@ -34825,7 +35464,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:24:34:0:pierce mon:5:34:5: hero:24:10:0:pierce mon:5:10:5: hero:24:-14:0:pierce+kill"
     },
     {
       monster = "spikeEel",
@@ -34875,7 +35515,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:20:38:0: mon:5:38:5: hero:20:18:0: mon:5:18:5: hero:20:-2:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34924,7 +35565,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:26:32:0:first hero:26:6:0: mon:2:6:2: hero:26:-20:0:kill"
     },
     {
       monster = "spikeEel",
@@ -34974,7 +35616,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 3
+      hits = 3,
+      log = "hero:26:32:0:first hero:26:6:0: mon:2:6:2: hero:26:-20:0:kill"
     },
     {
       monster = "spikeEel",
@@ -35029,7 +35672,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:26:32:-6:first+drain+corrode hero:27:5:-6:first+drain+corrode hero:28:-23:-7:drain+corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -35079,7 +35723,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 7,
-      hits = 2
+      hits = 2,
+      log = "hero:35:23:0: mon:7:23:7: hero:35:-12:0:kill"
     },
     {
       monster = "spikeEel",
@@ -35128,7 +35773,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:34:24:-8:drain mon:0:24:0: hero:34:-10:-8:drain+kill"
     },
     {
       monster = "spikeEel",
@@ -35178,7 +35824,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:38:20:0: mon:0:20:0: hero:38:-18:0:kill"
     },
     {
       monster = "spikeEel",
@@ -35232,7 +35879,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:34:24:0:first+corrode hero:35:-11:0:corrode+kill"
     },
     {
       monster = "spikeEel",
@@ -35283,7 +35931,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:34:24:0: mon:0:24:0: hero:34:-10:0:kill"
     },
     {
       monster = "spikeEel",
@@ -35332,7 +35981,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35382,7 +36032,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35435,7 +36086,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35487,7 +36139,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35537,7 +36190,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35586,7 +36240,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35638,7 +36293,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35691,7 +36347,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35741,7 +36398,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35790,7 +36448,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35841,7 +36500,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35895,7 +36555,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 361,
-      hits = 20
+      hits = 20,
+      log = "hero:4:74:0:pierce mon:19:74:19: hero:4:70:0:pierce mon:19:70:19: hero:4:66:0:pierce mon:19:66:19: hero:4:62:0:pierce mon:19:62:19: hero:4:58:0:pierce mon:19:58:19: hero:4:54:0:pierce mon:19:54:19: hero:4:50:0:pierce mon:19:50:19: hero:4:46:0:pierce mon:19:46:19: hero:4:42:0:pierce mon:19:42:19: hero:4:38:0:pierce mon:19:38:19: hero:4:34:0:pierce mon:19:34:19: hero:4:30:0:pierce mon:19:30:19: hero:4:26:0:pierce mon:19:26:19: hero:4:22:0:pierce mon:19:22:19: hero:4:18:0:pierce mon:19:18:19: hero:4:14:0:pierce mon:19:14:19: hero:4:10:0:pierce mon:19:10:19: hero:4:6:0:pierce mon:19:6:19: hero:4:2:0:pierce mon:19:2:19: hero:4:-2:0:pierce+kill"
     },
     {
       monster = "armorFrog",
@@ -35945,7 +36606,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "armorFrog",
@@ -35994,7 +36656,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 456,
-      hits = 26
+      hits = 26,
+      log = "hero:3:75:0:first hero:3:72:0: mon:19:72:19: hero:3:69:0: mon:19:69:19: hero:3:66:0: mon:19:66:19: hero:3:63:0: mon:19:63:19: hero:3:60:0: mon:19:60:19: hero:3:57:0: mon:19:57:19: hero:3:54:0: mon:19:54:19: hero:3:51:0: mon:19:51:19: hero:3:48:0: mon:19:48:19: hero:3:45:0: mon:19:45:19: hero:3:42:0: mon:19:42:19: hero:3:39:0: mon:19:39:19: hero:3:36:0: mon:19:36:19: hero:3:33:0: mon:19:33:19: hero:3:30:0: mon:19:30:19: hero:3:27:0: mon:19:27:19: hero:3:24:0: mon:19:24:19: hero:3:21:0: mon:19:21:19: hero:3:18:0: mon:19:18:19: hero:3:15:0: mon:19:15:19: hero:3:12:0: mon:19:12:19: hero:3:9:0: mon:19:9:19: hero:3:6:0: mon:19:6:19: hero:3:3:0: mon:19:3:19: hero:3:0:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36044,7 +36707,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 456,
-      hits = 26
+      hits = 26,
+      log = "hero:3:75:0:first hero:3:72:0: mon:19:72:19: hero:3:69:0: mon:19:69:19: hero:3:66:0: mon:19:66:19: hero:3:63:0: mon:19:63:19: hero:3:60:0: mon:19:60:19: hero:3:57:0: mon:19:57:19: hero:3:54:0: mon:19:54:19: hero:3:51:0: mon:19:51:19: hero:3:48:0: mon:19:48:19: hero:3:45:0: mon:19:45:19: hero:3:42:0: mon:19:42:19: hero:3:39:0: mon:19:39:19: hero:3:36:0: mon:19:36:19: hero:3:33:0: mon:19:33:19: hero:3:30:0: mon:19:30:19: hero:3:27:0: mon:19:27:19: hero:3:24:0: mon:19:24:19: hero:3:21:0: mon:19:21:19: hero:3:18:0: mon:19:18:19: hero:3:15:0: mon:19:15:19: hero:3:12:0: mon:19:12:19: hero:3:9:0: mon:19:9:19: hero:3:6:0: mon:19:6:19: hero:3:3:0: mon:19:3:19: hero:3:0:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36099,7 +36763,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 102,
-      hits = 9
+      hits = 9,
+      log = "hero:3:75:0:first+corrode hero:4:71:-1:first+drain+corrode hero:5:66:-1:drain+corrode mon:19:63:19:spikes hero:6:57:-1:drain+corrode mon:19:54:19:spikes hero:7:47:-1:drain+corrode mon:19:44:19:spikes hero:8:36:-2:drain+corrode mon:19:33:19:spikes hero:9:24:-2:drain+corrode mon:19:21:19:spikes hero:10:11:-2:drain+corrode mon:19:8:19:spikes hero:11:-3:-2:drain+corrode+kill"
     },
     {
       monster = "armorFrog",
@@ -36149,7 +36814,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 7
+      hits = 7,
+      log = "hero:12:66:0: mon:24:66:24: hero:12:54:0: mon:24:54:24: hero:12:42:0: mon:24:42:24: hero:12:30:0: mon:24:30:24: hero:12:18:0: mon:24:18:24: hero:12:6:0: mon:24:6:24: hero:12:-6:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36198,7 +36864,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 400,
-      hits = 26
+      hits = 26,
+      log = "hero:3:75:0: mon:16:75:16: hero:3:72:0: mon:16:72:16: hero:3:69:0: mon:16:69:16: hero:3:66:0: mon:16:66:16: hero:3:63:0: mon:16:63:16: hero:3:60:0: mon:16:60:16: hero:3:57:0: mon:16:57:16: hero:3:54:0: mon:16:54:16: hero:3:51:0: mon:16:51:16: hero:3:48:0: mon:16:48:16: hero:3:45:0: mon:16:45:16: hero:3:42:0: mon:16:42:16: hero:3:39:0: mon:16:39:16: hero:3:36:0: mon:16:36:16: hero:3:33:0: mon:16:33:16: hero:3:30:0: mon:16:30:16: hero:3:27:0: mon:16:27:16: hero:3:24:0: mon:16:24:16: hero:3:21:0: mon:16:21:16: hero:3:18:0: mon:16:18:16: hero:3:15:0: mon:16:15:16: hero:3:12:0: mon:16:12:16: hero:3:9:0: mon:16:9:16: hero:3:6:0: mon:16:6:16: hero:3:3:0: mon:16:3:16: hero:3:0:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36248,7 +36915,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 176,
-      hits = 12
+      hits = 12,
+      log = "hero:7:71:0: mon:16:71:16: hero:7:64:0: mon:16:64:16: hero:7:57:0: mon:16:57:16: hero:7:50:0: mon:16:50:16: hero:7:43:0: mon:16:43:16: hero:7:36:0: mon:16:36:16: hero:7:29:0: mon:16:29:16: hero:7:22:0: mon:16:22:16: hero:7:15:0: mon:16:15:16: hero:7:8:0: mon:16:8:16: hero:7:1:0: mon:16:1:16: hero:7:-6:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36302,7 +36970,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 11
+      hits = 11,
+      log = "hero:3:75:0:first+corrode hero:4:71:0:corrode mon:16:71:16: hero:5:66:0:corrode mon:16:66:16: hero:6:60:0:corrode mon:16:60:16: hero:7:53:0:corrode mon:16:53:16: hero:8:45:0:corrode mon:16:45:16: hero:9:36:0:corrode mon:16:36:16: hero:10:26:0:corrode mon:16:26:16: hero:11:15:0:corrode mon:16:15:16: hero:12:3:0:corrode mon:16:3:16: hero:13:-10:0:corrode+kill"
     },
     {
       monster = "armorFrog",
@@ -36353,7 +37022,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 400,
-      hits = 26
+      hits = 26,
+      log = "hero:3:75:0: mon:16:75:16: hero:3:72:0: mon:16:72:16: hero:3:69:0: mon:16:69:16: hero:3:66:0: mon:16:66:16: hero:3:63:0: mon:16:63:16: hero:3:60:0: mon:16:60:16: hero:3:57:0: mon:16:57:16: hero:3:54:0: mon:16:54:16: hero:3:51:0: mon:16:51:16: hero:3:48:0: mon:16:48:16: hero:3:45:0: mon:16:45:16: hero:3:42:0: mon:16:42:16: hero:3:39:0: mon:16:39:16: hero:3:36:0: mon:16:36:16: hero:3:33:0: mon:16:33:16: hero:3:30:0: mon:16:30:16: hero:3:27:0: mon:16:27:16: hero:3:24:0: mon:16:24:16: hero:3:21:0: mon:16:21:16: hero:3:18:0: mon:16:18:16: hero:3:15:0: mon:16:15:16: hero:3:12:0: mon:16:12:16: hero:3:9:0: mon:16:9:16: hero:3:6:0: mon:16:6:16: hero:3:3:0: mon:16:3:16: hero:3:0:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36402,7 +37072,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 192,
-      hits = 13
+      hits = 13,
+      log = "hero:6:72:0: mon:16:72:16: hero:6:66:0: mon:16:66:16: hero:6:60:0: mon:16:60:16: hero:6:54:0: mon:16:54:16: hero:6:48:0: mon:16:48:16: hero:6:42:0: mon:16:42:16: hero:6:36:0: mon:16:36:16: hero:6:30:0: mon:16:30:16: hero:6:24:0: mon:16:24:16: hero:6:18:0: mon:16:18:16: hero:6:12:0: mon:16:12:16: hero:6:6:0: mon:16:6:16: hero:6:0:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36452,7 +37123,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 67,
-      hits = 7
+      hits = 7,
+      log = "hero:6:72:-1:first+drain+corrode hero:7:65:-1:drain+corrode mon:16:62:16:spikes hero:8:54:-2:drain+corrode mon:16:51:16:spikes hero:9:42:-2:drain+corrode mon:16:39:16:spikes hero:10:29:-2:drain+corrode mon:16:26:16:spikes hero:11:15:-2:drain+corrode mon:16:12:16:spikes hero:12:0:-3:drain+corrode+kill"
     },
     {
       monster = "armorFrog",
@@ -36505,7 +37177,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 128,
-      hits = 9
+      hits = 9,
+      log = "hero:6:72:0:first hero:6:66:0: mon:16:63:16:spikes hero:6:57:0: mon:16:54:16:spikes hero:6:48:0: mon:16:45:16:spikes hero:6:39:0: mon:16:36:16:spikes hero:6:30:0: mon:16:27:16:spikes hero:6:21:0: mon:16:18:16:spikes hero:6:12:0: mon:16:9:16:spikes hero:6:3:0: mon:16:0:16:spikes+kill"
     },
     {
       monster = "armorFrog",
@@ -36557,7 +37230,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 176,
-      hits = 12
+      hits = 12,
+      log = "hero:7:71:0: mon:16:71:16: hero:7:64:0: mon:16:64:16: hero:7:57:0: mon:16:57:16: hero:7:50:0: mon:16:50:16: hero:7:43:0: mon:16:43:16: hero:7:36:0: mon:16:36:16: hero:7:29:0: mon:16:29:16: hero:7:22:0: mon:16:22:16: hero:7:15:0: mon:16:15:16: hero:7:8:0: mon:16:8:16: hero:7:1:0: mon:16:1:16: hero:7:-6:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36607,7 +37281,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 10
+      hits = 10,
+      log = "hero:8:70:0: mon:16:70:16: hero:8:62:0: mon:16:62:16: hero:8:54:0: mon:16:54:16: hero:8:46:0: mon:16:46:16: hero:8:38:0: mon:16:38:16: hero:8:30:0: mon:16:30:16: hero:8:22:0: mon:16:22:16: hero:8:14:0: mon:16:14:16: hero:8:6:0: mon:16:6:16: hero:8:-2:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36656,7 +37331,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 78,
-      hits = 7
+      hits = 7,
+      log = "hero:9:69:0:corrode mon:13:69:13: hero:10:59:0:corrode mon:13:59:13: hero:11:48:0:corrode mon:13:48:13: hero:12:36:0:corrode mon:13:36:13: hero:13:23:0:corrode mon:13:23:13: hero:14:9:0:corrode mon:13:9:13: hero:15:-6:0:corrode+kill"
     },
     {
       monster = "armorFrog",
@@ -36708,7 +37384,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 78,
-      hits = 9
+      hits = 9,
+      log = "hero:9:69:0:first hero:9:60:0:first hero:9:51:0: mon:13:51:13: hero:9:42:0: mon:13:42:13: hero:9:33:0: mon:13:33:13: hero:9:24:0: mon:13:24:13: hero:9:15:0: mon:13:15:13: hero:9:6:0: mon:13:6:13: hero:9:-3:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36761,7 +37438,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 104,
-      hits = 9
+      hits = 9,
+      log = "hero:9:69:0: mon:13:69:13: hero:9:60:0: mon:13:60:13: hero:9:51:0: mon:13:51:13: hero:9:42:0: mon:13:42:13: hero:9:33:0: mon:13:33:13: hero:9:24:0: mon:13:24:13: hero:9:15:0: mon:13:15:13: hero:9:6:0: mon:13:6:13: hero:9:-3:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36811,7 +37489,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 72,
-      hits = 9
+      hits = 9,
+      log = "hero:9:69:0: mon:9:69:9: hero:9:60:0: mon:9:60:9: hero:9:51:0: mon:9:51:9: hero:9:42:0: mon:9:42:9: hero:9:33:0: mon:9:33:9: hero:9:24:0: mon:9:24:9: hero:9:15:0: mon:9:15:9: hero:9:6:0: mon:9:6:9: hero:9:-3:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36860,7 +37539,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 50,
-      hits = 6
+      hits = 6,
+      log = "hero:12:66:0: mon:10:63:10:spikes hero:12:51:0: mon:10:48:10:spikes hero:12:36:0: mon:10:33:10:spikes hero:12:21:0: mon:10:18:10:spikes hero:12:6:0: mon:10:3:10:spikes hero:12:-9:0:kill"
     },
     {
       monster = "armorFrog",
@@ -36911,7 +37591,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 29,
-      hits = 7
+      hits = 7,
+      log = "hero:12:66:-3:first+drain hero:12:54:-3:drain mon:10:54:10: hero:12:42:-3:drain mon:10:42:10: hero:12:30:-3:drain mon:10:30:10: hero:12:18:-3:drain mon:10:18:10: hero:12:6:-3:drain mon:10:6:10: hero:12:-6:-3:drain+kill"
     },
     {
       monster = "armorFrog",
@@ -36965,7 +37646,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 40,
-      hits = 5
+      hits = 5,
+      log = "hero:16:62:0:pierce mon:10:62:10: hero:16:46:0:pierce mon:10:46:10: hero:16:30:0:pierce mon:10:30:10: hero:16:14:0:pierce mon:10:14:10: hero:16:-2:0:pierce+kill"
     },
     {
       monster = "armorFrog",
@@ -37015,7 +37697,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 60,
-      hits = 7
+      hits = 7,
+      log = "hero:12:66:0: mon:10:66:10: hero:12:54:0: mon:10:54:10: hero:12:42:0: mon:10:42:10: hero:12:30:0: mon:10:30:10: hero:12:18:0: mon:10:18:10: hero:12:6:0: mon:10:6:10: hero:12:-6:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37064,7 +37747,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 21,
-      hits = 5
+      hits = 5,
+      log = "hero:17:61:0:first hero:17:44:0: mon:7:44:7: hero:17:27:0: mon:7:27:7: hero:17:10:0: mon:7:10:7: hero:17:-7:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37114,7 +37798,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 21,
-      hits = 5
+      hits = 5,
+      log = "hero:17:61:0:first hero:17:44:0: mon:7:44:7: hero:17:27:0: mon:7:27:7: hero:17:10:0: mon:7:10:7: hero:17:-7:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37169,7 +37854,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:17:61:-4:first+drain+corrode hero:18:43:-4:first+drain+corrode hero:19:24:-4:drain+corrode mon:7:21:7:spikes hero:20:1:-5:drain+corrode mon:7:-2:7:spikes+kill"
     },
     {
       monster = "armorFrog",
@@ -37219,7 +37905,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 3
+      hits = 3,
+      log = "hero:26:52:0: mon:12:52:12: hero:26:26:0: mon:12:26:12: hero:26:0:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37268,7 +37955,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:23:55:-5:drain mon:4:55:4: hero:23:32:-5:drain mon:4:32:4: hero:23:9:-5:drain mon:4:9:4: hero:23:-14:-5:drain+kill"
     },
     {
       monster = "armorFrog",
@@ -37318,7 +38006,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 3
+      hits = 3,
+      log = "hero:27:51:0: mon:4:51:4: hero:27:24:0: mon:4:24:4: hero:27:-3:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37372,7 +38061,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 4
+      hits = 4,
+      log = "hero:23:55:0:first+corrode hero:24:31:0:corrode mon:4:31:4: hero:25:6:0:corrode mon:4:6:4: hero:26:-20:0:corrode+kill"
     },
     {
       monster = "armorFrog",
@@ -37423,7 +38113,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 4
+      hits = 4,
+      log = "hero:23:55:0: mon:4:55:4: hero:23:32:0: mon:4:32:4: hero:23:9:0: mon:4:9:4: hero:23:-14:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37472,7 +38163,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:31:47:0: mon:0:47:0: hero:31:16:0: mon:0:16:0: hero:31:-15:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37522,7 +38214,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:31:47:-7:first+drain+corrode hero:32:15:-8:drain+corrode mon:0:12:0:spikes hero:33:-21:-8:drain+corrode+kill"
     },
     {
       monster = "armorFrog",
@@ -37575,7 +38268,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:31:47:0:first hero:31:16:0: mon:0:13:0:spikes hero:31:-18:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37627,7 +38321,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:32:46:0: mon:0:46:0: hero:32:14:0: mon:0:14:0: hero:32:-18:0:kill"
     },
     {
       monster = "armorFrog",
@@ -37677,7 +38372,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:33:45:0: mon:0:45:0: hero:33:12:0: mon:0:12:0: hero:33:-21:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -37726,7 +38422,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -37778,7 +38475,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -37831,7 +38529,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -37881,7 +38580,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -37930,7 +38630,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -37981,7 +38682,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38035,7 +38737,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38085,7 +38788,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38134,7 +38838,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38184,7 +38889,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38239,7 +38945,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38289,7 +38996,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 340,
-      hits = 18
+      hits = 18,
+      log = "hero:3:49:0: mon:20:49:20: hero:3:46:0: mon:20:46:20: hero:3:43:0: mon:20:43:20: hero:3:40:0: mon:20:40:20: hero:3:37:0: mon:20:37:20: hero:3:34:0: mon:20:34:20: hero:3:31:0: mon:20:31:20: hero:3:28:0: mon:20:28:20: hero:3:25:0: mon:20:25:20: hero:3:22:0: mon:20:22:20: hero:3:19:0: mon:20:19:20: hero:3:16:0: mon:20:16:20: hero:3:13:0: mon:20:13:20: hero:3:10:0: mon:20:10:20: hero:3:7:0: mon:20:7:20: hero:3:4:0: mon:20:4:20: hero:3:1:0: mon:20:1:20: hero:3:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -38338,7 +39046,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38442,7 +39151,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38493,7 +39203,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38542,7 +39253,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38592,7 +39304,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38645,7 +39358,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38697,7 +39411,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38747,7 +39462,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38796,7 +39512,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38848,7 +39565,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38901,7 +39619,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -38951,7 +39670,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "ironBeetle",
@@ -39000,7 +39720,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 81,
-      hits = 9
+      hits = 9,
+      log = "hero:3:49:0: mon:9:46:9:spikes hero:3:43:0: mon:9:40:9:spikes hero:3:37:0: mon:9:34:9:spikes hero:3:31:0: mon:9:28:9:spikes hero:3:25:0: mon:9:22:9:spikes hero:3:19:0: mon:9:16:9:spikes hero:3:13:0: mon:9:10:9:spikes hero:3:7:0: mon:9:4:9:spikes hero:3:1:0: mon:9:-2:9:spikes+kill"
     },
     {
       monster = "ironBeetle",
@@ -39051,7 +39772,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 18
+      hits = 18,
+      log = "hero:3:49:0:first hero:3:46:0: mon:9:46:9: hero:3:43:0: mon:9:43:9: hero:3:40:0: mon:9:40:9: hero:3:37:0: mon:9:37:9: hero:3:34:0: mon:9:34:9: hero:3:31:0: mon:9:31:9: hero:3:28:0: mon:9:28:9: hero:3:25:0: mon:9:25:9: hero:3:22:0: mon:9:22:9: hero:3:19:0: mon:9:19:9: hero:3:16:0: mon:9:16:9: hero:3:13:0: mon:9:13:9: hero:3:10:0: mon:9:10:9: hero:3:7:0: mon:9:7:9: hero:3:4:0: mon:9:4:9: hero:3:1:0: mon:9:1:9: hero:3:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39105,7 +39827,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 63,
-      hits = 8
+      hits = 8,
+      log = "hero:7:45:0:pierce mon:9:45:9: hero:7:38:0:pierce mon:9:38:9: hero:7:31:0:pierce mon:9:31:9: hero:7:24:0:pierce mon:9:24:9: hero:7:17:0:pierce mon:9:17:9: hero:7:10:0:pierce mon:9:10:9: hero:7:3:0:pierce mon:9:3:9: hero:7:-4:0:pierce+kill"
     },
     {
       monster = "ironBeetle",
@@ -39155,7 +39878,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 153,
-      hits = 18
+      hits = 18,
+      log = "hero:3:49:0: mon:9:49:9: hero:3:46:0: mon:9:46:9: hero:3:43:0: mon:9:43:9: hero:3:40:0: mon:9:40:9: hero:3:37:0: mon:9:37:9: hero:3:34:0: mon:9:34:9: hero:3:31:0: mon:9:31:9: hero:3:28:0: mon:9:28:9: hero:3:25:0: mon:9:25:9: hero:3:22:0: mon:9:22:9: hero:3:19:0: mon:9:19:9: hero:3:16:0: mon:9:16:9: hero:3:13:0: mon:9:13:9: hero:3:10:0: mon:9:10:9: hero:3:7:0: mon:9:7:9: hero:3:4:0: mon:9:4:9: hero:3:1:0: mon:9:1:9: hero:3:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39204,7 +39928,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 42,
-      hits = 9
+      hits = 9,
+      log = "hero:6:46:0:first hero:6:40:0: mon:6:40:6: hero:6:34:0: mon:6:34:6: hero:6:28:0: mon:6:28:6: hero:6:22:0: mon:6:22:6: hero:6:16:0: mon:6:16:6: hero:6:10:0: mon:6:10:6: hero:6:4:0: mon:6:4:6: hero:6:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39254,7 +39979,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 42,
-      hits = 9
+      hits = 9,
+      log = "hero:6:46:0:first hero:6:40:0: mon:6:40:6: hero:6:34:0: mon:6:34:6: hero:6:28:0: mon:6:28:6: hero:6:22:0: mon:6:22:6: hero:6:16:0: mon:6:16:6: hero:6:10:0: mon:6:10:6: hero:6:4:0: mon:6:4:6: hero:6:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39309,7 +40035,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 8,
-      hits = 6
+      hits = 6,
+      log = "hero:6:46:-1:first+drain+corrode hero:7:39:-1:first+drain+corrode hero:8:31:-2:drain+corrode mon:6:28:6:spikes hero:9:19:-2:drain+corrode mon:6:16:6:spikes hero:10:6:-2:drain+corrode mon:6:3:6:spikes hero:11:-8:-2:drain+corrode+kill"
     },
     {
       monster = "ironBeetle",
@@ -39359,7 +40086,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 33,
-      hits = 4
+      hits = 4,
+      log = "hero:15:37:0: mon:11:37:11: hero:15:22:0: mon:11:22:11: hero:15:7:0: mon:11:7:11: hero:15:-8:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39408,7 +40136,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 5
+      hits = 5,
+      log = "hero:11:41:-2:drain mon:3:41:3: hero:11:30:-2:drain mon:3:30:3: hero:11:19:-2:drain mon:3:19:3: hero:11:8:-2:drain mon:3:8:3: hero:11:-3:-2:drain+kill"
     },
     {
       monster = "ironBeetle",
@@ -39458,7 +40187,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 4
+      hits = 4,
+      log = "hero:15:37:0: mon:3:37:3: hero:15:22:0: mon:3:22:3: hero:15:7:0: mon:3:7:3: hero:15:-8:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39512,7 +40242,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 9,
-      hits = 5
+      hits = 5,
+      log = "hero:11:41:0:first+corrode hero:12:29:0:corrode mon:3:29:3: hero:13:16:0:corrode mon:3:16:3: hero:14:2:0:corrode mon:3:2:3: hero:15:-13:0:corrode+kill"
     },
     {
       monster = "ironBeetle",
@@ -39563,7 +40294,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 12,
-      hits = 5
+      hits = 5,
+      log = "hero:11:41:0: mon:3:41:3: hero:11:30:0: mon:3:30:3: hero:11:19:0: mon:3:19:3: hero:11:8:0: mon:3:8:3: hero:11:-3:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39612,7 +40344,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:17:35:0: mon:0:35:0: hero:17:18:0: mon:0:18:0: hero:17:1:0: mon:0:1:0: hero:17:-16:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39662,7 +40395,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:17:35:-4:first+drain+corrode hero:18:17:-4:drain+corrode mon:0:14:0:spikes hero:19:-5:-4:drain+corrode+kill"
     },
     {
       monster = "ironBeetle",
@@ -39715,7 +40449,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:17:35:0:first hero:17:18:0: mon:0:15:0:spikes hero:17:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39767,7 +40502,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:18:34:0: mon:0:34:0: hero:18:16:0: mon:0:16:0: hero:18:-2:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39817,7 +40553,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:19:33:0: mon:0:33:0: hero:19:14:0: mon:0:14:0: hero:19:-5:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39866,7 +40603,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:25:27:0:corrode mon:0:27:0: hero:26:1:0:corrode mon:0:1:0: hero:27:-26:0:corrode+kill"
     },
     {
       monster = "ironBeetle",
@@ -39918,7 +40656,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:25:27:0:first hero:25:2:0:first hero:25:-23:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -39971,7 +40710,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:25:27:0: mon:0:27:0: hero:25:2:0: mon:0:2:0: hero:25:-23:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -40021,7 +40761,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:25:27:0: mon:0:27:0: hero:25:2:0: mon:0:2:0: hero:25:-23:0:kill"
     },
     {
       monster = "ironBeetle",
@@ -40070,7 +40811,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shriekBat",
@@ -40121,7 +40863,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shriekBat",
@@ -40175,7 +40918,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 375,
-      hits = 15
+      hits = 15,
+      log = "mon:25:45:25:first hero:3:42:0:pierce mon:25:42:25: hero:3:39:0:pierce mon:25:39:25: hero:3:36:0:pierce mon:25:36:25: hero:3:33:0:pierce mon:25:33:25: hero:3:30:0:pierce mon:25:30:25: hero:3:27:0:pierce mon:25:27:25: hero:3:24:0:pierce mon:25:24:25: hero:3:21:0:pierce mon:25:21:25: hero:3:18:0:pierce mon:25:18:25: hero:3:15:0:pierce mon:25:15:25: hero:3:12:0:pierce mon:25:12:25: hero:3:9:0:pierce mon:25:9:25: hero:3:6:0:pierce mon:25:6:25: hero:3:3:0:pierce mon:25:3:25: hero:3:0:0:pierce+kill"
     },
     {
       monster = "shriekBat",
@@ -40225,7 +40969,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shriekBat",
@@ -40274,7 +41019,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 550,
-      hits = 23
+      hits = 23,
+      log = "hero:2:43:0:first mon:25:43:25:first hero:2:41:0: mon:25:41:25: hero:2:39:0: mon:25:39:25: hero:2:37:0: mon:25:37:25: hero:2:35:0: mon:25:35:25: hero:2:33:0: mon:25:33:25: hero:2:31:0: mon:25:31:25: hero:2:29:0: mon:25:29:25: hero:2:27:0: mon:25:27:25: hero:2:25:0: mon:25:25:25: hero:2:23:0: mon:25:23:25: hero:2:21:0: mon:25:21:25: hero:2:19:0: mon:25:19:25: hero:2:17:0: mon:25:17:25: hero:2:15:0: mon:25:15:25: hero:2:13:0: mon:25:13:25: hero:2:11:0: mon:25:11:25: hero:2:9:0: mon:25:9:25: hero:2:7:0: mon:25:7:25: hero:2:5:0: mon:25:5:25: hero:2:3:0: mon:25:3:25: hero:2:1:0: mon:25:1:25: hero:2:-1:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40324,7 +41070,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 550,
-      hits = 23
+      hits = 23,
+      log = "hero:2:43:0:first mon:25:43:25:first hero:2:41:0: mon:25:41:25: hero:2:39:0: mon:25:39:25: hero:2:37:0: mon:25:37:25: hero:2:35:0: mon:25:35:25: hero:2:33:0: mon:25:33:25: hero:2:31:0: mon:25:31:25: hero:2:29:0: mon:25:29:25: hero:2:27:0: mon:25:27:25: hero:2:25:0: mon:25:25:25: hero:2:23:0: mon:25:23:25: hero:2:21:0: mon:25:21:25: hero:2:19:0: mon:25:19:25: hero:2:17:0: mon:25:17:25: hero:2:15:0: mon:25:15:25: hero:2:13:0: mon:25:13:25: hero:2:11:0: mon:25:11:25: hero:2:9:0: mon:25:9:25: hero:2:7:0: mon:25:7:25: hero:2:5:0: mon:25:5:25: hero:2:3:0: mon:25:3:25: hero:2:1:0: mon:25:1:25: hero:2:-1:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40379,7 +41126,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 119,
-      hits = 7
+      hits = 7,
+      log = "hero:2:43:0:first+corrode hero:3:40:0:first+corrode mon:25:37:25:first+spikes hero:4:33:-1:drain+corrode mon:25:30:25:spikes hero:5:25:-1:drain+corrode mon:25:22:25:spikes hero:6:16:-1:drain+corrode mon:25:13:25:spikes hero:7:6:-1:drain+corrode mon:25:3:25:spikes hero:8:-5:-2:drain+corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -40429,7 +41177,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 150,
-      hits = 5
+      hits = 5,
+      log = "mon:30:45:30:first hero:11:34:0: mon:30:34:30: hero:11:23:0: mon:30:23:30: hero:11:12:0: mon:30:12:30: hero:11:1:0: mon:30:1:30: hero:11:-10:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40478,7 +41227,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 506,
-      hits = 23
+      hits = 23,
+      log = "mon:22:45:22:first hero:2:43:0: mon:22:43:22: hero:2:41:0: mon:22:41:22: hero:2:39:0: mon:22:39:22: hero:2:37:0: mon:22:37:22: hero:2:35:0: mon:22:35:22: hero:2:33:0: mon:22:33:22: hero:2:31:0: mon:22:31:22: hero:2:29:0: mon:22:29:22: hero:2:27:0: mon:22:27:22: hero:2:25:0: mon:22:25:22: hero:2:23:0: mon:22:23:22: hero:2:21:0: mon:22:21:22: hero:2:19:0: mon:22:19:22: hero:2:17:0: mon:22:17:22: hero:2:15:0: mon:22:15:22: hero:2:13:0: mon:22:13:22: hero:2:11:0: mon:22:11:22: hero:2:9:0: mon:22:9:22: hero:2:7:0: mon:22:7:22: hero:2:5:0: mon:22:5:22: hero:2:3:0: mon:22:3:22: hero:2:1:0: mon:22:1:22: hero:2:-1:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40528,7 +41278,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 176,
-      hits = 8
+      hits = 8,
+      log = "mon:22:45:22:first hero:6:39:0: mon:22:39:22: hero:6:33:0: mon:22:33:22: hero:6:27:0: mon:22:27:22: hero:6:21:0: mon:22:21:22: hero:6:15:0: mon:22:15:22: hero:6:9:0: mon:22:9:22: hero:6:3:0: mon:22:3:22: hero:6:-3:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40582,7 +41333,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 176,
-      hits = 9
+      hits = 9,
+      log = "hero:2:43:0:first+corrode mon:22:43:22:first hero:3:40:0:corrode mon:22:40:22: hero:4:36:0:corrode mon:22:36:22: hero:5:31:0:corrode mon:22:31:22: hero:6:25:0:corrode mon:22:25:22: hero:7:18:0:corrode mon:22:18:22: hero:8:10:0:corrode mon:22:10:22: hero:9:1:0:corrode mon:22:1:22: hero:10:-9:0:corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -40633,7 +41385,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 506,
-      hits = 23
+      hits = 23,
+      log = "mon:22:45:22:first hero:2:43:0: mon:22:43:22: hero:2:41:0: mon:22:41:22: hero:2:39:0: mon:22:39:22: hero:2:37:0: mon:22:37:22: hero:2:35:0: mon:22:35:22: hero:2:33:0: mon:22:33:22: hero:2:31:0: mon:22:31:22: hero:2:29:0: mon:22:29:22: hero:2:27:0: mon:22:27:22: hero:2:25:0: mon:22:25:22: hero:2:23:0: mon:22:23:22: hero:2:21:0: mon:22:21:22: hero:2:19:0: mon:22:19:22: hero:2:17:0: mon:22:17:22: hero:2:15:0: mon:22:15:22: hero:2:13:0: mon:22:13:22: hero:2:11:0: mon:22:11:22: hero:2:9:0: mon:22:9:22: hero:2:7:0: mon:22:7:22: hero:2:5:0: mon:22:5:22: hero:2:3:0: mon:22:3:22: hero:2:1:0: mon:22:1:22: hero:2:-1:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40682,7 +41435,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 198,
-      hits = 9
+      hits = 9,
+      log = "mon:22:45:22:first hero:5:40:0: mon:22:40:22: hero:5:35:0: mon:22:35:22: hero:5:30:0: mon:22:30:22: hero:5:25:0: mon:22:25:22: hero:5:20:0: mon:22:20:22: hero:5:15:0: mon:22:15:22: hero:5:10:0: mon:22:10:22: hero:5:5:0: mon:22:5:22: hero:5:0:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40732,7 +41486,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 81,
-      hits = 5
+      hits = 5,
+      log = "hero:5:40:-1:first+drain+corrode mon:22:37:22:first+spikes hero:6:31:-1:drain+corrode mon:22:28:22:spikes hero:7:21:-1:drain+corrode mon:22:18:22:spikes hero:8:10:-2:drain+corrode mon:22:7:22:spikes hero:9:-2:-2:drain+corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -40785,7 +41540,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 110,
-      hits = 6
+      hits = 6,
+      log = "hero:5:40:0:first mon:22:37:22:first+spikes hero:5:32:0: mon:22:29:22:spikes hero:5:24:0: mon:22:21:22:spikes hero:5:16:0: mon:22:13:22:spikes hero:5:8:0: mon:22:5:22:spikes hero:5:0:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40837,7 +41593,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 154,
-      hits = 8
+      hits = 8,
+      log = "hero:6:39:0: mon:22:39:22: hero:6:33:0: mon:22:33:22: hero:6:27:0: mon:22:27:22: hero:6:21:0: mon:22:21:22: hero:6:15:0: mon:22:15:22: hero:6:9:0: mon:22:9:22: hero:6:3:0: mon:22:3:22: hero:6:-3:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40887,7 +41644,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 154,
-      hits = 7
+      hits = 7,
+      log = "mon:22:45:22:first hero:7:38:0: mon:22:38:22: hero:7:31:0: mon:22:31:22: hero:7:24:0: mon:22:24:22: hero:7:17:0: mon:22:17:22: hero:7:10:0: mon:22:10:22: hero:7:3:0: mon:22:3:22: hero:7:-4:0:kill"
     },
     {
       monster = "shriekBat",
@@ -40936,7 +41694,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 114,
-      hits = 6
+      hits = 6,
+      log = "mon:19:45:19:first hero:5:40:0:corrode mon:19:40:19: hero:6:34:0:corrode mon:19:34:19: hero:7:27:0:corrode mon:19:27:19: hero:8:19:0:corrode mon:19:19:19: hero:9:10:0:corrode mon:19:10:19: hero:10:0:0:corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -40988,7 +41747,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 133,
-      hits = 9
+      hits = 9,
+      log = "hero:5:40:0:first hero:5:35:0:first mon:19:35:19:first hero:5:30:0: mon:19:30:19: hero:5:25:0: mon:19:25:19: hero:5:20:0: mon:19:20:19: hero:5:15:0: mon:19:15:19: hero:5:10:0: mon:19:10:19: hero:5:5:0: mon:19:5:19: hero:5:0:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41041,7 +41801,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 171,
-      hits = 9
+      hits = 9,
+      log = "mon:19:45:19:first hero:5:40:0: mon:19:40:19: hero:5:35:0: mon:19:35:19: hero:5:30:0: mon:19:30:19: hero:5:25:0: mon:19:25:19: hero:5:20:0: mon:19:20:19: hero:5:15:0: mon:19:15:19: hero:5:10:0: mon:19:10:19: hero:5:5:0: mon:19:5:19: hero:5:0:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41091,7 +41852,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 135,
-      hits = 9
+      hits = 9,
+      log = "mon:15:45:15:first hero:5:40:0: mon:15:40:15: hero:5:35:0: mon:15:35:15: hero:5:30:0: mon:15:30:15: hero:5:25:0: mon:15:25:15: hero:5:20:0: mon:15:20:15: hero:5:15:0: mon:15:15:15: hero:5:10:0: mon:15:10:15: hero:5:5:0: mon:15:5:15: hero:5:0:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41140,7 +41902,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 95,
-      hits = 4
+      hits = 4,
+      log = "mon:19:42:19:first+spikes hero:8:34:0: mon:19:31:19:spikes hero:8:23:0: mon:19:20:19:spikes hero:8:12:0: mon:19:9:19:spikes hero:8:1:0: mon:19:-2:19:spikes+kill"
     },
     {
       monster = "shriekBat",
@@ -41191,7 +41954,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 83,
-      hits = 6
+      hits = 6,
+      log = "hero:8:37:-2:first+drain mon:19:37:19:first hero:8:29:-2:drain mon:19:29:19: hero:8:21:-2:drain mon:19:21:19: hero:8:13:-2:drain mon:19:13:19: hero:8:5:-2:drain mon:19:5:19: hero:8:-3:-2:drain+kill"
     },
     {
       monster = "shriekBat",
@@ -41245,7 +42009,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 76,
-      hits = 4
+      hits = 4,
+      log = "mon:19:45:19:first hero:12:33:0:pierce mon:19:33:19: hero:12:21:0:pierce mon:19:21:19: hero:12:9:0:pierce mon:19:9:19: hero:12:-3:0:pierce+kill"
     },
     {
       monster = "shriekBat",
@@ -41295,7 +42060,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 114,
-      hits = 6
+      hits = 6,
+      log = "mon:19:45:19:first hero:8:37:0: mon:19:37:19: hero:8:29:0: mon:19:29:19: hero:8:21:0: mon:19:21:19: hero:8:13:0: mon:19:13:19: hero:8:5:0: mon:19:5:19: hero:8:-3:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41344,7 +42110,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 64,
-      hits = 5
+      hits = 5,
+      log = "hero:11:34:0:first mon:16:34:16:first hero:11:23:0: mon:16:23:16: hero:11:12:0: mon:16:12:16: hero:11:1:0: mon:16:1:16: hero:11:-10:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41394,7 +42161,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 64,
-      hits = 5
+      hits = 5,
+      log = "hero:11:34:0:first mon:16:34:16:first hero:11:23:0: mon:16:23:16: hero:11:12:0: mon:16:12:16: hero:11:1:0: mon:16:1:16: hero:11:-10:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41449,7 +42217,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 21,
-      hits = 4
+      hits = 4,
+      log = "hero:11:34:-2:first+drain+corrode hero:12:22:-3:first+drain+corrode mon:16:19:16:first+spikes hero:13:6:-3:drain+corrode mon:16:3:16:spikes hero:14:-11:-3:drain+corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -41499,7 +42268,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 63,
-      hits = 3
+      hits = 3,
+      log = "mon:21:45:21:first hero:20:25:0: mon:21:25:21: hero:20:5:0: mon:21:5:21: hero:20:-15:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41548,7 +42318,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 40,
-      hits = 4
+      hits = 4,
+      log = "mon:13:45:13:first hero:14:31:-3:drain mon:13:31:13: hero:14:17:-3:drain mon:13:17:13: hero:14:3:-3:drain mon:13:3:13: hero:14:-11:-3:drain+kill"
     },
     {
       monster = "shriekBat",
@@ -41598,7 +42369,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 39,
-      hits = 3
+      hits = 3,
+      log = "mon:13:45:13:first hero:18:27:0: mon:13:27:13: hero:18:9:0: mon:13:9:13: hero:18:-9:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41652,7 +42424,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 26,
-      hits = 3
+      hits = 3,
+      log = "hero:14:31:0:first+corrode mon:13:31:13:first hero:15:16:0:corrode mon:13:16:13: hero:16:0:0:corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -41703,7 +42476,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 52,
-      hits = 4
+      hits = 4,
+      log = "mon:13:45:13:first hero:14:31:0: mon:13:31:13: hero:14:17:0: mon:13:17:13: hero:14:3:0: mon:13:3:13: hero:14:-11:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41752,7 +42526,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 3
+      hits = 3,
+      log = "mon:10:45:10:first hero:19:26:0: mon:10:26:10: hero:19:7:0: mon:10:7:10: hero:19:-12:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41802,7 +42577,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 11,
-      hits = 2
+      hits = 2,
+      log = "hero:19:26:-4:first+drain+corrode mon:10:23:10:first+spikes hero:20:3:-5:drain+corrode mon:10:0:10:spikes+kill"
     },
     {
       monster = "shriekBat",
@@ -41855,7 +42631,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 20,
-      hits = 3
+      hits = 3,
+      log = "hero:19:26:0:first mon:10:23:10:first+spikes hero:19:4:0: mon:10:1:10:spikes hero:19:-18:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41907,7 +42684,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 20,
-      hits = 3
+      hits = 3,
+      log = "hero:20:25:0: mon:10:25:10: hero:20:5:0: mon:10:5:10: hero:20:-15:0:kill"
     },
     {
       monster = "shriekBat",
@@ -41957,7 +42735,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 30,
-      hits = 3
+      hits = 3,
+      log = "mon:10:45:10:first hero:21:24:0: mon:10:24:10: hero:21:3:0: mon:10:3:10: hero:21:-18:0:kill"
     },
     {
       monster = "shriekBat",
@@ -42006,7 +42785,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 2
+      hits = 2,
+      log = "mon:7:45:7:first hero:25:20:0:corrode mon:7:20:7: hero:26:-6:0:corrode+kill"
     },
     {
       monster = "shriekBat",
@@ -42058,7 +42838,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:25:20:0:first hero:25:-5:0:first+kill"
     },
     {
       monster = "shriekBat",
@@ -42111,7 +42892,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 14,
-      hits = 2
+      hits = 2,
+      log = "mon:7:45:7:first hero:25:20:0: mon:7:20:7: hero:25:-5:0:kill"
     },
     {
       monster = "shriekBat",
@@ -42161,7 +42943,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 6,
-      hits = 2
+      hits = 2,
+      log = "mon:3:45:3:first hero:25:20:0: mon:3:20:3: hero:25:-5:0:kill"
     },
     {
       monster = "shriekBat",
@@ -42210,7 +42993,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 2
+      hits = 2,
+      log = "mon:1:42:1:first+spikes hero:33:9:0: mon:1:6:1:spikes hero:33:-27:0:kill"
     },
     {
       monster = "shriekBat",
@@ -42261,7 +43045,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 2
+      hits = 2,
+      log = "hero:33:12:-8:first+drain mon:1:12:1:first hero:33:-21:-8:drain+kill"
     },
     {
       monster = "shriekBat",
@@ -42315,7 +43100,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 2
+      hits = 2,
+      log = "mon:1:45:1:first hero:37:8:0:pierce mon:1:8:1: hero:37:-29:0:pierce+kill"
     },
     {
       monster = "shriekBat",
@@ -42365,7 +43151,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 2,
-      hits = 2
+      hits = 2,
+      log = "mon:1:45:1:first hero:33:12:0: mon:1:12:1: hero:33:-21:0:kill"
     },
     {
       monster = "shriekBat",
@@ -42414,7 +43201,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42464,7 +43252,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42519,7 +43308,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42618,7 +43408,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42722,7 +43513,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42773,7 +43565,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42822,7 +43615,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42872,7 +43666,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -42925,7 +43720,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "grudgeWraith",
@@ -43076,7 +43872,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 504,
-      hits = 25
+      hits = 25,
+      log = "hero:3:89:0:corrode mon:21:92:21:lifesteal hero:4:88:0:corrode mon:21:92:21:lifesteal hero:5:87:0:corrode mon:21:92:21:lifesteal hero:6:86:0:corrode mon:21:92:21:lifesteal hero:7:85:0:corrode mon:21:92:21:lifesteal hero:8:84:0:corrode mon:21:92:21:lifesteal hero:9:83:0:corrode mon:21:92:21:lifesteal hero:10:82:0:corrode mon:21:92:21:lifesteal hero:11:81:0:corrode mon:21:91:21:lifesteal hero:12:79:0:corrode mon:21:89:21:lifesteal hero:13:76:0:corrode mon:21:86:21:lifesteal hero:14:72:0:corrode mon:21:82:21:lifesteal hero:15:67:0:corrode mon:21:77:21:lifesteal hero:16:61:0:corrode mon:21:71:21:lifesteal hero:16:55:0:corrode mon:21:65:21:lifesteal hero:16:49:0:corrode mon:21:59:21:lifesteal hero:16:43:0:corrode mon:21:53:21:lifesteal hero:16:37:0:corrode mon:21:47:21:lifesteal hero:16:31:0:corrode mon:21:41:21:lifesteal hero:16:25:0:corrode mon:21:35:21:lifesteal hero:16:19:0:corrode mon:21:29:21:lifesteal hero:16:13:0:corrode mon:21:23:21:lifesteal hero:16:7:0:corrode mon:21:17:21:lifesteal hero:16:1:0:corrode mon:21:11:21:lifesteal hero:16:-5:0:corrode+kill"
     },
     {
       monster = "grudgeWraith",
@@ -43589,7 +44386,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 146,
-      hits = 13
+      hits = 13,
+      log = "hero:6:86:-1:first+drain+corrode hero:7:79:-1:first+drain+corrode hero:8:71:-2:drain+corrode mon:18:77:18:lifesteal+spikes hero:9:68:-2:drain+corrode mon:18:74:18:lifesteal+spikes hero:10:64:-2:drain+corrode mon:18:70:18:lifesteal+spikes hero:11:59:-2:drain+corrode mon:18:65:18:lifesteal+spikes hero:12:53:-3:drain+corrode mon:18:59:18:lifesteal+spikes hero:13:46:-3:drain+corrode mon:18:52:18:lifesteal+spikes hero:14:38:-3:drain+corrode mon:18:44:18:lifesteal+spikes hero:15:29:-3:drain+corrode mon:18:35:18:lifesteal+spikes hero:16:19:-4:drain+corrode mon:18:25:18:lifesteal+spikes hero:17:8:-4:drain+corrode mon:18:14:18:lifesteal+spikes hero:18:-4:-4:drain+corrode+kill"
     },
     {
       monster = "grudgeWraith",
@@ -43639,7 +44437,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 460,
-      hits = 21
+      hits = 21,
+      log = "hero:15:77:0: mon:23:88:23:lifesteal hero:15:73:0: mon:23:84:23:lifesteal hero:15:69:0: mon:23:80:23:lifesteal hero:15:65:0: mon:23:76:23:lifesteal hero:15:61:0: mon:23:72:23:lifesteal hero:15:57:0: mon:23:68:23:lifesteal hero:15:53:0: mon:23:64:23:lifesteal hero:15:49:0: mon:23:60:23:lifesteal hero:15:45:0: mon:23:56:23:lifesteal hero:15:41:0: mon:23:52:23:lifesteal hero:15:37:0: mon:23:48:23:lifesteal hero:15:33:0: mon:23:44:23:lifesteal hero:15:29:0: mon:23:40:23:lifesteal hero:15:25:0: mon:23:36:23:lifesteal hero:15:21:0: mon:23:32:23:lifesteal hero:15:17:0: mon:23:28:23:lifesteal hero:15:13:0: mon:23:24:23:lifesteal hero:15:9:0: mon:23:20:23:lifesteal hero:15:5:0: mon:23:16:23:lifesteal hero:15:1:0: mon:23:12:23:lifesteal hero:15:-3:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -43738,7 +44537,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 210,
-      hits = 15
+      hits = 15,
+      log = "hero:13:79:0: mon:15:86:15:lifesteal hero:13:73:0: mon:15:80:15:lifesteal hero:13:67:0: mon:15:74:15:lifesteal hero:13:61:0: mon:15:68:15:lifesteal hero:13:55:0: mon:15:62:15:lifesteal hero:13:49:0: mon:15:56:15:lifesteal hero:13:43:0: mon:15:50:15:lifesteal hero:13:37:0: mon:15:44:15:lifesteal hero:13:31:0: mon:15:38:15:lifesteal hero:13:25:0: mon:15:32:15:lifesteal hero:13:19:0: mon:15:26:15:lifesteal hero:13:13:0: mon:15:20:15:lifesteal hero:13:7:0: mon:15:14:15:lifesteal hero:13:1:0: mon:15:8:15:lifesteal hero:13:-5:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -43792,7 +44592,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 150,
-      hits = 12
+      hits = 12,
+      log = "hero:9:83:0:first+corrode hero:10:73:0:corrode mon:15:80:15:lifesteal hero:11:69:0:corrode mon:15:76:15:lifesteal hero:12:64:0:corrode mon:15:71:15:lifesteal hero:13:58:0:corrode mon:15:65:15:lifesteal hero:14:51:0:corrode mon:15:58:15:lifesteal hero:15:43:0:corrode mon:15:50:15:lifesteal hero:16:34:0:corrode mon:15:41:15:lifesteal hero:17:24:0:corrode mon:15:31:15:lifesteal hero:18:13:0:corrode mon:15:20:15:lifesteal hero:19:1:0:corrode mon:15:8:15:lifesteal hero:20:-12:0:corrode+kill"
     },
     {
       monster = "grudgeWraith",
@@ -43843,7 +44644,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 105,
-      hits = 8
+      hits = 8,
+      log = "hero:18:74:0:anti mon:15:81:15:lifesteal hero:18:63:0:anti mon:15:70:15:lifesteal hero:18:52:0:anti mon:15:59:15:lifesteal hero:18:41:0:anti mon:15:48:15:lifesteal hero:18:30:0:anti mon:15:37:15:lifesteal hero:18:19:0:anti mon:15:26:15:lifesteal hero:18:8:0:anti mon:15:15:15:lifesteal hero:18:-3:0:anti+kill"
     },
     {
       monster = "grudgeWraith",
@@ -43892,7 +44694,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 168,
-      hits = 15
+      hits = 15,
+      log = "hero:12:80:0: mon:12:86:12:lifesteal hero:12:74:0: mon:12:80:12:lifesteal hero:12:68:0: mon:12:74:12:lifesteal hero:12:62:0: mon:12:68:12:lifesteal hero:12:56:0: mon:12:62:12:lifesteal hero:12:50:0: mon:12:56:12:lifesteal hero:12:44:0: mon:12:50:12:lifesteal hero:12:38:0: mon:12:44:12:lifesteal hero:12:32:0: mon:12:38:12:lifesteal hero:12:26:0: mon:12:32:12:lifesteal hero:12:20:0: mon:12:26:12:lifesteal hero:12:14:0: mon:12:20:12:lifesteal hero:12:8:0: mon:12:14:12:lifesteal hero:12:2:0: mon:12:8:12:lifesteal hero:12:-4:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -43942,7 +44745,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 44,
-      hits = 8
+      hits = 8,
+      log = "hero:12:80:-3:first+drain+corrode hero:13:67:-3:drain+corrode mon:12:70:12:lifesteal+spikes hero:14:56:-3:drain+corrode mon:12:59:12:lifesteal+spikes hero:15:44:-3:drain+corrode mon:12:47:12:lifesteal+spikes hero:16:31:-4:drain+corrode mon:12:34:12:lifesteal+spikes hero:17:17:-4:drain+corrode mon:12:20:12:lifesteal+spikes hero:18:2:-4:drain+corrode mon:12:5:12:lifesteal+spikes hero:19:-14:-4:drain+corrode+kill"
     },
     {
       monster = "grudgeWraith",
@@ -43995,7 +44799,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 96,
-      hits = 10
+      hits = 10,
+      log = "hero:12:80:0:first hero:12:68:0: mon:12:71:12:lifesteal+spikes hero:12:59:0: mon:12:62:12:lifesteal+spikes hero:12:50:0: mon:12:53:12:lifesteal+spikes hero:12:41:0: mon:12:44:12:lifesteal+spikes hero:12:32:0: mon:12:35:12:lifesteal+spikes hero:12:23:0: mon:12:26:12:lifesteal+spikes hero:12:14:0: mon:12:17:12:lifesteal+spikes hero:12:5:0: mon:12:8:12:lifesteal+spikes hero:12:-4:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44047,7 +44852,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 144,
-      hits = 13
+      hits = 13,
+      log = "hero:13:79:0: mon:12:85:12:lifesteal hero:13:72:0: mon:12:78:12:lifesteal hero:13:65:0: mon:12:71:12:lifesteal hero:13:58:0: mon:12:64:12:lifesteal hero:13:51:0: mon:12:57:12:lifesteal hero:13:44:0: mon:12:50:12:lifesteal hero:13:37:0: mon:12:43:12:lifesteal hero:13:30:0: mon:12:36:12:lifesteal hero:13:23:0: mon:12:29:12:lifesteal hero:13:16:0: mon:12:22:12:lifesteal hero:13:9:0: mon:12:15:12:lifesteal hero:13:2:0: mon:12:8:12:lifesteal hero:13:-5:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44097,7 +44903,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 120,
-      hits = 11
+      hits = 11,
+      log = "hero:14:78:0: mon:12:84:12:lifesteal hero:14:70:0: mon:12:76:12:lifesteal hero:14:62:0: mon:12:68:12:lifesteal hero:14:54:0: mon:12:60:12:lifesteal hero:14:46:0: mon:12:52:12:lifesteal hero:14:38:0: mon:12:44:12:lifesteal hero:14:30:0: mon:12:36:12:lifesteal hero:14:22:0: mon:12:28:12:lifesteal hero:14:14:0: mon:12:20:12:lifesteal hero:14:6:0: mon:12:12:12:lifesteal hero:14:-2:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44146,7 +44953,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 45,
-      hits = 6
+      hits = 6,
+      log = "hero:17:75:0:corrode mon:9:79:9:lifesteal hero:18:61:0:corrode mon:9:65:9:lifesteal hero:19:46:0:corrode mon:9:50:9:lifesteal hero:20:30:0:corrode mon:9:34:9:lifesteal hero:21:13:0:corrode mon:9:17:9:lifesteal hero:22:-5:0:corrode+kill"
     },
     {
       monster = "grudgeWraith",
@@ -44198,7 +45006,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 36,
-      hits = 7
+      hits = 7,
+      log = "hero:17:75:0:first hero:17:58:0:first hero:17:41:0: mon:9:45:9:lifesteal hero:17:28:0: mon:9:32:9:lifesteal hero:17:15:0: mon:9:19:9:lifesteal hero:17:2:0: mon:9:6:9:lifesteal hero:17:-11:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44251,7 +45060,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 54,
-      hits = 7
+      hits = 7,
+      log = "hero:17:75:0: mon:9:79:9:lifesteal hero:17:62:0: mon:9:66:9:lifesteal hero:17:49:0: mon:9:53:9:lifesteal hero:17:36:0: mon:9:40:9:lifesteal hero:17:23:0: mon:9:27:9:lifesteal hero:17:10:0: mon:9:14:9:lifesteal hero:17:-3:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44301,7 +45111,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 25,
-      hits = 6
+      hits = 6,
+      log = "hero:17:75:0: mon:5:77:5:lifesteal hero:17:60:0: mon:5:62:5:lifesteal hero:17:45:0: mon:5:47:5:lifesteal hero:17:30:0: mon:5:32:5:lifesteal hero:17:15:0: mon:5:17:5:lifesteal hero:17:0:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44350,7 +45161,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 4
+      hits = 4,
+      log = "hero:23:69:0: mon:6:69:6:lifesteal+spikes hero:23:46:0: mon:6:46:6:lifesteal+spikes hero:23:23:0: mon:6:23:6:lifesteal+spikes hero:23:0:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44401,7 +45213,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 5
+      hits = 5,
+      log = "hero:23:69:-5:first+drain hero:23:46:-5:drain mon:6:49:6:lifesteal hero:23:26:-5:drain mon:6:29:6:lifesteal hero:23:6:-5:drain mon:6:9:6:lifesteal hero:23:-14:-5:drain+kill"
     },
     {
       monster = "grudgeWraith",
@@ -44455,7 +45268,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 18,
-      hits = 4
+      hits = 4,
+      log = "hero:27:65:0:pierce mon:6:68:6:lifesteal hero:27:41:0:pierce mon:6:44:6:lifesteal hero:27:17:0:pierce mon:6:20:6:lifesteal hero:27:-7:0:pierce+kill"
     },
     {
       monster = "grudgeWraith",
@@ -44505,7 +45319,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 24,
-      hits = 5
+      hits = 5,
+      log = "hero:23:69:0: mon:6:72:6:lifesteal hero:23:49:0: mon:6:52:6:lifesteal hero:23:29:0: mon:6:32:6:lifesteal hero:23:9:0: mon:6:12:6:lifesteal hero:23:-11:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44554,7 +45369,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:31:61:0:first hero:31:30:0: mon:0:30:0: hero:31:-1:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44604,7 +45420,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:31:61:0:first hero:31:30:0: mon:0:30:0: hero:31:-1:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44659,7 +45476,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:31:61:-7:first+drain+corrode hero:32:29:-8:first+drain+corrode hero:33:-4:-8:drain+corrode+kill"
     },
     {
       monster = "grudgeWraith",
@@ -44709,7 +45527,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 10,
-      hits = 3
+      hits = 3,
+      log = "hero:40:52:0: mon:5:54:5:lifesteal hero:40:14:0: mon:5:16:5:lifesteal hero:40:-24:0:kill"
     },
     {
       monster = "grudgeWraith",
@@ -44758,7 +45577,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -44808,7 +45628,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -44862,7 +45683,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -44913,7 +45735,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -44962,7 +45785,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45012,7 +45836,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45065,7 +45890,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45117,7 +45943,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45167,7 +45994,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45216,7 +46044,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45268,7 +46097,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45321,7 +46151,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45371,7 +46202,8 @@ return {
       canAttack = false,
       canWin = false,
       damage = 0,
-      hits = 0
+      hits = 0,
+      log = ""
     },
     {
       monster = "shardCrab",
@@ -45420,7 +46252,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 546,
-      hits = 21
+      hits = 21,
+      log = "hero:1:81:3:thorns mon:23:78:23:spikes hero:1:77:3:thorns mon:23:74:23:spikes hero:1:73:3:thorns mon:23:70:23:spikes hero:1:69:3:thorns mon:23:66:23:spikes hero:1:65:3:thorns mon:23:62:23:spikes hero:1:61:3:thorns mon:23:58:23:spikes hero:1:57:3:thorns mon:23:54:23:spikes hero:1:53:3:thorns mon:23:50:23:spikes hero:1:49:3:thorns mon:23:46:23:spikes hero:1:45:3:thorns mon:23:42:23:spikes hero:1:41:3:thorns mon:23:38:23:spikes hero:1:37:3:thorns mon:23:34:23:spikes hero:1:33:3:thorns mon:23:30:23:spikes hero:1:29:3:thorns mon:23:26:23:spikes hero:1:25:3:thorns mon:23:22:23:spikes hero:1:21:3:thorns mon:23:18:23:spikes hero:1:17:3:thorns mon:23:14:23:spikes hero:1:13:3:thorns mon:23:10:23:spikes hero:1:9:3:thorns mon:23:6:23:spikes hero:1:5:3:thorns mon:23:2:23:spikes hero:1:1:3:thorns mon:23:-2:23:spikes+kill"
     },
     {
       monster = "shardCrab",
@@ -45525,7 +46358,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 419,
-      hits = 17
+      hits = 17,
+      log = "hero:5:77:3:pierce+thorns mon:23:77:23: hero:5:72:3:pierce+thorns mon:23:72:23: hero:5:67:3:pierce+thorns mon:23:67:23: hero:5:62:3:pierce+thorns mon:23:62:23: hero:5:57:3:pierce+thorns mon:23:57:23: hero:5:52:3:pierce+thorns mon:23:52:23: hero:5:47:3:pierce+thorns mon:23:47:23: hero:5:42:3:pierce+thorns mon:23:42:23: hero:5:37:3:pierce+thorns mon:23:37:23: hero:5:32:3:pierce+thorns mon:23:32:23: hero:5:27:3:pierce+thorns mon:23:27:23: hero:5:22:3:pierce+thorns mon:23:22:23: hero:5:17:3:pierce+thorns mon:23:17:23: hero:5:12:3:pierce+thorns mon:23:12:23: hero:5:7:3:pierce+thorns mon:23:7:23: hero:5:2:3:pierce+thorns mon:23:2:23: hero:5:-3:3:pierce+thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -45729,7 +46563,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 181,
-      hits = 11
+      hits = 11,
+      log = "hero:1:81:3:first+thorns+corrode hero:2:79:3:first+thorns+corrode hero:3:76:3:thorns+corrode mon:20:73:20:spikes hero:4:69:2:thorns+drain+corrode mon:20:66:20:spikes hero:5:61:2:thorns+drain+corrode mon:20:58:20:spikes hero:6:52:2:thorns+drain+corrode mon:20:49:20:spikes hero:7:42:2:thorns+drain+corrode mon:20:39:20:spikes hero:8:31:1:thorns+drain+corrode mon:20:28:20:spikes hero:9:19:1:thorns+drain+corrode mon:20:16:20:spikes hero:10:6:1:thorns+drain+corrode mon:20:3:20:spikes hero:11:-8:1:thorns+drain+corrode+kill"
     },
     {
       monster = "shardCrab",
@@ -45779,7 +46614,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 227,
-      hits = 9
+      hits = 9,
+      log = "hero:10:72:3:thorns mon:25:72:25: hero:10:62:3:thorns mon:25:62:25: hero:10:52:3:thorns mon:25:52:25: hero:10:42:3:thorns mon:25:42:25: hero:10:32:3:thorns mon:25:32:25: hero:10:22:3:thorns mon:25:22:25: hero:10:12:3:thorns mon:25:12:25: hero:10:2:3:thorns mon:25:2:25: hero:10:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -45828,7 +46664,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 442,
-      hits = 21
+      hits = 21,
+      log = "hero:4:78:2:thorns+drain mon:20:78:20: hero:4:74:2:thorns+drain mon:20:74:20: hero:4:70:2:thorns+drain mon:20:70:20: hero:4:66:2:thorns+drain mon:20:66:20: hero:4:62:2:thorns+drain mon:20:62:20: hero:4:58:2:thorns+drain mon:20:58:20: hero:4:54:2:thorns+drain mon:20:54:20: hero:4:50:2:thorns+drain mon:20:50:20: hero:4:46:2:thorns+drain mon:20:46:20: hero:4:42:2:thorns+drain mon:20:42:20: hero:4:38:2:thorns+drain mon:20:38:20: hero:4:34:2:thorns+drain mon:20:34:20: hero:4:30:2:thorns+drain mon:20:30:20: hero:4:26:2:thorns+drain mon:20:26:20: hero:4:22:2:thorns+drain mon:20:22:20: hero:4:18:2:thorns+drain mon:20:18:20: hero:4:14:2:thorns+drain mon:20:14:20: hero:4:10:2:thorns+drain mon:20:10:20: hero:4:6:2:thorns+drain mon:20:6:20: hero:4:2:2:thorns+drain mon:20:2:20: hero:4:-2:2:thorns+drain+kill"
     },
     {
       monster = "shardCrab",
@@ -45878,7 +46715,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 233,
-      hits = 11
+      hits = 11,
+      log = "hero:8:74:3:thorns mon:20:74:20: hero:8:66:3:thorns mon:20:66:20: hero:8:58:3:thorns mon:20:58:20: hero:8:50:3:thorns mon:20:50:20: hero:8:42:3:thorns mon:20:42:20: hero:8:34:3:thorns mon:20:34:20: hero:8:26:3:thorns mon:20:26:20: hero:8:18:3:thorns mon:20:18:20: hero:8:10:3:thorns mon:20:10:20: hero:8:2:3:thorns mon:20:2:20: hero:8:-6:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -45932,7 +46770,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 190,
-      hits = 10
+      hits = 10,
+      log = "hero:4:78:3:first+thorns+corrode hero:5:73:3:thorns+corrode mon:20:73:20: hero:6:67:3:thorns+corrode mon:20:67:20: hero:7:60:3:thorns+corrode mon:20:60:20: hero:8:52:3:thorns+corrode mon:20:52:20: hero:9:43:3:thorns+corrode mon:20:43:20: hero:10:33:3:thorns+corrode mon:20:33:20: hero:11:22:3:thorns+corrode mon:20:22:20: hero:12:10:3:thorns+corrode mon:20:10:20: hero:13:-3:3:thorns+corrode+kill"
     },
     {
       monster = "shardCrab",
@@ -45983,7 +46822,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 463,
-      hits = 21
+      hits = 21,
+      log = "hero:4:78:3:thorns mon:20:78:20: hero:4:74:3:thorns mon:20:74:20: hero:4:70:3:thorns mon:20:70:20: hero:4:66:3:thorns mon:20:66:20: hero:4:62:3:thorns mon:20:62:20: hero:4:58:3:thorns mon:20:58:20: hero:4:54:3:thorns mon:20:54:20: hero:4:50:3:thorns mon:20:50:20: hero:4:46:3:thorns mon:20:46:20: hero:4:42:3:thorns mon:20:42:20: hero:4:38:3:thorns mon:20:38:20: hero:4:34:3:thorns mon:20:34:20: hero:4:30:3:thorns mon:20:30:20: hero:4:26:3:thorns mon:20:26:20: hero:4:22:3:thorns mon:20:22:20: hero:4:18:3:thorns mon:20:18:20: hero:4:14:3:thorns mon:20:14:20: hero:4:10:3:thorns mon:20:10:20: hero:4:6:3:thorns mon:20:6:20: hero:4:2:3:thorns mon:20:2:20: hero:4:-2:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46032,7 +46872,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 223,
-      hits = 12
+      hits = 12,
+      log = "hero:7:75:3:thorns mon:17:75:17: hero:7:68:3:thorns mon:17:68:17: hero:7:61:3:thorns mon:17:61:17: hero:7:54:3:thorns mon:17:54:17: hero:7:47:3:thorns mon:17:47:17: hero:7:40:3:thorns mon:17:40:17: hero:7:33:3:thorns mon:17:33:17: hero:7:26:3:thorns mon:17:26:17: hero:7:19:3:thorns mon:17:19:17: hero:7:12:3:thorns mon:17:12:17: hero:7:5:3:thorns mon:17:5:17: hero:7:-2:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46082,7 +46923,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 91,
-      hits = 7
+      hits = 7,
+      log = "hero:7:75:2:first+thorns+drain+corrode hero:8:67:1:thorns+drain+corrode mon:17:64:17:spikes hero:9:55:1:thorns+drain+corrode mon:17:52:17:spikes hero:10:42:1:thorns+drain+corrode mon:17:39:17:spikes hero:11:28:1:thorns+drain+corrode mon:17:25:17:spikes hero:12:13:0:thorns+drain+corrode mon:17:10:17:spikes hero:13:-3:0:thorns+drain+corrode+kill"
     },
     {
       monster = "shardCrab",
@@ -46135,7 +46977,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 146,
-      hits = 9
+      hits = 9,
+      log = "hero:7:75:3:first+thorns hero:7:68:3:thorns mon:17:65:17:spikes hero:7:58:3:thorns mon:17:55:17:spikes hero:7:48:3:thorns mon:17:45:17:spikes hero:7:38:3:thorns mon:17:35:17:spikes hero:7:28:3:thorns mon:17:25:17:spikes hero:7:18:3:thorns mon:17:15:17:spikes hero:7:8:3:thorns mon:17:5:17:spikes hero:7:-2:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46187,7 +47030,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 203,
-      hits = 11
+      hits = 11,
+      log = "hero:8:74:3:thorns mon:17:74:17: hero:8:66:3:thorns mon:17:66:17: hero:8:58:3:thorns mon:17:58:17: hero:8:50:3:thorns mon:17:50:17: hero:8:42:3:thorns mon:17:42:17: hero:8:34:3:thorns mon:17:34:17: hero:8:26:3:thorns mon:17:26:17: hero:8:18:3:thorns mon:17:18:17: hero:8:10:3:thorns mon:17:10:17: hero:8:2:3:thorns mon:17:2:17: hero:8:-6:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46237,7 +47081,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 183,
-      hits = 10
+      hits = 10,
+      log = "hero:9:73:3:thorns mon:17:73:17: hero:9:64:3:thorns mon:17:64:17: hero:9:55:3:thorns mon:17:55:17: hero:9:46:3:thorns mon:17:46:17: hero:9:37:3:thorns mon:17:37:17: hero:9:28:3:thorns mon:17:28:17: hero:9:19:3:thorns mon:17:19:17: hero:9:10:3:thorns mon:17:10:17: hero:9:1:3:thorns mon:17:1:17: hero:9:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46286,7 +47131,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 105,
-      hits = 7
+      hits = 7,
+      log = "hero:10:72:3:thorns+corrode mon:14:72:14: hero:11:61:3:thorns+corrode mon:14:61:14: hero:12:49:3:thorns+corrode mon:14:49:14: hero:13:36:3:thorns+corrode mon:14:36:14: hero:14:22:3:thorns+corrode mon:14:22:14: hero:15:7:3:thorns+corrode mon:14:7:14: hero:16:-9:3:thorns+corrode+kill"
     },
     {
       monster = "shardCrab",
@@ -46338,7 +47184,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 111,
-      hits = 9
+      hits = 9,
+      log = "hero:10:72:3:first+thorns hero:10:62:3:first+thorns hero:10:52:3:thorns mon:14:52:14: hero:10:42:3:thorns mon:14:42:14: hero:10:32:3:thorns mon:14:32:14: hero:10:22:3:thorns mon:14:22:14: hero:10:12:3:thorns mon:14:12:14: hero:10:2:3:thorns mon:14:2:14: hero:10:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46391,7 +47238,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 139,
-      hits = 9
+      hits = 9,
+      log = "hero:10:72:3:thorns mon:14:72:14: hero:10:62:3:thorns mon:14:62:14: hero:10:52:3:thorns mon:14:52:14: hero:10:42:3:thorns mon:14:42:14: hero:10:32:3:thorns mon:14:32:14: hero:10:22:3:thorns mon:14:22:14: hero:10:12:3:thorns mon:14:12:14: hero:10:2:3:thorns mon:14:2:14: hero:10:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46441,7 +47289,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 107,
-      hits = 9
+      hits = 9,
+      log = "hero:10:72:3:thorns mon:10:72:10: hero:10:62:3:thorns mon:10:62:10: hero:10:52:3:thorns mon:10:52:10: hero:10:42:3:thorns mon:10:42:10: hero:10:32:3:thorns mon:10:32:10: hero:10:22:3:thorns mon:10:22:10: hero:10:12:3:thorns mon:10:12:10: hero:10:2:3:thorns mon:10:2:10: hero:10:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46490,7 +47339,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 59,
-      hits = 5
+      hits = 5,
+      log = "hero:15:67:3:thorns mon:11:64:11:spikes hero:15:49:3:thorns mon:11:46:11:spikes hero:15:31:3:thorns mon:11:28:11:spikes hero:15:13:3:thorns mon:11:10:11:spikes hero:15:-5:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46541,7 +47391,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 44,
-      hits = 6
+      hits = 6,
+      log = "hero:15:67:0:first+thorns+drain hero:15:52:0:thorns+drain mon:11:52:11: hero:15:37:0:thorns+drain mon:11:37:11: hero:15:22:0:thorns+drain mon:11:22:11: hero:15:7:0:thorns+drain mon:11:7:11: hero:15:-8:0:thorns+drain+kill"
     },
     {
       monster = "shardCrab",
@@ -46595,7 +47446,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 59,
-      hits = 5
+      hits = 5,
+      log = "hero:19:63:3:pierce+thorns mon:11:63:11: hero:19:44:3:pierce+thorns mon:11:44:11: hero:19:25:3:pierce+thorns mon:11:25:11: hero:19:6:3:pierce+thorns mon:11:6:11: hero:19:-13:3:pierce+thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46645,7 +47497,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 73,
-      hits = 6
+      hits = 6,
+      log = "hero:15:67:3:thorns mon:11:67:11: hero:15:52:3:thorns mon:11:52:11: hero:15:37:3:thorns mon:11:37:11: hero:15:22:3:thorns mon:11:22:11: hero:15:7:3:thorns mon:11:7:11: hero:15:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46694,7 +47547,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 4
+      hits = 4,
+      log = "hero:21:61:3:first+thorns hero:21:40:3:thorns mon:8:40:8: hero:21:19:3:thorns mon:8:19:8: hero:21:-2:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46744,7 +47598,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 28,
-      hits = 4
+      hits = 4,
+      log = "hero:21:61:3:first+thorns hero:21:40:3:thorns mon:8:40:8: hero:21:19:3:thorns mon:8:19:8: hero:21:-2:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46799,7 +47654,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 4
+      hits = 4,
+      log = "hero:21:61:-2:first+thorns+drain+corrode hero:22:39:-2:first+thorns+drain+corrode hero:23:16:-2:thorns+drain+corrode mon:8:13:8:spikes hero:24:-11:-3:thorns+drain+corrode+kill"
     },
     {
       monster = "shardCrab",
@@ -46849,7 +47705,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 35,
-      hits = 3
+      hits = 3,
+      log = "hero:30:52:3:thorns mon:13:52:13: hero:30:22:3:thorns mon:13:22:13: hero:30:-8:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -46898,7 +47755,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 0,
-      hits = 3
+      hits = 3,
+      log = "hero:29:53:-4:thorns+drain mon:2:53:2: hero:29:24:-4:thorns+drain mon:2:24:2: hero:29:-5:-4:thorns+drain+kill"
     },
     {
       monster = "shardCrab",
@@ -46948,7 +47806,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 13,
-      hits = 3
+      hits = 3,
+      log = "hero:33:49:3:thorns mon:2:49:2: hero:33:16:3:thorns mon:2:16:2: hero:33:-17:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -47002,7 +47861,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 11,
-      hits = 3
+      hits = 3,
+      log = "hero:29:53:3:first+thorns+corrode hero:30:23:3:thorns+corrode mon:2:23:2: hero:31:-8:3:thorns+corrode+kill"
     },
     {
       monster = "shardCrab",
@@ -47053,7 +47913,8 @@ return {
       canAttack = true,
       canWin = true,
       damage = 13,
-      hits = 3
+      hits = 3,
+      log = "hero:29:53:3:thorns mon:2:53:2: hero:29:24:3:thorns mon:2:24:2: hero:29:-5:3:thorns+kill"
     },
     {
       monster = "shardCrab",
@@ -62171,7 +63032,7 @@ return {
           },
           pos = 135,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 119,
@@ -63551,7 +64412,7 @@ return {
           },
           pos = 135,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 151,
@@ -64931,7 +65792,7 @@ return {
           },
           pos = 121,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 105,
@@ -72010,7 +72871,7 @@ return {
           },
           pos = 103,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 104,
@@ -77842,7 +78703,7 @@ return {
           },
           pos = 135,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 119,
@@ -79807,7 +80668,7 @@ return {
           },
           pos = 121,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 122,
@@ -86297,7 +87158,7 @@ return {
           },
           pos = 103,
           status = "playing",
-          queue = 1
+          queue = 0
         },
         {
           cell = 119,
@@ -120168,6 +121029,692 @@ return {
           status = "playing"
         }
       }
+    }
+  },
+  rewardRuns = {
+    {
+      seed = 1,
+      floors = 1,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 42,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 84
+      },
+      queue = {}
+    },
+    {
+      seed = 1,
+      floors = 1,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 42,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 84
+      },
+      queue = { "boneKnife,mossBlade,hammer" }
+    },
+    {
+      seed = 1,
+      floors = 1,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 42,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 820,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 42
+      },
+      queue = {}
+    },
+    {
+      seed = 1,
+      floors = 5,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 42,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 84
+      },
+      queue = {}
+    },
+    {
+      seed = 1,
+      floors = 5,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 42,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 84
+      },
+      queue = { "bellStaff,wellHook,rustSword" }
+    },
+    {
+      seed = 1,
+      floors = 5,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 42,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 880,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 42
+      },
+      queue = {}
+    },
+    {
+      seed = 1,
+      floors = 13,
+      kind = "atk",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 42,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 75,
+        def = 70,
+        keys = 0,
+        gold = 84
+      },
+      queue = {}
+    },
+    {
+      seed = 1,
+      floors = 13,
+      kind = "engrave",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 42,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 84
+      },
+      queue = { "bellStaff,wellHook,rustSword" }
+    },
+    {
+      seed = 1,
+      floors = 13,
+      kind = "heal",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 42,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 1000,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 42
+      },
+      queue = {}
+    },
+    {
+      seed = 4,
+      floors = 1,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 44,
+        choices = { "saltDagger", "rustSword", "wild" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 87
+      },
+      queue = {}
+    },
+    {
+      seed = 4,
+      floors = 1,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 44,
+        choices = { "saltDagger", "rustSword", "wild" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 87
+      },
+      queue = { "saltDagger,rustSword,wild" }
+    },
+    {
+      seed = 4,
+      floors = 1,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 44,
+        choices = { "saltDagger", "rustSword", "wild" }
+      },
+      hero = {
+        hp = 820,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 43
+      },
+      queue = {}
+    },
+    {
+      seed = 4,
+      floors = 5,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 44,
+        choices = { "harpoon", "hammer", "mossBlade" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 87
+      },
+      queue = {}
+    },
+    {
+      seed = 4,
+      floors = 5,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 44,
+        choices = { "harpoon", "hammer", "mossBlade" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 87
+      },
+      queue = { "harpoon,hammer,mossBlade" }
+    },
+    {
+      seed = 4,
+      floors = 5,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 44,
+        choices = { "harpoon", "hammer", "mossBlade" }
+      },
+      hero = {
+        hp = 880,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 43
+      },
+      queue = {}
+    },
+    {
+      seed = 4,
+      floors = 13,
+      kind = "atk",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 44,
+        choices = { "harpoon", "hammer", "mossBlade" }
+      },
+      hero = {
+        hp = 700,
+        atk = 75,
+        def = 70,
+        keys = 0,
+        gold = 87
+      },
+      queue = {}
+    },
+    {
+      seed = 4,
+      floors = 13,
+      kind = "engrave",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 44,
+        choices = { "harpoon", "hammer", "mossBlade" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 87
+      },
+      queue = { "harpoon,hammer,mossBlade" }
+    },
+    {
+      seed = 4,
+      floors = 13,
+      kind = "heal",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 44,
+        choices = { "harpoon", "hammer", "mossBlade" }
+      },
+      hero = {
+        hp = 1000,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 43
+      },
+      queue = {}
+    },
+    {
+      seed = 9,
+      floors = 1,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 46,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 92
+      },
+      queue = {}
+    },
+    {
+      seed = 9,
+      floors = 1,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 46,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 92
+      },
+      queue = { "boneKnife,mossBlade,hammer" }
+    },
+    {
+      seed = 9,
+      floors = 1,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 46,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 820,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 46
+      },
+      queue = {}
+    },
+    {
+      seed = 9,
+      floors = 5,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 46,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 92
+      },
+      queue = {}
+    },
+    {
+      seed = 9,
+      floors = 5,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 46,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 92
+      },
+      queue = { "bellStaff,wellHook,rustSword" }
+    },
+    {
+      seed = 9,
+      floors = 5,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 46,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 880,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 46
+      },
+      queue = {}
+    },
+    {
+      seed = 9,
+      floors = 13,
+      kind = "atk",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 46,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 75,
+        def = 70,
+        keys = 0,
+        gold = 92
+      },
+      queue = {}
+    },
+    {
+      seed = 9,
+      floors = 13,
+      kind = "engrave",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 46,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 92
+      },
+      queue = { "bellStaff,wellHook,rustSword" }
+    },
+    {
+      seed = 9,
+      floors = 13,
+      kind = "heal",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 46,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 1000,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 46
+      },
+      queue = {}
+    },
+    {
+      seed = 77,
+      floors = 1,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 80,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 160
+      },
+      queue = {}
+    },
+    {
+      seed = 77,
+      floors = 1,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 80,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 160
+      },
+      queue = { "bellStaff,wellHook,rustSword" }
+    },
+    {
+      seed = 77,
+      floors = 1,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 120,
+        cost = 80,
+        choices = { "bellStaff", "wellHook", "rustSword" }
+      },
+      hero = {
+        hp = 820,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 80
+      },
+      queue = {}
+    },
+    {
+      seed = 77,
+      floors = 5,
+      kind = "atk",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 80,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 73,
+        def = 70,
+        keys = 0,
+        gold = 160
+      },
+      queue = {}
+    },
+    {
+      seed = 77,
+      floors = 5,
+      kind = "engrave",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 80,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 160
+      },
+      queue = { "boneKnife,mossBlade,hammer" }
+    },
+    {
+      seed = 77,
+      floors = 5,
+      kind = "heal",
+      offer = {
+        atk = 3,
+        heal = 180,
+        cost = 80,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 880,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 80
+      },
+      queue = {}
+    },
+    {
+      seed = 77,
+      floors = 13,
+      kind = "atk",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 80,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 75,
+        def = 70,
+        keys = 0,
+        gold = 160
+      },
+      queue = {}
+    },
+    {
+      seed = 77,
+      floors = 13,
+      kind = "engrave",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 80,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 700,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 160
+      },
+      queue = { "boneKnife,mossBlade,hammer" }
+    },
+    {
+      seed = 77,
+      floors = 13,
+      kind = "heal",
+      offer = {
+        atk = 5,
+        heal = 300,
+        cost = 80,
+        choices = { "boneKnife", "mossBlade", "hammer" }
+      },
+      hero = {
+        hp = 1000,
+        atk = 70,
+        def = 70,
+        keys = 0,
+        gold = 80
+      },
+      queue = {}
     }
   }
 }

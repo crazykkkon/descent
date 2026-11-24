@@ -8,7 +8,7 @@
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { Boon, CHARACTERS, Hero, MONSTERS, MonsterId, WEAPONS, WeaponId } from '../src/core/config';
-import { simulateCombat } from '../src/core/combat';
+import { CombatEvent, simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
 import { DEMO_POOLS, F2_CONTRACT, buildFloor } from '../src/core/levels';
@@ -46,13 +46,17 @@ const STATS: [number, number][] = [[10, 10], [13, 10], [13, 13], [16, 13], [16, 
 const weapons: (WeaponId | null)[] = [null, ...(Object.keys(WEAPONS) as WeaponId[])];
 const boonSets: Boon[][] = [[], ['lifesteal'], ['firstStrike'], ['thorns'], ['corrode'], ['lifesteal', 'corrode', 'thorns', 'firstStrike']];
 const combat: unknown[] = [];
+let logged = 0;
 for (const id of Object.keys(MONSTERS) as MonsterId[]) {
     for (const [atk, def] of STATS) {
         for (const w of weapons) {
             for (const b of (w === null || w === 'harpoon' ? boonSets : [[]])) {
                 const boons = b.length ? b : undefined;
-                const r = simulateCombat({ atk, def, weapon: w ?? undefined, boons }, MONSTERS[id]);
-                combat.push({ monster: id, atk, def, weapon: w ?? undefined, boons, canAttack: r.canAttack, canWin: r.canWin, damage: r.damage, hits: r.hits });
+                const evs: CombatEvent[] = [];
+                const r = simulateCombat({ atk, def, weapon: w ?? undefined, boons }, MONSTERS[id], evs);
+                // 战斗记录（画面回放用）：每隔几条带上一份，压成一行字符串对账
+                const log = (logged++ % 5 === 0 && evs.length <= 60) ? evs.map(e => `${e.who}:${e.hit}:${e.mhp}:${e.loss}:${e.tags.join('+')}`).join(' ') : undefined;
+                combat.push({ monster: id, atk, def, weapon: w ?? undefined, boons, canAttack: r.canAttack, canWin: r.canWin, damage: r.damage, hits: r.hits, log });
             }
         }
     }
@@ -219,6 +223,7 @@ for (const seed of [1, 5, 77, 31337, 2, 3, 4, 6, 8, 13, 21, 34]) {
             for (let k = 0; k < floors - 1; k++) { run.move(1, 0); run.finishFloor(false); }
             run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0, weapon: current };
             run.move(1, 0);
+            run.chooseReward('engrave'); // 精英倒下先三选一奖励，这里选刻图案
             run.move(1, 0);
             engraves.push({ seed, floorIndex: floors, current, queue: run.engraveQueue.map(p => ({ from: p.from, choices: p.choices })) });
         }
@@ -331,6 +336,25 @@ for (const seed of [1, 2, 3, 42, 99, 12345, 2147483647, 4000000000, 4, 5, 6, 7, 
 }
 const tutorials = [1, 7, 31337].map(seed => ({ seed, plan: R.buildTutorial(seed).map(o => o.map(floorParams)) }));
 
+// ---------- 精英奖励三选一 ----------
+const rewardRuns: unknown[] = [];
+for (const seed of [1, 4, 9, 77]) {
+    for (const floors of [1, 5, 13]) {
+        for (const kind of ['atk', 'engrave', 'heal'] as const) {
+            const fs: FloorDef[] = [];
+            for (let k = 0; k < floors; k++) fs.push(tiny(['@>']));
+            fs[floors - 1] = tiny(['@G.>'], { eliteReward: true });
+            const run = new Run(fs, 'digger', seed);
+            for (let k = 0; k < floors - 1; k++) { run.move(1, 0); run.finishFloor(false); }
+            run.hero = { hp: 700, atk: 70, def: 70, keys: 0, gold: 33 + seed };
+            run.move(1, 0);
+            const offer = JSON.parse(JSON.stringify(run.rewardOffer));
+            run.chooseReward(kind);
+            rewardRuns.push({ seed, floors, kind, offer, hero: heroOf(run.hero), queue: run.engraveQueue.map(p => p.choices.join(',')) });
+        }
+    }
+}
+
 // ---------- 11. 灵魂碎片：碎片折算、开局强化、解锁 / 深度模式的路线、新角色 ----------
 const shardsVec: unknown[] = [];
 for (let reached = 1; reached <= 20; reached++) for (const won of [false, true]) for (let depth = 0; depth <= 3; depth++) {
@@ -375,7 +399,7 @@ const charRuns: unknown[] = [];
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns, rewardRuns })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);

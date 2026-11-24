@@ -22,6 +22,7 @@ local monsters = require('view.monsters')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
 local coach = require('view.coach')
+local battle = require('view.battle')
 local metaMod = require('core.meta')
 local titleView = require('view.title')
 
@@ -77,9 +78,9 @@ end
 local function setColor(c, a) love.graphics.setColor(c[1], c[2], c[3], a or 1) end
 
 -- UI 层文字：坐标和字号都按逻辑像素给，内部换算成屏幕像素
-local function text(str, x, y, size, color, align, width)
+local function text(str, x, y, size, color, align, width, alpha)
     love.graphics.setFont(font(size * S))
-    setColor(color or C.text)
+    setColor(color or C.text, alpha)
     if align then
         love.graphics.printf(str, OX + x * S, OY + y * S, (width or 200) * S, align)
     else
@@ -103,6 +104,7 @@ local function saveGame()
     love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), facing = facing, routeOpts = runOpts }))
 end
 
+local openReward
 local openExit, openSummary, openDeath, openVictory, openEngrave, openDecree, openArm, openWheel, openPawn, openAltar, openStall, newGame, loadGame, continueFlow
 local spinArm, toggleHold
 local beginRun, openShop, drawShopUI, shopClick
@@ -317,6 +319,54 @@ local function openBossScene()
     end } })
 end
 
+-- ---------- 击杀反馈（制作人：特别是击杀反馈；算出刚好能打死时要有"算准了"的满足感） ----------
+-- fatalSeen：这一层里曾经"打不动 / 打不死 / 会死"的怪（格子）。后来把它打死了 = 算准了（先去拿宝石、绕路备战再回来）
+-- （放在一张表里：main.lua 顶层的局部变量快到 Lua 的 200 个上限了）
+local KF = { fatalSeen = {}, fatalKey = nil, combo = { n = 0, at = -99, floor = nil }, scanKey = nil }
+function KF.scan()
+    local key = run.seed .. ':' .. run.floorIndex
+    if KF.fatalKey ~= key then KF.fatalSeen, KF.fatalKey = {}, key end
+    local sk = key .. ':' .. run.steps .. ':' .. run.hero.atk .. ':' .. run.hero.def .. ':' .. run.hero.hp .. ':' .. tostring(run.hero.weapon)
+    if sk == KF.scanKey then return end
+    KF.scanKey = sk
+    for i, c in ipairs(run.cells) do
+        if c.kind == 'monster' then
+            local p = preview(i)
+            if p and p.fatal then KF.fatalSeen[i] = true end
+        end
+    end
+end
+
+-- threat：这只怪能不能伤到你（它的攻击高过你的防御）；伤不到你的"无伤"不值得夸
+function KF.onKill(cell, monId, before, fought, threat)
+    local combo = KF.combo
+    local x, y = tileXY(cell)
+    battle.kill(monId, x + TILE / 2, y + TILE - 4, TILE)
+    local loss = before.hp - run.hero.hp
+    -- 连杀：4 秒之内接着打死下一只
+    if combo.floor == run.floorIndex and clock - combo.at <= 4 then combo.n = combo.n + 1 else combo.n = 1 end
+    combo.at, combo.floor = clock, run.floorIndex
+    -- 只挑最值得夸的一句；连杀写在下面一行（没有别的可夸时，连杀自己当大字）
+    local main, sub, color
+    if KF.fatalSeen[cell] then
+        main, sub, color = '算准了！', '刚才还打不过它', { 1, 0.85, 0.35 }
+        fx.play('perfect'); fx.shake(4)
+    elseif loss > 0 and run.hero.hp <= math.max(10, math.floor(before.hp / 10)) then
+        main, sub, color = '千钧一发！', '只剩 ' .. run.hero.hp .. ' 血', { 1, 0.45, 0.45 }
+        fx.play('perfect', 0.8)
+    elseif loss <= 0 and fought and threat then
+        main, color = '无伤！', { 0.55, 1, 0.7 }
+        fx.play('combo', 1.2)
+    end
+    if combo.n >= 2 then
+        local c = '连杀 ×' .. combo.n
+        if main then sub = (sub and (sub .. '　·　') or '') .. c
+        else main, color = c, combo.n >= 4 and { 1, 0.5, 0.3 } or { 1, 0.8, 0.45 } end
+        fx.play('combo', 1 + 0.12 * math.min(combo.n, 8))
+    end
+    if main then battle.banner(main, sub, color) else fx.shake(2) end
+end
+
 local function walkStep()
     local cell = walking.path[walking.i]
     local c = run.cells[cell]
@@ -346,8 +396,30 @@ local function walkStep()
         openExit(cell)
         return
     end
+    -- 打怪：先把这一仗演出来（每一下的伤害由 combat.simulate 的记录给出，结果和结算一样），演完再结算
+    if c.kind == 'monster' and walking.fought ~= cell and (meta.battleSpeed or 1) > 0 then
+        local m = run:monsterAt(cell)
+        local log = {}
+        local r0 = combat.simulate(run.hero, m, log)
+        if r0.canAttack and r0.canWin and #log > 0 then
+            walking.waitBattle = true
+            local tx, ty = tileXY(cell)
+            local hx, hy = tileXY(run.pos)
+            if tx ~= hx then facing = tx > hx and 'right' or 'left' else facing = ty > hy and 'down' or 'up' end
+            battle.start({
+                tile = function(k) local x, y = tileXY(k); return x, y end, size = TILE,
+                heroCell = run.pos, monCell = cell, log = log, weapon = run.hero.weapon,
+                monHp = m.hp, heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
+                onDone = function() if walking then walking.waitBattle = false; walking.fought = cell; walking.t = STEP_TIME end end,
+            })
+            return
+        end
+    end
     local before = config.copyHero(run.hero)
     local from = run.pos
+    local monId = c.kind == 'monster' and c.id or nil
+    local fought = walking.fought == cell
+    local threat = monId and run:monsterAt(cell).atk > select(2, combat.effectiveStats(run.hero))
     local r = run:step(cell)
     if r.msg ~= '' then setMsg(r.msg, not r.ok or run.status == 'dead') end
     if not r.ok then walking = nil; afterStop(); return end
@@ -358,15 +430,20 @@ local function walkStep()
         else facing = ty > fy and 'down' or 'up' end
         heroAnim = { from = from, to = run.pos, t = 0 }
     end
-    if c.kind == 'monster' then fx.play('hit'); fx.shake(1.2)
+    if c.kind == 'monster' and not fought then fx.play('hit'); fx.shake(1.2)
     elseif c.kind == 'item' then fx.play('pick') end
     local lost = before.hp - run.hero.hp
-    if lost > 0 then float(cell, '-' .. lost, C.warn)
+    -- 打死了：怪碎掉，再看看这一仗值不值得夸
+    if monId and run.cells[cell].kind == 'floor' then KF.onKill(cell, monId, before, fought, threat) end
+    if monId and fought then
+        -- 演过了，伤害数字已经弹过，不再飘一次
+    elseif lost > 0 then float(cell, '-' .. lost, C.warn)
     elseif run.hero.hp > before.hp then float(cell, '+' .. (run.hero.hp - before.hp), { 0.5, 1, 0.7 })
     elseif run.hero.atk > before.atk then float(cell, '攻+' .. (run.hero.atk - before.atk), C.atk)
     elseif run.hero.def > before.def then float(cell, '防+' .. (run.hero.def - before.def), C.def) end
     walking.i = walking.i + 1
     walking.confirmedFatal = false
+    walking.fought = nil
     if not walking.bossFight and tutorialBossNear() then
         saveGame()
         openBossScene()
@@ -438,8 +515,34 @@ function continueFlow()
         openModal('井神的诏令', notes, { { label = '知道了', primary = true, fn = function() closeModal(); continueFlow() end } })
         return
     end
+    if run.rewardOffer then openReward(); return end
     if run:pendingEngrave() then openEngrave(); return end
     if run.decreeOffer then openDecree(); return end
+end
+
+-- 打败精英后的三选一（制作人：让每场战斗都成为构筑的一部分）
+function openReward()
+    local o = run.rewardOffer
+    if not o then return end
+    local names = {}
+    for k, w in ipairs(o.choices) do names[k] = W(w) end
+    local function pick(kind)
+        closeModal()
+        local r = run:chooseReward(kind)
+        if r.msg ~= '' then setMsg(r.msg); fx.play('pick') end
+        saveGame()
+        continueFlow()
+    end
+    openModal('精英的战利品', {
+        '精英倒下了。选一样带走：',
+        '攻击强化：攻击 +' .. o.atk .. '，永久。',
+        '刻一个图案：从 ' .. table.concat(names, '、') .. ' 里挑一个刻到断臂转轮上。',
+        '恢复生命：生命 +' .. o.heal .. '，要付一半金币（' .. o.cost .. ' 金）。',
+    }, {
+        { label = '攻击 +' .. o.atk, fn = function() pick('atk') end },
+        { label = '刻图案', primary = true, fn = function() pick('engrave') end },
+        { label = '生命 +' .. o.heal .. '（−' .. o.cost .. ' 金）', fn = function() pick('heal') end },
+    })
 end
 
 -- 从转轮上挑一格（当掉、擦掉用）。onPick(轮子, 格子)
@@ -953,7 +1056,9 @@ function love.update(dt)
     fx.update(dt)
     armView.update(dt)
     updatePicker(dt)
-    if walking and not modal then
+    battle.update(dt)
+    if scene == 'game' and run and run.status == 'playing' and not battle.active() then KF.scan() end
+    if walking and not modal and not walking.waitBattle then
         walking.t = walking.t + dt
         if walking.t >= STEP_TIME then walking.t = 0; walkStep() end
     end
@@ -1007,7 +1112,7 @@ local function drawTile(i)
     setColor(shade(base, 1.25)); g.rectangle('fill', x + 2, y + 1, TILE - 4, 1)
     local cx, cy = x + TILE / 2, y + TILE / 2 - 2
     if c.kind == 'monster' then
-        monsters.draw(c.id, cx, y + TILE - lip - 1, clock, i)
+        monsters.draw(c.id, cx, y + TILE - lip - 1, clock, i, battle.monster(i))
     elseif c.kind == 'item' then
         if c.id == 'smallPotion' or c.id == 'bigPotion' then
             local s = (c.id == 'bigPotion' and 1.3 or 1) * K
@@ -1098,8 +1203,16 @@ local function drawPixel()
         hx = fx0 + (hx - fx0) * heroAnim.t
         hy = fy0 + (hy - fy0) * heroAnim.t
     end
+    local bdx, bdy, bflash = battle.heroOffset()
+    hx, hy = hx + bdx, hy + bdy
     setColor({ 0, 0, 0 }, 0.35); g.ellipse('fill', hx + TILE / 2, hy + TILE - 5, 7, 2)
     miner.draw(facing, hx + TILE / 2, hy + TILE - 4, run.status == 'dead', 22)
+    if bflash > 0 then
+        g.setBlendMode('add'); setColor({ 1, 0.2, 0.2 }, bflash * 0.5)
+        g.ellipse('fill', hx + TILE / 2, hy + TILE / 2 - 2, 8, 11)
+        g.setBlendMode('alpha')
+    end
+    battle.drawPixel(function(id, cx, feet, f) monsters.draw(id, cx, feet, clock, 0, f) end)
     -- 矿灯：主角附近暖、远处冷暗（最暗也看得清格子）
     fx.lamp(MAP_X, MAP_Y - 4, run.w * TILE, run.h * TILE + 4, hx + TILE / 2, hy + TILE / 2 - 4, 170)
     -- 断臂转轮（机械小臂）。刻图案时整条手臂移到画面中间、放大，其余压暗
@@ -1316,7 +1429,7 @@ local function drawUI()
         local h = run.hero
         local atk, def = combat.effectiveStats(h)
         text(run:floor().name .. ((runOpts.depth or 0) > 0 and ('　深度 ' .. runOpts.depth) or ''), MAP_X, 7, 10, C.accent)
-        stat('hp', '', h.hp, 190, C.hp)
+        stat('hp', '', battle.heroHp() or h.hp, 190, C.hp)
         stat('atk', '攻', atk, 250, C.atk)
         stat('def', '防', def, 300, C.def)
         stat('keys', '钥', h.keys, 350, { 0.85, 0.76, 0.48 })
@@ -1336,7 +1449,9 @@ local function drawUI()
         -- 格子上的字；怪物头上挂"掉多少血"的牌子
         for i, c in ipairs(picker and {} or run.cells) do  -- 刻图案时地图上的字不画（地图被压暗了）
             local x, y = tileXY(i)
-            if c.kind == 'monster' then
+            if c.kind == 'monster' and i == battle.monCell() then
+                -- 正在打的怪：掉血牌先收起来，让位给弹出的伤害数字
+            elseif c.kind == 'monster' then
                 local p = preview(i)
                 local tag = p.fatal and (p.text == '会死' and '会死' or p.text) or ('−' .. p.lose)
                 if run.tutorial and c.id == 'eye' then tag = '？？？' end
@@ -1360,6 +1475,7 @@ local function drawUI()
         for _, f in ipairs(floats) do
             text(f.text, f.x - 10, f.y - f.t * 16, 8, f.color, 'center', TILE + 20)
         end
+        battle.drawUI(text, LW)
         drawArmUI()
         local tip, age = coach.current(run, clock)
         local recentError = msgErr and clock - msgTime < 1.5
@@ -1486,6 +1602,11 @@ function openSettings(back)
             local nxt = VOLUMES[1]
             for k, v in ipairs(VOLUMES) do if v > vol + 0.01 then nxt = v; break end end
             meta.volume = nxt; saveMeta(); applySettings(); fx.play('pick'); reopen()
+        end },
+        { label = '战斗动画：' .. (({ [0] = '跳过', [1] = '正常', [2.5] = '快' })[meta.battleSpeed or 1] or '正常'), fn = function()
+            local v = meta.battleSpeed or 1
+            meta.battleSpeed = v == 1 and 2.5 or (v == 2.5 and 0 or 1)
+            saveMeta(); reopen()
         end },
         { label = '重新走新手教程', fn = function()
             openModal('重新走新手教程？', { '会从新手教程的第 1 层开始，当前这一局的进度会清掉。' }, {
@@ -1677,6 +1798,7 @@ function love.mousepressed(mx, my, button)
         return
     end
     if scene == 'shop' then shopClick(lx, ly); return end
+    if battle.active() then battle.skip(); return end
     -- 刻图案的场景：按住轮子拨动；没拨动就松手 = 点这一格
     if picker then
         if pickerBusy() then return end
@@ -1821,6 +1943,7 @@ function love.keypressed(key)
         return
     end
     if picker then return end
+    if battle.active() then battle.skip(); return end
     if key == 'r' and run.arm and run.status == 'playing' and not walking then
         keyboardMap, keyTarget = true, nil
         spinArm('gold')
@@ -1841,7 +1964,8 @@ end
 return {
     getRun = function() return run end,
     getModal = function() return modal end,
-    busy = function() return walking ~= nil or armView.busy() or pickerBusy() end,
+    busy = function() return walking ~= nil or armView.busy() or pickerBusy() or battle.active() end,
+    setBattleSpeed = function(v) meta.battleSpeed = v end,
     act = act,
     newGame = function(seed, tutorial)
         closeModal()

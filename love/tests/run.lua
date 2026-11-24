@@ -88,6 +88,14 @@ for _, c in ipairs(V.combat) do
     local r = combat.simulate({ atk = c.atk, def = c.def, weapon = c.weapon, boons = c.boons }, config.MONSTERS[c.monster])
     check(r.canAttack == c.canAttack and r.canWin == c.canWin and r.damage == c.damage and r.hits == c.hits,
         string.format('战斗 %s 攻%d防%d %s %s：期望 %d/%d，实际 %d/%d', c.monster, c.atk, c.def, tostring(c.weapon), str(c.boons), c.damage, c.hits, r.damage, r.hits))
+    if c.log then
+        local log = {}
+        combat.simulate({ atk = c.atk, def = c.def, weapon = c.weapon, boons = c.boons }, config.MONSTERS[c.monster], log)
+        local parts = {}
+        for k, e in ipairs(log) do parts[k] = e.who .. ':' .. e.hit .. ':' .. e.mhp .. ':' .. e.loss .. ':' .. table.concat(e.tags, '+') end
+        local got = table.concat(parts, ' ')
+        check(got == c.log, string.format('战斗记录 %s 攻%d防%d：\n  期望 %s\n  实际 %s', c.monster, c.atk, c.def, c.log, got))
+    end
 end
 
 -- 2. 楼层逐步（每一步都存档读档）
@@ -175,6 +183,7 @@ for _, e in ipairs(V.engraves) do
     for _ = 1, e.floorIndex - 1 do run:move(1, 0); run:finishFloor(false) end
     run.hero = { hp = 999, atk = 60, def = 60, keys = 0, gold = 0, weapon = e.current }
     run:move(1, 0)
+    run:chooseReward('engrave') -- 精英倒下先三选一奖励，这里选刻图案
     run:move(1, 0)
     local got, want = {}, {}
     for _, p in ipairs(run.engraveQueue) do got[#got + 1] = p.from .. ':' .. table.concat(p.choices, '/') end
@@ -315,6 +324,25 @@ for _, t in ipairs(V.tutorials) do
     end
 end
 
+-- 精英奖励三选一
+for _, v in ipairs(V.rewardRuns) do
+    local fs = {}
+    for k = 1, v.floors do fs[k] = tiny({ '@>' }) end
+    fs[v.floors] = tiny({ '@G.>' }, { eliteReward = true })
+    local run = Run.new(fs, 'digger', v.seed)
+    for _ = 1, v.floors - 1 do run:move(1, 0); run:finishFloor(false) end
+    run.hero = { hp = 700, atk = 70, def = 70, keys = 0, gold = 33 + v.seed }
+    run:move(1, 0)
+    local o = run.rewardOffer
+    local same = o and o.atk == v.offer.atk and o.heal == v.offer.heal and o.cost == v.offer.cost and table.concat(o.choices, ',') == table.concat(v.offer.choices, ',')
+    run = reload(run)
+    run:chooseReward(v.kind)
+    local q = {}
+    for k, p in ipairs(run.engraveQueue) do q[k] = table.concat(p.choices, ',') end
+    check(same and heroEq(run.hero, v.hero) and table.concat(q, '|') == table.concat(v.queue, '|'),
+        string.format('精英奖励 种子%d 第%d层 %s：期望 %s，实际 %s', v.seed, v.floors, v.kind, heroStr(v.hero), heroStr(run.hero)))
+end
+
 -- 11. 灵魂碎片
 local metaMod = require('core.meta')
 for _, v in ipairs(V.shardsVec) do
@@ -359,5 +387,5 @@ for _, cr in ipairs(V.charRuns) do
 end
 
 print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d+%d、断臂转轮 %d、刻图案 %d、大转盘 %d、当铺 %d、骨坛 %d、诏令 %d+%d、路线 %d、教程 %d、碎片 %d+%d+%d+%d）',
-    pass, fail, #V.combat, #V.scenarios, #V.routeWalks, #V.armSessions, #V.engraves, #V.wheels, #V.shops, #V.altars, #V.decreeDraws, #V.decreeRuns, #V.routes, #V.tutorials, #V.shardsVec, #V.perkRuns, #V.metaRoutes, #V.charRuns))
+    pass, fail, #V.combat, #V.scenarios, #V.routeWalks, #V.armSessions, #V.engraves, #V.wheels, #V.shops, #V.altars, #V.decreeDraws, #V.decreeRuns, #V.routes, #V.tutorials, #V.shardsVec, #V.perkRuns, #V.metaRoutes, #V.charRuns) .. '；精英奖励 ' .. #V.rewardRuns)
 os.exit(fail == 0 and 0 or 1)

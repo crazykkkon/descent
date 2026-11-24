@@ -39,14 +39,26 @@ function M.load()
         sounds.pick = makeSound(0.14, function(t, p) return math.sin(t * 2 * math.pi * (880 + 440 * p)) * (1 - p) * 0.22 end)
         -- 滴水
         sounds.drip = makeSound(0.09, function(t, p) return math.sin(t * 2 * math.pi * (1400 - 700 * p)) * (1 - p) ^ 2 * 0.08 end)
+        -- 主角挨打：闷一点、低一点
+        sounds.thud = makeSound(0.11, function(t, p) return math.sin(t * 2 * math.pi * (90 - 30 * p)) * (1 - p) ^ 2 * 0.45 + noise() * (1 - p) ^ 3 * 0.15 end)
+        -- 打死：碎裂声
+        sounds.kill = makeSound(0.32, function(t, p) return noise() * (1 - p) ^ 1.5 * 0.4 + math.sin(t * 2 * math.pi * (180 - 120 * p)) * (1 - p) * 0.35 end)
+        -- 连杀：一声清脆的叮（音高按连杀数往上走）
+        sounds.combo = makeSound(0.25, function(t, p) return (math.sin(t * 2 * math.pi * 880) + 0.5 * math.sin(t * 2 * math.pi * 1320)) * (1 - p) ^ 2 * 0.22 end)
+        -- 算准了：上行的四个音
+        sounds.perfect = makeSound(0.7, function(t, p)
+            local f = t < 0.1 and 523 or (t < 0.2 and 659 or (t < 0.3 and 784 or 1047))
+            return (math.sin(t * 2 * math.pi * f) + 0.3 * math.sin(t * 2 * math.pi * f * 2)) * (1 - p) ^ 1.2 * 0.3
+        end)
     end)
     M.soundOk = ok
 end
 
-function M.play(name)
+-- pitch：音高倍数（不给就是 1）
+function M.play(name, pitch)
     local s = sounds[name]
     if not s then return end
-    pcall(function() s:stop(); s:play() end)
+    pcall(function() s:stop(); s:setPitch(pitch or 1); s:play() end)
 end
 
 -- ---------- 画面震动 ----------
