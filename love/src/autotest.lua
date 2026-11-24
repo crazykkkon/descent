@@ -25,7 +25,7 @@ function M.start()
         end
         return false
     end
-    -- 鼠标移到某个格子上（和 main.lua 的地图位置一致：每格 40，左上角 34, 46）
+    -- 鼠标移到某个格子上（和 main.lua 的地图位置一致：每格 26，左上角 34, 44）
     local function hoverCell(i)
         local run = game.getRun()
         local x = (i - 1) % run.w
@@ -33,7 +33,7 @@ function M.start()
         local w, h = love.graphics.getDimensions()
         local S = math.max(1, math.min(math.floor(w / 640), math.floor(h / 360)))
         local OX, OY = math.floor((w - 640 * S) / 2), math.floor((h - 360 * S) / 2)
-        love.mouse.setPosition(OX + (34 + x * 40 + 20) * S, OY + (46 + y * 40 + 16) * S)
+        love.mouse.setPosition(OX + (34 + x * 26 + 13) * S, OY + (44 + y * 26 + 10) * S)
     end
     local function find(pred)
         for i, c in ipairs(game.getRun().cells) do if pred(c, i) then return i end end
@@ -112,6 +112,14 @@ function M.start()
     co = coroutine.create(function()
         love.filesystem.remove('save.lua')
         love.filesystem.remove('meta.lua')
+        -- 0. 开局界面和设置
+        sleep(0.5)
+        say('开局界面：' .. tostring(game.getScene()))
+        shot('00-title')
+        game.openSettings(); sleep(0.2)
+        say('设置：' .. tostring(modalTitle()))
+        shot('00b-settings')
+        game.closeModal()
         -- 1. 新手教程
         game.newGame(1, true)
         sleep(0.3)
@@ -181,6 +189,7 @@ function M.start()
                     end
                 end
                 once('03-floor1')
+                game.openPause(); sleep(0.1); say('暂停：' .. tostring(modalTitle())); once('03c-pause'); game.closeModal()
                 local mon = find(function(c) return c.kind == 'monster' end)
                 if mon then hoverCell(mon); sleep(0.3); once('03b-hover'); love.mouse.setPosition(1, 1) end
             end

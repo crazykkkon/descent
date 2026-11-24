@@ -21,6 +21,7 @@ local miner = require('view.miner')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
 local coach = require('view.coach')
+local titleView = require('view.title')
 
 -- ---------- 尺寸 ----------
 local LW, LH = 640, 360          -- 逻辑画布
@@ -58,7 +59,9 @@ local walking = nil        -- { path, i, t, from, confirmedFatal, confirmedBreak
 local facing = 'down'
 local heroAnim = nil       -- { from, to, t }
 local floats = {}          -- 飘字 { text, x, y, t, color }
-local meta = { tutorialDone = false, crt = true }
+local meta = { tutorialDone = false, crt = true, volume = 1, fullscreen = false }
+local scene = 'title'      -- 'title' 开局界面 / 'game' 游戏中
+local titleSel = 1         -- 开局界面选中的第几项
 local facilityOpener
 
 local function font(px)
@@ -98,6 +101,7 @@ end
 
 local openExit, openSummary, openDeath, openVictory, openEngrave, openDecree, openArm, openWheel, openPawn, openAltar, openStall, newGame, loadGame, continueFlow
 local spinArm, toggleHold
+local hasSave, applySettings, toGame, continueGame, startNewGame, backToTitle, openSettings, openPause, titleItems, titleItemAt, drawTitleUI
 
 local function setMsg(s, err) msg, msgErr = s or '', err or false end
 
@@ -714,12 +718,9 @@ function love.load()
         meta = m
         if meta.crt == nil then meta.crt = true end
     end
-    local data = love.filesystem.getInfo(SAVE_FILE) and serialize.load(love.filesystem.read(SAVE_FILE))
-    if data and data.run and data.run.picks then
-        loadGame(data)
-    else
-        newGame()
-    end
+    if meta.volume == nil then meta.volume = 1 end
+    applySettings()
+    scene = 'title'   -- 先到开局界面：继续游戏 / 开始游戏 / 设置 / 退出
     if os.getenv('DESCENT_AUTOTEST') then require('autotest').start() end
 end
 
@@ -747,9 +748,20 @@ local function dripSpots()
 end
 
 local updateHold -- 长按方向键连续走（定义在输入部分）
+local lastMouse = { x = -1, y = -1 }
 
 function love.update(dt)
     clock = clock + dt
+    if scene == 'title' then
+        fx.update(dt)
+        if not modal then
+            local mx, my = love.mouse.getPosition()
+            local k = titleItemAt((mx - OX) / S, (my - OY) / S)
+            if k and (mx ~= lastMouse.x or my ~= lastMouse.y) then titleSel = k end
+            lastMouse.x, lastMouse.y = mx, my
+        end
+        return
+    end
     updateHold(dt)
     fx.update(dt)
     armView.update(dt)
@@ -1023,6 +1035,26 @@ local function drawArmUI()
     end
 end
 
+local function drawModal()
+    if modal then
+        love.graphics.setColor(0, 0, 0, 0.6)
+        love.graphics.rectangle('fill', 0, 0, love.graphics.getDimensions())
+        local x, y, w, hh, rects = modalLayout()
+        setColor(C.panel); love.graphics.rectangle('fill', OX + x * S, OY + y * S, w * S, hh * S)
+        setColor(C.line); love.graphics.rectangle('line', OX + x * S, OY + y * S, w * S, hh * S)
+        text(modal.title, x + 16, y + 12, 12, C.accent)
+        for k, line in ipairs(modal.lines) do
+            text(line, x + 16, y + 30 + (k - 1) * modalLineH(), #modal.lines > 12 and 7 or 8, C.text, 'left', w - 32)
+        end
+        for k, b in ipairs(modal.buttons) do
+            local r = rects[k]
+            setColor(b.danger and { 0.35, 0.12, 0.16 } or (b.primary and { 0.12, 0.35, 0.3 } or { 0.11, 0.16, 0.19 }))
+            love.graphics.rectangle('fill', OX + r.x * S, OY + r.y * S, r.w * S, r.h * S)
+            text(b.label, r.x, r.y + 5, 8, C.text, 'center', r.w)
+        end
+    end
+end
+
 local function drawUI()
     do
         local h = run.hero
@@ -1093,36 +1125,143 @@ local function drawUI()
         end
     end
 
-    -- 弹窗
-    if modal then
-        love.graphics.setColor(0, 0, 0, 0.6)
-        love.graphics.rectangle('fill', 0, 0, love.graphics.getDimensions())
-        local x, y, w, hh, rects = modalLayout()
-        setColor(C.panel); love.graphics.rectangle('fill', OX + x * S, OY + y * S, w * S, hh * S)
-        setColor(C.line); love.graphics.rectangle('line', OX + x * S, OY + y * S, w * S, hh * S)
-        text(modal.title, x + 16, y + 12, 12, C.accent)
-        for k, line in ipairs(modal.lines) do
-            text(line, x + 16, y + 30 + (k - 1) * modalLineH(), #modal.lines > 12 and 7 or 8, C.text, 'left', w - 32)
-        end
-        for k, b in ipairs(modal.buttons) do
-            local r = rects[k]
-            setColor(b.danger and { 0.35, 0.12, 0.16 } or (b.primary and { 0.12, 0.35, 0.3 } or { 0.11, 0.16, 0.19 }))
-            love.graphics.rectangle('fill', OX + r.x * S, OY + r.y * S, r.w * S, r.h * S)
-            text(b.label, r.x, r.y + 5, 8, C.text, 'center', r.w)
-        end
-    end
+    drawModal()
 end
 
 function love.draw()
-    drawPixel()
+    if scene == 'title' then
+        love.graphics.setCanvas(canvas)
+        titleView.draw(LW, LH, clock)
+        love.graphics.setCanvas()
+    else
+        drawPixel()
+    end
     love.graphics.setCanvas(frame)
     love.graphics.clear(0, 0, 0)
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(canvas, OX, OY, 0, S, S)
-    drawUI()
+    if scene == 'title' then drawTitleUI(); drawModal() else drawUI() end
     love.graphics.setCanvas()
     love.graphics.clear(0, 0, 0)
     fx.drawCRT(frame, meta.crt)
+end
+
+-- ---------- 开局界面、设置、暂停 ----------
+function hasSave() return love.filesystem.getInfo(SAVE_FILE) ~= nil end
+
+function applySettings()
+    love.audio.setVolume(meta.volume or 1)
+    if love.window.getFullscreen() ~= (meta.fullscreen or false) then
+        love.window.setFullscreen(meta.fullscreen or false, 'desktop')
+        relayout()
+        makeFrame()
+    end
+end
+
+function toGame() scene = 'game'; fx.resetWatch() end
+
+function continueGame()
+    local data = hasSave() and serialize.load(love.filesystem.read(SAVE_FILE))
+    if data and data.run and data.run.picks then
+        toGame()
+        loadGame(data)
+    else
+        toGame()
+        newGame()
+    end
+end
+
+function startNewGame()
+    love.filesystem.remove(SAVE_FILE)
+    closeModal()
+    walking, heroAnim = nil, nil
+    toGame()
+    newGame()
+end
+
+function backToTitle()
+    if run and run.status == 'playing' then saveGame() end
+    closeModal()
+    walking, heroAnim = nil, nil
+    scene = 'title'
+    titleSel = 1
+end
+
+local VOLUMES = { 0, 0.25, 0.5, 0.75, 1 }
+
+-- 设置：老电视滤镜、全屏、音量、重新走新手教程。back：关掉设置后回到哪里
+function openSettings(back)
+    local function reopen() openSettings(back) end
+    local vol = meta.volume or 1
+    local buttons = {
+        { label = '老电视滤镜：' .. (meta.crt and '开' or '关'), fn = function() meta.crt = not meta.crt; saveMeta(); reopen() end },
+        { label = '全屏：' .. (meta.fullscreen and '开' or '关'), fn = function() meta.fullscreen = not meta.fullscreen; saveMeta(); applySettings(); reopen() end },
+        { label = '音量：' .. math.floor(vol * 100 + 0.5) .. '%', fn = function()
+            local nxt = VOLUMES[1]
+            for k, v in ipairs(VOLUMES) do if v > vol + 0.01 then nxt = v; break end end
+            meta.volume = nxt; saveMeta(); applySettings(); fx.play('pick'); reopen()
+        end },
+        { label = '重新走新手教程', fn = function()
+            openModal('重新走新手教程？', { '会从新手教程的第 1 层开始，当前这一局的进度会清掉。' }, {
+                { label = '算了', primary = true, fn = reopen },
+                { label = '重新走', danger = true, fn = function() meta.tutorialDone = false; saveMeta(); startNewGame() end },
+            })
+        end },
+        { label = '返回', primary = true, fn = back },
+    }
+    openModal('设置', { '老电视滤镜也可以在游戏里按 F2 开关。' }, buttons)
+    modal.onEscape = back
+end
+
+function openPause()
+    openModal('暂停', { '进度会自动保存。' }, {
+        { label = '继续', primary = true, fn = closeModal },
+        { label = '设置', fn = function() openSettings(openPause) end },
+        { label = '回到开局界面', fn = backToTitle },
+        { label = '退出游戏', danger = true, fn = function() if run and run.status == 'playing' then saveGame() end; love.event.quit() end },
+    })
+    modal.onEscape = closeModal
+end
+
+-- 开局界面的菜单
+function titleItems()
+    local items = {}
+    if hasSave() then items[#items + 1] = { label = '继续游戏', fn = continueGame } end
+    items[#items + 1] = { label = hasSave() and '重新开始' or '开始游戏', fn = function()
+        if not hasSave() then startNewGame(); return end
+        openModal('重新开始？', { '当前这一局的进度会清掉，从第 1 层重新往下走。' }, {
+            { label = '算了', primary = true, fn = closeModal },
+            { label = '重新开始', danger = true, fn = startNewGame },
+        })
+        modal.onEscape = closeModal
+    end }
+    items[#items + 1] = { label = '设置', fn = function() openSettings(closeModal) end }
+    items[#items + 1] = { label = '退出游戏', fn = function() love.event.quit() end }
+    return items
+end
+
+local TITLE_X, TITLE_Y0, TITLE_DY = 58, 168, 26
+function titleItemAt(lx, ly)
+    for k = 1, #titleItems() do
+        local y = TITLE_Y0 + (k - 1) * TITLE_DY
+        if lx >= TITLE_X - 8 and lx <= TITLE_X + 130 and ly >= y - 4 and ly <= y + 18 then return k end
+    end
+end
+
+function drawTitleUI()
+    text('坠井者', TITLE_X - 4, 62, 40, { 0.95, 0.86, 0.62 })
+    text('D E S C E N T', TITLE_X, 116, 8, { 0.55, 0.62, 0.64 })
+    local items = titleItems()
+    titleSel = math.max(1, math.min(#items, titleSel))
+    for k, it in ipairs(items) do
+        local y = TITLE_Y0 + (k - 1) * TITLE_DY
+        local on = k == titleSel and not modal
+        if on then
+            rect({ 0.85, 0.64, 0.25 }, TITLE_X - 8, y - 2, 3, 18, 1, 1)
+            rect({ 0.85, 0.64, 0.25 }, TITLE_X - 4, y - 3, 130, 20, 0.12, 3)
+        end
+        text(it.label, TITLE_X + 4, y, 12, on and { 1, 0.86, 0.5 } or { 0.72, 0.76, 0.76 })
+    end
 end
 
 -- ---------- 输入 ----------
@@ -1134,6 +1273,11 @@ function love.mousepressed(mx, my, button)
         for k, r in ipairs(rects) do
             if lx >= r.x and lx <= r.x + r.w and ly >= r.y and ly <= r.y + r.h then modal.buttons[k].fn(); return end
         end
+        return
+    end
+    if scene == 'title' then
+        local k = titleItemAt(lx, ly)
+        if k then titleSel = k; titleItems()[k].fn() end
         return
     end
     if run.arm and run.status == 'playing' and not walking then
@@ -1200,6 +1344,24 @@ function love.keypressed(key)
     if key == 'f2' then
         meta.crt = not meta.crt
         love.filesystem.write(META_FILE, serialize.dump(meta))
+        if modal and modal.title == '设置' then modal.buttons[1].fn() end
+        return
+    end
+    -- Esc：弹窗里是"返回 / 关掉"，游戏中打开暂停
+    if key == 'escape' then
+        if modal then
+            if modal.onEscape then modal.onEscape() end
+        elseif scene == 'game' then
+            hold = nil
+            openPause()
+        end
+        return
+    end
+    if scene == 'title' and not modal then
+        local items = titleItems()
+        if key == 'up' or key == 'w' then titleSel = (titleSel - 2) % #items + 1
+        elseif key == 'down' or key == 's' then titleSel = (titleSel % #items) + 1
+        elseif key == 'return' or key == 'space' then items[titleSel].fn() end
         return
     end
     -- F9：重新走一遍新手教程（试玩用；已经打过教程的存档默认不会再进教程）
@@ -1209,6 +1371,7 @@ function love.keypressed(key)
         love.filesystem.remove(SAVE_FILE)
         closeModal()
         walking, hold = nil, nil
+        toGame()
         newGame()
         return
     end
@@ -1239,6 +1402,7 @@ return {
     act = act,
     newGame = function(seed, tutorial)
         closeModal()
+        scene = 'game'
         meta.tutorialDone = not tutorial
         newGame(seed)
     end,
@@ -1252,6 +1416,10 @@ return {
         for i, c in ipairs(run.cells) do if c.kind == 'exit' and c.to == k then return i end end
     end,
     setCRT = function(on) meta.crt = on end,
+    getScene = function() return scene end,
+    openSettings = function() openSettings(closeModal) end,
+    openPause = function() openPause() end,
+    closeModal = function() closeModal() end,
     -- 自动测试：按下 / 松开一个键（down = true 按下，false 松开）
     pressKey = function(key, down)
         fakeDown[key] = down or nil
