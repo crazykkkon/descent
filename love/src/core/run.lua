@@ -167,23 +167,26 @@ end
 
 function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
 
-function Run:armPrice(hold)
+-- held 里锁住的轮子越多越贵（锁一个 ×2，锁两个 ×3）
+function Run:armPrice(held)
     local base = rng.risingPrice(armMod.BASE_PRICE, self.arm and self.arm.spins or 0)
-    local gold = hold and rng.halfPrice(base) or base
+    local n = 0
+    for r = 1, 3 do if held and held[r] then n = n + 1 end end
+    local gold = math.floor(base * armMod.HOLD_MULTIPLIER[math.min(n, 2)] / 5 + 0.5) * 5
     return { gold = gold, blood = rng.bloodPrice(gold) }
 end
 
 local function anyHeld(t) return t and (t[1] or t[2] or t[3]) and true or false end
 local function allHeld(t) return t[1] and t[2] and t[3] and true or false end
 
--- 转断臂转轮；held[i] 为 true 的轮子锁住不动（半价）。返回 { ok, msg, faces }
+-- 转断臂转轮；held[i] 为 true 的轮子锁住不动（锁得越多越贵）。返回 { ok, msg, faces }
 function Run:armSpin(pay, held)
     local arm = self.arm
     if self.status ~= 'playing' or not arm then return { ok = false, msg = '' } end
     if armMod.empty(arm) then return { ok = false, msg = '转轮上还没有刻任何图案' } end
     local hold = anyHeld(held)
     if hold and allHeld(held) then return { ok = false, msg = '要锁住一两个轮子，留至少一个重转' } end
-    local price = self:armPrice(hold)
+    local price = self:armPrice(held)
     if pay == 'gold' then
         if self.hero.gold < price.gold then return { ok = false, msg = '金币不够（要 ' .. price.gold .. '）' } end
         self.hero.gold = self.hero.gold - price.gold

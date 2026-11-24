@@ -396,20 +396,23 @@ test('断臂转轮：三个轮子各 5 格；概率是三个轮子上各自占�
     assert.deepEqual(armOutcome(['hammer', null, 'hammer']), { kind: 'none' });
 });
 
-test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁轴半价；结果由种子决定', () => {
+test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁轴更贵（锁一个 ×2、两个 ×3）；结果由种子决定', () => {
     const plan = [tiny(['@.>']), tiny(['@.>'])];
     const run = new Run(plan, 'digger', 7);
     run.arm!.reels = reels(['boneKnife'], [null, 'hammer'], ['hammer', 'boneKnife']);
     run.hero.gold = 500;
-    assert.equal(run.armPrice(false).gold, 10);
+    assert.equal(run.armPrice().gold, 10);
     const a = run.armSpin('gold');
     assert.ok(a.ok && a.faces!.length === 3);
-    assert.equal(run.armPrice(false).gold, 15);
-    assert.equal(run.armPrice(true).gold, 10, '锁轴半价（取到 5 的倍数）');
+    assert.equal(run.armPrice().gold, 15);
+    assert.equal(run.armPrice([true, false, false]).gold, 30, '锁一个轮子 ×2');
+    assert.equal(run.armPrice([true, true, false]).gold, 45, '锁两个轮子 ×3');
     assert.equal(run.hero.gold, 490);
     const kept = run.arm!.stops[0];
     run.armSpin('gold', [true, false, false]);
     assert.equal(run.arm!.stops[0], kept, '锁住的轮子不动');
+    assert.equal(run.hero.gold, 460, '锁一个轮子付了 30');
+    assert.equal(run.armPrice().gold, 25, '锁轴也算转了一次，价格接着涨');
     assert.equal(run.armSpin('gold', [true, true, true]).ok, false, '不能三个都锁');
     // 同一个种子同样的操作，结果一样
     const run2 = new Run(plan, 'digger', 7);
@@ -419,9 +422,9 @@ test('断臂转轮：价格每层从 10 金起每次 ×1.5，换层重算；锁�
     // 换层后价格重算
     run.move(1, 0); run.move(1, 0);
     run.finishFloor(false);
-    assert.equal(run.armPrice(false).gold, 10);
+    assert.equal(run.armPrice().gold, 10);
     // 用生命付 ×1.5
-    assert.equal(run.armPrice(false).blood, 15);
+    assert.equal(run.armPrice().blood, 15);
 });
 
 test('断臂转轮：一个轮子刻满 5 格后再刻要选一格覆盖；精英倒下三选一', () => {

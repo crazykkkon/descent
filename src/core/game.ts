@@ -9,11 +9,11 @@ import { CombatResult, simulateCombat } from './combat';
 import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
 import { solveFloor } from './solver';
-import { ArmState, ArmSym, ARM_BASE_PRICE, armEmpty, armHas, armOutcome, armRoll, engraveCell, engravedCells, EngraveSym, firstBlank, newArm, WILD, WILD_CHANCE, WILD_NAME, WILD_PRICE } from './arm';
+import { ArmState, ArmSym, ARM_BASE_PRICE, HOLD_MULTIPLIER, armEmpty, armHas, armOutcome, armRoll, engraveCell, engravedCells, EngraveSym, firstBlank, newArm, WILD, WILD_CHANCE, WILD_NAME, WILD_PRICE } from './arm';
 import { draw } from './rng';
 import { WHEEL, WheelSector, wheelPrice, wheelStop } from './wheel';
 import { ActiveDecree, DECREE_PENALTY, DECREE_SPAN, DecreeDef, SILVER_BONUS_HP, TIER_NAMES, decreeFor, killCounts } from './decree';
-import { bloodPrice, halfPrice, pick, risingPrice } from './rng';
+import { bloodPrice, pick, risingPrice } from './rng';
 
 /** dead：主角死了，这一局结束 */
 export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
@@ -271,21 +271,22 @@ export class Run {
     /** 不刻 */
     skipEngrave(): void { this.engraveQueue.shift(); }
 
-    /** 断臂转轮下一次转的价格；hold 为 true 时是锁轴重转（半价） */
-    armPrice(hold: boolean): { gold: number; blood: number } {
+    /** 断臂转轮下一次转的价格；held 里锁住的轮子越多越贵（锁一个 ×2，锁两个 ×3） */
+    armPrice(held?: boolean[]): { gold: number; blood: number } {
         const base = risingPrice(ARM_BASE_PRICE, this.arm?.spins ?? 0);
-        const gold = hold ? halfPrice(base) : base;
+        const n = (held ?? []).filter(Boolean).length;
+        const gold = Math.round((base * HOLD_MULTIPLIER[Math.min(n, 2)]) / 5) * 5;
         return { gold, blood: bloodPrice(gold) };
     }
 
-    /** 转断臂转轮。held 里为 true 的轮子锁住不动（半价） */
+    /** 转断臂转轮。held 里为 true 的轮子锁住不动（更贵） */
     armSpin(pay: 'gold' | 'blood', held?: boolean[]): ArmSpinResult {
         const arm = this.arm;
         if (this.status !== 'playing' || !arm) return { ok: false, msg: '' };
         if (armEmpty(arm)) return { ok: false, msg: '转轮上还没有刻任何图案' };
         const hold = !!held && held.some(Boolean);
         if (hold && held!.every(Boolean)) return { ok: false, msg: '要锁住一两个轮子，留至少一个重转' };
-        const price = this.armPrice(hold);
+        const price = this.armPrice(held);
         if (pay === 'gold') {
             if (this.hero.gold < price.gold) return { ok: false, msg: `金币不够（要 ${price.gold}）` };
             this.hero.gold -= price.gold;

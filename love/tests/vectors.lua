@@ -64224,7 +64224,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -64238,7 +64238,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -64253,7 +64253,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -64267,7 +64267,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -64307,7 +64307,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -64322,7 +64322,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -64336,7 +64336,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -64350,7 +64350,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -64364,23 +64364,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "boneKnife", "blank", "blank" },
-          stops = { 0, 2, 4 },
+          ok = false,
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -64432,7 +64431,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -64446,7 +64445,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -64461,7 +64460,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -64475,7 +64474,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -64515,7 +64514,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -64530,7 +64529,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -64544,7 +64543,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -64558,7 +64557,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -64572,23 +64571,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "hammer", "hammer", "blank" },
-          stops = { 0, 2, 4 },
+          ok = false,
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -64640,7 +64638,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -64654,7 +64652,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 4
@@ -64670,7 +64668,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
+            gold = 75,
             weapon = "harpoon"
           },
           spins = 5
@@ -64685,7 +64683,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "harpoon"
           },
           spins = 6
@@ -64726,7 +64724,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -64741,7 +64739,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -64755,7 +64753,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -64769,7 +64767,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -64783,23 +64781,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "harpoon", "mossBlade", "harpoon" },
-          stops = { 0, 2, 4 },
+          ok = false,
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -64851,7 +64848,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -64865,7 +64862,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -64880,7 +64877,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -64894,7 +64891,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -64934,7 +64931,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -64949,7 +64946,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -64963,7 +64960,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -64977,7 +64974,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -64991,23 +64988,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "rustSword", "blank", "blank" },
-          stops = { 0, 2, 4 },
+          ok = false,
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -65059,7 +65055,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -65073,7 +65069,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -65088,7 +65084,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -65102,7 +65098,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -65142,7 +65138,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -65157,7 +65153,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -65171,7 +65167,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -65185,7 +65181,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "hammer"
           },
           spins = 5
@@ -65200,25 +65196,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "hammer"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "boneKnife", "hammer", "wild" },
-          stops = { 0, 2, 4 },
+          ok = false,
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "hammer"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -65270,7 +65265,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -65284,7 +65279,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -65299,7 +65294,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -65313,7 +65308,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -65353,7 +65348,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -65368,7 +65363,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -65382,7 +65377,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -65396,7 +65391,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -65410,23 +65405,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "wild", "blank", "blank" },
-          stops = { 0, 2, 4 },
+          ok = false,
+          stops = { 1, 0, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -65478,7 +65472,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -65492,7 +65486,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -65507,7 +65501,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -65521,7 +65515,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -65561,7 +65555,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -65576,7 +65570,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -65590,7 +65584,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -65604,7 +65598,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -65618,23 +65612,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "boneKnife", "blank" },
-          stops = { 4, 0, 1 },
+          ok = false,
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -65686,7 +65679,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -65700,7 +65693,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -65715,7 +65708,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -65729,7 +65722,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -65769,7 +65762,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -65784,7 +65777,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -65798,7 +65791,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -65812,7 +65805,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -65826,23 +65819,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "blank" },
-          stops = { 4, 0, 1 },
+          ok = false,
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -65895,7 +65887,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 3
@@ -65910,7 +65902,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 4
@@ -65926,7 +65918,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
+            gold = 75,
             weapon = "harpoon"
           },
           spins = 5
@@ -65941,7 +65933,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "harpoon"
           },
           spins = 6
@@ -65982,7 +65974,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290,
+            gold = 270,
             weapon = "harpoon"
           },
           spins = 2
@@ -65998,7 +65990,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275,
+            gold = 195,
             weapon = "harpoon"
           },
           spins = 3
@@ -66013,7 +66005,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240,
+            gold = 160,
             weapon = "harpoon"
           },
           spins = 4
@@ -66028,7 +66020,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 5
@@ -66043,25 +66035,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "harpoon", "harpoon", "harpoon" },
-          stops = { 4, 0, 1 },
+          ok = false,
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "harpoon"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -66113,7 +66104,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -66127,7 +66118,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -66142,7 +66133,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -66156,7 +66147,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -66196,7 +66187,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -66211,7 +66202,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -66225,7 +66216,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -66239,7 +66230,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -66253,23 +66244,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          stops = { 4, 0, 1 },
+          ok = false,
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -66321,7 +66311,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -66335,7 +66325,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -66350,7 +66340,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -66364,7 +66354,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -66404,7 +66394,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -66419,7 +66409,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -66433,7 +66423,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -66447,7 +66437,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -66461,23 +66451,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "wild", "wild" },
-          stops = { 4, 0, 1 },
+          ok = false,
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -66530,7 +66519,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 3
@@ -66545,7 +66534,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 4
@@ -66561,7 +66550,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
+            gold = 75,
             weapon = "harpoon"
           },
           spins = 5
@@ -66576,7 +66565,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "harpoon"
           },
           spins = 6
@@ -66617,7 +66606,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -66632,7 +66621,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -66646,7 +66635,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -66660,7 +66649,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 5
@@ -66675,25 +66664,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "wild", "wild", "wild" },
-          stops = { 4, 0, 1 },
+          ok = false,
+          stops = { 4, 2, 4 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "harpoon"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -66745,7 +66733,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -66759,7 +66747,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -66774,7 +66762,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -66788,7 +66776,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -66828,7 +66816,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -66843,7 +66831,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -66857,7 +66845,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -66871,7 +66859,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -66885,23 +66873,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          stops = { 3, 3, 2 },
+          ok = false,
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -66953,7 +66940,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -66967,7 +66954,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -66982,7 +66969,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -66996,7 +66983,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -67036,7 +67023,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -67051,7 +67038,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -67065,7 +67052,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -67079,7 +67066,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -67093,23 +67080,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          stops = { 3, 3, 2 },
+          ok = false,
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -67162,7 +67148,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 3
@@ -67177,7 +67163,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 4
@@ -67193,7 +67179,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
+            gold = 75,
             weapon = "harpoon"
           },
           spins = 5
@@ -67208,7 +67194,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "harpoon"
           },
           spins = 6
@@ -67249,7 +67235,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -67264,7 +67250,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -67278,7 +67264,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240,
+            gold = 160,
             weapon = "harpoon"
           },
           spins = 4
@@ -67293,7 +67279,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 5
@@ -67308,25 +67294,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "harpoon", "harpoon", "harpoon" },
-          stops = { 3, 3, 2 },
+          ok = false,
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "harpoon"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -67378,7 +67363,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -67392,7 +67377,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -67407,7 +67392,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -67421,7 +67406,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -67461,7 +67446,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -67476,7 +67461,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -67490,7 +67475,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -67504,7 +67489,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -67518,23 +67503,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          stops = { 3, 3, 2 },
+          ok = false,
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -67586,7 +67570,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -67600,7 +67584,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -67615,7 +67599,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -67629,7 +67613,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -67669,7 +67653,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290,
+            gold = 270,
             weapon = "hammer"
           },
           spins = 2
@@ -67685,7 +67669,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275,
+            gold = 195,
             weapon = "hammer"
           },
           spins = 3
@@ -67700,7 +67684,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240,
+            gold = 160,
             weapon = "hammer"
           },
           spins = 4
@@ -67715,7 +67699,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "hammer"
           },
           spins = 5
@@ -67730,25 +67714,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "hammer"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "hammer", "blank", "hammer" },
-          stops = { 3, 3, 2 },
+          ok = false,
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "hammer"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -67800,7 +67783,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -67814,7 +67797,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -67829,7 +67812,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -67843,7 +67826,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -67883,7 +67866,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -67898,7 +67881,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -67912,7 +67895,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -67926,7 +67909,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -67940,23 +67923,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "wild", "blank", "blank" },
-          stops = { 3, 3, 2 },
+          ok = false,
+          stops = { 2, 2, 2 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -68008,7 +67990,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -68022,7 +68004,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -68037,7 +68019,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -68051,7 +68033,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -68091,7 +68073,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -68106,7 +68088,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -68120,7 +68102,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -68134,7 +68116,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -68148,23 +68130,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "blank", "blank" },
-          stops = { 2, 2, 2 },
+          ok = false,
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -68216,7 +68197,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -68230,7 +68211,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -68245,7 +68226,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -68259,7 +68240,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -68299,7 +68280,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -68314,7 +68295,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -68328,7 +68309,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -68342,7 +68323,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -68356,23 +68337,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "blank" },
-          stops = { 2, 2, 2 },
+          ok = false,
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -68426,7 +68406,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 3
@@ -68441,7 +68421,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260,
+            gold = 225,
             weapon = "harpoon"
           },
           spins = 4
@@ -68457,7 +68437,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
+            gold = 75,
             weapon = "harpoon"
           },
           spins = 5
@@ -68472,7 +68452,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "harpoon"
           },
           spins = 6
@@ -68514,7 +68494,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290,
+            gold = 270,
             weapon = "harpoon"
           },
           spins = 2
@@ -68530,7 +68510,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275,
+            gold = 195,
             weapon = "harpoon"
           },
           spins = 3
@@ -68545,7 +68525,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240,
+            gold = 160,
             weapon = "harpoon"
           },
           spins = 4
@@ -68560,7 +68540,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 5
@@ -68575,25 +68555,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "saltDagger", "mossBlade", "harpoon" },
-          stops = { 2, 2, 2 },
+          ok = false,
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "harpoon"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -68645,7 +68624,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -68659,7 +68638,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -68674,7 +68653,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -68688,7 +68667,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160
+            gold = 0
           },
           spins = 6
         }
@@ -68728,7 +68707,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -68743,7 +68722,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -68757,7 +68736,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -68771,7 +68750,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -68785,23 +68764,22 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "rustSword", "blank", "blank" },
-          stops = { 2, 2, 2 },
+          ok = false,
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75
+            gold = 110
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -68853,7 +68831,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -68867,7 +68845,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -68882,7 +68860,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235,
+            gold = 75,
             weapon = "boneKnife"
           },
           spins = 5
@@ -68897,7 +68875,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "boneKnife"
           },
           spins = 6
@@ -68938,7 +68916,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -68953,7 +68931,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -68967,7 +68945,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -68981,7 +68959,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -68995,25 +68973,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "boneKnife"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "blank", "hammer", "hammer" },
-          stops = { 2, 2, 2 },
+          ok = false,
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "boneKnife"
           },
-          spins = 7
+          spins = 6
         }
       }
     },
@@ -69065,7 +69042,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 3
         },
@@ -69079,7 +69056,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 260
+            gold = 225
           },
           spins = 4
         },
@@ -69094,7 +69071,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 235
+            gold = 75
           },
           spins = 5
         },
@@ -69108,7 +69085,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 160,
+            gold = 0,
             weapon = "harpoon"
           },
           spins = 6
@@ -69149,7 +69126,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 290
+            gold = 270
           },
           spins = 2
         },
@@ -69164,7 +69141,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 275
+            gold = 195
           },
           spins = 3
         },
@@ -69178,7 +69155,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 240
+            gold = 160
           },
           spins = 4
         },
@@ -69192,7 +69169,7 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190
+            gold = 110
           },
           spins = 5
         },
@@ -69206,25 +69183,24 @@ return {
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 190,
+            gold = 110,
             weapon = "harpoon"
           },
           spins = 6
         },
         {
           pay = "gold",
-          ok = true,
-          faces = { "wild", "blank", "blank" },
-          stops = { 2, 2, 2 },
+          ok = false,
+          stops = { 0, 1, 1 },
           hero = {
             hp = 372,
             atk = 13,
             def = 13,
             keys = 0,
-            gold = 75,
+            gold = 110,
             weapon = "harpoon"
           },
-          spins = 7
+          spins = 6
         }
       }
     }

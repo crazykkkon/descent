@@ -835,7 +835,7 @@ function drawArmPanel()
     local x1, y1 = reelRect(1)
     love.graphics.rectangle('line', OX + (x1 - 2) * S, OY + (y1 + ARM.ch - 1) * S, (ARM.rw * 3 + ARM.gap * 2 + 4) * S, (ARM.ch + 1) * S)
     local anyHeld = held[1] or held[2] or held[3]
-    local price = run:armPrice(anyHeld)
+    local price = run:armPrice(armHeld)
     setColor({ 0.12, 0.35, 0.3 })
     love.graphics.rectangle('fill', OX + ARM_SPIN.x * S, OY + ARM_SPIN.y * S, ARM_SPIN.w * S, ARM_SPIN.h * S)
     text((anyHeld and '重转 ' or '转动 ') .. price.gold .. ' 金（R）', ARM_SPIN.x, ARM_SPIN.y + 4, 7, C.text, 'center', ARM_SPIN.w)

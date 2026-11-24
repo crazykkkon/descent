@@ -16,6 +16,8 @@ export const REELS = 3;
 export const REEL_SIZE = 5;
 /** 每层第一次转的价格（之后 ×1.5，换层重新算） */
 export const ARM_BASE_PRICE = 10;
+/** 锁轴更贵（制作人 2026-11-24）：锁一个轮子 ×2，锁两个 ×3 */
+export const HOLD_MULTIPLIER = [1, 2, 3];
 
 /** 赖子 */
 export const WILD = 'wild' as const;

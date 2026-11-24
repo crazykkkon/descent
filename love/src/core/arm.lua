@@ -14,6 +14,8 @@ M.WILD_PRICE = 150
 M.REELS = 3
 M.SIZE = 5
 M.BASE_PRICE = 10
+-- 锁轴更贵：锁一个轮子 ×2，锁两个 ×3
+M.HOLD_MULTIPLIER = { [0] = 1, 2, 3 }
 
 function M.new()
     local reels = {}
