@@ -1,6 +1,6 @@
 -- 由 tools/export-vectors.ts 从 src/core/route.ts 自动生成，不要手改。
 -- 路线用的地图池和各段数值。路线生成（love/src/core/route.lua）和原型用同一套算法。
--- 地图、数值、出现比例都是讨论项（设计方案第二十五章）。
+-- 地图、数值、出现比例都是讨论项（设计方案第五、六章）。
 return {
   SHALLOW = {
     gem = 2,

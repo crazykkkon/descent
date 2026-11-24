@@ -354,7 +354,7 @@ test('求解器：庇护和群居按"还活着的邻居"算，先拆祭司的路
 });
 
 
-// ---------- 断臂转轮版（设计方案第二十五章） ----------
+// ---------- 断臂转轮版（设计方案第五、六章） ----------
 import { newArm, armOdds, armOutcome, armHoldOdds, engraveCell } from '../src/core/arm';
 const reels = (...rs: (WeaponId | null)[][]) => rs.map(r => [...r, ...Array(5 - r.length).fill(null)]);
 import { WHEEL } from '../src/core/wheel';

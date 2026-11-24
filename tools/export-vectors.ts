@@ -355,7 +355,7 @@ const pools = {
 mkdirSync('love/src/data', { recursive: true });
 writeFileSync('love/src/data/pools.lua', `-- 由 tools/export-vectors.ts 从 src/core/route.ts 自动生成，不要手改。
 -- 路线用的地图池和各段数值。路线生成（love/src/core/route.lua）和原型用同一套算法。
--- 地图、数值、出现比例都是讨论项（设计方案第二十五章）。
+-- 地图、数值、出现比例都是讨论项（设计方案第五、六章）。
 return ${lua(pools)}
 `);
 console.log(`战斗 ${combat.length}；楼层 ${scenarios.length}；新怪属性 ${monsterViews.length}；路线逐层 ${routeWalks.length}；致死 ${deaths.length}；断臂转轮 ${armSessions.length}；刻在哪 ${engraveOps.length}；刻图案 ${engraves.length}；大转盘 ${wheels.length}；当铺 ${shops.length}；骨坛 ${altars.length}；补给摊 ${stalls.length}；诏令 ${decreeDraws.length}+${decreeRuns.length}；路线 ${routes.length}；教程 ${tutorials.length}`);

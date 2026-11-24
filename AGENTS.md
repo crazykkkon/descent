@@ -31,8 +31,8 @@
 - 设计方案：`docs/game-design.md`（Word 版同目录）；`crazykkkon/xiaochengxu` 的 `docs/descent/` 里有一份同步副本。
 - 核心规则是纯 TypeScript（`src/core/`），游戏和求解器共用同一份规则；改规则后跑 `npm test`。
 - 关卡检查：`npm run solve`；路线检查：`npm run mainline`；内容搜索：`tools/fill.ts`。
-- 地图是 **16×11**、地图上有两个出口（制作人定，设计方案 25.7）：`route.ts` / `levels.ts` 里写的是小图原稿，`npm run expand` 放大成 16×11 并加第二个出口 `<`，结果在 `src/core/bigmaps.ts`（不要手改）。改了小图要重新跑 `npm run expand` 再 `npm run vectors`。
-- 当前玩法是**断臂转轮版**（设计方案第二十五章）：井的契约、楼梯口情报、井中轮老虎机、武器格已去掉。
-- 画面方向（制作人定）：**A · 斜俯视立体 + 机械臂转轮**（设计方案 25.6）。
+- 地图是 **16×11**、地图上有两个出口（制作人定，设计方案 6.1、6.2）：`route.ts` / `levels.ts` 里写的是小图原稿，`npm run expand` 放大成 16×11 并加第二个出口 `<`，结果在 `src/core/bigmaps.ts`（不要手改）。改了小图要重新跑 `npm run expand` 再 `npm run vectors`。
+- 当前玩法是**断臂转轮版**（设计方案第三～六章）：井的契约、楼梯口情报、井中轮老虎机、武器格已去掉。
+- 画面方向（制作人定）：**A · 斜俯视立体 + 机械臂转轮**（设计方案 8.1）。
 - 推送到 `main` 会自动发布 LÖVE 安装包：https://github.com/crazykkkon/descent/releases/tag/love-latest 。网页原型（https://crazykkkon.github.io/descent/ ）从断臂转轮版起不再更新，只能手动发布。
 - LÖVE 版本地运行：`cd love && love .`；无界面自检：`DESCENT_AUTOTEST=1 xvfb-run -a love .`（先走新手教程，再用强角色走完 20 层；截图在 ~/.local/share/love/descent/）。地图池由原型导出到 `love/src/data/pools.lua`，不要手改。
