@@ -39,6 +39,11 @@ export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterD
         }
         case 'door':
             if (cell.door === 'bone') {
+                // 拾荒者：不用骨钥，扣生命
+                if (ch.boneDoorHp) {
+                    if (hero.hp <= ch.boneDoorHp) return { ok: false, reason: `撬开骨门要扣 ${ch.boneDoorHp} 生命，你会死` };
+                    return { ok: true, hero: { ...hero, hp: hero.hp - ch.boneDoorHp } };
+                }
                 if (hero.keys <= 0) return { ok: false, reason: '没有骨钥，打不开骨门' };
                 return { ok: true, hero: { ...hero, keys: hero.keys - 1 } };
             }

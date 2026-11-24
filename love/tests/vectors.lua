@@ -4,6 +4,7 @@ return {
   character = {
     id = "digger",
     name = "掘井人",
+    desc = "宝石效果 +1。",
     base = {
       hp = 200,
       atk = 10,
@@ -210,6 +211,26 @@ return {
     },
     {
       monster = "moss",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 3,
+      hits = 4
+    },
+    {
+      monster = "moss",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 3
+    },
+    {
+      monster = "moss",
       atk = 13,
       def = 10,
       canAttack = true,
@@ -405,6 +426,26 @@ return {
     {
       monster = "moss",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -579,200 +620,6 @@ return {
     {
       monster = "moss",
       atk = 13,
-      def = 13,
-      weapon = "rustSword",
-      canAttack = true,
-      canWin = true,
-      damage = 7,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 13,
-      def = 13,
-      weapon = "wellHook",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "lifesteal" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "thorns" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "corrode" },
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "boneKnife",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "lifesteal" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "thorns" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "corrode" },
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "harpoon",
-      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
-      canAttack = true,
-      canWin = true,
-      damage = 0,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "hammer",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "mossBlade",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "bellStaff",
-      canAttack = true,
-      canWin = true,
-      damage = 2,
-      hits = 2
-    },
-    {
-      monster = "moss",
-      atk = 16,
-      def = 13,
-      weapon = "saltDagger",
-      canAttack = true,
-      canWin = true,
-      damage = 4,
-      hits = 3
-    },
-    {
-      monster = "moss",
-      atk = 16,
       def = 13,
       weapon = "rustSword",
       canAttack = true,
@@ -782,6 +629,220 @@ return {
     },
     {
       monster = "moss",
+      atk = 13,
+      def = 13,
+      weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "lifesteal" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "thorns" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "corrode" },
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "boneKnife",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "lifesteal" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "thorns" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "corrode" },
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "harpoon",
+      boons = { "lifesteal", "corrode", "thorns", "firstStrike" },
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "hammer",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "mossBlade",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "bellStaff",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "saltDagger",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "rustSword",
+      canAttack = true,
+      canWin = true,
+      damage = 7,
+      hits = 2
+    },
+    {
+      monster = "moss",
       atk = 16,
       def = 13,
       weapon = "wellHook",
@@ -793,6 +854,26 @@ return {
     {
       monster = "moss",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -986,6 +1067,26 @@ return {
     },
     {
       monster = "moss",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "moss",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
       atk = 19,
       def = 16,
       canAttack = true,
@@ -1173,6 +1274,26 @@ return {
       atk = 19,
       def = 16,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -1374,6 +1495,26 @@ return {
     },
     {
       monster = "moss",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
       atk = 25,
       def = 22,
       canAttack = true,
@@ -1568,6 +1709,26 @@ return {
     },
     {
       monster = "moss",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -1762,6 +1923,26 @@ return {
     },
     {
       monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "moss",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -1956,6 +2137,26 @@ return {
     },
     {
       monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -2143,6 +2344,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "moss",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -2344,6 +2565,26 @@ return {
     },
     {
       monster = "eel",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 9
+    },
+    {
+      monster = "eel",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 7
+    },
+    {
+      monster = "eel",
       atk = 13,
       def = 10,
       canAttack = true,
@@ -2539,6 +2780,26 @@ return {
     {
       monster = "eel",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 30,
+      hits = 6
+    },
+    {
+      monster = "eel",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 40,
+      hits = 5
+    },
+    {
+      monster = "eel",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -2729,6 +2990,26 @@ return {
       canWin = true,
       damage = 35,
       hits = 6
+    },
+    {
+      monster = "eel",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 6
+    },
+    {
+      monster = "eel",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 28,
+      hits = 5
     },
     {
       monster = "eel",
@@ -2927,6 +3208,26 @@ return {
     {
       monster = "eel",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 5
+    },
+    {
+      monster = "eel",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 21,
+      hits = 4
+    },
+    {
+      monster = "eel",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -3117,6 +3418,26 @@ return {
       canWin = true,
       damage = 16,
       hits = 5
+    },
+    {
+      monster = "eel",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "eel",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 4
     },
     {
       monster = "eel",
@@ -3314,6 +3635,26 @@ return {
     },
     {
       monster = "eel",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "eel",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 8,
+      hits = 3
+    },
+    {
+      monster = "eel",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -3501,6 +3842,26 @@ return {
       atk = 22,
       def = 19,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "eel",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "eel",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 2,
@@ -3702,6 +4063,26 @@ return {
     },
     {
       monster = "eel",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "eel",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "eel",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -3896,6 +4277,26 @@ return {
     },
     {
       monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -4083,6 +4484,26 @@ return {
       atk = 36,
       def = 28,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -4277,6 +4698,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "eel",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -4478,6 +4919,26 @@ return {
     },
     {
       monster = "frog",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 232,
+      hits = 30
+    },
+    {
+      monster = "frog",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 168,
+      hits = 15
+    },
+    {
+      monster = "frog",
       atk = 13,
       def = 10,
       canAttack = true,
@@ -4673,6 +5134,26 @@ return {
     {
       monster = "frog",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 88,
+      hits = 12
+    },
+    {
+      monster = "frog",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 96,
+      hits = 9
+    },
+    {
+      monster = "frog",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -4863,6 +5344,26 @@ return {
       canWin = true,
       damage = 99,
       hits = 12
+    },
+    {
+      monster = "frog",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 55,
+      hits = 12
+    },
+    {
+      monster = "frog",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 72,
+      hits = 9
     },
     {
       monster = "frog",
@@ -5061,6 +5562,26 @@ return {
     {
       monster = "frog",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 35,
+      hits = 8
+    },
+    {
+      monster = "frog",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 6
+    },
+    {
+      monster = "frog",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -5251,6 +5772,26 @@ return {
       canWin = true,
       damage = 42,
       hits = 8
+    },
+    {
+      monster = "frog",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 8
+    },
+    {
+      monster = "frog",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 30,
+      hits = 6
     },
     {
       monster = "frog",
@@ -5448,6 +5989,26 @@ return {
     },
     {
       monster = "frog",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "frog",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 5
+    },
+    {
+      monster = "frog",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -5642,6 +6203,26 @@ return {
     },
     {
       monster = "frog",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "frog",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
+    },
+    {
+      monster = "frog",
       atk = 25,
       def = 22,
       canAttack = true,
@@ -5829,6 +6410,26 @@ return {
       atk = 25,
       def = 22,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "frog",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "frog",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -6030,6 +6631,26 @@ return {
     },
     {
       monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -6224,6 +6845,26 @@ return {
     },
     {
       monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "frog",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -6411,6 +7052,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "frog",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -6605,6 +7266,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "beetle",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "beetle",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -6807,6 +7488,26 @@ return {
     {
       monster = "beetle",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "beetle",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 312,
+      hits = 40
+    },
+    {
+      monster = "beetle",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -6997,6 +7698,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "beetle",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "beetle",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 195,
+      hits = 40
     },
     {
       monster = "beetle",
@@ -7195,6 +7916,26 @@ return {
     {
       monster = "beetle",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 19,
+      hits = 20
+    },
+    {
+      monster = "beetle",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 10
+    },
+    {
+      monster = "beetle",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -7385,6 +8126,26 @@ return {
       canWin = true,
       damage = 38,
       hits = 20
+    },
+    {
+      monster = "beetle",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 20
+    },
+    {
+      monster = "beetle",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 10
     },
     {
       monster = "beetle",
@@ -7582,6 +8343,26 @@ return {
     },
     {
       monster = "beetle",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 8
+    },
+    {
+      monster = "beetle",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "beetle",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -7773,6 +8554,26 @@ return {
       canWin = true,
       damage = 0,
       hits = 5
+    },
+    {
+      monster = "beetle",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "beetle",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
     },
     {
       monster = "beetle",
@@ -7970,6 +8771,26 @@ return {
     },
     {
       monster = "beetle",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "beetle",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "beetle",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -8164,6 +8985,26 @@ return {
     },
     {
       monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "beetle",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -8358,6 +9199,26 @@ return {
     },
     {
       monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -8545,6 +9406,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "beetle",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -8746,6 +9627,26 @@ return {
     },
     {
       monster = "bat",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 99,
+      hits = 9
+    },
+    {
+      monster = "bat",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 6
+    },
+    {
+      monster = "bat",
       atk = 13,
       def = 10,
       canAttack = true,
@@ -8941,6 +9842,26 @@ return {
     {
       monster = "bat",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 55,
+      hits = 5
+    },
+    {
+      monster = "bat",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 4
+    },
+    {
+      monster = "bat",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -9131,6 +10052,26 @@ return {
       canWin = true,
       damage = 60,
       hits = 5
+    },
+    {
+      monster = "bat",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 40,
+      hits = 5
+    },
+    {
+      monster = "bat",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 4
     },
     {
       monster = "bat",
@@ -9329,6 +10270,26 @@ return {
     {
       monster = "bat",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 32,
+      hits = 4
+    },
+    {
+      monster = "bat",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 3
+    },
+    {
+      monster = "bat",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -9522,6 +10483,26 @@ return {
     },
     {
       monster = "bat",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 20,
+      hits = 4
+    },
+    {
+      monster = "bat",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 3
+    },
+    {
+      monster = "bat",
       atk = 19,
       def = 16,
       canAttack = true,
@@ -9709,6 +10690,26 @@ return {
       atk = 19,
       def = 16,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 3
+    },
+    {
+      monster = "bat",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 3
+    },
+    {
+      monster = "bat",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 27,
@@ -9910,6 +10911,26 @@ return {
     },
     {
       monster = "bat",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 3
+    },
+    {
+      monster = "bat",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 2
+    },
+    {
+      monster = "bat",
       atk = 25,
       def = 22,
       canAttack = true,
@@ -10097,6 +11118,26 @@ return {
       atk = 25,
       def = 22,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 6,
@@ -10298,6 +11339,26 @@ return {
     },
     {
       monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -10492,6 +11553,26 @@ return {
     },
     {
       monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "bat",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -10679,6 +11760,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
+    },
+    {
+      monster = "bat",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -10880,6 +11981,26 @@ return {
     },
     {
       monster = "wraith",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "wraith",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = false,
+      damage = 18000,
+      hits = 1000
+    },
+    {
+      monster = "wraith",
       atk = 13,
       def = 10,
       canAttack = true,
@@ -11075,6 +12196,26 @@ return {
     {
       monster = "wraith",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = false,
+      damage = 14000,
+      hits = 1000
+    },
+    {
+      monster = "wraith",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = false,
+      damage = 18000,
+      hits = 1000
+    },
+    {
+      monster = "wraith",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = false,
@@ -11261,6 +12402,26 @@ return {
       atk = 13,
       def = 13,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = false,
+      damage = 15000,
+      hits = 1000
+    },
+    {
+      monster = "wraith",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = false,
+      damage = 11000,
+      hits = 1000
+    },
+    {
+      monster = "wraith",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
       canAttack = true,
       canWin = false,
       damage = 15000,
@@ -11463,6 +12624,26 @@ return {
     {
       monster = "wraith",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 814,
+      hits = 75
+    },
+    {
+      monster = "wraith",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 1080,
+      hits = 73
+    },
+    {
+      monster = "wraith",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = false,
@@ -11653,6 +12834,26 @@ return {
       canWin = false,
       damage = 12000,
       hits = 1000
+    },
+    {
+      monster = "wraith",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 296,
+      hits = 38
+    },
+    {
+      monster = "wraith",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 432,
+      hits = 37
     },
     {
       monster = "wraith",
@@ -11850,6 +13051,26 @@ return {
     },
     {
       monster = "wraith",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 120,
+      hits = 16
+    },
+    {
+      monster = "wraith",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 168,
+      hits = 15
+    },
+    {
+      monster = "wraith",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -12041,6 +13262,26 @@ return {
       canWin = true,
       damage = 81,
       hits = 10
+    },
+    {
+      monster = "wraith",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 35,
+      hits = 8
+    },
+    {
+      monster = "wraith",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 63,
+      hits = 8
     },
     {
       monster = "wraith",
@@ -12238,6 +13479,26 @@ return {
     },
     {
       monster = "wraith",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 6
+    },
+    {
+      monster = "wraith",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 30,
+      hits = 6
+    },
+    {
+      monster = "wraith",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -12429,6 +13690,26 @@ return {
       canWin = true,
       damage = 12,
       hits = 5
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
     },
     {
       monster = "wraith",
@@ -12626,6 +13907,26 @@ return {
     },
     {
       monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "wraith",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -12813,6 +14114,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "wraith",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -13007,6 +14328,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "crab",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "crab",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -13209,6 +14550,26 @@ return {
     {
       monster = "crab",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 1314,
+      hits = 70
+    },
+    {
+      monster = "crab",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 532,
+      hits = 24
+    },
+    {
+      monster = "crab",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -13399,6 +14760,26 @@ return {
       canWin = true,
       damage = 1383,
       hits = 70
+    },
+    {
+      monster = "crab",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 1107,
+      hits = 70
+    },
+    {
+      monster = "crab",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 463,
+      hits = 24
     },
     {
       monster = "crab",
@@ -13597,6 +14978,26 @@ return {
     {
       monster = "crab",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 275,
+      hits = 18
+    },
+    {
+      monster = "crab",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 223,
+      hits = 12
+    },
+    {
+      monster = "crab",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -13787,6 +15188,26 @@ return {
       canWin = true,
       damage = 292,
       hits = 18
+    },
+    {
+      monster = "crab",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 224,
+      hits = 18
+    },
+    {
+      monster = "crab",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 190,
+      hits = 12
     },
     {
       monster = "crab",
@@ -13984,6 +15405,26 @@ return {
     },
     {
       monster = "crab",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 120,
+      hits = 10
+    },
+    {
+      monster = "crab",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 122,
+      hits = 8
+    },
+    {
+      monster = "crab",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -14175,6 +15616,26 @@ return {
       canWin = true,
       damage = 87,
       hits = 7
+    },
+    {
+      monster = "crab",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 63,
+      hits = 7
+    },
+    {
+      monster = "crab",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 73,
+      hits = 6
     },
     {
       monster = "crab",
@@ -14372,6 +15833,26 @@ return {
     },
     {
       monster = "crab",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 38,
+      hits = 6
+    },
+    {
+      monster = "crab",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 47,
+      hits = 5
+    },
+    {
+      monster = "crab",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -14559,6 +16040,26 @@ return {
       atk = 30,
       def = 25,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "crab",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 27,
@@ -14760,6 +16261,26 @@ return {
     },
     {
       monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "crab",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -14947,6 +16468,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "crab",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 9,
@@ -15141,6 +16682,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "guardian",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "guardian",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -15343,6 +16904,26 @@ return {
     {
       monster = "guardian",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "guardian",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2848,
+      hits = 90
+    },
+    {
+      monster = "guardian",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -15533,6 +17114,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "guardian",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "guardian",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2314,
+      hits = 90
     },
     {
       monster = "guardian",
@@ -15731,6 +17332,26 @@ return {
     {
       monster = "guardian",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 792,
+      hits = 45
+    },
+    {
+      monster = "guardian",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 572,
+      hits = 23
+    },
+    {
+      monster = "guardian",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -15921,6 +17542,26 @@ return {
       canWin = true,
       damage = 880,
       hits = 45
+    },
+    {
+      monster = "guardian",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 528,
+      hits = 45
+    },
+    {
+      monster = "guardian",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 440,
+      hits = 23
     },
     {
       monster = "guardian",
@@ -16118,6 +17759,26 @@ return {
     },
     {
       monster = "guardian",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 204,
+      hits = 18
+    },
+    {
+      monster = "guardian",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 240,
+      hits = 13
+    },
+    {
+      monster = "guardian",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -16309,6 +17970,26 @@ return {
       canWin = true,
       damage = 154,
       hits = 12
+    },
+    {
+      monster = "guardian",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 66,
+      hits = 12
+    },
+    {
+      monster = "guardian",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 112,
+      hits = 9
     },
     {
       monster = "guardian",
@@ -16506,6 +18187,26 @@ return {
     },
     {
       monster = "guardian",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 9
+    },
+    {
+      monster = "guardian",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 7
+    },
+    {
+      monster = "guardian",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -16697,6 +18398,26 @@ return {
       canWin = true,
       damage = 10,
       hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 6
+    },
+    {
+      monster = "guardian",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 8,
+      hits = 5
     },
     {
       monster = "guardian",
@@ -16894,6 +18615,26 @@ return {
     },
     {
       monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "guardian",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "guardian",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -17081,6 +18822,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "guardian",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -17282,6 +19043,26 @@ return {
     },
     {
       monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
       atk = 13,
       def = 10,
       canAttack = false,
@@ -17477,6 +19258,26 @@ return {
     {
       monster = "rat",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 936,
+      hits = 40
+    },
+    {
+      monster = "rat",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -17667,6 +19468,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "rat",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 819,
+      hits = 40
     },
     {
       monster = "rat",
@@ -17865,6 +19686,26 @@ return {
     {
       monster = "rat",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 323,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 189,
+      hits = 10
+    },
+    {
+      monster = "rat",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -18055,6 +19896,26 @@ return {
       canWin = true,
       damage = 342,
       hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 266,
+      hits = 20
+    },
+    {
+      monster = "rat",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 162,
+      hits = 10
     },
     {
       monster = "rat",
@@ -18252,6 +20113,26 @@ return {
     },
     {
       monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 98,
+      hits = 8
+    },
+    {
+      monster = "rat",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 6
+    },
+    {
+      monster = "rat",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -18446,6 +20327,26 @@ return {
     },
     {
       monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 44,
+      hits = 5
+    },
+    {
+      monster = "rat",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 4
+    },
+    {
+      monster = "rat",
       atk = 25,
       def = 22,
       canAttack = true,
@@ -18633,6 +20534,26 @@ return {
       atk = 25,
       def = 22,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 4
+    },
+    {
+      monster = "rat",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 36,
@@ -18834,6 +20755,26 @@ return {
     },
     {
       monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 3
+    },
+    {
+      monster = "rat",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "rat",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -19021,6 +20962,26 @@ return {
       atk = 36,
       def = 28,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 6,
@@ -19221,6 +21182,26 @@ return {
       hits = 2
     },
     {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "rat",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
       monster = "slug",
       atk = 10,
       def = 10,
@@ -19409,6 +21390,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -19611,6 +21612,26 @@ return {
     {
       monster = "slug",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -19797,6 +21818,26 @@ return {
       atk = 13,
       def = 13,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -19999,6 +22040,26 @@ return {
     {
       monster = "slug",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
       def = 16,
       canAttack = false,
       canWin = false,
@@ -20185,6 +22246,26 @@ return {
       atk = 16,
       def = 16,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "slug",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -20386,6 +22467,26 @@ return {
     },
     {
       monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 5518,
+      hits = 90
+    },
+    {
+      monster = "slug",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 1044,
+      hits = 30
+    },
+    {
+      monster = "slug",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -20577,6 +22678,26 @@ return {
       canWin = true,
       damage = 649,
       hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 561,
+      hits = 23
+    },
+    {
+      monster = "slug",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 357,
+      hits = 15
     },
     {
       monster = "slug",
@@ -20774,6 +22895,26 @@ return {
     },
     {
       monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 210,
+      hits = 13
+    },
+    {
+      monster = "slug",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 180,
+      hits = 10
+    },
+    {
+      monster = "slug",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -20968,6 +23109,26 @@ return {
     },
     {
       monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 84,
+      hits = 8
+    },
+    {
+      monster = "slug",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 93,
+      hits = 7
+    },
+    {
+      monster = "slug",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -21155,6 +23316,26 @@ return {
       atk = 36,
       def = 28,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 46,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 30,
+      hits = 5
+    },
+    {
+      monster = "slug",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 46,
@@ -21355,6 +23536,26 @@ return {
       hits = 4
     },
     {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 3,
+      hits = 4
+    },
+    {
+      monster = "slug",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
       monster = "priest",
       atk = 10,
       def = 10,
@@ -21550,6 +23751,26 @@ return {
     },
     {
       monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
       atk = 13,
       def = 10,
       canAttack = false,
@@ -21745,6 +23966,26 @@ return {
     {
       monster = "priest",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -21931,6 +24172,26 @@ return {
       atk = 13,
       def = 13,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -22133,6 +24394,26 @@ return {
     {
       monster = "priest",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
       def = 16,
       canAttack = false,
       canWin = false,
@@ -22319,6 +24600,26 @@ return {
       atk = 16,
       def = 16,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -22520,6 +24821,26 @@ return {
     },
     {
       monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
       atk = 22,
       def = 19,
       canAttack = false,
@@ -22711,6 +25032,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "priest",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 539,
+      hits = 50
     },
     {
       monster = "priest",
@@ -22908,6 +25249,26 @@ return {
     },
     {
       monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 132,
+      hits = 34
+    },
+    {
+      monster = "priest",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 152,
+      hits = 20
+    },
+    {
+      monster = "priest",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -23099,6 +25460,26 @@ return {
       canWin = true,
       damage = 60,
       hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 13
+    },
+    {
+      monster = "priest",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 10
     },
     {
       monster = "priest",
@@ -23296,6 +25677,26 @@ return {
     },
     {
       monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 8
+    },
+    {
+      monster = "priest",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 7
+    },
+    {
+      monster = "priest",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -23489,6 +25890,26 @@ return {
       hits = 5
     },
     {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "priest",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
       monster = "gatekeeper",
       atk = 10,
       def = 10,
@@ -23684,6 +26105,26 @@ return {
     },
     {
       monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
       atk = 13,
       def = 10,
       canAttack = false,
@@ -23879,6 +26320,26 @@ return {
     {
       monster = "gatekeeper",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -24065,6 +26526,26 @@ return {
       atk = 13,
       def = 13,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -24267,6 +26748,26 @@ return {
     {
       monster = "gatekeeper",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
       def = 16,
       canAttack = false,
       canWin = false,
@@ -24453,6 +26954,26 @@ return {
       atk = 16,
       def = 16,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -24654,6 +27175,26 @@ return {
     },
     {
       monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
       atk = 22,
       def = 19,
       canAttack = false,
@@ -24841,6 +27382,26 @@ return {
       atk = 22,
       def = 19,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "gatekeeper",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -25042,6 +27603,26 @@ return {
     },
     {
       monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 5724,
+      hits = 160
+    },
+    {
+      monster = "gatekeeper",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2332,
+      hits = 54
+    },
+    {
+      monster = "gatekeeper",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -25233,6 +27814,26 @@ return {
       canWin = true,
       damage = 988,
       hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 780,
+      hits = 27
+    },
+    {
+      monster = "gatekeeper",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 722,
+      hits = 20
     },
     {
       monster = "gatekeeper",
@@ -25430,6 +28031,26 @@ return {
     },
     {
       monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 312,
+      hits = 14
+    },
+    {
+      monster = "gatekeeper",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 352,
+      hits = 12
+    },
+    {
+      monster = "gatekeeper",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -25623,6 +28244,26 @@ return {
       hits = 8
     },
     {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 84,
+      hits = 8
+    },
+    {
+      monster = "gatekeeper",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 140,
+      hits = 8
+    },
+    {
       monster = "eye",
       atk = 10,
       def = 10,
@@ -25818,6 +28459,26 @@ return {
     },
     {
       monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
       atk = 13,
       def = 10,
       canAttack = false,
@@ -26013,6 +28674,26 @@ return {
     {
       monster = "eye",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -26206,6 +28887,26 @@ return {
     },
     {
       monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
       atk = 16,
       def = 13,
       canAttack = false,
@@ -26401,6 +29102,26 @@ return {
     {
       monster = "eye",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
       def = 16,
       canAttack = false,
       canWin = false,
@@ -26594,6 +29315,26 @@ return {
     },
     {
       monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
       atk = 19,
       def = 16,
       canAttack = false,
@@ -26788,6 +29529,26 @@ return {
     },
     {
       monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
       atk = 22,
       def = 19,
       canAttack = false,
@@ -26982,6 +29743,26 @@ return {
     },
     {
       monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
       atk = 25,
       def = 22,
       canAttack = false,
@@ -27169,6 +29950,26 @@ return {
       atk = 25,
       def = 22,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -27370,6 +30171,26 @@ return {
     },
     {
       monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "eye",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -27561,6 +30382,26 @@ return {
       canWin = true,
       damage = 10458,
       hits = 250
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 9462,
+      hits = 250
+    },
+    {
+      monster = "eye",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 5208,
+      hits = 125
     },
     {
       monster = "eye",
@@ -27757,6 +30598,26 @@ return {
       hits = 50
     },
     {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 1568,
+      hits = 50
+    },
+    {
+      monster = "eye",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 1476,
+      hits = 42
+    },
+    {
       monster = "thornMoss",
       atk = 10,
       def = 10,
@@ -27949,6 +30810,26 @@ return {
       canWin = true,
       damage = 180,
       hits = 13
+    },
+    {
+      monster = "thornMoss",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 132,
+      hits = 13
+    },
+    {
+      monster = "thornMoss",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 105,
+      hits = 8
     },
     {
       monster = "thornMoss",
@@ -28147,6 +31028,26 @@ return {
     {
       monster = "thornMoss",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 66,
+      hits = 7
+    },
+    {
+      monster = "thornMoss",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "thornMoss",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -28337,6 +31238,26 @@ return {
       canWin = true,
       damage = 72,
       hits = 7
+    },
+    {
+      monster = "thornMoss",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 7
+    },
+    {
+      monster = "thornMoss",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 48,
+      hits = 5
     },
     {
       monster = "thornMoss",
@@ -28535,6 +31456,26 @@ return {
     {
       monster = "thornMoss",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 32,
+      hits = 5
+    },
+    {
+      monster = "thornMoss",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "thornMoss",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -28725,6 +31666,26 @@ return {
       canWin = true,
       damage = 36,
       hits = 5
+    },
+    {
+      monster = "thornMoss",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 20,
+      hits = 5
+    },
+    {
+      monster = "thornMoss",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 27,
+      hits = 4
     },
     {
       monster = "thornMoss",
@@ -28922,6 +31883,26 @@ return {
     },
     {
       monster = "thornMoss",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 15,
+      hits = 4
+    },
+    {
+      monster = "thornMoss",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "thornMoss",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -29109,6 +32090,26 @@ return {
       atk = 22,
       def = 19,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 3
+    },
+    {
+      monster = "thornMoss",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "thornMoss",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 12,
@@ -29310,6 +32311,26 @@ return {
     },
     {
       monster = "thornMoss",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "thornMoss",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 3,
+      hits = 2
+    },
+    {
+      monster = "thornMoss",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -29497,6 +32518,26 @@ return {
       atk = 30,
       def = 25,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "thornMoss",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "thornMoss",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -29698,6 +32739,26 @@ return {
     },
     {
       monster = "thornMoss",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "thornMoss",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "thornMoss",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -29889,6 +32950,26 @@ return {
       canWin = true,
       damage = 0,
       hits = 2
+    },
+    {
+      monster = "thornMoss",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "thornMoss",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 1
     },
     {
       monster = "spikeEel",
@@ -30083,6 +33164,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "spikeEel",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "spikeEel",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 560,
+      hits = 29
     },
     {
       monster = "spikeEel",
@@ -30281,6 +33382,26 @@ return {
     {
       monster = "spikeEel",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 304,
+      hits = 20
+    },
+    {
+      monster = "spikeEel",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 220,
+      hits = 12
+    },
+    {
+      monster = "spikeEel",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -30471,6 +33592,26 @@ return {
       canWin = true,
       damage = 323,
       hits = 20
+    },
+    {
+      monster = "spikeEel",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 247,
+      hits = 20
+    },
+    {
+      monster = "spikeEel",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 187,
+      hits = 12
     },
     {
       monster = "spikeEel",
@@ -30669,6 +33810,26 @@ return {
     {
       monster = "spikeEel",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 117,
+      hits = 10
+    },
+    {
+      monster = "spikeEel",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 119,
+      hits = 8
+    },
+    {
+      monster = "spikeEel",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -30859,6 +34020,26 @@ return {
       canWin = true,
       damage = 126,
       hits = 10
+    },
+    {
+      monster = "spikeEel",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 10
+    },
+    {
+      monster = "spikeEel",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 98,
+      hits = 8
     },
     {
       monster = "spikeEel",
@@ -31056,6 +34237,26 @@ return {
     },
     {
       monster = "spikeEel",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 7
+    },
+    {
+      monster = "spikeEel",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 70,
+      hits = 6
+    },
+    {
+      monster = "spikeEel",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -31243,6 +34444,26 @@ return {
       atk = 22,
       def = 19,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 44,
+      hits = 5
+    },
+    {
+      monster = "spikeEel",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 28,
+      hits = 5
+    },
+    {
+      monster = "spikeEel",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 44,
@@ -31444,6 +34665,26 @@ return {
     },
     {
       monster = "spikeEel",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 4
+    },
+    {
+      monster = "spikeEel",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 4
+    },
+    {
+      monster = "spikeEel",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -31631,6 +34872,26 @@ return {
       atk = 30,
       def = 25,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 10,
+      hits = 3
+    },
+    {
+      monster = "spikeEel",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 3
+    },
+    {
+      monster = "spikeEel",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 10,
@@ -31832,6 +35093,26 @@ return {
     },
     {
       monster = "spikeEel",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "spikeEel",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 4,
+      hits = 3
+    },
+    {
+      monster = "spikeEel",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -32019,6 +35300,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "spikeEel",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "spikeEel",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 0,
@@ -32213,6 +35514,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "armorFrog",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "armorFrog",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -32415,6 +35736,26 @@ return {
     {
       monster = "armorFrog",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "armorFrog",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 836,
+      hits = 39
+    },
+    {
+      monster = "armorFrog",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -32605,6 +35946,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "armorFrog",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "armorFrog",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 722,
+      hits = 39
     },
     {
       monster = "armorFrog",
@@ -32803,6 +36164,26 @@ return {
     {
       monster = "armorFrog",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 375,
+      hits = 26
+    },
+    {
+      monster = "armorFrog",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 285,
+      hits = 16
+    },
+    {
+      monster = "armorFrog",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -32993,6 +36374,26 @@ return {
       canWin = true,
       damage = 400,
       hits = 26
+    },
+    {
+      monster = "armorFrog",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 300,
+      hits = 26
+    },
+    {
+      monster = "armorFrog",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 240,
+      hits = 16
     },
     {
       monster = "armorFrog",
@@ -33190,6 +36591,26 @@ return {
     },
     {
       monster = "armorFrog",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 144,
+      hits = 13
+    },
+    {
+      monster = "armorFrog",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 144,
+      hits = 10
+    },
+    {
+      monster = "armorFrog",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -33381,6 +36802,26 @@ return {
       canWin = true,
       damage = 104,
       hits = 9
+    },
+    {
+      monster = "armorFrog",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 72,
+      hits = 9
+    },
+    {
+      monster = "armorFrog",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 91,
+      hits = 8
     },
     {
       monster = "armorFrog",
@@ -33578,6 +37019,26 @@ return {
     },
     {
       monster = "armorFrog",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 7
+    },
+    {
+      monster = "armorFrog",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 50,
+      hits = 6
+    },
+    {
+      monster = "armorFrog",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -33765,6 +37226,26 @@ return {
       atk = 30,
       def = 25,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 28,
+      hits = 5
+    },
+    {
+      monster = "armorFrog",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 5
+    },
+    {
+      monster = "armorFrog",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 28,
@@ -33966,6 +37447,26 @@ return {
     },
     {
       monster = "armorFrog",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "armorFrog",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 12,
+      hits = 4
+    },
+    {
+      monster = "armorFrog",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -34159,6 +37660,26 @@ return {
       hits = 3
     },
     {
+      monster = "armorFrog",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "armorFrog",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
       monster = "ironBeetle",
       atk = 10,
       def = 10,
@@ -34347,6 +37868,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -34549,6 +38090,26 @@ return {
     {
       monster = "ironBeetle",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -34735,6 +38296,26 @@ return {
       atk = 13,
       def = 13,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -34937,6 +38518,26 @@ return {
     {
       monster = "ironBeetle",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 16,
       def = 16,
       canAttack = false,
       canWin = false,
@@ -35123,6 +38724,26 @@ return {
       atk = 16,
       def = 16,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -35324,6 +38945,26 @@ return {
     },
     {
       monster = "ironBeetle",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "ironBeetle",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 300,
+      hits = 26
+    },
+    {
+      monster = "ironBeetle",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -35515,6 +39156,26 @@ return {
       canWin = true,
       damage = 153,
       hits = 18
+    },
+    {
+      monster = "ironBeetle",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 85,
+      hits = 18
+    },
+    {
+      monster = "ironBeetle",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 11
     },
     {
       monster = "ironBeetle",
@@ -35712,6 +39373,26 @@ return {
     },
     {
       monster = "ironBeetle",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 16,
+      hits = 9
+    },
+    {
+      monster = "ironBeetle",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 7
+    },
+    {
+      monster = "ironBeetle",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -35903,6 +39584,26 @@ return {
       canWin = true,
       damage = 12,
       hits = 5
+    },
+    {
+      monster = "ironBeetle",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 5
+    },
+    {
+      monster = "ironBeetle",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 4
     },
     {
       monster = "ironBeetle",
@@ -36100,6 +39801,26 @@ return {
     },
     {
       monster = "ironBeetle",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 4
+    },
+    {
+      monster = "ironBeetle",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "ironBeetle",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -36291,6 +40012,26 @@ return {
       canWin = true,
       damage = 0,
       hits = 3
+    },
+    {
+      monster = "ironBeetle",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "ironBeetle",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
     },
     {
       monster = "shriekBat",
@@ -36485,6 +40226,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "shriekBat",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shriekBat",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 1125,
+      hits = 45
     },
     {
       monster = "shriekBat",
@@ -36683,6 +40444,26 @@ return {
     {
       monster = "shriekBat",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 483,
+      hits = 23
+    },
+    {
+      monster = "shriekBat",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 300,
+      hits = 12
+    },
+    {
+      monster = "shriekBat",
+      atk = 13,
       def = 13,
       canAttack = true,
       canWin = true,
@@ -36873,6 +40654,26 @@ return {
       canWin = true,
       damage = 506,
       hits = 23
+    },
+    {
+      monster = "shriekBat",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 414,
+      hits = 23
+    },
+    {
+      monster = "shriekBat",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 264,
+      hits = 12
     },
     {
       monster = "shriekBat",
@@ -37071,6 +40872,26 @@ return {
     {
       monster = "shriekBat",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 162,
+      hits = 9
+    },
+    {
+      monster = "shriekBat",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 154,
+      hits = 7
+    },
+    {
+      monster = "shriekBat",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -37261,6 +41082,26 @@ return {
       canWin = true,
       damage = 171,
       hits = 9
+    },
+    {
+      monster = "shriekBat",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 135,
+      hits = 9
+    },
+    {
+      monster = "shriekBat",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 133,
+      hits = 7
     },
     {
       monster = "shriekBat",
@@ -37458,6 +41299,26 @@ return {
     },
     {
       monster = "shriekBat",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 90,
+      hits = 6
+    },
+    {
+      monster = "shriekBat",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 95,
+      hits = 5
+    },
+    {
+      monster = "shriekBat",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -37649,6 +41510,26 @@ return {
       canWin = true,
       damage = 80,
       hits = 5
+    },
+    {
+      monster = "shriekBat",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 60,
+      hits = 5
+    },
+    {
+      monster = "shriekBat",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 64,
+      hits = 4
     },
     {
       monster = "shriekBat",
@@ -37846,6 +41727,26 @@ return {
     },
     {
       monster = "shriekBat",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "shriekBat",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 39,
+      hits = 3
+    },
+    {
+      monster = "shriekBat",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -38033,6 +41934,26 @@ return {
       atk = 30,
       def = 25,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 30,
+      hits = 3
+    },
+    {
+      monster = "shriekBat",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 18,
+      hits = 3
+    },
+    {
+      monster = "shriekBat",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 30,
@@ -38234,6 +42155,26 @@ return {
     },
     {
       monster = "shriekBat",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 6,
+      hits = 2
+    },
+    {
+      monster = "shriekBat",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 14,
+      hits = 2
+    },
+    {
+      monster = "shriekBat",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -38427,6 +42368,26 @@ return {
       hits = 2
     },
     {
+      monster = "shriekBat",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 2
+    },
+    {
+      monster = "shriekBat",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 2,
+      hits = 2
+    },
+    {
       monster = "grudgeWraith",
       atk = 10,
       def = 10,
@@ -38622,6 +42583,26 @@ return {
     },
     {
       monster = "grudgeWraith",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "grudgeWraith",
       atk = 13,
       def = 10,
       canAttack = false,
@@ -38813,6 +42794,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = false,
+      damage = 24000,
+      hits = 1000
     },
     {
       monster = "grudgeWraith",
@@ -39007,6 +43008,26 @@ return {
       canWin = false,
       damage = 0,
       hits = 0
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = false,
+      damage = 21000,
+      hits = 1000
     },
     {
       monster = "grudgeWraith",
@@ -39197,6 +43218,26 @@ return {
       atk = 16,
       def = 13,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = false,
+      damage = 21000,
+      hits = 1000
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = false,
+      damage = 17000,
+      hits = 1000
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
       canAttack = true,
       canWin = false,
       damage = 21000,
@@ -39398,6 +43439,26 @@ return {
     },
     {
       monster = "grudgeWraith",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = false,
+      damage = 14000,
+      hits = 1000
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = false,
+      damage = 18000,
+      hits = 1000
+    },
+    {
+      monster = "grudgeWraith",
       atk = 19,
       def = 16,
       canAttack = true,
@@ -39585,6 +43646,26 @@ return {
       atk = 19,
       def = 16,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = false,
+      damage = 18000,
+      hits = 1000
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = false,
+      damage = 14000,
+      hits = 1000
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
       canAttack = true,
       canWin = false,
       damage = 18000,
@@ -39786,6 +43867,26 @@ return {
     },
     {
       monster = "grudgeWraith",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 231,
+      hits = 22
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 315,
+      hits = 22
+    },
+    {
+      monster = "grudgeWraith",
       atk = 25,
       def = 22,
       canAttack = true,
@@ -39977,6 +44078,26 @@ return {
       canWin = true,
       damage = 168,
       hits = 15
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 80,
+      hits = 11
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 120,
+      hits = 11
     },
     {
       monster = "grudgeWraith",
@@ -40174,6 +44295,26 @@ return {
     },
     {
       monster = "grudgeWraith",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 25,
+      hits = 6
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 45,
+      hits = 6
+    },
+    {
+      monster = "grudgeWraith",
       atk = 36,
       def = 28,
       canAttack = true,
@@ -40361,6 +44502,26 @@ return {
       atk = 36,
       def = 28,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 5
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 8,
+      hits = 5
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 24,
@@ -40561,6 +44722,26 @@ return {
       hits = 3
     },
     {
+      monster = "grudgeWraith",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
+      monster = "grudgeWraith",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 0,
+      hits = 3
+    },
+    {
       monster = "shardCrab",
       atk = 10,
       def = 10,
@@ -40749,6 +44930,26 @@ return {
       atk = 10,
       def = 10,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shardCrab",
+      atk = 10,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shardCrab",
+      atk = 10,
+      def = 10,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -40951,6 +45152,26 @@ return {
     {
       monster = "shardCrab",
       atk = 13,
+      def = 10,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shardCrab",
+      atk = 13,
+      def = 10,
+      weapon = "twinHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shardCrab",
+      atk = 13,
       def = 13,
       canAttack = false,
       canWin = false,
@@ -41137,6 +45358,26 @@ return {
       atk = 13,
       def = 13,
       weapon = "wellHook",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shardCrab",
+      atk = 13,
+      def = 13,
+      weapon = "lamp",
+      canAttack = false,
+      canWin = false,
+      damage = 0,
+      hits = 0
+    },
+    {
+      monster = "shardCrab",
+      atk = 13,
+      def = 13,
+      weapon = "twinHook",
       canAttack = false,
       canWin = false,
       damage = 0,
@@ -41339,6 +45580,26 @@ return {
     {
       monster = "shardCrab",
       atk = 16,
+      def = 13,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 1785,
+      hits = 82
+    },
+    {
+      monster = "shardCrab",
+      atk = 16,
+      def = 13,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 705,
+      hits = 28
+    },
+    {
+      monster = "shardCrab",
+      atk = 16,
       def = 16,
       canAttack = true,
       canWin = true,
@@ -41529,6 +45790,26 @@ return {
       canWin = true,
       damage = 1866,
       hits = 82
+    },
+    {
+      monster = "shardCrab",
+      atk = 16,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 1542,
+      hits = 82
+    },
+    {
+      monster = "shardCrab",
+      atk = 16,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 624,
+      hits = 28
     },
     {
       monster = "shardCrab",
@@ -41726,6 +46007,26 @@ return {
     },
     {
       monster = "shardCrab",
+      atk = 19,
+      def = 16,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 383,
+      hits = 21
+    },
+    {
+      monster = "shardCrab",
+      atk = 19,
+      def = 16,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 302,
+      hits = 14
+    },
+    {
+      monster = "shardCrab",
       atk = 22,
       def = 19,
       canAttack = true,
@@ -41917,6 +46218,26 @@ return {
       canWin = true,
       damage = 223,
       hits = 12
+    },
+    {
+      monster = "shardCrab",
+      atk = 22,
+      def = 19,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 179,
+      hits = 12
+    },
+    {
+      monster = "shardCrab",
+      atk = 22,
+      def = 19,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 183,
+      hits = 10
     },
     {
       monster = "shardCrab",
@@ -42114,6 +46435,26 @@ return {
     },
     {
       monster = "shardCrab",
+      atk = 25,
+      def = 22,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 107,
+      hits = 9
+    },
+    {
+      monster = "shardCrab",
+      atk = 25,
+      def = 22,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 105,
+      hits = 7
+    },
+    {
+      monster = "shardCrab",
       atk = 30,
       def = 25,
       canAttack = true,
@@ -42305,6 +46646,26 @@ return {
       canWin = true,
       damage = 73,
       hits = 6
+    },
+    {
+      monster = "shardCrab",
+      atk = 30,
+      def = 25,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 53,
+      hits = 6
+    },
+    {
+      monster = "shardCrab",
+      atk = 30,
+      def = 25,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 59,
+      hits = 5
     },
     {
       monster = "shardCrab",
@@ -42502,6 +46863,26 @@ return {
     },
     {
       monster = "shardCrab",
+      atk = 36,
+      def = 28,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 24,
+      hits = 4
+    },
+    {
+      monster = "shardCrab",
+      atk = 36,
+      def = 28,
+      weapon = "twinHook",
+      canAttack = true,
+      canWin = true,
+      damage = 36,
+      hits = 4
+    },
+    {
+      monster = "shardCrab",
       atk = 44,
       def = 34,
       canAttack = true,
@@ -42689,6 +47070,26 @@ return {
       atk = 44,
       def = 34,
       weapon = "wellHook",
+      canAttack = true,
+      canWin = true,
+      damage = 13,
+      hits = 3
+    },
+    {
+      monster = "shardCrab",
+      atk = 44,
+      def = 34,
+      weapon = "lamp",
+      canAttack = true,
+      canWin = true,
+      damage = 9,
+      hits = 3
+    },
+    {
+      monster = "shardCrab",
+      atk = 44,
+      def = 34,
+      weapon = "twinHook",
       canAttack = true,
       canWin = true,
       damage = 13,
@@ -105161,6 +109562,10550 @@ return {
             kind = "boss",
             hint = "出口前趴着一个巨大的东西。"
           }
+        }
+      }
+    }
+  },
+  shardsVec = {
+    {
+      reached = 1,
+      won = false,
+      depth = 0,
+      shards = 0
+    },
+    {
+      reached = 1,
+      won = false,
+      depth = 1,
+      shards = 0
+    },
+    {
+      reached = 1,
+      won = false,
+      depth = 2,
+      shards = 0
+    },
+    {
+      reached = 1,
+      won = false,
+      depth = 3,
+      shards = 0
+    },
+    {
+      reached = 1,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 1,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 1,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 1,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 2,
+      won = false,
+      depth = 0,
+      shards = 1
+    },
+    {
+      reached = 2,
+      won = false,
+      depth = 1,
+      shards = 1
+    },
+    {
+      reached = 2,
+      won = false,
+      depth = 2,
+      shards = 1
+    },
+    {
+      reached = 2,
+      won = false,
+      depth = 3,
+      shards = 1
+    },
+    {
+      reached = 2,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 2,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 2,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 2,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 0,
+      shards = 3
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 1,
+      shards = 3
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 2,
+      shards = 4
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 3,
+      shards = 5
+    },
+    {
+      reached = 3,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 3,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 3,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 3,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 0,
+      shards = 6
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 1,
+      shards = 7
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 2,
+      shards = 9
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 3,
+      shards = 10
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 5,
+      won = false,
+      depth = 0,
+      shards = 10
+    },
+    {
+      reached = 5,
+      won = false,
+      depth = 1,
+      shards = 12
+    },
+    {
+      reached = 5,
+      won = false,
+      depth = 2,
+      shards = 15
+    },
+    {
+      reached = 5,
+      won = false,
+      depth = 3,
+      shards = 17
+    },
+    {
+      reached = 5,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 5,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 5,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 5,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 0,
+      shards = 15
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 1,
+      shards = 18
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 2,
+      shards = 22
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 3,
+      shards = 26
+    },
+    {
+      reached = 6,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 6,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 6,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 6,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 0,
+      shards = 21
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 1,
+      shards = 26
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 2,
+      shards = 31
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 3,
+      shards = 36
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 0,
+      shards = 28
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 1,
+      shards = 35
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 2,
+      shards = 42
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 3,
+      shards = 49
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 9,
+      won = false,
+      depth = 0,
+      shards = 36
+    },
+    {
+      reached = 9,
+      won = false,
+      depth = 1,
+      shards = 45
+    },
+    {
+      reached = 9,
+      won = false,
+      depth = 2,
+      shards = 54
+    },
+    {
+      reached = 9,
+      won = false,
+      depth = 3,
+      shards = 63
+    },
+    {
+      reached = 9,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 9,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 9,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 9,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 10,
+      won = false,
+      depth = 0,
+      shards = 45
+    },
+    {
+      reached = 10,
+      won = false,
+      depth = 1,
+      shards = 56
+    },
+    {
+      reached = 10,
+      won = false,
+      depth = 2,
+      shards = 67
+    },
+    {
+      reached = 10,
+      won = false,
+      depth = 3,
+      shards = 78
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 0,
+      shards = 55
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 1,
+      shards = 68
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 2,
+      shards = 82
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 3,
+      shards = 96
+    },
+    {
+      reached = 11,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 11,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 11,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 11,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 12,
+      won = false,
+      depth = 0,
+      shards = 66
+    },
+    {
+      reached = 12,
+      won = false,
+      depth = 1,
+      shards = 82
+    },
+    {
+      reached = 12,
+      won = false,
+      depth = 2,
+      shards = 99
+    },
+    {
+      reached = 12,
+      won = false,
+      depth = 3,
+      shards = 115
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 0,
+      shards = 78
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 1,
+      shards = 97
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 2,
+      shards = 117
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 3,
+      shards = 136
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 14,
+      won = false,
+      depth = 0,
+      shards = 91
+    },
+    {
+      reached = 14,
+      won = false,
+      depth = 1,
+      shards = 113
+    },
+    {
+      reached = 14,
+      won = false,
+      depth = 2,
+      shards = 136
+    },
+    {
+      reached = 14,
+      won = false,
+      depth = 3,
+      shards = 159
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 0,
+      shards = 105
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 1,
+      shards = 131
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 2,
+      shards = 157
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 3,
+      shards = 183
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 0,
+      shards = 120
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 1,
+      shards = 150
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 2,
+      shards = 180
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 3,
+      shards = 210
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 0,
+      shards = 136
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 1,
+      shards = 170
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 2,
+      shards = 204
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 3,
+      shards = 238
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 18,
+      won = false,
+      depth = 0,
+      shards = 153
+    },
+    {
+      reached = 18,
+      won = false,
+      depth = 1,
+      shards = 191
+    },
+    {
+      reached = 18,
+      won = false,
+      depth = 2,
+      shards = 229
+    },
+    {
+      reached = 18,
+      won = false,
+      depth = 3,
+      shards = 267
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 0,
+      shards = 171
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 1,
+      shards = 213
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 2,
+      shards = 256
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 3,
+      shards = 299
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 3,
+      shards = 455
+    },
+    {
+      reached = 20,
+      won = false,
+      depth = 0,
+      shards = 190
+    },
+    {
+      reached = 20,
+      won = false,
+      depth = 1,
+      shards = 237
+    },
+    {
+      reached = 20,
+      won = false,
+      depth = 2,
+      shards = 285
+    },
+    {
+      reached = 20,
+      won = false,
+      depth = 3,
+      shards = 332
+    },
+    {
+      reached = 20,
+      won = true,
+      depth = 0,
+      shards = 260
+    },
+    {
+      reached = 20,
+      won = true,
+      depth = 1,
+      shards = 325
+    },
+    {
+      reached = 20,
+      won = true,
+      depth = 2,
+      shards = 390
+    },
+    {
+      reached = 20,
+      won = true,
+      depth = 3,
+      shards = 455
+    }
+  },
+  perkRuns = {
+    {
+      seed = 1,
+      perks = {
+        atk = 1
+      },
+      unlocks = {},
+      hero = {
+        hp = 200,
+        atk = 11,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 1,
+      perks = {
+        atk = 3,
+        def = 2,
+        hp = 3,
+        keys = 1,
+        gold = 2,
+        engrave = 1,
+        halfSpin = 1
+      },
+      unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" },
+      hero = {
+        hp = 300,
+        atk = 13,
+        def = 12,
+        keys = 1,
+        gold = 50
+      },
+      reels = {
+        { [1] = nil, [2] = "saltDagger", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 5
+    },
+    {
+      seed = 1,
+      perks = {
+        engrave = 1
+      },
+      unlocks = { "lamp" },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = "saltDagger", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 2,
+      perks = {
+        atk = 1
+      },
+      unlocks = {},
+      hero = {
+        hp = 200,
+        atk = 11,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 2,
+      perks = {
+        atk = 3,
+        def = 2,
+        hp = 3,
+        keys = 1,
+        gold = 2,
+        engrave = 1,
+        halfSpin = 1
+      },
+      unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" },
+      hero = {
+        hp = 300,
+        atk = 13,
+        def = 12,
+        keys = 1,
+        gold = 50
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = "boneKnife", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 5
+    },
+    {
+      seed = 2,
+      perks = {
+        engrave = 1
+      },
+      unlocks = { "lamp" },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = "boneKnife", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 3,
+      perks = {
+        atk = 1
+      },
+      unlocks = {},
+      hero = {
+        hp = 200,
+        atk = 11,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 3,
+      perks = {
+        atk = 3,
+        def = 2,
+        hp = 3,
+        keys = 1,
+        gold = 2,
+        engrave = 1,
+        halfSpin = 1
+      },
+      unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" },
+      hero = {
+        hp = 300,
+        atk = 13,
+        def = 12,
+        keys = 1,
+        gold = 50
+      },
+      reels = {
+        { [1] = nil, [2] = "bellStaff", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 5
+    },
+    {
+      seed = 3,
+      perks = {
+        engrave = 1
+      },
+      unlocks = { "lamp" },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = "bellStaff", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 42,
+      perks = {
+        atk = 1
+      },
+      unlocks = {},
+      hero = {
+        hp = 200,
+        atk = 11,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 42,
+      perks = {
+        atk = 3,
+        def = 2,
+        hp = 3,
+        keys = 1,
+        gold = 2,
+        engrave = 1,
+        halfSpin = 1
+      },
+      unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" },
+      hero = {
+        hp = 300,
+        atk = 13,
+        def = 12,
+        keys = 1,
+        gold = 50
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = "boneKnife", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 5
+    },
+    {
+      seed = 42,
+      perks = {
+        engrave = 1
+      },
+      unlocks = { "lamp" },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = "boneKnife", [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 777,
+      perks = {
+        atk = 1
+      },
+      unlocks = {},
+      hero = {
+        hp = 200,
+        atk = 11,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    },
+    {
+      seed = 777,
+      perks = {
+        atk = 3,
+        def = 2,
+        hp = 3,
+        keys = 1,
+        gold = 2,
+        engrave = 1,
+        halfSpin = 1
+      },
+      unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" },
+      hero = {
+        hp = 300,
+        atk = 13,
+        def = 12,
+        keys = 1,
+        gold = 50
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = "harpoon", [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 5
+    },
+    {
+      seed = 777,
+      perks = {
+        engrave = 1
+      },
+      unlocks = { "lamp" },
+      hero = {
+        hp = 200,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      },
+      reels = {
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil, n = 5 },
+        { [1] = nil, [2] = "harpoon", [3] = nil, [4] = nil, [5] = nil, n = 5 }
+      },
+      price = 10
+    }
+  },
+  metaRoutes = {
+    {
+      seed = 1,
+      opts = {
+        depth = 1
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 71 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室1",
+            map = { "##<#############", "##h##.m.##b##.r#", "##e##.#.##f##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....m.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.c.##m##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            marks = { 130 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 侧室2",
+            map = { "##<#############", "##h##.v.##b##.v#", "##x##.#.##b##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....B.....e.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##v##...##e##k##", "##r##.#.##h##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            marks = { 22 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 当铺",
+            map = { "################", "######<#########", "#@....m....r...#", "#.####.####.##.#", "#.#b...N...e##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....f...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "pawn",
+            shop = { "harpoon", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 5 层 · 近路1",
+            map = { "#####<##########", "#.m..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....f..>#", "###e######m#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            marks = { 106 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 6 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "pawn",
+            shop = { "mossBlade", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 7 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...j.##B...h.#", "#.####.##.####.#", "#.#n..D.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###n##.####.##.#", "#h...j.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "normal",
+            marks = { 21 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...n.##i...h.#", "#.####.##.####.#", "#.#D..q.....##>#", "#.#.#####.#.##.#", "#.#.#####r#.##.#", "#...##k...#....#", "###.##.####.##.#", "###B##.####.##.#", "#h...n.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 7,
+            kind = "normal",
+            marks = { 151 },
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 12 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          },
+          {
+            name = "第 13 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 14 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 15 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            kind = "normal",
+            marks = { 106 },
+            hint = "血门近路省战力，多打一场能凑金币。"
+          },
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            kind = "pawn",
+            shop = { "rustSword", "wild" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 抵押厅",
+            map = { "################", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 2,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 1,
+      opts = {
+        depth = 3
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 71 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室1",
+            map = { "##<#############", "##h##.m.##b##.r#", "##e##.#.##f##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....m.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.c.##m##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            marks = { 130 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 侧室2",
+            map = { "##<#############", "##h##.v.##b##.v#", "##x##.#.##b##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....B.....e.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##v##...##e##k##", "##r##.#.##h##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            marks = { 22 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 当铺",
+            map = { "################", "######<#########", "#@....m....r...#", "#.####.####.##.#", "#.#b...N...e##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....f...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "pawn",
+            shop = { "harpoon", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 5 层 · 近路1",
+            map = { "#####<##########", "#.m..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....f..>#", "###e######m#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            marks = { 106 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 6 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "pawn",
+            shop = { "mossBlade", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 7 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...j.##B...h.#", "#.####.##.####.#", "#.#n..D.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###n##.####.##.#", "#h...j.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "normal",
+            marks = { 21 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...n.##i...h.#", "#.####.##.####.#", "#.#D..q.....##>#", "#.#.#####.#.##.#", "#.#.#####r#.##.#", "#...##k...#....#", "###.##.####.##.#", "###B##.####.##.#", "#h...n.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 11,
+            kind = "normal",
+            marks = { 151 },
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 12 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          },
+          {
+            name = "第 13 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 14 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 15 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            kind = "normal",
+            marks = { 106 },
+            hint = "血门近路省战力，多打一场能凑金币。"
+          },
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            kind = "pawn",
+            shop = { "rustSword", "wild" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 抵押厅",
+            map = { "################", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 6,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 1,
+      opts = {
+        unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 71 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室1",
+            map = { "##<#############", "##h##.m.##b##.r#", "##e##.#.##f##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....m.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.c.##m##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 130 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 侧室2",
+            map = { "##<#############", "##h##.v.##b##.v#", "##x##.#.##b##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....B.....e.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##v##...##e##k##", "##r##.#.##h##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 22 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 当铺",
+            map = { "################", "######<#########", "#@....m....r...#", "#.####.####.##.#", "#.#b...N...e##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....f...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "hammer", "rustSword", "lamp" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 5 层 · 近路1",
+            map = { "#####<##########", "#.m..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....f..>#", "###e######m#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 106 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 6 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "pawn",
+            shop = { "bellStaff", "boneKnife", "wellHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 7 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...j.##B...h.#", "#.####.##.####.#", "#.#n..D.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###n##.####.##.#", "#h...j.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "normal",
+            marks = { 21 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...n.##i...h.#", "#.####.##.####.#", "#.#D..q.....##>#", "#.#.#####.#.##.#", "#.#.#####r#.##.#", "#...##k...#....#", "###.##.####.##.#", "###B##.####.##.#", "#h...n.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 5,
+            kind = "normal",
+            marks = { 151 },
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 12 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          },
+          {
+            name = "第 13 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 14 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 15 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            kind = "normal",
+            marks = { 106 },
+            hint = "血门近路省战力，多打一场能凑金币。"
+          },
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            kind = "pawn",
+            shop = { "lamp", "wild", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 抵押厅",
+            map = { "################", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 1,
+      opts = {
+        depth = 2,
+        unlocks = { "pawnExtra", "campKey" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 71 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室1",
+            map = { "##<#############", "##h##.m.##b##.r#", "##e##.#.##f##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....m.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.c.##m##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            marks = { 130 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 侧室2",
+            map = { "##<#############", "##h##.v.##b##.v#", "##x##.#.##b##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....B.....e.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##v##...##e##k##", "##r##.#.##h##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            marks = { 22 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 当铺",
+            map = { "################", "######<#########", "#@....m....r...#", "#.####.####.##.#", "#.#b...N...e##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....f...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "pawn",
+            shop = { "harpoon", "saltDagger", "rustSword" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 5 层 · 近路1",
+            map = { "#####<##########", "#.m..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....f..>#", "###e######m#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            marks = { 106 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 6 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "pawn",
+            shop = { "mossBlade", "boneKnife", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 7 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...j.##B...h.#", "#.####.##.####.#", "#.#n..D.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###n##.####.##.#", "#h...j.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "normal",
+            marks = { 21 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...n.##i...h.#", "#.####.##.####.#", "#.#D..q.....##>#", "#.#.#####.#.##.#", "#.#.#####r#.##.#", "#...##k...#....#", "###.##.####.##.#", "###B##.####.##.#", "#h...n.......bb#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 9,
+            kind = "normal",
+            marks = { 151 },
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 12 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          },
+          {
+            name = "第 13 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 14 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 15 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            kind = "normal",
+            marks = { 106 },
+            hint = "血门近路省战力，多打一场能凑金币。"
+          },
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            kind = "pawn",
+            shop = { "rustSword", "wild", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 抵押厅",
+            map = { "################", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 4,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 5,
+      opts = {
+        depth = 1
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..r##.....#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##b..m##h....#", "#.########.###.#", "#.########.###.#", "#......m.......#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 55 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.e..h..e.h..>#", "#.############.#", "#......e.....f.#", "##.#############", "##m#############", "##r#############", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 岔路2",
+            map = { "################", "#@...e.##D...b.#", "#.####.##.####.#", "#.#m..e.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###f##.####.##.#", "<h...e.......rv#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 4 层 · 环道1",
+            map = { "###########<####", "#@....f....D...#", "#.####.##.####.#", "#.####.##.####.#", "#.#h...e...r##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...m##.>#", "#.###.####.##b.#", "#..m..e....f..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 三道2",
+            map = { "##############<#", "#@..v..b..e...$#", "#.############.#", "#.m...r..f..h..#", "#.############.#", "#.############.#", "#.e...$.....c..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 环道2",
+            map = { "######<#########", "#@....j....q...#", "#.####.##.####.#", "#.####.##.####.#", "#.#b...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...l##.>#", "#.###.####.##k.#", "#..j..D....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 6 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 近路1",
+            map = { "#####<##########", "#.n..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....i....o..>#", "###j######q#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "normal",
+            marks = { 91 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 近路2",
+            map = { "#####<##########", "#.i..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....n....q..>#", "###l######i#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "normal",
+            marks = { 18 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 侧室1",
+            map = { "##<#############", "##h##.a.##b##.r#", "##i##.#.##j##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....a.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.l.##a##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "#h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "pawn",
+            shop = { "saltDagger", "wild" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 7,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 双井道",
+            map = { "####<###########", "#@.w...##..q..h#", "#.#w##.##.####.#", "#.#r##....o....#", "#.#.#######.##.#", "#.#.#######.##.#", "#.n....k....##.#", "#.#######.####.#", "#.#######D####.#", "#h.....u......>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 98 },
+            hint = "两条井道，一条要钥匙。"
+          },
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 13 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 14 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "pawn",
+            shop = { "harpoon", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 16 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "pawn",
+            shop = { "hammer", "bellStaff" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道1",
+            map = { "################", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 2,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 5,
+      opts = {
+        depth = 3
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..r##.....#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##b..m##h....#", "#.########.###.#", "#.########.###.#", "#......m.......#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 55 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.e..h..e.h..>#", "#.############.#", "#......e.....f.#", "##.#############", "##m#############", "##r#############", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 岔路2",
+            map = { "################", "#@...e.##D...b.#", "#.####.##.####.#", "#.#m..e.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###f##.####.##.#", "<h...e.......rv#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 4 层 · 环道1",
+            map = { "###########<####", "#@....f....D...#", "#.####.##.####.#", "#.####.##.####.#", "#.#h...e...r##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...m##.>#", "#.###.####.##b.#", "#..m..e....f..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 三道2",
+            map = { "##############<#", "#@..v..b..e...$#", "#.############.#", "#.m...r..f..h..#", "#.############.#", "#.############.#", "#.e...$.....c..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 环道2",
+            map = { "######<#########", "#@....j....q...#", "#.####.##.####.#", "#.####.##.####.#", "#.#b...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...l##.>#", "#.###.####.##k.#", "#..j..D....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 6 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 近路1",
+            map = { "#####<##########", "#.n..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....i....o..>#", "###j######q#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "normal",
+            marks = { 91 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 近路2",
+            map = { "#####<##########", "#.i..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....n....q..>#", "###l######i#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "normal",
+            marks = { 18 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 侧室1",
+            map = { "##<#############", "##h##.a.##b##.r#", "##i##.#.##j##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....a.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.l.##a##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "#h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "pawn",
+            shop = { "saltDagger", "wild" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 11,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 双井道",
+            map = { "####<###########", "#@.w...##..q..h#", "#.#w##.##.####.#", "#.#r##....o....#", "#.#.#######.##.#", "#.#.#######.##.#", "#.n....k....##.#", "#.#######.####.#", "#.#######D####.#", "#h.....u......>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 98 },
+            hint = "两条井道，一条要钥匙。"
+          },
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 13 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 14 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "pawn",
+            shop = { "harpoon", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 16 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "pawn",
+            shop = { "hammer", "bellStaff" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道1",
+            map = { "################", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 6,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 5,
+      opts = {
+        unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..r##.....#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##b..m##h....#", "#.########.###.#", "#.########.###.#", "#......m.......#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 55 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.e..h..e.h..>#", "#.############.#", "#......e.....f.#", "##.#############", "##m#############", "##r#############", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 岔路2",
+            map = { "################", "#@...e.##D...b.#", "#.####.##.####.#", "#.#m..e.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###f##.####.##.#", "<h...e.......rv#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 4 层 · 环道1",
+            map = { "###########<####", "#@....f....D...#", "#.####.##.####.#", "#.####.##.####.#", "#.#h...e...r##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...m##.>#", "#.###.####.##b.#", "#..m..e....f..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 三道2",
+            map = { "##############<#", "#@..v..b..e...$#", "#.############.#", "#.m...r..f..h..#", "#.############.#", "#.############.#", "#.e...$.....c..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 环道2",
+            map = { "######<#########", "#@....j....q...#", "#.####.##.####.#", "#.####.##.####.#", "#.#b...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...l##.>#", "#.###.####.##k.#", "#..j..D....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 6 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 近路1",
+            map = { "#####<##########", "#.n..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....i....o..>#", "###j######q#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "normal",
+            marks = { 91 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 近路2",
+            map = { "#####<##########", "#.i..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....n....q..>#", "###l######i#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "normal",
+            marks = { 18 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 侧室1",
+            map = { "##<#############", "##h##.a.##b##.r#", "##i##.#.##j##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....a.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.l.##a##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "#h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "pawn",
+            shop = { "rustSword", "wild", "mossBlade" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 5,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 双井道",
+            map = { "####<###########", "#@.w...##..q..h#", "#.#w##.##.####.#", "#.#r##....o....#", "#.#.#######.##.#", "#.#.#######.##.#", "#.n....k....##.#", "#.#######.####.#", "#.#######D####.#", "#h.....u......>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 98 },
+            hint = "两条井道，一条要钥匙。"
+          },
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 13 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 14 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "pawn",
+            shop = { "harpoon", "boneKnife", "twinHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 16 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "pawn",
+            shop = { "hammer", "saltDagger", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道1",
+            map = { "################", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 5,
+      opts = {
+        depth = 2,
+        unlocks = { "pawnExtra", "campKey" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..r##.....#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##b..m##h....#", "#.########.###.#", "#.########.###.#", "#......m.......#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 55 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.e..h..e.h..>#", "#.############.#", "#......e.....f.#", "##.#############", "##m#############", "##r#############", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 岔路2",
+            map = { "################", "#@...e.##D...b.#", "#.####.##.####.#", "#.#m..e.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###f##.####.##.#", "<h...e.......rv#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 4 层 · 环道1",
+            map = { "###########<####", "#@....f....D...#", "#.####.##.####.#", "#.####.##.####.#", "#.#h...e...r##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...m##.>#", "#.###.####.##b.#", "#..m..e....f..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 三道2",
+            map = { "##############<#", "#@..v..b..e...$#", "#.############.#", "#.m...r..f..h..#", "#.############.#", "#.############.#", "#.e...$.....c..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 环道2",
+            map = { "######<#########", "#@....j....q...#", "#.####.##.####.#", "#.####.##.####.#", "#.#b...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...l##.>#", "#.###.####.##k.#", "#..j..D....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 6 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 近路1",
+            map = { "#####<##########", "#.n..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....i....o..>#", "###j######q#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "normal",
+            marks = { 91 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 近路2",
+            map = { "#####<##########", "#.i..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....n....q..>#", "###l######i#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "normal",
+            marks = { 18 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 侧室1",
+            map = { "##<#############", "##h##.a.##b##.r#", "##i##.#.##j##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....a.....D.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.l.##a##h##", "##k##.#.##r##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "#h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "pawn",
+            shop = { "saltDagger", "wild", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 9,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 双井道",
+            map = { "####<###########", "#@.w...##..q..h#", "#.#w##.##.####.#", "#.#r##....o....#", "#.#.#######.##.#", "#.#.#######.##.#", "#.n....k....##.#", "#.#######.####.#", "#.#######D####.#", "#h.....u......>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 98 },
+            hint = "两条井道，一条要钥匙。"
+          },
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 13 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 14 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "pawn",
+            shop = { "harpoon", "boneKnife", "wellHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 收租口",
+            map = { "#####<##########", "#@...j...$...o.#", "#.#######.####.#", "#.B.........##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.#...$...l.##.#", "#.#########.##.#", "#.#########.##.#", "#....w.w.....$>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "血门近路省战力，多打一场能凑金币。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 16 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "pawn",
+            shop = { "hammer", "bellStaff", "boneKnife" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道1",
+            map = { "################", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 4,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 9,
+      opts = {
+        depth = 1
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "################", "################", "#@.h..f..H.v...>", "#.###.#.##.#####", "#.m...#..e.#####", "################", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 105 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室2",
+            map = { "##<#############", "##b##.c.##r##.h#", "##m##.#.##m##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........f.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.v.##c##m##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            marks = { 34 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 近路2",
+            map = { "#####<##########", "#.e..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....v....x..>#", "###c######e#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 环道1",
+            map = { "######<#########", "#@....D....o...#", "#.####.##.####.#", "#.####.##.####.#", "#.#k...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...j##.>#", "#.###.####.##b.#", "#..n..l....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "pawn",
+            shop = { "boneKnife", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 8 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "<h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            marks = { 25 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "#h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "normal",
+            marks = { 158 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 7,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 57 },
+            hint = "每一格都有人押过东西。"
+          },
+          {
+            name = "第 12 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 15 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            kind = "pawn",
+            shop = { "mossBlade", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 17 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            kind = "normal",
+            marks = { 157 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 绳桥",
+            map = { "################", "################", "################", "################", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 2,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 9,
+      opts = {
+        depth = 3
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "################", "################", "#@.h..f..H.v...>", "#.###.#.##.#####", "#.m...#..e.#####", "################", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 105 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室2",
+            map = { "##<#############", "##b##.c.##r##.h#", "##m##.#.##m##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........f.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.v.##c##m##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            marks = { 34 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 近路2",
+            map = { "#####<##########", "#.e..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....v....x..>#", "###c######e#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 环道1",
+            map = { "######<#########", "#@....D....o...#", "#.####.##.####.#", "#.####.##.####.#", "#.#k...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...j##.>#", "#.###.####.##b.#", "#..n..l....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "pawn",
+            shop = { "boneKnife", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 8 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "<h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            kind = "normal",
+            marks = { 25 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "#h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "normal",
+            marks = { 158 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 11,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 57 },
+            hint = "每一格都有人押过东西。"
+          },
+          {
+            name = "第 12 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 15 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            kind = "pawn",
+            shop = { "mossBlade", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 17 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            kind = "normal",
+            marks = { 157 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 绳桥",
+            map = { "################", "################", "################", "################", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 6,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 9,
+      opts = {
+        unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "################", "################", "#@.h..f..H.v...>", "#.###.#.##.#####", "#.m...#..e.#####", "################", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 105 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室2",
+            map = { "##<#############", "##b##.c.##r##.h#", "##m##.#.##m##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........f.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.v.##c##m##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            marks = { 34 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 近路2",
+            map = { "#####<##########", "#.e..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....v....x..>#", "###c######e#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 环道1",
+            map = { "######<#########", "#@....D....o...#", "#.####.##.####.#", "#.####.##.####.#", "#.#k...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...j##.>#", "#.###.####.##b.#", "#..n..l....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "pawn",
+            shop = { "harpoon", "hammer", "mossBlade" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 8 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "<h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            marks = { 25 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "#h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "normal",
+            marks = { 158 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 5,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 57 },
+            hint = "每一格都有人押过东西。"
+          },
+          {
+            name = "第 12 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 15 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            kind = "pawn",
+            shop = { "bellStaff", "rustSword", "mossBlade" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 17 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            kind = "normal",
+            marks = { 157 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 绳桥",
+            map = { "################", "################", "################", "################", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 9,
+      opts = {
+        depth = 2,
+        unlocks = { "pawnExtra", "campKey" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "#...m..b##..h..#", "#.########.###.#", "#@.....e......>#", "#.#####.######.#", "#.#####.######.#", "#.##r..m##.....#", "#.########.###.#", "#.########.###.#", "#......m....m..#", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 20 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "################", "################", "#@.h..f..H.v...>", "#.###.#.##.#####", "#.m...#..e.#####", "################", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 105 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 侧室2",
+            map = { "##<#############", "##b##.c.##r##.h#", "##m##.#.##m##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........f.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##e##.v.##c##m##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            marks = { 34 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 近路2",
+            map = { "#####<##########", "#.e..D.......hB#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....v....x..>#", "###c######e#####", "###.######.#####", "###r###...hb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 赌坊",
+            map = { "##############<#", "#@.....v......b#", "#.####S#######.#", "#.........$.e.h#", "#######.########", "#######.########", "#.$....e....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 暗河",
+            map = { "##########<#####", "#@......#.ww.r.#", "#.#####.#.w###.#", "#.##h.......##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.##.###.##.##.#", "#.i..##..ww.##.#", "#.#####...w.##.#", "#......n.#...j>#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "井鼠挤在一起时更凶：每有一只相邻的井鼠，攻击 +5。先打边上落单的。"
+          },
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 环道1",
+            map = { "######<#########", "#@....D....o...#", "#.####.##.####.#", "#.####.##.####.#", "#.#k...h...h##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...r...j##.>#", "#.###.####.##b.#", "#..n..l....B..b#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "normal",
+            marks = { 27 },
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 7 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "pawn",
+            shop = { "boneKnife", "hammer", "mossBlade" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 8 层 · 岔路1",
+            map = { "################", "#@...i.##a...r.#", "#.####.##.####.#", "#.#i..k.....##>#", "#.#.#####.#.##.#", "#.#.#####D#.##.#", "#...##b...#....#", "###.##.####.##.#", "###i##.####.##.#", "<h...j.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            marks = { 25 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 赌坊",
+            map = { "################", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 9 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "#h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "normal",
+            marks = { 158 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 9,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 57 },
+            hint = "每一格都有人押过东西。"
+          },
+          {
+            name = "第 12 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 13 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 75 },
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 15 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 16 层 · 盐窟",
+            map = { "#########<######", "#@...k.##..u..$#", "#.####.##.######", "#.#i...D......h#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l.##u..b#.##.#", "#.#.##.####.##.#", "#.#.##.####.##.#", "#....j.......q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 157 },
+            hint = "盐蚀蛞蝓每打中你一下，你这一仗的防御就 −1。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            kind = "pawn",
+            shop = { "mossBlade", "saltDagger", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 17 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            kind = "normal",
+            marks = { 157 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          },
+          {
+            name = "第 18 层 · 绳桥",
+            map = { "################", "################", "################", "################", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 101 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 4,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 2024,
+      opts = {
+        depth = 1
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "##r###h....#b###", "##m#######e#e###", "##.###.....#.###", "##.###.....#.###", "#@.........e...>", "##.###.###.#####", "##.###.###.#####", "##e###D###m..###", "##k###h###..h###", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 138 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            power = 2,
+            kind = "normal",
+            marks = { 66 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 侧室1",
+            map = { "##<#############", "##k##.f.##e##.b#", "##c##.#.##r##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....f.....B.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##f##.v.##h##b##", "##h##.#.##.##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "<h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "normal",
+            marks = { 131 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 7 层 · 侧室2",
+            map = { "##<#############", "##b##.l.##r##.h#", "##a##.#.##a##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........j.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.n.##l##a##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 3,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 近路2",
+            map = { "################", "#.a..D........h#", "#.#h##########.#", "#.############.#", "#.############.#", "#@....a....l..>#", "###a######i#####", "###.######.#####", "###r###...kb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 5,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 7,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          },
+          {
+            name = "第 12 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "pawn",
+            shop = { "bellStaff", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            marks = { 149 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          },
+          {
+            name = "第 13 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "pawn",
+            shop = { "saltDagger", "mossBlade" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 14 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "pawn",
+            shop = { "rustSword", "wild" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 8,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道2",
+            map = { "################", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 8,
+            kind = "pawn",
+            shop = { "boneKnife", "wellHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 2,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 2024,
+      opts = {
+        depth = 3
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "##r###h....#b###", "##m#######e#e###", "##.###.....#.###", "##.###.....#.###", "#@.........e...>", "##.###.###.#####", "##.###.###.#####", "##e###D###m..###", "##k###h###..h###", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 138 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 6,
+            kind = "normal",
+            marks = { 66 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 侧室1",
+            map = { "##<#############", "##k##.f.##e##.b#", "##c##.#.##r##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....f.....B.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##f##.v.##h##b##", "##h##.#.##.##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "<h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "normal",
+            marks = { 131 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 7 层 · 侧室2",
+            map = { "##<#############", "##b##.l.##r##.h#", "##a##.#.##a##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........j.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.n.##l##a##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 7,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 近路2",
+            map = { "################", "#.a..D........h#", "#.#h##########.#", "#.############.#", "#.############.#", "#@....a....l..>#", "###a######i#####", "###.######.#####", "###r###...kb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 180,
+            power = 9,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 60
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 60
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 11,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          },
+          {
+            name = "第 12 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "pawn",
+            shop = { "bellStaff", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            marks = { 149 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          },
+          {
+            name = "第 13 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "pawn",
+            shop = { "saltDagger", "mossBlade" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 14 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "pawn",
+            shop = { "rustSword", "wild" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 60
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 105
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 105
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 375,
+            power = 12,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道2",
+            map = { "################", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 12,
+            kind = "pawn",
+            shop = { "boneKnife", "wellHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 12,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 6,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 2024,
+      opts = {
+        unlocks = { "lamp", "twinHook", "scavenger", "drowned", "campKey", "pawnExtra", "depth" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "##r###h....#b###", "##m#######e#e###", "##.###.....#.###", "##.###.....#.###", "#@.........e...>", "##.###.###.#####", "##.###.###.#####", "##e###D###m..###", "##k###h###..h###", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 138 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 20,
+            kind = "normal",
+            marks = { 66 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 侧室1",
+            map = { "##<#############", "##k##.f.##e##.b#", "##c##.#.##r##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....f.....B.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##f##.v.##h##b##", "##h##.#.##.##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "<h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "normal",
+            marks = { 131 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 7 层 · 侧室2",
+            map = { "##<#############", "##b##.l.##r##.h#", "##a##.#.##a##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........j.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.n.##l##a##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 1,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 2,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 近路2",
+            map = { "################", "#.a..D........h#", "#.#h##########.#", "#.############.#", "#.############.#", "#@....a....l..>#", "###a######i#####", "###.######.#####", "###r###...kb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            rent = 120,
+            power = 3,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 150,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 5,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          },
+          {
+            name = "第 12 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "pawn",
+            shop = { "saltDagger", "mossBlade", "twinHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            marks = { 149 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          },
+          {
+            name = "第 13 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "pawn",
+            shop = { "rustSword", "bellStaff", "harpoon" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 14 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "pawn",
+            shop = { "lamp", "wild", "saltDagger" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            rent = 250,
+            power = 6,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道2",
+            map = { "################", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 50,
+            bigPotion = 120,
+            gold = 30,
+            power = 6,
+            kind = "pawn",
+            shop = { "harpoon", "lamp", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 60,
+            bigPotion = 150,
+            gold = 40,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    },
+    {
+      seed = 2024,
+      opts = {
+        depth = 2,
+        unlocks = { "pawnExtra", "campKey" }
+      },
+      plan = {
+        {
+          {
+            name = "第 1 层 · 井口",
+            map = { "################", "##r###h....#b###", "##m#######e#e###", "##.###.....#.###", "##.###.....#.###", "#@.........e...>", "##.###.###.#####", "##.###.###.#####", "##e###D###m..###", "##k###h###..h###", "################" },
+            bloodCost = 40,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 138 },
+            hint = "怪物格子上的数字是打它要掉的血。不用清怪，走到出口就行；奖励都在怪物身后，值不值得打，自己算。"
+          }
+        },
+        {
+          {
+            name = "第 2 层 · 苔壁",
+            map = { "################", "################", "#@.......f.....>", "###.##.#########", "#hv.##.v.h######", "######.#########", "######.#########", "######m...r#####", "################", "################", "################" },
+            bloodCost = 60,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 20,
+            power = 4,
+            kind = "normal",
+            marks = { 66 },
+            hint = "苔壁湿滑，血瓶藏在怪物身后。"
+          }
+        },
+        {
+          {
+            name = "第 3 层 · 环道2",
+            map = { "######<#########", "#@....e....f...#", "#.####.##.####.#", "#.####.##.####.#", "#.#r...D...e##.#", "#.#.#####.####.#", "#.#.#####.###..#", "#.#...b...f##.>#", "#.###.####.##h.#", "#..e..e....r..k#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 4 层 · 近路1",
+            map = { "#####<##########", "#.v..D........h#", "#.#k##########.#", "#.############.#", "#.############.#", "#@....e....g..>#", "###f######x#####", "###.######.#####", "###r###...bh####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 4 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 5 层 · 侧室1",
+            map = { "##<#############", "##k##.f.##e##.b#", "##c##.#.##r##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@.....f.....B.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##f##.v.##h##b##", "##h##.#.##.##.##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "normal",
+            hint = "回声蝠会先打你一下；溺魂会吸血，攻击不够根本打不死。"
+          },
+          {
+            name = "第 5 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....e.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 6 层 · 赌坊",
+            map = { "##############<#", "#@.....n......b#", "#.####S#######.#", "#.........$.i.h#", "#######.########", "#######.########", "#.$....i....r..#", "#.############.#", "#.############.#", "#......>.......#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            kind = "wheel",
+            hint = "井壁上嵌着一台大转盘。站到旁边点它，花金币或生命转一次。"
+          },
+          {
+            name = "第 6 层 · 三道2",
+            map = { "##############<#", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 4,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          }
+        },
+        {
+          {
+            name = "第 7 层 · 岔路2",
+            map = { "################", "#@...i.##D...b.#", "#.####.##.####.#", "#.#a..i.....##>#", "#.#.#####.#.##.#", "#.#.#####k#.##.#", "#...##r...#....#", "###.##.####.##.#", "###j##.####.##.#", "<h...i.......rn#", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "normal",
+            marks = { 131 },
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 7 层 · 侧室2",
+            map = { "##<#############", "##b##.l.##r##.h#", "##a##.#.##a##.##", "##.##.#.##.##.##", "##.##.#.##.##.##", "#@...........j.>", "##.##.#.##.##.##", "##.##.#.##.##.##", "##i##.n.##l##a##", "##r##.#.##$##$##", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 5,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          }
+        },
+        {
+          {
+            name = "第 8 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 8 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 6,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 9 层 · 近路2",
+            map = { "################", "#.a..D........h#", "#.#h##########.#", "#.############.#", "#.############.#", "#@....a....l..>#", "###a######i#####", "###.######.#####", "###r###...kb####", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "normal",
+            hint = "锈甲虫防御很高，攻击不够就打不动。"
+          },
+          {
+            name = "第 9 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "################", "################", "################", "################" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            rent = 120,
+            power = 7,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 80,
+                price = 25
+              },
+              {
+                id = "atk",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "def",
+                amount = 2,
+                price = 40
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 30
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 10 层 · 断绞盘",
+            map = { "################", "#@...b.##..h...#", "#.####.##.####.#", "#.#h...i....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#.l....u.p..##.#", "#.#######G.###.#", "#########.######", "#########.######", "#########>######" },
+            bloodCost = 80,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 112,
+            gold = 25,
+            power = 8,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着一只骸骨祭司。先拆祭司，还是直接打被庇护的守卫？"
+          }
+        },
+        {
+          {
+            name = "第 11 层 · 绳桥",
+            map = { "################", "################", "################", "####<###########", "#@.i..$##..h...#", "#.####.##.####.#", "#....n....w..w>#", "################", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 9,
+            kind = "normal",
+            marks = { 109 },
+            hint = "短短一段，桥那头有光。"
+          }
+        },
+        {
+          {
+            name = "第 12 层 · 锈厅",
+            map = { "################", "#@...r.##..b...#", "#.####.##.####.#", "#.#h...q....##.#", "#.#.###<###.##.#", "#.#.#######.##.#", "#.u....p.G..##.#", "#.#########.##.#", "#.#########.##.#", "#............>.#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "石鳞守卫身边站着祭司。先拆祭司，还是直接打？"
+          },
+          {
+            name = "第 12 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "pawn",
+            shop = { "bellStaff", "hammer", "wellHook" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 13 层 · 骨龛",
+            map = { "######<#########", "#@....i...#...h#", "#.#######.#.##.#", "#.#r...B..p...h#", "#.#.######.#####", "#.#.######q#####", "#......o.....j.#", "#.####.##.####.#", "#.####.##.####.#", "#h...a.##....n>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            marks = { 149 },
+            hint = "骸骨祭司让相邻的怪物防御 +6。先拆祭司，还是硬闯？"
+          },
+          {
+            name = "第 13 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "pawn",
+            shop = { "saltDagger", "mossBlade", "harpoon" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 14 层 · 骨坛",
+            map = { "################", "#####<##########", "#@...n....h....#", "#.#########.##.#", "#.r...A...o.##.#", "#.#########.##.#", "#.#########.##.#", "#..b...l..r...>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "altar",
+            hint = "骨坛上堆着怪物的骨头。献点东西，能把它们的本事移到你的武器上。"
+          },
+          {
+            name = "第 14 层 · 锈栅",
+            map = { "#########<######", "#@...k.##.p..$.#", "#.####.##.u###.#", "#.#$..D........#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w..w....o.##.#", "#.#######.####.#", "#.#######.####.#", "#......h.....q>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "用骨钥绕开被庇护的蛞蝓，还是先拆掉祭司？"
+          }
+        },
+        {
+          {
+            name = "第 15 层 · 当铺",
+            map = { "################", "######<#########", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "pawn",
+            shop = { "rustSword", "wild", "bellStaff" },
+            hint = "有人在这里收东西，也卖东西。"
+          },
+          {
+            name = "第 15 层 · 裂石廊",
+            map = { "################", "################", "################", "################", "#@....r....w..>#", "#.############.#", "#....h....u....#", "##########<#####", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "头顶的石头在掉渣。"
+          }
+        },
+        {
+          {
+            name = "第 16 层 · 回声库",
+            map = { "#####<##########", "#@...o...$.$...#", "#.############.#", "#.k..D...q...h.#", "#.############.#", "#.############.#", "#..u...b...w..w#", "##############.#", "##############.#", "##############.#", "##############>#" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "normal",
+            hint = "守卫身后是金币。"
+          },
+          {
+            name = "第 16 层 · 营火",
+            map = { "################", "################", "################", "################", "#@....h.....H..#", "#.####M#####...#", "#....i.r....b.>#", "#####<##########", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "camp",
+            stall = {
+              {
+                id = "hp",
+                amount = 150,
+                price = 40
+              },
+              {
+                id = "atk",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "def",
+                amount = 3,
+                price = 70
+              },
+              {
+                id = "key",
+                amount = 1,
+                price = 40
+              }
+            },
+            hint = "火边有个补给摊。"
+          }
+        },
+        {
+          {
+            name = "第 17 层 · 三道1",
+            map = { "##############<#", "#@..a..r..i...h#", "#.############.#", "#.n...b..j..$..#", "#.############.#", "#.############.#", "#.l...$.....i..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 17 层 · 抵押厅",
+            map = { "#####<##########", "#@...q....u...$#", "#.#######.####.#", "#.h...p..o....$#", "#.#.#######.##.#", "#.#.#######.##.#", "#.w....r....##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#......$.....u>#", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            rent = 250,
+            power = 10,
+            kind = "normal",
+            marks = { 98 },
+            hint = "每一格都有人押过东西。"
+          }
+        },
+        {
+          {
+            name = "第 18 层 · 三道2",
+            map = { "################", "#@..n..b..i...$#", "#.############.#", "#.a...r..j..h..#", "#.############.#", "#.############.#", "#.i...$.....l..#", "#######.########", "#######G########", "#######.########", "#######>########" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "精英封住了出口。打败它可以往断臂转轮上刻一把武器。"
+          },
+          {
+            name = "第 18 层 · 当铺",
+            map = { "################", "################", "#@....a....r...#", "#.####.####.##.#", "#.#b...N...i##.#", "#.#.#######.##.#", "#.#.#######.##.#", "#....j...k....>#", "################", "################", "################" },
+            bloodCost = 100,
+            gem = 2,
+            smallPotion = 37,
+            bigPotion = 90,
+            gold = 30,
+            power = 10,
+            kind = "pawn",
+            shop = { "boneKnife", "wellHook", "hammer" },
+            hint = "有人在这里收东西，也卖东西。"
+          }
+        },
+        {
+          {
+            name = "第 19 层 · 守门",
+            map = { "################", "#@...r..b....h.#", "#.############.#", "#.############.#", "#.u...w.w....u.#", "#.####...#####.#", "#.####pKp#####.#", "#######.########", "#######.########", "#######.########", "#######>########" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 10,
+            eliteReward = true,
+            kind = "elite",
+            hint = "守门人两边各一只骸骨祭司（庇护不叠加）。先拆祭司，还是直接挑战？"
+          }
+        },
+        {
+          {
+            name = "第 20 层 · 井底之眼",
+            map = { "################", "################", "#@....h..h....b#", "#.############.#", "#.g..r.E..r..g.#", "#.#####.######.#", "#.#####.######.#", "#.#####.######.#", "#######>########", "################", "################" },
+            bloodCost = 120,
+            gem = 2,
+            smallPotion = 45,
+            bigPotion = 112,
+            gold = 40,
+            power = 4,
+            eliteReward = false,
+            kind = "boss",
+            hint = "（Boss 站位战还没做，先是一场确定的战斗。）"
+          }
+        }
+      }
+    }
+  },
+  charRuns = {
+    {
+      id = "scavenger",
+      maps = {
+        { "@D.G>", "....." },
+        { "@.m.>" },
+        { "@...>" }
+      },
+      log = {
+        {
+          ok = true,
+          hero = {
+            hp = 140,
+            atk = 9,
+            def = 8,
+            keys = 0,
+            gold = 30
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = true,
+          hero = {
+            hp = 140,
+            atk = 9,
+            def = 8,
+            keys = 0,
+            gold = 30
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = true,
+          hero = {
+            hp = 0,
+            atk = 9,
+            def = 8,
+            keys = 0,
+            gold = 30
+          },
+          status = "dead",
+          revived = false
+        },
+        {
+          floor = 0,
+          hero = {
+            hp = 0,
+            atk = 9,
+            def = 8,
+            keys = 0,
+            gold = 30
+          },
+          status = "dead"
+        },
+        {
+          floor = 0,
+          hero = {
+            hp = 0,
+            atk = 9,
+            def = 8,
+            keys = 0,
+            gold = 30
+          },
+          status = "dead"
+        },
+        {
+          floor = 0,
+          hero = {
+            hp = 0,
+            atk = 9,
+            def = 8,
+            keys = 0,
+            gold = 30
+          },
+          status = "dead"
+        }
+      }
+    },
+    {
+      id = "drowned",
+      maps = {
+        { "@D.G>", "....." },
+        { "@.m.>" },
+        { "@...>" }
+      },
+      log = {
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 14,
+            def = 6,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 74,
+            def = 66,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 134,
+            def = 126,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 194,
+            def = 186,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 254,
+            def = 246,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 314,
+            def = 306,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 374,
+            def = 366,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 434,
+            def = 426,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          floor = 0,
+          hero = {
+            hp = 100,
+            atk = 494,
+            def = 486,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 494,
+            def = 486,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 554,
+            def = 546,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 614,
+            def = 606,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 674,
+            def = 666,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 734,
+            def = 726,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 794,
+            def = 786,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 854,
+            def = 846,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 914,
+            def = 906,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          floor = 0,
+          hero = {
+            hp = 100,
+            atk = 974,
+            def = 966,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing"
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 974,
+            def = 966,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1034,
+            def = 1026,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1094,
+            def = 1086,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1154,
+            def = 1146,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1214,
+            def = 1206,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1274,
+            def = 1266,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1334,
+            def = 1326,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          ok = false,
+          hero = {
+            hp = 100,
+            atk = 1394,
+            def = 1386,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing",
+          revived = false
+        },
+        {
+          floor = 0,
+          hero = {
+            hp = 100,
+            atk = 1454,
+            def = 1446,
+            keys = 0,
+            gold = 0
+          },
+          status = "playing"
         }
       }
     }

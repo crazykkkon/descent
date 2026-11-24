@@ -13,6 +13,7 @@ import { FloorDef, FloorKind, StallOffer, parseFloor } from './floor';
 import { DEMO_POOLS, F2_CLASSIC, F2_CONTRACT, F5_ELITE, F4_GAMBLE, FloorPool, buildFloor } from './levels';
 import { draw, pick } from './rng';
 import { BIG_MAPS } from './bigmaps';
+import { DEPTH_POWER, weaponPool } from './meta';
 
 /**
  * 地图尺寸：16×11（制作人定）。route.ts / levels.ts 里写的是小图（逻辑原稿，11×7 或 9×7），
@@ -292,7 +293,16 @@ export function powerFor(d: number, kind?: FloorKind): number {
     return kind === 'boss' || d <= POWER_FROM ? 0 : Math.min(POWER_MAX, d - POWER_FROM);
 }
 
-function toFloor(seed: number, d: number, slot: number, e: MapEntry): FloorDef {
+/** 路线选项（灵魂碎片解锁的东西、深度模式） */
+export interface RouteOptions {
+    /** 深度模式 0～3 */
+    depth?: number;
+    /** 已经解锁的东西（meta.ts 的 UNLOCKS id） */
+    unlocks?: string[];
+}
+
+function toFloor(seed: number, d: number, slot: number, e: MapEntry, opts: RouteOptions = {}): FloorDef {
+    const unlocks = opts.unlocks ?? [];
     const p = band(d);
     const map = e.kind === 'boss' ? e.map : deepen(e.map, d);
     const f: FloorDef = { ...p, name: `第 ${d + 1} 层 · ${e.name}`, hint: e.hint, map, kind: e.kind };
@@ -300,15 +310,24 @@ function toFloor(seed: number, d: number, slot: number, e: MapEntry): FloorDef {
     if (power) f.power = power;
     if (e.kind === 'elite' || e.kind === 'boss') f.eliteReward = e.kind === 'elite';
     if (e.kind === 'normal') { const m = markFor(seed, d, slot, map); if (m) f.marks = m; }
-    if (e.kind === 'camp') f.stall = d >= 10 ? STALL_DEEP : STALL_SHALLOW;
+    if (e.kind === 'camp') {
+        f.stall = [...(d >= 10 ? STALL_DEEP : STALL_SHALLOW)];
+        // 解锁"营火的骨钥"：多卖一把骨钥
+        if (unlocks.includes('campKey')) f.stall.push({ id: 'key', amount: 1, price: d >= 10 ? 40 : 30 });
+    }
     if (e.kind === 'pawn') {
-        const all = Object.keys(WEAPONS) as WeaponId[];
+        const all = weaponPool(unlocks);
         const a = pick(seed, 8500 + d * 10 + slot, 0, all.length);
         let b = pick(seed, 8500 + d * 10 + slot, 1, all.length - 1);
         if (b >= a) b++;
         f.shop = [all[a], all[b]];
         // 很小的机会第二件换成赖子
         if (draw(seed, 8600 + d * 10 + slot, 0) < 0.1) f.shop[1] = 'wild';
+        // 解锁"当铺的第三件"：多摆一件
+        if (unlocks.includes('pawnExtra')) {
+            const rest = all.filter(w => w !== all[a] && w !== all[b]);
+            f.shop.push(rest[pick(seed, 8500 + d * 10 + slot, 2, rest.length)]);
+        }
     }
     if (RENTS[d]) f.rent = RENTS[d];
     return f;
@@ -346,7 +365,7 @@ export const FIXED_FLOORS = [0, 1, 2, 9, 10, 18, 19];
  * 一局的完整路线：每层 1 个或 2 个候选。
  * 下一层有两个候选的层，地图上有两个出口：'>' 通向第一个候选，'<' 通向第二个；其余层只有 '>'。
  */
-export function buildRoute(seed: number): FloorDef[][] {
+export function buildRoute(seed: number, opts: RouteOptions = {}): FloorDef[][] {
     const used = new Set<string>();
     const plan: FloorDef[][] = [];
     for (let d = 0; d < ROUTE_LENGTH; d++) {
@@ -375,13 +394,24 @@ export function buildRoute(seed: number): FloorDef[][] {
                 if (m) f.marks = m;
                 return f;
             }
-            return toFloor(seed, d, slot, e);
+            return toFloor(seed, d, slot, e, opts);
         }));
     }
     // 下一层只有一个候选的层：只留一个出口
-    plan.forEach((opts, d) => {
-        if ((plan[d + 1]?.length ?? 0) !== 2) for (const f of opts) f.map = oneExit(f.map);
+    plan.forEach((cands, d) => {
+        if ((plan[d + 1]?.length ?? 0) !== 2) for (const f of cands) f.map = oneExit(f.map);
     });
+    // 深度模式：第 1 级起怪物每级再加强 2 级（每一层都加，井底之眼也加，精英按一半算）；
+    // 第 2 级起血瓶效果 −25%；第 3 级起井租和补给摊的价格 ×1.5
+    const depth = opts.depth ?? 0;
+    if (depth > 0) for (const cands of plan) for (const f of cands) {
+        f.power = (f.power ?? 0) + DEPTH_POWER * depth;
+        if (depth >= 2) { f.smallPotion = Math.floor((f.smallPotion * 3) / 4); f.bigPotion = Math.floor((f.bigPotion * 3) / 4); }
+        if (depth >= 3) {
+            if (f.rent) f.rent = Math.floor((f.rent * 3) / 2);
+            if (f.stall) f.stall = f.stall.map(o => ({ ...o, price: Math.round((o.price * 3) / 2 / 5) * 5 }));
+        }
+    }
     return plan;
 }
 

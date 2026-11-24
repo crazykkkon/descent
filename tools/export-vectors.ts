@@ -17,6 +17,7 @@ import { decreeFor } from '../src/core/decree';
 import { ArmSym, EngraveSym, armOutcomeCounts, newArm } from '../src/core/arm';
 import { whisper } from '../src/core/whisper';
 import * as R from '../src/core/route';
+import * as Meta from '../src/core/meta';
 
 // ---------- 把 JS 值写成 Lua 表 ----------
 const LUA_KEYWORDS = new Set(['and', 'break', 'do', 'else', 'elseif', 'end', 'false', 'for', 'function', 'goto', 'if', 'in', 'local', 'nil', 'not', 'or', 'repeat', 'return', 'then', 'true', 'until', 'while']);
@@ -330,12 +331,51 @@ for (const seed of [1, 2, 3, 42, 99, 12345, 2147483647, 4000000000, 4, 5, 6, 7, 
 }
 const tutorials = [1, 7, 31337].map(seed => ({ seed, plan: R.buildTutorial(seed).map(o => o.map(floorParams)) }));
 
+// ---------- 11. 灵魂碎片：碎片折算、开局强化、解锁 / 深度模式的路线、新角色 ----------
+const shardsVec: unknown[] = [];
+for (let reached = 1; reached <= 20; reached++) for (const won of [false, true]) for (let depth = 0; depth <= 3; depth++) {
+    shardsVec.push({ reached, won, depth, shards: Meta.shardsFor(reached, won, depth) });
+}
+const ALL_UNLOCKS = Meta.UNLOCKS.map(u => u.id);
+const perkRuns: unknown[] = [];
+for (const seed of [1, 2, 3, 42, 777]) {
+    for (const [perks, unlocks] of [[{ atk: 1 }, []], [{ atk: 3, def: 2, hp: 3, keys: 1, gold: 2, engrave: 1, halfSpin: 1 }, ALL_UNLOCKS], [{ engrave: 1 }, ['lamp']]] as [Record<string, number>, string[]][]) {
+        const pool = Meta.weaponPool(unlocks);
+        const run = new Run(R.buildRoute(seed, { unlocks }), 'digger', seed, { perks, pool });
+        perkRuns.push({ seed, perks, unlocks, hero: heroOf(run.hero), reels: JSON.parse(JSON.stringify(run.arm!.reels)), price: run.armPrice().gold });
+    }
+}
+const metaRoutes: unknown[] = [];
+for (const seed of [1, 5, 9, 2024]) {
+    for (const opts of [{ depth: 1 }, { depth: 3 }, { unlocks: ALL_UNLOCKS }, { depth: 2, unlocks: ['pawnExtra', 'campKey'] }]) {
+        metaRoutes.push({ seed, opts, plan: R.buildRoute(seed, opts).map(o => o.map(floorParams)) });
+    }
+}
+const charRuns: unknown[] = [];
+{
+    const maps = [['@D.G>', '.....'], ['@.m.>'], ['@...>']];
+    for (const id of ['scavenger', 'drowned']) {
+        const run = new Run(maps.map(m => tiny(m)), id, 3);
+        const log: unknown[] = [];
+        for (let d = 0; d < maps.length; d++) {
+            for (let guard = 0; guard < 8 && run.status === 'playing'; guard++) {
+                const r = run.move(1, 0);
+                log.push({ ok: r.ok, hero: heroOf(run.hero), status: run.status, revived: run.revived });
+                if (!r.ok) { run.hero.atk += 60; run.hero.def += 60; }
+            }
+            if (run.status === 'floorDone') run.finishFloor(false);
+            log.push({ floor: run.floorIndex, hero: heroOf(run.hero), status: run.status });
+        }
+        charRuns.push({ id, maps, log });
+    }
+}
+
 // ---------- 10. 存档 ----------
 // （每一步对账时 Lua 都会存档再读回来）
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);

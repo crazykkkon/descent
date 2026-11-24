@@ -98,6 +98,9 @@ M.WEAPONS = {
     saltDagger = { id = 'saltDagger', name = '盐晶匕首', desc = '对会吸血的怪伤害翻倍', atk = 0, def = 0, antiLifesteal = true, sell = 25 },
     rustSword  = { id = 'rustSword',  name = '锈蚀大剑', desc = '攻击 +9，防御 −5（诅咒）', atk = 9, def = -5, sell = 35 },
     wellHook   = { id = 'wellHook',   name = '井神的钩', desc = '每次击杀多得 5 金币', atk = 0, def = 0, killGold = 5, sell = 40 },
+    -- 下面两把要用灵魂碎片解锁
+    lamp       = { id = 'lamp',       name = '井灯',     desc = '防御 +4', atk = 0, def = 4, sell = 30 },
+    twinHook   = { id = 'twinHook',   name = '双钩',     desc = '攻击 +2；每次击杀回复 4 生命', atk = 2, def = 0, killHeal = 4, sell = 30 },
 }
 
 -- 武器的固定顺序（和原型 WEAPONS 的键顺序一致，三选一的随机数按这个顺序取）
@@ -109,9 +112,20 @@ M.ITEM_NAMES = {
 
 M.CHARACTERS = {
     digger = {
-        id = 'digger', name = '掘井人',
+        id = 'digger', name = '掘井人', desc = '宝石效果 +1。',
         base = { hp = 200, atk = 10, def = 10, keys = 0, gold = 0 },
         gemBonus = 1,
+    },
+    -- 下面两个要用灵魂碎片解锁
+    scavenger = {
+        id = 'scavenger', name = '拾荒者', desc = '开骨门不用骨钥，改成每次扣 10 生命；骨钥留着卖钱。',
+        base = { hp = 150, atk = 9, def = 8, keys = 0, gold = 30 },
+        gemBonus = 0, boneDoorHp = 10,
+    },
+    drowned = {
+        id = 'drowned', name = '溺者', desc = '倒下时复活一次（生命回到 50），之后每进一层扣 20 生命。',
+        base = { hp = 100, atk = 14, def = 6, keys = 0, gold = 0 },
+        gemBonus = 0, revive = 50, drain = 20,
     },
 }
 

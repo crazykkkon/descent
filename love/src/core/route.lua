@@ -6,6 +6,7 @@ local config = require('core.config')
 local floorMod = require('core.floor')
 local rng = require('core.rng')
 local P = require('data.pools')
+local metaMod = require('core.meta')
 
 local M = {}
 M.LENGTH = 20
@@ -62,7 +63,9 @@ function M.powerFor(d, kind)
     return math.min(M.POWER_MAX, d - M.POWER_FROM)
 end
 
-local function toFloor(seed, d, slot, e)
+-- opts：{ depth = 深度模式 0～3, unlocks = { 解锁的 id } }（和原型 RouteOptions 一致）
+local function toFloor(seed, d, slot, e, opts)
+    local unlocks = (opts and opts.unlocks) or {}
     local f = copy(band(d))
     f.name = '第 ' .. (d + 1) .. ' 层 · ' .. e.name
     f.hint, f.kind = e.hint, e.kind
@@ -71,15 +74,26 @@ local function toFloor(seed, d, slot, e)
     if power > 0 then f.power = power end
     if e.kind == 'elite' or e.kind == 'boss' then f.eliteReward = (e.kind == 'elite') end
     if e.kind == 'normal' then f.marks = markFor(seed, d, slot, f.map) end
-    if e.kind == 'camp' then f.stall = d >= 10 and STALL_DEEP or STALL_SHALLOW end
+    if e.kind == 'camp' then
+        f.stall = {}
+        for i, o in ipairs(d >= 10 and STALL_DEEP or STALL_SHALLOW) do f.stall[i] = o end
+        -- 解锁"营火的骨钥"：多卖一把骨钥
+        if metaMod.has(unlocks, 'campKey') then f.stall[#f.stall + 1] = { id = 'key', amount = 1, price = d >= 10 and 40 or 30 } end
+    end
     if e.kind == 'pawn' then
-        local all = config.WEAPON_ORDER
+        local all = metaMod.weaponPool(unlocks)
         local a = rng.pick(seed, 8500 + d * 10 + slot, 0, #all)
         local b = rng.pick(seed, 8500 + d * 10 + slot, 1, #all - 1)
         if b >= a then b = b + 1 end
         f.shop = { all[a + 1], all[b + 1] }
         -- 很小的机会第二件换成赖子
         if rng.draw(seed, 8600 + d * 10 + slot, 0) < 0.1 then f.shop[2] = 'wild' end
+        -- 解锁"当铺的第三件"：多摆一件
+        if metaMod.has(unlocks, 'pawnExtra') then
+            local rest = {}
+            for _, w in ipairs(all) do if w ~= all[a + 1] and w ~= all[b + 1] then rest[#rest + 1] = w end end
+            f.shop[3] = rest[rng.pick(seed, 8500 + d * 10 + slot, 2, #rest) + 1]
+        end
     end
     if RENT[d] then f.rent = RENT[d] end
     return f
@@ -109,37 +123,58 @@ local function poolOf(kind, d)
 end
 
 -- 一局的完整路线：plan[层] = { 候选1, 候选2? }
-function M.build(seed)
+function M.build(seed, opts)
     local used, plan = {}, {}
     for d = 0, M.LENGTH - 1 do
-        local opts = {}
+        local cands = {}
         if d == 0 or d == 1 then
             local pool = d == 0 and P.F1 or P.F2
             local map = pool.maps[rng.pick(seed, 8000 + d, 0, #pool.maps) + 1]
             local f = copy(pool.params)
             f.map, f.kind = map, 'normal'
             f.marks = markFor(seed, d, 0, map)
-            opts[1] = f
-        elseif d == 9 then opts[1] = toFloor(seed, d, 0, P.MID_ELITE)
-        elseif d == 18 then opts[1] = toFloor(seed, d, 0, P.GATE)
-        elseif d == 19 then opts[1] = toFloor(seed, d, 0, P.BOSS)
+            cands[1] = f
+        elseif d == 9 then cands[1] = toFloor(seed, d, 0, P.MID_ELITE, opts)
+        elseif d == 18 then cands[1] = toFloor(seed, d, 0, P.GATE, opts)
+        elseif d == 19 then cands[1] = toFloor(seed, d, 0, P.BOSS, opts)
         else
             local fightKind = (d >= 4 and rng.draw(seed, 8200 + d, 0) < 0.3) and 'elite' or 'normal'
             local a = choose(seed, 8300 + d * 10, poolOf(fightKind, d), d, used)
-            if M.FIXED[d] then opts[1] = toFloor(seed, d, 0, a)
+            if M.FIXED[d] then cands[1] = toFloor(seed, d, 0, a, opts)
             else
                 local otherKind = OTHER_KINDS[rng.pick(seed, 8200 + d, 1, #OTHER_KINDS) + 1]
                 local b = choose(seed, 8300 + d * 10 + 1, poolOf(otherKind, d), d, used)
                 local entries = rng.draw(seed, 8200 + d, 2) < 0.5 and { a, b } or { b, a }
-                for slot = 0, 1 do opts[slot + 1] = toFloor(seed, d, slot, entries[slot + 1]) end
+                for slot = 0, 1 do cands[slot + 1] = toFloor(seed, d, slot, entries[slot + 1], opts) end
             end
         end
-        plan[d + 1] = opts
+        plan[d + 1] = cands
     end
     -- 下一层只有一个候选的层：只留一个出口
     for d = 1, M.LENGTH do
         if not plan[d + 1] or #plan[d + 1] ~= 2 then
             for _, f in ipairs(plan[d]) do f.map = oneExit(f.map) end
+        end
+    end
+    -- 深度模式：第 1 级起怪物每级再加强 2 级；第 2 级起血瓶 −25%；第 3 级起井租和补给摊 ×1.5
+    local depth = (opts and opts.depth) or 0
+    if depth > 0 then
+        for _, cs in ipairs(plan) do
+            for _, f in ipairs(cs) do
+                f.power = (f.power or 0) + metaMod.DEPTH_POWER * depth
+                if depth >= 2 then
+                    f.smallPotion = math.floor(f.smallPotion * 3 / 4)
+                    f.bigPotion = math.floor(f.bigPotion * 3 / 4)
+                end
+                if depth >= 3 then
+                    if f.rent then f.rent = math.floor(f.rent * 3 / 2) end
+                    if f.stall then
+                        local st = {}
+                        for i, o in ipairs(f.stall) do st[i] = { id = o.id, amount = o.amount, price = math.floor(o.price * 3 / 2 / 5 + 0.5) * 5 } end
+                        f.stall = st
+                    end
+                end
+            end
         end
     end
     return plan

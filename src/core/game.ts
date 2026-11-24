@@ -4,7 +4,7 @@
  *
  * 楼层之内完全确定；随机只发生在楼层之间和设施上（断臂转轮、大转盘、诏令、选路线），全部由本局种子决定。
  */
-import { Boon, BOON_NAMES, CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MARK_WEAPON, MONSTER_BOON, MONSTERS, MonsterDef, monsterInContext, powered, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
+import { BASE_WEAPONS, Boon, BOON_NAMES, CHARACTERS, CharacterDef, EXIT, Hero, ITEM_NAMES, MARK_WEAPON, MONSTER_BOON, MONSTERS, MonsterDef, monsterInContext, powered, TRAIT_DESC, TRAIT_NAMES, WEAPONS, WeaponId } from './config';
 import { CombatResult, simulateCombat } from './combat';
 import { adjacentMonsters, Cell, FloorDef, isFacility, neighbors, parseFloor, StallOffer } from './floor';
 import { interact, isElite } from './rules';
@@ -14,6 +14,7 @@ import { draw } from './rng';
 import { WHEEL, WheelSector, wheelPrice, wheelStop } from './wheel';
 import { ActiveDecree, DECREE_PENALTY, DECREE_SPAN, DecreeDef, SILVER_BONUS_HP, TIER_NAMES, decreeFor, killCounts } from './decree';
 import { bloodPrice, pick, risingPrice } from './rng';
+import { perkValue } from './meta';
 
 /** dead：主角死了，这一局结束 */
 export type Status = 'playing' | 'floorDone' | 'finished' | 'dead';
@@ -84,6 +85,9 @@ export interface RunSave {
     engraveQueue: PendingEngrave[];
     drank: boolean;
     exitTaken?: number;
+    pool?: WeaponId[];
+    perks?: Record<string, number>;
+    revived?: boolean;
 }
 
 /** 交井租的方式 */
@@ -113,6 +117,10 @@ export interface CellInfo {
 export interface RunOptions {
     /** 新手教程局：没有断臂转轮、没有诏令 */
     tutorial?: boolean;
+    /** 碎片商店里开着的强化（id → 等级）；教程局不生效 */
+    perks?: Record<string, number>;
+    /** 图案池（解锁的武器也在里面）；不给就是一开始的 8 把 */
+    pool?: WeaponId[];
 }
 
 export class Run {
@@ -156,6 +164,12 @@ export class Run {
     drank = false;
     /** 从哪个出口走的（0 = '>'，1 = '<'），决定下一层是哪个候选 */
     exitTaken = 0;
+    /** 图案池：精英三选一、大转盘新图案从这里抽 */
+    pool: WeaponId[] = [...BASE_WEAPONS];
+    /** 开着的强化 */
+    perks: Record<string, number> = {};
+    /** 溺者已经复活过 */
+    revived = false;
     /** 上一次结算时诏令的消息（界面显示后清掉） */
     notes: string[] = [];
     private floorStart!: Snapshot;
@@ -170,7 +184,25 @@ export class Run {
         this.hero = { ...this.ch.base };
         this.tutorial = !!opts.tutorial;
         this.arm = this.tutorial ? null : newArm();
+        if (opts.pool) this.pool = [...opts.pool];
+        if (!this.tutorial && opts.perks) this.perks = { ...opts.perks };
+        this.applyPerks();
         this.loadFloor(0);
+    }
+
+    /** 开局强化（碎片商店） */
+    private applyPerks() {
+        const v = (id: string) => perkValue(id, this.perks[id] ?? 0);
+        this.hero.atk += v('atk');
+        this.hero.def += v('def');
+        this.hero.hp += v('hp');
+        this.hero.keys += v('keys');
+        this.hero.gold += v('gold');
+        // 旧印子：开局随机刻一个武器图案（不落在中间一行，要转到才拿得到）
+        if (v('engrave') && this.arm) {
+            const w = this.pool[pick(this.seed, 9900, 0, this.pool.length)];
+            engraveCell(this.arm, pick(this.seed, 9900, 1, 3), w);
+        }
     }
 
     get floor(): FloorDef { return this.plan[this.floorIndex][this.picks[this.floorIndex] ?? 0]; }
@@ -192,6 +224,8 @@ export class Run {
         this.drank = false;
         this.exitTaken = 0;
         if (this.arm) this.arm.spins = 0;
+        // 溺者复活以后，每进一层扣生命（最少留 1）
+        if (this.revived && this.ch.drain && i > 0) this.hero.hp = Math.max(1, this.hero.hp - this.ch.drain);
         this.decreeOffer = !this.tutorial && !this.decree ? decreeFor(this.seed, i) : null;
         this.floorStart = this.snapshot();
     }
@@ -236,7 +270,7 @@ export class Run {
 
     /** 精英、诏令给的三选一（不含手上这把）；有很小的机会第三个换成赖子 */
     private rollWeaponChoices(salt = 0): EngraveSym[] {
-        const pool = (Object.keys(WEAPONS) as WeaponId[]).filter(w => w !== this.hero.weapon);
+        const pool = this.pool.filter(w => w !== this.hero.weapon);
         const out: WeaponId[] = [];
         let n = 0;
         while (out.length < 3 && out.length < pool.length) {
@@ -274,7 +308,9 @@ export class Run {
 
     /** 断臂转轮下一次转的价格；held 里锁住的轮子越多越贵（锁一个 ×2，锁两个 ×3） */
     armPrice(held?: boolean[]): { gold: number; blood: number } {
-        const base = risingPrice(ARM_BASE_PRICE, this.arm?.spins ?? 0);
+        let base = risingPrice(ARM_BASE_PRICE, this.arm?.spins ?? 0);
+        // 润滑油（碎片商店）：每层第一次半价
+        if (this.perks.halfSpin && (this.arm?.spins ?? 0) === 0) base /= 2;
         const n = (held ?? []).filter(Boolean).length;
         const gold = Math.round((base * HOLD_MULTIPLIER[Math.min(n, 2)]) / 5) * 5;
         return { gold, blood: bloodPrice(gold) };
@@ -379,7 +415,7 @@ export class Run {
             case 'atk': this.hero.atk += s.amount; break;
             case 'def': this.hero.def += s.amount; break;
             case 'engrave': {
-                const all = Object.keys(WEAPONS) as WeaponId[];
+                const all = this.pool;
                 const w: EngraveSym = draw(this.seed, key + 700, n) < WILD_CHANCE ? WILD : all[pick(this.seed, key + 500, n, all.length)];
                 if (this.arm) { this.engraveQueue.push({ from: 'wheel', choices: [w] }); msg += `：${symName(w)}`; }
                 break;
@@ -679,6 +715,13 @@ export class Run {
         const r = interact(c, this.hero, this.floor, this.ch, true, c.kind === 'monster' ? this.monsterAt(i) : undefined);
         if (!r.ok) return { ok: false, msg: r.reason };
         if (c.kind === 'item' && (c.id === 'smallPotion' || c.id === 'bigPotion')) this.drank = true;
+        if (r.fatal && this.ch.revive && !this.revived) {
+            // 溺者：倒下时复活一次，怪还在
+            this.revived = true;
+            this.hero.hp = this.ch.revive;
+            this.steps++;
+            return { ok: true, msg: `你倒下了……又从水里爬了起来，生命 ${this.ch.revive}。之后每进一层扣 ${this.ch.drain ?? 0} 生命` };
+        }
         if (r.fatal) {
             // 硬上打不过的怪：打完就死
             this.hero = r.hero;
@@ -776,7 +819,7 @@ export class Run {
             arm: this.arm, wheels: this.wheels, pawned: this.pawned, bought: this.bought,
             altarUsed: this.altarUsed, boonsSeen: this.boonsSeen, decree: this.decree,
             decreeOffer: this.decreeOffer, engraveQueue: this.engraveQueue, drank: this.drank,
-            exitTaken: this.exitTaken,
+            exitTaken: this.exitTaken, pool: this.pool, perks: this.perks, revived: this.revived,
         }));
     }
 
@@ -800,6 +843,9 @@ export class Run {
         run.engraveQueue = s.engraveQueue ?? [];
         run.drank = s.drank;
         run.exitTaken = s.exitTaken ?? 0;
+        if (s.pool) run.pool = [...s.pool];
+        run.perks = s.perks ?? {};
+        run.revived = !!s.revived;
         return run;
     }
 }

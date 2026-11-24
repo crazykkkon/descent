@@ -315,6 +315,49 @@ for _, t in ipairs(V.tutorials) do
     end
 end
 
-print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d+%d、断臂转轮 %d、刻图案 %d、大转盘 %d、当铺 %d、骨坛 %d、诏令 %d+%d、路线 %d、教程 %d）',
-    pass, fail, #V.combat, #V.scenarios, #V.routeWalks, #V.armSessions, #V.engraves, #V.wheels, #V.shops, #V.altars, #V.decreeDraws, #V.decreeRuns, #V.routes, #V.tutorials))
+-- 11. 灵魂碎片
+local metaMod = require('core.meta')
+for _, v in ipairs(V.shardsVec) do
+    check(metaMod.shardsFor(v.reached, v.won, v.depth) == v.shards, string.format('碎片 第%d层 %s 深度%d：期望 %d', v.reached, tostring(v.won), v.depth, v.shards))
+end
+for _, v in ipairs(V.perkRuns) do
+    local pool = metaMod.weaponPool(v.unlocks)
+    local run = Run.new(route.build(v.seed, { unlocks = v.unlocks }), 'digger', v.seed, { perks = v.perks, pool = pool })
+    local same = heroEq(run.hero, v.hero) and run:armPrice().gold == v.price
+    for r = 1, 3 do for k = 1, 5 do if (run.arm.reels[r][k] or nil) ~= (v.reels[r][k] or nil) then same = false end end end
+    check(same, string.format('碎片强化 种子%d：期望 %s 价格%d，实际 %s 价格%d', v.seed, heroStr(v.hero), v.price, heroStr(run.hero), run:armPrice().gold))
+end
+for _, mr in ipairs(V.metaRoutes) do
+    local plan = route.build(mr.seed, mr.opts)
+    for d, cands in ipairs(mr.plan) do
+        for k, want in ipairs(cands) do
+            local got = plan[d][k]
+            check(got and floorStr(got, 1) == floorStr(want, 0), string.format('解锁/深度路线 种子%d 第%d层 候选%d：\n  期望 %s\n  实际 %s', mr.seed, d, k, floorStr(want, 0), got and floorStr(got, 1) or '无'))
+        end
+    end
+end
+for _, cr in ipairs(V.charRuns) do
+    local floors = {}
+    for i, m in ipairs(cr.maps) do floors[i] = tiny(m) end
+    local run = Run.new(floors, cr.id, 3)
+    local li = 0
+    for d = 1, #cr.maps do
+        for _ = 1, 8 do
+            if run.status ~= 'playing' then break end
+            local r = run:move(1, 0)
+            li = li + 1
+            local e = cr.log[li]
+            check(e and r.ok == e.ok and heroEq(run.hero, e.hero) and run.status == e.status and run.revived == e.revived, string.format('%s 第%d步：期望 %s，实际 %s', cr.id, li, e and heroStr(e.hero) or '?', heroStr(run.hero)))
+            if not r.ok then run.hero.atk = run.hero.atk + 60; run.hero.def = run.hero.def + 60 end
+        end
+        if run.status == 'floorDone' then run:finishFloor(false) end
+        li = li + 1
+        local e = cr.log[li]
+        check(e and heroEq(run.hero, e.hero) and run.status == e.status, string.format('%s 第%d层结算：期望 %s，实际 %s', cr.id, d, e and heroStr(e.hero) or '?', heroStr(run.hero)))
+        run = reload(run)
+    end
+end
+
+print(string.format('对账：%d 条一致，%d 条不一致（战斗 %d、楼层 %d+%d、断臂转轮 %d、刻图案 %d、大转盘 %d、当铺 %d、骨坛 %d、诏令 %d+%d、路线 %d、教程 %d、碎片 %d+%d+%d+%d）',
+    pass, fail, #V.combat, #V.scenarios, #V.routeWalks, #V.armSessions, #V.engraves, #V.wheels, #V.shops, #V.altars, #V.decreeDraws, #V.decreeRuns, #V.routes, #V.tutorials, #V.shardsVec, #V.perkRuns, #V.metaRoutes, #V.charRuns))
 os.exit(fail == 0 and 0 or 1)

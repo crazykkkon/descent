@@ -44,6 +44,13 @@ function M.interact(cell, hero, floor, ch, allowFatal, mon)
         return { ok = true, hero = h }
     elseif cell.kind == 'door' then
         if cell.door == 'bone' then
+            -- 拾荒者：不用骨钥，扣生命
+            if ch.boneDoorHp then
+                if hero.hp <= ch.boneDoorHp then return { ok = false, reason = '撬开骨门要扣 ' .. ch.boneDoorHp .. ' 生命，你会死' } end
+                local h = config.copyHero(hero)
+                h.hp = h.hp - ch.boneDoorHp
+                return { ok = true, hero = h }
+            end
             if hero.keys <= 0 then return { ok = false, reason = '没有骨钥，打不开骨门' } end
             local h = config.copyHero(hero)
             h.keys = h.keys - 1

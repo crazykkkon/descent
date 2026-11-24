@@ -711,3 +711,85 @@ test('赖子很难拿到：精英三选一、大转盘新图案、当铺大约�
     }
     assert.ok(pawns > 20 && shops < pawns / 3, `当铺卖赖子 ${shops} / ${pawns}`);
 });
+
+// ---------- 灵魂碎片（局外成长） ----------
+import { shardsFor, perkValue, weaponPool, PERKS, UNLOCKS } from '../src/core/meta';
+
+test('灵魂碎片：越深越值钱（走完第 N 层得 N 个），通关加 50，深度每级多 25%', () => {
+    assert.equal(shardsFor(1, false), 0);
+    assert.equal(shardsFor(5, false), 10, '教程死在第 5 层：10 个');
+    assert.equal(shardsFor(10, false), 45);
+    assert.equal(shardsFor(20, false), 190);
+    assert.equal(shardsFor(20, true), 260, '通关');
+    assert.equal(shardsFor(20, true, 2), 390, '深度 2 多给 50%');
+    assert.ok(PERKS.every(p => p.costs.length === p.values.length));
+    assert.ok(UNLOCKS.some(u => u.kind === 'character') && UNLOCKS.some(u => u.kind === 'weapon') && UNLOCKS.some(u => u.kind === 'depth'));
+});
+
+test('碎片强化：开局加攻防血钥金；旧印子开局刻一个图案（不在中间一行）；润滑油每层第一次拉杆半价；教程不生效', () => {
+    const plan = buildRoute(4);
+    const perks = { atk: 2, def: 1, hp: 3, keys: 1, gold: 2, engrave: 1, halfSpin: 1 };
+    const run = new Run(plan, 'digger', 4, { perks });
+    assert.deepEqual([run.hero.atk, run.hero.def, run.hero.hp, run.hero.keys, run.hero.gold], [12, 11, 300, 1, 50]);
+    assert.equal(perkValue('hp', 3), 100);
+    const cells = run.arm!.reels.flat().filter(Boolean);
+    assert.equal(cells.length, 1, '旧印子刻了一格');
+    assert.deepEqual(run.arm!.stops.map((k, r) => run.arm!.reels[r][k]), [null, null, null], '不在中间一行');
+    assert.equal(run.hero.weapon, undefined);
+    assert.equal(run.armPrice().gold, 5, '第一次半价');
+    run.hero.gold = 100;
+    run.arm!.reels[0][2] = 'boneKnife';
+    run.armSpin('gold');
+    assert.equal(run.armPrice().gold, 15, '第二次照常涨价');
+    const tut = new Run(buildTutorial(1), 'digger', 1, { tutorial: true, perks });
+    assert.equal(tut.hero.atk, 10, '教程不吃强化');
+    const back = Run.load(plan, JSON.parse(JSON.stringify(run.save())));
+    assert.equal(back.armPrice().gold, run.armPrice().gold, '读档后强化还在');
+});
+
+test('解锁：新武器进图案池；当铺多摆一件、营火多卖骨钥；深度模式让怪更凶、血瓶更少、井租更贵', () => {
+    assert.deepEqual(weaponPool(['twinHook']).slice(-1), ['twinHook']);
+    assert.equal(weaponPool().length, 8);
+    const plain = buildRoute(11);
+    const more = buildRoute(11, { unlocks: ['pawnExtra', 'campKey', 'lamp', 'twinHook'] });
+    let pawns = 0, camps = 0;
+    more.forEach((cands, d) => cands.forEach((f, k) => {
+        assert.equal(f.map.join(''), plain[d][k].map.join(''), '解锁不改变地图');
+        if (f.kind === 'pawn') { pawns++; assert.equal(f.shop!.length, 3); }
+        if (f.kind === 'camp') { camps++; assert.ok(f.stall!.some(o => o.id === 'key')); }
+    }));
+    assert.ok(pawns + camps > 0);
+    const deep = buildRoute(11, { depth: 3 });
+    deep.forEach((cands, d) => cands.forEach((f, k) => {
+        assert.equal(f.power ?? 0, (plain[d][k].power ?? 0) + 6);
+        assert.equal(f.smallPotion, Math.floor(plain[d][k].smallPotion * 3 / 4));
+        if (f.rent) assert.equal(f.rent, plain[d][k].rent! * 3 / 2);
+    }));
+    // 解锁的武器会出现在精英三选一里
+    const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 1, { pool: ['lamp', 'twinHook', 'boneKnife'] });
+    run.hero = { hp: 999, atk: 60, def: 60, keys: 0, gold: 0 };
+    run.move(1, 0);
+    assert.ok(run.pendingEngrave!.choices.every(c => ['lamp', 'twinHook', 'boneKnife', 'wild'].includes(c)));
+});
+
+test('新角色：拾荒者开骨门扣 10 生命不用钥匙；溺者倒下复活一次，之后每进一层扣 20', () => {
+    const s = new Run([tiny(['@D>'])], 'scavenger', 1);
+    assert.equal(s.hero.hp, 150);
+    assert.ok(s.move(1, 0).ok);
+    assert.equal(s.hero.hp, 140);
+    assert.equal(s.hero.keys, 0);
+    const d = new Run([tiny(['@G>']), tiny(['@.>']), tiny(['@.>'])], 'drowned', 1);
+    d.move(1, 0); // 打石鳞守卫必死
+    assert.equal(d.status, 'playing', '复活了');
+    assert.equal(d.hero.hp, 50);
+    assert.equal(d.revived, true);
+    assert.equal(d.cells[1].kind, 'monster', '怪还在');
+    d.hero.atk = 99; d.hero.def = 99;
+    d.move(1, 0); d.move(1, 0);
+    d.finishFloor(false);
+    assert.equal(d.hero.hp, 50 - 20 + 0, '进下一层扣 20');
+    d.move(1, 0); d.move(1, 0); d.finishFloor(false);
+    assert.equal(d.hero.hp, 10);
+    const back = Run.load([tiny(['@G>']), tiny(['@.>']), tiny(['@.>'])], JSON.parse(JSON.stringify(d.save())));
+    assert.equal(back.revived, true);
+});

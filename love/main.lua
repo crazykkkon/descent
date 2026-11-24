@@ -21,6 +21,7 @@ local miner = require('view.miner')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
 local coach = require('view.coach')
+local metaMod = require('core.meta')
 local titleView = require('view.title')
 
 -- ---------- 尺寸 ----------
@@ -60,7 +61,8 @@ local facing = 'down'
 local heroAnim = nil       -- { from, to, t }
 local floats = {}          -- 飘字 { text, x, y, t, color }
 local meta = { tutorialDone = false, crt = true, volume = 1, fullscreen = false }
-local scene = 'title'      -- 'title' 开局界面 / 'game' 游戏中
+local scene = 'title'      -- 'title' 开局界面 / 'shop' 碎片商店 / 'game' 游戏中
+local runOpts = { depth = 0, unlocks = {} }   -- 这一局的路线选项（深度模式、解锁了什么），存档里也存一份
 local titleSel = 1         -- 开局界面选中的第几项
 local facilityOpener
 
@@ -96,11 +98,12 @@ local function saveGame()
         love.filesystem.remove(SAVE_FILE)
         return
     end
-    love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), facing = facing }))
+    love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), facing = facing, routeOpts = runOpts }))
 end
 
 local openExit, openSummary, openDeath, openVictory, openEngrave, openDecree, openArm, openWheel, openPawn, openAltar, openStall, newGame, loadGame, continueFlow
 local spinArm, toggleHold
+local beginRun, openShop, drawShopUI, shopClick
 local hasSave, applySettings, toGame, continueGame, startNewGame, backToTitle, openSettings, openPause, titleItems, titleItemAt, drawTitleUI
 
 local function setMsg(s, err) msg, msgErr = s or '', err or false end
@@ -489,7 +492,7 @@ local function armHint()
     local arm = run.arm
     if armMod.empty(arm) then return '转轮还是空的。打败带「印」的怪或精英，就能往上刻武器。' end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
-    local list = armMod.holdOdds(arm, anyHeld and armHeld or nil, config.WEAPON_ORDER)
+    local list = armMod.holdOdds(arm, anyHeld and armHeld or nil, run.pool)
     local parts = {}
     for _, o in ipairs(list) do parts[#parts + 1] = (o.target and W(o.target) or '空手') .. ' ' .. pct(o.p) end
     if #parts == 0 then return anyHeld and '锁住的图案连不成一线，重转也没用。' or '中间一行现在连不成任何武器。' end
@@ -754,45 +757,90 @@ local function openFacility(i)
 end
 facilityOpener = openFacility
 
+local function saveMeta() love.filesystem.write(META_FILE, serialize.dump(meta)) end
+
+-- 一局结束：按走到第几层折算灵魂碎片（越深越值钱），记进跨局存档
+local function awardShards(won)
+    local depth = run.tutorial and 0 or (runOpts.depth or 0)
+    local n = metaMod.shardsFor(run.floorIndex, won, depth)
+    meta.shards = (meta.shards or 0) + n
+    meta.best = math.max(meta.best or 0, won and 20 or run.floorIndex)
+    if won then
+        meta.cleared = true
+        meta.clearedDepth = math.max(meta.clearedDepth or -1, depth)
+    end
+    saveMeta()
+    return n
+end
+local function shardLine(n) return '带回 ' .. n .. ' 块灵魂碎片（现在共有 ' .. meta.shards .. ' 块），可以在开局界面的「碎片商店」里花掉。' end
+
 function openVictory()
     love.filesystem.remove(SAVE_FILE)
     local h = run.hero
+    local n = awardShards(true)
     openModal('你走到了井底', {
         '二十层，一层不落。',
         '剩余生命 ' .. h.hp .. '，攻 ' .. h.atk .. ' / 防 ' .. h.def .. '，金币 ' .. h.gold .. (h.weapon and ('，手上是' .. W(h.weapon)) or '') .. '。',
-        '总步数 ' .. run.totalSteps .. '。',
+        shardLine(n),
         '（第 20 层 Boss 站位战还是占位，正式版会换掉。）',
-    }, { { label = '再来一局', primary = true, fn = function() closeModal(); newGame() end } })
+    }, {
+        { label = '回开局界面', fn = function() backToTitle() end },
+        { label = '再来一局', primary = true, fn = function() closeModal(); beginRun() end },
+    })
 end
-
-local function saveMeta() love.filesystem.write(META_FILE, serialize.dump(meta)) end
 
 function openDeath()
     love.filesystem.remove(SAVE_FILE)
     if run.tutorial then
         meta.tutorialDone = true
-        saveMeta()
+        local n = awardShards(false)
         openModal('……', {
             '那东西只睁了一下眼，你就被甩回了黑暗里。',
             '你在井口醒来。右臂没了，断口处长出一个空空的转轮。',
             '转轮上什么都没有。打败带印记的怪、打败精英，就能往上面刻武器的图案。',
+            '你身上还沾着一点发光的东西——' .. n .. ' 块灵魂碎片。越往深处倒下，带回来的越多。',
             '这一次，从第 1 层重新往下走。',
-        }, { { label = '再下井', primary = true, fn = function() closeModal(); newGame() end } })
+        }, {
+            { label = '去碎片商店', fn = function() closeModal(); backToTitle(); openShop() end },
+            { label = '再下井', primary = true, fn = function() closeModal(); beginRun() end },
+        })
         return
     end
-    openModal('你倒下了', { '你倒在了' .. run:floor().name .. '。', '这一局结束了。重新开始要从第 1 层走起，地图会换，转轮上的图案也会清空。' }, {
-        { label = '从第 1 层重新开始', primary = true, fn = function() closeModal(); newGame() end },
+    local n = awardShards(false)
+    openModal('你倒下了', { '你倒在了' .. run:floor().name .. '。', shardLine(n), '重新开始要从第 1 层走起，地图会换，转轮上的图案也会清空。' }, {
+        { label = '回开局界面', fn = function() backToTitle() end },
+        { label = '从第 1 层重新开始', primary = true, fn = function() closeModal(); beginRun() end },
     })
 end
 
-local function planFor(seed, tutorial)
-    return tutorial and route.tutorial(seed) or route.build(seed)
+local function planFor(seed, tutorial, ropts)
+    return tutorial and route.tutorial(seed) or route.build(seed, ropts)
 end
 
-function newGame(seed)
+-- 已经解锁的东西（列表）和开着的强化（id → 等级）
+local function unlockList()
+    local out = {}
+    for _, u in ipairs(metaMod.UNLOCKS) do if meta.unlocks and meta.unlocks[u.id] then out[#out + 1] = u.id end end
+    return out
+end
+local function activePerks()
+    local out = {}
+    for _, p in ipairs(metaMod.PERKS) do
+        local lv = meta.perks and meta.perks[p.id] or 0
+        if lv > 0 and not (meta.perkOff and meta.perkOff[p.id]) then out[p.id] = lv end
+    end
+    return out
+end
+
+-- opts：{ character, depth }（新手教程不看这些）
+function newGame(seed, opts)
     seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or os.time()
+    opts = opts or {}
     local tutorial = not meta.tutorialDone
-    run = Run.new(planFor(seed, tutorial), 'digger', seed, { tutorial = tutorial })
+    local character = tutorial and 'digger' or (opts.character or 'digger')
+    runOpts = { depth = tutorial and 0 or (opts.depth or 0), unlocks = unlockList() }
+    run = Run.new(planFor(seed, tutorial, runOpts), character, seed,
+        { tutorial = tutorial, perks = activePerks(), pool = metaMod.weaponPool(runOpts.unlocks) })
     facing = 'down'
     floats, walking, heroAnim = {}, nil, nil
     bossScene = false
@@ -811,7 +859,8 @@ end
 
 function loadGame(data)
     facing = miner.restoreFacing(data.facing)
-    run = Run.load(planFor(data.run.seed, data.run.tutorial), data.run)
+    runOpts = data.routeOpts or { depth = 0, unlocks = {} }
+    run = Run.load(planFor(data.run.seed, data.run.tutorial, runOpts), data.run)
     bossScene = false
     setMsg('继续上一局。')
     if run.status == 'floorDone' then openSummary() else continueFlow() end
@@ -1231,7 +1280,7 @@ local function drawUI()
     do
         local h = run.hero
         local atk, def = combat.effectiveStats(h)
-        text(run:floor().name, MAP_X, 7, 10, C.accent)
+        text(run:floor().name .. ((runOpts.depth or 0) > 0 and ('　深度 ' .. runOpts.depth) or ''), MAP_X, 7, 10, C.accent)
         stat('hp', '', h.hp, 190, C.hp)
         stat('atk', '攻', atk, 250, C.atk)
         stat('def', '防', def, 300, C.def)
@@ -1302,7 +1351,7 @@ local function drawUI()
 end
 
 function love.draw()
-    if scene == 'title' then
+    if scene == 'title' or scene == 'shop' then
         love.graphics.setCanvas(canvas)
         titleView.draw(LW, LH, clock)
         love.graphics.setCanvas()
@@ -1313,7 +1362,9 @@ function love.draw()
     love.graphics.clear(0, 0, 0)
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(canvas, OX, OY, 0, S, S)
-    if scene == 'title' then drawTitleUI(); drawModal() else drawUI() end
+    if scene == 'title' then drawTitleUI(); drawModal()
+    elseif scene == 'shop' then drawShopUI(); drawModal()
+    else drawUI() end
     love.graphics.setCanvas()
     love.graphics.clear(0, 0, 0)
     fx.drawCRT(frame, meta.crt)
@@ -1345,11 +1396,38 @@ function continueGame()
 end
 
 function startNewGame()
-    love.filesystem.remove(SAVE_FILE)
     closeModal()
+    beginRun()
+end
+
+-- 开始一局：解锁了别的角色或深度模式时，先选角色、再选深度
+function beginRun()
+    love.filesystem.remove(SAVE_FILE)
     walking, heroAnim = nil, nil
-    toGame()
-    newGame()
+    local function go(opts) closeModal(); toGame(); newGame(nil, opts) end
+    if not meta.tutorialDone then go({}); return end
+    local chars = { 'digger' }
+    for _, id in ipairs({ 'scavenger', 'drowned' }) do if meta.unlocks and meta.unlocks[id] then chars[#chars + 1] = id end end
+    local maxDepth = (meta.unlocks and meta.unlocks.depth) and math.min(metaMod.MAX_DEPTH, (meta.clearedDepth or -1) + 1) or 0
+    local function chooseDepth(character)
+        if maxDepth <= 0 then go({ character = character }); return end
+        local lines = { '深度越深，怪越凶，碎片也给得越多。通关一个深度才能选下一级。',
+            '深度 1：每层的怪再加强 2 级。碎片 +25%。', '深度 2：再加强 2 级，血瓶效果 −25%。碎片 +50%。', '深度 3：再加强 2 级，井租和补给摊 ×1.5。碎片 +75%。' }
+        local buttons = { { label = '普通', primary = true, fn = function() go({ character = character, depth = 0 }) end } }
+        for d = 1, maxDepth do buttons[#buttons + 1] = { label = '深度 ' .. d, fn = function() go({ character = character, depth = d }) end } end
+        openModal('选深度', lines, buttons)
+        modal.onEscape = closeModal
+    end
+    if #chars == 1 then chooseDepth('digger'); return end
+    local lines = {}
+    for _, id in ipairs(chars) do
+        local c = config.CHARACTERS[id]
+        lines[#lines + 1] = c.name .. '：生命 ' .. c.base.hp .. '，攻 ' .. c.base.atk .. '，防 ' .. c.base.def .. '。' .. c.desc
+    end
+    local buttons = {}
+    for _, id in ipairs(chars) do buttons[#buttons + 1] = { label = config.CHARACTERS[id].name, primary = id == 'digger', fn = function() closeModal(); chooseDepth(id) end } end
+    openModal('选角色', lines, buttons)
+    modal.onEscape = closeModal
 end
 
 function backToTitle()
@@ -1408,6 +1486,7 @@ function titleItems()
         })
         modal.onEscape = closeModal
     end }
+    if meta.tutorialDone then items[#items + 1] = { label = '碎片商店', fn = function() openShop() end } end
     items[#items + 1] = { label = '设置', fn = function() openSettings(closeModal) end }
     items[#items + 1] = { label = '退出游戏', fn = function() love.event.quit() end }
     return items
@@ -1435,6 +1514,114 @@ function drawTitleUI()
         end
         text(it.label, TITLE_X + 4, y, 12, on and { 1, 0.86, 0.5 } or { 0.72, 0.76, 0.76 })
     end
+    if meta.tutorialDone then
+        text('灵魂碎片 ' .. (meta.shards or 0) .. (meta.best and meta.best > 0 and ('　·　最深到过第 ' .. meta.best .. ' 层') or ''), TITLE_X, LH - 30, 8, { 0.62, 0.82, 0.86 })
+    end
+end
+
+-- ---------- 碎片商店（制作人：首页有一个碎片商店，买加攻、加血之类，不想要可以关掉，用掉的碎片不退；碎片也能解锁东西） ----------
+local shopMsg, shopMsgErr = '', false
+local SHOP = { lx = 24, rx = 330, w = 286, y0 = 70, rowH = 36 }
+local SHOP_BACK = { x = LW / 2 - 44, y = LH - 22, w = 88, h = 16 }
+
+function openShop()
+    closeModal()
+    scene = 'shop'
+    shopMsg, shopMsgErr = '', false
+end
+
+local function spend(cost)
+    if (meta.shards or 0) < cost then shopMsg, shopMsgErr = '碎片不够（要 ' .. cost .. '，你有 ' .. (meta.shards or 0) .. '）', true; return false end
+    meta.shards = meta.shards - cost
+    return true
+end
+
+-- 商店里所有能点的地方：{ x, y, w, h, label, fn, style }（画和点共用一份）
+local function shopButtons()
+    local out = {}
+    meta.perks = meta.perks or {}
+    meta.perkOff = meta.perkOff or {}
+    meta.unlocks = meta.unlocks or {}
+    for i, p in ipairs(metaMod.PERKS) do
+        local y = SHOP.y0 + (i - 1) * SHOP.rowH
+        local lv = meta.perks[p.id] or 0
+        if lv < #p.costs then
+            local cost = p.costs[lv + 1]
+            out[#out + 1] = { x = SHOP.lx + SHOP.w - 70, y = y + 4, w = 66, h = 15, label = (lv == 0 and '买 ' or '升级 ') .. cost, style = 'buy', fn = function()
+                if not spend(cost) then return end
+                meta.perks[p.id] = lv + 1
+                meta.perkOff[p.id] = nil
+                shopMsg, shopMsgErr = p.name .. '：' .. p.desc(p.values[lv + 1]), false
+                fx.play('pick'); saveMeta()
+            end }
+        end
+        if lv > 0 then
+            local off = meta.perkOff[p.id]
+            out[#out + 1] = { x = SHOP.lx + SHOP.w - 70, y = y + 20, w = 66, h = 13, label = off and '已关（点开启）' or '开着（点关掉）', style = off and 'off' or 'on', fn = function()
+                meta.perkOff[p.id] = (not off) or nil
+                shopMsg, shopMsgErr = p.name .. (off and '开启了。' or '关掉了：下一局不生效，用掉的碎片不退。'), false
+                saveMeta()
+            end }
+        end
+    end
+    for i, u in ipairs(metaMod.UNLOCKS) do
+        local y = SHOP.y0 + (i - 1) * SHOP.rowH
+        if not meta.unlocks[u.id] then
+            local locked = u.needsClear and not meta.cleared
+            out[#out + 1] = { x = SHOP.rx + SHOP.w - 70, y = y + 4, w = 66, h = 15, label = locked and '通关后才能买' or ('解锁 ' .. u.cost), style = locked and 'locked' or 'buy', fn = function()
+                if locked then shopMsg, shopMsgErr = '先通关一次（走到第 20 层并打败井底之眼）。', true; return end
+                if not spend(u.cost) then return end
+                meta.unlocks[u.id] = true
+                shopMsg, shopMsgErr = '解锁了「' .. u.name .. '」。', false
+                fx.play('win'); saveMeta()
+            end }
+        end
+    end
+    out[#out + 1] = { x = SHOP_BACK.x, y = SHOP_BACK.y, w = SHOP_BACK.w, h = SHOP_BACK.h, label = '返回（Esc）', style = 'back', fn = function() scene = 'title' end }
+    return out
+end
+
+function shopClick(lx, ly)
+    for _, b in ipairs(shopButtons()) do
+        if lx >= b.x and lx <= b.x + b.w and ly >= b.y and ly <= b.y + b.h then b.fn(); return true end
+    end
+    return false
+end
+
+function drawShopUI()
+    rect({ 0.02, 0.03, 0.04 }, 0, 0, LW, LH, 0.78)
+    text('灵魂碎片商店', SHOP.lx, 12, 15, { 0.95, 0.86, 0.62 })
+    text('碎片 ' .. (meta.shards or 0), LW - 160, 16, 11, { 0.62, 0.86, 0.92 }, 'right', 136)
+    text('强化 · 每局开局生效；不想要可以关掉（关掉不退碎片）', SHOP.lx, 50, 7.5, C.dim)
+    text('解锁 · 一次买断，永久有效', SHOP.rx, 50, 7.5, C.dim)
+    for i, p in ipairs(metaMod.PERKS) do
+        local y = SHOP.y0 + (i - 1) * SHOP.rowH
+        local lv = (meta.perks or {})[p.id] or 0
+        local off = (meta.perkOff or {})[p.id]
+        rect({ 0.07, 0.10, 0.12 }, SHOP.lx, y, SHOP.w, SHOP.rowH - 3, 0.92, 4)
+        text(p.name, SHOP.lx + 6, y + 3, 9.5, lv > 0 and not off and { 1, 0.88, 0.55 } or C.text)
+        for k = 1, #p.costs do rect(k <= lv and (off and { 0.4, 0.4, 0.4 } or C.ok) or { 0.2, 0.24, 0.26 }, SHOP.lx + 62 + (k - 1) * 9, y + 7, 6, 6, 1, 1) end
+        local now = lv > 0 and ('现在：' .. p.desc(p.values[lv]) .. (off and '（已关）' or '')) or '还没买'
+        local nxt = lv < #p.costs and ('　下一级：' .. p.desc(p.values[lv + 1])) or '　已满级'
+        text(now .. nxt, SHOP.lx + 6, y + 19, 6.5, C.dim, 'left', SHOP.w - 84)
+    end
+    for i, u in ipairs(metaMod.UNLOCKS) do
+        local y = SHOP.y0 + (i - 1) * SHOP.rowH
+        local got = (meta.unlocks or {})[u.id]
+        rect({ 0.07, 0.10, 0.12 }, SHOP.rx, y, SHOP.w, SHOP.rowH - 3, 0.92, 4)
+        text(u.name, SHOP.rx + 6, y + 3, 9.5, got and { 1, 0.88, 0.55 } or C.text)
+        if got then text('已解锁', SHOP.rx + SHOP.w - 70, y + 6, 8, C.ok, 'center', 66) end
+        text(u.desc, SHOP.rx + 6, y + 16, 6, C.dim, 'left', SHOP.w - 80)
+    end
+    local mx, my = love.mouse.getPosition()
+    local lx, ly = (mx - OX) / S, (my - OY) / S
+    for _, b in ipairs(shopButtons()) do
+        local hover = lx >= b.x and lx <= b.x + b.w and ly >= b.y and ly <= b.y + b.h and not modal
+        local col = ({ buy = { 0.12, 0.35, 0.3 }, on = { 0.30, 0.24, 0.10 }, off = { 0.14, 0.16, 0.18 }, locked = { 0.12, 0.13, 0.15 }, back = { 0.11, 0.16, 0.19 } })[b.style]
+        rect(col, b.x, b.y, b.w, b.h, hover and 1 or 0.85, 3)
+        text(b.label, b.x, b.y + (b.h >= 15 and 3 or 2), b.h >= 15 and 7.5 or 6, b.style == 'locked' and C.dim or C.text, 'center', b.w)
+    end
+    if shopMsg ~= '' then text(shopMsg, SHOP.lx, LH - 38, 7.5, shopMsgErr and C.warn or C.ok, 'left', LW - 2 * SHOP.lx) end
 end
 
 -- ---------- 输入 ----------
@@ -1453,6 +1640,7 @@ function love.mousepressed(mx, my, button)
         if k then titleSel = k; titleItems()[k].fn() end
         return
     end
+    if scene == 'shop' then shopClick(lx, ly); return end
     -- 刻图案的场景：按住轮子拨动；没拨动就松手 = 点这一格
     if picker then
         if pickerBusy() then return end
@@ -1558,9 +1746,12 @@ function love.keypressed(key)
         elseif scene == 'game' then
             hold = nil
             openPause()
+        elseif scene == 'shop' then
+            scene = 'title'
         end
         return
     end
+    if scene == 'shop' then return end
     if scene == 'title' and not modal then
         local items = titleItems()
         if key == 'up' or key == 'w' then titleSel = (titleSel - 2) % #items + 1
@@ -1622,6 +1813,12 @@ return {
     end,
     setCRT = function(on) meta.crt = on end,
     getScene = function() return scene end,
+    -- 自动测试：跨局存档清零（碎片、强化、解锁）
+    resetMeta = function() meta = { tutorialDone = false, crt = meta.crt, volume = 1, fullscreen = false } end,
+    openShop = function() openShop() end,
+    shopBuy = function(label) for _, b in ipairs(shopButtons()) do if b.label:find(label, 1, true) == 1 then b.fn(); return b.label end end end,
+    shopMsg = function() return shopMsg end,
+    beginRun = function() beginRun() end,
     inPicker = function() return picker ~= nil end,
     -- 自动测试：第 r 个轮子露出来的第 row 格（0 上、1 中、2 下）在屏幕上的位置（真实像素）
     pickerCellScreen = function(r, row)

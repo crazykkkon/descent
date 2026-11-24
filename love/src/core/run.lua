@@ -11,6 +11,7 @@ local rng = require('core.rng')
 local armMod = require('core.arm')
 local wheelMod = require('core.wheel')
 local decreeMod = require('core.decree')
+local metaMod = require('core.meta')
 
 -- 图案的名字（武器名或"赖子"）
 local function symName(id) return id == armMod.WILD and armMod.WILD_NAME or config.WEAPONS[id].name end
@@ -47,6 +48,13 @@ function Run.new(plan, characterId, seed, opts)
     self.seed = rng.u32(seed or 1)
     self.tutorial = (opts and opts.tutorial) and true or false
     self.arm = (not self.tutorial) and armMod.new() or nil
+    -- 图案池（解锁的武器也在里面）和碎片商店里开着的强化（教程局不生效）
+    self.pool = {}
+    for i, w in ipairs((opts and opts.pool) or config.WEAPON_ORDER) do self.pool[i] = w end
+    self.perks = {}
+    if not self.tutorial and opts and opts.perks then for k, v in pairs(opts.perks) do self.perks[k] = v end end
+    self.revived = false
+    self:applyPerks()
     self.picks = { 1 }
     self.totalSteps = 0
     self.wheels = {}
@@ -78,6 +86,8 @@ function Run:loadFloor(i)
     self.drank = false
     self.exitTaken = 0   -- 从哪个出口走的（0 = '>'，1 = '<'），决定下一层是哪个候选
     if self.arm then self.arm.spins = 0 end
+    -- 溺者复活以后，每进一层扣生命（最少留 1）
+    if self.revived and self.ch.drain and i > 1 then self.hero.hp = math.max(1, self.hero.hp - self.ch.drain) end
     self.decreeOffer = (not self.tutorial and not self.decree) and decreeMod.decreeFor(self.seed, i) or nil
     self.floorStart = self:snapshot()
 end
@@ -126,10 +136,25 @@ end
 function Run:pendingEngrave() return self.engraveQueue[1] end
 
 -- 精英、诏令给的三选一（不含手上这把）；和原型逐位相同
+-- 开局强化（碎片商店）
+function Run:applyPerks()
+    local function v(id) return metaMod.perkValue(id, self.perks[id] or 0) end
+    self.hero.atk = self.hero.atk + v('atk')
+    self.hero.def = self.hero.def + v('def')
+    self.hero.hp = self.hero.hp + v('hp')
+    self.hero.keys = self.hero.keys + v('keys')
+    self.hero.gold = self.hero.gold + v('gold')
+    -- 旧印子：开局随机刻一个武器图案（不落在中间一行）
+    if v('engrave') > 0 and self.arm then
+        local w = self.pool[rng.pick(self.seed, 9900, 0, #self.pool) + 1]
+        armMod.engraveCell(self.arm, rng.pick(self.seed, 9900, 1, 3) + 1, w)
+    end
+end
+
 function Run:rollWeaponChoices(salt)
     salt = salt or 0
     local pool = {}
-    for _, w in ipairs(config.WEAPON_ORDER) do if w ~= self.hero.weapon then pool[#pool + 1] = w end end
+    for _, w in ipairs(self.pool) do if w ~= self.hero.weapon then pool[#pool + 1] = w end end
     local out, n = {}, 0
     while #out < 3 and #out < #pool do
         n = n + 1
@@ -167,6 +192,8 @@ function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
 -- held 里锁住的轮子越多越贵（锁一个 ×2，锁两个 ×3）
 function Run:armPrice(held)
     local base = rng.risingPrice(armMod.BASE_PRICE, self.arm and self.arm.spins or 0)
+    -- 润滑油（碎片商店）：每层第一次半价
+    if self.perks.halfSpin and (self.arm and self.arm.spins or 0) == 0 then base = base / 2 end
     local n = 0
     for r = 1, 3 do if held and held[r] then n = n + 1 end end
     local gold = math.floor(base * armMod.HOLD_MULTIPLIER[math.min(n, 2)] / 5 + 0.5) * 5
@@ -288,7 +315,7 @@ function Run:wheelSpin(i, pay)
     elseif s.prize == 'atk' then h.atk = h.atk + s.amount
     elseif s.prize == 'def' then h.def = h.def + s.amount
     elseif s.prize == 'engrave' then
-        local all = config.WEAPON_ORDER
+        local all = self.pool
         local w
         if rng.draw(self.seed, key + 700, n) < armMod.WILD_CHANCE then w = armMod.WILD
         else w = all[rng.pick(self.seed, key + 500, n, #all) + 1] end
@@ -478,6 +505,13 @@ function Run:step(i)
     local r = rules.interact(c, self.hero, self:floor(), self.ch, true, c.kind == 'monster' and self:monsterAt(i) or nil)
     if not r.ok then return { ok = false, msg = r.reason } end
     if rules.isPotion(c) then self.drank = true end
+    if r.fatal and self.ch.revive and not self.revived then
+        -- 溺者：倒下时复活一次，怪还在
+        self.revived = true
+        self.hero.hp = self.ch.revive
+        self.steps = self.steps + 1
+        return { ok = true, msg = '你倒下了……又从水里爬了起来，生命 ' .. self.ch.revive .. '。之后每进一层扣 ' .. (self.ch.drain or 0) .. ' 生命' }
+    end
     if r.fatal then
         self.hero = r.hero
         self.steps = self.steps + 1
@@ -643,7 +677,7 @@ function Run:save()
         arm = self.arm, wheels = self.wheels, pawned = self.pawned, bought = self.bought,
         altarUsed = self.altarUsed, boonsSeen = self.boonsSeen, decree = self.decree,
         decreeOffer = self.decreeOffer, engraveQueue = self.engraveQueue, drank = self.drank,
-        exitTaken = self.exitTaken,
+        exitTaken = self.exitTaken, pool = self.pool, perks = self.perks, revived = self.revived,
     }
 end
 
@@ -668,6 +702,9 @@ function Run.load(plan, s)
     run.engraveQueue = s.engraveQueue or {}
     run.drank = s.drank or false
     run.exitTaken = s.exitTaken or 0
+    if s.pool then run.pool = {}; for i, w in ipairs(s.pool) do run.pool[i] = w end end
+    run.perks = s.perks or {}
+    run.revived = s.revived or false
     return run
 end
 
