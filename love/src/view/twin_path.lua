@@ -1,9 +1,10 @@
 -- 双道的石桥与蓄水池。位置与输入仍使用关卡的 32 像素逻辑格。
+local miner = require('view.miner')
 local M = {}
 local g = love.graphics
 local tile = 32
 local art, tops, fronts = {}, {}, {}
-local widths = { miner = 24, eel = 30, frog = 28, moss = 27, smallPotion = 14, redGem = 18 }
+local widths = { eel = 30, frog = 28, moss = 27, smallPotion = 14, redGem = 18 }
 local lighting, gallery
 
 function M.load()
@@ -82,7 +83,7 @@ local function drawBridge(run, ox, oy)
 end
 
 -- 坐标以地图为原点，用同一组灯位给顶面和立面着色。
-function M.drawScene(run, ox, oy, hx, hy, hovered, zoom, vx, vy)
+function M.drawScene(run, ox, oy, hx, hy, facing, hovered, zoom, vx, vy)
     g.push('all')
     g.translate(vx, vy)
     g.scale(zoom)
@@ -96,7 +97,8 @@ function M.drawScene(run, ox, oy, hx, hy, hovered, zoom, vx, vy)
     g.draw(art.cistern, ox, ledgeY, 0, width / art.cistern:getWidth(), (sceneHeight - tile*3) / art.cistern:getHeight())
 
     local dead = run.status == 'dead'
-    local lampX, lampY = hx + 22, hy + 12
+    local dx, dy = miner.lampOffset(facing)
+    local lampX, lampY = hx + dx, hy + dy
     g.setShader(lighting)
     lighting:send('origin', {vx, vy})
     lighting:send('zoom', zoom)
@@ -130,9 +132,7 @@ function M.drawScene(run, ox, oy, hx, hy, hovered, zoom, vx, vy)
         end
     end
     shadow(hx + 16, hy + 28, 9, -1)
-    local v = dead and 0.45 or 1
-    g.setColor(v, v, v)
-    sprite('miner', hx + 16, hy + 29, widths.miner)
+    miner.draw(facing, hx + 16, hy + 29, dead)
     g.pop()
 end
 

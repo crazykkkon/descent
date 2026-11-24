@@ -54,7 +54,8 @@
   .cell.exit.locked { background: #23302d; color: #5d7a73; }
   #board { position: relative; }
   #hero { position: absolute; left: 0; top: 0; display: grid; place-items: center; pointer-events: none; z-index: 3; will-change: transform; }
-  .heroToken { width: 72%; height: 72%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6d5, #f0c94a 55%, #a37a1d); box-shadow: 0 0 calc(var(--u) * 2) #f0c94a80; display: grid; place-items: center; color: #3b2a00; font-size: calc(var(--cell) * 0.32); }
+  .heroToken { height: 88%; max-width: 100%; object-fit: contain; image-rendering: pixelated; }
+  #hero[data-facing="left"] .heroToken { scale: -1 1; }
   .gem { width: 50%; height: 50%; transform: rotate(45deg); border-radius: 18%; }
   .gem.red { background: linear-gradient(135deg, #ffb08a, #e2553a); box-shadow: 0 0 calc(var(--u) * 1.5) #e2553a90; }
   .gem.blue { background: linear-gradient(135deg, #a8dcff, #2f7fd6); box-shadow: 0 0 calc(var(--u) * 1.5) #2f7fd690; }

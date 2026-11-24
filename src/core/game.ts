@@ -429,10 +429,10 @@ export class Run {
             // 精英倒下：三选一拿武器
             if (MONSTERS[c.id].elite && this.floor.eliteReward) this.pendingWeapons = this.rollWeaponChoices();
         } else {
-            this.pos = i;
             msg = c.kind === 'item' ? `获得${ITEM_NAMES[c.id]}` : (c.door === 'bone' ? '打开骨门' : `穿过血门，损失 ${lost} 生命`);
             if (breaks) msg += `。契约已毁：押下的 ${this.contract!.def.deposit} 生命归井了`;
         }
+        this.pos = i;
         this.cells[i] = { kind: 'floor' };
         return { ok: true, msg };
     }

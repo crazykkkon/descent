@@ -260,12 +260,12 @@ function Run:step(i)
         -- 精英倒下：三选一拿武器
         if m.elite and self:floor().eliteReward then self.pendingWeapons = self:rollWeaponChoices() end
     else
-        self.pos = i
         if c.kind == 'item' then msg = '获得' .. config.ITEM_NAMES[c.id]
         elseif c.door == 'bone' then msg = '打开骨门'
         else msg = '穿过血门，损失 ' .. lost .. ' 生命' end
         if breaks then msg = msg .. '。契约已毁：押下的 ' .. self.contract.def.deposit .. ' 生命归井了' end
     end
+    self.pos = i
     self.cells[i] = { kind = 'floor' }
     return { ok = true, msg = msg }
 end

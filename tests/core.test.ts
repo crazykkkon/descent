@@ -44,13 +44,14 @@ test('吸血：回血太快就打不死', () => {
 const tiny = (map: string[], extra: Partial<FloorDef> = {}): FloorDef =>
     ({ name: 't', map, bloodCost: 40, gem: 2, smallPotion: 50, bigPotion: 150, gold: 20, ...extra });
 
-test('预览掉血 = 实际掉血，怪物格子变空地，主角不动', () => {
+test('预览掉血 = 实际掉血，战斗胜利后一步站到怪物格', () => {
     const run = new Run([tiny(['@m>'])]);
     const preview = run.info(1).combat!.damage;
     const r = run.move(1, 0);
     assert.ok(r.ok);
     assert.equal(run.hero.hp, 200 - preview);
-    assert.equal(run.pos, 0);
+    assert.equal(run.pos, 1);
+    assert.equal(run.steps, 1);
     assert.equal(run.cells[1].kind, 'floor');
 });
 
@@ -60,6 +61,8 @@ test('打不过的怪也可以硬上：打完就死，这一局结束', () => {
     assert.equal(run.move(1, 0).ok, true);
     assert.equal(run.status, 'dead');
     assert.equal(run.hero.hp, 0);
+    assert.equal(run.pos, 0);
+    assert.equal(run.cells[1].kind, 'monster');
     assert.equal(run.move(1, 0).ok, false);
     // 打不动（攻击不够破防）的怪也可以上
     const r2 = new Run([tiny(['@c>'])]);
@@ -73,9 +76,9 @@ test('打败怪物按强度掉金币；金币袋照样能捡', () => {
     const run = new Run([tiny(['@me$>'])]);
     run.move(1, 0);
     assert.equal(run.hero.gold, MONSTERS.moss.gold);
-    run.move(1, 0); run.move(1, 0);
+    run.move(1, 0);
     assert.equal(run.hero.gold, MONSTERS.moss.gold + MONSTERS.eel.gold);
-    run.move(1, 0); run.move(1, 0);
+    run.move(1, 0);
     assert.equal(run.hero.gold, MONSTERS.moss.gold + MONSTERS.eel.gold + 20);
     // 越强的怪掉得越多
     const g = (id: keyof typeof MONSTERS) => MONSTERS[id].gold;
@@ -115,7 +118,7 @@ test('精英活着时出口被封住', () => {
 
 test('清层不再有额外奖励；剩余血瓶换金币、卖钥匙', () => {
     const run = new Run([tiny(['@mk>', '..h.'])]);
-    run.move(1, 0); run.move(1, 0); run.move(1, 0); run.move(1, 0);
+    run.move(1, 0); run.move(1, 0); run.move(1, 0);
     const s = run.exitSummary();
     assert.equal(s.leftoverPotions, 1);
     run.finishFloor(true);
@@ -123,11 +126,11 @@ test('清层不再有额外奖励；剩余血瓶换金币、卖钥匙', () => {
     assert.equal(run.status, 'finished');
 });
 
-test('点击寻路：走到怪物旁边再打；没有撤回', () => {
+test('点击寻路：沿路接近，打赢后停在怪物格；没有撤回', () => {
     const run = new Run([tiny(['@..m', '...>'])]);
     assert.deepEqual(run.findPath(3), [1, 2, 3]);
     run.tapCell(3);
-    assert.equal(run.pos, 2);
+    assert.equal(run.pos, 3);
     assert.equal(run.cells[3].kind, 'floor');
     assert.equal(run.steps, 3);
     assert.equal((run as unknown as Record<string, unknown>).undo, undefined);
@@ -521,6 +524,8 @@ test('精英倒下后三选一拿武器（由种子决定，三把不重复）',
     const run = new Run([{ ...tiny(['@G>']), eliteReward: true }], 'digger', 5);
     run.hero.atk = 40; run.hero.def = 40;
     run.move(1, 0);
+    assert.equal(run.pos, 1);
+    assert.equal(run.kills, 1);
     assert.equal(run.pendingWeapons!.length, 3);
     assert.equal(new Set(run.pendingWeapons).size, 3);
     const w = run.pendingWeapons![1];

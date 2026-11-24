@@ -17,6 +17,7 @@ local levels = require('core.levels')
 local twinPath = require('view.twin_path')
 local mainline = require('data.mainline')
 local floorMod = require('core.floor')
+local miner = require('view.miner')
 
 -- ---------- 尺寸 ----------
 local LW, LH = 640, 360          -- 逻辑画布
@@ -47,6 +48,7 @@ local hovered = nil        -- 鼠标所在格子
 local msg, msgErr = '', false
 local modal = nil          -- { title, lines, buttons }
 local walking = nil        -- { path, i, t, from, confirmedFatal, confirmedBreak }
+local facing = 'down'
 local heroAnim = nil       -- { from, to, t }
 local floats = {}          -- 飘字 { text, x, y, t, color }
 local pendingSign = false
@@ -85,7 +87,7 @@ local function saveGame()
         love.filesystem.remove(SAVE_FILE)
         return
     end
-    love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), choices = choices }))
+    love.filesystem.write(SAVE_FILE, serialize.dump({ run = run:save(), choices = choices, facing = facing }))
 end
 
 local function floorsFor(c) return levels.buildFloors(mainline.pools, c) end
@@ -217,7 +219,13 @@ local function walkStep()
     local r = run:step(cell)
     if r.msg ~= '' then setMsg(r.msg, not r.ok or run.status == 'dead') end
     if not r.ok then walking = nil; afterStop(); return end
-    if run.pos ~= from then heroAnim = { from = from, to = run.pos, t = 0 } end
+    if run.pos ~= from then
+        local fx, fy = tileXY(from)
+        local tx, ty = tileXY(run.pos)
+        if tx ~= fx then facing = tx > fx and 'right' or 'left'
+        else facing = ty > fy and 'down' or 'up' end
+        heroAnim = { from = from, to = run.pos, t = 0 }
+    end
     local lost = before.hp - run.hero.hp
     if lost > 0 then float(cell, '-' .. lost, C.warn)
     elseif run.hero.hp > before.hp then float(cell, '+' .. (run.hero.hp - before.hp), { 0.5, 1, 0.7 })
@@ -470,6 +478,7 @@ function newGame(seed)
     choices = levels.pickChoices(seed, mainline.pools, last and last.choices)
     love.filesystem.write(LAST_FILE, serialize.dump({ choices = choices }))
     run = Run.new(floorsFor(choices), 'digger', seed)
+    facing = 'down'
     floats, walking, heroAnim, pendingSign = {}, nil, nil, false
     slotHeld = { false, false, false }
     setMsg(run:floor().hint or '')
@@ -480,10 +489,12 @@ end
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     twinPath.load()
+    miner.load()
     canvas = love.graphics.newCanvas(LW, LH)
     relayout()
     local data = love.filesystem.getInfo(SAVE_FILE) and serialize.load(love.filesystem.read(SAVE_FILE))
     if data and data.run and data.choices then
+        facing = miner.restoreFacing(data.facing)
         choices = data.choices
         run = Run.load(floorsFor(choices), data.run)
         setMsg('继续上一局。')
@@ -575,14 +586,13 @@ local function drawPixel()
         hy = fy + (hy - fy) * heroAnim.t
     end
     if not painted then
-        setColor(run.status == 'dead' and { 0.4, 0.4, 0.4 } or C.hero)
-        love.graphics.circle('fill', hx + 16, hy + 16, 11)
+        miner.draw(facing, hx + 16, hy + 29, run.status == 'dead')
     end
     love.graphics.setCanvas()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(canvas, OX, OY, 0, S, S)
     if painted then
-        twinPath.drawScene(run, MAP_X, MAP_Y, hx, hy, not modal and hovered, S, OX, OY)
+        twinPath.drawScene(run, MAP_X, MAP_Y, hx, hy, facing, not modal and hovered, S, OX, OY)
     end
 end
 
