@@ -52,9 +52,10 @@ local C = {
 
 -- ---------- 状态 ----------
 local run
-local hovered = nil        -- 鼠标所在格子
+local hovered = nil        -- 鼠标或键盘当前指向的格子
+local keyboardMap, keyTarget = false, nil
 local forcedHover = nil    -- 自动测试指定的悬停格子
-local msg, msgErr = '', false
+local msg, msgErr, msgTime = '', false, 0
 local modal = nil          -- { title, lines, buttons }
 local walking = nil        -- { path, i, t, from, confirmedFatal, confirmedBreak }
 local facing = 'down'
@@ -106,7 +107,7 @@ local spinArm, toggleHold
 local beginRun, openShop, drawShopUI, shopClick
 local hasSave, applySettings, toGame, continueGame, startNewGame, backToTitle, openSettings, openPause, titleItems, titleItemAt, drawTitleUI
 
-local function setMsg(s, err) msg, msgErr = s or '', err or false end
+local function setMsg(s, err) msg, msgErr, msgTime = s or '', err or false, clock end
 
 -- ---------- 地图坐标 ----------
 local function tileXY(i)
@@ -594,6 +595,7 @@ local function nextFloor(sell)
     closeModal()
     local spun = run.arm and run.arm.spins > 0
     run:finishFloor(sell)
+    hovered, keyTarget = nil, nil
     armHeld = { false, false, false }
     floats, walking, heroAnim = {}, nil, nil
     saveGame()
@@ -850,6 +852,7 @@ function newGame(seed, opts)
     runOpts = { depth = tutorial and 0 or (opts.depth or 0), unlocks = unlockList() }
     run = Run.new(planFor(seed, tutorial, runOpts), character, seed,
         { tutorial = tutorial, perks = activePerks(), pool = metaMod.weaponPool(runOpts.unlocks) })
+    hovered, keyTarget, keyboardMap = nil, nil, false
     facing = 'down'
     floats, walking, heroAnim = {}, nil, nil
     bossScene = false
@@ -867,6 +870,7 @@ function newGame(seed, opts)
 end
 
 function loadGame(data)
+    hovered, keyTarget, keyboardMap = nil, nil, false
     facing = miner.restoreFacing(data.facing)
     runOpts = data.routeOpts or { depth = 0, unlocks = {} }
     run = Run.load(planFor(data.run.seed, data.run.tutorial, runOpts), data.run)
@@ -957,7 +961,9 @@ function love.update(dt)
     end
     fx.updateDrips(dt, dripSpots())
     local mx, my = love.mouse.getPosition()
-    hovered = forcedHover or tileAt((mx - OX) / S, (my - OY) / S)
+    if forcedHover then hovered = forcedHover
+    elseif keyboardMap then hovered = keyTarget
+    else hovered = tileAt((mx - OX) / S, (my - OY) / S) end
 end
 
 -- ---------- 绘制：像素层 ----------
@@ -1133,57 +1139,68 @@ local function stat(key, label, value, x, color)
     text(tostring(value), x + 9 + (#label > 0 and 14 or 0), 6 - (k - 1) * 6, 10 * k, col)
 end
 
--- 悬停卡片的内容
-local function hoverLines(i)
+-- 和教学、事件反馈共用地图下方的空间。第一行回答这次行动的结果，第二行保留属性和特性。
+local function cellDetails(i)
     local c = run.cells[i]
     if c.kind == 'monster' then
         local m = run:monsterAt(i)
         local p = preview(i)
+        if run.tutorial and c.id == 'eye' then return m.name, '它在看着你。' end
         local base = config.powered(config.MONSTERS[c.id], run:floor().power)
-        if run.tutorial and c.id == 'eye' then return { { m.name, 10, C.text }, { '它在看着你。', 7.5, C.dim } } end
-        local L = { { m.name, 10, C.text }, { '生命 ' .. m.hp .. '  攻 ' .. m.atk .. '  防 ' .. m.def, 7, C.dim } }
-        if m.atk ~= base.atk then L[#L + 1] = { '群居：攻击 ' .. base.atk .. ' → ' .. m.atk, 7, C.warn } end
-        if m.def ~= base.def then L[#L + 1] = { '被庇护：防御 ' .. base.def .. ' → ' .. m.def, 7, C.warn } end
-        for k in pairs(m.traits) do L[#L + 1] = { config.TRAIT_NAMES[k] .. '：' .. config.TRAIT_DESC[k], 6.5, C.dim } end
-        if p.fatal then L[#L + 1] = { p.text == '会死' and ('预计 −' .. p.lose .. '，你会死') or (p.text .. '，硬打会死'), 8.5, C.warn }
-        else L[#L + 1] = { '预计 −' .. p.lose .. '，打完剩 ' .. p.left, 8.5, C.ok } end
-        L[#L + 1] = { '掉落 ' .. p.gold .. ' 金', 6.5, C.gold }
-        if run:marked(i) then L[#L + 1] = { '印：打败后可刻' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name, 6.5, C.ok } end
-        return L
+        local stats = { '生命 ' .. m.hp .. '　攻 ' .. m.atk .. '　防 ' .. m.def }
+        if m.atk ~= base.atk then stats[#stats + 1] = '群居：攻击 ' .. base.atk .. ' → ' .. m.atk end
+        if m.def ~= base.def then stats[#stats + 1] = '被庇护：防御 ' .. base.def .. ' → ' .. m.def end
+        for k in pairs(m.traits) do stats[#stats + 1] = config.TRAIT_NAMES[k] .. '：' .. config.TRAIT_DESC[k] end
+        local result
+        if p.fatal then
+            result = p.text == '会死' and ('预计损失 ' .. p.lose .. ' 生命，会死') or (p.text .. '，硬打会死')
+            if run.ch.revive and not run.revived then
+                result = '硬打会消耗复活机会，恢复 ' .. run.ch.revive .. ' 生命，怪物仍在'
+            end
+        else
+            local after = rules.interact(c, run.hero, run:floor(), run.ch, false, m).hero
+            result = '战损 ' .. p.lose .. '　　战后生命 ' .. after.hp .. '　　掉落 ' .. (after.gold - run.hero.gold) .. ' 金币'
+        end
+        if run:marked(i) then result = result .. '　　印：打败后可刻' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name end
+        return m.name, result, table.concat(stats, '　'), p.fatal
     elseif c.kind == 'item' then
         local f = run:floor()
         local gem = f.gem + run.ch.gemBonus
-        local eff = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
-        return { { config.ITEM_NAMES[c.id], 10, C.text }, { eff, 8, C.text } }
+        local effect = ({ smallPotion = '生命 +' .. f.smallPotion, bigPotion = '生命 +' .. f.bigPotion, redGem = '攻击 +' .. gem, blueGem = '防御 +' .. gem, key = '骨钥 +1', gold = '金币 +' .. f.gold })[c.id]
+        return config.ITEM_NAMES[c.id], effect
     elseif c.kind == 'door' then
-        return { { c.door == 'bone' and '骨门' or '血门', 10, C.text }, { c.door == 'bone' and '消耗 1 把骨钥' or ('通过时扣 ' .. run:floor().bloodCost .. ' 生命'), 7.5, C.text } }
+        if c.door == 'bone' then
+            return '骨门', run.ch.boneDoorHp and ('撬开时扣 ' .. run.ch.boneDoorHp .. ' 生命') or '消耗 1 把骨钥打开'
+        end
+        return '血门', '通过时扣 ' .. run:floor().bloodCost .. ' 生命'
     elseif c.kind == 'exit' then
-        if run:eliteAlive() then return { { '出口', 10, C.text }, { '精英还活着，出口被封住了', 7.5, C.text } } end
-        return { { twoExits() and EXIT_LOOK[exitLevel(c)] or '出口', 10, C.text }, { exitWords(c), 7.5, { 0.78, 0.84, 0.86 } }, { '走上去前会问你一次，还能回头', 6.5, C.dim } }
+        if run:eliteAlive() then return '出口', '精英还活着，出口被封住了' end
+        return twoExits() and EXIT_LOOK[exitLevel(c)] or '出口', exitWords(c), '走上去前会问你一次，还能回头'
     elseif floorMod.isFacility(c) then
         local g = FACILITY_GLYPH[c.kind]
-        return { { g[3], 10, C.text }, { g[4], 6.5, C.dim } }
+        return g[3], g[4]
     end
-    return nil
 end
 
-local function drawTooltip(i)
-    local L = hoverLines(i)
-    if not L then return end
-    local x, y = tileXY(i)
-    local w = 150
-    local h = 8
-    for _, l in ipairs(L) do h = h + (l[2] >= 9 and 14 or (l[2] >= 7.5 and 12 or (#l[1] > 40 and 20 or 11))) end
-    local tx = x + TILE + 4
-    if tx + w > PANEL_X - 4 then tx = x - w - 4 end
-    local ty = math.max(32, math.min(y - 4, LH - h - 26))
-    rect({ 0.05, 0.07, 0.08 }, tx, ty, w, h, 0.94, 4)
-    setColor({ 0.4, 0.33, 0.2 }); love.graphics.rectangle('line', OX + tx * S, OY + ty * S, w * S, h * S, 4 * S, 4 * S)
-    local yy = ty + 5
-    for _, l in ipairs(L) do
-        text(l[1], tx + 6, yy, l[2], l[3], 'left', w - 12)
-        yy = yy + (l[2] >= 9 and 14 or (l[2] >= 7.5 and 12 or (#l[1] > 40 and 20 or 11)))
-    end
+local function detailText(str, x, y, size, color, width)
+    local f = font(size * S)
+    love.graphics.setFont(f)
+    setColor(color)
+    love.graphics.print(str, OX + x * S, OY + y * S, 0, math.min(1, width * S / f:getWidth(str)), 1)
+end
+
+local function drawCellDetails(i)
+    local name, result, extra, fatal = cellDetails(i)
+    if not name then return false end
+    local x, y, w = MAP_X, LH - 28, run.w * TILE
+    rect(C.panel, x, y, w, 25, 1, 3)
+    rect(fatal and C.warn or C.accent, x, y + 2, 1.5, 21)
+    local row = extra and y + 1 or y + 6
+    text(name, x + 6, row, 9, C.accent)
+    local offset = 14 + font(9 * S):getWidth(name) / S
+    detailText(result, x + offset, row + 1, 8, fatal and C.warn or C.text, w - offset - 5)
+    if extra then detailText(extra, x + 6, y + 13, 7.5, C.dim, w - 12) end
+    return true
 end
 
 local SYMW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', wild = '赖' }
@@ -1341,11 +1358,10 @@ local function drawUI()
             text(f.text, f.x - 10, f.y - f.t * 16, 8, f.color, 'center', TILE + 20)
         end
         drawArmUI()
-        if hovered and not modal and not walking and not picker and run.cells[hovered].kind ~= 'wall' and run.cells[hovered].kind ~= 'floor' then drawTooltip(hovered) end
-        -- 底部：消息和提示
-        -- 底部：教程局是教学提示条；正式局只显示刚发生的事（不再有楼层提示和小字说明）
         local tip, age = coach.current(run, clock)
-        if tip and not msgErr then
+        local recentError = msgErr and clock - msgTime < 1.5
+        local details = hovered and not picker and not modal and not walking and not recentError and drawCellDetails(hovered)
+        if not details and tip and not recentError then
             local x, y, w, hh = MAP_X, LH - 28, PANEL_X - MAP_X - 8, 25
             local glow = math.max(0, 1 - age / 0.6)
             rect({ 0.06, 0.12, 0.11 }, x, y, w, hh, 0.95, 4)
@@ -1356,7 +1372,7 @@ local function drawUI()
             rect(C.accent, x + 5, y + 7, 20, 11, 1, 3)
             text('教学', x + 5, y + 8, 6, { 0.04, 0.1, 0.09 }, 'center', 20)
             text(tip, x + 30, y + 3, 7, C.text, 'left', w - 36)
-        elseif msg ~= '' and not picker then
+        elseif not details and msg ~= '' and not picker then
             text(msg, MAP_X, LH - 22, 7.5, msgErr and C.warn or C.text, 'left', PANEL_X - MAP_X - 8)
         end
     end
@@ -1640,6 +1656,7 @@ end
 
 -- ---------- 输入 ----------
 function love.mousepressed(mx, my, button)
+    keyboardMap, keyTarget = false, nil
     if button ~= 1 then return end
     local lx, ly = (mx - OX) / S, (my - OY) / S
     if modal then
@@ -1687,6 +1704,7 @@ function love.mousepressed(mx, my, button)
 end
 
 function love.mousemoved(mx, my)
+    keyboardMap, keyTarget = false, nil
     if armDrag then
         local ly = (my - OY) / S
         if armDrag.picker then
@@ -1737,7 +1755,12 @@ function updateHold(dt)
     local t = dirTarget(hold.d)
     local c = t and run.cells[t]
     if not c or c.kind == 'wall' then return end
-    if c.kind == 'floor' or c.kind == 'item' then act(t) else hold = nil end
+    if c.kind == 'floor' or c.kind == 'item' then
+        act(t)
+    else
+        keyboardMap, keyTarget = true, t
+        hold = nil
+    end
 end
 
 function love.keyreleased(key)
@@ -1793,9 +1816,14 @@ function love.keypressed(key)
         return
     end
     if picker then return end
-    if key == 'r' and run.arm and run.status == 'playing' and not walking then spinArm('gold'); return end
+    if key == 'r' and run.arm and run.status == 'playing' and not walking then
+        keyboardMap, keyTarget = true, nil
+        spinArm('gold')
+        return
+    end
     local d = DIRS[key]
     if d and run.status == 'playing' then
+        keyboardMap, keyTarget = true, nil
         hold = { key = key, d = d, t = 0 }
         if not walking then
             local t = dirTarget(d)
