@@ -428,7 +428,7 @@ local function walkStep()
             local traits = {}
             for k in pairs(m.traits) do traits[#traits + 1] = config.TRAIT_NAMES[k] end
             battle.start({
-                log = log, weapon = w, monHp = m.hp, heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
+                log = log, weapon = w, monHp = m.hp, monW = monsters.size(c.id), heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
                 hero = { name = run.ch.name, line = '攻 ' .. atk .. ' · 防 ' .. def .. (w and (' · ' .. W(w)) or '') },
                 mon = { id = c.id, name = m.name, line = '攻 ' .. m.atk .. ' · 防 ' .. m.def, traits = table.concat(traits, ' ') },
                 onDone = function() if walking then walking.waitBattle = false; walking.fought = cell; walking.t = STEP_TIME end end,
@@ -927,6 +927,18 @@ end
 
 function openDeath()
     love.filesystem.remove(SAVE_FILE)
+    if run.tutorial and run.floorIndex < #run.plan then
+        -- 教程还没走到井底就倒下了：教程不算走完，从教程第 1 层重来（制作人定）
+        openModal('你倒下了', {
+            '你倒在了' .. run:floor().name .. '。',
+            '新手教程还没走完，要从教程第 1 层重新走。',
+            '开打之前，先用攻防算一算这一仗要掉多少血。',
+        }, {
+            { label = '回开局界面', fn = function() backToTitle() end },
+            { label = '重新走教程', primary = true, fn = function() closeModal(); beginRun() end },
+        })
+        return
+    end
     if run.tutorial then
         meta.tutorialDone = true
         local n = awardShards(false)
@@ -2007,6 +2019,12 @@ return {
     setCRT = function(on) meta.crt = on end,
     getScene = function() return scene end,
     -- 自动测试：跨局存档清零（碎片、强化、解锁）
+    battlePose = function(id, weapon, who, p)
+        local m = config.MONSTERS[id]
+        battle.pose({ weapon = weapon, monHp = m.hp, heroHp = 200, speed = 1, monW = monsters.size(id),
+            hero = { name = '掘井人', line = '攻 10 · 防 10' }, mon = { id = id, name = m.name, line = '攻 ' .. m.atk .. ' · 防 ' .. m.def, traits = '' } }, who, p)
+    end,
+    battleClear = function() battle.skip() end,
     resetMeta = function() meta = { tutorialDone = false, crt = meta.crt, volume = 1, fullscreen = false } end,
     openShop = function() openShop() end,
     shopBuy = function(label) for _, b in ipairs(shopButtons()) do if b.label:find(label, 1, true) == 1 then b.fn(); return b.label end end end,

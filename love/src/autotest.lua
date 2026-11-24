@@ -177,6 +177,37 @@ function M.start()
         say('设置：' .. tostring(modalTitle()))
         shot('00b-settings')
         game.closeModal()
+        -- 0a. 战斗动作图鉴：每种出手方式定格在打中前后（只截图，不影响后面）
+        game.newGame(1, true); sleep(0.3); button('往下走')
+        for _, c in ipairs({
+            { 'moss', 'none', 'hero', 0.56, 'fist' }, { 'eel', 'boneKnife', 'hero', 0.5, 'blade' },
+            { 'crab', 'harpoon', 'hero', 0.52, 'spear' }, { 'beetle', 'hammer', 'hero', 0.4, 'hammer-up' },
+            { 'moss', 'none', 'mon', 0.35, 'spit' }, { 'frog', 'none', 'mon', 0.5, 'tongue' },
+            { 'bat', 'none', 'mon', 0.35, 'wave' }, { 'eel', 'none', 'mon', 0.5, 'bite' },
+            { 'crab', 'none', 'mon', 0.55, 'claw' }, { 'wraith', 'none', 'mon', 0.4, 'wisp' },
+            { 'priest', 'none', 'mon', 0.35, 'bolt' }, { 'eye', 'none', 'mon', 0.45, 'beam' },
+            { 'eye', 'none', 'dead', 1, 'dead' },
+        }) do
+            game.battlePose(c[1], c[2], c[3], c[4]); sleep(0.25)
+            shot('pose-' .. c[5])
+        end
+        game.battleClear(); sleep(0.5)
+        -- 0b. 教程里倒下：要从教程第 1 层重来，教程不算走完
+        game.newGame(1, true)
+        sleep(0.3)
+        button('往下走')
+        do
+            local h = game.getRun().hero
+            h.hp, h.atk, h.def = 20, 5, 0
+            local mon = find(function(c) return c.kind == 'monster' end)
+            go(mon); settle(); sleep(0.3)
+            local run = game.getRun()
+            say('教程第 1 层倒下：' .. tostring(modalTitle()) .. '，教程算走完 ' .. tostring(game.getMeta().tutorialDone))
+            shot('01a-tutorial-dead')
+            button('重新走教程'); sleep(0.3)
+            run = game.getRun()
+            say('重新走教程：教程局 ' .. tostring(run.tutorial) .. '，第 ' .. run.floorIndex .. ' 层，' .. tostring(modalTitle()))
+        end
         -- 1. 新手教程
         game.newGame(1, true)
         sleep(0.3)
@@ -193,9 +224,10 @@ function M.start()
                 local mon = find(function(c) return c.kind == 'monster' end)
                 game.setHover(nil); sleep(1.4); shot('01f0-near')
                 -- 打第一只井苔：截一张打到一半的图
-                game.act(mon); sleep(0.32)
+                game.act(mon); sleep(0.28)
                 say('战斗中：' .. tostring(game.busy()))
                 shot('01f-battle')
+                shot('01f2-spit')
                 go(mon); settle(); sleep(0.2)
                 shot('01d-coach-after-kill')
             end
@@ -213,8 +245,8 @@ function M.start()
                 button('迎上去')
                 sleep(0.9)
                 shot('01g-boss-battle')
-                sleep(0.25); shot('01h-boss-skip')
-                sleep(0.6); shot('01i-boss-dead')
+                sleep(0.5); shot('01h-boss-skip')
+                sleep(1.1); shot('01i-boss-dead')
                 settle(); sleep(0.4)
                 say('第 5 层硬打井底之眼：' .. tostring(modalTitle()))
                 break

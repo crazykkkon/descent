@@ -12,6 +12,13 @@ function M.load(monsters)
 end
 
 -- fx（可选，战斗反馈用）：{ dx, dy 偏移, flash 闪白 0～1, alpha 透明度, scale 缩放 }
+-- 素材原始尺寸（战斗窗口用来算怪的身体边缘：主角冲过去要正好打到它身上）
+function M.size(id)
+    local sprite = sprites[id]
+    if not sprite then return 40, 32 end
+    return sprite:getDimensions()
+end
+
 function M.draw(id, cx, feet, clock, tileIndex, fx)
     local g = love.graphics
     local sprite = sprites[id]
