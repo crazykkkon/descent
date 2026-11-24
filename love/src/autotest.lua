@@ -191,6 +191,7 @@ function M.start()
                 -- 第 1 层：先往右走几步打第一只井苔，看教学提示换没换
                 game.pressKey('right', true); sleep(1.2); game.pressKey('right', false); settle()
                 local mon = find(function(c) return c.kind == 'monster' end)
+                game.setHover(nil); sleep(1.4); shot('01f0-near')
                 -- 打第一只井苔：截一张打到一半的图
                 game.act(mon); sleep(0.32)
                 say('战斗中：' .. tostring(game.busy()))
@@ -210,6 +211,10 @@ function M.start()
                 say('第 5 层走近井底之眼：' .. tostring(modalTitle()))
                 shot('01e-boss-scene')
                 button('迎上去')
+                sleep(0.9)
+                shot('01g-boss-battle')
+                sleep(0.25); shot('01h-boss-skip')
+                sleep(0.6); shot('01i-boss-dead')
                 settle(); sleep(0.4)
                 say('第 5 层硬打井底之眼：' .. tostring(modalTitle()))
                 break

@@ -121716,5 +121716,82 @@ return {
       },
       queue = {}
     }
+  },
+  stalemates = {
+    {
+      map = "@c>",
+      atk = 10,
+      def = 10,
+      ok = true,
+      msg = "你倒下了。打不动锈甲虫：攻击要高于它的防御 14",
+      status = "dead",
+      hero = {
+        hp = 0,
+        atk = 10,
+        def = 10,
+        keys = 0,
+        gold = 0
+      }
+    },
+    {
+      map = "@c>",
+      atk = 10,
+      def = 30,
+      ok = false,
+      msg = "打不动锈甲虫，它也伤不到你",
+      status = "playing",
+      hero = {
+        hp = 100,
+        atk = 10,
+        def = 30,
+        keys = 0,
+        gold = 0
+      }
+    },
+    {
+      map = "@x>",
+      atk = 5,
+      def = 40,
+      ok = true,
+      msg = "你倒下了。打不动裂岩蟹：攻击要高于它的防御 12",
+      status = "dead",
+      hero = {
+        hp = 0,
+        atk = 5,
+        def = 40,
+        keys = 0,
+        gold = 0
+      }
+    },
+    {
+      map = "@g>",
+      atk = 8,
+      def = 30,
+      ok = false,
+      msg = "打不动溺魂，它也伤不到你",
+      status = "playing",
+      hero = {
+        hp = 100,
+        atk = 8,
+        def = 30,
+        keys = 0,
+        gold = 0
+      }
+    },
+    {
+      map = "@G>",
+      atk = 10,
+      def = 60,
+      ok = false,
+      msg = "打不动石鳞守卫，它也伤不到你",
+      status = "playing",
+      hero = {
+        hp = 100,
+        atk = 10,
+        def = 60,
+        keys = 0,
+        gold = 0
+      }
+    }
   }
 }

@@ -12,6 +12,13 @@ function M.interact(cell, hero, floor, ch, allowFatal, mon)
     if cell.kind == 'monster' then
         local m = mon or config.powered(config.MONSTERS[cell.id], floor.power)
         local r = combat.simulate(hero, m)
+        -- 打不动、它也伤不到你（没有反伤）：两边谁也伤不到谁，打不起来
+        if not r.canAttack then
+            local _, def = combat.effectiveStats(hero)
+            if math.max(m.atk - def, 0) == 0 and not m.traits.thorns then
+                return { ok = false, reason = '打不动' .. m.name .. '，它也伤不到你' }
+            end
+        end
         local reason
         if not r.canAttack then reason = '打不动' .. m.name .. '：攻击要高于它的防御 ' .. m.def
         elseif not r.canWin then reason = '打不死' .. m.name .. '：它回血比你打得快'

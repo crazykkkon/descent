@@ -838,3 +838,16 @@ test('战斗记录：每一下加起来和结算一样（画面回放用）', ()
         }
     }
 });
+
+test('打不动也能硬打（会被耗死）；但打不动、它也伤不到你时打不起来', () => {
+    const run = new Run([tiny(['@c>'])], 'digger', 1); // 锈甲虫 防 14，攻 18
+    run.hero = { hp: 100, atk: 10, def: 10, keys: 0, gold: 0 };
+    run.move(1, 0);
+    assert.equal(run.status, 'dead', '它打得到你：硬打被耗死');
+    const r2 = new Run([tiny(['@c>'])], 'digger', 1);
+    r2.hero = { hp: 100, atk: 10, def: 30, keys: 0, gold: 0 };
+    const res = r2.move(1, 0);
+    assert.equal(res.ok, false);
+    assert.match(res.msg, /也伤不到你/);
+    assert.equal(r2.status, 'playing');
+});

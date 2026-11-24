@@ -1,6 +1,6 @@
 /** 和格子交互的规则。游戏和求解器共用这一份，保证两边结果一致。 */
 import { CharacterDef, Hero, MONSTERS, MonsterDef, powered, WEAPONS } from './config';
-import { simulateCombat } from './combat';
+import { effectiveStats, simulateCombat } from './combat';
 import { Cell, FloorDef } from './floor';
 
 /** fatal：这一仗打完主角死了（生命为 0） */
@@ -16,6 +16,10 @@ export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterD
         case 'monster': {
             const m = mon ?? powered(MONSTERS[cell.id], floor.power)
             const r = simulateCombat(hero, m);
+            // 打不动、它也伤不到你（没有反伤）：两边谁也伤不到谁，打不起来（制作人 2026-11-24：打不动也能硬打，被一点点耗死）
+            if (!r.canAttack && Math.max(m.atk - effectiveStats(hero).def, 0) === 0 && !m.traits.includes('thorns')) {
+                return { ok: false, reason: `打不动${m.name}，它也伤不到你` };
+            }
             let reason = '';
             if (!r.canAttack) reason = `打不动${m.name}：攻击要高于它的防御 ${m.def}`;
             else if (!r.canWin) reason = `打不死${m.name}：它回血比你打得快`;

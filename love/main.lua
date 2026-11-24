@@ -370,46 +370,67 @@ end
 local function walkStep()
     local cell = walking.path[walking.i]
     local c = run.cells[cell]
-    -- 硬打会死的怪：先确认（教程第 5 层的井底之眼不问，剧情里直接开打）
-    if c.kind == 'monster' and not walking.confirmedFatal and not walking.bossFight then
-        local p = preview(cell)
-        if p and p.fatal then
-            local path, rest = walking.path, walking.i
-            walking = nil
-            local m = config.MONSTERS[c.id]
-            openModal('硬打' .. m.name .. '？', { p.text == '会死' and ('这一仗要损失 ' .. p.lose .. ' 生命，你只有 ' .. run.hero.hp .. '。') or (p.text .. '。'), '打下去你会死，这一局就结束了。' }, {
-                { label = '算了', primary = true, fn = function() closeModal(); setMsg('没有出手。') end },
-                { label = '硬打', danger = true, fn = function()
-                    closeModal()
-                    local remain = {}
-                    for k = rest, #path do remain[#remain + 1] = path[k] end
-                    startWalk(remain)
-                    walking.confirmedFatal = true
-                end },
-            })
-            return
-        end
-    end
     -- 走上出口之前问一次（下一层是哪个候选、井租），可以"再想想"
     if c.kind == 'exit' and not walking.confirmedExit and not run:eliteAlive() then
         walking = nil
         openExit(cell)
         return
     end
-    -- 打怪：先把这一仗演出来（每一下的伤害由 combat.simulate 的记录给出，结果和结算一样），演完再结算
+    -- 打怪：每场都弹战斗窗口，一来一回演完再结算（制作人定：魔塔式，每场都弹）。
+    -- 每一下的伤害由 combat.simulate 的记录给出（结果和结算一样）；打不过的仗也演，在矿工倒下的那一下停。
     if c.kind == 'monster' and walking.fought ~= cell and (meta.battleSpeed or 1) > 0 then
         local m = run:monsterAt(cell)
         local log = {}
         local r0 = combat.simulate(run.hero, m, log)
-        if r0.canAttack and r0.canWin and #log > 0 then
+        local _, def = combat.effectiveStats(run.hero)
+        local hurts = math.max(m.atk - def, 0) > 0 or m.traits.thorns
+        if not r0.canAttack and hurts then
+            -- 破不了防：你每下打出 0，它一下下把你耗死
+            log = {}
+            local cur, lost = def, 0
+            local firstMon = m.traits.firstStrike and not (run.hero.weapon and config.WEAPONS[run.hero.weapon].noFirstStrike)
+            local function monHit(tag)
+                local h = math.max(m.atk - cur, 0)
+                lost = lost + h
+                log[#log + 1] = { who = 'mon', hit = h, mhp = m.hp, loss = h, tags = { tag } }
+                if m.traits.corrode then cur = cur - config.CORRODE_DEF end
+            end
+            if firstMon then monHit('first') end
+            while lost < run.hero.hp and #log < 100000 do
+                local t = m.traits.thorns and config.THORNS_DAMAGE or 0
+                lost = lost + t
+                log[#log + 1] = { who = 'hero', hit = 0, mhp = m.hp, loss = t, tags = t > 0 and { 'thorns' } or {} }
+                if lost >= run.hero.hp then break end
+                monHit()
+                if m.traits.double and lost < run.hero.hp then monHit('double') end
+            end
+        end
+        if (r0.canAttack or hurts) and #log > 0 then
+            -- 打不过：在矿工倒下的那一下停
+            local lost = 0
+            for k, e in ipairs(log) do
+                lost = lost + e.loss
+                if lost >= run.hero.hp then
+                    for j = #log, k + 1, -1 do log[j] = nil end
+                    local tags = {}
+                    for _, t in ipairs(e.tags) do if t ~= 'kill' then tags[#tags + 1] = t end end
+                    tags[#tags + 1] = 'dead'
+                    e.tags = tags
+                    break
+                end
+            end
             walking.waitBattle = true
             local tx, ty = tileXY(cell)
             local hx, hy = tileXY(run.pos)
             if tx ~= hx then facing = tx > hx and 'right' or 'left' else facing = ty > hy and 'down' or 'up' end
+            local w = run.hero.weapon
+            local atk = combat.effectiveStats(run.hero)
+            local traits = {}
+            for k in pairs(m.traits) do traits[#traits + 1] = config.TRAIT_NAMES[k] end
             battle.start({
-                tile = function(k) local x, y = tileXY(k); return x, y end, size = TILE,
-                heroCell = run.pos, monCell = cell, log = log, weapon = run.hero.weapon,
-                monHp = m.hp, heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
+                log = log, weapon = w, monHp = m.hp, heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
+                hero = { name = run.ch.name, line = '攻 ' .. atk .. ' · 防 ' .. def .. (w and (' · ' .. W(w)) or '') },
+                mon = { id = c.id, name = m.name, line = '攻 ' .. m.atk .. ' · 防 ' .. m.def, traits = table.concat(traits, ' ') },
                 onDone = function() if walking then walking.waitBattle = false; walking.fought = cell; walking.t = STEP_TIME end end,
             })
             return
@@ -1212,7 +1233,6 @@ local function drawPixel()
         g.ellipse('fill', hx + TILE / 2, hy + TILE / 2 - 2, 8, 11)
         g.setBlendMode('alpha')
     end
-    battle.drawPixel(function(id, cx, feet, f) monsters.draw(id, cx, feet, clock, 0, f) end)
     -- 矿灯：主角附近暖、远处冷暗（最暗也看得清格子）
     fx.lamp(MAP_X, MAP_Y - 4, run.w * TILE, run.h * TILE + 4, hx + TILE / 2, hy + TILE / 2 - 4, 170)
     -- 断臂转轮（机械小臂）。刻图案时整条手臂移到画面中间、放大，其余压暗
@@ -1268,18 +1288,10 @@ local function cellDetails(i)
         if m.atk ~= base.atk then stats[#stats + 1] = '群居：攻击 ' .. base.atk .. ' → ' .. m.atk end
         if m.def ~= base.def then stats[#stats + 1] = '被庇护：防御 ' .. base.def .. ' → ' .. m.def end
         for k in pairs(m.traits) do stats[#stats + 1] = config.TRAIT_NAMES[k] .. '：' .. config.TRAIT_DESC[k] end
-        local result
-        if p.fatal then
-            result = p.text == '会死' and ('预计损失 ' .. p.lose .. ' 生命，会死') or (p.text .. '，硬打会死')
-            if run.ch.revive and not run.revived then
-                result = '硬打会消耗复活机会，恢复 ' .. run.ch.revive .. ' 生命，怪物仍在'
-            end
-        else
-            local after = rules.interact(c, run.hero, run:floor(), run.ch, false, m).hero
-            result = '战损 ' .. p.lose .. '　　战后生命 ' .. after.hp .. '　　掉落 ' .. (after.gold - run.hero.gold) .. ' 金币'
-        end
+        -- 不给预计掉血（制作人定：玩家自己算）；只给数值、特性、掉落
+        local result = '掉落 ' .. m.gold .. ' 金币'
         if run:marked(i) then result = result .. '　　印：打败后可刻' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name end
-        return m.name, result, table.concat(stats, '　'), p.fatal
+        return m.name, result, table.concat(stats, '　'), false
     elseif c.kind == 'item' then
         local f = run:floor()
         local gem = f.gem + run.ch.gemBonus
@@ -1449,15 +1461,8 @@ local function drawUI()
         -- 格子上的字；怪物头上挂"掉多少血"的牌子
         for i, c in ipairs(picker and {} or run.cells) do  -- 刻图案时地图上的字不画（地图被压暗了）
             local x, y = tileXY(i)
-            if c.kind == 'monster' and i == battle.monCell() then
-                -- 正在打的怪：掉血牌先收起来，让位给弹出的伤害数字
-            elseif c.kind == 'monster' then
-                local p = preview(i)
-                local tag = p.fatal and (p.text == '会死' and '会死' or p.text) or ('−' .. p.lose)
-                if run.tutorial and c.id == 'eye' then tag = '？？？' end
-                local tw = math.max(16, #tag * 2.1 + 6)
-                rect(p.fatal and { 0.75, 0.2, 0.25 } or { 0.94, 0.77, 0.42 }, x + (TILE - tw) / 2, y - 5, tw, 8, 1, 4)
-                text(tag, x - 4, y - 5, 5.5, p.fatal and { 1, 0.95, 0.95 } or { 0.12, 0.08, 0.02 }, 'center', TILE + 8)
+            if c.kind == 'monster' then
+                -- 不挂"掉多少血"的牌子（制作人定）：指着它在地图下方看生命 / 攻 / 防，自己算
                 if run:marked(i) then text('印', x + TILE - 7, y + 1, 5.5, C.ok) end
             elseif c.kind == 'door' then
                 text(c.door == 'bone' and '门' or '血门', x, y + 3, 8, { 0.95, 0.84, 0.6 }, 'center', TILE)
@@ -1475,11 +1480,23 @@ local function drawUI()
         for _, f in ipairs(floats) do
             text(f.text, f.x - 10, f.y - f.t * 16, 8, f.color, 'center', TILE + 20)
         end
-        battle.drawUI(text, LW)
         drawArmUI()
         local tip, age = coach.current(run, clock)
         local recentError = msgErr and clock - msgTime < 1.5
         local details = hovered and not picker and not modal and not walking and not recentError and drawCellDetails(hovered)
+        if not details and not picker and not modal and not walking and not recentError and not battle.active() and clock - msgTime > 1.2 and not (tip and age < 4) then
+            -- 走到怪物旁边：下方也显示它的生命 / 攻 / 防（制作人：鼠标指着或者靠近了都显示）；面朝的那只优先
+            local near
+            local hx, hy = tileXY(run.pos)
+            for _, n in ipairs(floorMod.neighbors(run.pos, run.w, run.h)) do
+                if run.cells[n].kind == 'monster' then
+                    local tx, ty = tileXY(n)
+                    local dir = tx ~= hx and (tx > hx and 'right' or 'left') or (ty > hy and 'down' or 'up')
+                    if not near or dir == facing then near = n end
+                end
+            end
+            details = near and drawCellDetails(near)
+        end
         if not details and tip and not recentError then
             local x, y, w, hh = MAP_X, LH - 28, PANEL_X - MAP_X - 8, 25
             local glow = math.max(0, 1 - age / 0.6)
@@ -1496,6 +1513,11 @@ local function drawUI()
         end
     end
 
+    if scene == 'game' then
+        battle.drawUI({ text = text, rect = rect, S = S, OX = OX, OY = OY, LW = LW, LH = LH,
+            monster = function(id, cx, feet, f) monsters.draw(id, cx, feet, clock, 0, f) end,
+            miner = function(cx, feet, dead, tall, a) miner.draw('right', cx, feet, dead, tall, a) end })
+    end
     drawModal()
 end
 

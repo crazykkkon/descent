@@ -336,6 +336,15 @@ for (const seed of [1, 2, 3, 42, 99, 12345, 2147483647, 4000000000, 4, 5, 6, 7, 
 }
 const tutorials = [1, 7, 31337].map(seed => ({ seed, plan: R.buildTutorial(seed).map(o => o.map(floorParams)) }));
 
+// ---------- 打不动：它打得到你就硬打被耗死；谁也伤不到谁就打不起来 ----------
+const stalemates: unknown[] = [];
+for (const [map, atk, def] of [['@c>', 10, 10], ['@c>', 10, 30], ['@x>', 5, 40], ['@g>', 8, 30], ['@G>', 10, 60]] as [string, number, number][]) {
+    const run = new Run([tiny([map])], 'digger', 1);
+    run.hero = { hp: 100, atk, def, keys: 0, gold: 0 };
+    const r = run.move(1, 0);
+    stalemates.push({ map, atk, def, ok: r.ok, msg: r.msg, status: run.status, hero: heroOf(run.hero) });
+}
+
 // ---------- 精英奖励三选一 ----------
 const rewardRuns: unknown[] = [];
 for (const seed of [1, 4, 9, 77]) {
@@ -399,7 +408,7 @@ const charRuns: unknown[] = [];
 
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns, rewardRuns })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns, rewardRuns, stalemates })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);

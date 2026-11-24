@@ -324,6 +324,15 @@ for _, t in ipairs(V.tutorials) do
     end
 end
 
+-- 打不动：硬打被耗死 / 谁也伤不到谁打不起来
+for _, v in ipairs(V.stalemates) do
+    local run = Run.new({ tiny({ v.map }) }, 'digger', 1)
+    run.hero = { hp = 100, atk = v.atk, def = v.def, keys = 0, gold = 0 }
+    local r = run:move(1, 0)
+    check(r.ok == v.ok and r.msg == v.msg and run.status == v.status and heroEq(run.hero, v.hero),
+        string.format('打不动 %s 攻%d防%d：期望 %s「%s」%s，实际 %s「%s」%s', v.map, v.atk, v.def, tostring(v.ok), v.msg, v.status, tostring(r.ok), r.msg, run.status))
+end
+
 -- 精英奖励三选一
 for _, v in ipairs(V.rewardRuns) do
     local fs = {}
