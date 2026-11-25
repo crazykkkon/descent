@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="384" height="288" viewBox="0 0 192 144">
+  <title>坠井者 · 断臂轮盘印记</title>
+  <defs>
+    <g id="grip">
+      <path fill="#77412c" stroke="#172026" stroke-width="2" d="M20 28L26 27 27 42 24 46 20 44Z"/>
+      <path fill="#deab5e" d="M20 32L26 29 26 32 21 35ZM21 38L26 35 26 38 21 41ZM21 43L26 41 25 44 22 45Z"/>
+    </g>
+    <g id="shaft">
+      <path fill="#b9783c" stroke="#172026" stroke-width="2" d="M22 13L26 11 26 43 23 46 21 43Z"/>
+      <path fill="#f1bf76" d="M23 17L24 16 24 40 22 43Z"/>
+      <path fill="#573736" d="M21 34L26 31 26 34 21 37ZM21 39L26 36 26 38 21 41Z"/>
+    </g>
+  </defs>
+  <!-- A shared slant aligns the etched marks with the same grip in the miner's hand. -->
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <g id="bone-knife" transform="translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#grip"/>
+      <path fill="#d6b783" stroke="#172026" stroke-width="2" d="M16 28L16 19 19 20 17 15 19 9 23 11 24 6 30 2 31 13 28 24 25 29 29 30 28 33 15 32 14 29Z"/>
+      <path fill="#fff0bf" d="M29 5L28 14 24 23 20 26 23 17 20 16 24 13 25 8ZM15 30L26 29 28 30 24 31Z"/>
+      <path fill="#805c4c" d="M16 24L22 21 19 25 17 26ZM25 7L23 13 22 12Z"/>
+    </g>
+    <g id="harpoon" transform="translate(48) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#shaft"/>
+      <path fill="#79b9bc" stroke="#172026" stroke-width="2" d="M20 25L11 18 10 5 16 10 15 15 20 17 22 8 25 1 27 9 26 17 32 13 32 8 38 4 37 18 27 24 27 28 20 28Z"/>
+      <path fill="#e1f3df" d="M12 8L15 11 14 14ZM24 5L25 9 23 19 21 20ZM35 9L34 16 29 19 33 14ZM20 24L26 22 26 24 21 26Z"/>
+    </g>
+    <g id="shell-hammer" transform="translate(96) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#shaft"/>
+      <path fill="#809b9f" stroke="#172026" stroke-width="2" d="M5 9L11 5 34 5 41 10 40 19 34 23 11 22 5 18Z"/>
+      <path fill="#d1dad0" d="M7 10L12 7 33 7 37 10 11 12Z"/>
+      <path fill="#456074" d="M7 12L12 14 12 21 7 17ZM33 12L39 10 38 18 33 20Z"/>
+      <path fill="#e2a457" stroke="#253139" stroke-width="1.3" d="M18 6L25 6 26 21 19 21Z"/>
+      <path fill="#384954" d="M29 8L27 13 31 14 27 20 28 15 25 14Z"/>
+    </g>
+    <g id="moss-blade" transform="translate(144) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#grip"/>
+      <path fill="#5c967b" stroke="#172026" stroke-width="2" d="M14 27L14 17 18 11 19 15 21 7 32 2 33 13 30 23 25 28 32 26 30 32 25 34 19 32 13 32 10 28Z"/>
+      <path fill="#bedc89" d="M31 5L27 16 19 26 20 22 23 13ZM16 18L20 16 16 23ZM26 29L31 27 28 31Z"/>
+      <path fill="#315d59" d="M31 14L26 24 21 28 23 23Z"/>
+    </g>
+    <g id="echo-bell" transform="translate(0 48) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#shaft"/>
+      <path fill="#c7863d" stroke="#172026" stroke-width="2" d="M20 5Q19 1 24 1Q29 1 28 6Q35 8 35 18L40 23 37 26 12 26 9 23 14 19Q13 9 20 5Z"/>
+      <path fill="#ffe09b" d="M21 7L25 6 19 12 18 18 15 20 16 12ZM12 22L36 20 39 23 15 24Z"/>
+      <path fill="#855036" d="M28 9Q33 12 32 18L28 19Z"/>
+      <path fill="#e5b164" stroke="#172026" stroke-width="1.5" d="M21 26Q24 33 28 26Z"/>
+      <path fill="none" stroke="#f4d780" stroke-width="2" d="M8 9L6 14M38 9L41 13"/>
+    </g>
+    <g id="salt-dagger" transform="translate(48 48) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#grip"/>
+      <path fill="#9acacb" stroke="#172026" stroke-width="2" d="M16 29L11 21 13 14 20 18 20 11 28 1 31 14 28 19 34 15 35 21 28 29 32 30 29 33 15 32 13 30Z"/>
+      <path fill="#eff9f1" d="M27 5L26 17 21 25 22 12ZM14 16L18 20 18 25 13 21ZM33 18L31 24 27 26Z"/>
+      <path fill="#6686ad" d="M27 15L29 12 28 19 23 27ZM17 29L28 27 26 30Z"/>
+    </g>
+    <g id="rust-greatsword" transform="translate(96 48) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#grip"/>
+      <path fill="#ae5239" stroke="#172026" stroke-width="2" d="M13 28L13 8 20 2 33 3 33 11 30 13 33 15 31 26 26 29 33 28 35 33 26 34 21 32 11 34 10 30Z"/>
+      <path fill="#e79459" d="M15 10L20 5 27 5 17 12 17 24 15 26ZM29 6L31 5 30 9 28 11ZM12 31L24 29 31 30 20 32Z"/>
+      <path fill="#703e36" d="M25 12L29 10 26 16 23 16ZM20 24L27 18 25 24 21 27Z"/>
+    </g>
+    <g id="well-hook" transform="translate(144 48) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#shaft"/>
+      <path fill="#78a5ad" stroke="#172026" stroke-width="2" d="M20 30L18 17Q16 6 25 3Q36 0 39 10Q41 18 30 23L30 13 33 15Q35 10 30 9Q24 8 25 16L28 28 26 31Z"/>
+      <path fill="#e2e8cf" d="M21 16Q18 7 28 5L32 5Q23 7 23 13L24 20ZM37 12L36 17 32 20 33 17Z"/>
+      <path fill="#deb270" d="M21 26L27 23 28 26 22 29Z"/>
+    </g>
+    <g id="well-lamp" transform="translate(0 96) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#shaft"/>
+      <path fill="#d59245" stroke="#172026" stroke-width="2" d="M21 6Q20 1 25 1Q29 1 28 6L36 10 35 13 33 25 36 28 31 31 17 30 13 27 16 24 14 13 12 11Z"/>
+      <path fill="#ffe574" d="M18 13L31 13 29 24 20 25Z"/>
+      <path fill="#fff5cb" d="M23 23Q18 20 25 15L25 18 27 18 27 22Z"/>
+      <path fill="#98613b" d="M17 11L22 7 29 7 31 10ZM19 26L30 25 32 27 19 28Z"/>
+    </g>
+    <g id="twin-hook" transform="translate(48 96) translate(2.4 2.4) scale(.9) rotate(34 24 24)">
+      <use xlink:href="#grip"/>
+      <path fill="#b089b9" stroke="#172026" stroke-width="2" d="M20 31L17 20Q7 19 8 11Q8 6 15 4L12 11Q12 15 17 14L19 10Q19 4 25 2Q35 0 38 7Q42 14 32 19L31 12 34 12Q34 6 29 7Q24 7 24 13L26 20 30 26 27 30 23 32Z"/>
+      <path fill="#f4d8d7" d="M10 11L12 8 11 12 13 16 10 15ZM22 15Q19 6 28 4L32 5Q24 6 23 11ZM35 15L37 10 36 14Z"/>
+      <path fill="#e9bc80" d="M19 28L27 24 28 27 21 31Z"/>
+    </g>
+    <g id="wild" transform="translate(96 96)">
+      <path fill="#703c57" stroke="#1c1d2b" stroke-width="2" d="M24 1L30 9 39 8 38 16 46 24 38 30 39 39 29 38 24 46 17 38 8 39 10 29 2 24 10 17 9 8 18 10Z"/>
+      <path fill="#e6b770" d="M24 4L28 11 24 14 20 11ZM6 24L12 20 15 24 12 27ZM24 34L28 37 24 43 21 37ZM34 24L37 20 43 24 37 27Z"/>
+      <path fill="#e5a6ae" stroke="#242437" stroke-width="2" d="M9 24Q23 5 39 24Q23 42 9 24Z"/>
+      <path fill="#743d6b" d="M21 16L28 17 29 25 24 32 20 28 19 22Z"/>
+      <path fill="#fff0bc" d="M24 18L26 22 24 29 22 25Z"/>
+    </g>
+  </g>
+</svg>

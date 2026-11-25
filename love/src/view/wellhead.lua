@@ -23,10 +23,10 @@ function M.drawObject(c, x, y, tile)
         if c.id == 'smallPotion' then
             g.setColor(1, 1, 1)
             g.draw(potion, cx, cy + 9, 0, 0.43, 0.43, potion:getWidth() / 2, potion:getHeight())
-        elseif c.id == 'redGem' or c.id == 'blueGem' then
+        elseif c.id == 'redGem' or c.id == 'blueGem' or c.id == 'bigRedGem' or c.id == 'bigBlueGem' then
             g.setColor(0.05, 0.14, 0.16)
             g.polygon('fill', cx, cy - 8, cx + 7, cy + 1, cx, cy + 9, cx - 7, cy + 1)
-            if c.id == 'redGem' then
+            if c.id == 'redGem' or c.id == 'bigRedGem' then
                 g.setColor(0.86, 0.24, 0.12)
             else
                 g.setColor(0.27, 0.76, 0.81)

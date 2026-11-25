@@ -27,7 +27,7 @@ local HERO_CX, MON_CX, FEET = WX + 112, WX + WW - 112, WY + 150
 local MON_SCALE = 4
 -- 矿工素材（侧面）上：前手的位置、身体前沿（相对脚底中心，逻辑像素，按 96 高算）
 local HAND_X, HAND_Y, HERO_FRONT = 16, -33, 26
-local WEAPON_SCALE = 1.7
+local marks = require('view.weapon_marks')
 
 local fight = nil
 local parts, slashes, banners = {}, {}, {}
@@ -337,7 +337,6 @@ end
 -- 矿工手上的武器（白盒：程序画的，正式美术换成帧动画）
 local function drawWeapon(G, f, x, p, hero, a)
     local shape = WEAPON_SHAPE[f.o.weapon or 'none'] or 'blade'
-    local col = (WEAPON_FX[f.o.weapon or 'none'] or WEAPON_FX.none)[2]
     local px, py = x + HAND_X, FEET + HAND_Y
     local swing = hero and p or nil
     -- 角度：举起（−1.3）→ 打中时劈下（0.5）→ 收回（−0.4）；矛和拳头是往前直刺
@@ -365,45 +364,13 @@ local function drawWeapon(G, f, x, p, hero, a)
         G.setColor(0.85, 0.62, 0.38, a); G.rectangle('fill', len + 7, -4.5, 2.5, 9, 1, 1)
         G.pop(); return
     end
-    G.scale(WEAPON_SCALE, WEAPON_SCALE)
-    local DARK = { 0.08, 0.05, 0.04 }
-    local function outline(mode, ...)
-        G.setColor(DARK[1], DARK[2], DARK[3], a); G.setLineWidth(0.9)
-        if mode == 'poly' then G.polygon('line', ...) else G.rectangle('line', ...) end
-    end
+    local size = 49
     if shape == 'spear' then
         ang = swing and (-0.15 + 0.15 * ext) or -0.5
-        G.rotate(ang)
-        local back = swing and ext * 8 or 0
-        G.setColor(DARK[1], DARK[2], DARK[3], a); G.setLineWidth(3); G.line(-10 + back, 0, 20 + back, 0)
-        G.setColor(0.55, 0.4, 0.25, a); G.setLineWidth(1.6); G.line(-10 + back, 0, 20 + back, 0)
-        G.setColor(col[1], col[2], col[3], a)
-        G.polygon('fill', 19 + back, -3.5, 28 + back, 0, 19 + back, 3.5)
-        outline('poly', 19 + back, -3.5, 28 + back, 0, 19 + back, 3.5)
-        G.setLineWidth(1); G.pop(); return
+        G.translate(ext * 9, 0)
+        size = 68
     end
-    G.rotate(ang)
-    if shape == 'blade' then
-        G.setColor(0.35, 0.24, 0.16, a); G.rectangle('fill', -3, -1.5, 6, 3); outline('rect', -3, -1.5, 6, 3)
-        G.setColor(0.6, 0.5, 0.35, a); G.rectangle('fill', 2, -3, 2, 6); outline('rect', 2, -3, 2, 6)
-        G.setColor(col[1], col[2], col[3], a)
-        G.polygon('fill', 4, -2, 18, -1.2, 21, 0, 18, 1.2, 4, 2)
-        outline('poly', 4, -2, 18, -1.2, 21, 0, 18, 1.2, 4, 2)
-    elseif shape == 'hammer' then
-        G.setColor(DARK[1], DARK[2], DARK[3], a); G.setLineWidth(3); G.line(-3, 0, 15, 0)
-        G.setColor(0.55, 0.4, 0.25, a); G.setLineWidth(1.6); G.line(-3, 0, 15, 0)
-        G.setColor(col[1] * 0.75, col[2] * 0.75, col[3] * 0.75, a); G.rectangle('fill', 13, -6, 7, 12, 1, 1)
-        outline('rect', 13, -6, 7, 12, 1, 1)
-        G.setColor(col[1], col[2], col[3], a); G.rectangle('fill', 14, -5, 2, 10)
-    else -- hook
-        G.setColor(DARK[1], DARK[2], DARK[3], a); G.setLineWidth(3); G.line(-3, 0, 14, 0)
-        G.setColor(0.55, 0.4, 0.25, a); G.setLineWidth(1.6); G.line(-3, 0, 14, 0)
-        G.setColor(DARK[1], DARK[2], DARK[3], a); G.setLineWidth(3.4)
-        G.arc('line', 'open', 14, 5, 5, -math.pi / 2, math.pi * 0.6)
-        G.setColor(col[1], col[2], col[3], a); G.setLineWidth(2)
-        G.arc('line', 'open', 14, 5, 5, -math.pi / 2, math.pi * 0.6)
-    end
-    G.setLineWidth(1)
+    marks.inHand(f.o.weapon, 0, 0, size, ang + math.rad(56), false, a)
     G.pop()
 end
 
@@ -642,6 +609,8 @@ function M.drawUI(g)
         if b.sub then g.text(b.sub, 0, y + 22, 7.5, { 0.85, 0.85, 0.8 }, 'center', g.LW, ba) end
     end
 end
+
+function M.dismissBanner() banners = {} end
 
 function M.clear() parts, slashes, banners = {}, {}, {} end
 

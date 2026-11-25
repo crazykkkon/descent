@@ -22,6 +22,7 @@ local monsters = require('view.monsters')
 local wellhead = require('view.wellhead')
 local fx = require('view.fx')
 local armView = require('view.arm_view')
+local marks = require('view.weapon_marks')
 local coach = require('view.coach')
 local battle = require('view.battle')
 local metaMod = require('core.meta')
@@ -193,7 +194,7 @@ local picker = nil
 local PICK_K = 1.45                              -- 移到中间后放大多少
 local ARM_CX, ARM_CY = armView.X + 72, armView.Y + 112   -- 手臂（逻辑坐标）的中心
 local PICK_CX, PICK_CY = LW / 2, LH / 2 + 14     -- 移到画面的哪里
-local PICK_OPEN, PICK_CLOSE, PICK_HOLD = 0.35, 0.3, 0.45
+local PICK_OPEN, PICK_CLOSE, PICK_HOLD = 0.35, 0.3, 0.80
 
 local function ease(t) return t * t * (3 - 2 * t) end
 -- 手臂现在的变换：屏幕 = (手臂坐标 − 手臂中心) × k + 中心
@@ -213,6 +214,7 @@ end
 
 -- 打开刻图案的场景
 local function openPicker(opts)
+    battle.dismissBanner()
     picker = { sym = opts.sym, apply = opts.apply, after = opts.after, cancel = opts.cancel, onlyReel = opts.onlyReel,
         t = 0, closing = false, hold = 0, offs = { 0, 0, 0 } }
     fx.play('lever')
@@ -480,7 +482,7 @@ local function walkStep()
 end
 
 local function act(i)
-    if walking or modal or picker or run.status ~= 'playing' then return end
+    if walking or modal or picker or armView.busy() or run.status ~= 'playing' then return end
     local c = run.cells[i]
     if c.kind == 'wall' or i == run.pos then return end
     -- 设施（补给摊、大转盘、当铺、骨坛）：走到旁边再打开
@@ -501,7 +503,7 @@ local function act(i)
 end
 
 -- ---------- 场景 ----------
-local SHORTW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', wild = '赖' }
+local SHORTW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', lamp = '灯', twinHook = '双钩', wild = '赖' }
 
 local function weaponLine(id)
     if id == armMod.WILD then return '赖子：能顶替任何武器（不顶替空格），自己不能拿在手上；很难得到' end
@@ -582,6 +584,7 @@ end
 function openEngrave()
     local p = run:pendingEngrave()
     if not p then return end
+    battle.dismissBanner()
     -- 剧情二「第一道印子」（Codex 写，跨局只出一次）：正式局第一次打完架能刻图案时，先于刻图案窗口
     if not run.tutorial and not meta.storyMarkSeen and (p.from == 'mark' or p.from == 'elite') then
         meta.storyMarkSeen = true
@@ -598,7 +601,7 @@ function openEngrave()
     for _, w in ipairs(p.choices) do lines[#lines + 1] = weaponLine(w) end
     local buttons = {}
     for _, w in ipairs(p.choices) do
-        buttons[#buttons + 1] = { label = '刻' .. W(w), primary = #p.choices == 1, fn = function()
+        buttons[#buttons + 1] = { label = '刻' .. W(w), mark = w, primary = #p.choices == 1, fn = function()
             closeModal()
             openPicker({
                 sym = w,
@@ -650,16 +653,23 @@ function spinArm(pay)
     if not run.arm or run.status ~= 'playing' or walking or modal or picker or armView.busy() then return end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
     local held = { armHeld[1], armHeld[2], armHeld[3] }
+    local before = config.copyHero(run.hero)
+    before.stops = config.copyList(run.arm.stops)
     local r = run:armSpin(pay, anyHeld and held or nil)
     if not r.ok then setMsg(r.msg, true); return end
-    armView.startSpin(held, r.faces)
+    local resultText = r.msg
+    if run.hero.weapon and (r.faces[1] == armMod.WILD or r.faces[2] == armMod.WILD or r.faces[3] == armMod.WILD)
+        and armMod.outcome(r.faces) == 'weapon' then
+        resultText = '赖子补齐中线，转出' .. W(run.hero.weapon)
+    end
+    armView.startSpin(held, r.faces, before, run.arm.stops, resultText)
     armHeld = { false, false, false }
-    setMsg(r.msg)
+    setMsg('')
     saveGame()
 end
 
 function toggleHold(k)
-    if not run.arm or modal then return end
+    if not run.arm or modal or armView.busy() then return end
     armHeld[k] = not armHeld[k]
 end
 
@@ -1011,6 +1021,7 @@ end
 
 -- opts：{ character, depth }（新手教程不看这些）
 function newGame(seed, opts)
+    armView.reset()
     seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or os.time()
     opts = opts or {}
     local tutorial = not meta.tutorialDone
@@ -1036,6 +1047,7 @@ function newGame(seed, opts)
 end
 
 function loadGame(data)
+    armView.reset()
     hovered, keyTarget, keyboardMap = nil, nil, false
     facing = miner.restoreFacing(data.facing)
     runOpts = data.routeOpts or { depth = 0, unlocks = {} }
@@ -1057,6 +1069,7 @@ end
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
+    marks.load()
     miner.load()
     battle.load()
     wellhead.load()
@@ -1118,7 +1131,8 @@ function love.update(dt)
     end
     updateHold(dt)
     fx.update(dt)
-    armView.update(dt)
+    local result = armView.update(dt)
+    if result then setMsg(result) end
     updatePicker(dt)
     battle.update(dt)
     if scene == 'game' and run and run.status == 'playing' and not battle.active() then KF.scan() end
@@ -1239,12 +1253,12 @@ local function drawExitFx(i, level)
     end
 end
 
-local armTexts = {}
+local armCells = {}
 local function drawPixel()
     local g = love.graphics
     g.setCanvas(mapCanvas)
     g.clear(C.bg[1], C.bg[2], C.bg[3])
-    armTexts = {}
+    armCells = {}
     -- 顶栏底色
     setColor(C.panel); g.rectangle('fill', 0, 0, LW, 30)
     -- 左边的深度条：1～20 层
@@ -1292,7 +1306,9 @@ local function drawPixel()
     hx, hy = hx + bdx, hy + bdy
     local heroFeet = hy + TILE - 4
     local function drawMiner()
-        miner.drawOnMap(facing, hx + TILE / 2, heroFeet, run.status == 'dead', bflash)
+        local kind, t, prize = armView.flashInfo()
+        local glint = run.hero.weapon == prize and kind == 'win' and math.max(0, 1 - math.abs(t - 0.22) / 0.22) or 0
+        miner.drawOnMap(facing, hx + TILE / 2, heroFeet, run.status == 'dead', bflash, armView.displayHero(run.hero).weapon, glint)
     end
     -- 地面画完才画角色。按脚底从远到近绘制，移动经过相邻怪物时也遵循这个顺序。
     local minerDrawn = false
@@ -1318,9 +1334,9 @@ local function drawPixel()
         end
         g.push()
         g.translate(cx, cy); g.scale(k, k); g.translate(-ARM_CX, -ARM_CY)
-        local held = picker and { false, false, false } or armHeld
+        local held = picker and { false, false, false } or armView.displayHeld(armHeld)
         armView.draw(run.arm, held, armDrag and armDrag.reel, armDrag and armDrag.off or 0, function(x, y, w, h, sym, mid, alpha, top, bottom)
-            armTexts[#armTexts + 1] = { x = x, y = y, w = w, h = h, sym = sym, mid = mid, alpha = alpha, top = top, bottom = bottom }
+            armCells[#armCells + 1] = { x = x, y = y, w = w, h = h, sym = sym, mid = mid, alpha = alpha, top = top, bottom = bottom }
         end, picker and picker.offs, picker ~= nil)
         g.pop()
     end
@@ -1409,20 +1425,37 @@ local function drawCellDetails(i)
     return true
 end
 
-local SYMW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', wild = '赖' }
-
 local function drawPickerUI()
     local e = ease(math.max(0, math.min(1, picker.t)))
     -- 顶栏也压暗，标题写在上面
     rect({ 0.01, 0.02, 0.03 }, 0, 0, LW, 46, 0.92 * e)
     local col = picker.sym == armMod.WILD and C.ok or { 1, 0.9, 0.6 }
-    text('把「' .. W(picker.sym) .. '」刻在哪一格？', 0, 10 - (1 - e) * 20, 13, col, 'center', LW)
-    if pickerHasBlank() then
+    local title = picker.flash and ('已刻入「' .. W(picker.sym) .. '」') or ('把「' .. W(picker.sym) .. '」刻在哪一格？')
+    local ty = 10 - (1 - e) * 20
+    local tw = font(13 * S):getWidth(title) / S
+    local tx = (LW - tw + 23) / 2
+    setColor({ 1, 1, 1 })
+    marks.icon(picker.sym, OX + (tx - 13) * S, OY + (ty + 9) * S, 23 * S)
+    text(title, tx, ty, 13, col)
+    if picker.flash then
+        local hint = picker.sym == armMod.WILD and '中线上的赖子能替代武器图案。' or '图案留在这一格。拉杆连成中线，武器才到手。'
+        text(hint, 0, 32 - (1 - e) * 20, 7.5, C.text, 'center', LW)
+    elseif pickerHasBlank() then
         text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '点一个空格刻上去 · 有图案的格子不能覆盖 · 按住轮子上下拨动看整圈',
             0, 32 - (1 - e) * 20, 7.5, C.dim, 'center', LW)
     else
         text((picker.onlyReel and ('第 ' .. picker.onlyReel .. ' 个轮子') or '转轮') .. '刻满了，刻不上。先去当铺擦掉一格。', 0, 32 - (1 - e) * 20, 8, C.warn, 'center', LW)
     end
+    -- 让玩家在刻入的瞬间仍能核对手里实际拿着什么。
+    local lx, ly, scale = armToScreen(armView.X + 12, armView.Y + 139)
+    rect({ 0.085, 0.13, 0.13 }, lx, ly, 104 * scale, 24 * scale, 1, 2 * scale)
+    text('手中', lx + 6 * scale, ly + 6 * scale, 7 * scale, C.dim)
+    local weapon = run.hero.weapon
+    if weapon then
+        setColor({ 1, 1, 1 })
+        marks.icon(weapon, OX + (lx + 35 * scale) * S, OY + (ly + 12 * scale) * S, 20 * scale * S)
+    end
+    text(weapon and W(weapon) or '空手', lx + (weapon and 47 or 29) * scale, ly + 4 * scale, 9 * scale, C.text)
     if not picker.closing then
         -- 鼠标所在的格子：亮框
         local mx, my = love.mouse.getPosition()
@@ -1432,6 +1465,11 @@ local function drawPickerUI()
             local row = ((k - (run.arm.stops[r] - picker.offs[r])) + 1) % armMod.SIZE
             local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
             local ok = (not picker.onlyReel or r == picker.onlyReel) and not run.arm.reels[r][k]
+            if ok then
+                love.graphics.setColor(0.92, 0.77, 0.53, 0.40)
+                marks.icon(picker.sym, OX + (sx + armView.REEL_W * kk / 2) * S,
+                    OY + (sy + armView.CELL_H * kk / 2) * S, 23 * kk * S)
+            end
             setColor(ok and { 1, 0.85, 0.4 } or C.warn)
             love.graphics.setLineWidth(2)
             love.graphics.rectangle('line', OX + sx * S, OY + sy * S, armView.REEL_W * kk * S, armView.CELL_H * kk * S, 3 * S, 3 * S)
@@ -1449,7 +1487,7 @@ local function drawPickerUI()
         local row = ((f.k - (run.arm.stops[f.r] - picker.offs[f.r])) + 1) % armMod.SIZE
         if row <= 2 then
             local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
-            rect({ 1, 0.85, 0.4 }, sx, sy, armView.REEL_W * kk, armView.CELL_H * kk, 0.5 * (1 - f.t / 0.6), 3)
+            marks.cut(OX + sx * S, OY + sy * S, armView.REEL_W * kk * S, armView.CELL_H * kk * S, f.t)
         end
     end
 end
@@ -1459,22 +1497,29 @@ local function drawArmUI()
     local g = love.graphics
     local tx, ty, k = armToScreen(armView.X + 10, armView.Y + 26)
     text('断臂转轮', tx, ty, 8 * k, { 0.96, 0.85, 0.6 })
-    -- 轮子上的图案（大字，一眼认得出；只画在窗口里）。刻图案时跟着手臂一起移动、放大
-    for _, t in ipairs(armTexts) do
+    -- 轮窗中的图案按当前分辨率绘制。刻图案时跟着手臂一起移动、放大
+    for _, t in ipairs(armCells) do
         local sx, sy = armToScreen(t.x, t.y)
         local _, top = armToScreen(t.x, t.top)
         local _, bottom = armToScreen(t.x, t.bottom)
         g.setScissor(OX + sx * S, OY + top * S, t.w * k * S, (bottom - top) * S)
-        local col = t.sym == armMod.WILD and C.ok or (t.sym and (t.mid and { 1, 0.96, 0.88 } or { 0.62, 0.62, 0.6 }) or { 0.3, 0.32, 0.33 })
-        setColor(col, t.alpha)
-        love.graphics.setFont(font((t.sym and (t.mid and 15 or 12) or 10) * k * S))
-        love.graphics.printf(t.sym and SYMW[t.sym] or '·', OX + sx * S, OY + (sy + (t.mid and 4 or 6) * k) * S, t.w * k * S, 'center')
+        local cx, cy = OX + (sx + t.w * k / 2) * S, OY + (sy + t.h * k / 2) * S
+        local unit = k * S
+        if t.sym then
+            local tone = t.mid and 1 or 0.80
+            g.setColor(tone, tone, tone, t.alpha)
+            marks.icon(t.sym, cx, cy, 24 * unit)
+        else
+            g.setColor(0.39, 0.43, 0.38, t.alpha)
+            g.line(cx - 2 * unit, cy + unit, cx, cy - unit, cx + 2 * unit, cy + unit)
+        end
         g.setScissor()
     end
     if picker then drawPickerUI(); return end
+    local shownHeld = armView.displayHeld(armHeld)
     for r = 1, 3 do
         local lx, ly, lw = armView.lockRect(r)
-        text(armHeld[r] and '已锁' or '锁', lx, ly + 2, 6.5, armHeld[r] and { 0.15, 0.1, 0.02 } or { 0.85, 0.75, 0.55 }, 'center', lw)
+        text(shownHeld[r] and '已锁' or '锁', lx, ly + 2, 6.5, shownHeld[r] and { 0.15, 0.1, 0.02 } or { 0.85, 0.75, 0.55 }, 'center', lw)
     end
     local price = run:armPrice(armHeld)
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
@@ -1483,13 +1528,12 @@ local function drawArmUI()
     text('用血转 ' .. price.blood, b.x, b.y + 4, 7, { 1, 0.85, 0.88 }, 'center', b.w)
     text(armHint(), PANEL_X + 2, armView.Y + 222, 6.5, C.dim, 'left', PANEL_W)
     if not meta.dragged then text('按住轮子上下拨动看整圈', PANEL_X + 2, armView.Y + 258, 6, { 0.42, 0.48, 0.5 }, 'left', PANEL_W) end
-    -- 连成一线：大字跳一下
-    local kind, t = armView.flashInfo()
-    if kind == 'win' and run.hero.weapon then
-        local k = 1 + 0.6 * math.max(0, 1 - t / 0.25)
-        text(config.WEAPONS[run.hero.weapon].name .. '！', armView.X - 20, armView.Y + 112 - (k - 1) * 10, 13 * k, C.ok, 'center', 170)
-    elseif kind == 'lose' then
-        text('空手……', armView.X - 20, armView.Y + 112, 12, C.dim, 'center', 170)
+    local kind, t, prize = armView.flashInfo()
+    if kind then
+        local a = math.min(1, (1 - t) / 0.2)
+        local label = kind == 'win' and ('转出 · ' .. W(prize)) or (kind == 'lose' and '三个空格 · 空手' or '未连成 · 武器保留')
+        rect({ 0.12, 0.13, 0.11 }, armView.X + 10, armView.Y + 141, 109, 15, a, 2)
+        text(label, armView.X + 10, armView.Y + 142, 8, kind == 'win' and C.ok or C.text, 'center', 109, a)
     end
 end
 
@@ -1508,7 +1552,15 @@ local function drawModal()
             local r = rects[k]
             setColor(b.danger and { 0.35, 0.12, 0.16 } or (b.primary and { 0.12, 0.35, 0.3 } or { 0.11, 0.16, 0.19 }))
             love.graphics.rectangle('fill', OX + r.x * S, OY + r.y * S, r.w * S, r.h * S)
-            text(b.label, r.x, r.y + 5, 8, C.text, 'center', r.w)
+            if b.mark then
+                local tw = font(8 * S):getWidth(b.label) / S
+                local tx = r.x + (r.w - tw + 19) / 2
+                setColor({ 1, 1, 1 })
+                marks.icon(b.mark, OX + (tx - 11) * S, OY + (r.y + r.h / 2) * S, 18 * S)
+                text(b.label, tx, r.y + 5, 8, C.text)
+            else
+                text(b.label, r.x, r.y + 5, 8, C.text, 'center', r.w)
+            end
         end
     end
 end
@@ -1516,18 +1568,23 @@ end
 local function drawUI()
     do
         local h = run.hero
-        local atk, def = combat.effectiveStats(h)
+        local shown = armView.displayHero(h)
+        local atk, def = combat.effectiveStats(shown)
         text(run:floor().name .. ((runOpts.depth or 0) > 0 and ('　深度 ' .. runOpts.depth) or ''), MAP_X, 7, 10, C.accent)
         stat('hp', '', battle.heroHp() or h.hp, 190, C.hp)
         stat('atk', '攻', atk, 250, C.atk)
         stat('def', '防', def, 300, C.def)
         stat('keys', '钥', h.keys, 350, { 0.85, 0.76, 0.48 })
         stat('gold', '金', h.gold, 396, C.gold)
-        local wname = h.weapon and config.WEAPONS[h.weapon].name or (run.arm and '空手' or '')
-        text(wname, 452, 8, 8.5, h.weapon and C.atk or C.dim)
-        if h.boons then
+        local wname = shown.weapon and W(shown.weapon) or (run.arm and '空手' or '')
+        if shown.weapon then
+            setColor({ 1, 1, 1 })
+            marks.icon(shown.weapon, OX + 458 * S, OY + 14 * S, 17 * S)
+        end
+        text(wname, shown.weapon and 470 or 452, 8, 8.5, shown.weapon and C.atk or C.dim)
+        if shown.boons then
             local names = {}
-            for k, b in ipairs(h.boons) do names[k] = config.BOON_NAMES[b] end
+            for k, b in ipairs(shown.boons) do names[k] = config.BOON_NAMES[b] end
             text(table.concat(names, '·'), 452, 20, 6, C.accent)
         end
         if run.decree then
