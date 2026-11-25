@@ -143,6 +143,26 @@ function M.start()
                 end
             end
         end
+        -- 摊开以后，平时藏着的上下两格（row −1、3）也能直接点
+        -- （第 4 层以后再试，别打乱第 3 层刻赖子的检查）
+        if not shots['07e-unfolded'] and game.inPicker() and game.getRun().floorIndex >= 4 then
+            local run = game.getRun()
+            for rr = 1, 3 do
+                for _, row in ipairs({ 3, -1 }) do
+                    local k = ((run.arm.stops[rr] - 1) + (row - 1)) % 5 + 1
+                    if not run.arm.reels[rr][k] and not shots['07e-unfolded'] then
+                        shots['07e-unfolded'] = true
+                        local x, y = game.pickerCellScreen(rr, row)
+                        love.mouse.setPosition(x, y); sleep(0.1)
+                        shot('07e-unfolded')
+                        love.mousepressed(x, y, 1); love.mousereleased(x, y, 1)
+                        for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
+                        say(string.format('点摊开后多出来的格子（轮子 %d 第 %d 格，离刻线 %d）：刻上了 %s', rr, k, row - 1, tostring(run.arm.reels[rr][k])))
+                        return
+                    end
+                end
+            end
+        end
         game.pickCell(r)
         for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
     end

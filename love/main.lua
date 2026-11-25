@@ -219,16 +219,31 @@ local function openPicker(opts)
 end
 local function pickerBusy() return picker ~= nil and (picker.t < 1 or picker.closing) end
 
--- 屏幕上的这一点是哪个轮子的哪一格（只算露出来的 3 格）
+-- 摊开的转轮（制作人 2026-11-25：刻图案时转轮移到画面中间、摊开，所有格子一起看，直接点）。
+-- 手臂移到中间以后，三个轮子从刻线那一行往上下摊开成一条 5 格的长条：中间 3 格就是平时露出来的那 3 格，
+-- 上下各多出来的 1 格是平时藏在后面的。
+-- （放在一张表里：main.lua 顶层的局部变量快到 Lua 的 200 个上限了）
+local UNF = { cw = 70, ch = 30, gap = 18 }
+function UNF.unfold()
+    if not picker then return 0 end
+    return ease(math.max(0, math.min(1, (picker.t - 0.4) / 0.6)))
+end
+-- 第 r 个轮子、离刻线 i 格（i = −2～2，0 是刻线那一格，正数往下）：位置（逻辑坐标）和它是第几格
+function UNF.rect(r, i)
+    local u = UNF.unfold()
+    local total = 3 * UNF.cw + 2 * UNF.gap
+    local x = LW / 2 - total / 2 + (r - 1) * (UNF.cw + UNF.gap)
+    local off = math.abs(i) <= 1 and i or (i > 0 and 1 or -1) * (1 + u)
+    local y = LH / 2 + 22 - UNF.ch / 2 + off * UNF.ch
+    return x, y, UNF.cw, UNF.ch, ((run.arm.stops[r] - 1 + i) % armMod.SIZE) + 1
+end
+-- 屏幕上的这一点是哪个轮子的哪一格（摊开以后 5 格都能点）
 local function pickerCellAt(lx, ly)
-    if not picker or not run.arm then return nil end
-    local ax, ay = screenToArm(lx, ly)
+    if not picker or not run.arm or UNF.unfold() < 0.5 then return nil end
     for r = 1, armMod.REELS do
-        local x, y, w, h = armView.reelRect(r)
-        if ax >= x and ax <= x + w and ay >= y and ay < y + h then
-            local row = math.floor((ay - y) / armView.CELL_H)
-            local center = run.arm.stops[r] - picker.offs[r]
-            return r, ((center - 1) + (row - 1)) % armMod.SIZE + 1
+        for i = -2, 2 do
+            local x, y, w, h, k = UNF.rect(r, i)
+            if lx >= x and lx < x + w and ly >= y and ly < y + h then return r, k, i end
         end
     end
     return nil
@@ -1374,28 +1389,60 @@ local SYMW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '
 
 local function drawPickerUI()
     local e = ease(math.max(0, math.min(1, picker.t)))
+    local u = UNF.unfold()
     -- 顶栏也压暗，标题写在上面
     rect({ 0.01, 0.02, 0.03 }, 0, 0, LW, 46, 0.92 * e)
     local col = picker.sym == armMod.WILD and C.ok or { 1, 0.9, 0.6 }
     text('把「' .. W(picker.sym) .. '」刻在哪一格？', 0, 10 - (1 - e) * 20, 13, col, 'center', LW)
     if pickerHasBlank() then
-        text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '点一个空格刻上去 · 有图案的格子不能覆盖 · 按住轮子上下拨动看整圈',
+        text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '三个轮子都摊开了，每个轮子 5 格 · 点一个空格刻上去 · 有图案的格子不能覆盖',
             0, 32 - (1 - e) * 20, 7.5, C.dim, 'center', LW)
     else
         text((picker.onlyReel and ('第 ' .. picker.onlyReel .. ' 个轮子') or '转轮') .. '刻满了，刻不上。先去当铺擦掉一格。', 0, 32 - (1 - e) * 20, 8, C.warn, 'center', LW)
     end
+    if u > 0 then
+        -- 铜底板：从手臂的轮子窗口里摊开来
+        local x0 = UNF.rect(1, 0)
+        local x3, _, w3 = UNF.rect(3, 0)
+        local _, yTop = UNF.rect(1, -2)
+        local _, yBot, _, hBot = UNF.rect(1, 2)
+        rect({ 0.2, 0.13, 0.07 }, x0 - 16, yTop - 22, x3 + w3 - x0 + 32, yBot + hBot - yTop + 32, 0.97 * u, 8)
+        rect({ 0.45, 0.32, 0.16 }, x0 - 14, yTop - 20, x3 + w3 - x0 + 28, 2, 0.9 * u)
+        -- 刻线：中间那一行（转到这一行连成同一把武器才拿得到）
+        local _, ym, _, hm = UNF.rect(1, 0)
+        rect({ 0.94, 0.77, 0.42 }, x0 - 12, ym - 1.5, x3 + w3 - x0 + 24, hm + 3, 0.22 * u, 4)
+        text('刻线', x0 - 42, ym + hm / 2 - 4, 7, { 0.94, 0.77, 0.42 }, 'center', 24, u)
+        for r = 1, armMod.REELS do
+            local cx = UNF.rect(r, 0)
+            local only = not picker.onlyReel or r == picker.onlyReel
+            text('第 ' .. r .. ' 轮', cx, yTop - 16, 7, only and { 0.96, 0.85, 0.6 } or C.dim, 'center', UNF.cw, u)
+            for i = -2, 2 do
+                local x, y, w, h, k = UNF.rect(r, i)
+                local a = (math.abs(i) <= 1) and u or u * u
+                local sym = run.arm.reels[r][k]
+                local ok = only and not sym
+                rect(sym and { 0.13, 0.11, 0.09 } or { 0.06, 0.07, 0.08 }, x + 1, y + 1, w - 2, h - 2, a, 3)
+                if sym then
+                    local c = sym == armMod.WILD and C.ok or (i == 0 and { 1, 0.96, 0.88 } or { 0.78, 0.76, 0.7 })
+                    text(SYMW[sym], x + 4, y + 6, 13, c, 'left', 20, a)
+                    text(W(sym), x + 22, y + 10, 7.5, c, 'left', w - 24, a)
+                else
+                    text('空', x, y + 9, 8, only and { 0.55, 0.6, 0.6 } or { 0.3, 0.32, 0.33 }, 'center', w, a)
+                end
+                if not ok then rect({ 0, 0, 0 }, x + 1, y + 1, w - 2, h - 2, 0.35 * a, 3) end
+            end
+        end
+    end
     if not picker.closing then
-        -- 鼠标所在的格子：亮框
+        -- 鼠标所在的格子：能刻是金框，不能刻是红框
         local mx, my = love.mouse.getPosition()
-        local r, k = pickerCellAt((mx - OX) / S, (my - OY) / S)
-        if r and not armDrag then
-            local x, y = armView.reelRect(r)
-            local row = ((k - (run.arm.stops[r] - picker.offs[r])) + 1) % armMod.SIZE
-            local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
+        local r, k, i = pickerCellAt((mx - OX) / S, (my - OY) / S)
+        if r then
+            local x, y, w, h = UNF.rect(r, i)
             local ok = (not picker.onlyReel or r == picker.onlyReel) and not run.arm.reels[r][k]
             setColor(ok and { 1, 0.85, 0.4 } or C.warn)
             love.graphics.setLineWidth(2)
-            love.graphics.rectangle('line', OX + sx * S, OY + sy * S, armView.REEL_W * kk * S, armView.CELL_H * kk * S, 3 * S, 3 * S)
+            love.graphics.rectangle('line', OX + x * S, OY + y * S, w * S, h * S, 3 * S, 3 * S)
             love.graphics.setLineWidth(1)
         end
         if msgErr and msg ~= '' then text(msg, 0, PICK_CANCEL.y - 16, 7.5, C.warn, 'center', LW) end
@@ -1404,13 +1451,11 @@ local function drawPickerUI()
         text('不刻了（Esc）', b.x, b.y + 4, 7.5, C.text, 'center', b.w)
     end
     -- 刻上的那一格闪一下
-    if picker.flash and picker.flash.t < 0.6 then
+    if picker.flash and picker.flash.t < 0.6 and u > 0 then
         local f = picker.flash
-        local x, y = armView.reelRect(f.r)
-        local row = ((f.k - (run.arm.stops[f.r] - picker.offs[f.r])) + 1) % armMod.SIZE
-        if row <= 2 then
-            local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
-            rect({ 1, 0.85, 0.4 }, sx, sy, armView.REEL_W * kk, armView.CELL_H * kk, 0.5 * (1 - f.t / 0.6), 3)
+        for i = -2, 2 do
+            local x, y, w, h, k = UNF.rect(f.r, i)
+            if k == f.k then rect({ 1, 0.85, 0.4 }, x, y, w, h, 0.6 * (1 - f.t / 0.6) * u, 3) end
         end
     end
 end
@@ -1859,16 +1904,13 @@ function love.mousepressed(mx, my, button)
     end
     if scene == 'shop' then shopClick(lx, ly); return end
     if battle.active() then battle.skip(); return end
-    -- 刻图案的场景：按住轮子拨动；没拨动就松手 = 点这一格
+    -- 刻图案的场景：转轮摊开了，直接点要刻的格子
     if picker then
         if pickerBusy() then return end
         local b = PICK_CANCEL
         if inRect(lx, ly, b.x, b.y, b.w, b.h) then pickerCancel(); return end
-        local r = pickerCellAt(lx, ly)
-        if r then
-            local _, ay = screenToArm(lx, ly)
-            armDrag = { reel = r, y0 = ay, off = 0, moved = false, picker = true }
-        end
+        local r, k = pickerCellAt(lx, ly)
+        if r then pickerChoose(r, k) end
         return
     end
     if run.arm and run.status == 'playing' and not walking then
@@ -2057,11 +2099,10 @@ return {
     shopMsg = function() return shopMsg end,
     beginRun = function() beginRun() end,
     inPicker = function() return picker ~= nil end,
-    -- 自动测试：第 r 个轮子露出来的第 row 格（0 上、1 中、2 下）在屏幕上的位置（真实像素）
+    -- 自动测试：第 r 个轮子第 row 格（0 上、1 刻线、2 下；−1、3 是摊开后多出来的上下两格）在屏幕上的位置（真实像素）
     pickerCellScreen = function(r, row)
-        local x, y, w = armView.reelRect(r)
-        local sx, sy, k = armToScreen(x + w / 2, y + (row + 0.5) * armView.CELL_H)
-        return OX + sx * S, OY + sy * S
+        local x, y, w, h = UNF.rect(r, row - 1)
+        return OX + (x + w / 2) * S, OY + (y + h / 2) * S
     end,
     pickerReady = function() return picker ~= nil and not pickerBusy() end,
     -- 自动测试：刻在第 r 个轮子的空格上；这个轮子刻满了就换一个有空格的；都满了就不刻
