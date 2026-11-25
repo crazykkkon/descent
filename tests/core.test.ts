@@ -802,8 +802,9 @@ test('解锁：新武器进图案池；当铺多摆一件、营火多卖骨钥�
     assert.ok(pawns + camps > 0);
     const deep = buildRoute(11, { depth: 3 });
     deep.forEach((cands, d) => cands.forEach((f, k) => {
-        assert.equal(f.power ?? 0, (plain[d][k].power ?? 0) + 6);
-        assert.equal(f.smallPotion, Math.floor(plain[d][k].smallPotion * 3 / 4));
+        // 深度 3：第 11 层起每层怪物再加强 3 级（前面和普通局一样）；血瓶效果剩 90%
+        assert.equal(f.power ?? 0, (plain[d][k].power ?? 0) + (d >= 10 ? 3 : 0), `第 ${d + 1} 层`);
+        assert.equal(f.smallPotion, Math.floor(plain[d][k].smallPotion * 90 / 100));
         if (f.rent) assert.equal(f.rent, plain[d][k].rent! * 3 / 2);
     }));
     // 解锁的武器会出现在精英三选一里

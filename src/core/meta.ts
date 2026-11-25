@@ -49,6 +49,7 @@ export function weaponPool(unlocks: string[] = []): WeaponId[] {
     return [...BASE_WEAPONS, ...UNLOCKS.filter(u => u.kind === 'weapon' && unlocks.includes(u.id)).map(u => u.id as WeaponId)];
 }
 
-/** 深度模式：第 1 级起每层怪物再加强 2 级；第 2 级起血瓶效果 −25%；第 3 级起井租和补给摊 ×1.5 */
+/** 深度模式：第 11 层起每层怪物再加强（深度几就加几级）；第 2 级起血瓶效果剩 90%；第 3 级起井租和补给摊 ×1.5。
+ * 目标（讨论项）：碎片强化买满时深度 1 / 2 / 3 大约 35% / 20% / 10% 通关（tools/balance.ts 量出来 39% / 18% / 10%） */
 export const MAX_DEPTH = 3;
-export const DEPTH_POWER = 2;
+export const DEPTH_POWER = 1;

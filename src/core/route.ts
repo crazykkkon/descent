@@ -317,6 +317,10 @@ export const UPGRADE_FROM = 5;
 export const POWER_FROM = 5;
 /** 最多加强几级：14 = 一直加到第 20 层（原来是 6，第 12 层以后怪不再变强，后期一大半的怪打不疼主角） */
 export const POWER_MAX = 14;
+/** 深度模式从第几层起加强（层号从 0 开始） */
+export const DEPTH_FROM = 10;
+/** 深度模式第 2 级起血瓶效果剩下百分之几 */
+export const DEPTH_POTION = 90;
 
 /** 这一层的怪按深度换成更凶的同类、加强几级（制作人：后面的小怪太好打） */
 export function deepen(map: string[], d: number): string[] {
@@ -441,14 +445,15 @@ export function buildRoute(seed: number, opts: RouteOptions = {}): FloorDef[][] 
     // 深度模式：第 1 级起怪物每级再加强 2 级（每一层都加，井底之眼也加，精英按一半算）；
     // 第 2 级起血瓶效果 −25%；第 3 级起井租和补给摊的价格 ×1.5
     const depth = opts.depth ?? 0;
-    if (depth > 0) for (const cands of plan) for (const f of cands) {
-        f.power = (f.power ?? 0) + DEPTH_POWER * depth;
-        if (depth >= 2) { f.smallPotion = Math.floor((f.smallPotion * 3) / 4); f.bigPotion = Math.floor((f.bigPotion * 3) / 4); }
+    if (depth > 0) plan.forEach((cands, d) => { for (const f of cands) {
+        // 深度模式的加强从第 DEPTH_FROM + 1 层起（前面和普通局一样）
+        if (d >= DEPTH_FROM) f.power = (f.power ?? 0) + DEPTH_POWER * depth;
+        if (depth >= 2) { f.smallPotion = Math.floor((f.smallPotion * DEPTH_POTION) / 100); f.bigPotion = Math.floor((f.bigPotion * DEPTH_POTION) / 100); }
         if (depth >= 3) {
             if (f.rent) f.rent = Math.floor((f.rent * 3) / 2);
             if (f.stall) f.stall = f.stall.map(o => ({ ...o, price: Math.round((o.price * 3) / 2 / 5) * 5 }));
         }
-    }
+    } });
     return plan;
 }
 

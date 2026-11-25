@@ -52,6 +52,8 @@ end
 
 -- 第 6 层起（d ≥ 5）小怪换成更凶的同类；第 7 层起每往下一层怪物加强一级，一直加到第 20 层。和原型 deepen / powerFor 一致
 M.UPGRADE_FROM, M.POWER_FROM, M.POWER_MAX = 5, 5, 14
+-- 深度模式：第 11 层起（d ≥ DEPTH_FROM）每层怪物再加强（深度几就加几级）；第 2 级起血瓶效果剩 DEPTH_POTION%（和原型一致）
+M.DEPTH_FROM, M.DEPTH_POTION = 10, 90
 local function deepen(map, d)
     if d < M.UPGRADE_FROM then return map end
     local out = {}
@@ -191,15 +193,16 @@ function M.build(seed, opts)
             for _, f in ipairs(plan[d]) do f.map = oneExit(f.map) end
         end
     end
-    -- 深度模式：第 1 级起怪物每级再加强 2 级；第 2 级起血瓶 −25%；第 3 级起井租和补给摊 ×1.5
+    -- 深度模式：第 11 层起怪物每级再加强 1 级；第 2 级起血瓶效果剩 90%；第 3 级起井租和补给摊 ×1.5
     local depth = (opts and opts.depth) or 0
     if depth > 0 then
-        for _, cs in ipairs(plan) do
+        for d0, cs in ipairs(plan) do
             for _, f in ipairs(cs) do
-                f.power = (f.power or 0) + metaMod.DEPTH_POWER * depth
+                -- 第 DEPTH_FROM + 1 层起才加强（前面和普通局一样）
+                if d0 - 1 >= M.DEPTH_FROM then f.power = (f.power or 0) + metaMod.DEPTH_POWER * depth end
                 if depth >= 2 then
-                    f.smallPotion = math.floor(f.smallPotion * 3 / 4)
-                    f.bigPotion = math.floor(f.bigPotion * 3 / 4)
+                    f.smallPotion = math.floor(f.smallPotion * M.DEPTH_POTION / 100)
+                    f.bigPotion = math.floor(f.bigPotion * M.DEPTH_POTION / 100)
                 end
                 if depth >= 3 then
                     if f.rent then f.rent = math.floor(f.rent * 3 / 2) end

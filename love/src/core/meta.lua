@@ -51,6 +51,6 @@ function M.weaponPool(unlocks)
 end
 
 M.MAX_DEPTH = 3
-M.DEPTH_POWER = 2
+M.DEPTH_POWER = 1
 
 return M
