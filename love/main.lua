@@ -1560,6 +1560,20 @@ local function drawArmUI()
     text((anyHeld and '拉杆重转 ' or '拉杆 ') .. price.gold .. ' 金（R）', armView.X + 10, armView.Y + 160, 7.5, { 0.96, 0.85, 0.6 })
     local b = armView.BLOOD
     text('花 ' .. price.blood .. ' 生命', b.x, b.y + 4, 7, { 1, 0.85, 0.88 }, 'center', b.w)
+    -- 鼠标指着拉杆（或下面那行字）：红头外面一圈亮光，提示点它就转
+    do
+        local mx, my = love.mouse.getPosition()
+        local lx, ly = (mx - OX) / S, (my - OY) / S
+        local lb = armView.LEVER_LABEL
+        if not armView.busy() and not modal and (inRect(lx, ly, armView.leverRect()) or inRect(lx, ly, lb.x, lb.y, lb.w, lb.h)) then
+            local kx, ky = armView.knobPos()
+            setColor({ 1, 0.85, 0.45 }, 0.55 + 0.35 * math.sin(clock * 8))
+            love.graphics.setLineWidth(2 * S)
+            love.graphics.circle('line', OX + kx * S, OY + ky * S, 9 * S)
+            love.graphics.setLineWidth(1)
+            text('拉', kx - 14, ky - 22, 7, { 1, 0.9, 0.6 }, 'center', 28)
+        end
+    end
     text(armHint(), PANEL_X + 2, armView.Y + 222, 6.5, C.dim, 'left', PANEL_W)
     if not meta.dragged then text('按住轮子上下拨动看整圈', PANEL_X + 2, armView.Y + 258, 6, { 0.42, 0.48, 0.5 }, 'left', PANEL_W) end
     local kind, t, prize = armView.flashInfo()
@@ -2002,7 +2016,8 @@ function love.mousepressed(mx, my, button)
         return
     end
     if run.arm and run.status == 'playing' and not walking then
-        if inRect(lx, ly, armView.leverRect()) then spinArm('gold'); return end
+        local lb = armView.LEVER_LABEL
+        if inRect(lx, ly, armView.leverRect()) or inRect(lx, ly, lb.x, lb.y, lb.w, lb.h) then spinArm('gold'); return end
         local b = armView.BLOOD
         if inRect(lx, ly, b.x, b.y, b.w, b.h) then spinArm('blood'); return end
         for r = 1, armMod.REELS do
@@ -2161,6 +2176,9 @@ return {
     wheelOpen = function() return KF.wheel.active() end,
     wheelSpin = function(pay) KF.wheel.spin(pay) end,
     wheelClose = function() KF.wheel.close() end,
+    -- 自动测试：拉杆红头在屏幕上的位置（真实像素），用来模拟真的去点摇杆
+    armKnobScreen = function() local kx, ky = armView.knobPos(); return OX + kx * S, OY + ky * S end,
+    wheelKnobScreen = function() local x, y = KF.wheel.knobPos(); return OX + x * S, OY + y * S end,
     setBattleSpeed = function(v) meta.battleSpeed = v end,
     act = act,
     newGame = function(seed, tutorial)

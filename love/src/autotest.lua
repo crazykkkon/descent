@@ -366,7 +366,13 @@ function M.start()
                     local before = { gold = run.hero.gold, hp = run.hero.hp }
                     say('大转盘场景打开：' .. tostring(game.wheelOpen()))
                     local peek = run:wheelPeek(fac)
-                    game.wheelSpin('gold'); sleep(0.9)
+                    -- 真的用鼠标点大转盘摇杆的红头
+                    local wx, wy = game.wheelKnobScreen()
+                    love.mouse.setPosition(wx, wy); sleep(0.1)
+                    once('05a-wheel-knob-hover')
+                    love.mousepressed(wx, wy, 1); love.mousereleased(wx, wy, 1)
+                    say('点大转盘摇杆的红头：转起来了 ' .. tostring(game.busy()))
+                    sleep(0.8)
                     once('05b-wheel-spinning')
                     settle(); sleep(0.2)
                     once('05c-wheel-result')
@@ -388,7 +394,18 @@ function M.start()
             local armCells = 0
             for r = 1, 3 do for k = 1, 5 do if run.arm.reels[r][k] then armCells = armCells + 1 end end end
             if armCells > 0 then
-                game.spinArm('gold'); sleep(0.62)
+                if not shots['06d-arm-knob-click'] then
+                    -- 真的用鼠标点拉杆的红头（制作人：点摇杆也能转）
+                    shots['06d-arm-knob-click'] = true
+                    local g0, x, y = run.hero.gold, game.armKnobScreen()
+                    love.mouse.setPosition(x, y); sleep(0.1)
+                    shot('06d-arm-knob-hover')
+                    love.mousepressed(x, y, 1); love.mousereleased(x, y, 1)
+                    say(string.format('点断臂转轮拉杆的红头：转了 %s（金币 %d → %d）', tostring(run.hero.gold < g0), g0, run.hero.gold))
+                    sleep(0.62)
+                else
+                    game.spinArm('gold'); sleep(0.62)
+                end
                 if not shots['06c-spinning'] then once('06c-spinning') end
                 sleep(0.3)
                 game.toggleHold(1)
