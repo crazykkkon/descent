@@ -338,6 +338,8 @@ end
 -- fatalSeen：这一层里曾经"打不动 / 打不死 / 会死"的怪（格子）。后来把它打死了 = 算准了（先去拿宝石、绕路备战再回来）
 -- （放在一张表里：main.lua 顶层的局部变量快到 Lua 的 200 个上限了）
 local KF = { fatalSeen = {}, fatalKey = nil, combo = { n = 0, at = -99, floor = nil }, scanKey = nil }
+-- 大转盘的场景（放在这张表里，顶层局部变量快到上限了）
+KF.wheel = require('view.wheel_scene')
 function KF.scan()
     local key = run.seed .. ':' .. run.floorIndex
     if KF.fatalKey ~= key then KF.fatalSeen, KF.fatalKey = {}, key end
@@ -494,7 +496,7 @@ local function walkStep()
 end
 
 local function act(i)
-    if walking or modal or picker or run.status ~= 'playing' then return end
+    if walking or modal or picker or KF.wheel.active() or run.status ~= 'playing' then return end
     local c = run.cells[i]
     if c.kind == 'wall' or i == run.pos then return end
     -- 设施（补给摊、大转盘、当铺、骨坛）：走到旁边再打开
@@ -661,7 +663,7 @@ local function armHint()
 end
 
 function spinArm(pay)
-    if not run.arm or run.status ~= 'playing' or walking or modal or picker or armView.busy() then return end
+    if not run.arm or run.status ~= 'playing' or walking or modal or picker or KF.wheel.active() or armView.busy() then return end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
     local held = { armHeld[1], armHeld[2], armHeld[3] }
     local r = run:armSpin(pay, anyHeld and held or nil)
@@ -765,28 +767,23 @@ function openSummary()
     nextFloor(false, s.leftoverPotions > 0 and ('地图上剩下的 ' .. s.leftoverPotions .. ' 瓶血瓶换了 ' .. s.potionGold .. ' 金币。') or nil)
 end
 
--- 大转盘
+-- 大转盘：真的转盘（制作人 2026-11-25：拉摇杆、真的会转）。画面和动画在 view/wheel_scene.lua，规则还是 run:wheelSpin
 function openWheel(i)
-    local lines = { '盘面八格，每格机会一样（各 12.5%）：' }
-    local t = {}
-    for k, s in ipairs(wheelMod.SECTORS) do t[k] = s.text end
-    lines[#lines + 1] = table.concat(t, '、')
-    local price = run:wheelPrice(i)
-    lines[#lines + 1] = '转一次：' .. price.gold .. ' 金币，或 ' .. price.blood .. ' 生命（每转一次 ×1.5）'
-    lines[#lines + 1] = '你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.hp .. ' 生命。'
-    local function spin(pay)
-        local r = run:wheelSpin(i, pay)
-        if not r.ok then setMsg(r.msg, true); return end
-        setMsg(r.msg, run.status == 'dead')
-        saveGame()
-        closeModal()
-        if run.status == 'dead' then openDeath(); return end
-        if run:pendingEngrave() then continueFlow() else openWheel(i) end
-    end
-    openModal('大转盘', lines, {
-        { label = '金币 ' .. price.gold, primary = true, fn = function() spin('gold') end },
-        { label = '生命 ' .. price.blood, danger = true, fn = function() spin('blood') end },
-        { label = '离开', fn = function() closeModal() end },
+    KF.wheel.open(i, {
+        price = function() return run:wheelPrice(i) end,
+        hero = function() return run.hero end,
+        peek = function() return run:wheelPeek(i) end,
+        apply = function(pay)
+            local r = run:wheelSpin(i, pay)
+            if r.ok then saveGame() end
+            setMsg(r.msg, not r.ok or run.status == 'dead')
+            return r
+        end,
+        after = function()
+            if run.status == 'dead' then return function() openDeath() end end
+            if run:pendingEngrave() then return function() continueFlow() end end
+            return nil
+        end,
     })
 end
 
@@ -1014,7 +1011,8 @@ end
 
 -- opts：{ character, depth }（新手教程不看这些）
 function newGame(seed, opts)
-    seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or os.time()
+    -- 自动测试默认用种子 6：第 4、5 层就有大转盘，四种设施都能走到
+    seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or (os.getenv('DESCENT_AUTOTEST') and 6) or os.time()
     opts = opts or {}
     local tutorial = not meta.tutorialDone
     local character = tutorial and 'digger' or (opts.character or 'digger')
@@ -1121,6 +1119,7 @@ function love.update(dt)
     fx.update(dt)
     armView.update(dt)
     updatePicker(dt)
+    KF.wheel.update(dt)
     battle.update(dt)
     if scene == 'game' and run and run.status == 'playing' and not battle.active() then KF.scan() end
     if walking and not modal and not walking.waitBattle then
@@ -1600,6 +1599,7 @@ local function drawUI()
         battle.drawUI({ text = text, rect = rect, S = S, OX = OX, OY = OY, LW = LW, LH = LH,
             monster = function(id, cx, feet, f) monsters.draw(id, cx, feet, clock, 0, f) end,
             miner = function(cx, feet, dead, tall, a) miner.draw('right', cx, feet, dead, tall, a) end })
+        KF.wheel.draw({ text = text, rect = rect, S = S, OX = OX, OY = OY, LW = LW, LH = LH })
     end
     drawModal()
 end
@@ -1903,6 +1903,7 @@ function love.mousepressed(mx, my, button)
         return
     end
     if scene == 'shop' then shopClick(lx, ly); return end
+    if KF.wheel.active() then KF.wheel.click(lx, ly); return end
     if battle.active() then battle.skip(); return end
     -- 刻图案的场景：转轮摊开了，直接点要刻的格子
     if picker then
@@ -2009,6 +2010,8 @@ function love.keypressed(key)
             if modal.onEscape then modal.onEscape() end
         elseif picker then
             pickerCancel()
+        elseif KF.wheel.active() then
+            KF.wheel.close()
         elseif scene == 'game' then
             hold = nil
             openPause()
@@ -2045,6 +2048,7 @@ function love.keypressed(key)
         return
     end
     if picker then return end
+    if KF.wheel.active() then KF.wheel.key(key); return end
     if battle.active() then battle.skip(); return end
     if key == 'r' and run.arm and run.status == 'playing' and not walking then
         keyboardMap, keyTarget = true, nil
@@ -2066,7 +2070,10 @@ end
 return {
     getRun = function() return run end,
     getModal = function() return modal end,
-    busy = function() return walking ~= nil or armView.busy() or pickerBusy() or battle.active() end,
+    busy = function() return walking ~= nil or armView.busy() or pickerBusy() or battle.active() or KF.wheel.busy() end,
+    wheelOpen = function() return KF.wheel.active() end,
+    wheelSpin = function(pay) KF.wheel.spin(pay) end,
+    wheelClose = function() KF.wheel.close() end,
     setBattleSpeed = function(v) meta.battleSpeed = v end,
     act = act,
     newGame = function(seed, tutorial)

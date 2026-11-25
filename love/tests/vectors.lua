@@ -108227,43 +108227,43 @@ return {
       reached = 1,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
       reached = 1,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
       reached = 1,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
       reached = 1,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
       reached = 2,
       won = false,
       depth = 0,
-      shards = 1
+      shards = 0
     },
     {
       reached = 2,
       won = false,
       depth = 1,
-      shards = 1
+      shards = 0
     },
     {
       reached = 2,
       won = false,
       depth = 2,
-      shards = 1
+      shards = 0
     },
     {
       reached = 2,
@@ -108275,889 +108275,889 @@ return {
       reached = 2,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
       reached = 2,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
       reached = 2,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
       reached = 2,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
       reached = 3,
       won = false,
       depth = 0,
+      shards = 1
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 1,
+      shards = 2
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 2,
+      shards = 2
+    },
+    {
+      reached = 3,
+      won = false,
+      depth = 3,
       shards = 3
     },
     {
       reached = 3,
-      won = false,
-      depth = 1,
-      shards = 3
-    },
-    {
-      reached = 3,
-      won = false,
-      depth = 2,
-      shards = 4
-    },
-    {
-      reached = 3,
-      won = false,
-      depth = 3,
-      shards = 5
-    },
-    {
-      reached = 3,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
       reached = 3,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
       reached = 3,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
       reached = 3,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
       reached = 4,
+      won = false,
+      depth = 0,
+      shards = 3
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 1,
+      shards = 4
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 2,
+      shards = 5
+    },
+    {
+      reached = 4,
+      won = false,
+      depth = 3,
+      shards = 6
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 4,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 5,
       won = false,
       depth = 0,
       shards = 6
     },
     {
-      reached = 4,
+      reached = 5,
       won = false,
       depth = 1,
       shards = 7
     },
     {
-      reached = 4,
+      reached = 5,
       won = false,
       depth = 2,
       shards = 9
     },
     {
-      reached = 4,
+      reached = 5,
       won = false,
       depth = 3,
       shards = 10
     },
     {
-      reached = 4,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 4,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 4,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 4,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 5,
-      won = false,
-      depth = 0,
-      shards = 10
-    },
-    {
-      reached = 5,
-      won = false,
-      depth = 1,
-      shards = 12
-    },
-    {
-      reached = 5,
-      won = false,
-      depth = 2,
-      shards = 15
-    },
-    {
-      reached = 5,
-      won = false,
-      depth = 3,
-      shards = 17
-    },
-    {
       reached = 5,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
       reached = 5,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
       reached = 5,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
       reached = 5,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
       reached = 6,
       won = false,
       depth = 0,
+      shards = 9
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 1,
+      shards = 11
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 2,
+      shards = 13
+    },
+    {
+      reached = 6,
+      won = false,
+      depth = 3,
       shards = 15
     },
     {
       reached = 6,
-      won = false,
-      depth = 1,
-      shards = 18
-    },
-    {
-      reached = 6,
-      won = false,
-      depth = 2,
-      shards = 22
-    },
-    {
-      reached = 6,
-      won = false,
-      depth = 3,
-      shards = 26
-    },
-    {
-      reached = 6,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
       reached = 6,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
       reached = 6,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
       reached = 6,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
       reached = 7,
+      won = false,
+      depth = 0,
+      shards = 12
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 1,
+      shards = 15
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 2,
+      shards = 18
+    },
+    {
+      reached = 7,
+      won = false,
+      depth = 3,
+      shards = 22
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 7,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 0,
+      shards = 16
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 1,
+      shards = 21
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 2,
+      shards = 25
+    },
+    {
+      reached = 8,
+      won = false,
+      depth = 3,
+      shards = 29
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 8,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 9,
       won = false,
       depth = 0,
       shards = 21
     },
     {
-      reached = 7,
+      reached = 9,
       won = false,
       depth = 1,
-      shards = 26
+      shards = 27
     },
     {
-      reached = 7,
+      reached = 9,
       won = false,
       depth = 2,
-      shards = 31
+      shards = 32
     },
     {
-      reached = 7,
+      reached = 9,
       won = false,
       depth = 3,
-      shards = 36
+      shards = 37
     },
     {
-      reached = 7,
+      reached = 9,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
-      reached = 7,
+      reached = 9,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
-      reached = 7,
+      reached = 9,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
-      reached = 7,
+      reached = 9,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
-      reached = 8,
+      reached = 10,
       won = false,
       depth = 0,
-      shards = 28
+      shards = 27
     },
     {
-      reached = 8,
+      reached = 10,
       won = false,
       depth = 1,
-      shards = 35
+      shards = 33
     },
     {
-      reached = 8,
+      reached = 10,
       won = false,
       depth = 2,
-      shards = 42
+      shards = 40
     },
     {
-      reached = 8,
+      reached = 10,
       won = false,
       depth = 3,
+      shards = 47
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 10,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 0,
+      shards = 33
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 1,
+      shards = 41
+    },
+    {
+      reached = 11,
+      won = false,
+      depth = 2,
       shards = 49
     },
     {
-      reached = 8,
+      reached = 11,
+      won = false,
+      depth = 3,
+      shards = 57
+    },
+    {
+      reached = 11,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
-      reached = 8,
+      reached = 11,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
-      reached = 8,
+      reached = 11,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
-      reached = 8,
+      reached = 11,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     },
     {
-      reached = 9,
+      reached = 12,
       won = false,
       depth = 0,
-      shards = 36
+      shards = 39
     },
     {
-      reached = 9,
+      reached = 12,
       won = false,
       depth = 1,
-      shards = 45
+      shards = 49
     },
     {
-      reached = 9,
+      reached = 12,
       won = false,
       depth = 2,
+      shards = 59
+    },
+    {
+      reached = 12,
+      won = false,
+      depth = 3,
+      shards = 69
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 12,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 0,
+      shards = 46
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 1,
+      shards = 58
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 2,
+      shards = 70
+    },
+    {
+      reached = 13,
+      won = false,
+      depth = 3,
+      shards = 81
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 13,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 14,
+      won = false,
+      depth = 0,
       shards = 54
     },
     {
-      reached = 9,
-      won = false,
-      depth = 3,
-      shards = 63
-    },
-    {
-      reached = 9,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 9,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 9,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 9,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 10,
-      won = false,
-      depth = 0,
-      shards = 45
-    },
-    {
-      reached = 10,
-      won = false,
-      depth = 1,
-      shards = 56
-    },
-    {
-      reached = 10,
-      won = false,
-      depth = 2,
-      shards = 67
-    },
-    {
-      reached = 10,
-      won = false,
-      depth = 3,
-      shards = 78
-    },
-    {
-      reached = 10,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 10,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 10,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 10,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 11,
-      won = false,
-      depth = 0,
-      shards = 55
-    },
-    {
-      reached = 11,
+      reached = 14,
       won = false,
       depth = 1,
       shards = 68
     },
     {
-      reached = 11,
+      reached = 14,
       won = false,
       depth = 2,
-      shards = 82
-    },
-    {
-      reached = 11,
-      won = false,
-      depth = 3,
-      shards = 96
-    },
-    {
-      reached = 11,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 11,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 11,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 11,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 12,
-      won = false,
-      depth = 0,
-      shards = 66
-    },
-    {
-      reached = 12,
-      won = false,
-      depth = 1,
-      shards = 82
-    },
-    {
-      reached = 12,
-      won = false,
-      depth = 2,
-      shards = 99
-    },
-    {
-      reached = 12,
-      won = false,
-      depth = 3,
-      shards = 115
-    },
-    {
-      reached = 12,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 12,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 12,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 12,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 13,
-      won = false,
-      depth = 0,
-      shards = 78
-    },
-    {
-      reached = 13,
-      won = false,
-      depth = 1,
-      shards = 97
-    },
-    {
-      reached = 13,
-      won = false,
-      depth = 2,
-      shards = 117
-    },
-    {
-      reached = 13,
-      won = false,
-      depth = 3,
-      shards = 136
-    },
-    {
-      reached = 13,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 13,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 13,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 13,
-      won = true,
-      depth = 3,
-      shards = 455
+      shards = 81
     },
     {
       reached = 14,
+      won = false,
+      depth = 3,
+      shards = 95
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 14,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 0,
+      shards = 63
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 1,
+      shards = 78
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 2,
+      shards = 94
+    },
+    {
+      reached = 15,
+      won = false,
+      depth = 3,
+      shards = 110
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 15,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 0,
+      shards = 72
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 1,
+      shards = 90
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 2,
+      shards = 108
+    },
+    {
+      reached = 16,
+      won = false,
+      depth = 3,
+      shards = 126
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 16,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 0,
+      shards = 81
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 1,
+      shards = 102
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 2,
+      shards = 122
+    },
+    {
+      reached = 17,
+      won = false,
+      depth = 3,
+      shards = 142
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 17,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 18,
       won = false,
       depth = 0,
       shards = 91
     },
     {
-      reached = 14,
+      reached = 18,
       won = false,
       depth = 1,
-      shards = 113
-    },
-    {
-      reached = 14,
-      won = false,
-      depth = 2,
-      shards = 136
-    },
-    {
-      reached = 14,
-      won = false,
-      depth = 3,
-      shards = 159
-    },
-    {
-      reached = 14,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 14,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 14,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 14,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 15,
-      won = false,
-      depth = 0,
-      shards = 105
-    },
-    {
-      reached = 15,
-      won = false,
-      depth = 1,
-      shards = 131
-    },
-    {
-      reached = 15,
-      won = false,
-      depth = 2,
-      shards = 157
-    },
-    {
-      reached = 15,
-      won = false,
-      depth = 3,
-      shards = 183
-    },
-    {
-      reached = 15,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 15,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 15,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 15,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 16,
-      won = false,
-      depth = 0,
-      shards = 120
-    },
-    {
-      reached = 16,
-      won = false,
-      depth = 1,
-      shards = 150
-    },
-    {
-      reached = 16,
-      won = false,
-      depth = 2,
-      shards = 180
-    },
-    {
-      reached = 16,
-      won = false,
-      depth = 3,
-      shards = 210
-    },
-    {
-      reached = 16,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 16,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 16,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 16,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 17,
-      won = false,
-      depth = 0,
-      shards = 136
-    },
-    {
-      reached = 17,
-      won = false,
-      depth = 1,
-      shards = 170
-    },
-    {
-      reached = 17,
-      won = false,
-      depth = 2,
-      shards = 204
-    },
-    {
-      reached = 17,
-      won = false,
-      depth = 3,
-      shards = 238
-    },
-    {
-      reached = 17,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 17,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 17,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 17,
-      won = true,
-      depth = 3,
-      shards = 455
+      shards = 114
     },
     {
       reached = 18,
       won = false,
+      depth = 2,
+      shards = 137
+    },
+    {
+      reached = 18,
+      won = false,
+      depth = 3,
+      shards = 160
+    },
+    {
+      reached = 18,
+      won = true,
       depth = 0,
+      shards = 156
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 18,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 0,
+      shards = 102
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 1,
+      shards = 128
+    },
+    {
+      reached = 19,
+      won = false,
+      depth = 2,
       shards = 153
     },
     {
-      reached = 18,
-      won = false,
-      depth = 1,
-      shards = 191
-    },
-    {
-      reached = 18,
-      won = false,
-      depth = 2,
-      shards = 229
-    },
-    {
-      reached = 18,
+      reached = 19,
       won = false,
       depth = 3,
-      shards = 267
-    },
-    {
-      reached = 18,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 18,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 18,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 18,
-      won = true,
-      depth = 3,
-      shards = 455
+      shards = 179
     },
     {
       reached = 19,
+      won = true,
+      depth = 0,
+      shards = 156
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 1,
+      shards = 195
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 2,
+      shards = 234
+    },
+    {
+      reached = 19,
+      won = true,
+      depth = 3,
+      shards = 273
+    },
+    {
+      reached = 20,
       won = false,
       depth = 0,
+      shards = 114
+    },
+    {
+      reached = 20,
+      won = false,
+      depth = 1,
+      shards = 142
+    },
+    {
+      reached = 20,
+      won = false,
+      depth = 2,
       shards = 171
     },
     {
-      reached = 19,
-      won = false,
-      depth = 1,
-      shards = 213
-    },
-    {
-      reached = 19,
-      won = false,
-      depth = 2,
-      shards = 256
-    },
-    {
-      reached = 19,
-      won = false,
-      depth = 3,
-      shards = 299
-    },
-    {
-      reached = 19,
-      won = true,
-      depth = 0,
-      shards = 260
-    },
-    {
-      reached = 19,
-      won = true,
-      depth = 1,
-      shards = 325
-    },
-    {
-      reached = 19,
-      won = true,
-      depth = 2,
-      shards = 390
-    },
-    {
-      reached = 19,
-      won = true,
-      depth = 3,
-      shards = 455
-    },
-    {
-      reached = 20,
-      won = false,
-      depth = 0,
-      shards = 190
-    },
-    {
-      reached = 20,
-      won = false,
-      depth = 1,
-      shards = 237
-    },
-    {
-      reached = 20,
-      won = false,
-      depth = 2,
-      shards = 285
-    },
-    {
       reached = 20,
       won = false,
       depth = 3,
-      shards = 332
+      shards = 199
     },
     {
       reached = 20,
       won = true,
       depth = 0,
-      shards = 260
+      shards = 156
     },
     {
       reached = 20,
       won = true,
       depth = 1,
-      shards = 325
+      shards = 195
     },
     {
       reached = 20,
       won = true,
       depth = 2,
-      shards = 390
+      shards = 234
     },
     {
       reached = 20,
       won = true,
       depth = 3,
-      shards = 455
+      shards = 273
     }
   },
   perkRuns = {

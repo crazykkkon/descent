@@ -314,6 +314,11 @@ function Run:wheelPrice(i)
     return { gold = gold, blood = rng.bloodPrice(gold) }
 end
 
+-- 下一次转会停在哪一格（从 1 开始；只看、不付钱也不结算；和原型 wheelPeek 一致）
+function Run:wheelPeek(i)
+    return wheelMod.stop(self.seed, (self.floorIndex - 1) * 1000 + (i - 1), self:wheelState(i).draws)
+end
+
 -- 转大转盘：返回 { ok, msg, sector }（sector 从 1 开始）
 function Run:wheelSpin(i, pay)
     local bad = self:checkFacility(i, 'wheel')

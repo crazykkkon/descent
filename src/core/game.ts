@@ -433,6 +433,11 @@ export class Run {
     }
 
     /** 转大转盘 */
+    /** 下一次转会停在哪一格（只看、不付钱也不结算；画面先把转盘转到这一格，停下来再调 wheelSpin） */
+    wheelPeek(i: number): number {
+        return wheelStop(this.seed, this.floorIndex * 1000 + i, this.wheelState(i).draws);
+    }
+
     wheelSpin(i: number, pay: 'gold' | 'blood'): WheelResult {
         const bad = this.facility(i, 'wheel', '大转盘');
         if (bad) return bad;
