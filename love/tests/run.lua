@@ -199,7 +199,9 @@ for _, w in ipairs(V.wheels) do
     run.arm.reels = reelsIn({ { 'boneKnife', 'hammer', 'blank', 'blank', 'blank' }, { 'harpoon', 'blank', 'boneKnife', 'blank', 'blank' }, { 'boneKnife', 'blank', 'blank', 'blank', 'blank' } })
     run.hero.weapon = 'boneKnife'
     for k, st in ipairs(w.steps) do
+        local peek = run:wheelPeek(5)
         local r = run:wheelSpin(5, (k - 1) % 3 == 2 and 'blood' or 'gold')
+        check(not r.sector or peek == r.sector, string.format('大转盘 种子%d 第%d次：先看的格 %s，转出来 %s', w.seed, k, tostring(peek), tostring(r.sector)))
         local q = {}
         for _, p in ipairs(run.engraveQueue) do q[#q + 1] = p.choices[1] end
         run.engraveQueue = {}

@@ -514,7 +514,9 @@ test('大转盘：盘面 8 格公开；30 金起每次 ×1.5；擦图案、井�
     assert.equal(run.wheelPrice(1).gold, 30);
     const seen = new Set<number>();
     for (let k = 0; k < 40; k++) {
+        const peek = run.wheelPeek(1);
         const r = run.wheelSpin(1, k % 2 ? 'gold' : 'blood');
+        if (r.ok && r.sector !== undefined) assert.equal(r.sector, peek, '先看到的格子就是转出来的格子（画面先转到这一格再结算）');
         if (!r.ok) break;
         seen.add(r.sector!);
         run.engraveQueue = [];
@@ -756,13 +758,13 @@ test('赖子很难拿到：精英三选一、大转盘新图案、当铺大约�
 // ---------- 灵魂碎片（局外成长） ----------
 import { shardsFor, perkValue, weaponPool, PERKS, UNLOCKS } from '../src/core/meta';
 
-test('灵魂碎片：越深越值钱（走完第 N 层得 N 个），通关加 50，深度每级多 25%', () => {
+test('灵魂碎片：越深越值钱（走完第 N 层得 N 个），通关加 50，再打六折（制作人：碎片给得太多），深度每级多 25%', () => {
     assert.equal(shardsFor(1, false), 0);
-    assert.equal(shardsFor(5, false), 10, '教程死在第 5 层：10 个');
-    assert.equal(shardsFor(10, false), 45);
-    assert.equal(shardsFor(20, false), 190);
-    assert.equal(shardsFor(20, true), 260, '通关');
-    assert.equal(shardsFor(20, true, 2), 390, '深度 2 多给 50%');
+    assert.equal(shardsFor(5, false), 6, '教程死在第 5 层：10 × 0.6');
+    assert.equal(shardsFor(10, false), 27);
+    assert.equal(shardsFor(20, false), 114);
+    assert.equal(shardsFor(20, true), 156, '通关：260 × 0.6');
+    assert.equal(shardsFor(20, true, 2), 234, '深度 2 多给 50%');
     assert.ok(PERKS.every(p => p.costs.length === p.values.length));
     assert.ok(UNLOCKS.some(u => u.kind === 'character') && UNLOCKS.some(u => u.kind === 'weapon') && UNLOCKS.some(u => u.kind === 'depth'));
 });

@@ -13,13 +13,14 @@ local rules = require('core.rules')
 local serialize = require('core.serialize')
 local floorMod = require('core.floor')
 local armMod = require('core.arm')
-local wheelMod = require('core.wheel')
 local decreeMod = require('core.decree')
 local whisperMod = require('core.whisper')
 local route = require('core.route')
-local miner = require('view.miner')
-local monsters = require('view.monsters')
-local wellhead = require('view.wellhead')
+local mapArt = {
+    miner = require('view.miner'),
+    monsters = require('view.monsters'),
+    wellhead = require('view.wellhead'),
+}
 local fx = require('view.fx')
 local armView = require('view.arm_view')
 local marks = require('view.weapon_marks')
@@ -224,16 +225,31 @@ local function openPicker(opts)
 end
 local function pickerBusy() return picker ~= nil and (picker.t < 1 or picker.closing) end
 
--- 屏幕上的这一点是哪个轮子的哪一格（只算露出来的 3 格）
+-- 摊开的转轮（制作人 2026-11-25：刻图案时转轮移到画面中间、摊开，所有格子一起看，直接点）。
+-- 手臂移到中间以后，三个轮子从刻线那一行往上下摊开成一条 5 格的长条：中间 3 格就是平时露出来的那 3 格，
+-- 上下各多出来的 1 格是平时藏在后面的。
+-- （放在一张表里：main.lua 顶层的局部变量快到 Lua 的 200 个上限了）
+local UNF = { cw = 70, ch = 30, gap = 18 }
+function UNF.unfold()
+    if not picker then return 0 end
+    return ease(math.max(0, math.min(1, (picker.t - 0.4) / 0.6)))
+end
+-- 第 r 个轮子、离刻线 i 格（i = −2～2，0 是刻线那一格，正数往下）：位置（逻辑坐标）和它是第几格
+function UNF.rect(r, i)
+    local u = UNF.unfold()
+    local total = 3 * UNF.cw + 2 * UNF.gap
+    local x = LW / 2 - total / 2 + (r - 1) * (UNF.cw + UNF.gap)
+    local off = math.abs(i) <= 1 and i or (i > 0 and 1 or -1) * (1 + u)
+    local y = LH / 2 + 22 - UNF.ch / 2 + off * UNF.ch
+    return x, y, UNF.cw, UNF.ch, ((run.arm.stops[r] - 1 + i) % armMod.SIZE) + 1
+end
+-- 屏幕上的这一点是哪个轮子的哪一格（摊开以后 5 格都能点）
 local function pickerCellAt(lx, ly)
-    if not picker or not run.arm then return nil end
-    local ax, ay = screenToArm(lx, ly)
+    if not picker or not run.arm or UNF.unfold() < 0.5 then return nil end
     for r = 1, armMod.REELS do
-        local x, y, w, h = armView.reelRect(r)
-        if ax >= x and ax <= x + w and ay >= y and ay < y + h then
-            local row = math.floor((ay - y) / armView.CELL_H)
-            local center = run.arm.stops[r] - picker.offs[r]
-            return r, ((center - 1) + (row - 1)) % armMod.SIZE + 1
+        for i = -2, 2 do
+            local x, y, w, h, k = UNF.rect(r, i)
+            if lx >= x and lx < x + w and ly >= y and ly < y + h then return r, k, i end
         end
     end
     return nil
@@ -328,6 +344,8 @@ end
 -- fatalSeen：这一层里曾经"打不动 / 打不死 / 会死"的怪（格子）。后来把它打死了 = 算准了（先去拿宝石、绕路备战再回来）
 -- （放在一张表里：main.lua 顶层的局部变量快到 Lua 的 200 个上限了）
 local KF = { fatalSeen = {}, fatalKey = nil, combo = { n = 0, at = -99, floor = nil }, scanKey = nil }
+-- 大转盘的场景（放在这张表里，顶层局部变量快到上限了）
+KF.wheel = require('view.wheel_scene')
 function KF.scan()
     local key = run.seed .. ':' .. run.floorIndex
     if KF.fatalKey ~= key then KF.fatalSeen, KF.fatalKey = {}, key end
@@ -433,7 +451,7 @@ local function walkStep()
             local traits = {}
             for k in pairs(m.traits) do traits[#traits + 1] = config.TRAIT_NAMES[k] end
             battle.start({
-                log = log, weapon = w, monHp = m.hp, monW = monsters.size(c.id), heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
+                log = log, weapon = w, monHp = m.hp, monW = mapArt.monsters.size(c.id), heroHp = run.hero.hp, speed = meta.battleSpeed or 1,
                 hero = { name = run.ch.name, line = '攻 ' .. atk .. ' · 防 ' .. def .. (w and (' · ' .. W(w)) or '') },
                 mon = { id = c.id, name = m.name, line = '攻 ' .. m.atk .. ' · 防 ' .. m.def, traits = table.concat(traits, ' ') },
                 onDone = function() if walking then walking.waitBattle = false; walking.fought = cell; walking.t = STEP_TIME end end,
@@ -484,7 +502,7 @@ local function walkStep()
 end
 
 local function act(i)
-    if walking or modal or picker or run.status ~= 'playing' then return end
+    if walking or modal or picker or KF.wheel.active() or run.status ~= 'playing' then return end
     if armView.busy() then
         afterSpinCell = i
         return
@@ -656,7 +674,7 @@ local function armHint()
 end
 
 function spinArm(pay)
-    if not run.arm or run.status ~= 'playing' or walking or modal or picker or armView.busy() then return end
+    if not run.arm or run.status ~= 'playing' or walking or modal or picker or KF.wheel.active() or armView.busy() then return end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
     local held = { armHeld[1], armHeld[2], armHeld[3] }
     local before = config.copyHero(run.hero)
@@ -743,8 +761,8 @@ local function openRent(thenFn)
     }, buttons)
 end
 
-local function nextFloor(sell)
-    if run:rentDue() > 0 then openRent(function() nextFloor(sell) end); return end
+local function nextFloor(sell, note)
+    if run:rentDue() > 0 then openRent(function() nextFloor(sell, note) end); return end
     closeModal()
     local spun = run.arm and run.arm.spins > 0
     run:finishFloor(sell)
@@ -754,52 +772,36 @@ local function nextFloor(sell)
     saveGame()
     if run.status == 'finished' then openVictory(); return end
     -- 每层转轮价格重新算（上一层转过才提一句）
-    setMsg(spun and ('新的一层：断臂转轮的价格回到 ' .. run:armPrice().gold .. ' 金。') or '')
+    local msg = spun and ('新的一层：断臂转轮的价格回到 ' .. run:armPrice().gold .. ' 金。') or ''
+    if note then msg = note .. (msg ~= '' and '　' .. msg or '') end
+    setMsg(msg)
     continueFlow()
 end
 
+-- 走出出口以后直接下楼（制作人 2026-11-25：每层的总结不要了）。
+-- 地图上剩下的血瓶照样在出口折成金币（规则里算），只在底部提一句；骨钥要卖去当铺。
 function openSummary()
     local s = run:exitSummary()
-    local start = run:floorStartHero()
-    local lines = {}
-    local d = run.hero.hp - start.hp
-    lines[#lines + 1] = '本层生命变化：' .. (d >= 0 and '+' or '') .. d
-    local gains = {}
-    for _, g in ipairs({ { '攻击', run.hero.atk - start.atk }, { '防御', run.hero.def - start.def }, { '金币', run.hero.gold - start.gold } }) do
-        if g[2] ~= 0 then gains[#gains + 1] = g[1] .. ' ' .. (g[2] > 0 and '+' or '') .. g[2] end
-    end
-    lines[#lines + 1] = '本层换到：' .. (#gains > 0 and table.concat(gains, '，') or '没有')
-    if s.leftoverPotions > 0 then lines[#lines + 1] = '地图上剩下的血瓶 ×' .. s.leftoverPotions .. '：+' .. s.potionGold .. ' 金币' end
-    if run.decree then lines[#lines + 1] = '诏令：' .. run.decree.def.text .. '（第 ' .. run.decree['until'] .. ' 层前）' end
-    local buttons = { { label = '下楼', primary = true, fn = function() nextFloor(false) end } }
-    if s.keys > 0 then
-        table.insert(buttons, 1, { label = '卖掉 ' .. s.keys .. ' 把骨钥（+' .. s.keyGold .. '）', fn = function() nextFloor(true) end })
-    end
-    openModal(run:floor().name .. ' 完成', lines, buttons)
+    nextFloor(false, s.leftoverPotions > 0 and ('地图上剩下的 ' .. s.leftoverPotions .. ' 瓶血瓶换了 ' .. s.potionGold .. ' 金币。') or nil)
 end
 
--- 大转盘
+-- 大转盘：真的转盘（制作人 2026-11-25：拉摇杆、真的会转）。画面和动画在 view/wheel_scene.lua，规则还是 run:wheelSpin
 function openWheel(i)
-    local lines = { '盘面八格，每格机会一样（各 12.5%）：' }
-    local t = {}
-    for k, s in ipairs(wheelMod.SECTORS) do t[k] = s.text end
-    lines[#lines + 1] = table.concat(t, '、')
-    local price = run:wheelPrice(i)
-    lines[#lines + 1] = '转一次：' .. price.gold .. ' 金币，或 ' .. price.blood .. ' 生命（每转一次 ×1.5）'
-    lines[#lines + 1] = '你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.hp .. ' 生命。'
-    local function spin(pay)
-        local r = run:wheelSpin(i, pay)
-        if not r.ok then setMsg(r.msg, true); return end
-        setMsg(r.msg, run.status == 'dead')
-        saveGame()
-        closeModal()
-        if run.status == 'dead' then openDeath(); return end
-        if run:pendingEngrave() then continueFlow() else openWheel(i) end
-    end
-    openModal('大转盘', lines, {
-        { label = '金币 ' .. price.gold, primary = true, fn = function() spin('gold') end },
-        { label = '生命 ' .. price.blood, danger = true, fn = function() spin('blood') end },
-        { label = '离开', fn = function() closeModal() end },
+    KF.wheel.open(i, {
+        price = function() return run:wheelPrice(i) end,
+        hero = function() return run.hero end,
+        peek = function() return run:wheelPeek(i) end,
+        apply = function(pay)
+            local r = run:wheelSpin(i, pay)
+            if r.ok then saveGame() end
+            setMsg(r.msg, not r.ok or run.status == 'dead')
+            return r
+        end,
+        after = function()
+            if run.status == 'dead' then return function() openDeath() end end
+            if run:pendingEngrave() then return function() continueFlow() end end
+            return nil
+        end,
     })
 end
 
@@ -1029,7 +1031,8 @@ end
 function newGame(seed, opts)
     afterSpinCell = nil
     armView.reset()
-    seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or os.time()
+    -- 自动测试默认用种子 6：第 4、5 层就有大转盘，四种设施都能走到
+    seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or (os.getenv('DESCENT_AUTOTEST') and 6) or os.time()
     opts = opts or {}
     local tutorial = not meta.tutorialDone
     local character = tutorial and 'digger' or (opts.character or 'digger')
@@ -1057,7 +1060,7 @@ function loadGame(data)
     afterSpinCell = nil
     armView.reset()
     hovered, keyTarget, keyboardMap = nil, nil, false
-    facing = miner.restoreFacing(data.facing)
+    facing = mapArt.miner.restoreFacing(data.facing)
     runOpts = data.routeOpts or { depth = 0, unlocks = {} }
     run = Run.load(planFor(data.run.seed, data.run.tutorial, runOpts), data.run)
     bossScene = false
@@ -1078,10 +1081,10 @@ end
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     marks.load()
-    miner.load()
+    mapArt.miner.load()
     battle.load()
-    wellhead.load()
-    monsters.load(config.MONSTERS)
+    mapArt.wellhead.load()
+    mapArt.monsters.load(config.MONSTERS)
     fx.load()
     fx.loadShader()
     fx.loadLight()
@@ -1147,6 +1150,7 @@ function love.update(dt)
         act(target)
     end
     updatePicker(dt)
+    KF.wheel.update(dt)
     battle.update(dt)
     if scene == 'game' and run and run.status == 'playing' and not battle.active() then KF.scan() end
     if walking and not modal and not walking.waitBattle then
@@ -1285,11 +1289,11 @@ local function drawPixel()
         if d == 20 and not run.tutorial then setColor({ 0.5, 0.15, 0.2 }); g.rectangle('fill', 8, y + 10, 18, 2) end
     end
     if run.tutorial and run.floorIndex == 1 then
-        wellhead.drawMap(MAP_X, MAP_Y, run.w * TILE, run.h * TILE)
+        mapArt.wellhead.drawMap(MAP_X, MAP_Y, run.w * TILE, run.h * TILE)
         for i, c in ipairs(run.cells) do
             if c.kind ~= 'wall' then
                 local x, y = tileXY(i)
-                wellhead.drawObject(c, x, y, TILE)
+                mapArt.wellhead.drawObject(c, x, y, TILE)
             end
         end
     else
@@ -1321,7 +1325,7 @@ local function drawPixel()
     local function drawMiner()
         local kind, t, prize = armView.flashInfo()
         local glint = run.hero.weapon == prize and kind == 'win' and math.max(0, 1 - math.abs(t - 0.22) / 0.22) or 0
-        miner.drawOnMap(facing, hx + TILE / 2, heroFeet, run.status == 'dead', bflash, armView.displayHero(run.hero).weapon, glint)
+        mapArt.miner.drawOnMap(facing, hx + TILE / 2, heroFeet, run.status == 'dead', bflash, armView.displayHero(run.hero).weapon, glint)
     end
     -- 地面画完才画角色。按脚底从远到近绘制，移动经过相邻怪物时也遵循这个顺序。
     local minerDrawn = false
@@ -1333,7 +1337,7 @@ local function drawPixel()
                 drawMiner()
                 minerDrawn = true
             end
-            monsters.draw(c.id, x + TILE / 2, feet, clock, i, battle.monster(i), 1.4)
+            mapArt.monsters.draw(c.id, x + TILE / 2, feet, clock, i, battle.monster(i), 1.4)
         end
     end
     if not minerDrawn then drawMiner() end
@@ -1440,6 +1444,7 @@ end
 
 local function drawPickerUI()
     local e = ease(math.max(0, math.min(1, picker.t)))
+    local u = UNF.unfold()
     -- 顶栏也压暗，标题写在上面
     rect({ 0.01, 0.02, 0.03 }, 0, 0, LW, 46, 0.92 * e)
     local col = picker.sym == armMod.WILD and C.ok or { 1, 0.9, 0.6 }
@@ -1454,38 +1459,66 @@ local function drawPickerUI()
         local hint = picker.sym == armMod.WILD and '中线上的赖子能替代武器图案。' or '图案留在这一格。拉杆连成中线，武器才到手。'
         text(hint, 0, 32 - (1 - e) * 20, 7.5, C.text, 'center', LW)
     elseif pickerHasBlank() then
-        text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '点一个空格刻上去 · 有图案的格子不能覆盖 · 按住轮子上下拨动看整圈',
+        text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '三个轮子都摊开了，每个轮子 5 格 · 点一个空格刻上去 · 有图案的格子不能覆盖',
             0, 32 - (1 - e) * 20, 7.5, C.dim, 'center', LW)
     else
         text((picker.onlyReel and ('第 ' .. picker.onlyReel .. ' 个轮子') or '转轮') .. '刻满了，刻不上。先去当铺擦掉一格。', 0, 32 - (1 - e) * 20, 8, C.warn, 'center', LW)
     end
     -- 让玩家在刻入的瞬间仍能核对手里实际拿着什么。
-    local lx, ly, scale = armToScreen(armView.X + 12, armView.Y + 139)
-    rect({ 0.085, 0.13, 0.13 }, lx, ly, 104 * scale, 24 * scale, 1, 2 * scale)
-    text('手中', lx + 6 * scale, ly + 6 * scale, 7 * scale, C.dim)
     local weapon = run.hero.weapon
     if weapon then
         setColor({ 1, 1, 1 })
-        marks.icon(weapon, OX + (lx + 35 * scale) * S, OY + (ly + 12 * scale) * S, 20 * scale * S)
+        marks.icon(weapon, OX + 15 * S, OY + 21 * S, 17 * S)
     end
-    text(weapon and W(weapon) or '空手', lx + (weapon and 47 or 29) * scale, ly + 4 * scale, 9 * scale, C.text)
+    text('手中 · ' .. (weapon and W(weapon) or '空手'), weapon and 26 or 12, 16, 7.5, C.text)
+    if u > 0 then
+        -- 铜底板：从手臂的轮子窗口里摊开来
+        local x0 = UNF.rect(1, 0)
+        local x3, _, w3 = UNF.rect(3, 0)
+        local _, yTop = UNF.rect(1, -2)
+        local _, yBot, _, hBot = UNF.rect(1, 2)
+        rect({ 0.2, 0.13, 0.07 }, x0 - 16, yTop - 22, x3 + w3 - x0 + 32, yBot + hBot - yTop + 32, 0.97 * u, 8)
+        rect({ 0.45, 0.32, 0.16 }, x0 - 14, yTop - 20, x3 + w3 - x0 + 28, 2, 0.9 * u)
+        -- 刻线：中间那一行（转到这一行连成同一把武器才拿得到）
+        local _, ym, _, hm = UNF.rect(1, 0)
+        rect({ 0.94, 0.77, 0.42 }, x0 - 12, ym - 1.5, x3 + w3 - x0 + 24, hm + 3, 0.22 * u, 4)
+        text('刻线', x0 - 42, ym + hm / 2 - 4, 7, { 0.94, 0.77, 0.42 }, 'center', 24, u)
+        for r = 1, armMod.REELS do
+            local cx = UNF.rect(r, 0)
+            local only = not picker.onlyReel or r == picker.onlyReel
+            text('第 ' .. r .. ' 轮', cx, yTop - 16, 7, only and { 0.96, 0.85, 0.6 } or C.dim, 'center', UNF.cw, u)
+            for i = -2, 2 do
+                local x, y, w, h, k = UNF.rect(r, i)
+                local a = (math.abs(i) <= 1) and u or u * u
+                local sym = run.arm.reels[r][k]
+                local ok = only and not sym
+                rect(sym and { 0.13, 0.11, 0.09 } or { 0.06, 0.07, 0.08 }, x + 1, y + 1, w - 2, h - 2, a, 3)
+                if sym then
+                    local c = sym == armMod.WILD and C.ok or (i == 0 and { 1, 0.96, 0.88 } or { 0.78, 0.76, 0.7 })
+                    setColor(c, a)
+                    marks.icon(sym, OX + (x + 13) * S, OY + (y + h / 2) * S, 20 * S)
+                    text(W(sym), x + 22, y + 10, 7.5, c, 'left', w - 24, a)
+                else
+                    text('空', x, y + 9, 8, only and { 0.55, 0.6, 0.6 } or { 0.3, 0.32, 0.33 }, 'center', w, a)
+                end
+                if not ok then rect({ 0, 0, 0 }, x + 1, y + 1, w - 2, h - 2, 0.35 * a, 3) end
+            end
+        end
+    end
     if not picker.closing then
-        -- 鼠标所在的格子：亮框
+        -- 鼠标所在的格子：能刻是金框，不能刻是红框
         local mx, my = love.mouse.getPosition()
-        local r, k = pickerCellAt((mx - OX) / S, (my - OY) / S)
-        if r and not armDrag then
-            local x, y = armView.reelRect(r)
-            local row = ((k - (run.arm.stops[r] - picker.offs[r])) + 1) % armMod.SIZE
-            local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
+        local r, k, i = pickerCellAt((mx - OX) / S, (my - OY) / S)
+        if r then
+            local x, y, w, h = UNF.rect(r, i)
             local ok = (not picker.onlyReel or r == picker.onlyReel) and not run.arm.reels[r][k]
             if ok then
                 love.graphics.setColor(0.92, 0.77, 0.53, 0.40)
-                marks.icon(picker.sym, OX + (sx + armView.REEL_W * kk / 2) * S,
-                    OY + (sy + armView.CELL_H * kk / 2) * S, 23 * kk * S)
+                marks.icon(picker.sym, OX + (x + 13) * S, OY + (y + h / 2) * S, 18 * S)
             end
             setColor(ok and { 1, 0.85, 0.4 } or C.warn)
             love.graphics.setLineWidth(2)
-            love.graphics.rectangle('line', OX + sx * S, OY + sy * S, armView.REEL_W * kk * S, armView.CELL_H * kk * S, 3 * S, 3 * S)
+            love.graphics.rectangle('line', OX + x * S, OY + y * S, w * S, h * S, 3 * S, 3 * S)
             love.graphics.setLineWidth(1)
         end
         if msgErr and msg ~= '' then text(msg, 0, PICK_CANCEL.y - 16, 7.5, C.warn, 'center', LW) end
@@ -1494,13 +1527,11 @@ local function drawPickerUI()
         text('不刻了（Esc）', b.x, b.y + 4, 7.5, C.text, 'center', b.w)
     end
     -- 刻上的那一格闪一下
-    if picker.flash and picker.flash.t < 0.6 then
+    if picker.flash and picker.flash.t < 0.6 and u > 0 then
         local f = picker.flash
-        local x, y = armView.reelRect(f.r)
-        local row = ((f.k - (run.arm.stops[f.r] - picker.offs[f.r])) + 1) % armMod.SIZE
-        if row <= 2 then
-            local sx, sy, kk = armToScreen(x, y + row * armView.CELL_H)
-            marks.cut(OX + sx * S, OY + sy * S, armView.REEL_W * kk * S, armView.CELL_H * kk * S, f.t)
+        for i = -2, 2 do
+            local x, y, w, h, k = UNF.rect(f.r, i)
+            if k == f.k then marks.cut(OX + x * S, OY + y * S, w * S, h * S, f.t) end
         end
     end
 end
@@ -1660,8 +1691,9 @@ local function drawUI()
 
     if scene == 'game' then
         battle.drawUI({ text = text, rect = rect, font = font, S = S, OX = OX, OY = OY, LW = LW, LH = LH,
-            monster = function(id, cx, feet, f) monsters.draw(id, cx, feet, clock, 0, f) end,
-            miner = function(cx, feet, dead, tall, a) miner.draw('right', cx, feet, dead, tall, a) end })
+            monster = function(id, cx, feet, f) mapArt.monsters.draw(id, cx, feet, clock, 0, f) end,
+            miner = function(cx, feet, dead, tall, a) mapArt.miner.draw('right', cx, feet, dead, tall, a) end })
+        KF.wheel.draw({ text = text, rect = rect, S = S, OX = OX, OY = OY, LW = LW, LH = LH })
     end
     drawModal()
 end
@@ -1965,17 +1997,15 @@ function love.mousepressed(mx, my, button)
         return
     end
     if scene == 'shop' then shopClick(lx, ly); return end
+    if KF.wheel.active() then KF.wheel.click(lx, ly); return end
     if battle.active() then battle.skip(); return end
-    -- 刻图案的场景：按住轮子拨动；没拨动就松手 = 点这一格
+    -- 刻图案的场景：转轮摊开了，直接点要刻的格子
     if picker then
         if pickerBusy() then return end
         local b = PICK_CANCEL
         if inRect(lx, ly, b.x, b.y, b.w, b.h) then pickerCancel(); return end
-        local r = pickerCellAt(lx, ly)
-        if r then
-            local _, ay = screenToArm(lx, ly)
-            armDrag = { reel = r, y0 = ay, off = 0, moved = false, picker = true }
-        end
+        local r, k = pickerCellAt(lx, ly)
+        if r then pickerChoose(r, k) end
         return
     end
     if run.arm and run.status == 'playing' and not walking then
@@ -2074,6 +2104,8 @@ function love.keypressed(key)
             if modal.onEscape then modal.onEscape() end
         elseif picker then
             pickerCancel()
+        elseif KF.wheel.active() then
+            KF.wheel.close()
         elseif scene == 'game' then
             hold = nil
             openPause()
@@ -2110,6 +2142,7 @@ function love.keypressed(key)
         return
     end
     if picker then return end
+    if KF.wheel.active() then KF.wheel.key(key); return end
     if battle.active() then battle.skip(); return end
     if key == 'r' and run.arm and run.status == 'playing' and not walking then
         keyboardMap, keyTarget = true, nil
@@ -2131,7 +2164,10 @@ end
 return {
     getRun = function() return run end,
     getModal = function() return modal end,
-    busy = function() return walking ~= nil or armView.busy() or pickerBusy() or battle.active() end,
+    busy = function() return walking ~= nil or armView.busy() or pickerBusy() or battle.active() or KF.wheel.busy() end,
+    wheelOpen = function() return KF.wheel.active() end,
+    wheelSpin = function(pay) KF.wheel.spin(pay) end,
+    wheelClose = function() KF.wheel.close() end,
     setBattleSpeed = function(v) meta.battleSpeed = v end,
     act = act,
     newGame = function(seed, tutorial)
@@ -2154,7 +2190,7 @@ return {
     -- 自动测试：跨局存档清零（碎片、强化、解锁）
     battlePose = function(id, weapon, who, p)
         local m = config.MONSTERS[id]
-        battle.pose({ weapon = weapon, monHp = m.hp, heroHp = 200, speed = 1, monW = monsters.size(id),
+        battle.pose({ weapon = weapon, monHp = m.hp, heroHp = 200, speed = 1, monW = mapArt.monsters.size(id),
             hero = { name = '掘井人', line = '攻 10 · 防 10' }, mon = { id = id, name = m.name, line = '攻 ' .. m.atk .. ' · 防 ' .. m.def, traits = '' } }, who, p)
     end,
     battleClear = function() battle.skip() end,
@@ -2164,11 +2200,10 @@ return {
     shopMsg = function() return shopMsg end,
     beginRun = function() beginRun() end,
     inPicker = function() return picker ~= nil end,
-    -- 自动测试：第 r 个轮子露出来的第 row 格（0 上、1 中、2 下）在屏幕上的位置（真实像素）
+    -- 自动测试：第 r 个轮子第 row 格（0 上、1 刻线、2 下；−1、3 是摊开后多出来的上下两格）在屏幕上的位置（真实像素）
     pickerCellScreen = function(r, row)
-        local x, y, w = armView.reelRect(r)
-        local sx, sy, k = armToScreen(x + w / 2, y + (row + 0.5) * armView.CELL_H)
-        return OX + sx * S, OY + sy * S
+        local x, y, w, h = UNF.rect(r, row - 1)
+        return OX + (x + w / 2) * S, OY + (y + h / 2) * S
     end,
     pickerReady = function() return picker ~= nil and not pickerBusy() end,
     -- 自动测试：刻在第 r 个轮子的空格上；这个轮子刻满了就换一个有空格的；都满了就不刻

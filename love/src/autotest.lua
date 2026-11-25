@@ -143,6 +143,26 @@ function M.start()
                 end
             end
         end
+        -- 摊开以后，平时藏着的上下两格（row −1、3）也能直接点
+        -- （第 4 层以后再试，别打乱第 3 层刻赖子的检查）
+        if not shots['07e-unfolded'] and game.inPicker() and game.getRun().floorIndex >= 4 then
+            local run = game.getRun()
+            for rr = 1, 3 do
+                for _, row in ipairs({ 3, -1 }) do
+                    local k = ((run.arm.stops[rr] - 1) + (row - 1)) % 5 + 1
+                    if not run.arm.reels[rr][k] and not shots['07e-unfolded'] then
+                        shots['07e-unfolded'] = true
+                        local x, y = game.pickerCellScreen(rr, row)
+                        love.mouse.setPosition(x, y); sleep(0.1)
+                        shot('07e-unfolded')
+                        love.mousepressed(x, y, 1); love.mousereleased(x, y, 1)
+                        for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
+                        say(string.format('点摊开后多出来的格子（轮子 %d 第 %d 格，离刻线 %d）：刻上了 %s', rr, k, row - 1, tostring(run.arm.reels[rr][k])))
+                        return
+                    end
+                end
+            end
+        end
         game.pickCell(r)
         for _ = 1, 60 do if not game.inPicker() then break end; sleep(0.05) end
     end
@@ -262,7 +282,6 @@ function M.start()
             go(find(function(c) return c.kind == 'exit' end))
             if f == 1 then shot('01b-exit-confirm') end
             button('往下走'); settle(); sleep(0.1)
-            button('下楼'); sleep(0.1)
         end
         shot('02-arm-story')
         say('断臂剧情：' .. tostring(modalTitle()) .. '，教程完成 ' .. tostring(game.getMeta().tutorialDone) .. '，灵魂碎片 ' .. tostring(game.getMeta().shards))
@@ -342,7 +361,18 @@ function M.start()
                 game.act(fac); settle(); sleep(0.2)
                 say(string.format('第 %d 层设施 %s：%s', f, kind, tostring(modalTitle())))
                 once('05-' .. kind)
-                if kind == 'wheel' then button('金币'); sleep(0.1); handlePopups(); if modalTitle() == '大转盘' then button('离开') end
+                if kind == 'wheel' then
+                    -- 真的转盘：拉摇杆，转盘转起来，停在先定好的那一格再结算
+                    local before = { gold = run.hero.gold, hp = run.hero.hp }
+                    say('大转盘场景打开：' .. tostring(game.wheelOpen()))
+                    local peek = run:wheelPeek(fac)
+                    game.wheelSpin('gold'); sleep(0.9)
+                    once('05b-wheel-spinning')
+                    settle(); sleep(0.2)
+                    once('05c-wheel-result')
+                    say(string.format('大转盘停在第 %d 格（%s）：金币 %d → %d，生命 %d → %d', peek, require('core.wheel').SECTORS[peek].text, before.gold, run.hero.gold, before.hp, run.hero.hp))
+                    handlePopups()
+                    if game.wheelOpen() then game.wheelClose() end
                 elseif kind == 'pawn' then
                     if button('买') then pickCell(3) else button('卖骨钥') end
                     handlePopups(); if modalTitle() == '当铺' then button('离开') end
@@ -394,8 +424,7 @@ function M.start()
             say(string.format('第 %d 层走出口 %d（%s）', f, pick, tostring(modalTitle())))
             button('往下走')
             settle(); sleep(0.2)
-            if modalTitle() ~= run:floor().name .. ' 完成' then say('第 ' .. f .. ' 层没出结算：' .. tostring(modalTitle())); break end
-            button('下楼')
+            -- 走出出口直接下楼（没有每层的总结了）；要交井租时先弹井租
             if modalTitle() == '井租' then say('第 ' .. f .. ' 层交井租：' .. tostring(button('交'))) end
             sleep(0.2)
             run = game.getRun()
@@ -416,8 +445,9 @@ function M.start()
         say('升级：' .. tostring(game.shopBuy('升级 ')) .. ' → ' .. game.shopMsg())
         say('买：' .. tostring(game.shopBuy('买 ')) .. ' → ' .. game.shopMsg())
         say('关掉：' .. tostring(game.shopBuy('开着')) .. ' → ' .. game.shopMsg())
-        say('解锁：' .. tostring(game.shopBuy('解锁 ')) .. ' → ' .. game.shopMsg())
+        say('解锁（碎片不够时）：' .. tostring(game.shopBuy('解锁 ')) .. ' → ' .. game.shopMsg())
         game.getMeta().shards = game.getMeta().shards + 600   -- 测试用：多给一些碎片，把角色也解锁了
+        say('解锁：' .. tostring(game.shopBuy('解锁 ')) .. ' → ' .. game.shopMsg())
         for _ = 1, 3 do game.shopBuy('解锁 ') end
         say('剩余碎片：' .. tostring(game.getMeta().shards) .. '，解锁了拾荒者 ' .. tostring(game.getMeta().unlocks.scavenger))
         sleep(0.2)
