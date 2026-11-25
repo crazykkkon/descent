@@ -54,7 +54,7 @@ function M.spin(pay)
     if not st or st.spinning or st.next then return end
     local price, h = st.ctx.price(), st.ctx.hero()
     if pay == 'gold' and h.gold < price.gold then st.msg, st.err = '金币不够（要 ' .. price.gold .. '）', true; fx.shake(1); return end
-    if pay == 'blood' and h.hp <= price.blood then st.msg, st.err = '生命不够（要 ' .. price.blood .. '）', true; fx.shake(1); return end
+    if pay == 'blood' and h.hp <= price.blood then st.msg, st.err = '需要消耗 ' .. price.blood .. ' 点生命，支付后至少要剩 1 点', true; fx.shake(1); return end
     local sector = st.ctx.peek()
     -- 第 k 格的中心在顺时针 (k − 0.5) × 一格 的地方；转盘顺时针转 angle 以后，它要正好转到顶上的指针下面
     local target = -((sector - 0.5) * STEP)
@@ -110,8 +110,8 @@ local function inRect(x, y, r) return x >= r.x and x <= r.x + r.w and y >= r.y a
 local function buttons()
     local price = st.ctx.price()
     return {
-        { id = 'gold', label = '拉杆 · ' .. price.gold .. ' 金币', x = BTN.x, y = 150, w = BTN.w, h = BTN.h, primary = true },
-        { id = 'blood', label = '用血转 · ' .. price.blood .. ' 生命', x = BTN.x, y = 180, w = BTN.w, h = BTN.h },
+        { id = 'gold', label = '花 ' .. price.gold .. ' 金币转一次', x = BTN.x, y = 150, w = BTN.w, h = BTN.h, primary = true },
+        { id = 'blood', label = '花 ' .. price.blood .. ' 点生命转一次', x = BTN.x, y = 180, w = BTN.w, h = BTN.h },
         { id = 'leave', label = '离开（Esc）', x = BTN.x, y = 226, w = BTN.w, h = BTN.h },
     }
 end
@@ -143,7 +143,7 @@ function M.draw(g)
     local G = love.graphics
     g.rect({ 0.01, 0.02, 0.03 }, 0, 0, g.LW, g.LH, 0.92)
     g.text('大转盘', 0, 12, 13, { 1, 0.9, 0.6 }, 'center', g.LW)
-    g.text('八格机会一样（各 12.5%）· 拉一下摇杆转一次，每转一次价格 ×1.5', 0, 32, 7.5, { 0.6, 0.66, 0.68 }, 'center', g.LW)
+    g.text('每格停中的概率都是 12.5%。在这里每多转一次，花费就上涨约五成。', 0, 32, 7.5, { 0.6, 0.66, 0.68 }, 'center', g.LW)
 
     G.push(); G.translate(g.OX, g.OY); G.scale(g.S, g.S)
     -- 底座和外圈
@@ -210,7 +210,7 @@ function M.draw(g)
         g.text(b.label, b.x, b.y + 6, 8, { 0.95, 0.95, 0.92 }, 'center', b.w, st.spinning and 0.5 or 1)
     end
     if st.spinning then
-        g.text('转……（点一下停得快一点）', BTN.x, 262, 7.5, { 0.6, 0.66, 0.68 }, 'left', BTN.w + 40)
+        g.text('转盘转动中，点击可加快停转。', BTN.x, 262, 7.5, { 0.6, 0.66, 0.68 }, 'left', BTN.w + 40)
     elseif st.msg then
         local col = st.err and { 1, 0.45, 0.45 } or { 1, 0.88, 0.5 }
         g.text(st.msg, BTN.x - 10, 262, 8, col, 'left', 200)

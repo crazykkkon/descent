@@ -16,13 +16,13 @@ function M.interact(cell, hero, floor, ch, allowFatal, mon)
         if not r.canAttack then
             local _, def = combat.effectiveStats(hero)
             if math.max(m.atk - def, 0) == 0 and not m.traits.thorns then
-                return { ok = false, reason = '打不动' .. m.name .. '，它也伤不到你' }
+                return { ok = false, reason = '你和' .. m.name .. '都无法伤到对方' }
             end
         end
         local reason
-        if not r.canAttack then reason = '打不动' .. m.name .. '：攻击要高于它的防御 ' .. m.def
-        elseif not r.canWin then reason = '打不死' .. m.name .. '：它回血比你打得快'
-        elseif r.damage >= hero.hp then reason = '打' .. m.name .. '要损失 ' .. r.damage .. ' 生命，你会死'
+        if not r.canAttack then reason = m.name .. '的防御是 ' .. m.def .. '。你的攻击必须高于这个数值才能造成伤害'
+        elseif not r.canWin then reason = m.name .. '在战斗中不断回血，你的伤害不足以击败它'
+        elseif r.damage >= hero.hp then reason = '与' .. m.name .. '交战要承受 ' .. r.damage .. ' 点伤害，现有生命不足以撑到最后'
         end
         if reason then
             if allowFatal then

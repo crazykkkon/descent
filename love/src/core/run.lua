@@ -187,7 +187,7 @@ function Run:engrave(id, reel, cell)
     if not k then return { ok = false, msg = '' } end
     table.remove(self.engraveQueue, 1)
     self:checkHold()
-    return { ok = true, msg = '把' .. symName(id) .. '刻在第 ' .. reel .. ' 个轮子的第 ' .. k .. ' 格，转到它才拿得到' }
+    return { ok = true, msg = '「' .. symName(id) .. '」已刻入第 ' .. reel .. ' 轮第 ' .. k .. ' 格' }
 end
 
 function Run:skipEngrave() table.remove(self.engraveQueue, 1) end
@@ -234,13 +234,13 @@ function Run:armSpin(pay, held)
     if self.status ~= 'playing' or not arm then return { ok = false, msg = '' } end
     if armMod.empty(arm) then return { ok = false, msg = '转轮上还没有刻任何图案' } end
     local hold = anyHeld(held)
-    if hold and allHeld(held) then return { ok = false, msg = '要锁住一两个轮子，留至少一个重转' } end
+    if hold and allHeld(held) then return { ok = false, msg = '三个轮子都锁住了。请先解锁至少一个' } end
     local price = self:armPrice(held)
     if pay == 'gold' then
         if self.hero.gold < price.gold then return { ok = false, msg = '金币不够（要 ' .. price.gold .. '）' } end
         self.hero.gold = self.hero.gold - price.gold
     else
-        if self.hero.hp <= price.blood then return { ok = false, msg = '生命不够（要 ' .. price.blood .. '）' } end
+        if self.hero.hp <= price.blood then return { ok = false, msg = '需要消耗 ' .. price.blood .. ' 点生命，支付后至少要剩 1 点' } end
         self.hero.hp = self.hero.hp - price.blood
     end
     local faces = armMod.roll(arm, self.seed, (self.floorIndex - 1) * 1000 + 999, hold and held or nil)
@@ -250,12 +250,12 @@ function Run:armSpin(pay, held)
         local same = self.hero.weapon == id
         self:hold(id)
         local name = config.WEAPONS[id].name
-        return { ok = true, msg = same and ('三个轮子都停在' .. name .. '上，还是它') or ('三个轮子都停在' .. name .. '上，换成了' .. name), faces = faces }
+        return { ok = true, msg = same and ('再次转出「' .. name .. '」，继续使用') or ('转出并装备「' .. name .. '」'), faces = faces }
     elseif kind == 'empty' then
         self:hold(nil)
-        return { ok = true, msg = '三个轮子都停在空格上，手里空了', faces = faces }
+        return { ok = true, msg = '中线三个都是空格，本次转为空手', faces = faces }
     end
-    return { ok = true, msg = '没有连成一线，手上的武器不变', faces = faces }
+    return { ok = true, msg = '中线没有凑齐图案，保持当前装备', faces = faces }
 end
 
 -- ---------- 设施 ----------
@@ -292,7 +292,7 @@ function Run:stallBuy(i, k)
     local o = self:floor().stall and self:floor().stall[k]
     local bad = self:checkFacility(i, 'stall') or ((not o) and { ok = false, msg = '' }) or nil
     if bad then return bad end
-    if self:sold(i, k) then return { ok = false, msg = '这样已经买过了' } end
+    if self:sold(i, k) then return { ok = false, msg = '这件商品已经售出' } end
     local unpaid = self:pay(o.price)
     if unpaid then return unpaid end
     if o.id == 'atk' then self.hero.atk = self.hero.atk + o.amount
@@ -329,7 +329,7 @@ function Run:wheelSpin(i, pay)
         local unpaid = self:pay(price.gold)
         if unpaid then return unpaid end
     else
-        if self.hero.hp <= price.blood then return { ok = false, msg = '生命不够（要 ' .. price.blood .. '）' } end
+        if self.hero.hp <= price.blood then return { ok = false, msg = '需要消耗 ' .. price.blood .. ' 点生命，支付后至少要剩 1 点' } end
         self.hero.hp = self.hero.hp - price.blood
     end
     local key = (self.floorIndex - 1) * 1000 + (i - 1)
@@ -426,7 +426,7 @@ function Run:pawnBuy(i, k, reel, cell)
     if bad then return bad end
     local w = self:floor().shop and self:floor().shop[k]
     if not w or not self.arm then return { ok = false, msg = '' } end
-    if self:sold(i, k) then return { ok = false, msg = '这样已经买过了' } end
+    if self:sold(i, k) then return { ok = false, msg = '这件商品已经售出' } end
     local full = self:fullReel(reel, cell)
     if full then return full end
     local price = self:shopPrice(w)
@@ -493,7 +493,7 @@ function Run:completeDecree()
     local d = self.decree
     self.engraveQueue[#self.engraveQueue + 1] = { from = 'decree', choices = self:rollWeaponChoices(1) }
     if d.def.tier == 'silver' then self.hero.hp = self.hero.hp + decreeMod.SILVER_BONUS_HP end
-    self.notes[#self.notes + 1] = '诏令完成：' .. d.def.text .. '。' .. (d.def.tier == 'silver' and ('生命 +' .. decreeMod.SILVER_BONUS_HP .. '，') or '') .. '可以刻一把武器'
+    self.notes[#self.notes + 1] = '诏令完成：' .. d.def.text .. '。' .. (d.def.tier == 'silver' and ('生命 +' .. decreeMod.SILVER_BONUS_HP .. '，') or '') .. '获得一次刻入武器图案的机会'
     self.decree = nil
 end
 
@@ -549,13 +549,16 @@ function Run:step(i)
         return { ok = true, msg = '你倒下了。' .. r.reason }
     end
     local lost = self.hero.hp - r.hero.hp
+    local earned = r.hero.gold - self.hero.gold
     self.hero = r.hero
     self.steps = self.steps + 1
     local msg
     if c.kind == 'monster' then
         self.kills = self.kills + 1
         local m = config.MONSTERS[c.id]
-        msg = '击败' .. m.name .. '，' .. (lost >= 0 and ('损失 ' .. lost) or ('回复 ' .. -lost)) .. ' 生命，获得 ' .. m.gold .. ' 金币'
+        msg = '击败' .. m.name .. '，获得 ' .. earned .. ' 金币'
+        if lost > 0 then msg = msg .. '，损失 ' .. lost .. ' 点生命'
+        elseif lost < 0 then msg = msg .. '，恢复 ' .. -lost .. ' 点生命' end
         local boon = config.MONSTER_BOON[c.id]
         if boon and not contains(self.boonsSeen, boon) then self.boonsSeen[#self.boonsSeen + 1] = boon end
         if self.arm then
@@ -727,8 +730,9 @@ function Run.load(plan, s)
     run.bought = s.bought or {}
     run.altarUsed = s.altarUsed or {}
     run.boonsSeen = s.boonsSeen or {}
-    run.decree = s.decree
-    run.decreeOffer = s.decreeOffer
+    local d = s.decree
+    run.decree = d and { def = decreeMod.restore(d.def), progress = d.progress, ['until'] = d['until'] }
+    run.decreeOffer = decreeMod.restore(s.decreeOffer)
     run.engraveQueue = s.engraveQueue or {}
     run.drank = s.drank or false
     run.exitTaken = s.exitTaken or 0

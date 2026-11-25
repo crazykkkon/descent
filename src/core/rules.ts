@@ -18,12 +18,12 @@ export function interact(cell: Cell, hero: Hero, floor: FloorDef, ch: CharacterD
             const r = simulateCombat(hero, m);
             // 打不动、它也伤不到你（没有反伤）：两边谁也伤不到谁，打不起来（制作人 2026-11-24：打不动也能硬打，被一点点耗死）
             if (!r.canAttack && Math.max(m.atk - effectiveStats(hero).def, 0) === 0 && !m.traits.includes('thorns')) {
-                return { ok: false, reason: `打不动${m.name}，它也伤不到你` };
+                return { ok: false, reason: `你和${m.name}都无法伤到对方` };
             }
             let reason = '';
-            if (!r.canAttack) reason = `打不动${m.name}：攻击要高于它的防御 ${m.def}`;
-            else if (!r.canWin) reason = `打不死${m.name}：它回血比你打得快`;
-            else if (r.damage >= hero.hp) reason = `打${m.name}要损失 ${r.damage} 生命，你会死`;
+            if (!r.canAttack) reason = `${m.name}的防御是 ${m.def}。你的攻击必须高于这个数值才能造成伤害`;
+            else if (!r.canWin) reason = `${m.name}在战斗中不断回血，你的伤害不足以击败它`;
+            else if (r.damage >= hero.hp) reason = `与${m.name}交战要承受 ${r.damage} 点伤害，现有生命不足以撑到最后`;
             if (reason) return allowFatal ? { ok: true, hero: { ...hero, hp: 0 }, fatal: true, reason } : { ok: false, reason };
             const w = hero.weapon ? WEAPONS[hero.weapon] : undefined;
             return { ok: true, hero: { ...hero, hp: hero.hp - r.damage + (w?.killHeal ?? 0), gold: hero.gold + m.gold + (w?.killGold ?? 0) } };

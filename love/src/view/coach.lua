@@ -21,33 +21,33 @@ local FLOORS = {
     function(run, s)
         local h = run.hero
         if items(run, 'smallPotion') < s.potions then
-            return '血瓶走上去就喝，生命 +' .. run:floor().smallPotion .. '。最后打掉盲鳗，走下左边的石阶就进下一层。不用把怪打完。'
+            return '踩到血瓶会自动喝下，恢复' .. run:floor().smallPotion .. '点生命。击败左边挡路的盲鳗，就能沿石阶下楼。'
         end
-        if h.def > s.def then return '大青晶加防御：怪打你没那么疼了。鼠标停在格子上，能看到它的详细数值。' end
-        if h.atk > s.atk then return '攻击变高了，打下一只井苔要的回合更少，挨打也更少。先拿宝石再打，更划算。' end
-        if run.kills >= 1 then return '打赢了，还掉了几个金币。前面红色的是大赤晶，走上去就捡：攻击 +' .. (config.BIG_GEM + run.ch.gemBonus) .. '。正式下井以后，浅层只有小宝石（+1），越往深处大宝石（+3）越多。' end
-        if run.steps >= 1 then return '鼠标指着怪物，下方会显示它的生命、攻、防。你每下打掉「你的攻 − 它的防」，它每下打掉你「它的攻 − 你的防」。走过去就开打。' end
-        return '用方向键或者点格子走路。按住方向键可以一直走。'
+        if h.def > s.def then return '大青晶提高了防御。现在挨同样的一击，掉的血会更少。' end
+        if h.atk > s.atk then return '攻击提高了。现在打下一只井苔，能更快结束战斗，少挨几下。' end
+        if run.kills >= 1 then return '前面那颗红色晶簇是大赤晶。走过去拾取，攻击增加' .. (config.BIG_GEM + run.ch.gemBonus) .. '点。' end
+        if run.steps >= 1 then return '指向怪物可查看攻防。普通攻击时，你的攻击比它的防御高几点，就能打掉几点生命。它打你也这样算。' end
+        return '点地面或按方向键移动。按住方向键可连续走。走到怪物那一格就会开战。'
     end,
     -- 第 2 层：骨钥和骨门、打不动的怪、血瓶
     function(run, s)
         if doors(run) < s.doors then
-            return '锈甲虫的防御比你的攻击高：现在打它，你每下都是 0，会被它一点点耗死。拿了门后的大赤晶就打得动了，但要掉很多血换一袋金币——值不值得，自己算。出口在右边。'
+            return '右边就是出口。想拿岔路里的金币？先捡门后的大赤晶，再看看你的攻击能不能穿透锈甲虫的甲壳。'
         end
-        if run.hero.keys > s.keys then return '拿到骨钥了。走到骨门上，就会用掉一把骨钥把门打开。' end
-        return '骨门要骨钥才能开。骨钥在井苔身后，往下走。顺路的血瓶走上去就喝。'
+        if run.hero.keys > s.keys then return '拿到骨钥了。走向骨门会自动用一把钥匙开门。' end
+        return '往下走，骨钥就在井苔身后。拿到钥匙就能打开骨门。'
     end,
     -- 第 3 层：两条路怎么选
     function(run, s)
         if run.kills >= 1 or doors(run) < s.doors then
-            return '走过的路不能撤回，死了要从第 1 层重来。开打之前，先用攻防算一算这一仗要掉多少血。'
+            return '可以折返，也可以直接下楼。已经损失的生命不会因折返而恢复。'
         end
-        return '两条路都能到出口。上面：过血门（不用钥匙，扣 ' .. run:floor().bloodCost .. ' 生命），还有一只会先出手的回声蝠。下面：打两只怪，路上有一颗大赤晶。自己算哪条划算。'
+        return '上下两条路都通向出口。上路有先出手的回声蝠，过血门还要花' .. run:floor().bloodCost .. '点生命。下路有两只怪，也有一颗大赤晶。'
     end,
     -- 第 4 层：精英
     function(run)
-        if not run:eliteAlive() then return '精英倒下了，出口开了。' end
-        return '披着厚石鳞的守卫是精英：它不倒，出口就打不开。它每回合打你两下——先把宝石和血瓶都拿到手，再去打它。'
+        if not run:eliteAlive() then return '守卫倒下了，可以下楼了。' end
+        return '石鳞守卫封住了出口，每回合能攻击两次。先沿路收集宝石和血瓶，再去挑战它。'
     end,
     -- 第 5 层：井底之眼
     function()

@@ -531,7 +531,7 @@ end
 local SHORTW = { boneKnife = '刀', harpoon = '叉', hammer = '锤', mossBlade = '苔', bellStaff = '铃', saltDagger = '盐', rustSword = '锈', wellHook = '钩', lamp = '灯', twinHook = '双钩', wild = '赖' }
 
 local function weaponLine(id)
-    if id == armMod.WILD then return '赖子：能顶替任何武器（不顶替空格），自己不能拿在手上；很难得到' end
+    if id == armMod.WILD then return '赖子是万能图案，可以配合任意一种武器。中线有空格或全是赖子时，转不出武器。' end
     local b = run.arm and run.arm.boons[id]
     local extra = ''
     if b and #b > 0 then
@@ -583,10 +583,10 @@ function openReward()
         continueFlow()
     end
     openModal('精英的战利品', {
-        '精英倒下了。选一样带走：',
-        '攻击强化：攻击 +' .. o.atk .. '，永久。',
+        '从以下三项中选一项。',
+        '攻击提高 ' .. o.atk .. ' 点，持续到本局结束。',
         '刻一个图案：从 ' .. table.concat(names, '、') .. ' 里挑一个刻到断臂转轮上。',
-        '恢复生命：生命 +' .. o.heal .. '，要付一半金币（' .. o.cost .. ' 金）。',
+        '花 ' .. o.cost .. ' 金币恢复 ' .. o.heal .. ' 点生命，花费为现有金币的一半。',
     }, {
         { label = '攻击 +' .. o.atk, fn = function() pick('atk') end },
         { label = '刻图案', primary = true, fn = function() pick('engrave') end },
@@ -617,12 +617,12 @@ function openEngrave()
         openModal('第一道印子', {
             '矿灯照过怪物倒下的地方，一道印子还在发亮。你把断臂凑近，一格空白的铜面暖了起来。',
             '你挪开手，那道印子也跟着挪了半寸。',
-            '「原来带得走的是图案。要拿到手，还得把它转出来。」',
+            '「能带走的是这道印。想握住那把武器，还得靠这三只轮子。」',
         }, { { label = '看看图案', primary = true, fn = function() closeModal(); openEngrave() end } })
         return
     end
-    local from = ({ elite = '精英倒下了，它身上压着几件东西的印子', mark = '这只怪身上的印记亮了起来', decree = '井神兑现了诏令', wheel = '大转盘吐出一个图案' })[p.from]
-    local lines = { from .. '。选一个刻到断臂转轮上（刻上以后要转到才拿得到）：' }
+    local from = ({ elite = '守卫倒下后，地上留下几道武器的印记', mark = '怪物身上的印记亮了起来', decree = '井神兑现了诏令', wheel = '大转盘吐出一个图案' })[p.from]
+    local lines = { from .. '。', '先选图案，再点空格刻下。拉杆后，只要三个相同的武器图案停在中间的刻线上，你就能拿到那把武器。' }
     for _, w in ipairs(p.choices) do lines[#lines + 1] = weaponLine(w) end
     local buttons = {}
     for _, w in ipairs(p.choices) do
@@ -646,9 +646,9 @@ function openDecree()
     openModal('井神的诏令·' .. decreeMod.TIER_NAMES[d.tier], {
         '井壁上浮出一行字：',
         '「' .. d.text .. '」',
-        '期限：从这一层起，' .. decreeMod.SPAN .. ' 层之内。',
-        '完成：从三把武器里选一把刻上去' .. (d.tier == 'silver' and '，再加生命 +' .. decreeMod.SILVER_BONUS_HP or '') .. '。',
-        '做不到：攻击 −' .. decreeMod.PENALTY[d.tier] .. '。也可以不接。',
+        '期限到第 ' .. (run.floorIndex + decreeMod.SPAN - 1) .. ' 层结束。',
+        '完成后获得一个武器图案，可刻入转轮' .. (d.tier == 'silver' and '，并恢复 ' .. decreeMod.SILVER_BONUS_HP .. ' 点生命' or '') .. '。',
+        '逾期未完成，攻击 −' .. decreeMod.PENALTY[d.tier] .. '。拒绝诏令没有惩罚。',
     }, {
         { label = '不接', fn = function() closeModal(); run:refuseDecree(); saveGame(); continueFlow() end },
         { label = '接下', primary = true, fn = function() closeModal(); setMsg(run:acceptDecree().msg); saveGame(); continueFlow() end },
@@ -665,13 +665,13 @@ local function pct(x) return math.floor(x * 1000 + 0.5) / 10 .. '%' end
 -- 右侧转轮下面那行说明
 local function armHint()
     local arm = run.arm
-    if armMod.empty(arm) then return '转轮还是空的。打败带「印」的怪或精英，就能往上刻武器。' end
+    if armMod.empty(arm) then return '转轮上还没有图案。击败带「印」的怪物可获得武器图案。' end
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
     local list = armMod.holdOdds(arm, anyHeld and armHeld or nil, run.pool)
     local parts = {}
     for _, o in ipairs(list) do parts[#parts + 1] = (o.target and W(o.target) or '空手') .. ' ' .. pct(o.p) end
-    if #parts == 0 then return anyHeld and '锁住的图案连不成一线，重转也没用。' or '中间一行现在连不成任何武器。' end
-    return (anyHeld and '锁住后重转：' or '中间一行连成：') .. table.concat(parts, '，')
+    if #parts == 0 then return anyHeld and '这样锁轮无法凑齐图案。试试解锁。' or '目前的图案组合转不出武器。' end
+    return (anyHeld and '锁轮后重转概率：' or '本次拉杆概率：') .. table.concat(parts, '，')
 end
 
 function spinArm(pay)
@@ -685,7 +685,7 @@ function spinArm(pay)
     local resultText = r.msg
     if run.hero.weapon and (r.faces[1] == armMod.WILD or r.faces[2] == armMod.WILD or r.faces[3] == armMod.WILD)
         and armMod.outcome(r.faces) == 'weapon' then
-        resultText = '赖子补齐中线，转出' .. W(run.hero.weapon)
+        resultText = '赖子补齐了图案，转出' .. W(run.hero.weapon)
     end
     armView.startSpin(held, r.faces, before, run.arm.stops, resultText)
     armHeld = { false, false, false }
@@ -732,8 +732,8 @@ end
 -- 走上出口前问一次
 function openExit(cell)
     local c = run.cells[cell]
-    local lines = { exitWords(c), '下楼之后就回不来了。' }
-    if twoExits() then lines[#lines + 1] = '这一层有两个出口，各通向不同的下一层。' end
+    local lines = { exitWords(c), '下楼后无法返回本层。' }
+    if twoExits() then lines[#lines + 1] = '两处楼梯通向不同的房间，只能选一条路。' end
     local due = run:rentDue()
     if due > 0 then lines[#lines + 1] = '收租的井神坐在洞口：下楼前要交 ' .. due .. ' 金币（你有 ' .. run.hero.gold .. '）。' end
     openModal(twoExits() and EXIT_LOOK[exitLevel(c)] or '出口', lines, {
@@ -751,14 +751,14 @@ local function openRent(thenFn)
         thenFn()
     end
     local buttons = {
-        { label = '用 ' .. Run.RENT_STAT_COST .. ' 点攻击抵', fn = function() pay('atk') end },
-        { label = '用 ' .. Run.RENT_STAT_COST .. ' 点防御抵', fn = function() pay('def') end },
+        { label = '用 ' .. Run.RENT_STAT_COST .. ' 点攻击抵租', fn = function() pay('atk') end },
+        { label = '用 ' .. Run.RENT_STAT_COST .. ' 点防御抵租', fn = function() pay('def') end },
     }
     if run.hero.gold >= due then buttons[#buttons + 1] = { label = '交 ' .. due .. ' 金币', primary = true, fn = function() pay('gold') end } end
     openModal('井租', {
         '收租的井神伸出手：要下楼，先交 ' .. due .. ' 金币的井租。',
-        '你有 ' .. run.hero.gold .. ' 金币。' .. (run.hero.gold >= due and '' or '金币不够，只能用属性抵。'),
-        '交不上可以用 ' .. Run.RENT_STAT_COST .. ' 点攻击或防御抵（永久减少）。',
+        '你有 ' .. run.hero.gold .. ' 金币。' .. (run.hero.gold >= due and '' or '金币不足。'),
+        '也可以抵扣井租。选择攻击或防御后，该属性本局减少 ' .. Run.RENT_STAT_COST .. ' 点。',
     }, buttons)
 end
 
@@ -809,10 +809,10 @@ end
 -- 当铺
 function openPawn(i)
     local f = run:floor()
-    local lines = { '当铺不收攻击和防御。你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.keys .. ' 把骨钥。' }
+    local lines = { '在这里可以典当或赎回图案，也能卖骨钥。你有 ' .. run.hero.gold .. ' 金币、' .. run.hero.keys .. ' 把骨钥。' }
     for _, l in ipairs(armReelsText()) do lines[#lines + 1] = l end
-    for j, p in ipairs(run.pawned) do lines[#lines + 1] = '当着的：' .. W(p.weapon) .. '（原来在轮子 ' .. p.reel .. '），赎回 ' .. run:redeemPrice(j) .. ' 金（每过一层涨 20%）' end
-    for k, w in ipairs(f.shop or {}) do lines[#lines + 1] = '卖：' .. weaponLine(w) .. '　' .. run:shopPrice(w) .. ' 金' .. (run:sold(i, k) and '（已卖出）' or '') end
+    for j, p in ipairs(run.pawned) do lines[#lines + 1] = '待赎图案：' .. W(p.weapon) .. '（原来在轮子 ' .. p.reel .. '），赎回 ' .. run:redeemPrice(j) .. ' 金（每过一层涨 20%）' end
+    for k, w in ipairs(f.shop or {}) do lines[#lines + 1] = '在售图案：' .. weaponLine(w) .. '　' .. run:shopPrice(w) .. ' 金' .. (run:sold(i, k) and '（已卖出）' or '') end
     local function after(r)
         setMsg(r.msg, not r.ok)
         saveGame()
@@ -861,16 +861,16 @@ function openAltar(i, boon, weapon)
         openModal('骨坛', { '这座骨坛已经用过了。' }, { { label = '离开', primary = true, fn = function() closeModal() end } })
         return
     end
-    local lines = { '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击或 1 把骨钥，把你这一局杀过的怪的本事移到转轮上的一把武器上。' }
+    local lines = { '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击或 1 把骨钥，为转轮上的一种武器附加特性。可选特性来自你本局击败的怪物。' }
     local buttons = {}
     if not boon then
-        if #run.boonsSeen == 0 then lines[#lines + 1] = '你这一局还没杀过带特性的怪（溺魂、回声蝠、裂岩蟹、盐蚀蛞蝓）。' end
+        if #run.boonsSeen == 0 then lines[#lines + 1] = '还没有可用的特性。击败溺魂、回声蝠、裂岩蟹或盐蚀蛞蝓后再来。' end
         for _, b in ipairs(run.boonsSeen) do
             lines[#lines + 1] = config.BOON_NAMES[b] .. '：' .. config.BOON_DESC[b]
             buttons[#buttons + 1] = { label = config.BOON_NAMES[b], fn = function() openAltar(i, b) end }
         end
     elseif not weapon then
-        lines[#lines + 1] = '移「' .. config.BOON_NAMES[boon] .. '」到哪一把上？'
+        lines[#lines + 1] = '要让哪把武器获得「' .. config.BOON_NAMES[boon] .. '」？'
         local seen = {}
         for _, c in ipairs(armMod.engravedCells(run.arm)) do
             local w = run.arm.reels[c[1]][c[2]]
@@ -940,19 +940,18 @@ local function awardShards(won)
     saveMeta()
     return n
 end
-local function shardLine(n) return '带回 ' .. n .. ' 块灵魂碎片（现在共有 ' .. meta.shards .. ' 块），可以在开局界面的「碎片商店」里花掉。' end
+local function shardLine(n) return '本次带回 ' .. n .. ' 块灵魂碎片。现有 ' .. meta.shards .. ' 块，可在主菜单的「碎片商店」使用。' end
 
 function openVictory()
     love.filesystem.remove(SAVE_FILE)
     local h = run.hero
     local n = awardShards(true)
     openModal('你走到了井底', {
-        '二十层，一层不落。',
+        '走过二十层，你终于来到了井底。本次试玩到此结束。',
         '剩余生命 ' .. h.hp .. '，攻 ' .. h.atk .. ' / 防 ' .. h.def .. '，金币 ' .. h.gold .. (h.weapon and ('，手上是' .. W(h.weapon)) or '') .. '。',
         shardLine(n),
-        '（第 20 层 Boss 站位战还是占位，正式版会换掉。）',
     }, {
-        { label = '回开局界面', fn = function() backToTitle() end },
+        { label = '返回主菜单', fn = function() backToTitle() end },
         { label = '再来一局', primary = true, fn = function() closeModal(); beginRun() end },
     })
 end
@@ -963,10 +962,10 @@ function openDeath()
         -- 教程还没走到井底就倒下了：教程不算走完，从教程第 1 层重来（制作人定）
         openModal('你倒下了', {
             '你倒在了' .. run:floor().name .. '。',
-            '新手教程还没走完，要从教程第 1 层重新走。',
+            '这次得从井口重新出发。',
             '开打之前，先用攻防算一算这一仗要掉多少血。',
         }, {
-            { label = '回开局界面', fn = function() backToTitle() end },
+            { label = '返回主菜单', fn = function() backToTitle() end },
             { label = '重新走教程', primary = true, fn = function() closeModal(); beginRun() end },
         })
         return
@@ -978,7 +977,7 @@ function openDeath()
             { label = '去碎片商店', fn = function() closeModal(); backToTitle(); openShop() end },
             { label = '再下井', primary = true, fn = function() closeModal(); beginRun() end },
         }
-        local shardText = '你身上还沾着一点发光的东西——' .. n .. ' 块灵魂碎片。越往深处倒下，带回来的越多。'
+        local shardText = '你身上还沾着一点发光的东西——' .. n .. ' 块灵魂碎片。走完的楼层越多，能带回的碎片就越多。'
         if meta.storyArmSeen then
             -- 重走教程：剧情只演一次，这里只给结算
             openModal('……', { '你又在井口醒来。断口上的三只铜轮还在。', shardText }, after)
@@ -994,9 +993,9 @@ function openDeath()
         }, { { label = '低头看一眼', primary = true, fn = function()
             closeModal()
             openModal('袖子里的响声', {
-                '三只轮子正中，横着一道刻线。拉杆带它们转，扣上哪只的锁，哪只就停在原位。',
+                '一道刻线横穿三只铜轮。你扣住一只轮子，再拉动摇杆。只有另外两只转了起来。',
                 '铜壳上刻着三个一样的刀印。旁边是一只握刀的手。',
-                '「懂了。中间凑齐同一把武器，它才肯给我。」',
+                '「懂了。三个刀印都停在这条线上，我手里就能多把刀。」',
                 shardText,
             }, after)
         end } })
@@ -1004,7 +1003,7 @@ function openDeath()
     end
     local n = awardShards(false)
     openModal('你倒下了', { '你倒在了' .. run:floor().name .. '。', shardLine(n), '重新开始要从第 1 层走起，地图会换，转轮上的图案也会清空。' }, {
-        { label = '回开局界面', fn = function() backToTitle() end },
+        { label = '返回主菜单', fn = function() backToTitle() end },
         { label = '从第 1 层重新开始', primary = true, fn = function() closeModal(); beginRun() end },
     })
 end
@@ -1048,8 +1047,8 @@ function newGame(seed, opts)
     saveGame()
     if tutorial then
         openModal('坠井', {
-            '你失足掉进了一口很深的井。',
-            '往下走，找出口。画面下方会一步步告诉你怎么走。',
+            '脚下一滑，你跌进了井里。矿灯还亮着。',
+            '沿石道寻找通往下一层的楼梯。指向怪物或道具，可以在地图下方查看详情。',
         }, { { label = '往下走', primary = true, fn = function() closeModal(); setMsg('') end } })
     else
         setMsg('')
@@ -1355,9 +1354,9 @@ end
 
 local FACILITY_GLYPH = {
     stall = { '摊', '补给', '补给摊', '火边的补给摊，花金币买生命、攻击或防御。' },
-    wheel = { '盘', '转盘', '大转盘', '盘面八格全部公开：金币、生命、攻防、新图案，也有井蛭和擦掉图案。' },
+    wheel = { '盘', '转盘', '大转盘', '转盘有八格。可能转到奖励，也可能被井蛭吸血，或失去一个图案。' },
     pawn = { '当', '当铺', '当铺', '卖骨钥、当掉或赎回武器图案、买图案、擦图案。不收攻防。' },
-    altar = { '坛', '骨坛', '骨坛', '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击或 1 把骨钥，把杀过的怪的本事移到一把武器上。' },
+    altar = { '坛', '骨坛', '骨坛', '献 ' .. Run.ALTAR_ATK_COST .. ' 点攻击或 1 把骨钥，可将击败过的怪物特性赋予一种已刻的武器。' },
 }
 
 local function inRect(lx, ly, x, y, w, h) return lx >= x and lx <= x + w and ly >= y and ly <= y + h end
@@ -1389,7 +1388,7 @@ local function cellDetails(i)
         for k in pairs(m.traits) do stats[#stats + 1] = config.TRAIT_NAMES[k] .. '：' .. config.TRAIT_DESC[k] end
         -- 不给预计掉血（制作人定：玩家自己算）；只给数值、特性、掉落
         local result = '掉落 ' .. m.gold .. ' 金币'
-        if run:marked(i) then result = result .. '　　印：打败后可刻' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name end
+        if run:marked(i) then result = result .. '　　印：可刻入「' .. config.WEAPONS[config.MARK_WEAPON[c.id]].name .. '」图案' end
         return m.name, result, table.concat(stats, '　'), false
     elseif c.kind == 'item' then
         local f = run:floor()
@@ -1405,7 +1404,7 @@ local function cellDetails(i)
         return '血门', '通过时扣 ' .. run:floor().bloodCost .. ' 生命'
     elseif c.kind == 'exit' then
         if run:eliteAlive() then return '出口', '精英还活着，出口被封住了' end
-        return twoExits() and EXIT_LOOK[exitLevel(c)] or '出口', exitWords(c), '走上去前会问你一次，还能回头'
+        return twoExits() and EXIT_LOOK[exitLevel(c)] or '出口', exitWords(c), '走到楼梯口后，可以选择下楼或留在本层'
     elseif floorMod.isFacility(c) then
         local g = FACILITY_GLYPH[c.kind]
         return g[3], g[4]
@@ -1447,13 +1446,13 @@ local function drawPickerUI()
     marks.icon(picker.sym, OX + (tx - 13) * S, OY + (ty + 9) * S, 23 * S)
     text(title, tx, ty, 13, col)
     if picker.flash then
-        local hint = picker.sym == armMod.WILD and '中线上的赖子能替代武器图案。' or '图案留在这一格。拉杆连成中线，武器才到手。'
+        local hint = picker.sym == armMod.WILD and '中线上的赖子能替代武器图案。' or '图案已刻好。拉杆后，中线凑齐三个相同的武器图案即可装备。'
         text(hint, 0, 32 - (1 - e) * 20, 7.5, C.text, 'center', LW)
     elseif pickerHasBlank() then
-        text(picker.onlyReel and ('赎回只能刻回第 ' .. picker.onlyReel .. ' 个轮子 · 点一个空格刻上去') or '三个轮子都摊开了，每个轮子 5 格 · 点一个空格刻上去 · 有图案的格子不能覆盖',
+        text(picker.onlyReel and ('请选择第 ' .. picker.onlyReel .. ' 轮的空格，赎回的图案只能刻回原轮。') or '每轮有五格。点空格刻入图案，已有图案的格子不能覆盖。',
             0, 32 - (1 - e) * 20, 7.5, C.dim, 'center', LW)
     else
-        text((picker.onlyReel and ('第 ' .. picker.onlyReel .. ' 个轮子') or '转轮') .. '刻满了，刻不上。先去当铺擦掉一格。', 0, 32 - (1 - e) * 20, 8, C.warn, 'center', LW)
+        text((picker.onlyReel and ('第 ' .. picker.onlyReel .. ' 个轮子') or '转轮') .. '已满。可以去当铺擦掉旧图案，腾出空格。', 0, 32 - (1 - e) * 20, 8, C.warn, 'center', LW)
     end
     -- 让玩家在刻入的瞬间仍能核对手里实际拿着什么。
     local weapon = run.hero.weapon
@@ -1515,7 +1514,7 @@ local function drawPickerUI()
         if msgErr and msg ~= '' then text(msg, 0, PICK_CANCEL.y - 16, 7.5, C.warn, 'center', LW) end
         local b = PICK_CANCEL
         rect({ 0.11, 0.16, 0.19 }, b.x, b.y, b.w, b.h, 0.95, 4)
-        text('不刻了（Esc）', b.x, b.y + 4, 7.5, C.text, 'center', b.w)
+        text('返回（Esc）', b.x, b.y + 4, 7.5, C.text, 'center', b.w)
     end
     -- 刻上的那一格闪一下
     if picker.flash and picker.flash.t < 0.6 and u > 0 then
@@ -1560,7 +1559,7 @@ local function drawArmUI()
     local anyHeld = armHeld[1] or armHeld[2] or armHeld[3]
     text((anyHeld and '拉杆重转 ' or '拉杆 ') .. price.gold .. ' 金（R）', armView.X + 10, armView.Y + 160, 7.5, { 0.96, 0.85, 0.6 })
     local b = armView.BLOOD
-    text('用血转 ' .. price.blood, b.x, b.y + 4, 7, { 1, 0.85, 0.88 }, 'center', b.w)
+    text('花 ' .. price.blood .. ' 生命', b.x, b.y + 4, 7, { 1, 0.85, 0.88 }, 'center', b.w)
     text(armHint(), PANEL_X + 2, armView.Y + 222, 6.5, C.dim, 'left', PANEL_W)
     if not meta.dragged then text('按住轮子上下拨动看整圈', PANEL_X + 2, armView.Y + 258, 6, { 0.42, 0.48, 0.5 }, 'left', PANEL_W) end
     local kind, t, prize = armView.flashInfo()
@@ -1752,8 +1751,11 @@ function beginRun()
     local maxDepth = (meta.unlocks and meta.unlocks.depth) and math.min(metaMod.MAX_DEPTH, (meta.clearedDepth or -1) + 1) or 0
     local function chooseDepth(character)
         if maxDepth <= 0 then go({ character = character }); return end
-        local lines = { '深度越深，怪越凶，碎片也给得越多。通关一个深度才能选下一级。',
-            '深度 1：每层的怪再加强 2 级。碎片 +25%。', '深度 2：再加强 2 级，血瓶效果 −25%。碎片 +50%。', '深度 3：再加强 2 级，井租和补给摊 ×1.5。碎片 +75%。' }
+        local lines = { '每通关一个深度，就能挑战下一级。',
+            '从第 ' .. (route.DEPTH_FROM + 1) .. ' 层起，深度每提高一级，怪物就额外增强 ' .. metaMod.DEPTH_POWER .. ' 级。',
+            '深度 1：结算时多得 25% 碎片。',
+            '深度 2：多得 50% 碎片。从开局起，血瓶恢复量降至普通模式的 ' .. route.DEPTH_POTION .. '%。',
+            '深度 3：多得 75% 碎片。血瓶恢复量仍为 ' .. route.DEPTH_POTION .. '%，井租和补给摊价格另涨约五成。' }
         local buttons = { { label = '普通', primary = true, fn = function() go({ character = character, depth = 0 }) end } }
         for d = 1, maxDepth do buttons[#buttons + 1] = { label = '深度 ' .. d, fn = function() go({ character = character, depth = d }) end } end
         openModal('选深度', lines, buttons)
@@ -1814,7 +1816,7 @@ function openPause()
     openModal('暂停', { '进度会自动保存。' }, {
         { label = '继续', primary = true, fn = closeModal },
         { label = '设置', fn = function() openSettings(openPause) end },
-        { label = '回到开局界面', fn = backToTitle },
+        { label = '返回主菜单', fn = backToTitle },
         { label = '退出游戏', danger = true, fn = function() if run and run.status == 'playing' then saveGame() end; love.event.quit() end },
     })
     modal.onEscape = closeModal
@@ -1903,9 +1905,9 @@ local function shopButtons()
         end
         if lv > 0 then
             local off = meta.perkOff[p.id]
-            out[#out + 1] = { x = SHOP.lx + SHOP.w - 70, y = y + 20, w = 66, h = 13, label = off and '已关（点开启）' or '开着（点关掉）', style = off and 'off' or 'on', fn = function()
+            out[#out + 1] = { x = SHOP.lx + SHOP.w - 70, y = y + 20, w = 66, h = 13, label = off and '已停用 · 启用' or '已启用 · 停用', style = off and 'off' or 'on', fn = function()
                 meta.perkOff[p.id] = (not off) or nil
-                shopMsg, shopMsgErr = p.name .. (off and '开启了。' or '关掉了：下一局不生效，用掉的碎片不退。'), false
+                shopMsg, shopMsgErr = p.name .. (off and '已启用，下局生效。' or '已停用。等级保留，可随时重新启用。'), false
                 saveMeta()
             end }
         end
@@ -1938,7 +1940,7 @@ function drawShopUI()
     rect({ 0.02, 0.03, 0.04 }, 0, 0, LW, LH, 0.78)
     text('灵魂碎片商店', SHOP.lx, 12, 15, { 0.95, 0.86, 0.62 })
     text('碎片 ' .. (meta.shards or 0), LW - 160, 16, 11, { 0.62, 0.86, 0.92 }, 'right', 136)
-    text('强化 · 每局开局生效；不想要可以关掉（关掉不退碎片）', SHOP.lx, 50, 7.5, C.dim)
+    text('强化在开局时生效。停用保留等级，已花的碎片不退还。', SHOP.lx, 50, 7.5, C.dim)
     text('解锁 · 一次买断，永久有效', SHOP.rx, 50, 7.5, C.dim)
     for i, p in ipairs(metaMod.PERKS) do
         local y = SHOP.y0 + (i - 1) * SHOP.rowH
@@ -1947,7 +1949,7 @@ function drawShopUI()
         rect({ 0.07, 0.10, 0.12 }, SHOP.lx, y, SHOP.w, SHOP.rowH - 3, 0.92, 4)
         text(p.name, SHOP.lx + 6, y + 3, 9.5, lv > 0 and not off and { 1, 0.88, 0.55 } or C.text)
         for k = 1, #p.costs do rect(k <= lv and (off and { 0.4, 0.4, 0.4 } or C.ok) or { 0.2, 0.24, 0.26 }, SHOP.lx + 62 + (k - 1) * 9, y + 7, 6, 6, 1, 1) end
-        local now = lv > 0 and ('现在：' .. p.desc(p.values[lv]) .. (off and '（已关）' or '')) or '还没买'
+        local now = lv > 0 and ('现在：' .. p.desc(p.values[lv]) .. (off and '（已停用）' or '')) or '未购买'
         local nxt = lv < #p.costs and ('　下一级：' .. p.desc(p.values[lv + 1])) or '　已满级'
         text(now .. nxt, SHOP.lx + 6, y + 19, 6.5, C.dim, 'left', SHOP.w - 84)
     end

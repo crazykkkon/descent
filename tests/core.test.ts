@@ -714,6 +714,20 @@ test('存档读档：断臂转轮、当铺、诏令、选过的楼梯都保留',
     assert.equal(back.floor.map.join(''), run.floor.map.join(''));
 });
 
+test('旧存档的诏令更新措辞，保留原来的数量、期限和进度', () => {
+    const plan = buildRoute(9);
+    const saved = new Run(plan, 'digger', 9).save();
+    saved.decree = { def: { kind: 'killTrait', tier: 'bronze', n: 2, text: '打败 2 只会先攻、吸血或反伤的怪' }, until: 4, progress: 1 };
+    const active = Run.load(plan, saved).decree!;
+    assert.match(active.def.text, /累计击败 2 只/);
+    assert.equal(active.progress, 1);
+    assert.equal(active.until, 4);
+    assert.equal(saved.decree.def.text, '打败 2 只会先攻、吸血或反伤的怪');
+    saved.decree = null;
+    saved.decreeOffer = { kind: 'gold', tier: 'silver', n: 150, text: '带 150 金币离开' };
+    assert.deepEqual(Run.load(plan, saved).decreeOffer, saved.decreeOffer);
+});
+
 test('赖子：顶替任何武器，不顶替空格；三个赖子不变；不能拿在手上', () => {
     assert.deepEqual(armOutcome(['boneKnife', 'wild', 'boneKnife']), { kind: 'weapon', id: 'boneKnife' });
     assert.deepEqual(armOutcome(['wild', 'wild', 'hammer']), { kind: 'weapon', id: 'hammer' });
@@ -886,6 +900,6 @@ test('打不动也能硬打（会被耗死）；但打不动、它也伤不到�
     r2.hero = { hp: 100, atk: 10, def: 30, keys: 0, gold: 0 };
     const res = r2.move(1, 0);
     assert.equal(res.ok, false);
-    assert.match(res.msg, /也伤不到你/);
+    assert.match(res.msg, /都无法伤到对方/);
     assert.equal(r2.status, 'playing');
 });

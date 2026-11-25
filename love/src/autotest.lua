@@ -444,7 +444,7 @@ function M.start()
         say('买：' .. tostring(game.shopBuy('买 ')) .. ' → ' .. game.shopMsg())
         say('升级：' .. tostring(game.shopBuy('升级 ')) .. ' → ' .. game.shopMsg())
         say('买：' .. tostring(game.shopBuy('买 ')) .. ' → ' .. game.shopMsg())
-        say('关掉：' .. tostring(game.shopBuy('开着')) .. ' → ' .. game.shopMsg())
+        say('关掉：' .. tostring(game.shopBuy('已启用')) .. ' → ' .. game.shopMsg())
         say('解锁（碎片不够时）：' .. tostring(game.shopBuy('解锁 ')) .. ' → ' .. game.shopMsg())
         game.getMeta().shards = game.getMeta().shards + 600   -- 测试用：多给一些碎片，把角色也解锁了
         say('解锁：' .. tostring(game.shopBuy('解锁 ')) .. ' → ' .. game.shopMsg())

@@ -91254,7 +91254,7 @@ return {
       weapon = "boneKnife",
       reel = 0,
       ok = true,
-      msg = "把骨刀刻在第 1 个轮子的第 2 格，转到它才拿得到",
+      msg = "「骨刀」已刻入第 1 轮第 2 格",
       reels = {
         { "blank", "boneKnife", "blank", "blank", "blank" },
         { "blank", "blank", "blank", "blank", "blank" },
@@ -91273,7 +91273,7 @@ return {
       weapon = "hammer",
       reel = 0,
       ok = true,
-      msg = "把破壳锤刻在第 1 个轮子的第 3 格，转到它才拿得到",
+      msg = "「破壳锤」已刻入第 1 轮第 3 格",
       reels = {
         { "blank", "boneKnife", "hammer", "blank", "blank" },
         { "blank", "blank", "blank", "blank", "blank" },
@@ -91292,7 +91292,7 @@ return {
       weapon = "wild",
       reel = 1,
       ok = true,
-      msg = "把赖子刻在第 2 个轮子的第 2 格，转到它才拿得到",
+      msg = "「赖子」已刻入第 2 轮第 2 格",
       reels = {
         { "blank", "boneKnife", "hammer", "blank", "blank" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -91311,7 +91311,7 @@ return {
       weapon = "mossBlade",
       reel = 2,
       ok = true,
-      msg = "把苔衣短剑刻在第 3 个轮子的第 2 格，转到它才拿得到",
+      msg = "「苔衣短剑」已刻入第 3 轮第 2 格",
       reels = {
         { "blank", "boneKnife", "hammer", "blank", "blank" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -91330,7 +91330,7 @@ return {
       weapon = "bellStaff",
       reel = 0,
       ok = true,
-      msg = "把回声铃杖刻在第 1 个轮子的第 4 格，转到它才拿得到",
+      msg = "「回声铃杖」已刻入第 1 轮第 4 格",
       reels = {
         { "blank", "boneKnife", "hammer", "bellStaff", "blank" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -91349,7 +91349,7 @@ return {
       weapon = "saltDagger",
       reel = 0,
       ok = true,
-      msg = "把盐晶匕首刻在第 1 个轮子的第 5 格，转到它才拿得到",
+      msg = "「盐晶匕首」已刻入第 1 轮第 5 格",
       reels = {
         { "blank", "boneKnife", "hammer", "bellStaff", "saltDagger" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -91368,7 +91368,7 @@ return {
       weapon = "wild",
       reel = 0,
       ok = true,
-      msg = "把赖子刻在第 1 个轮子的第 1 格，转到它才拿得到",
+      msg = "「赖子」已刻入第 1 轮第 1 格",
       reels = {
         { "wild", "boneKnife", "hammer", "bellStaff", "saltDagger" },
         { "blank", "wild", "blank", "blank", "blank" },
@@ -91426,7 +91426,7 @@ return {
       weapon = "wild",
       reel = 1,
       ok = true,
-      msg = "把赖子刻在第 2 个轮子的第 3 格，转到它才拿得到",
+      msg = "「赖子」已刻入第 2 轮第 3 格",
       reels = {
         { "wild", "boneKnife", "hammer", "bellStaff", "saltDagger" },
         { "blank", "wild", "wild", "blank", "blank" },
@@ -91446,7 +91446,7 @@ return {
       reel = 2,
       cell = 4,
       ok = true,
-      msg = "把苔衣短剑刻在第 3 个轮子的第 5 格，转到它才拿得到",
+      msg = "「苔衣短剑」已刻入第 3 轮第 5 格",
       reels = {
         { "wild", "boneKnife", "hammer", "bellStaff", "saltDagger" },
         { "blank", "wild", "wild", "blank", "blank" },
@@ -96797,7 +96797,7 @@ return {
           a = 0,
           b = 1,
           ok = false,
-          msg = "这样已经买过了",
+          msg = "这件商品已经售出",
           hero = {
             hp = 200,
             atk = 10,
@@ -97299,7 +97299,7 @@ return {
           a = 0,
           b = 1,
           ok = false,
-          msg = "这样已经买过了",
+          msg = "这件商品已经售出",
           hero = {
             hp = 200,
             atk = 10,
@@ -98474,7 +98474,7 @@ return {
         {
           k = 0,
           ok = false,
-          msg = "这样已经买过了",
+          msg = "这件商品已经售出",
           hero = {
             hp = 200,
             atk = 12,
@@ -98585,7 +98585,7 @@ return {
         kind = "gold",
         tier = "silver",
         n = 150,
-        text = "带着至少 150 金币走出一层"
+        text = "离开任意一层时，持有至少 150 金币"
       }
     },
     {
@@ -98595,7 +98595,7 @@ return {
         kind = "noPotion",
         tier = "bronze",
         n = 1,
-        text = "有一层一瓶血瓶都不喝，走到出口"
+        text = "在任意一层不喝血瓶，抵达出口"
       }
     },
     {
@@ -98605,7 +98605,7 @@ return {
         kind = "noPotion",
         tier = "bronze",
         n = 1,
-        text = "有一层一瓶血瓶都不喝，走到出口"
+        text = "在任意一层不喝血瓶，抵达出口"
       }
     },
     {
@@ -98620,7 +98620,7 @@ return {
         kind = "gold",
         tier = "silver",
         n = 150,
-        text = "带着至少 150 金币走出一层"
+        text = "离开任意一层时，持有至少 150 金币"
       }
     },
     {
@@ -98630,7 +98630,7 @@ return {
         kind = "killTrait",
         tier = "bronze",
         n = 2,
-        text = "打败 2 只会先攻、吸血或反伤的怪"
+        text = "累计击败 2 只具有先攻、吸血或反伤特性的怪物"
       }
     },
     {
@@ -98640,7 +98640,7 @@ return {
         kind = "noLoss",
         tier = "silver",
         n = 1,
-        text = "有一层走出去时的生命不比进来时少"
+        text = "离开任意一层时，剩余生命至少和进这一层时一样多"
       }
     },
     {
@@ -98655,7 +98655,7 @@ return {
         kind = "noPotion",
         tier = "bronze",
         n = 1,
-        text = "有一层一瓶血瓶都不喝，走到出口"
+        text = "在任意一层不喝血瓶，抵达出口"
       }
     },
     {
@@ -98665,7 +98665,7 @@ return {
         kind = "gold",
         tier = "silver",
         n = 150,
-        text = "带着至少 150 金币走出一层"
+        text = "离开任意一层时，持有至少 150 金币"
       }
     },
     {
@@ -98675,7 +98675,7 @@ return {
         kind = "clear",
         tier = "silver",
         n = 1,
-        text = "有一层把怪全部打完再走"
+        text = "在任意一层击败所有怪物，再前往出口"
       }
     },
     {
@@ -98690,7 +98690,7 @@ return {
         kind = "killTrait",
         tier = "bronze",
         n = 2,
-        text = "打败 2 只会先攻、吸血或反伤的怪"
+        text = "累计击败 2 只具有先攻、吸血或反伤特性的怪物"
       }
     },
     {
@@ -98700,7 +98700,7 @@ return {
         kind = "gold",
         tier = "silver",
         n = 150,
-        text = "带着至少 150 金币走出一层"
+        text = "离开任意一层时，持有至少 150 金币"
       }
     },
     {
@@ -98710,7 +98710,7 @@ return {
         kind = "clear",
         tier = "silver",
         n = 1,
-        text = "有一层把怪全部打完再走"
+        text = "在任意一层击败所有怪物，再前往出口"
       }
     },
     {
@@ -98725,7 +98725,7 @@ return {
         kind = "noPotion",
         tier = "bronze",
         n = 1,
-        text = "有一层一瓶血瓶都不喝，走到出口"
+        text = "在任意一层不喝血瓶，抵达出口"
       }
     },
     {
@@ -98735,7 +98735,7 @@ return {
         kind = "noPotion",
         tier = "bronze",
         n = 1,
-        text = "有一层一瓶血瓶都不喝，走到出口"
+        text = "在任意一层不喝血瓶，抵达出口"
       }
     },
     {
@@ -98745,7 +98745,7 @@ return {
         kind = "clear",
         tier = "silver",
         n = 1,
-        text = "有一层把怪全部打完再走"
+        text = "在任意一层击败所有怪物，再前往出口"
       }
     },
     {
@@ -98760,7 +98760,7 @@ return {
         kind = "noPotion",
         tier = "bronze",
         n = 1,
-        text = "有一层一瓶血瓶都不喝，走到出口"
+        text = "在任意一层不喝血瓶，抵达出口"
       }
     },
     {
@@ -98770,7 +98770,7 @@ return {
         kind = "gold",
         tier = "silver",
         n = 150,
-        text = "带着至少 150 金币走出一层"
+        text = "离开任意一层时，持有至少 150 金币"
       }
     },
     {
@@ -98780,7 +98780,7 @@ return {
         kind = "killTrait",
         tier = "bronze",
         n = 2,
-        text = "打败 2 只会先攻、吸血或反伤的怪"
+        text = "累计击败 2 只具有先攻、吸血或反伤特性的怪物"
       }
     },
     {
@@ -98795,7 +98795,7 @@ return {
         kind = "killTrait",
         tier = "bronze",
         n = 2,
-        text = "打败 2 只会先攻、吸血或反伤的怪"
+        text = "累计击败 2 只具有先攻、吸血或反伤特性的怪物"
       }
     },
     {
@@ -98805,7 +98805,7 @@ return {
         kind = "gold",
         tier = "silver",
         n = 150,
-        text = "带着至少 150 金币走出一层"
+        text = "离开任意一层时，持有至少 150 金币"
       }
     },
     {
@@ -98815,7 +98815,7 @@ return {
         kind = "killTrait",
         tier = "bronze",
         n = 2,
-        text = "打败 2 只会先攻、吸血或反伤的怪"
+        text = "累计击败 2 只具有先攻、吸血或反伤特性的怪物"
       }
     },
     {
@@ -98873,7 +98873,7 @@ return {
             gold = 9
           },
           decree = nil,
-          notes = { "诏令完成：killTrait。可以刻一把武器" },
+          notes = { "诏令完成：killTrait。获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99009,7 +99009,7 @@ return {
             gold = 44
           },
           decree = nil,
-          notes = { "诏令完成：killTrait。生命 +100，可以刻一把武器" },
+          notes = { "诏令完成：killTrait。生命 +100，获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99097,7 +99097,7 @@ return {
             gold = 12
           },
           decree = nil,
-          notes = { "诏令完成：noPotion。可以刻一把武器" },
+          notes = { "诏令完成：noPotion。获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99198,7 +99198,7 @@ return {
             gold = 12
           },
           decree = nil,
-          notes = { "诏令完成：noPotion。生命 +100，可以刻一把武器" },
+          notes = { "诏令完成：noPotion。生命 +100，获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99277,7 +99277,7 @@ return {
             gold = 9
           },
           decree = nil,
-          notes = { "诏令完成：clear。可以刻一把武器" },
+          notes = { "诏令完成：clear。获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99369,7 +99369,7 @@ return {
             gold = 9
           },
           decree = nil,
-          notes = { "诏令完成：clear。生命 +100，可以刻一把武器" },
+          notes = { "诏令完成：clear。生命 +100，获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99461,7 +99461,7 @@ return {
             gold = 9
           },
           decree = nil,
-          notes = { "诏令完成：noLoss。可以刻一把武器" },
+          notes = { "诏令完成：noLoss。获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99553,7 +99553,7 @@ return {
             gold = 9
           },
           decree = nil,
-          notes = { "诏令完成：noLoss。生命 +100，可以刻一把武器" },
+          notes = { "诏令完成：noLoss。生命 +100，获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99689,7 +99689,7 @@ return {
             gold = 44
           },
           decree = nil,
-          notes = { "诏令完成：gold。可以刻一把武器" },
+          notes = { "诏令完成：gold。获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -99799,7 +99799,7 @@ return {
             gold = 44
           },
           decree = nil,
-          notes = { "诏令完成：gold。生命 +100，可以刻一把武器" },
+          notes = { "诏令完成：gold。生命 +100，获得一次刻入武器图案的机会" },
           status = "playing"
         },
         {
@@ -119858,7 +119858,7 @@ return {
       atk = 10,
       def = 10,
       ok = true,
-      msg = "你倒下了。打不动锈甲虫：攻击要高于它的防御 14",
+      msg = "你倒下了。锈甲虫的防御是 14。你的攻击必须高于这个数值才能造成伤害",
       status = "dead",
       hero = {
         hp = 0,
@@ -119873,7 +119873,7 @@ return {
       atk = 10,
       def = 30,
       ok = false,
-      msg = "打不动锈甲虫，它也伤不到你",
+      msg = "你和锈甲虫都无法伤到对方",
       status = "playing",
       hero = {
         hp = 100,
@@ -119888,7 +119888,7 @@ return {
       atk = 5,
       def = 40,
       ok = true,
-      msg = "你倒下了。打不动裂岩蟹：攻击要高于它的防御 12",
+      msg = "你倒下了。裂岩蟹的防御是 12。你的攻击必须高于这个数值才能造成伤害",
       status = "dead",
       hero = {
         hp = 0,
@@ -119903,7 +119903,7 @@ return {
       atk = 8,
       def = 30,
       ok = false,
-      msg = "打不动溺魂，它也伤不到你",
+      msg = "你和溺魂都无法伤到对方",
       status = "playing",
       hero = {
         hp = 100,
@@ -119918,7 +119918,7 @@ return {
       atk = 10,
       def = 60,
       ok = false,
-      msg = "打不动石鳞守卫，它也伤不到你",
+      msg = "你和石鳞守卫都无法伤到对方",
       status = "playing",
       hero = {
         hp = 100,

@@ -21,8 +21,8 @@ M.PERKS = {
     { id = 'hp', name = '血囊', costs = { 15, 45, 90 }, values = { 30, 60, 100 }, desc = function(v) return '开局生命 +' .. v end },
     { id = 'keys', name = '钥匙串', costs = { 60 }, values = { 1 }, desc = function(v) return '开局带 ' .. v .. ' 把骨钥' end },
     { id = 'gold', name = '钱袋', costs = { 30, 75 }, values = { 20, 50 }, desc = function(v) return '开局金币 +' .. v end },
-    { id = 'engrave', name = '旧印子', costs = { 90 }, values = { 1 }, desc = function() return '开局转轮上已刻一个随机武器图案（转到才拿得到）' end },
-    { id = 'halfSpin', name = '润滑油', costs = { 120 }, values = { 1 }, desc = function() return '每层第一次拉杆半价' end },
+    { id = 'engrave', name = '旧印子', costs = { 90 }, values = { 1 }, desc = function() return '每局开始时，断臂转轮自带一个随机武器图案' end },
+    { id = 'halfSpin', name = '润滑油', costs = { 120 }, values = { 1 }, desc = function() return '每层首次转动断臂转轮时半价' end },
 }
 function M.perk(id) for _, p in ipairs(M.PERKS) do if p.id == id then return p end end end
 function M.perkValue(id, level)
@@ -33,13 +33,13 @@ end
 
 -- 解锁：一次买断，永久有效
 M.UNLOCKS = {
-    { id = 'lamp', name = '井灯', cost = 90, kind = 'weapon', desc = '新武器图案：防御 +2。加入精英三选一、当铺、大转盘的图案池' },
+    { id = 'lamp', name = '井灯', cost = 90, kind = 'weapon', desc = '解锁井灯图案。装备井灯时，防御 +2' },
     { id = 'twinHook', name = '双钩', cost = 90, kind = 'weapon', desc = '新武器图案：攻击 +1，每次击杀回复 4 生命' },
     { id = 'scavenger', name = '拾荒者', cost = 180, kind = 'character', desc = '新角色：生命 150、攻 9、防 8、开局 30 金。开骨门不用骨钥，改扣 10 生命' },
     { id = 'drowned', name = '溺者', cost = 300, kind = 'character', desc = '新角色：生命 100、攻 14、防 6。倒下时复活一次，之后每进一层扣 20 生命' },
     { id = 'campKey', name = '营火的骨钥', cost = 60, kind = 'facility', desc = '营火的补给摊多卖一把骨钥' },
     { id = 'pawnExtra', name = '当铺的第三件', cost = 75, kind = 'facility', desc = '当铺多摆一件武器图案' },
-    { id = 'depth', name = '深度模式', cost = 150, kind = 'depth', needsClear = true, desc = '通关后才能买。开局可选深度 1～3：怪更凶、血瓶更少、井租更贵，碎片多 25%～75%' },
+    { id = 'depth', name = '深度模式', cost = 150, kind = 'depth', needsClear = true, desc = '通关后可解锁更高难度。深度越高，结算时获得的碎片越多' },
 }
 
 local BASE = { 'boneKnife', 'harpoon', 'hammer', 'mossBlade', 'bellStaff', 'saltDagger', 'rustSword', 'wellHook' }

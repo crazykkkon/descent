@@ -12,7 +12,7 @@ import { solveFloor } from './solver';
 import { ArmState, ArmSym, ARM_BASE_PRICE, HOLD_MULTIPLIER, armEmpty, armHas, armOutcome, armRoll, engraveCell, engravedCells, EngraveSym, firstBlank, newArm, WILD, WILD_CHANCE, WILD_NAME, WILD_PRICE } from './arm';
 import { draw } from './rng';
 import { WHEEL, WheelSector, wheelPrice, wheelStop } from './wheel';
-import { ActiveDecree, DECREE_PENALTY, DECREE_SPAN, DecreeDef, SILVER_BONUS_HP, TIER_NAMES, decreeFor, killCounts } from './decree';
+import { ActiveDecree, DECREE_PENALTY, DECREE_SPAN, DecreeDef, SILVER_BONUS_HP, TIER_NAMES, decreeFor, killCounts, restoreDecree } from './decree';
 import { bloodPrice, pick, risingPrice } from './rng';
 import { perkValue } from './meta';
 
@@ -327,7 +327,7 @@ export class Run {
         this.engraveQueue.shift();
         // 刻上不等于拿到：要拉杆转到才换成这把武器
         this.checkHold();
-        return { ok: true, msg: `把${symName(id)}刻在第 ${reel + 1} 个轮子的第 ${k + 1} 格，转到它才拿得到` };
+        return { ok: true, msg: `「${symName(id)}」已刻入第 ${reel + 1} 轮第 ${k + 1} 格` };
     }
 
     /** 不刻 */
@@ -364,13 +364,13 @@ export class Run {
         if (this.status !== 'playing' || !arm) return { ok: false, msg: '' };
         if (armEmpty(arm)) return { ok: false, msg: '转轮上还没有刻任何图案' };
         const hold = !!held && held.some(Boolean);
-        if (hold && held!.every(Boolean)) return { ok: false, msg: '要锁住一两个轮子，留至少一个重转' };
+        if (hold && held!.every(Boolean)) return { ok: false, msg: '三个轮子都锁住了。请先解锁至少一个' };
         const price = this.armPrice(held);
         if (pay === 'gold') {
             if (this.hero.gold < price.gold) return { ok: false, msg: `金币不够（要 ${price.gold}）` };
             this.hero.gold -= price.gold;
         } else {
-            if (this.hero.hp <= price.blood) return { ok: false, msg: `生命不够（要 ${price.blood}）` };
+            if (this.hero.hp <= price.blood) return { ok: false, msg: `需要消耗 ${price.blood} 点生命，支付后至少要剩 1 点` };
             this.hero.hp -= price.blood;
         }
         const faces = armRoll(arm, this.seed, this.floorIndex * 1000 + 999, hold ? held : undefined);
@@ -379,13 +379,13 @@ export class Run {
         if (o.kind === 'weapon') {
             const same = this.hero.weapon === o.id;
             this.hold(o.id);
-            return { ok: true, msg: same ? `三个轮子都停在${WEAPONS[o.id].name}上，还是它` : `三个轮子都停在${WEAPONS[o.id].name}上，换成了${WEAPONS[o.id].name}`, faces };
+            return { ok: true, msg: same ? `再次转出「${WEAPONS[o.id].name}」，继续使用` : `转出并装备「${WEAPONS[o.id].name}」`, faces };
         }
         if (o.kind === 'empty') {
             this.hold(undefined);
-            return { ok: true, msg: '三个轮子都停在空格上，手里空了', faces };
+            return { ok: true, msg: '中线三个都是空格，本次转为空手', faces };
         }
-        return { ok: true, msg: '没有连成一线，手上的武器不变', faces };
+        return { ok: true, msg: '中线没有凑齐图案，保持当前装备', faces };
     }
 
     // ---------- 设施 ----------
@@ -412,7 +412,7 @@ export class Run {
         const o = this.floor.stall?.[k];
         const bad = this.facility(i, 'stall', '补给摊') ?? (o ? null : { ok: false, msg: '' });
         if (bad) return bad;
-        if (this.sold(i, k)) return { ok: false, msg: '这样已经买过了' };
+        if (this.sold(i, k)) return { ok: false, msg: '这件商品已经售出' };
         const unpaid = this.pay(o!.price);
         if (unpaid) return unpaid;
         if (o!.id === 'atk') this.hero.atk += o!.amount;
@@ -447,7 +447,7 @@ export class Run {
             const unpaid = this.pay(price.gold);
             if (unpaid) return unpaid;
         } else {
-            if (this.hero.hp <= price.blood) return { ok: false, msg: `生命不够（要 ${price.blood}）` };
+            if (this.hero.hp <= price.blood) return { ok: false, msg: `需要消耗 ${price.blood} 点生命，支付后至少要剩 1 点` };
             this.hero.hp -= price.blood;
         }
         const key = this.floorIndex * 1000 + i;
@@ -539,7 +539,7 @@ export class Run {
         if (bad) return bad;
         const w = this.floor.shop?.[k];
         if (!w || !this.arm) return { ok: false, msg: '' };
-        if (this.sold(i, k)) return { ok: false, msg: '这样已经买过了' };
+        if (this.sold(i, k)) return { ok: false, msg: '这件商品已经售出' };
         const full = this.fullReel(reel, cell);
         if (full) return full;
         const price = this.shopPrice(w);
@@ -604,7 +604,7 @@ export class Run {
         const d = this.decree!;
         this.engraveQueue.push({ from: 'decree', choices: this.rollWeaponChoices(1) });
         if (d.def.tier === 'silver') this.hero.hp += SILVER_BONUS_HP;
-        this.notes.push(`诏令完成：${d.def.text}。${d.def.tier === 'silver' ? `生命 +${SILVER_BONUS_HP}，` : ''}可以刻一把武器`);
+        this.notes.push(`诏令完成：${d.def.text}。${d.def.tier === 'silver' ? `生命 +${SILVER_BONUS_HP}，` : ''}获得一次刻入武器图案的机会`);
         this.decree = null;
     }
 
@@ -778,13 +778,16 @@ export class Run {
             return { ok: true, msg: `你倒下了。${r.reason}` };
         }
         const lost = this.hero.hp - r.hero.hp;
+        const earned = r.hero.gold - this.hero.gold;
         this.hero = r.hero;
         this.steps++;
         let msg: string;
         if (c.kind === 'monster') {
             this.kills++;
             const m = MONSTERS[c.id];
-            msg = `击败${m.name}，${lost >= 0 ? `损失 ${lost}` : `回复 ${-lost}`} 生命，获得 ${m.gold} 金币`;
+            msg = `击败${m.name}，获得 ${earned} 金币`;
+            if (lost > 0) msg += `，损失 ${lost} 点生命`;
+            else if (lost < 0) msg += `，恢复 ${-lost} 点生命`;
             const boon = MONSTER_BOON[c.id];
             if (boon && !this.boonsSeen.includes(boon)) this.boonsSeen.push(boon);
             if (this.arm) {
@@ -886,8 +889,8 @@ export class Run {
         run.bought = s.bought ?? [];
         run.altarUsed = s.altarUsed ?? [];
         run.boonsSeen = s.boonsSeen ?? [];
-        run.decree = s.decree;
-        run.decreeOffer = s.decreeOffer;
+        run.decree = s.decree ? { ...s.decree, def: restoreDecree(s.decree.def) } : null;
+        run.decreeOffer = s.decreeOffer ? restoreDecree(s.decreeOffer) : null;
         run.engraveQueue = s.engraveQueue ?? [];
         run.drank = s.drank;
         run.exitTaken = s.exitTaken ?? 0;
