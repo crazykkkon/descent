@@ -61,6 +61,7 @@ local keyboardMap, keyTarget = false, nil
 local forcedHover = nil    -- 自动测试指定的悬停格子
 local msg, msgErr, msgTime = '', false, 0
 local modal = nil          -- { title, lines, buttons }
+local afterSpinCell = nil   -- 停轮前点地图，停稳后走到最后点的目标
 local walking = nil        -- { path, i, t, from, confirmedFatal, confirmedBreak }
 local facing = 'down'
 local heroAnim = nil       -- { from, to, t }
@@ -147,6 +148,7 @@ end
 
 -- ---------- 弹窗 ----------
 local function openModal(title, lines, buttons)
+    afterSpinCell = nil
     modal = { title = title, lines = lines, buttons = buttons }
 end
 
@@ -482,7 +484,11 @@ local function walkStep()
 end
 
 local function act(i)
-    if walking or modal or picker or armView.busy() or run.status ~= 'playing' then return end
+    if walking or modal or picker or run.status ~= 'playing' then return end
+    if armView.busy() then
+        afterSpinCell = i
+        return
+    end
     local c = run.cells[i]
     if c.kind == 'wall' or i == run.pos then return end
     -- 设施（补给摊、大转盘、当铺、骨坛）：走到旁边再打开
@@ -1021,6 +1027,7 @@ end
 
 -- opts：{ character, depth }（新手教程不看这些）
 function newGame(seed, opts)
+    afterSpinCell = nil
     armView.reset()
     seed = seed or tonumber(os.getenv('DESCENT_SEED') or '') or os.time()
     opts = opts or {}
@@ -1047,6 +1054,7 @@ function newGame(seed, opts)
 end
 
 function loadGame(data)
+    afterSpinCell = nil
     armView.reset()
     hovered, keyTarget, keyboardMap = nil, nil, false
     facing = miner.restoreFacing(data.facing)
@@ -1133,6 +1141,11 @@ function love.update(dt)
     fx.update(dt)
     local result = armView.update(dt)
     if result then setMsg(result) end
+    if afterSpinCell and not armView.busy() then
+        local target = afterSpinCell
+        afterSpinCell = nil
+        act(target)
+    end
     updatePicker(dt)
     battle.update(dt)
     if scene == 'game' and run and run.status == 'playing' and not battle.active() then KF.scan() end

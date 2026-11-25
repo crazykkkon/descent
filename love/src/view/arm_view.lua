@@ -44,11 +44,11 @@ end
 
 function M.busy() return anim ~= nil end
 function M.displayHeld(selected)
-    return anim and not anim.done and anim.held or selected
+    return anim and anim.held or selected
 end
 function M.reset() anim, flash = nil, nil end
 function M.displayHero(hero)
-    if anim and not anim.done then return anim.before end
+    if anim then return anim.before end
     return hero
 end
 
@@ -67,8 +67,7 @@ function M.update(dt)
         end
     end
     local last = anim.last
-    if not anim.done and anim.t >= last then
-        anim.done = true
+    if anim.t >= last then
         if anim.kind == 'weapon' then
             fx.play('win'); fx.shake(3.5); flash = { t = 0, kind = 'win', weapon = anim.target }
         elseif anim.kind == 'empty' then
@@ -76,9 +75,10 @@ function M.update(dt)
         else
             flash = { t = 0, kind = 'keep' }
         end
-        return anim.message
+        local message = anim.message
+        anim = nil
+        return message
     end
-    if anim.t > last + 0.25 then anim = nil end
 end
 
 -- 这个轮子现在还要多滚几格（小数，滚动中有拖影）
