@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="48" viewBox="0 0 192 48">
+  <title>赤晶、青晶、大赤晶、大青晶，脚底对齐</title>
+  <!-- Small garnet. A single leaning blade with a long illuminated edge. -->
+  <g stroke-linejoin="round">
+    <ellipse cx="24" cy="39" rx="12" ry="3" fill="#101b20" opacity=".7"/>
+    <path d="M28 9 32 24 25 39 16 36 14 28Z" fill="#9e263b" stroke="#251f2b" stroke-width="2.8"/>
+    <path d="m28 10-5 17-8 2Z" fill="#ffd3a3"/>
+    <path d="m28 10 3 14-8 3Z" fill="#ff7550"/>
+    <path d="m23 27 8-3-6 13Z" fill="#cb3845"/>
+    <path d="m15 29 8-2 2 10-8-2Z" fill="#f65d46"/>
+    <path d="m18 26 7-11-4 10Z" fill="#fff0c8"/>
+  </g>
+  <!-- Small aquamarine. A low, bevelled shield with a broad crown. -->
+  <g transform="translate(48)" stroke-linejoin="round">
+    <ellipse cx="24" cy="39" rx="13" ry="3" fill="#101b20" opacity=".7"/>
+    <path d="m12 22 7-9 12 1 6 8-4 9-9 8-10-8Z" fill="#297390" stroke="#14272e" stroke-width="2.8"/>
+    <path d="m13 22 7-8 10 1-6 5Z" fill="#c5f5e4"/>
+    <path d="m24 20 6-5 6 7-5 2Z" fill="#65bfc8"/>
+    <path d="m13 23 11-3-1 16-8-6Z" fill="#52c5ce"/>
+    <path d="m24 20 7 4-8 12Z" fill="#3597b4"/>
+    <path d="m31 24 5-2-4 8-9 7Z" fill="#235275"/>
+    <path d="m15 22 7-3-3 4Z" fill="#f4ffe8"/>
+  </g>
+  <!-- Large garnet. Three blades, strongly separated at their tips. -->
+  <g transform="translate(96)" stroke-linejoin="round">
+    <ellipse cx="24" cy="38" rx="21" ry="6.5" fill="#bd5f48" opacity=".24"/>
+    <path d="M4 37c2-4 7-5 11-6m18 2c4 1 8 3 10 5m-5 4-8 2" fill="none" stroke="#ed985d" stroke-width="1.7" opacity=".8"/>
+    <ellipse cx="24" cy="39" rx="18" ry="4" fill="#201d2a" opacity=".82"/>
+    <path d="m20 35 13-16 9-4-3 13-12 12Z" fill="#b43445" stroke="#30202a" stroke-width="2.8"/>
+    <path d="m23 34 12-14 6-4-7 14Z" fill="#ff9c64"/>
+    <path d="m25 36 10-9 5-9-2 10-11 11Z" fill="#e65a4b"/>
+    <path d="M14 31 19 13 27 2 31 19 26 38 17 40Z" fill="#b23043" stroke="#30202a" stroke-width="2.8"/>
+    <path d="m27 4-4 16-8 11 5-17Z" fill="#ffcb93"/>
+    <path d="m27 4 3 15-7 1Z" fill="#ff7350"/>
+    <path d="m23 20 7-1-5 18-8 2Z" fill="#d44049"/>
+    <path d="m15 31 8-11-6 18Z" fill="#fa7852"/>
+    <path d="m20 15 5-8-3 9-4 5Z" fill="#fff2ce"/>
+    <path d="m5 16 10 7 5 15-7-2-6-8Z" fill="#c83b49" stroke="#30202a" stroke-width="2.6"/>
+    <path d="m6 17 8 7 4 11-7-9Z" fill="#ff995d"/>
+    <path d="m7 19 3 8 4 6-5-5Z" fill="#ffe1a5"/>
+  </g>
+  <!-- Large aquamarine. Staggered flat crowns form a low, fan-shaped cluster. -->
+  <g transform="translate(144)" stroke-linejoin="round">
+    <ellipse cx="24" cy="38" rx="22" ry="6.5" fill="#63c6c9" opacity=".23"/>
+    <path d="M3 38c1-3 6-5 11-6m20 1c5 1 8 3 11 5m-6 4-9 2" fill="none" stroke="#8adbd9" stroke-width="1.7" opacity=".8"/>
+    <ellipse cx="24" cy="39" rx="19" ry="4" fill="#14252d" opacity=".82"/>
+    <path d="m29 22 8-11 6 1 2 8-5 13-12 6-4-6Z" fill="#256984" stroke="#192a34" stroke-width="2.8"/>
+    <path d="m30 23 7-11 5 1-1 7Z" fill="#b4efe5"/>
+    <path d="m30 24 11-4-9 14-5 3Z" fill="#4dbac6"/>
+    <path d="M15 13 21 5 29 6 33 15 28 34 20 39 14 29Z" fill="#2e8099" stroke="#192a34" stroke-width="2.8"/>
+    <path d="m16 14 6-8 7 1-3 6Z" fill="#c6f5e4"/>
+    <path d="m26 13 3-6 3 8-6 3Z" fill="#6ad0d2"/>
+    <path d="m16 15 10-2-6 23-5-8Z" fill="#59bfd0"/>
+    <path d="m26 18 6-3-5 17-6 5Z" fill="#3089aa"/>
+    <path d="m17 14 5-7 4 1-6 6Z" fill="#f1ffeb"/>
+    <path d="m3 22 2-7 9 4 7 10 1 10-12-5Z" fill="#30809a" stroke="#192a34" stroke-width="2.8"/>
+    <path d="m4 22 2-6 7 4 3 6Z" fill="#a4e5df"/>
+    <path d="m5 23 11 3 4 11-9-5Z" fill="#4bacc1"/>
+  </g>
+</svg>

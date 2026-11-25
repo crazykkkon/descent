@@ -20,6 +20,7 @@ local mapArt = {
     miner = require('view.miner'),
     monsters = require('view.monsters'),
     wellhead = require('view.wellhead'),
+    gems = require('view.gems'),
 }
 local fx = require('view.fx')
 local armView = require('view.arm_view')
@@ -1084,6 +1085,7 @@ function love.load()
     mapArt.miner.load()
     battle.load()
     mapArt.wellhead.load()
+    mapArt.gems.load()
     mapArt.monsters.load(config.MONSTERS)
     fx.load()
     fx.loadShader()
@@ -1213,19 +1215,8 @@ local function drawTile(i)
             setColor({ 0.62, 0.7, 0.73 }); g.rectangle('fill', cx - 2 * s, cy - 10 * s, 4 * s, 3 * s)
             setColor(C.hp); g.rectangle('fill', cx - 6 * s, cy - 7 * s, 12 * s, 15 * s, 2, 2)
             setColor({ 1, 0.7, 0.75 }); g.rectangle('fill', cx - 4 * s, cy - 5 * s, 2, 6 * s)
-        elseif c.id == 'redGem' or c.id == 'blueGem' or c.id == 'bigRedGem' or c.id == 'bigBlueGem' then
-            -- 小宝石（+1）小一圈、颜色淡一点；大宝石（+3）大、亮、多一圈光（正式美术由 Codex 换）
-            local big = c.id == 'bigRedGem' or c.id == 'bigBlueGem'
-            local red = c.id == 'redGem' or c.id == 'bigRedGem'
-            local s = (big and 1.15 or 0.72) * K
-            setColor({ 0, 0, 0 }, 0.3); g.ellipse('fill', cx, cy + 10 * s, 8 * s, 2)
-            if big then
-                setColor(red and { 1, 0.45, 0.3 } or { 0.35, 0.65, 1 }, 0.25 + 0.1 * math.sin(clock * 3))
-                g.circle('fill', cx, cy, 14 * s)
-            end
-            setColor(red and (big and { 0.95, 0.3, 0.2 } or { 0.8, 0.38, 0.3 }) or (big and { 0.15, 0.5, 0.95 } or { 0.27, 0.5, 0.75 }))
-            g.polygon('fill', cx, cy - 10 * s, cx + 10 * s, cy, cx, cy + 10 * s, cx - 10 * s, cy)
-            setColor({ 1, 1, 1 }, 0.45); g.polygon('fill', cx, cy - 10 * s, cx + 4 * s, cy - 4 * s, cx, cy, cx - 4 * s, cy - 4 * s)
+        else
+            mapArt.gems.draw(c.id, x, y, TILE)
         end
     end
 end
