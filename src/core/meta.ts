@@ -35,8 +35,8 @@ export function perkValue(id: string, level: number): number {
 /** 解锁：一次买断，永久有效 */
 export interface UnlockDef { id: string; name: string; cost: number; desc: string; kind: 'weapon' | 'character' | 'depth' | 'facility'; needsClear?: boolean }
 export const UNLOCKS: UnlockDef[] = [
-    { id: 'lamp', name: '井灯', cost: 60, kind: 'weapon', desc: '新武器图案：防御 +4。加入精英三选一、当铺、大转盘的图案池' },
-    { id: 'twinHook', name: '双钩', cost: 60, kind: 'weapon', desc: '新武器图案：攻击 +2，每次击杀回复 4 生命' },
+    { id: 'lamp', name: '井灯', cost: 60, kind: 'weapon', desc: '新武器图案：防御 +2。加入精英三选一、当铺、大转盘的图案池' },
+    { id: 'twinHook', name: '双钩', cost: 60, kind: 'weapon', desc: '新武器图案：攻击 +1，每次击杀回复 4 生命' },
     { id: 'scavenger', name: '拾荒者', cost: 120, kind: 'character', desc: '新角色：生命 150、攻 9、防 8、开局 30 金。开骨门不用骨钥，改扣 10 生命' },
     { id: 'drowned', name: '溺者', cost: 200, kind: 'character', desc: '新角色：生命 100、攻 14、防 6。倒下时复活一次，之后每进一层扣 20 生命' },
     { id: 'campKey', name: '营火的骨钥', cost: 40, kind: 'facility', desc: '营火的补给摊多卖一把骨钥' },
@@ -49,6 +49,7 @@ export function weaponPool(unlocks: string[] = []): WeaponId[] {
     return [...BASE_WEAPONS, ...UNLOCKS.filter(u => u.kind === 'weapon' && unlocks.includes(u.id)).map(u => u.id as WeaponId)];
 }
 
-/** 深度模式：第 1 级起每层怪物再加强 2 级；第 2 级起血瓶效果 −25%；第 3 级起井租和补给摊 ×1.5 */
+/** 深度模式：第 11 层起每层怪物再加强（深度几就加几级）；第 2 级起血瓶效果剩 90%；第 3 级起井租和补给摊 ×1.5。
+ * 目标（讨论项）：碎片强化买满时深度 1 / 2 / 3 大约 35% / 20% / 10% 通关（tools/balance.ts 量出来 39% / 18% / 10%） */
 export const MAX_DEPTH = 3;
-export const DEPTH_POWER = 2;
+export const DEPTH_POWER = 1;

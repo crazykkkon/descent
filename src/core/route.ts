@@ -29,17 +29,17 @@ export function big(small: string[]): string[] { return BIG_MAPS[mapKey(small)] 
 export function oneExit(map: string[]): string[] { return map.map(r => r.replace('<', '#')); }
 
 /** 各段的数值 */
-export const SHALLOW = { gem: 2, smallPotion: 50, bigPotion: 150, gold: 25, bloodCost: 80 };
-export const DEEP = { gem: 2, smallPotion: 50, bigPotion: 120, gold: 30, bloodCost: 100 };
-export const BOTTOM = { gem: 2, smallPotion: 60, bigPotion: 150, gold: 40, bloodCost: 120 };
+export const SHALLOW = { gem: 1, smallPotion: 50, bigPotion: 150, gold: 25, bloodCost: 80 };
+export const DEEP = { gem: 1, smallPotion: 50, bigPotion: 120, gold: 30, bloodCost: 100 };
+export const BOTTOM = { gem: 1, smallPotion: 60, bigPotion: 150, gold: 40, bloodCost: 120 };
 
 /** 井租：第几层（从 0 开始）→ 金额 */
 export const RENTS: Record<number, number> = { 8: 120, 16: 250 };
 
 export const ROUTE_LENGTH = 20;
 
-const STALL_SHALLOW: StallOffer[] = [{ id: 'hp', amount: 80, price: 25 }, { id: 'atk', amount: 2, price: 40 }, { id: 'def', amount: 2, price: 40 }];
-const STALL_DEEP: StallOffer[] = [{ id: 'hp', amount: 150, price: 40 }, { id: 'atk', amount: 3, price: 70 }, { id: 'def', amount: 3, price: 70 }];
+const STALL_SHALLOW: StallOffer[] = [{ id: 'hp', amount: 80, price: 25 }, { id: 'atk', amount: 1, price: 40 }, { id: 'def', amount: 1, price: 40 }];
+const STALL_DEEP: StallOffer[] = [{ id: 'hp', amount: 150, price: 40 }, { id: 'atk', amount: 2, price: 70 }, { id: 'def', amount: 2, price: 70 }];
 
 export interface MapEntry {
     name: string;
@@ -277,20 +277,59 @@ function markFor(seed: number, d: number, slot: number, map: string[]): number[]
     return [cand[pick(seed, 8100 + d * 10 + slot, 1, cand.length)]];
 }
 
+/**
+ * 大宝石（制作人定）：第 1～6 层只有小宝石（+1）；第 7 层起偶尔出现大宝石（+3），第 7～10 层一层最多一颗、概率很小；
+ * 第 11 层起大小都有，每颗宝石是大的概率越往下越高。按种子定好（求解器照样能算）。概率是讨论项。
+ */
+export const BIG_GEM_FROM = 6;
+export const BIG_GEM_MIX_FROM = 10;
+/** 第 7～10 层：这一层出一颗大宝石的概率 */
+export const BIG_GEM_EARLY = 0.25;
+/** 第 11 层起：每颗宝石是大的概率 = BIG_GEM_P0 + BIG_GEM_STEP × (层号 − 11)，最多 BIG_GEM_PMAX */
+export const BIG_GEM_P0 = 0.3;
+export const BIG_GEM_STEP = 0.04;
+export const BIG_GEM_PMAX = 0.7;
+export function bigGems(map: string[], seed: number, d: number, slot: number): string[] {
+    if (d < BIG_GEM_FROM) return map;
+    const gems: [number, number][] = [];
+    map.forEach((r, y) => { for (let x = 0; x < r.length; x++) if (r[x] === 'r' || r[x] === 'b') gems.push([y, x]); });
+    if (!gems.length) return map;
+    const key = 8700 + d * 10 + slot;
+    let pickSet: number[];
+    if (d < BIG_GEM_MIX_FROM) {
+        pickSet = draw(seed, key, 0) < BIG_GEM_EARLY ? [pick(seed, key, 1, gems.length)] : [];
+    } else {
+        const p = Math.min(BIG_GEM_PMAX, BIG_GEM_P0 + BIG_GEM_STEP * (d - BIG_GEM_MIX_FROM));
+        pickSet = gems.map((_, k) => k).filter(k => draw(seed, key, 2 + k) < p);
+    }
+    if (!pickSet.length) return map;
+    const rows = map.map(r => r.split(''));
+    for (const k of pickSet) {
+        const [y, x] = gems[k];
+        rows[y][x] = rows[y][x] === 'r' ? 'R' : 'C';
+    }
+    return rows.map(r => r.join(''));
+}
+
 /** 第 6 层起（d ≥ UPGRADE_FROM）小怪换成更凶的同类 */
 export const UPGRADE_FROM = 5;
-/** 第 7 层起（d > POWER_FROM）每往下一层，怪物加强一级（井底之眼不加），最多 POWER_MAX 级 */
+/** 第 7 层起（d > POWER_FROM）每往下一层，怪物加强一级，最多 POWER_MAX 级 */
 export const POWER_FROM = 5;
-/** 最多加强几级（第 12 层以后不再变强，免得最后几层的精英和 Boss 前攒不下血） */
-export const POWER_MAX = 6;
+/** 最多加强几级：14 = 一直加到第 20 层（原来是 6，第 12 层以后怪不再变强，后期一大半的怪打不疼主角） */
+export const POWER_MAX = 14;
+/** 深度模式从第几层起加强（层号从 0 开始） */
+export const DEPTH_FROM = 10;
+/** 深度模式第 2 级起血瓶效果剩下百分之几 */
+export const DEPTH_POTION = 90;
 
 /** 这一层的怪按深度换成更凶的同类、加强几级（制作人：后面的小怪太好打） */
 export function deepen(map: string[], d: number): string[] {
     if (d < UPGRADE_FROM) return map;
     return map.map(r => r.replace(/[mefcvgx]/g, ch => UPGRADE_CHARS[ch]));
 }
-export function powerFor(d: number, kind?: FloorKind): number {
-    return kind === 'boss' || d <= POWER_FROM ? 0 : Math.min(POWER_MAX, d - POWER_FROM);
+// 第 20 层也加（每只怪按自己的 basePower 扣掉，井底之眼是精英再减半）；教程的井底不走这里
+export function powerFor(d: number, _kind?: FloorKind): number {
+    return d <= POWER_FROM ? 0 : Math.min(POWER_MAX, d - POWER_FROM);
 }
 
 /** 路线选项（灵魂碎片解锁的东西、深度模式） */
@@ -304,7 +343,7 @@ export interface RouteOptions {
 function toFloor(seed: number, d: number, slot: number, e: MapEntry, opts: RouteOptions = {}): FloorDef {
     const unlocks = opts.unlocks ?? [];
     const p = band(d);
-    const map = e.kind === 'boss' ? e.map : deepen(e.map, d);
+    const map = bigGems(e.kind === 'boss' ? e.map : deepen(e.map, d), seed, d, slot);
     const f: FloorDef = { ...p, name: `第 ${d + 1} 层 · ${e.name}`, hint: e.hint, map, kind: e.kind };
     const power = powerFor(d, e.kind);
     if (power) f.power = power;
@@ -397,6 +436,8 @@ export function buildRoute(seed: number, opts: RouteOptions = {}): FloorDef[][] 
             return toFloor(seed, d, slot, e, opts);
         }));
     }
+    // 正式局的楼层：怪物用 RUN_STATS 的数值
+    for (const cands of plan) for (const f of cands) f.runStats = true;
     // 下一层只有一个候选的层：只留一个出口
     plan.forEach((cands, d) => {
         if ((plan[d + 1]?.length ?? 0) !== 2) for (const f of cands) f.map = oneExit(f.map);
@@ -404,14 +445,15 @@ export function buildRoute(seed: number, opts: RouteOptions = {}): FloorDef[][] 
     // 深度模式：第 1 级起怪物每级再加强 2 级（每一层都加，井底之眼也加，精英按一半算）；
     // 第 2 级起血瓶效果 −25%；第 3 级起井租和补给摊的价格 ×1.5
     const depth = opts.depth ?? 0;
-    if (depth > 0) for (const cands of plan) for (const f of cands) {
-        f.power = (f.power ?? 0) + DEPTH_POWER * depth;
-        if (depth >= 2) { f.smallPotion = Math.floor((f.smallPotion * 3) / 4); f.bigPotion = Math.floor((f.bigPotion * 3) / 4); }
+    if (depth > 0) plan.forEach((cands, d) => { for (const f of cands) {
+        // 深度模式的加强从第 DEPTH_FROM + 1 层起（前面和普通局一样）
+        if (d >= DEPTH_FROM) f.power = (f.power ?? 0) + DEPTH_POWER * depth;
+        if (depth >= 2) { f.smallPotion = Math.floor((f.smallPotion * DEPTH_POTION) / 100); f.bigPotion = Math.floor((f.bigPotion * DEPTH_POTION) / 100); }
         if (depth >= 3) {
             if (f.rent) f.rent = Math.floor((f.rent * 3) / 2);
             if (f.stall) f.stall = f.stall.map(o => ({ ...o, price: Math.round((o.price * 3) / 2 / 5) * 5 }));
         }
-    }
+    } });
     return plan;
 }
 
@@ -453,6 +495,7 @@ export const TUTORIAL_FLOORS: FloorDef[] = [
 ];
 
 /** 新手教程局：第 1～5 层，第 5 层遇到打不过的井底之眼（每层只有一个出口） */
+// 教程的宝石都是大宝石（+3，和原来 宝石 2 + 掘井人 1 一样，教程的数值不变）
 export function buildTutorial(_seed: number): FloorDef[][] {
-    return TUTORIAL_FLOORS.map(f => [{ ...f, map: oneExit(f.map) }]);
+    return TUTORIAL_FLOORS.map(f => [{ ...f, map: oneExit(f.map).map(r => r.replace(/r/g, 'R').replace(/b/g, 'C')) }]);
 }

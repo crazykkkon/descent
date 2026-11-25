@@ -10,7 +10,7 @@ local M = {}
 -- mon：怪物算上周围格子（群居、庇护）以后的属性；不传就用怪物本身的数值
 function M.interact(cell, hero, floor, ch, allowFatal, mon)
     if cell.kind == 'monster' then
-        local m = mon or config.powered(config.MONSTERS[cell.id], floor.power)
+        local m = mon or config.powered(config.MONSTERS[cell.id], floor.power, floor.runStats)
         local r = combat.simulate(hero, m)
         -- 打不动、它也伤不到你（没有反伤）：两边谁也伤不到谁，打不起来
         if not r.canAttack then
@@ -45,6 +45,8 @@ function M.interact(cell, hero, floor, ch, allowFatal, mon)
         elseif id == 'bigPotion' then h.hp = h.hp + floor.bigPotion
         elseif id == 'redGem' then h.atk = h.atk + gem
         elseif id == 'blueGem' then h.def = h.def + gem
+        elseif id == 'bigRedGem' then h.atk = h.atk + config.BIG_GEM + ch.gemBonus
+        elseif id == 'bigBlueGem' then h.def = h.def + config.BIG_GEM + ch.gemBonus
         elseif id == 'key' then h.keys = h.keys + 1
         elseif id == 'gold' then h.gold = h.gold + floor.gold
         end

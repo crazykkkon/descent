@@ -7,7 +7,7 @@
  * 用法：npx tsx tools/export-vectors.ts
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { Boon, CHARACTERS, Hero, MONSTERS, MonsterId, WEAPONS, WeaponId } from '../src/core/config';
+import { Boon, CHARACTERS, Hero, MONSTERS, MonsterId, powered, WEAPONS, WeaponId } from '../src/core/config';
 import { CombatEvent, simulateCombat } from '../src/core/combat';
 import { FloorDef } from '../src/core/floor';
 import { Run } from '../src/core/game';
@@ -66,7 +66,7 @@ for (const id of Object.keys(MONSTERS) as MonsterId[]) {
 function floorParams(f: FloorDef) {
     return {
         name: f.name, map: f.map, bloodCost: f.bloodCost, gem: f.gem, smallPotion: f.smallPotion, bigPotion: f.bigPotion, gold: f.gold,
-        rent: f.rent, power: f.power, eliteReward: f.eliteReward, kind: f.kind, marks: f.marks, shop: f.shop, stall: f.stall, hint: f.hint,
+        rent: f.rent, power: f.power, runStats: f.runStats, eliteReward: f.eliteReward, kind: f.kind, marks: f.marks, shop: f.shop, stall: f.stall, hint: f.hint,
     };
 }
 
@@ -124,6 +124,8 @@ AURA_MAPS.forEach((map, mi) => {
 });
 // 路线里的每一层（种子 1，按两种选法连续求解时的入场状态）
 const routeWalks: unknown[] = [];
+const topPerk = (id: string) => Meta.perkValue(id, Meta.PERKS.find(p => p.id === id)!.costs.length);
+const PERKED = { ...CHARACTERS.digger, base: { hp: CHARACTERS.digger.base.hp + topPerk('hp'), atk: CHARACTERS.digger.base.atk + topPerk('atk'), def: CHARACTERS.digger.base.def + topPerk('def'), keys: topPerk('keys'), gold: topPerk('gold') } };
 {
     const plan = R.buildRoute(1);
     for (const k of [0, 1]) {
@@ -131,7 +133,8 @@ const routeWalks: unknown[] = [];
         const floors = plan.map((o, d) => o[picks[d]]);
         // 第 d 层走的出口 = 第 d+1 层选的候选
         const exits = plan.map((_, d) => (plan[d + 1]?.length === 2 ? picks[d + 1] : 0));
-        const chain = solveChain(floors, undefined, 40, exits);
+        // 第一次玩大约 10% 通关（制作人定），不加强化时保守求解不一定走得到底；这里只要每层的入场状态，按碎片强化买满来算
+        const chain = solveChain(floors, PERKED, 40, exits);
         floors.forEach((f, d) => {
             if (d === 0) return;
             const sc = scenario(`路线 选法${k} 第${d + 1}层`, f, chain[d - 1].best!, exits[d]);
@@ -406,9 +409,15 @@ const charRuns: unknown[] = [];
 // ---------- 10. 存档 ----------
 // （每一步对账时 Lua 都会存档再读回来）
 
+// 按层加强后的怪物数值（每种怪 × 几种 power；深处的怪先扣 basePower，精英减半）
+const poweredVec = (Object.keys(MONSTERS) as MonsterId[]).flatMap(id => [0, 1, 3, 5, 9, 14, 20].flatMap(power => [false, true].map(run => {
+    const m = powered(MONSTERS[id], power, run);
+    return { id, power, run, hp: m.hp, atk: m.atk, def: m.def };
+})));
+
 const out = `-- 由 tools/export-vectors.ts 自动生成，不要手改。
 -- 来源：TypeScript 原型（src/core）。LÖVE + Lua 版必须逐条算出同样的结果。
-return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns, rewardRuns, stalemates })}
+return ${lua({ character: CHARACTERS.digger, combat, scenarios, monsterViews, routeWalks, deaths, armSessions, armOddsVec, engraveOps, engraves, wheels, shops, altars, stalls, decreeDraws, decreeRuns, routes, tutorials, shardsVec, perkRuns, metaRoutes, charRuns, rewardRuns, stalemates, poweredVec })}
 `;
 mkdirSync('love/tests', { recursive: true });
 writeFileSync('love/tests/vectors.lua', out);
@@ -431,4 +440,4 @@ writeFileSync('love/src/data/pools.lua', `-- 由 tools/export-vectors.ts 从 src
 -- 地图、数值、出现比例都是讨论项（设计方案第五、六章）。
 return ${lua(pools)}
 `);
-console.log(`战斗 ${combat.length}；楼层 ${scenarios.length}；新怪属性 ${monsterViews.length}；路线逐层 ${routeWalks.length}；致死 ${deaths.length}；断臂转轮 ${armSessions.length}；刻在哪 ${engraveOps.length}；刻图案 ${engraves.length}；大转盘 ${wheels.length}；当铺 ${shops.length}；骨坛 ${altars.length}；补给摊 ${stalls.length}；诏令 ${decreeDraws.length}+${decreeRuns.length}；路线 ${routes.length}；教程 ${tutorials.length}`);
+console.log(`怪物加强 ${poweredVec.length}；战斗 ${combat.length}；楼层 ${scenarios.length}；新怪属性 ${monsterViews.length}；路线逐层 ${routeWalks.length}；致死 ${deaths.length}；断臂转轮 ${armSessions.length}；刻在哪 ${engraveOps.length}；刻图案 ${engraves.length}；大转盘 ${wheels.length}；当铺 ${shops.length}；骨坛 ${altars.length}；补给摊 ${stalls.length}；诏令 ${decreeDraws.length}+${decreeRuns.length}；路线 ${routes.length}；教程 ${tutorials.length}`);

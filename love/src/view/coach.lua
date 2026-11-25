@@ -3,6 +3,7 @@
 -- 地图在原型 src/core/route.ts 的 TUTORIAL_FLOORS（固定 5 张）。
 
 local floorMod = require('core.floor')
+local config = require('core.config')
 
 local M = {}
 
@@ -22,16 +23,16 @@ local FLOORS = {
         if items(run, 'smallPotion') < s.potions then
             return '血瓶走上去就喝，生命 +' .. run:floor().smallPotion .. '。最后打掉盲鳗，走下左边的石阶就进下一层。不用把怪打完。'
         end
-        if h.def > s.def then return '青晶加防御：怪打你没那么疼了。鼠标停在格子上，能看到它的详细数值。' end
+        if h.def > s.def then return '大青晶加防御：怪打你没那么疼了。鼠标停在格子上，能看到它的详细数值。' end
         if h.atk > s.atk then return '攻击变高了，打下一只井苔要的回合更少，挨打也更少。先拿宝石再打，更划算。' end
-        if run.kills >= 1 then return '打赢了，还掉了几个金币。前面红色的是赤晶，走上去就捡：攻击 +' .. (run:floor().gem + run.ch.gemBonus) .. '。' end
+        if run.kills >= 1 then return '打赢了，还掉了几个金币。前面红色的是大赤晶，走上去就捡：攻击 +' .. (config.BIG_GEM + run.ch.gemBonus) .. '。正式下井以后，浅层只有小宝石（+1），越往深处大宝石（+3）越多。' end
         if run.steps >= 1 then return '鼠标指着怪物，下方会显示它的生命、攻、防。你每下打掉「你的攻 − 它的防」，它每下打掉你「它的攻 − 你的防」。走过去就开打。' end
         return '用方向键或者点格子走路。按住方向键可以一直走。'
     end,
     -- 第 2 层：骨钥和骨门、打不动的怪、血瓶
     function(run, s)
         if doors(run) < s.doors then
-            return '锈甲虫的防御比你的攻击高：现在打它，你每下都是 0，会被它一点点耗死。拿了门后的赤晶就打得动了，但要掉很多血换一袋金币——值不值得，自己算。出口在右边。'
+            return '锈甲虫的防御比你的攻击高：现在打它，你每下都是 0，会被它一点点耗死。拿了门后的大赤晶就打得动了，但要掉很多血换一袋金币——值不值得，自己算。出口在右边。'
         end
         if run.hero.keys > s.keys then return '拿到骨钥了。走到骨门上，就会用掉一把骨钥把门打开。' end
         return '骨门要骨钥才能开。骨钥在井苔身后，往下走。顺路的血瓶走上去就喝。'
@@ -41,7 +42,7 @@ local FLOORS = {
         if run.kills >= 1 or doors(run) < s.doors then
             return '走过的路不能撤回，死了要从第 1 层重来。开打之前，先用攻防算一算这一仗要掉多少血。'
         end
-        return '两条路都能到出口。上面：过血门（不用钥匙，扣 ' .. run:floor().bloodCost .. ' 生命），还有一只会先出手的回声蝠。下面：打两只怪，路上有一颗赤晶。自己算哪条划算。'
+        return '两条路都能到出口。上面：过血门（不用钥匙，扣 ' .. run:floor().bloodCost .. ' 生命），还有一只会先出手的回声蝠。下面：打两只怪，路上有一颗大赤晶。自己算哪条划算。'
     end,
     -- 第 4 层：精英
     function(run)

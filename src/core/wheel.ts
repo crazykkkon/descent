@@ -10,10 +10,10 @@ export interface WheelSector { prize: WheelPrize; amount: number; text: string }
 export const WHEEL: WheelSector[] = [
     { prize: 'gold', amount: 30, text: '金币 +30' },
     { prize: 'hp', amount: 60, text: '生命 +60' },
-    { prize: 'atk', amount: 2, text: '攻击 +2' },
+    { prize: 'atk', amount: 1, text: '攻击 +1' },
     { prize: 'engrave', amount: 1, text: '新图案' },
     { prize: 'gold', amount: 30, text: '金币 +30' },
-    { prize: 'def', amount: 2, text: '防御 +2' },
+    { prize: 'def', amount: 1, text: '防御 +1' },
     { prize: 'leech', amount: 40, text: '井蛭 −40 生命' },
     { prize: 'erase', amount: 1, text: '擦掉一个图案' },
 ];
