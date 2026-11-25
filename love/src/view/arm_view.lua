@@ -25,7 +25,8 @@ local flash = nil       -- { t, kind }
 local function reelX(r) return M.REELS_X + (r - 1) * (M.REEL_W + M.GAP) end
 function M.reelRect(r) return reelX(r), M.REELS_Y, M.REEL_W, M.CELL_H * 3 end
 function M.lockRect(r) return reelX(r), M.REELS_Y + M.CELL_H * 3 + 6, M.REEL_W, 12 end
-function M.leverRect() return M.LEVER_X - 8, M.LEVER_Y - 34, 20, 76 end
+-- 能点的范围：红头和整根杆（原来只框住了杆的下半截，点红头没反应）
+function M.leverRect() return M.LEVER_X - 20, M.LEVER_Y - 54, 34, 72 end
 
 -- 开始转动的动画（规则已经在 run:armSpin 里算完了）
 function M.startSpin(held, faces)
@@ -78,6 +79,14 @@ local function leverDown()
     if anim.t < LEVER_T then return anim.t / LEVER_T end
     return math.max(0, 1 - (anim.t - LEVER_T) / 0.25)
 end
+
+-- 红头现在在哪（随拉杆角度动）
+function M.knobPos()
+    local ang = -0.25 + leverDown() * 1.6
+    return M.LEVER_X + math.sin(ang) * 44, M.LEVER_Y - math.cos(ang) * 44
+end
+-- 拉杆下面那行"拉杆 X 金"的字，也能点
+M.LEVER_LABEL = { x = M.X + 8, y = M.Y + 156, w = 120, h = 14 }
 
 -- 像素层：手臂、轮子窗口、锁扣、拉杆。drawCellText(x, y, w, h, sym, isMid, alpha) 由调用方在 UI 层画字
 -- offs：每个轮子另外拨过几格（刻图案时拨开看的位置，松手不弹回）；可以不给。noControls：刻图案时不画"用血转"按钮

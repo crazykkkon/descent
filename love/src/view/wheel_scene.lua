@@ -34,6 +34,8 @@ local LABEL = {
 local st = nil
 
 function M.active() return st ~= nil end
+-- 摇杆红头的位置（逻辑坐标）
+function M.knobPos() return LEVER.x + LEVER.w / 2, LEVER.y + (st and st.lever or 0) * (LEVER.h - 34) end
 function M.busy() return st ~= nil and (st.spinning or st.next ~= nil) end
 
 -- ctx = { price() -> { gold, blood }, hero() -> hero, peek() -> 格（从 1 开始）, apply(pay) -> 结果,
@@ -193,6 +195,13 @@ function M.draw(g)
     G.setColor(0.4, 0.3, 0.16); G.rectangle('fill', LEVER.x, LEVER.y + LEVER.h - 18, LEVER.w, 18, 3, 3)
     local ky = LEVER.y + st.lever * (LEVER.h - 34)
     G.setColor(0.6, 0.6, 0.62); G.setLineWidth(4); G.line(lx, LEVER.y + LEVER.h - 12, lx, ky); G.setLineWidth(1)
+    -- 鼠标指着摇杆：红头外面一圈亮光
+    local pmx, pmy = love.mouse.getPosition()
+    local pl, pt = (pmx - g.OX) / g.S, (pmy - g.OY) / g.S
+    if not st.spinning and not st.next and (inRect(pl, pt, LEVER) or (pl - lx) ^ 2 + (pt - LEVER.y) ^ 2 < 14 ^ 2) then
+        G.setColor(1, 0.85, 0.45, 0.55 + 0.35 * math.sin(love.timer.getTime() * 8)); G.setLineWidth(2)
+        G.circle('line', lx, ky, 16); G.setLineWidth(1)
+    end
     G.setColor(0.45, 0.06, 0.06); G.circle('fill', lx, ky, 12)
     G.setColor(0.9, 0.2, 0.18); G.circle('fill', lx, ky, 10)
     G.setColor(1, 0.75, 0.7); G.circle('fill', lx - 3, ky - 3, 3)
