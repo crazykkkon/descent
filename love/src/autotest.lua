@@ -262,7 +262,6 @@ function M.start()
             go(find(function(c) return c.kind == 'exit' end))
             if f == 1 then shot('01b-exit-confirm') end
             button('往下走'); settle(); sleep(0.1)
-            button('下楼'); sleep(0.1)
         end
         shot('02-arm-story')
         say('断臂剧情：' .. tostring(modalTitle()) .. '，教程完成 ' .. tostring(game.getMeta().tutorialDone) .. '，灵魂碎片 ' .. tostring(game.getMeta().shards))
@@ -394,8 +393,7 @@ function M.start()
             say(string.format('第 %d 层走出口 %d（%s）', f, pick, tostring(modalTitle())))
             button('往下走')
             settle(); sleep(0.2)
-            if modalTitle() ~= run:floor().name .. ' 完成' then say('第 ' .. f .. ' 层没出结算：' .. tostring(modalTitle())); break end
-            button('下楼')
+            -- 走出出口直接下楼（没有每层的总结了）；要交井租时先弹井租
             if modalTitle() == '井租' then say('第 ' .. f .. ' 层交井租：' .. tostring(button('交'))) end
             sleep(0.2)
             run = game.getRun()

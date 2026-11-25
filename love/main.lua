@@ -726,8 +726,8 @@ local function openRent(thenFn)
     }, buttons)
 end
 
-local function nextFloor(sell)
-    if run:rentDue() > 0 then openRent(function() nextFloor(sell) end); return end
+local function nextFloor(sell, note)
+    if run:rentDue() > 0 then openRent(function() nextFloor(sell, note) end); return end
     closeModal()
     local spun = run.arm and run.arm.spins > 0
     run:finishFloor(sell)
@@ -737,28 +737,17 @@ local function nextFloor(sell)
     saveGame()
     if run.status == 'finished' then openVictory(); return end
     -- 每层转轮价格重新算（上一层转过才提一句）
-    setMsg(spun and ('新的一层：断臂转轮的价格回到 ' .. run:armPrice().gold .. ' 金。') or '')
+    local msg = spun and ('新的一层：断臂转轮的价格回到 ' .. run:armPrice().gold .. ' 金。') or ''
+    if note then msg = note .. (msg ~= '' and '　' .. msg or '') end
+    setMsg(msg)
     continueFlow()
 end
 
+-- 走出出口以后直接下楼（制作人 2026-11-25：每层的总结不要了）。
+-- 地图上剩下的血瓶照样在出口折成金币（规则里算），只在底部提一句；骨钥要卖去当铺。
 function openSummary()
     local s = run:exitSummary()
-    local start = run:floorStartHero()
-    local lines = {}
-    local d = run.hero.hp - start.hp
-    lines[#lines + 1] = '本层生命变化：' .. (d >= 0 and '+' or '') .. d
-    local gains = {}
-    for _, g in ipairs({ { '攻击', run.hero.atk - start.atk }, { '防御', run.hero.def - start.def }, { '金币', run.hero.gold - start.gold } }) do
-        if g[2] ~= 0 then gains[#gains + 1] = g[1] .. ' ' .. (g[2] > 0 and '+' or '') .. g[2] end
-    end
-    lines[#lines + 1] = '本层换到：' .. (#gains > 0 and table.concat(gains, '，') or '没有')
-    if s.leftoverPotions > 0 then lines[#lines + 1] = '地图上剩下的血瓶 ×' .. s.leftoverPotions .. '：+' .. s.potionGold .. ' 金币' end
-    if run.decree then lines[#lines + 1] = '诏令：' .. run.decree.def.text .. '（第 ' .. run.decree['until'] .. ' 层前）' end
-    local buttons = { { label = '下楼', primary = true, fn = function() nextFloor(false) end } }
-    if s.keys > 0 then
-        table.insert(buttons, 1, { label = '卖掉 ' .. s.keys .. ' 把骨钥（+' .. s.keyGold .. '）', fn = function() nextFloor(true) end })
-    end
-    openModal(run:floor().name .. ' 完成', lines, buttons)
+    nextFloor(false, s.leftoverPotions > 0 and ('地图上剩下的 ' .. s.leftoverPotions .. ' 瓶血瓶换了 ' .. s.potionGold .. ' 金币。') or nil)
 end
 
 -- 大转盘
